@@ -1,0 +1,12 @@
+name: ДенежныеСредства
+dimensions:
+  - name: Касса
+    type: string
+resources:
+  - name: Сумма
+    type: number
+attributes:
+  - name: Контрагент
+    type: string
+  - name: Основание
+    type: string

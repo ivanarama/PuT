@@ -13,6 +13,10 @@ fields:
     type: reference:Контрагент
   - name: Склад
     type: reference:Склад
+  - name: ТипЦенПродажи
+    type: reference:ТипЦен
+  - name: Основание
+    type: reference:Счёт
   - name: Сумма
     type: number
 tableparts:

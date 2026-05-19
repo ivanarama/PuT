@@ -2,7 +2,31 @@ name: Контрагент
 fields:
   - name: Наименование
     type: string
-  - name: ИНН
+  - name: ПолноеНаименование
     type: string
   - name: Вид
     type: enum:ВидКонтрагента
+  - name: ИНН
+    type: string
+  - name: КПП
+    type: string
+  - name: ОГРН
+    type: string
+  - name: ЮридическийАдрес
+    type: string
+  - name: ФактическийАдрес
+    type: string
+  - name: Телефон
+    type: string
+  - name: Email
+    type: string
+  - name: КонтактноеЛицо
+    type: string
+  - name: РасчётныйСчёт
+    type: string
+  - name: НаименованиеБанка
+    type: string
+  - name: БИК
+    type: string
+  - name: КорреспондентскийСчёт
+    type: string

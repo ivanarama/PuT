@@ -1,0 +1,34 @@
+name: Счёт
+posting: false
+numerator:
+  prefix: "СЧ-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+  - name: Дата
+    type: date
+  - name: Покупатель
+    type: reference:Контрагент
+  - name: Склад
+    type: reference:Склад
+  - name: ТипЦенПродажи
+    type: reference:ТипЦен
+  - name: СрокОплаты
+    type: date
+  - name: Комментарий
+    type: string
+  - name: Сумма
+    type: number
+tableparts:
+  - name: Товары
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Количество
+        type: number
+      - name: Цена
+        type: number
+      - name: Сумма
+        type: number

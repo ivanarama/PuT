@@ -1,0 +1,27 @@
+name: ПоступлениеНаРасчётныйСчёт
+posting: true
+numerator:
+  prefix: "БНК-П-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+  - name: Дата
+    type: date
+  - name: БанковскийСчёт
+    type: reference:Касса
+  - name: Контрагент
+    type: reference:Контрагент
+  - name: ДокументРеализации
+    type: reference:РеализацияТоваров
+  - name: ДокументПоступления
+    type: reference:ПоступлениеТоваров
+  - name: НомерПлатёжки
+    type: string
+  - name: ДатаПлатёжки
+    type: date
+  - name: НазначениеПлатежа
+    type: string
+  - name: Сумма
+    type: number

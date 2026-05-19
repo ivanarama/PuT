@@ -1,0 +1,23 @@
+name: РасходныйКассовыйОрдер
+posting: true
+numerator:
+  prefix: "РКО-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+  - name: Дата
+    type: date
+  - name: Касса
+    type: reference:Касса
+  - name: Контрагент
+    type: reference:Контрагент
+  - name: ДокументРеализации
+    type: reference:РеализацияТоваров
+  - name: ДокументПоступления
+    type: reference:ПоступлениеТоваров
+  - name: Основание
+    type: string
+  - name: Сумма
+    type: number

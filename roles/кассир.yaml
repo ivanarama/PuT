@@ -1,0 +1,19 @@
+name: Кассир
+description: Работа с кассой и банком — ПКО, РКО, отчёты по ДС
+permissions:
+  catalogs:
+    Касса: [read]
+    Контрагент: [read]
+  documents:
+    ПриходныйКассовыйОрдер: [read, write, post, unpost]
+    РасходныйКассовыйОрдер: [read, write, post, unpost]
+    ПоступлениеНаРасчётныйСчёт: [read, write, post, unpost]
+    СписаниеСРасчётногоСчёта: [read, write, post, unpost]
+  registers:
+    ДенежныеСредства: [read]
+    Взаиморасчеты: [read]
+  reports:
+    ОстаткиДенежныхСредств: [run]
+    ДвижениеДенежныхСредств: [run]
+    Взаиморасчеты: [run]
+    АктСверки: [run]

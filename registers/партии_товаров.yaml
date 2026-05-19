@@ -2,6 +2,8 @@ name: ПартииТоваров
 dimensions:
   - name: Номенклатура
     type: reference:Номенклатура
+  - name: Склад
+    type: string
   - name: ДатаПоставки
     type: date
 resources:

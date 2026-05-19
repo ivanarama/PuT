@@ -1,9 +1,9 @@
 name: ТестовоеЗадание
-title: Тестовый пересчёт цен (каждую минуту)
-schedule: "*/1 * * * *"
+title: "Пример: пересчёт цен (по умолчанию выключен)"
+schedule: "0 3 * * 0"
 processor: ПересчётЦен
 params:
-  Процент: 5
-enabled: true
+  Процент: 0
+enabled: false
 on_error: continue
 timeout: 60

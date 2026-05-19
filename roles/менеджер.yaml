@@ -5,10 +5,21 @@ permissions:
     Контрагент: [read, write]
     Номенклатура: [read]
     Склад: [read]
+    Касса: [read]
+    ТипЦен: [read]
   documents:
+    Счёт: [read, write]
     РеализацияТоваров: [read, write, post, unpost]
     ПоступлениеТоваров: [read]
+    ПриходныйКассовыйОрдер: [read, write, post, unpost]
+    УстановкаЦен: [read, write, post, unpost]
   registers:
     Взаиморасчеты: [read]
+    ДенежныеСредства: [read]
   reports:
     ОстаткиТоваров: [run]
+    ВаловаяПрибыль: [run]
+    ПродажиПоКонтрагентам: [run]
+    ОплатыРеализаций: [run]
+    ЦеныНоменклатуры: [run]
+    АктСверки: [run]

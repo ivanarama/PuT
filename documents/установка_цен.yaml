@@ -1,0 +1,20 @@
+name: УстановкаЦен
+posting: true
+numerator:
+  prefix: "УЦ-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+  - name: Дата
+    type: date
+  - name: ТипЦен
+    type: reference:ТипЦен
+tableparts:
+  - name: Цены
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Цена
+        type: number

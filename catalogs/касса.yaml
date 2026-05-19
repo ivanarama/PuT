@@ -1,0 +1,12 @@
+name: Касса
+fields:
+  - name: Наименование
+    type: string
+  - name: Вид
+    type: enum:ВидКассы
+  - name: НомерСчёта
+    type: string
+  - name: Банк
+    type: string
+  - name: БИК
+    type: string

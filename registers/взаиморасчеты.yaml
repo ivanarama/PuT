@@ -8,3 +8,7 @@ resources:
 attributes:
   - name: ТипКонтрагента
     type: string
+  - name: ДокументРеализации
+    type: string
+  - name: ДокументПоступления
+    type: string

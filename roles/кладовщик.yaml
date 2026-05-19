@@ -1,5 +1,5 @@
 name: Кладовщик
-description: Работа со складом и поступлениями
+description: Работа со складом, поступлениями, списаниями и перемещениями
 permissions:
   catalogs:
     Номенклатура: [read, write]
@@ -7,6 +7,16 @@ permissions:
     Контрагент: [read]
   documents:
     ПоступлениеТоваров: [read, write, post, unpost]
+    СписаниеТоваров: [read, write, post, unpost]
+    ОприходованиеТоваров: [read, write, post, unpost]
+    ПеремещениеТоваров: [read, write, post, unpost]
     РеализацияТоваров: [read]
   registers:
+    ОстаткиТоваров: [read]
+    ПартииТоваров: [read]
     Взаиморасчеты: [read]
+  reports:
+    ОстаткиТоваров: [run]
+    ДвиженияТоваров: [run]
+    ВедомостьПартий: [run]
+    ОборотПоСкладам: [run]

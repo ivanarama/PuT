@@ -1,0 +1,7 @@
+name: РеализацияИзСчёта
+title: Создать реализацию из счёта
+params:
+  - name: Счёт
+    type: reference:Счёт
+    label: Счёт-основание
+    required: true
