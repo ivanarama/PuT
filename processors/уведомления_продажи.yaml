@@ -1,0 +1,6 @@
+name: УведомленияПродажи
+title: Отчёт о продажах по email
+params:
+  - name: Кому
+    type: string
+    default: ""

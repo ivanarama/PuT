@@ -1,0 +1,54 @@
+name: Накладная
+document: РеализацияТоваров
+areas:
+  Заголовок:
+    rows:
+      - cells:
+          - text: "Накладная"
+            bold: true
+            colspan: 4
+            align: center
+            fontSize: 16
+  ШапкаТаблицы:
+    rows:
+      - cells:
+          - text: "№"
+            bold: true
+            align: center
+            backColor: "#E8E8E8"
+          - text: "Товар"
+            bold: true
+            backColor: "#E8E8E8"
+          - text: "Кол-во"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+          - text: "Цена"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+          - text: "Сумма"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+  СтрокаТаблицы:
+    rows:
+      - cells:
+          - parameter: НомерПП
+            align: center
+          - parameter: Номенклатура
+          - parameter: Количество
+            align: right
+          - parameter: Цена
+            align: right
+          - parameter: Сумма
+            align: right
+  Подвал:
+    rows:
+      - cells:
+          - text: "Итого:"
+            bold: true
+            colspan: 4
+          - parameter: ИтогоСумма
+            bold: true
+            align: right

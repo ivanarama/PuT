@@ -1,0 +1,9 @@
+name: ТестовоеЗадание
+title: Тестовый пересчёт цен (каждую минуту)
+schedule: "*/1 * * * *"
+processor: ПересчётЦен
+params:
+  Процент: 5
+enabled: true
+on_error: continue
+timeout: 60

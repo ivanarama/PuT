@@ -1,0 +1,9 @@
+name: УведомленияПродажи
+title: Ежедневный отчёт о продажах на email
+schedule: "0 18 * * *"
+processor: УведомленияПродажи
+params:
+  Кому: "manager@company.ru"
+enabled: false
+on_error: continue
+timeout: 30

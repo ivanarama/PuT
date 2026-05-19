@@ -1,0 +1,8 @@
+name: ПоследниеДокументы
+type: recent
+title: Мои последние документы
+limit: 8
+scope: current_user
+entities:
+  - РеализацияТоваров
+  - ПоступлениеТоваров

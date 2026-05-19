@@ -1,0 +1,11 @@
+name: ПартииТоваров
+dimensions:
+  - name: Номенклатура
+    type: reference:Номенклатура
+  - name: ДатаПоставки
+    type: date
+resources:
+  - name: Количество
+    type: number
+  - name: Сумма
+    type: number

@@ -1,0 +1,21 @@
+name: ВсеОперации
+title: Все операции
+documents:
+  - ПоступлениеТоваров
+  - РеализацияТоваров
+columns:
+  - field: Дата
+    label: Дата
+    format: date
+  - field: Номер
+    label: Номер
+  - field: Контрагент
+    label: Контрагент
+    fallback: [Поставщик, Покупатель]
+  - field: Сумма
+    label: Сумма
+filters:
+  - field: Дата
+    type: date_range
+  - field: Контрагент
+    type: reference:Контрагент

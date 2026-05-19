@@ -1,0 +1,6 @@
+name: ИмпортНоменклатуры
+title: Импорт номенклатуры из JSON
+params:
+  - name: ФайлJSON
+    type: string
+    label: "JSON-строка с номенклатурой"

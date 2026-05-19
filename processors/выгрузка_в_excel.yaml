@@ -1,0 +1,6 @@
+name: ВыгрузкаВExcel
+title: Выгрузка номенклатуры в Excel (пример DSL)
+params:
+  - name: ТипЦены
+    type: string
+    label: Тип цены (или пусто для всех)

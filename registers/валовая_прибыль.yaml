@@ -1,0 +1,9 @@
+name: ВаловаяПрибыль
+dimensions:
+  - name: Номенклатура
+    type: reference:Номенклатура
+resources:
+  - name: Выручка
+    type: number
+  - name: Себестоимость
+    type: number

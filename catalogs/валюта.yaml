@@ -1,0 +1,19 @@
+name: Валюта
+fields:
+  - name: Наименование
+    type: string
+  - name: Код
+    type: string
+predefined:
+  - name: Рубль
+    fields:
+      Наименование: Российский рубль
+      Код: RUB
+  - name: Доллар
+    fields:
+      Наименование: Доллар США
+      Код: USD
+  - name: Евро
+    fields:
+      Наименование: Евро
+      Код: EUR
