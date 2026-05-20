@@ -9,12 +9,22 @@ fields:
     type: string
   - name: Дата
     type: date
+  - name: Организация
+    type: reference:Организация
   - name: Поставщик
     type: reference:Контрагент
   - name: Склад
     type: reference:Склад
+  - name: СпособУчетаНДС
+    type: enum:СпособУчетаНДС
+    label: НДС
+  - name: СуммаБезНДС
+    type: number
+  - name: СуммаНДС
+    type: number
   - name: Сумма
     type: number
+    label: Всего
 tableparts:
   - name: Товары
     fields:
@@ -23,6 +33,10 @@ tableparts:
       - name: Количество
         type: number
       - name: Цена
+        type: number
+      - name: СтавкаНДС
+        type: reference:СтавкаНДС
+      - name: СуммаНДС
         type: number
       - name: Сумма
         type: number

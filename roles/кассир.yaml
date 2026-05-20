@@ -4,6 +4,7 @@ permissions:
   catalogs:
     Касса: [read]
     Контрагент: [read]
+    Организация: [read]
   documents:
     ПриходныйКассовыйОрдер: [read, write, post, unpost]
     РасходныйКассовыйОрдер: [read, write, post, unpost]

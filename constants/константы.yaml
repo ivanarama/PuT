@@ -1,7 +1,7 @@
 constants:
   - name: НашаОрганизация
-    type: reference:Контрагент
-    label: Наша организация
+    type: reference:Организация
+    label: Наша организация (по умолчанию)
   - name: ОсновнаяВалюта
     type: string
     default: "RUB"

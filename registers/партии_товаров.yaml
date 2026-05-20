@@ -6,6 +6,8 @@ dimensions:
     type: string
   - name: ДатаПоставки
     type: date
+  - name: Организация
+    type: reference:Организация
 resources:
   - name: Количество
     type: number

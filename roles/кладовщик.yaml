@@ -5,6 +5,9 @@ permissions:
     Номенклатура: [read, write]
     Склад: [read]
     Контрагент: [read]
+    Организация: [read]
+    ЕдиницаИзмерения: [read]
+    СтавкаНДС: [read]
   documents:
     ПоступлениеТоваров: [read, write, post, unpost]
     СписаниеТоваров: [read, write, post, unpost]

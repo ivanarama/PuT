@@ -4,6 +4,8 @@ dimensions:
     type: string
   - name: Склад
     type: string
+  - name: Организация
+    type: reference:Организация
 resources:
   - name: Количество
     type: number

@@ -7,6 +7,10 @@ permissions:
     Склад: [read, write]
     Касса: [read, write]
     ТипЦен: [read, write]
+    Организация: [read, write]
+    ЕдиницаИзмерения: [read, write]
+    СтавкаНДС: [read, write]
+    НастройкиПользователя: [read, write]
   documents:
     Счёт: [read, write]
     РеализацияТоваров: [read, write, post, unpost]

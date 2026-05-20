@@ -2,6 +2,8 @@ name: ВаловаяПрибыль
 dimensions:
   - name: Номенклатура
     type: reference:Номенклатура
+  - name: Организация
+    type: reference:Организация
 resources:
   - name: Выручка
     type: number

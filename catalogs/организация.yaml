@@ -1,23 +1,16 @@
-name: Контрагент
+name: Организация
 fields:
   - name: Наименование
     type: string
   - name: ПолноеНаименование
     type: string
-  - name: Вид
-    type: enum:ВидКонтрагента
   - name: ИНН
     type: string
   - name: КПП
     type: string
   - name: ОГРН
     type: string
-  - name: ОГРНИП
-    type: string
-    label: ОГРНИП (для ИП)
   - name: ОКПО
-    type: string
-  - name: Сайт
     type: string
   - name: ЮридическийАдрес
     type: string
@@ -27,11 +20,6 @@ fields:
     type: string
   - name: Email
     type: string
-  - name: КонтактноеЛицо
-    type: string
-  - name: ТипЦенПродажи
-    type: reference:ТипЦен
-    label: Тип цен продажи по умолчанию
   - name: РасчётныйСчёт
     type: string
   - name: НаименованиеБанка
@@ -40,3 +28,12 @@ fields:
     type: string
   - name: КорреспондентскийСчёт
     type: string
+  - name: Руководитель
+    type: string
+    label: ФИО руководителя
+  - name: ДолжностьРуководителя
+    type: string
+    default: "Директор"
+  - name: ГлавныйБухгалтер
+    type: string
+    label: ФИО главного бухгалтера

@@ -2,6 +2,8 @@ name: Взаиморасчеты
 dimensions:
   - name: Контрагент
     type: string
+  - name: Организация
+    type: reference:Организация
 resources:
   - name: Сумма
     type: number

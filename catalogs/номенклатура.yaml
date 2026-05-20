@@ -5,7 +5,8 @@ fields:
     type: string
   - name: Артикул
     type: string
-  - name: ЦенаПродажи
-    type: number
   - name: ЕдиницаИзмерения
-    type: string
+    type: reference:ЕдиницаИзмерения
+  - name: СтавкаНДС
+    type: reference:СтавкаНДС
+    label: Ставка НДС по умолчанию

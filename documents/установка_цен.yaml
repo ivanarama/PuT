@@ -9,6 +9,8 @@ fields:
     type: string
   - name: Дата
     type: date
+  - name: Организация
+    type: reference:Организация
   - name: ТипЦен
     type: reference:ТипЦен
 tableparts:
