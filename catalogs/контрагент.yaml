@@ -22,6 +22,9 @@ fields:
     type: string
   - name: КонтактноеЛицо
     type: string
+  - name: ТипЦенПродажи
+    type: reference:ТипЦен
+    label: Тип цен продажи по умолчанию
   - name: РасчётныйСчёт
     type: string
   - name: НаименованиеБанка
