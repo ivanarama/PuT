@@ -227,3 +227,10 @@
 | СпособУчетаНДС | ВТомЧисле, Сверху |
 | ВидРасчета | Хранимый, Расчетный |
 | ВидДвижения | Приход, Расход |
+
+## Публикации
+
+[**Этот репозиторий использован в статье на Инфостарт**](https://infostart.ru/1c/articles/2694204/)
+
+<img src="https://infostart.ru/bitrix/templates/sandbox_empty/assets/tpl/abo/img/logo.svg" alt="Инфостарт" width="120">
+
