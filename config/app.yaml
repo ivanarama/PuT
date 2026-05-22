@@ -1,28 +1,2 @@
-name: trade
+name: ПУТ- Программа Управления Торговлей
 version: "1.0"
-
-# Путь к логотипу относительно папки конфигурации (PNG, SVG, JPG)
-# logo: config/logo.png
-
-# Настройки email (раскомментируйте и заполните для отправки писем)
-# email:
-#   smtp_host: smtp.gmail.com
-#   smtp_port: 587
-#   smtp_user: noreply@company.ru
-#   smtp_password: env:SMTP_PASSWORD   # читается из переменной окружения
-#   from_name: "Мой склад"
-#   from_address: noreply@company.ru
-
-# Настройки вложений
-# attachments:
-#   max_file_size_mb: 50
-#   allowed_types: [pdf, png, jpg, docx, xlsx]
-
-# Демо-режим: жёлтый баннер + автосброс данных по расписанию
-# Перед включением: создайте бэкап эталонного состояния через конфигуратор
-# и укажите путь к нему в reset_backup.
-# demo:
-#   enabled: true
-#   reset_backup: backups/demo_initial.obz   # путь относительно папки проекта
-#   reset_schedule: "0 2 * * *"              # каждую ночь в 02:00
-#   message: "Данные сбрасываются каждую ночь в 02:00"

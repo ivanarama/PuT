@@ -1,7 +1,7 @@
 name: ДенежныеСредства
 dimensions:
   - name: Касса
-    type: string
+    type: reference:Касса
   - name: Организация
     type: reference:Организация
 resources:

@@ -11,6 +11,6 @@ attributes:
   - name: ТипКонтрагента
     type: string
   - name: ДокументРеализации
-    type: string
+    type: reference:РеализацияТоваров
   - name: ДокументПоступления
     type: string
