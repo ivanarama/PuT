@@ -1,5 +1,9 @@
 name: ПродажиПоКонтрагентам
 title: Продажи по контрагентам
+titles:
+  en: Sales by counterparty
+  de: Verkäufe nach Geschäftspartner
+  sr: Продаја по партнерима
 params:
   - name: НачалоПериода
     type: date

@@ -1,5 +1,9 @@
 name: ОстаткиДенежныхСредств
 title: Остатки денежных средств
+titles:
+  en: Cash balances
+  de: Geldbestände
+  sr: Стање готовине
 params:
   - name: НаДату
     type: date

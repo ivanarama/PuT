@@ -1,5 +1,9 @@
 name: ЗаполнитьТестовуюБазу
 title: Заполнить тестовую базу демо-данными (с проведением)
+titles:
+  en: Fill demo database (with posting)
+  de: Demo-Datenbank füllen (mit Buchung)
+  sr: Попуни демо базу (са књижењем)
 params:
   - name: Очистить
     type: bool

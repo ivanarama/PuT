@@ -1,5 +1,9 @@
 name: ПересчётЦен
 title: Пересчёт цен номенклатуры
+titles:
+  en: Recalculate item prices
+  de: Artikelpreise neu berechnen
+  sr: Прерачун цена артикала
 params:
   - name: Процент
     type: number

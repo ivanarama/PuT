@@ -1,4 +1,9 @@
 name: Валюта
+title: Валюта
+titles:
+  en: Currency
+  de: Währung
+  sr: Валута
 fields:
   - name: Наименование
     type: string

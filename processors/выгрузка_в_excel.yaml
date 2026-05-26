@@ -1,5 +1,9 @@
 name: ВыгрузкаВExcel
 title: Выгрузка номенклатуры в Excel (пример DSL)
+titles:
+  en: Export items to Excel (DSL example)
+  de: Artikel nach Excel exportieren (DSL-Beispiel)
+  sr: Извоз артикала у Excel (DSL пример)
 params:
   - name: ТипЦены
     type: string

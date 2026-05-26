@@ -1,5 +1,9 @@
 name: Закупки
 title: Закупки
+titles:
+  en: Purchasing
+  de: Einkauf
+  sr: Набавка
 order: 20
 contents:
   documents: [ПоступлениеТоваров, РасходныйКассовыйОрдер]

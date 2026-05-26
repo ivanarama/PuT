@@ -1,4 +1,9 @@
 name: Контрагент
+title: Контрагент
+titles:
+  en: Counterparty
+  de: Geschäftspartner
+  sr: Партнер
 fields:
   - name: Наименование
     type: string

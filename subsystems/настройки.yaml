@@ -1,5 +1,9 @@
 name: Настройки
 title: Настройки
+titles:
+  en: Settings
+  de: Einstellungen
+  sr: Подешавања
 order: 50
 contents:
   catalogs:  [Организация, НастройкиПользователя, ЕдиницаИзмерения, СтавкаНДС, ТипЦен, Валюта]

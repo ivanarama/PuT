@@ -1,6 +1,10 @@
 name: ПоследниеДокументы
 type: recent
 title: Мои последние документы
+titles:
+  en: My recent documents
+  de: Meine letzten Dokumente
+  sr: Моји недавни документи
 limit: 10
 scope: current_user
 entities:

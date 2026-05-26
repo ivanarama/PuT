@@ -1,4 +1,9 @@
 name: ВаловаяПрибыль
+title: Валовая прибыль
+titles:
+  en: Gross profit
+  de: Rohgewinn
+  sr: Бруто добит
 dimensions:
   - name: Номенклатура
     type: reference:Номенклатура

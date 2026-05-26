@@ -1,4 +1,9 @@
 name: УстановкаЦен
+title: Установка цен
+titles:
+  en: Price update
+  de: Preisfestlegung
+  sr: Подешавање цена
 posting: true
 numerator:
   prefix: "УЦ-"

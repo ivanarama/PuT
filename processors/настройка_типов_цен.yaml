@@ -1,2 +1,6 @@
 name: НастройкаТиповЦен
 title: Создать/обновить стандартные типы цен (Закупочная, Розничная, Оптовая)
+titles:
+  en: Set up standard price types (Purchase, Retail, Wholesale)
+  de: Standard-Preisarten anlegen/aktualisieren (Einkauf, Einzel-, Großhandel)
+  sr: Постављање стандардних типова цена (набавна, малопродајна, велепродајна)

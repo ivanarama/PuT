@@ -1,4 +1,9 @@
 name: ПоступлениеТоваров
+title: Поступление товаров
+titles:
+  en: Goods receipt
+  de: Wareneingang
+  sr: Пријем робе
 posting: true
 numerator:
   prefix: "ПОС-"

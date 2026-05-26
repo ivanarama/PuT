@@ -1,5 +1,9 @@
 name: РеализацияИзСчёта
 title: Создать реализацию из счёта
+titles:
+  en: Create sale from invoice
+  de: Verkauf aus Rechnung erstellen
+  sr: Креирај продају из рачуна
 params:
   - name: Счёт
     type: reference:Счёт

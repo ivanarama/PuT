@@ -1,4 +1,9 @@
 name: СписаниеСРасчётногоСчёта
+title: Списание с расчётного счёта
+titles:
+  en: Bank payment
+  de: Bankausgang
+  sr: Одлив са рачуна
 posting: true
 numerator:
   prefix: "БНК-Р-"

@@ -1,4 +1,9 @@
 name: Взаиморасчеты
+title: Взаиморасчёты
+titles:
+  en: Accounts receivable / payable
+  de: Verrechnungskonten
+  sr: Међусобна обрачуна
 dimensions:
   - name: Контрагент
     type: string

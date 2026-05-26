@@ -1,6 +1,10 @@
 name: ВыручкаМесяца
 type: kpi
 title: Выручка за месяц
+titles:
+  en: Revenue for month
+  de: Umsatz im Monat
+  sr: Приход у месецу
 format: money
 params:
   Начало: "{{today|start_of_month}}"

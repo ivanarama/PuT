@@ -1,4 +1,9 @@
 name: ПеремещениеТоваров
+title: Перемещение товаров
+titles:
+  en: Inventory transfer
+  de: Warenumlagerung
+  sr: Премештај робе
 posting: true
 numerator:
   prefix: "ПЕР-"

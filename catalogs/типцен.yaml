@@ -1,4 +1,9 @@
 name: ТипЦен
+title: Тип цен
+titles:
+  en: Price type
+  de: Preisart
+  sr: Тип цене
 fields:
     - name: Наименование
       type: string

@@ -1,5 +1,9 @@
 name: ДвиженияТоваров
 title: Движения товаров за период
+titles:
+  en: Goods movements for period
+  de: Warenbewegungen für den Zeitraum
+  sr: Кретања робе за период
 params:
   - name: НачалоПериода
     type: date

@@ -1,5 +1,9 @@
 name: ОстаткиТоваров
 title: Остатки товаров по складам
+titles:
+  en: Inventory balances by warehouse
+  de: Warenbestand nach Lager
+  sr: Стање робе по магацинима
 params:
   - name: НаДату
     type: date

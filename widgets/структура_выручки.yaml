@@ -2,6 +2,10 @@ name: СтруктураВыручки
 type: chart
 chart_kind: pie
 title: Структура выручки по номенклатуре
+titles:
+  en: Revenue breakdown by item
+  de: Umsatzstruktur nach Artikel
+  sr: Структура прихода по артиклу
 params:
   Начало: "{{today|start_of_month}}"
 query: |

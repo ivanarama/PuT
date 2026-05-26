@@ -2,7 +2,15 @@ constants:
   - name: НашаОрганизация
     type: reference:Организация
     label: Наша организация (по умолчанию)
+    labels:
+      en: Our organization (default)
+      de: Unsere Organisation (Standard)
+      sr: Наша организација (подразумевано)
   - name: ОсновнаяВалюта
     type: string
     default: "RUB"
     label: Основная валюта учёта
+    labels:
+      en: Main accounting currency
+      de: Hauptbuchungswährung
+      sr: Главна књиговодствена валута

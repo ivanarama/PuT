@@ -1,4 +1,9 @@
 name: РеализацияТоваров
+title: Реализация товаров
+titles:
+  en: Sales of goods
+  de: Warenverkauf
+  sr: Продаја робе
 posting: true
 numerator:
   prefix: "РЕА-"

@@ -1,4 +1,9 @@
 name: ЕдиницаИзмерения
+title: Единица измерения
+titles:
+  en: Unit of measure
+  de: Maßeinheit
+  sr: Јединица мере
 fields:
   - name: Наименование
     type: string

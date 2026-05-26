@@ -1,6 +1,10 @@
 name: КассаОстаток
 type: kpi
 title: Денежные средства, итого
+titles:
+  en: Cash, total
+  de: Geld gesamt
+  sr: Готовина, укупно
 format: money
 query: |
   ВЫБРАТЬ

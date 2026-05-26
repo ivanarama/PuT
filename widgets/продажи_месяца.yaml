@@ -1,6 +1,10 @@
 name: ПродажиМесяца
 type: kpi
 title: Кол-во продаж за месяц
+titles:
+  en: Sales count for month
+  de: Anzahl Verkäufe im Monat
+  sr: Број продаја у месецу
 format: number
 params:
   Начало: "{{today|start_of_month}}"

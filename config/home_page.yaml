@@ -1,4 +1,8 @@
 title: Главная — Торговля
+titles:
+  en: Home — Trade
+  de: Start — Handel
+  sr: Почетна — Трговина
 layout: rows
 rows:
   - widgets:

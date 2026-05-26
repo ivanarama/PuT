@@ -1,5 +1,9 @@
 name: ТестовоеЗадание
 title: "Пример: пересчёт цен (по умолчанию выключен)"
+titles:
+  en: "Example: price recalculation (disabled by default)"
+  de: "Beispiel: Preisneuberechnung (standardmäßig deaktiviert)"
+  sr: "Пример: прерачун цена (подразумевано искључен)"
 schedule: "0 3 * * 0"
 processor: ПересчётЦен
 params:

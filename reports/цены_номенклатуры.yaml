@@ -1,5 +1,9 @@
 name: ЦеныНоменклатуры
 title: Цены номенклатуры по типам
+titles:
+  en: Item prices by type
+  de: Artikelpreise nach Typ
+  sr: Цене артикала по типу
 params:
   - name: НаДату
     type: date

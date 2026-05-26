@@ -2,6 +2,10 @@ name: ПродажиПоДням
 type: chart
 chart_kind: bar
 title: Продажи за 30 дней
+titles:
+  en: Sales over 30 days
+  de: Verkäufe der letzten 30 Tage
+  sr: Продаја за 30 дана
 params:
   Начало: "{{today|minus_days:30}}"
 query: |

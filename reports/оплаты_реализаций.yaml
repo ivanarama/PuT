@@ -1,5 +1,9 @@
 name: ОплатыРеализаций
 title: Оплаты по реализациям
+titles:
+  en: Customer payments by sales
+  de: Kundenzahlungen je Verkauf
+  sr: Уплате од купаца по продаји
 params:
   - name: Контрагент
     type: reference:Контрагент

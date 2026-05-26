@@ -1,5 +1,9 @@
 name: ОплатыПоступлений
 title: Оплаты поставщикам по поступлениям
+titles:
+  en: Supplier payments by receipts
+  de: Lieferantenzahlungen je Eingang
+  sr: Плаћања добављачима по пријемима
 params:
   - name: Контрагент
     type: reference:Контрагент

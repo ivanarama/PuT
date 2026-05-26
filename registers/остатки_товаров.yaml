@@ -1,4 +1,9 @@
 name: ОстаткиТоваров
+title: Остатки товаров
+titles:
+  en: Inventory balances
+  de: Warenbestand
+  sr: Стање робе
 dimensions:
   - name: Номенклатура
     type: string

@@ -1,5 +1,9 @@
 name: АктСверки
 title: Акт сверки взаиморасчётов с контрагентом
+titles:
+  en: Reconciliation statement
+  de: Abstimmungserklärung
+  sr: Изјава о усклађивању
 params:
   - name: Контрагент
     type: reference:Контрагент

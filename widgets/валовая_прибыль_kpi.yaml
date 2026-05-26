@@ -1,6 +1,10 @@
 name: ВаловаяПрибыльМесяца
 type: kpi
 title: Валовая прибыль за месяц
+titles:
+  en: Gross profit for month
+  de: Rohgewinn des Monats
+  sr: Бруто добит у месецу
 format: money
 params:
   Начало: "{{today|start_of_month}}"

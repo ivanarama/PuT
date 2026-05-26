@@ -1,5 +1,9 @@
 name: ИмпортНоменклатуры
 title: Импорт номенклатуры из JSON
+titles:
+  en: Import items from JSON
+  de: Artikel aus JSON importieren
+  sr: Увоз артикала из JSON
 params:
   - name: ФайлJSON
     type: string

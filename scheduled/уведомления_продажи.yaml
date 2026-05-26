@@ -1,5 +1,9 @@
 name: УведомленияПродажи
 title: Ежедневный отчёт о продажах на email
+titles:
+  en: Daily sales report via email
+  de: Täglicher Verkaufsbericht per E-Mail
+  sr: Дневни извештај о продаји е-поштом
 schedule: "0 18 * * *"
 processor: УведомленияПродажи
 params:

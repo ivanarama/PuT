@@ -1,5 +1,9 @@
 name: ВаловаяПрибыль
 title: Отчёт по валовой прибыли (ФИФО)
+titles:
+  en: Gross profit (FIFO)
+  de: Rohgewinn (FIFO)
+  sr: Бруто добит (ФИФО)
 params:
   - name: Начало
     type: date

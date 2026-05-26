@@ -1,4 +1,9 @@
 name: Касса
+title: Касса
+titles:
+  en: Cash desk
+  de: Kasse
+  sr: Каса
 fields:
   - name: Наименование
     type: string

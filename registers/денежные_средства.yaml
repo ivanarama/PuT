@@ -1,4 +1,9 @@
 name: ДенежныеСредства
+title: Денежные средства
+titles:
+  en: Cash balances
+  de: Geldbestände
+  sr: Новчана средства
 dimensions:
   - name: Касса
     type: reference:Касса

@@ -1,4 +1,9 @@
 name: Организация
+title: Организация
+titles:
+  en: Organization
+  de: Unternehmen
+  sr: Организација
 fields:
   - name: Наименование
     type: string

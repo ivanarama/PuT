@@ -1,5 +1,9 @@
 name: ДвижениеДенежныхСредств
 title: Движение денежных средств за период
+titles:
+  en: Cash flow for period
+  de: Geldverkehr für den Zeitraum
+  sr: Новчани токови за период
 params:
   - name: НачалоПериода
     type: date

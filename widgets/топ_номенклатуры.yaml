@@ -1,6 +1,10 @@
 name: ТопНоменклатуры
 type: list
 title: Топ номенклатуры по выручке (месяц)
+titles:
+  en: Top items by revenue (month)
+  de: Top-Artikel nach Umsatz (Monat)
+  sr: Топ артикли по приходу (месец)
 limit: 10
 params:
   Начало: "{{today|start_of_month}}"

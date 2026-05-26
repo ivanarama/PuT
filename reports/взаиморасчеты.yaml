@@ -1,5 +1,9 @@
 name: Взаиморасчеты
 title: Взаиморасчёты с контрагентами
+titles:
+  en: Accounts with counterparties
+  de: Verrechnungen mit Geschäftspartnern
+  sr: Међусобна обрачуна
 params:
   - name: НаДату
     type: date

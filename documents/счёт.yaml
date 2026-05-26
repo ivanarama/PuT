@@ -1,4 +1,9 @@
 name: Счёт
+title: Счёт
+titles:
+  en: Invoice
+  de: Rechnung
+  sr: Рачун
 posting: false
 numerator:
   prefix: "СЧ-"

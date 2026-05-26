@@ -1,4 +1,9 @@
 name: СписаниеТоваров
+title: Списание товаров
+titles:
+  en: Inventory write-off
+  de: Warenabgang
+  sr: Отпис робе
 posting: true
 numerator:
   prefix: "СПС-"

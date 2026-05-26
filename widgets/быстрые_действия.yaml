@@ -1,6 +1,10 @@
 name: БыстрыеДействия
 type: actions
 title: Создать
+titles:
+  en: Create
+  de: Erstellen
+  sr: Креирај
 items:
   - { label: "Счёт",         entity: Счёт }
   - { label: "Реализация",   entity: РеализацияТоваров }

@@ -2,6 +2,10 @@ name: ДенежныйПоток
 type: chart
 chart_kind: bar
 title: Движение денежных средств за 30 дней
+titles:
+  en: Cash flow over 30 days
+  de: Geldverkehr der letzten 30 Tage
+  sr: Новчани токови за 30 дана
 params:
   Начало: "{{today|minus_days:30}}"
 query: |

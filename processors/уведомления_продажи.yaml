@@ -1,5 +1,9 @@
 name: УведомленияПродажи
 title: Отчёт о продажах по email
+titles:
+  en: Sales report via email
+  de: Verkaufsbericht per E-Mail
+  sr: Извештај о продаји путем е-поште
 params:
   - name: Кому
     type: string

@@ -1,4 +1,9 @@
 name: РасходныйКассовыйОрдер
+title: Расходный кассовый ордер
+titles:
+  en: Cash payment voucher
+  de: Kassenausgangsbeleg
+  sr: Исплата из касе
 posting: true
 numerator:
   prefix: "РКО-"

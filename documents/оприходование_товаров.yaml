@@ -1,4 +1,9 @@
 name: ОприходованиеТоваров
+title: Оприходование товаров
+titles:
+  en: Inventory receipt
+  de: Wareneingangsbuchung
+  sr: Унос робе
 posting: true
 numerator:
   prefix: "ОПР-"

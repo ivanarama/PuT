@@ -1,4 +1,9 @@
 name: ПартииТоваров
+title: Партии товаров
+titles:
+  en: Inventory lots
+  de: Warenchargen
+  sr: Партије робе
 dimensions:
   - name: Номенклатура
     type: reference:Номенклатура

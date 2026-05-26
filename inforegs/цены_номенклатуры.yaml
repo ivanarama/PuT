@@ -1,4 +1,9 @@
 name: ЦеныНоменклатуры
+title: Цены номенклатуры
+titles:
+  en: Item prices
+  de: Artikelpreise
+  sr: Цене артикала
 periodic: true
 dimensions:
   - name: Номенклатура

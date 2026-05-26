@@ -1,4 +1,9 @@
 name: СтавкаНДС
+title: Ставка НДС
+titles:
+  en: VAT rate
+  de: MwSt.-Satz
+  sr: ПДВ стопа
 fields:
   - name: Наименование
     type: string

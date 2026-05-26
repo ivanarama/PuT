@@ -1,4 +1,9 @@
 name: ПоступлениеНаРасчётныйСчёт
+title: Поступление на расчётный счёт
+titles:
+  en: Bank receipt
+  de: Bankeingang
+  sr: Прилив на рачун
 posting: true
 numerator:
   prefix: "БНК-П-"

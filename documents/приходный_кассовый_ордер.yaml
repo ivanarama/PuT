@@ -1,4 +1,9 @@
 name: ПриходныйКассовыйОрдер
+title: Приходный кассовый ордер
+titles:
+  en: Cash receipt voucher
+  de: Kasseneingangsbeleg
+  sr: Уплата у касу
 posting: true
 numerator:
   prefix: "ПКО-"

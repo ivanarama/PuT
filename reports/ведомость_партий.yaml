@@ -1,5 +1,9 @@
 name: ВедомостьПартий
 title: Партии товаров (ФИФО)
+titles:
+  en: Inventory lots (FIFO)
+  de: Warenchargen-Übersicht (FIFO)
+  sr: Преглед партија (ФИФО)
 params:
   - name: НаДату
     type: date

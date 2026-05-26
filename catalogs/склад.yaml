@@ -1,4 +1,9 @@
 name: Склад
+title: Склад
+titles:
+  en: Warehouse
+  de: Lager
+  sr: Магацин
 fields:
   - name: Наименование
     type: string

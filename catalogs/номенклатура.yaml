@@ -1,4 +1,9 @@
 name: Номенклатура
+title: Номенклатура
+titles:
+  en: Items
+  de: Artikel
+  sr: Артикли
 hierarchical: true
 fields:
   - name: Наименование

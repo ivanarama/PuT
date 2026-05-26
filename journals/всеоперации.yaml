@@ -1,5 +1,9 @@
 name: ВсеОперации
 title: Все операции
+titles:
+  en: All operations
+  de: Alle Vorgänge
+  sr: Све операције
 documents:
   - Счёт
   - ПоступлениеТоваров

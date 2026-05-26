@@ -1,4 +1,9 @@
 name: НастройкиПользователя
+title: Настройки пользователя
+titles:
+  en: User settings
+  de: Benutzereinstellungen
+  sr: Корисничка подешавања
 fields:
   - name: Наименование
     type: string

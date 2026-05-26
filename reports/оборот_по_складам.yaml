@@ -1,5 +1,9 @@
 name: ОборотПоСкладам
 title: Оборот по складам за период
+titles:
+  en: Warehouse turnover for period
+  de: Lagerumsatz für den Zeitraum
+  sr: Промет по магацинима за период
 params:
   - name: НачалоПериода
     type: date
