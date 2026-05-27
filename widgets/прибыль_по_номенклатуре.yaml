@@ -1,0 +1,32 @@
+name: ПрибыльПоНоменклатуре
+type: chart
+chart_kind: pie
+title: Структура прибыли по номенклатуре
+titles:
+  en: Profit breakdown by item
+  de: Gewinnstruktur nach Artikel
+  sr: Структура добити по артиклу
+  az: Mənfəətin məhsul üzrə strukturu
+  es: Desglose de beneficio por artículo
+  fr: Répartition du bénéfice par article
+  hy: "Շահույթի կառուցվածքը ըստ ապրանքների"
+  ka: "მოგების სტრუქტურა პროდუქტის მიხედვით"
+  kk: "Пайда құрылымы тауар бойынша"
+  pt: "Composição do lucro por item"
+  ro: "Structura profitului pe articole"
+  tr: "Kârın ürün bazlı dağılımı"
+  uk: "Структура прибутку за товарами"
+  uz: "Foydaning mahsulot bo'yicha tuzilishi"
+  zh: "按商品的利润构成"
+params:
+  Начало: "{{today|start_of_month}}"
+query: |
+  ВЫБРАТЬ
+    Номенклатура,
+    СУММА(Выручка) - СУММА(Себестоимость) КАК Прибыль
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ period >= &Начало
+  СГРУППИРОВАТЬ ПО Номенклатура
+  УПОРЯДОЧИТЬ ПО Прибыль УБЫВ
+x_field: Номенклатура
+y_fields: [Прибыль]

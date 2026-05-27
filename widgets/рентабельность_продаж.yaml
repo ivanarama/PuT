@@ -1,0 +1,29 @@
+name: РентабельностьПродаж
+type: kpi
+title: Рентабельность продаж, %
+titles:
+  en: Sales margin, %
+  de: Verkaufsmarge, %
+  sr: Маржа продаје, %
+  az: Satış marjası, %
+  es: Margen de ventas, %
+  fr: Marge de vente, %
+  hy: "Վաճառքի մարժա, %"
+  ka: "გაყიდვების მარჟა, %"
+  kk: "Сату маржасы, %"
+  pt: "Margem de vendas, %"
+  ro: "Marja vânzărilor, %"
+  tr: "Satış marjı, %"
+  uk: "Рентабельність продаж, %"
+  uz: "Sotuv marjasi, %"
+  zh: "销售利润率%"
+format: percent
+params:
+  Начало: "{{today|start_of_month}}"
+query: |
+  ВЫБРАТЬ
+    ВЫБОР КОГДА СУММА(Выручка) > 0
+      ТОГДА (СУММА(Выручка) - СУММА(Себестоимость)) * 100 / СУММА(Выручка)
+      ИНАЧЕ 0 КОНЕЦ КАК Значение
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ period >= &Начало

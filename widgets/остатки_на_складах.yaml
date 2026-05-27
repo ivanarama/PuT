@@ -1,0 +1,106 @@
+name: ОстаткиНаСкладах
+type: list
+title: Остатки по складам
+titles:
+  en: Stock by warehouse
+  de: Bestand nach Lager
+  sr: Стање по магацинима
+  az: Anbarlar üzrə qalıq
+  es: Stock por almacén
+  fr: Stock par entrepôt
+  hy: "Պահեստների մնացորդ"
+  ka: "ნაშთი საწყობების მიხედვით"
+  kk: "Қоймалар бойынша қалдық"
+  pt: "Stock por armazém"
+  ro: "Stoc pe depozite"
+  tr: "Depolara göre stok"
+  uk: "Залишки по складах"
+  uz: "Omborlar bo'yicha qoldiq"
+  zh: "按仓库的库存"
+limit: 15
+query: |
+  ВЫБРАТЬ
+    Номенклатура,
+    Склад,
+    КоличествоОстаток КАК Количество,
+    СуммаОстаток КАК Сумма
+  ИЗ РегистрНакопления.ОстаткиТоваров.Остатки()
+  ГДЕ КоличествоОстаток > 0
+  УПОРЯДОЧИТЬ ПО СуммаОстаток УБЫВ
+columns:
+  - field: Номенклатура
+    label: "Номенклатура"
+    labels:
+      en: "Item"
+      de: "Artikel"
+      sr: "Артикал"
+      az: "Məhsul"
+      es: "Artículo"
+      fr: "Article"
+      hy: "Ապրանք"
+      ka: "პროდუქტი"
+      kk: "Тауар"
+      pt: "Item"
+      ro: "Articol"
+      tr: "Ürün"
+      uk: "Товар"
+      uz: "Mahsulot"
+      zh: "商品"
+  - field: Склад
+    label: "Склад"
+    labels:
+      en: "Warehouse"
+      de: "Lager"
+      sr: "Магацин"
+      az: "Anbar"
+      es: "Almacén"
+      fr: "Entrepôt"
+      hy: "Պահեստ"
+      ka: "საწყობ"
+      kk: "Қойма"
+      pt: "Armazém"
+      ro: "Depozit"
+      tr: "Depo"
+      uk: "Склад"
+      uz: "Ombor"
+      zh: "仓库"
+  - field: Количество
+    label: "Кол-во"
+    labels:
+      en: "Qty"
+      de: "Menge"
+      sr: "Кол."
+      az: "Say"
+      es: "Cant."
+      fr: "Qté"
+      hy: "Քան."
+      ka: "რაოდ."
+      kk: "Сан"
+      pt: "Qtd"
+      ro: "Cant."
+      tr: "Adet"
+      uk: "Кіл."
+      uz: "Soni"
+      zh: "数量"
+    format: number
+    align: right
+  - field: Сумма
+    label: "Сумма"
+    labels:
+      en: "Amount"
+      de: "Betrag"
+      sr: "Износ"
+      az: "Məbləğ"
+      es: "Importe"
+      fr: "Montant"
+      hy: "Գումար"
+      ka: "თანხა"
+      kk: "Сома"
+      pt: "Valor"
+      ro: "Sumă"
+      tr: "Tutar"
+      uk: "Сума"
+      uz: "Miqdor"
+      zh: "金额"
+    format: money
+    align: right

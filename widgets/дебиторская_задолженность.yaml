@@ -1,0 +1,25 @@
+name: ДебиторскаяЗадолженность
+type: kpi
+title: Задолженность покупателей
+titles:
+  en: Accounts receivable
+  de: Forderungen
+  sr: Потраживања од купаца
+  az: Alıcıların borcu
+  es: Deuda de clientes
+  fr: Créances clients
+  hy: "Գնորդների պարտք"
+  ka: "მყიდველების ვალი"
+  kk: "Сатып алушылар берешегі"
+  pt: "Dívida de clientes"
+  ro: "Creanțe clienți"
+  tr: "Müşteri alacakları"
+  uk: "Дебіторська заборгованість"
+  uz: "Xaridorlar qarzi"
+  zh: "应收账款"
+format: money
+query: |
+  ВЫБРАТЬ
+    СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ) КАК Значение
+  ИЗ РегистрНакопления.Взаиморасчеты
+  ГДЕ ТипКонтрагента = "Покупатель"

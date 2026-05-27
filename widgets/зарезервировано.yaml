@@ -1,0 +1,24 @@
+name: Зарезервировано
+type: kpi
+title: Зарезервировано под заказы
+titles:
+  en: Reserved for orders
+  de: Für Aufträge reserviert
+  sr: Резервисано за налоге
+  az: Sifarişlər üçün rezerv
+  es: Reservado para pedidos
+  fr: Réservé pour commandes
+  hy: "Պատվերների համար ռեզերվ"
+  ka: "შეკვეთებისთვის რეზერვირებული"
+  kk: "Тапсырыстарға резерв"
+  pt: "Reservado para encomendas"
+  ro: "Rezervat pentru comenzi"
+  tr: "Siparişler için ayrılmış"
+  uk: "Зарезервовано під замовлення"
+  uz: "Buyurtmalar uchun zaxira"
+  zh: "订单预留"
+format: number
+query: |
+  ВЫБРАТЬ СУММА(КоличествоОстаток) КАК Значение
+  ИЗ РегистрНакопления.РезервыТоваров.Остатки()
+  ГДЕ КоличествоОстаток > 0

@@ -1,0 +1,25 @@
+name: ЗадолженностьПоставщикам
+type: kpi
+title: Задолженность поставщикам
+titles:
+  en: Accounts payable
+  de: Verbindlichkeiten
+  sr: Дуг добављачима
+  az: Təchizatçılara borc
+  es: Deuda con proveedores
+  fr: Dettes fournisseurs
+  hy: Պարտք մատակարարներին
+  ka: მომწოდებლების ვალი
+  kk: Жабдықтаушыларға берешек
+  pt: Dívida a fornecedores
+  ro: Datorii furnizori
+  tr: Tedarikçi borcu
+  uk: Заборгованість постачальникам
+  uz: Yetkazib beruvchilarga qarz
+  zh: 应付账款
+format: money
+query: |
+  ВЫБРАТЬ
+    СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ) КАК Значение
+  ИЗ РегистрНакопления.Взаиморасчеты
+  ГДЕ ТипКонтрагента = "Поставщик"

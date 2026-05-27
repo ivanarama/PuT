@@ -1,0 +1,34 @@
+name: ПрибыльПоДням
+type: chart
+chart_kind: line
+title: Прибыль за 30 дней
+titles:
+  en: Profit over 30 days
+  de: Gewinn der letzten 30 Tage
+  sr: Добит за 30 дана
+  az: 30 günlük mənfəət
+  es: Beneficio en 30 días
+  fr: Bénéfice sur 30 jours
+  hy: "30 օրվա շահույթ"
+  ka: "30 დღის მოგება"
+  kk: "30 күндік пайда"
+  pt: "Lucro em 30 dias"
+  ro: "Profit pe 30 de zile"
+  tr: "30 günlük kâr"
+  uk: "Прибуток за 30 днів"
+  uz: "30 kunlik foyda"
+  zh: "30天利润"
+params:
+  Начало: "{{today|minus_days:30}}"
+query: |
+  ВЫБРАТЬ
+    date(period) КАК Дата,
+    СУММА(Выручка) КАК Выручка,
+    СУММА(Себестоимость) КАК Себестоимость,
+    СУММА(Выручка) - СУММА(Себестоимость) КАК Прибыль
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ period >= &Начало
+  СГРУППИРОВАТЬ ПО date(period)
+  УПОРЯДОЧИТЬ ПО date(period)
+x_field: Дата
+y_fields: [Выручка, Прибыль]

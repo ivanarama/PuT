@@ -1,0 +1,24 @@
+name: СтоимостьСклада
+type: kpi
+title: Стоимость склада
+titles:
+  en: Warehouse value
+  de: Lagerwert
+  sr: Вредност магацина
+  az: Anbar dəyəri
+  es: Valor del almacén
+  fr: Valeur entrepôt
+  hy: Պահեստի արժեք
+  ka: საწყობის ღირებულება
+  kk: Қойма құны
+  pt: Valor do armazém
+  ro: Valoare depozit
+  tr: Depo değeri
+  uk: Вартість складу
+  uz: Ombor qiymati
+  zh: 仓库价值
+format: money
+query: |
+  ВЫБРАТЬ СУММА(СуммаОстаток) КАК Значение
+  ИЗ РегистрНакопления.ОстаткиТоваров.Остатки()
+  ГДЕ КоличествоОстаток > 0

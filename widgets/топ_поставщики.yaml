@@ -1,0 +1,71 @@
+name: ТопПоставщики
+type: list
+title: Топ поставщики за месяц
+titles:
+  en: Top suppliers (month)
+  de: Top-Lieferanten (Monat)
+  sr: Топ добављачи (месец)
+  az: Ən yaxşı təchizatçılar (ay)
+  es: Top proveedores (mes)
+  fr: Top fournisseurs (mois)
+  hy: Լավագույն մատակարարներ (ամիս)
+  ka: საუკეთესო მომწოდებლები (თვე)
+  kk: Топ жабдықтаушылар (ай)
+  pt: Top fornecedores (mês)
+  ro: Top furnizori (lună)
+  tr: En iyi tedarikçiler (ay)
+  uk: Топ постачальники (місяць)
+  uz: Top yetkazib beruvchilar (oy)
+  zh: 月度热门供应商
+limit: 5
+params:
+  Начало: "{{today|start_of_month}}"
+query: |
+  ВЫБРАТЬ
+    Контрагент,
+    СУММА(Сумма) КАК Сумма
+  ИЗ РегистрНакопления.Взаиморасчеты
+  ГДЕ ТипКонтрагента = "Поставщик"
+    И вид_движения = "Расход"
+    И period >= &Начало
+  СГРУППИРОВАТЬ ПО Контрагент
+  УПОРЯДОЧИТЬ ПО Сумма УБЫВ
+columns:
+  - field: Контрагент
+    label: "Поставщик"
+    labels:
+      en: "Supplier"
+      de: "Lieferant"
+      sr: "Добављач"
+      az: "Təchizatçı"
+      es: "Proveedor"
+      fr: "Fournisseur"
+      hy: "Մատակարար"
+      ka: "მომწოდებელი"
+      kk: "Жабдықтаушы"
+      pt: "Fornecedor"
+      ro: "Furnizor"
+      tr: "Tedarikçi"
+      uk: "Постачальник"
+      uz: "Yetkazib beruvchi"
+      zh: "供应商"
+  - field: Сумма
+    label: "Сумма закупок"
+    labels:
+      en: "Purchase amount"
+      de: "Einkaufsbetrag"
+      sr: "Износ набавке"
+      az: "Satınalma məbləği"
+      es: "Importe compras"
+      fr: "Montant achats"
+      hy: "Գնումների գումար"
+      ka: "შესყიდვის თანხა"
+      kk: "Сатып алу сомасы"
+      pt: "Valor compras"
+      ro: "Sumă achiziții"
+      tr: "Satın alma tutarı"
+      uk: "Сума закупівель"
+      uz: "Xarid miqdori"
+      zh: "采购金额"
+    format: money
+    align: right

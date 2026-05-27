@@ -1,0 +1,106 @@
+name: ОжидаемыеПоставки
+type: list
+title: Ожидаемые поставки
+titles:
+  en: Expected deliveries
+  de: Erwartete Lieferungen
+  sr: Очекиване испоруке
+  az: Gözlənilən çatdırmalar
+  es: Entregas esperadas
+  fr: Livraisons attendues
+  hy: Սպասվող մատակարարումներ
+  ka: მოსალოდნელი მიწოდებები
+  kk: Күтілетін жеткізілімдер
+  pt: Entregas esperadas
+  ro: Livrări așteptate
+  tr: Beklenen teslimatlar
+  uk: Очікувані поставки
+  uz: Kutilayotgan yetkazib berishlar
+  zh: 预计到货
+limit: 10
+query: |
+  ВЫБРАТЬ
+    ЗаказПоставщику,
+    Номенклатура,
+    КоличествоОстаток КАК Количество,
+    СуммаОстаток КАК Сумма
+  ИЗ РегистрНакопления.ТоварыВПути.Остатки()
+  ГДЕ КоличествоОстаток > 0
+  УПОРЯДОЧИТЬ ПО Сумма УБЫВ
+columns:
+  - field: ЗаказПоставщику
+    label: "Заказ"
+    labels:
+      en: "Order"
+      de: "Bestellung"
+      sr: "Налог"
+      az: "Sifariş"
+      es: "Pedido"
+      fr: "Commande"
+      hy: "Պատվեր"
+      ka: "შეკვეთა"
+      kk: "Тапсырыс"
+      pt: "Encomenda"
+      ro: "Comandă"
+      tr: "Sipariş"
+      uk: "Замовлення"
+      uz: "Buyurtma"
+      zh: "订单"
+  - field: Номенклатура
+    label: "Номенклатура"
+    labels:
+      en: "Item"
+      de: "Artikel"
+      sr: "Артикал"
+      az: "Məhsul"
+      es: "Artículo"
+      fr: "Article"
+      hy: "Ապրանք"
+      ka: "პროდუქტი"
+      kk: "Тауар"
+      pt: "Item"
+      ro: "Articol"
+      tr: "Ürün"
+      uk: "Товар"
+      uz: "Mahsulot"
+      zh: "商品"
+  - field: Количество
+    label: "Кол-во"
+    labels:
+      en: "Qty"
+      de: "Menge"
+      sr: "Кол."
+      az: "Say"
+      es: "Cant."
+      fr: "Qté"
+      hy: "Քան."
+      ka: "რაოდ."
+      kk: "Сан"
+      pt: "Qtd"
+      ro: "Cant."
+      tr: "Adet"
+      uk: "Кіл."
+      uz: "Soni"
+      zh: "数量"
+    format: number
+    align: right
+  - field: Сумма
+    label: "Сумма"
+    labels:
+      en: "Amount"
+      de: "Betrag"
+      sr: "Износ"
+      az: "Məbləğ"
+      es: "Importe"
+      fr: "Montant"
+      hy: "Գումար"
+      ka: "თანხა"
+      kk: "Сома"
+      pt: "Valor"
+      ro: "Sumă"
+      tr: "Tutar"
+      uk: "Сума"
+      uz: "Miqdor"
+      zh: "金额"
+    format: money
+    align: right

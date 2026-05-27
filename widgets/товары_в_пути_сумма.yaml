@@ -1,0 +1,24 @@
+name: ТоварыВПутиСумма
+type: kpi
+title: Товары в пути, сумма
+titles:
+  en: Goods in transit, amount
+  de: Waren Unterwegs, Betrag
+  sr: Роба у транзиту, износ
+  az: Yoldakı mallar, məbləğ
+  es: Mercancías en tránsito, importe
+  fr: Marchandises en transit, montant
+  hy: Ճանապարհի ապրանքներ, գումար
+  ka: გზაში მყოფი საქონელი, თანხა
+  kk: Жолдағы тауарлар, сома
+  pt: Mercadorias em trânsito, valor
+  ro: Mărfuri în tranzit, sumă
+  tr: Yoldaki mallar, tutar
+  uk: Товари в дорозі, сума
+  uz: Yo'ldagi tovarlar, miqdor
+  zh: 在途商品金额
+format: money
+query: |
+  ВЫБРАТЬ СУММА(СуммаОстаток) КАК Значение
+  ИЗ РегистрНакопления.ТоварыВПути.Остатки()
+  ГДЕ КоличествоОстаток > 0

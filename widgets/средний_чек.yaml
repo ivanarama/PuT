@@ -1,0 +1,27 @@
+name: СреднийЧек
+type: kpi
+title: Средний чек за месяц
+titles:
+  en: Average check (month)
+  de: Durchschnittsbon (Monat)
+  sr: Просечна сметка (месец)
+  az: Orta çek (ay)
+  es: Ticket medio (mes)
+  fr: Panier moyen (mois)
+  hy: "Միջին չեկ (ամիս)"
+  ka: "საშუალო ჩეკი (თვე)"
+  kk: "Орташа чек (ай)"
+  pt: "Ticket médio (mês)"
+  ro: "Bon mediu (lună)"
+  tr: "Ortalama fiş (ay)"
+  uk: "Середній чек (місяць)"
+  uz: "O'rtacha chek (oy)"
+  zh: "月度客单价"
+format: money
+params:
+  Начало: "{{today|start_of_month}}"
+query: |
+  ВЫБРАТЬ
+    ВЫБОР КОГДА КОЛИЧЕСТВО(*) > 0 ТОГДА СУММА(Сумма)/КОЛИЧЕСТВО(*) ИНАЧЕ 0 КОНЕЦ КАК Значение
+  ИЗ Документ.РеализацияТоваров
+  ГДЕ Дата >= &Начало
