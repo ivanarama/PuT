@@ -1,29 +1,28 @@
-﻿name: РеализацияТоваров
-title: Реализация товаров
+name: ЗаказПокупателя
+title: Заказ покупателя
 titles:
-  en: Sales of goods
-  de: Warenverkauf
-  sr: Продаја робе
-  az: Malların satışı
-  es: Venta de mercancías
-  fr: Vente de marchandises
-  hy: Ապրանքների իրացում
-  ka: საქონლის რეაլიზაცია
-  kk: Тауарларды сату
-  pt: Venda de mercadorias
-  ro: Vânzare mărfuri
-  tr: Mal satışı
-  uk: Реалізація товарів
-  uz: Tovarlarni sotish
-  zh: 商品销售
+  en: Sales order
+  de: Kundenauftrag
+  sr: Налог купца
+  az: Alıcı sifarişi
+  es: Pedido cliente
+  fr: Commande client
+  hy: Գնորդի պատվեր
+  ka: მყიდველის შეკვეთა
+  kk: Сатып алушы тапсырысы
+  pt: Encomenda cliente
+  ro: Comandă client
+  tr: Müşteri siparişi
+  uk: Замовлення покупця
+  uz: Xaridor buyurtmasi
+  zh: 客户订单
 posting: true
-based_on:
-  - Счёт
-  - ЗаказПокупателя
 numerator:
-  prefix: "РЕА-"
+  prefix: "ЗПК-"
   length: 5
   period: year
+based_on:
+  - Счёт
 fields:
   - name: Номер
     type: string
@@ -139,44 +138,6 @@ fields:
       uk: Тип ціни продажу
       uz: Sotuv narx turi
       zh: 销售价格类型
-  - name: ЗаказПокупателя
-    type: reference:ЗаказПокупателя
-    title: Заказ покупателя
-    titles:
-      en: Sales order
-      de: Kundenauftrag
-      sr: Налог купца
-      az: Alıcı sifarişi
-      es: Pedido cliente
-      fr: Commande client
-      hy: Գնորդի պատվեր
-      ka: მყიდველის შეკვეთა
-      kk: Сатып алушы тапсырысы
-      pt: Encomenda cliente
-      ro: Comandă client
-      tr: Müşteri siparişi
-      uk: Замовлення покупця
-      uz: Xaridor buyurtmasi
-      zh: 客户订单
-  - name: Основание
-    type: reference:Счёт
-    title: Основание
-    titles:
-      en: Base document
-      de: Beleggrundlage
-      sr: Основни документ
-      az: Əsas
-      es: Base
-      fr: Base
-      hy: Հիմք
-      ka: საფუძველი
-      kk: Негіздеме
-      pt: Base
-      ro: Bază
-      tr: Dayanak
-      uk: Підстава
-      uz: Asos
-      zh: 依据
   - name: СпособУчетаНДС
     type: enum:СпособУчетаНДС
     title: НДС
@@ -196,6 +157,44 @@ fields:
       uk: ПДВ
       uz: QQS
       zh: 增值税
+  - name: Основание
+    type: reference:Счёт
+    title: Основание
+    titles:
+      en: Base document
+      de: Beleggrundlage
+      sr: Основни документ
+      az: Əsas
+      es: Base
+      fr: Base
+      hy: Հիմք
+      ka: საფუძველი
+      kk: Негіздеме
+      pt: Base
+      ro: Bază
+      tr: Dayanak
+      uk: Підстава
+      uz: Asos
+      zh: 依据
+  - name: Комментарий
+    type: string
+    title: Комментарий
+    titles:
+      en: Comment
+      de: Kommentar
+      sr: Коментар
+      az: Şərh
+      es: Comentario
+      fr: Commentaire
+      hy: Մեկնաբանություն
+      ka: კომენტარი
+      kk: Түсініктеме
+      pt: Comentário
+      ro: Comentariu
+      tr: Yorum
+      uk: Коментар
+      uz: Izoh
+      zh: 备注
   - name: СуммаБезНДС
     type: number
     title: Сумма без НДС
@@ -236,23 +235,23 @@ fields:
       zh: 增值税额
   - name: Сумма
     type: number
-    title: Всего к оплате
+    title: Всего
     titles:
-      en: Total payable
-      de: Gesamtbetrag
-      sr: Укупно за плаћање
-      az: Cəmi ödəniş
-      es: Total a pagar
-      fr: Total à payer
-      hy: Ընդհանուր վճար
-      ka: საერთო გადასახდელი
-      kk: Төлемге дейін
-      pt: Total a pagar
-      ro: Total de plată
-      tr: Toplam ödeme
-      uk: Всього до оплати
-      uz: To'lovga jami
-      zh: 应付总额
+      en: Total
+      de: Gesamt
+      sr: Укупно
+      az: Cəmi
+      es: Total
+      fr: Total
+      hy: Ընդհանուր
+      ka: საერთო
+      kk: Барлығы
+      pt: Total
+      ro: Total
+      tr: Toplam
+      uk: Всього
+      uz: Jami
+      zh: 合计
 tableparts:
   - name: Товары
     title: Товары

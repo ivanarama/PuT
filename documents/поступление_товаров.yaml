@@ -17,6 +17,8 @@ titles:
   uz: Tovarlarni qabul qilish
   zh: 商品入库
 posting: true
+based_on:
+  - ЗаказПоставщику
 numerator:
   prefix: "ПОС-"
   length: 5
@@ -117,6 +119,25 @@ fields:
       uk: Склад
       uz: Ombor
       zh: 仓库
+  - name: ЗаказПоставщику
+    type: reference:ЗаказПоставщику
+    title: Заказ поставщику
+    titles:
+      en: Purchase order
+      de: Lieferantenbestellung
+      sr: Налог добављачу
+      az: Təchizatçı sifarişi
+      es: Pedido proveedor
+      fr: Commande fournisseur
+      hy: Մատակարարի պատվեր
+      ka: მომწოდებლის შეკვეთა
+      kk: Жабдықтаушы тапсырысы
+      pt: Encomenda fornecedor
+      ro: Comandă furnizor
+      tr: Tedarikçi siparişi
+      uk: Замовлення постачальнику
+      uz: Yetkazib beruvchi buyurtmasi
+      zh: 采购订单
   - name: СпособУчетаНДС
     type: enum:СпособУчетаНДС
     title: НДС

@@ -1,0 +1,96 @@
+name: РезервыТоваров
+title: Резервы товаров
+titles:
+  en: Goods reservations
+  de: Warenreservierungen
+  sr: Резерве робе
+  az: Mal rezervləri
+  es: Reservas de mercancías
+  fr: Réservations de marchandises
+  hy: Ապրանքների ռեզերվներ
+  ka: საქონლის რეზერვი
+  kk: Тауар резервтері
+  pt: Reservas de mercadorias
+  ro: Rezervări mărfuri
+  tr: Mal rezervasyonları
+  uk: Резерви товарів
+  uz: Tovar zaxiralari
+  zh: 商品预留
+dimensions:
+  - name: Номенклатура
+    type: string
+    title: Номенклатура
+    titles:
+      en: Item
+      de: Artikel
+      sr: Артикал
+      az: Adlandırma
+      es: Nomenclatura
+      fr: Nomenclature
+      hy: Անվանակարգ
+      ka: ნომენკლატურა
+      kk: Номенклатура
+      pt: Nomenclatura
+      ro: Nomenclatură
+      tr: Nomembüro
+      uk: Номенклатура
+      uz: Nomеnklatura
+      zh: 物料
+  - name: Склад
+    type: string
+    title: Склад
+    titles:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
+  - name: ЗаказПокупателя
+    type: string
+    title: Заказ покупателя
+    titles:
+      en: Sales order
+      de: Kundenauftrag
+      sr: Налог купца
+      az: Alıcı sifarişi
+      es: Pedido cliente
+      fr: Commande client
+      hy: Գնորդի պատվեր
+      ka: მყიდველის შეკვეთა
+      kk: Сатып алушы тапсырысы
+      pt: Encomenda cliente
+      ro: Comandă client
+      tr: Müşteri siparişi
+      uk: Замовлення покупця
+      uz: Xaridor buyurtmasi
+      zh: 客户订单
+resources:
+  - name: Количество
+    type: number
+    title: Количество
+    titles:
+      en: Quantity
+      de: Menge
+      sr: Количина
+      az: Miqdar
+      es: Cantidad
+      fr: Quantité
+      hy: Քանակ
+      ka: რაოდენობა
+      kk: Саны
+      pt: Quantidade
+      ro: Cantitate
+      tr: Miktar
+      uk: Кількість
+      uz: Miqdor
+      zh: 数量

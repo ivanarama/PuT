@@ -1,27 +1,24 @@
-﻿name: РеализацияТоваров
-title: Реализация товаров
+name: ЗаказПоставщику
+title: Заказ поставщику
 titles:
-  en: Sales of goods
-  de: Warenverkauf
-  sr: Продаја робе
-  az: Malların satışı
-  es: Venta de mercancías
-  fr: Vente de marchandises
-  hy: Ապրանքների իրացում
-  ka: საქონლის რეაլიზაცია
-  kk: Тауарларды сату
-  pt: Venda de mercadorias
-  ro: Vânzare mărfuri
-  tr: Mal satışı
-  uk: Реалізація товарів
-  uz: Tovarlarni sotish
-  zh: 商品销售
+  en: Purchase order
+  de: Lieferantenbestellung
+  sr: Налог добављачу
+  az: Təchizatçı sifarişi
+  es: Pedido proveedor
+  fr: Commande fournisseur
+  hy: Մատակարարի պատվեր
+  ka: მომწოდებლის შეკვეთა
+  kk: Жабдықтаушы тапсырысы
+  pt: Encomenda fornecedor
+  ro: Comandă furnizor
+  tr: Tedarikçi siparişi
+  uk: Замовлення постачальнику
+  uz: Yetkazib beruvchi buyurtmasi
+  zh: 采购订单
 posting: true
-based_on:
-  - Счёт
-  - ЗаказПокупателя
 numerator:
-  prefix: "РЕА-"
+  prefix: "ЗПС-"
   length: 5
   period: year
 fields:
@@ -82,25 +79,25 @@ fields:
       uk: Організація
       uz: Tashkilot
       zh: 组织
-  - name: Покупатель
+  - name: Поставщик
     type: reference:Контрагент
-    title: Покупатель
+    title: Поставщик
     titles:
-      en: Customer
-      de: Kunde
-      sr: Купац
-      az: Alıcı
-      es: Cliente
-      fr: Client
-      hy: Գնորդ
-      ka: მყიდველი
-      kk: Сатып алушы
-      pt: Cliente
-      ro: Client
-      tr: Müşteri
-      uk: Покупець
-      uz: Xaridor
-      zh: 客户
+      en: Supplier
+      de: Lieferant
+      sr: Добављач
+      az: Təchizatçı
+      es: Proveedor
+      fr: Fournisseur
+      hy: Մատակարար
+      ka: მომწოდებელი
+      kk: Жабдықтаушы
+      pt: Fornecedor
+      ro: Furnizor
+      tr: Tedarikçi
+      uk: Постачальник
+      uz: Yetkazib beruvchi
+      zh: 供应商
   - name: Склад
     type: reference:Склад
     title: Склад
@@ -120,63 +117,6 @@ fields:
       uk: Склад
       uz: Ombor
       zh: 仓库
-  - name: ТипЦенПродажи
-    type: reference:ТипЦен
-    title: Тип цен продажи
-    titles:
-      en: Sales price type
-      de: Verkaufspreistyp
-      sr: Тип цене продаје
-      az: Satış qiymət növü
-      es: Tipo precio venta
-      fr: Type prix vente
-      hy: Վաճառքի գնի տեսակի
-      ka: გაყიდვის ფასის ტიპი
-      kk: Сату баға түрі
-      pt: Tipo preço venda
-      ro: Tip preț vânzare
-      tr: Satış fiyat tipi
-      uk: Тип ціни продажу
-      uz: Sotuv narx turi
-      zh: 销售价格类型
-  - name: ЗаказПокупателя
-    type: reference:ЗаказПокупателя
-    title: Заказ покупателя
-    titles:
-      en: Sales order
-      de: Kundenauftrag
-      sr: Налог купца
-      az: Alıcı sifarişi
-      es: Pedido cliente
-      fr: Commande client
-      hy: Գնորդի պատվեր
-      ka: მყიდველის შეკვეთა
-      kk: Сатып алушы тапсырысы
-      pt: Encomenda cliente
-      ro: Comandă client
-      tr: Müşteri siparişi
-      uk: Замовлення покупця
-      uz: Xaridor buyurtmasi
-      zh: 客户订单
-  - name: Основание
-    type: reference:Счёт
-    title: Основание
-    titles:
-      en: Base document
-      de: Beleggrundlage
-      sr: Основни документ
-      az: Əsas
-      es: Base
-      fr: Base
-      hy: Հիմք
-      ka: საფუძველი
-      kk: Негіздеме
-      pt: Base
-      ro: Bază
-      tr: Dayanak
-      uk: Підстава
-      uz: Asos
-      zh: 依据
   - name: СпособУчетаНДС
     type: enum:СпособУчетаНДС
     title: НДС
@@ -196,6 +136,25 @@ fields:
       uk: ПДВ
       uz: QQS
       zh: 增值税
+  - name: Комментарий
+    type: string
+    title: Комментарий
+    titles:
+      en: Comment
+      de: Kommentar
+      sr: Коментар
+      az: Şərh
+      es: Comentario
+      fr: Commentaire
+      hy: Մեկնաբանություն
+      ka: კომენტარი
+      kk: Түсініктеме
+      pt: Comentário
+      ro: Comentariu
+      tr: Yorum
+      uk: Коментар
+      uz: Izoh
+      zh: 备注
   - name: СуммаБезНДС
     type: number
     title: Сумма без НДС
@@ -236,23 +195,23 @@ fields:
       zh: 增值税额
   - name: Сумма
     type: number
-    title: Всего к оплате
+    title: Всего
     titles:
-      en: Total payable
-      de: Gesamtbetrag
-      sr: Укупно за плаћање
-      az: Cəmi ödəniş
-      es: Total a pagar
-      fr: Total à payer
-      hy: Ընդհանուր վճար
-      ka: საერთო გადასახდელი
-      kk: Төлемге дейін
-      pt: Total a pagar
-      ro: Total de plată
-      tr: Toplam ödeme
-      uk: Всього до оплати
-      uz: To'lovga jami
-      zh: 应付总额
+      en: Total
+      de: Gesamt
+      sr: Укупно
+      az: Cəmi
+      es: Total
+      fr: Total
+      hy: Ընդհանուր
+      ka: საერთო
+      kk: Барлығы
+      pt: Total
+      ro: Total
+      tr: Toplam
+      uk: Всього
+      uz: Jami
+      zh: 合计
 tableparts:
   - name: Товары
     title: Товары

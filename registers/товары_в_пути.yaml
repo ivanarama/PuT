@@ -1,0 +1,115 @@
+name: ТоварыВПути
+title: Товары в пути
+titles:
+  en: Goods in transit
+  de: Waren Unterwegs
+  sr: Роба у транзиту
+  az: Yoldakı mallar
+  es: Mercancías en tránsito
+  fr: Marchandises en transit
+  hy: Ճանապարհի ապրանքներ
+  ka: გზაში მყოფი საქონელი
+  kk: Жолдағы тауарлар
+  pt: Mercadorias em trânsito
+  ro: Mărfuri în tranzit
+  tr: Yoldaki mallar
+  uk: Товари в дорозі
+  uz: Yoʻldagi tovarlar
+  zh: 在途商品
+dimensions:
+  - name: Номенклатура
+    type: string
+    title: Номенклатура
+    titles:
+      en: Item
+      de: Artikel
+      sr: Артикал
+      az: Adlandırma
+      es: Nomenclatura
+      fr: Nomenclature
+      hy: Անվանակարգ
+      ka: ნომენკლატურა
+      kk: Номенклатура
+      pt: Nomenclatura
+      ro: Nomenclatură
+      tr: Nomembüro
+      uk: Номенклатура
+      uz: Nomеnklatura
+      zh: 物料
+  - name: Склад
+    type: string
+    title: Склад
+    titles:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
+  - name: ЗаказПоставщику
+    type: string
+    title: Заказ поставщику
+    titles:
+      en: Purchase order
+      de: Lieferantenbestellung
+      sr: Налог добављачу
+      az: Təchizatçı sifarişi
+      es: Pedido proveedor
+      fr: Commande fournisseur
+      hy: Մատակարարի պատվեր
+      ka: მომწოდებლის შეკვეთა
+      kk: Жабдықтаушы тапсырысы
+      pt: Encomenda fornecedor
+      ro: Comandă furnizor
+      tr: Tedarikçi siparişi
+      uk: Замовлення постачальнику
+      uz: Yetkazib beruvchi buyurtmasi
+      zh: 采购订单
+resources:
+  - name: Количество
+    type: number
+    title: Количество
+    titles:
+      en: Quantity
+      de: Menge
+      sr: Количина
+      az: Miqdar
+      es: Cantidad
+      fr: Quantité
+      hy: Քանակ
+      ka: რაოდენობა
+      kk: Саны
+      pt: Quantidade
+      ro: Cantitate
+      tr: Miktar
+      uk: Кількість
+      uz: Miqdor
+      zh: 数量
+  - name: Сумма
+    type: number
+    title: Сумма
+    titles:
+      en: Amount
+      de: Betrag
+      sr: Износ
+      az: Məbləğ
+      es: Importe
+      fr: Montant
+      hy: Գումար
+      ka: თანხა
+      kk: Сомасы
+      pt: Valor
+      ro: Sumă
+      tr: Tutar
+      uk: Сума
+      uz: Miqdor
+      zh: 金额

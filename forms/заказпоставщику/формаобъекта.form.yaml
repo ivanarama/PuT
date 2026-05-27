@@ -3,18 +3,18 @@ schema: onebase.form/v1
 form:
   name: ФормаОбъекта
   kind: object
-  entity: ПоступлениеТоваров
+  entity: ЗаказПоставщику
   title:
-    ru: "Поступление товаров"
-    en: "Goods receipt"
-    de: "Warenzugang"
-    sr: "Пријем робе"
+    ru: "Заказ поставщику"
+    en: "Purchase order"
+    de: "Lieferantenbestellung"
+    sr: "Налог добављачу"
   auto_save_settings: true
   vertical_scroll: auto
 
 attributes:
   - name: Объект
-    type: DocumentRef.ПоступлениеТоваров
+    type: DocumentRef.ЗаказПоставщику
     save: true
     main: true
 
@@ -48,7 +48,7 @@ elements:
                   sr: "Број"
                 data_path: Объект.Номер
                 readonly: true
-                hint: "ПОС-NNNNN"
+                hint: "ЗПС-NNNNN"
               - kind: ПолеВвода
                 name: ПолеДата
                 title:
@@ -105,6 +105,7 @@ elements:
                   sr: "Укупно"
                 data_path: Объект.Сумма
                 readonly: true
+                hint: "Рассчитывается автоматически из строк табличной части"
 
       - kind: Страница
         name: СтраницаКонтрагент
@@ -147,16 +148,6 @@ elements:
                 events:
                   ПриИзменении: СкладПриИзменении
               - kind: ПолеВвода
-                name: ПолеЗаказПоставщику
-                title:
-                  ru: "Заказ поставщику"
-                  en: "Purchase order"
-                  de: "Lieferantenbestellung"
-                  sr: "Налог добављачу"
-                data_path: Объект.ЗаказПоставщику
-                choice: true
-                hint: "Заказ, по которому поступает товар (снимает ожидание)"
-              - kind: ПолеВвода
                 name: ПолеСпособУчетаНДС
                 title:
                   ru: "НДС"
@@ -168,6 +159,14 @@ elements:
                 hint: "ВТомЧисле — НДС включён в сумму, Сверху — НДС сверху"
                 events:
                   ПриИзменении: СпособУчетаНДСПриИзменении
+              - kind: ПолеВвода
+                name: ПолеКомментарий
+                title:
+                  ru: "Комментарий"
+                  en: "Comment"
+                  de: "Kommentar"
+                  sr: "Коментар"
+                data_path: Объект.Комментарий
 
       - kind: Страница
         name: СтраницаТовары
@@ -180,10 +179,10 @@ elements:
           - kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              ru: "Состав поступления"
-              en: "Receipt contents"
-              de: "Zugangsinhalt"
-              sr: "Садржај пријема"
+              ru: "Состав заказа"
+              en: "Order contents"
+              de: "Bestellungsinhalt"
+              sr: "Садржај налога"
             children:
               - kind: ТабличнаяЧасть
                 name: ТабТовары

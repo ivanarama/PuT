@@ -3,18 +3,18 @@ schema: onebase.form/v1
 form:
   name: ФормаОбъекта
   kind: object
-  entity: ПоступлениеТоваров
+  entity: ЗаказПокупателя
   title:
-    ru: "Поступление товаров"
-    en: "Goods receipt"
-    de: "Warenzugang"
-    sr: "Пријем робе"
+    ru: "Заказ покупателя"
+    en: "Sales order"
+    de: "Kundenauftrag"
+    sr: "Налог купца"
   auto_save_settings: true
   vertical_scroll: auto
 
 attributes:
   - name: Объект
-    type: DocumentRef.ПоступлениеТоваров
+    type: DocumentRef.ЗаказПокупателя
     save: true
     main: true
 
@@ -48,7 +48,7 @@ elements:
                   sr: "Број"
                 data_path: Объект.Номер
                 readonly: true
-                hint: "ПОС-NNNNN"
+                hint: "ЗПК-NNNNN"
               - kind: ПолеВвода
                 name: ПолеДата
                 title:
@@ -69,6 +69,16 @@ elements:
                   sr: "Организација"
                 data_path: Объект.Организация
                 choice: true
+              - kind: ПолеВвода
+                name: ПолеОснование
+                title:
+                  ru: "Основание"
+                  en: "Base document"
+                  de: "Beleggrundlage"
+                  sr: "Основни документ"
+                data_path: Объект.Основание
+                choice: true
+                hint: "Счёт, на основании которого создан заказ"
 
           - kind: ГруппаФормы
             name: ГруппаИтоги
@@ -105,35 +115,36 @@ elements:
                   sr: "Укупно"
                 data_path: Объект.Сумма
                 readonly: true
+                hint: "Рассчитывается автоматически из строк табличной части"
 
       - kind: Страница
         name: СтраницаКонтрагент
         title:
-          ru: "Поставщик и склад"
-          en: "Supplier & warehouse"
-          de: "Lieferant & Lager"
-          sr: "Добављач и магацин"
+          ru: "Покупатель и склад"
+          en: "Customer & warehouse"
+          de: "Kunde & Lager"
+          sr: "Купац и магацин"
         children:
           - kind: ГруппаФормы
-            name: ГруппаРеквизиты
+            name: ГруппаКонтрагент
             title:
-              ru: "Реквизиты поставщика"
-              en: "Supplier details"
-              de: "Lieferantendaten"
-              sr: "Подаци о добављачу"
+              ru: "Реквизиты покупателя"
+              en: "Customer details"
+              de: "Kundendaten"
+              sr: "Подаци о купцу"
             children:
               - kind: ПолеВвода
-                name: ПолеПоставщик
+                name: ПолеПокупатель
                 title:
-                  ru: "Поставщик"
-                  en: "Supplier"
-                  de: "Lieferant"
-                  sr: "Добављач"
-                data_path: Объект.Поставщик
+                  ru: "Покупатель"
+                  en: "Customer"
+                  de: "Kunde"
+                  sr: "Купац"
+                data_path: Объект.Покупатель
                 required: true
                 choice: true
                 events:
-                  ПриИзменении: ПоставщикПриИзменении
+                  ПриИзменении: ПокупательПриИзменении
               - kind: ПолеВвода
                 name: ПолеСклад
                 title:
@@ -147,15 +158,17 @@ elements:
                 events:
                   ПриИзменении: СкладПриИзменении
               - kind: ПолеВвода
-                name: ПолеЗаказПоставщику
+                name: ПолеТипЦенПродажи
                 title:
-                  ru: "Заказ поставщику"
-                  en: "Purchase order"
-                  de: "Lieferantenbestellung"
-                  sr: "Налог добављачу"
-                data_path: Объект.ЗаказПоставщику
+                  ru: "Тип цен продажи"
+                  en: "Sales price type"
+                  de: "Verkaufspreistyp"
+                  sr: "Тип цене продаје"
+                data_path: Объект.ТипЦенПродажи
                 choice: true
-                hint: "Заказ, по которому поступает товар (снимает ожидание)"
+                hint: "Заполняется автоматически из карточки покупателя"
+                events:
+                  ПриИзменении: ТипЦенПродажиПриИзменении
               - kind: ПолеВвода
                 name: ПолеСпособУчетаНДС
                 title:
@@ -168,6 +181,14 @@ elements:
                 hint: "ВТомЧисле — НДС включён в сумму, Сверху — НДС сверху"
                 events:
                   ПриИзменении: СпособУчетаНДСПриИзменении
+              - kind: ПолеВвода
+                name: ПолеКомментарий
+                title:
+                  ru: "Комментарий"
+                  en: "Comment"
+                  de: "Kommentar"
+                  sr: "Коментар"
+                data_path: Объект.Комментарий
 
       - kind: Страница
         name: СтраницаТовары
@@ -180,10 +201,10 @@ elements:
           - kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              ru: "Состав поступления"
-              en: "Receipt contents"
-              de: "Zugangsinhalt"
-              sr: "Садржај пријема"
+              ru: "Состав заказа"
+              en: "Order contents"
+              de: "Auftragsinhalt"
+              sr: "Садржај налога"
             children:
               - kind: ТабличнаяЧасть
                 name: ТабТовары
