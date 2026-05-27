@@ -4,10 +4,38 @@ titles:
   en: Inventory balances by warehouse
   de: Warenbestand nach Lager
   sr: Стање робе по магацинима
+  az: Anbarlar üzrə mal qalıqları
+  es: Existencias por almacén
+  fr: Stocks par entrepôt
+  hy: Ապրանքամնաց ըստ պահեստների
+  ka: საქონლის ნაშთი საწყობების მიხედვით
+  kk: Қоймалар бойынша тауар қалдығы
+  pt: Estoques por armazém
+  ro: Stocuri pe depozite
+  tr: Depolara göre stok bakiyeleri
+  uk: Залишки товарів по складах
+  uz: Omborlar bo'yicha tovar qoldiqlari
+  zh: 按仓库的库存余额
 params:
   - name: НаДату
     type: date
     label: На дату
+    labels:
+      en: On date
+      de: Zum Datum
+      sr: На датум
+      az: Tarixə
+      es: A fecha
+      fr: À la date
+      hy: Ամսաթվով
+      ka: თარიღით
+      kk: Күніне
+      pt: Na data
+      ro: La data
+      tr: Tarihe
+      uk: На дату
+      uz: Sanaga
+      zh: 截至
 query: |
   ВЫБРАТЬ
     Номенклатура,

@@ -4,16 +4,92 @@ titles:
   en: User settings
   de: Benutzereinstellungen
   sr: Корисничка подешавања
+  az: İstifadəçi ayarları
+  es: Ajustes usuario
+  fr: Paramètres utilisateur
+  hy: Օգտատիրոջ կարգավորումներ
+  ka: მომხმარებლის პარამეტრები
+  kk: Пайдаланушы баптаулары
+  pt: Configurações usuário
+  ro: Setări utilizator
+  tr: Kullanıcı ayarları
+  uk: Налаштування користувача
+  uz: Foydalanuvchi sozlamalari
+  zh: 用户设置
 fields:
   - name: Наименование
     type: string
     label: Логин пользователя или «Общие»
+    labels:
+      en: User login or "General"
+      de: Benutzeranmeldung oder "Allgemein"
+      sr: Корисничко име или "Опште"
+      az: İstifadəçi girişi və ya "Ümumi"
+      es: Login usuario o "General"
+      fr: Identifiant utilisateur ou « Général »
+      hy: Օգտատիրոջ մուտքանունը կամ «Ընդհանուր»
+      ka: მომხმარებლის შესვლა ან "ზოგადი"
+      kk: Пайдаланушы логині немесе "Жалпы"
+      pt: Login usuário ou "Geral"
+      ro: Login utilizator sau "General"
+      tr: Kullanıcı girişi veya "Genel"
+      uk: Логін користувача або «Загальні»
+      uz: Foydalanuvchi logini yoki "Umumiy"
+      zh: 用户登录或"通用"
   - name: Склад
     type: reference:Склад
     label: Склад по умолчанию
+    labels:
+      en: Default warehouse
+      de: Standardlager
+      sr: Подразумевани магацин
+      az: Defolt anbar
+      es: Almacén predeterminado
+      fr: Entrepôt par défaut
+      hy: Լռելյայն պահեստ
+      ka: ნაგულისხმევი საწყობი
+      kk: Әдепкі қойма
+      pt: Armazém padrão
+      ro: Depozit implicit
+      tr: Varsayılan depo
+      uk: Склад за замовчуванням
+      uz: Standart ombor
+      zh: 默认仓库
   - name: Организация
     type: reference:Организация
     label: Организация по умолчанию
+    labels:
+      en: Default organization
+      de: Standardunternehmen
+      sr: Подразумевана организација
+      az: Defolt təşkilat
+      es: Organización predeterminada
+      fr: Organisation par défaut
+      hy: Լռելյայն կազմակերպություն
+      ka: ნაგულისხმევი ორგანიზაცია
+      kk: Әдепкі ұйым
+      pt: Organização padrão
+      ro: Organizație implicită
+      tr: Varsayılan organizasyon
+      uk: Організація за замовчуванням
+      uz: Standart tashkilot
+      zh: 默认组织
   - name: ТипЦенПродажи
     type: reference:ТипЦен
     label: Тип цен продажи по умолчанию
+    labels:
+      en: Default sales price type
+      de: Standard-Verkaufspreistyp
+      sr: Подразумевани тип цене продаје
+      az: Satış qiymət növü
+      es: Tipo precio venta
+      fr: Type prix vente
+      hy: Վաճառքի գնի տեսակի
+      ka: გაყიდვის ფასის ტიპის
+      kk: Сату баға түрі
+      pt: Tipo preço venda
+      ro: Tip preț vânzare
+      tr: Satış fiyat tipi
+      uk: Тип ціни продажу
+      uz: Sotuv narx turi
+      zh: 销售价格类型

@@ -1,5 +1,38 @@
 name: Кассир
+title: Кассир
+titles:
+  en: Cashier
+  de: Kassierer
+  sr: Касир
+  az: Kassir
+  es: Cajero
+  fr: Caissier
+  hy: Դրամարկղի վարող
+  ka: კასირი
+  kk: Кассир
+  pt: Caixa
+  ro: Casier
+  tr: Kasiyer
+  uk: Касир
+  uz: Kassir
+  zh: 出纳员
 description: Работа с кассой и банком — ПКО, РКО, отчёты по ДС
+descriptions:
+  en: Cash and bank operations — cash receipts, cash payments, fund reports
+  de: Kasse und Bank — Einzahlungen, Auszahlungen, Geldberichte
+  sr: Рад с касом и банком — пријем готовине, исплата, извештаји о средствима
+  az: Kassa və bank əməliyyatları — gəlir, xərc, vəsait hesabatları
+  es: Operaciones de caja y banco — ingresos, pagos, informes de fondos
+  fr: Opérations de caisse et banque — encaissements, décaissements, rapports
+  hy: Դրամարկղի և բանկի գործունեություն — մուտք, ելք, միջոցների հաշվետվություն
+  ka: სალარო და ბანკის ოპერაციები — შემოსავალი, გასავალი, ანგარიშგება
+  kk: Касса және банк операциялары — кіріс, шығыс, қаражат есептері
+  pt: Operações de caixa e banco — receitas, pagamentos, relatórios
+  ro: Operațiuni casierie și bancă — încasări, plăți, rapoarte fonduri
+  tr: Kasa ve banka işlemleri — gelir, gider, fon raporları
+  uk: Операції з касою та банком — прибуток, витрата, звіти по коштах
+  uz: Kassa va bank operatsiyalari — kirish, chiqish, mablag' hisobotlari
+  zh: 现金和银行业务 — 收款、付款、资金报告
 permissions:
   catalogs:
     Касса: [read]

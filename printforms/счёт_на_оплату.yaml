@@ -1,6 +1,22 @@
 name: СчётНаОплату
 document: Счёт
 title: "Счёт на оплату № {{Номер}} от {{Дата | date}}"
+titles:
+  en: "Invoice for payment № {{Номер}} of {{Дата | date}}"
+  de: "Rechnung zur Zahlung № {{Номер}} vom {{Дата | date}}"
+  sr: "Рачун за плаћање бр. {{Номер}} од {{Дата | date}}"
+  az: "Ödəniş üçün hesab № {{Номер}} {{Дата | date}}"
+  es: "Factura para pago № {{Номер}} del {{Дата | date}}"
+  fr: "Facture à payer № {{Номер}} du {{Дата | date}}"
+  hy: "Վճարման հաշիվ-ապացույց № {{Номер}} {{Дата | date}}"
+  ka: "გადასახდელი ინვოისი № {{Номер}} {{Дата | date}}"
+  kk: "Төлем шот № {{Номер}} {{Дата | date}}"
+  pt: "Fatura para pagamento № {{Номер}} de {{Дата | date}}"
+  ro: "Factură de plată № {{Номер}} din {{Дата | date}}"
+  tr: "Ödeme faturası № {{Номер}} {{Дата | date}}"
+  uk: "Рахунок на оплату № {{Номер}} від {{Дата | date}}"
+  uz: "To'lov hisobi № {{Номер}} {{Дата | date}}"
+  zh: "付款发票 № {{Номер}} {{Дата | date}}"
 
 header: |
   ## Счёт на оплату № {{Номер}} от {{Дата | date}}

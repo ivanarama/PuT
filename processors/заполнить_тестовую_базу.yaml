@@ -4,8 +4,36 @@ titles:
   en: Fill demo database (with posting)
   de: Demo-Datenbank füllen (mit Buchung)
   sr: Попуни демо базу (са књижењем)
+  az: Demo bazanı doldur (sənədləşdirmə ilə)
+  es: Llenar base de datos demo (con contabilización)
+  fr: Remplir la base démo (avec validation)
+  hy: Լրացնել դեմո բազան (գրանցմամբ)
+  ka: დემო ბაზის შევსება (დოკუმენტაციით)
+  kk: Демо базаны толтыру (құжаттамамен)
+  pt: Preencher base de dados demo (com lançamento)
+  ro: Completare bază demo (cu postare)
+  tr: Demo veritabanını doldur (belgeleme ile)
+  uk: Заповнити демо-базу (з проведенням)
+  uz: Demo bazani to'ldirish (hujjatlashtirish bilan)
+  zh: 填充演示数据库（含过账）
 params:
   - name: Очистить
     type: bool
     label: "Очистить документы перед загрузкой"
+    labels:
+      en: "Clear documents before loading"
+      de: "Dokumente vor dem Laden löschen"
+      sr: "Обриши документе пре учитавања"
+      az: "Yükləmədən əvvəl sənədləri təmizlə"
+      es: "Limpiar documentos antes de cargar"
+      fr: "Effacer les documents avant le chargement"
+      hy: "Մաքրել փաստաթղթերը բեռնելուց առաջ"
+      ka: "დოკუმენტების გასუფთავება ჩატვირთვამდე"
+      kk: "Жүктемес бұрын құжаттарды тазалау"
+      pt: "Limpar documentos antes de carregar"
+      ro: "Curăța documentele înainte de încărcare"
+      tr: "Yüklemeden önce belgeleri temizle"
+      uk: "Очистити документи перед завантаженням"
+      uz: "Yuklashdan oldin hujjatlarni tozalash"
+      zh: "加载前清除文档"
     default: true

@@ -4,17 +4,77 @@ titles:
   en: Reconciliation statement
   de: Abstimmungserklärung
   sr: Изјава о усклађивању
+  az: Uyğunlaşdırma aktı
+  es: Declaración de conciliación
+  fr: Relevé de rapprochement
+  hy: Հաշվառման ակտ
+  ka: შეთანხმების აქტი
+  kk: Түзету актісі
+  pt: Declaração de reconciliação
+  ro: Declarație de reconciliere
+  tr: Mutabakat beyanı
+  uk: Акт звірки
+  uz: Kelishilgan hisob-akt
+  zh: 对账单
 params:
   - name: Контрагент
     type: reference:Контрагент
     label: Контрагент
+    labels:
+      en: Counterparty
+      de: Geschäftspartner
+      sr: Контрагент
+      az: Əks-tərəf
+      es: Contraparte
+      fr: Counterpartie
+      hy: Գործընկեր
+      ka: კონტრაგენტი
+      kk: Контрагент
+      pt: Contraparte
+      ro: Contraparte
+      tr: Karşı taraf
+      uk: Контрагент
+      uz: Kontragent
+      zh: 往来单位
     required: true
   - name: НачалоПериода
     type: date
     label: С даты
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
   - name: КонецПериода
     type: date
     label: По дату
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
 query: |
   ВЫБРАТЬ
     period КАК Дата,

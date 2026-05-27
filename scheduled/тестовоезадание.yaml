@@ -4,10 +4,40 @@ titles:
   en: "Example: price recalculation (disabled by default)"
   de: "Beispiel: Preisneuberechnung (standardmäßig deaktiviert)"
   sr: "Пример: прерачун цена (подразумевано искључен)"
+  az: "Nümunə: qiymətlərin yenidən hesablanması (susmaya görə söndürülüb)"
+  es: "Ejemplo: recálculo de precios (desactivado por defecto)"
+  fr: "Exemple: recalcul des prix (désactivé par défaut)"
+  hy: "Օրինակ՝ գների վերահաշվարկ (լռելյայն անջատված)"
+  ka: "მაგალითი: ფასების გადაანგარიშება (ნაგულისხმევად გამორთული)"
+  kk: "Мысалы: бағаларды қайта есептеу (әдепкіде өшірілген)"
+  pt: "Exemplo: recálculo de preços (desativado por padrão)"
+  ro: "Exemplu: recalculare prețuri (dezactivat implicit)"
+  tr: "Örnek: fiyat yeniden hesaplama (varsayılan olarak devre dışı)"
+  uk: "Приклад: перерахунок цін (вимкнено за замовчуванням)"
+  uz: "Misol: narxlarni qayta hisoblash (standart holatda o'chirilgan)"
+  zh: "示例：价格重新计算（默认禁用）"
 schedule: "0 3 * * 0"
 processor: ПересчётЦен
 params:
-  Процент: 0
+  Процент:
+    value: 0
+    label: Процент
+    labels:
+      en: Percentage
+      de: Prozentsatz
+      sr: Проценат
+      az: Faiz
+      es: Porcentaje
+      fr: Pourcentage
+      hy: Տոկոս
+      ka: პროცენტი
+      kk: Пайыз
+      pt: Porcentagem
+      ro: Procentaj
+      tr: Yüzde
+      uk: Відсоток
+      uz: Foiz
+      zh: 百分比
 enabled: false
 on_error: continue
 timeout: 60

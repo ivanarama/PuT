@@ -4,16 +4,113 @@ titles:
   en: Cash balances
   de: Geldbestände
   sr: Новчана средства
+  az: Pul vəsaitləri
+  es: Fondos monetarios
+  fr: Fonds monétaires
+  hy: Դրամական միջոցներ
+  ka: ფულადი საშუალებები
+  kk: Ақша қаражаты
+  pt: Fundos monetários
+  ro: Fonduri bănești
+  tr: Nakit varlıklar
+  uk: Грошові кошти
+  uz: Pul mablag'lari
+  zh: 资金
 dimensions:
   - name: Касса
     type: reference:Касса
+    label: Касса
+    labels:
+      en: Cash desk
+      de: Kasse
+      sr: Каса
+      az: Kassa
+      es: Caja
+      fr: Caisse
+      hy: Դրամարկղի
+      ka: სალარო
+      kk: Касса
+      pt: Caixa
+      ro: Casier
+      tr: Kasa
+      uk: Каса
+      uz: Kassa
+      zh: 收银
   - name: Организация
     type: reference:Организация
+    label: Организация
+    labels:
+      en: Organization
+      de: Organisation
+      sr: Организација
+      az: Təşkilat
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
 resources:
   - name: Сумма
     type: number
+    label: Сумма
+    labels:
+      en: Amount
+      de: Betrag
+      sr: Износ
+      az: Məbləğ
+      es: Importe
+      fr: Montant
+      hy: Գումար
+      ka: თანხა
+      kk: Сомасы
+      pt: Valor
+      ro: Sumă
+      tr: Tutar
+      uk: Сума
+      uz: Miqdor
+      zh: 金额
 attributes:
   - name: Контрагент
     type: string
+    label: Контрагент
+    labels:
+      en: Counterparty
+      de: Geschäftspartner
+      sr: Контрагент
+      az: Əks-tərəf
+      es: Contraparte
+      fr: Counterpartie
+      hy: Գործընկեր
+      ka: კონტრაგენტი
+      kk: Контрагент
+      pt: Contraparte
+      ro: Contraparte
+      tr: Karşı taraf
+      uk: Контрагент
+      uz: Kontragent
+      zh: 往来单位
   - name: Основание
     type: string
+    label: Основание
+    labels:
+      en: Basis
+      de: Grundlage
+      sr: Основа
+      az: Əsas
+      es: Base
+      fr: Base
+      hy: Հիմք
+      ka: საფუძველი
+      kk: Негіздеме
+      pt: Base
+      ro: Bază
+      tr: Dayanak
+      uk: Підстава
+      uz: Asos
+      zh: 依据

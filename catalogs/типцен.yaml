@@ -4,17 +4,114 @@ titles:
   en: Price type
   de: Preisart
   sr: Тип цене
+  az: Qiymət növü
+  es: Tipo precio
+  fr: Type prix
+  hy: Գնի տեսակ
+  ka: ფასის ტიპი
+  kk: Баға түрі
+  pt: Tipo preço
+  ro: Tip preț
+  tr: Fiyat türü
+  uk: Тип ціни
+  uz: Narx turi
+  zh: 价格类型
 fields:
-    - name: Наименование
-      type: string
-    - name: ВидРасчета
-      type: enum:ВидРасчета
-    - name: БазовыйТип
-      type: reference:ТипЦен
-    - name: Процент
-      type: number
-    - name: Округление
-      type: number
+  - name: Наименование
+    type: string
+    label: Наименование
+    labels:
+      en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დასახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称
+  - name: ВидРасчета
+    type: enum:ВидРасчета
+    label: Вид расчёта
+    labels:
+      en: Calculation type
+      de: Berechnungsart
+      sr: Врста обрачунa
+      az: Hesablama növü
+      es: Tipo cálculo
+      fr: Type calcul
+      hy: Հաշվարկի տեսակ
+      ka: გაანგარიშების ტიპი
+      kk: Есептеу түрі
+      pt: Tipo cálculo
+      ro: Tip calcul
+      tr: Hesaplama türü
+      uk: Вид розрахунку
+      uz: Hisob turi
+      zh: 计算类型
+  - name: БазовыйТип
+    type: reference:ТипЦен
+    label: Базовый тип
+    labels:
+      en: Base type
+      de: Basistyp
+      sr: Основни тип
+      az: Əsas növ
+      es: Tipo base
+      fr: Type base
+      hy: Բազային տեսակ
+      ka: ბაზისური ტიპი
+      kk: Негізгі түрі
+      pt: Tipo base
+      ro: Tip bază
+      tr: Temel tür
+      uk: Базовий тип
+      uz: Asosiy tur
+      zh: 基本类型
+  - name: Процент
+    type: number
+    label: Процент
+    labels:
+      en: Percentage
+      de: Prozent
+      sr: Проценат
+      az: Faiz
+      es: Porcentaje
+      fr: Pourcentage
+      hy: Տոկոս
+      ka: პროცენტი
+      kk: Пайыз
+      pt: Porcentagem
+      ro: Procentaj
+      tr: Yüzde
+      uk: Відсоток
+      uz: Foiz
+      zh: 百分比
+  - name: Округление
+    type: number
+    label: Округление
+    labels:
+      en: Rounding
+      de: Rundung
+      sr: Заокруживање
+      az: Yuvarlama
+      es: Redondeo
+      fr: Arrondi
+      hy: Կլորացում
+      ka: დამრგვალება
+      kk: Дөңгелектеу
+      pt: Arredondamento
+      ro: Rotunjire
+      tr: Yuvarlama
+      uk: Округлення
+      uz: Yaxlitlash
+      zh: 舍入
 predefined:
   - name: Закупочная
     fields:

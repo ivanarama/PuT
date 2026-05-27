@@ -4,8 +4,36 @@ titles:
   en: Create sale from invoice
   de: Verkauf aus Rechnung erstellen
   sr: Креирај продају из рачуна
+  az: Saytdan satış yarat
+  es: Crear venta desde factura
+  fr: Créer une vente depuis la facture
+  hy: Ստեղծել վաճառք հաշիվ-ապացույցից
+  ka: ინვოյსიდან გაყიდვის შექმნა
+  kk: Шоттан сату жасау
+  pt: Criar venda a partir da fatura
+  ro: Creare vânzare din factură
+  tr: Faturadan satış oluştur
+  uk: Створити реалізацію з рахунку
+  uz: Hisobdan savdo yaratish
+  zh: 从发票创建销售
 params:
   - name: Счёт
     type: reference:Счёт
     label: Счёт-основание
+    labels:
+      en: Invoice (basis)
+      de: Rechnung (Grundlage)
+      sr: Рачун (основа)
+      az: Hesab (əsas)
+      es: Factura (base)
+      fr: Facture (base)
+      hy: Հաշիվ-ապացույց (հիմք)
+      ka: ინვოისი (საფუძველი)
+      kk: Шот (негіз)
+      pt: Fatura (base)
+      ro: Factură (bază)
+      tr: Fatura (temel)
+      uk: Рахунок (підстава)
+      uz: Hisob (asos)
+      zh: 发票（依据）
     required: true

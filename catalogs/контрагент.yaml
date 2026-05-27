@@ -4,44 +4,377 @@ titles:
   en: Counterparty
   de: Geschäftspartner
   sr: Партнер
+  az: Əks-tərəf
+  es: Contraparte
+  fr: Contrepartie
+  hy: Գործընկեր
+  ka: კონტრაგენტი
+  kk: Контрагент
+  pt: Contraparte
+  ro: Contrapartidă
+  tr: Karşı taraf
+  uk: Контрагент
+  uz: Kontragent
+  zh: 往来单位
 fields:
   - name: Наименование
     type: string
+    label: Наименование
+    labels:
+      en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დასახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称
   - name: ПолноеНаименование
     type: string
+    label: Полное наименование
+    labels:
+      en: Full name
+      de: Vollständiger Name
+      sr: Пуни назив
+      az: Tam adı
+      es: Nombre completo
+      fr: Nom complet
+      hy: Ամբողջական անվանում
+      ka: სრული დასახელება
+      kk: Толық атауы
+      pt: Nome completo
+      ro: Denumire completă
+      tr: Tam ad
+      uk: Повне найменування
+      uz: To'liq nomi
+      zh: 全称
   - name: Вид
     type: enum:ВидКонтрагента
+    label: Вид контрагента
+    labels:
+      en: Counterparty type
+      de: Geschäftspartnertyp
+      sr: Врста контрагента
+      az: Əks-tərəf növü
+      es: Tipo contraparte
+      fr: Type contrepartie
+      hy: Գործընկերոջ տեսակ
+      ka: კონტრაგენტის ტიპი
+      kk: Контрагент түрі
+      pt: Tipo contraparte
+      ro: Tip contrapartidă
+      tr: Karşı taraf türü
+      uk: Вид контрагента
+      uz: Kontragent turi
+      zh: 往来单位类型
   - name: ИНН
     type: string
+    label: ИНН
+    labels:
+      en: Tax ID
+      de: Steuernummer
+      sr: ПИБ
+      az: VÖEN
+      es: NIF
+      fr: SIRET
+      hy: ՀՎՀՀ
+      ka: საიდენტიფიკაციო
+      kk: ЖСН
+      pt: NIF
+      ro: CUI
+      tr: Vergi no
+      uk: РНОКПП
+      uz: STIR
+      zh: 税号
   - name: КПП
     type: string
+    label: КПП
+    labels:
+      en: KPP
+      de: KPP
+      sr: КПП
+      az: KPP
+      es: KPP
+      fr: KPP
+      hy: ԿՊՊ
+      ka: კპპ
+      kk: КПП
+      pt: KPP
+      ro: KPP
+      tr: KPP
+      uk: КПП
+      uz: KPP
+      zh: KPP
   - name: ОГРН
     type: string
+    label: ОГРН
+    labels:
+      en: OGRN
+      de: OGRN
+      sr: ОГРН
+      az: VÖEN
+      es: OGRN
+      fr: OGRN
+      hy: ՊՏՀ
+      ka: საჯარო
+      kk: ОЖСН
+      pt: OGRN
+      ro: OGRN
+      tr: OGRN
+      uk: ОГРН
+      uz: OGRN
+      zh: OGRN
   - name: ОГРНИП
     type: string
     label: ОГРНИП (для ИП)
+    labels:
+      en: OGRNIP (for sole proprietor)
+      de: OGRNIP (für Einzelunternehmer)
+      sr: ОГРНИП (за предузетника)
+      az: ОГРНИП (fərdi sahibkar üçün)
+      es: OGRNIP (para autónomo)
+      fr: OGRNIP (pour auto-entrepreneur)
+      hy: ОГРНИП (անհատ ձեռնարկատիրոջ համար)
+      ka: ОГРНИП (ინდივიდუალური მეწარმისთვის)
+      kk: ОГРНИП (жеке кәсіпкер үшін)
+      pt: OGRNIP (para autónomo)
+      ro: OGRNIP (pentru PFA)
+      tr: ОГРНИП (şahıs firması için)
+      uk: ОГРНИП (для ФОП)
+      uz: ОГРНИП (yakka tartibdagi tadbirkor uchun)
+      zh: OGRNIP（个体工商户）
   - name: ОКПО
     type: string
+    label: ОКПО
+    labels:
+      en: OKPO
+      de: OKPO
+      sr: ОКПО
+      az: OKPO
+      es: OKPO
+      fr: OKPO
+      hy: ОКПО
+      ka: ОКПО
+      kk: ОКПО
+      pt: OKPO
+      ro: OKPO
+      tr: OKPO
+      uk: ОКПО
+      uz: OKPO
+      zh: OKPO
   - name: Сайт
     type: string
+    label: Сайт
+    labels:
+      en: Website
+      de: Webseite
+      sr: Веб-сајт
+      az: Sayt
+      es: Web
+      fr: Site
+      hy: Կայք
+      ka: ვებსაიტი
+      kk: Сайт
+      pt: Site
+      ro: Site
+      tr: Web sitesi
+      uk: Сайт
+      uz: Sayt
+      zh: 网站
   - name: ЮридическийАдрес
     type: string
+    label: Юридический адрес
+    labels:
+      en: Legal address
+      de: Rechtsadresse
+      sr: Правна адреса
+      az: Hüquqi ünvan
+      es: Dirección legal
+      fr: Adresse légale
+      hy: Իրավական հասցե
+      ka: იურიდიული მისამართი
+      kk: Заңды мекенжай
+      pt: Endereço legal
+      ro: Adresă legală
+      tr: Yasal adres
+      uk: Юридична адреса
+      uz: Yuridik manzil
+      zh: 法定地址
   - name: ФактическийАдрес
     type: string
+    label: Фактический адрес
+    labels:
+      en: Actual address
+      de: Tatsächliche Adresse
+      sr: Стварна адреса
+      az: Faktiki ünvan
+      es: Dirección real
+      fr: Adresse réelle
+      hy: Փաստացի հասցե
+      ka: ფაქტიური მისამართი
+      kk: Нақты мекенжай
+      pt: Endereço real
+      ro: Adresă reală
+      tr: Fiili adres
+      uk: Фактична адреса
+      uz: Haqiqiy manzil
+      zh: 实际地址
   - name: Телефон
     type: string
+    label: Телефон
+    labels:
+      en: Phone
+      de: Telefon
+      sr: Телефон
+      az: Telefon
+      es: Teléfono
+      fr: Tél
+      hy: Հեռախոս
+      ka: ტელეფონი
+      kk: Телефон
+      pt: Telefone
+      ro: Telefon
+      tr: Telefon
+      uk: Телефон
+      uz: Telefon
+      zh: 电话
   - name: Email
     type: string
+    label: Email
+    labels:
+      en: Email
+      de: E-Mail
+      sr: Е-пошта
+      az: E-poçt
+      es: Correo
+      fr: Courriel
+      hy: Էլ. փոստ
+      ka: ელ. ფოსტა
+      kk: Email
+      pt: Email
+      ro: Email
+      tr: E-posta
+      uk: Email
+      uz: Email
+      zh: 邮箱
   - name: КонтактноеЛицо
     type: string
+    label: Контактное лицо
+    labels:
+      en: Contact person
+      de: Kontaktperson
+      sr: Контакт особа
+      az: Əlaqə şəxsi
+      es: Persona contacto
+      fr: Personne contact
+      hy: Կոնտակտային անձ
+      ka: საკონტაქტო პირი
+      kk: Байланыс тұлғасы
+      pt: Pessoa contato
+      ro: Persoană contact
+      tr: İletişim kişisi
+      uk: Контактна особа
+      uz: Aloqa shaxsi
+      zh: 联系人
   - name: ТипЦенПродажи
     type: reference:ТипЦен
     label: Тип цен продажи по умолчанию
+    labels:
+      en: Default sales price type
+      de: Standard-Verkaufspreistyp
+      sr: Подразумевани тип цене продаје
+      az: Satış qiymət növü
+      es: Tipo precio venta
+      fr: Type prix vente
+      hy: Վաճառքի գնի տեսակի
+      ka: გაყიდვის ფასის ტიპის
+      kk: Сату баға түрі
+      pt: Tipo preço venda
+      ro: Tip preț vânzare
+      tr: Satış fiyat tipi
+      uk: Тип ціни продажу
+      uz: Sotuv narx turi
+      zh: 销售价格类型
   - name: РасчётныйСчёт
     type: string
+    label: Расчётный счёт
+    labels:
+      en: Settlement account
+      de: Girokonto
+      sr: Текући рачун
+      az: Hesablaşma hesabı
+      es: Cuenta bancaria
+      fr: Compte bancaire
+      hy: Հաշվարկային հաշիվ
+      ka: ანგარიში
+      kk: Банк шоты
+      pt: Conta bancária
+      ro: Contă bancară
+      tr: Banka hesabı
+      uk: Розрахунковий рахунок
+      uz: Hisoblash hisobi
+      zh: 银行账户
   - name: НаименованиеБанка
     type: string
+    label: Наименование банка
+    labels:
+      en: Bank name
+      de: Bankname
+      sr: Назив банке
+      az: Bank adı
+      es: Nombre banco
+      fr: Nom banque
+      hy: Բանկի անվանում
+      ka: ბანკის დასახელება
+      kk: Банк атауы
+      pt: Nome banco
+      ro: Nume bancă
+      tr: Banka adı
+      uk: Найменування банку
+      uz: Bank nomi
+      zh: 银行名称
   - name: БИК
     type: string
+    label: БИК
+    labels:
+      en: BIK
+      de: BIK
+      sr: БИК
+      az: BIK
+      es: BIC
+      fr: BIC
+      hy: ԲԻԿ
+      ka: ბიკ
+      kk: БИК
+      pt: BIC
+      ro: BIC
+      tr: BİK
+      uk: БІК
+      uz: BIK
+      zh: BIC
   - name: КорреспондентскийСчёт
     type: string
+    label: Корреспондентский счёт
+    labels:
+      en: Correspondent account
+      de: Korrespondentenkonto
+      sr: Комерцијални рачун
+      az: Korrespondent hesabı
+      es: Cuenta corresp.
+      fr: Compte corresp.
+      hy: Միջբանկային հաշիվ
+      ka: კორესპონდენტული ანგარიში
+      kk: Корр. шот
+      pt: Conta corresp.
+      ro: Contă coresp.
+      tr: Karsılıklı hesap
+      uk: Кореспондентський рахунок
+      uz: Korrespondent hisobi
+      zh: 联行账户

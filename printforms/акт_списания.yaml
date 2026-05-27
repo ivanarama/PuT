@@ -1,6 +1,22 @@
 name: АктСписания
 document: СписаниеТоваров
 title: "Акт списания № {{Номер}} от {{Дата | date}}"
+titles:
+  en: "Write-off act № {{Номер}} of {{Дата | date}}"
+  de: "Abschreibungsprotokoll № {{Номер}} vom {{Дата | date}}"
+  sr: "Акт отписа бр. {{Номер}} од {{Дата | date}}"
+  az: "Silmə aktı № {{Номер}} {{Дата | date}}"
+  es: "Acta de baja № {{Номер}} del {{Дата | date}}"
+  fr: "Acte de radiation № {{Номер}} du {{Дата | date}}"
+  hy: "Գրման ակտ № {{Номер}} {{Дата | date}}"
+  ka: "ჩამოწერის აქტი № {{Номер}} {{Дата | date}}"
+  kk: "Жазу актісі № {{Номер}} {{Дата | date}}"
+  pt: "Ata de baixa № {{Номер}} de {{Дата | date}}"
+  ro: "Act de casare № {{Номер}} din {{Дата | date}}"
+  tr: "Silme tutanağı № {{Номер}} {{Дата | date}}"
+  uk: "Акт списання № {{Номер}} від {{Дата | date}}"
+  uz: "Yozish akti № {{Номер}} {{Дата | date}}"
+  zh: "核销单 № {{Номер}} {{Дата | date}}"
 
 header: |
   **Организация**: {{Константы.НашаОрганизация}}

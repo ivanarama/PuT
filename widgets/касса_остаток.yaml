@@ -5,6 +5,18 @@ titles:
   en: Cash, total
   de: Geld gesamt
   sr: Готовина, укупно
+  az: Pul vəsaitləri, cəmi
+  es: Efectivo, total
+  fr: Espèces, total
+  hy: Կանխիկ գումար, ընդհանուր
+  ka: სალარო, სულ
+  kk: Ақша қаражаттары, барлығы
+  pt: Caixa, total
+  ro: Numerar, total
+  tr: Nakit, toplam
+  uk: Готівка, підсумок
+  uz: Naqd pul, jami
+  zh: 现金，合计
 format: money
 query: |
   ВЫБРАТЬ

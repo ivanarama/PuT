@@ -4,11 +4,57 @@ titles:
   en: Currency
   de: Währung
   sr: Валута
+  az: Valyuta
+  es: Moneda
+  fr: Devise
+  hy: Արժույթ
+  ka: ვალუტა
+  kk: Валюта
+  pt: Moeda
+  ro: Monedă
+  tr: Para birimi
+  uk: Валюта
+  uz: Valyuta
+  zh: 货币
 fields:
   - name: Наименование
     type: string
+    label: Наименование
+    labels:
+      en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დასახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称
   - name: Код
     type: string
+    label: Код
+    labels:
+      en: Code
+      de: Code
+      sr: Кôд
+      az: Kod
+      es: Código
+      fr: Code
+      hy: Կոդ
+      ka: კოდი
+      kk: Код
+      pt: Código
+      ro: Cod
+      tr: Kod
+      uk: Код
+      uz: Kod
+      zh: 代码
 predefined:
   - name: Рубль
     fields:

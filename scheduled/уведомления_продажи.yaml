@@ -4,10 +4,40 @@ titles:
   en: Daily sales report via email
   de: Täglicher Verkaufsbericht per E-Mail
   sr: Дневни извештај о продаји е-поштом
+  az: Gündəlik satış hesabatı e-poçt ilə
+  es: Informe diario de ventas por correo electrónico
+  fr: Rapport quotidien des ventes par email
+  hy: "Օրական վաճառքի հաշվետվություն էլ. փոստով"
+  ka: დღიური გაყიდვების ანგარიში ელ. ფოსტით
+  kk: Күнделікті сатылым есебі эл. поштамен
+  pt: Relatório diário de vendas por email
+  ro: Raport zilnic de vânzări prin email
+  tr: Günlük satış raporu e-posta ile
+  uk: Щоденний звіт про продажі електронною поштою
+  uz: Kundalik savdo hisoboti elektron pochta orqali
+  zh: 每日销售报告（电子邮件）
 schedule: "0 18 * * *"
 processor: УведомленияПродажи
 params:
-  Кому: "manager@company.ru"
+  Кому:
+    value: "manager@company.ru"
+    label: Кому
+    labels:
+      en: To
+      de: An
+      sr: Коме
+      az: Kimə
+      es: A quién
+      fr: À qui
+      hy: Ում
+      ka: ვის
+      kk: Кімге
+      pt: Para quem
+      ro: Către
+      tr: Kime
+      uk: Кому
+      uz: Kimga
+      zh: 收件人
 enabled: false
 on_error: continue
 timeout: 30

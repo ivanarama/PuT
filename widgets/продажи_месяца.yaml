@@ -5,6 +5,18 @@ titles:
   en: Sales count for month
   de: Anzahl Verkäufe im Monat
   sr: Број продаја у месецу
+  az: Aylıq satış sayı
+  es: Cantidad de ventas del mes
+  fr: Nombre de ventes du mois
+  hy: Ամսական վաճառքների քանակ
+  ka: თვიური გაყიდვების რაოდენობა
+  kk: Айлық сатылым саны
+  pt: Quantidade de vendas do mês
+  ro: Număr vânzări lunar
+  tr: Aylık satış sayısı
+  uk: Кількість продажів за місяць
+  uz: Oylik savdo soni
+  zh: 月度销售笔数
 format: number
 params:
   Начало: "{{today|start_of_month}}"

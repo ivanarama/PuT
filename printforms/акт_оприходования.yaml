@@ -1,6 +1,22 @@
 name: АктОприходования
 document: ОприходованиеТоваров
 title: "Акт оприходования № {{Номер}} от {{Дата | date}}"
+titles:
+  en: "Receipt act № {{Номер}} of {{Дата | date}}"
+  de: "Zugangsbilanz № {{Номер}} vom {{Дата | date}}"
+  sr: "Акт пријема бр. {{Номер}} од {{Дата | date}}"
+  az: "Qəbul aktı № {{Номер}} {{Дата | date}}"
+  es: "Acta de recepción № {{Номер}} del {{Дата | date}}"
+  fr: "Acte de réception № {{Номер}} du {{Дата | date}}"
+  hy: "Ընդունման ակտ № {{Номер}} {{Дата | date}}"
+  ka: "მიღების აქტი № {{Номер}} {{Дата | date}}"
+  kk: "Қабылдау актісі № {{Номер}} {{Дата | date}}"
+  pt: "Ata de recebimento № {{Номер}} de {{Дата | date}}"
+  ro: "Act de recepție № {{Номер}} din {{Дата | date}}"
+  tr: "Kabul tutanağı № {{Номер}} {{Дата | date}}"
+  uk: "Акт оприбуткування № {{Номер}} від {{Дата | date}}"
+  uz: "Qabul qilish akti № {{Номер}} {{Дата | date}}"
+  zh: "收货单 № {{Номер}} {{Дата | date}}"
 
 header: |
   **Организация**: {{Константы.НашаОрганизация}}

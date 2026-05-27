@@ -4,7 +4,35 @@ titles:
   en: Export items to Excel (DSL example)
   de: Artikel nach Excel exportieren (DSL-Beispiel)
   sr: Извоз артикала у Excel (DSL пример)
+  az: Məhsulları Excel-ə ixrac et (DSL nümunəsi)
+  es: Exportar artículos a Excel (ejemplo DSL)
+  fr: Exporter les articles vers Excel (exemple DSL)
+  hy: Ապրանքների արտահանում Excel (DSL օրինակ)
+  ka: პროდუქტების Excel-ში ექსპორტი (DSL მაგალითი)
+  kk: Тауарларды Excel-ге экспорттау (DSL мысалы)
+  pt: Exportar itens para Excel (exemplo DSL)
+  ro: Export articole în Excel (exemplu DSL)
+  tr: Ürünleri Excel'e aktar (DSL örneği)
+  uk: Експорт товарів до Excel (приклад DSL)
+  uz: Mahsulotlarni Excelga eksport qilish (DSL misoli)
+  zh: 导出商品到Excel（DSL示例）
 params:
   - name: ТипЦены
     type: string
     label: Тип цены (или пусто для всех)
+    labels:
+      en: Price type (or empty for all)
+      de: Preistyp (oder leer für alle)
+      sr: Тип цене (или празно за све)
+      az: Qiymət növü (və ya boş — hamısı üçün)
+      es: Tipo de precio (o vacío para todos)
+      fr: Type de prix (ou vide pour tous)
+      hy: Գնի տեսակ (կամ դատարկ՝ բոլորի համար)
+      ka: ფასის ტიპი (ან ცარიელი — ყველასთვის)
+      kk: Баға түрі (немесе бос — барлығы үшін)
+      pt: Tipo de preço (ou vazio para todos)
+      ro: Tip preț (sau gol pentru toate)
+      tr: Fiyat tipi (veya boş — tümü için)
+      uk: Тип ціни (або порожньо — для всіх)
+      uz: Narx turi (yoki bo'sh — barchasi uchun)
+      zh: 价格类型（或留空表示全部）

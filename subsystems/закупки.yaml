@@ -4,8 +4,20 @@ titles:
   en: Purchasing
   de: Einkauf
   sr: Набавка
+  az: Satınalmalar
+  es: Compras
+  fr: Achats
+  hy: Գնումներ
+  ka: შესყიდვები
+  kk: Сатып алу
+  pt: Compras
+  ro: Achiziții
+  tr: Satın alma
+  uk: Закупівлі
+  uz: Xaridlar
+  zh: 采购
 order: 20
 contents:
-  documents: [ПоступлениеТоваров, РасходныйКассовыйОрдер]
+  documents: [ПоступлениеТоваров, ВозвратПоставщику, РасходныйКассовыйОрдер]
   catalogs:  [Контрагент, Номенклатура, ТипЦен, СтавкаНДС, ЕдиницаИзмерения, Организация, Валюта]
   reports:   [ДвиженияТоваров, Взаиморасчеты, ОплатыПоступлений, ЦеныНоменклатуры, АктСверки]

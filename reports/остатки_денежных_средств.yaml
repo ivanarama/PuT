@@ -4,13 +4,57 @@ titles:
   en: Cash balances
   de: Geldbestände
   sr: Стање готовине
+  az: Pul vəsaitlərinin qalığı
+  es: Saldos de efectivo
+  fr: Soldes de trésorerie
+  hy: Դրամական միջոցների մնացորդ
+  ka: ფულადი საშუალებების ნაშთი
+  kk: Ақша қаражатының қалдығы
+  pt: Saldos de caixa
+  ro: Solduri de numerar
+  tr: Nakit bakiyeleri
+  uk: Залишки грошових коштів
+  uz: Pul mablag'lari qoldiqlari
+  zh: 资金余额
 params:
   - name: НаДату
     type: date
     label: На дату
+    labels:
+      en: On date
+      de: Zum Datum
+      sr: На датум
+      az: Tarixə
+      es: A fecha
+      fr: À la date
+      hy: Ամսաթվով
+      ka: თარიღით
+      kk: Күніне
+      pt: Na data
+      ro: La data
+      tr: Tarihe
+      uk: На дату
+      uz: Sanaga
+      zh: 截至
   - name: Вид
     type: select
     label: Вид
+    labels:
+      en: Type
+      de: Art
+      sr: Врста
+      az: Növ
+      es: Tipo
+      fr: Type
+      hy: Տեսակ
+      ka: ტიპი
+      kk: Түрі
+      pt: Tipo
+      ro: Tip
+      tr: Tür
+      uk: Вид
+      uz: Tur
+      zh: 类型
     options:
       - ""
       - Касса

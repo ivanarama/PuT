@@ -6,6 +6,18 @@ titles:
   en: Revenue breakdown by item
   de: Umsatzstruktur nach Artikel
   sr: Структура прихода по артиклу
+  az: Gəlirin məhsul üzrə strukturu
+  es: Desglose de ingresos por artículo
+  fr: Répartition du chiffre d'affaires par article
+  hy: Եկամտի կառուցվածքը ըստ ապրանքների
+  ka: შემოსავლის სტრუქტურა პროდუქტის მიხედვით
+  kk: Табыстың тауар бойынша құрылымы
+  pt: Composição da receita por item
+  ro: Structura veniturilor pe articole
+  tr: Ciroğun ürün bazlı dağılımı
+  uk: Структура виручки за товарами
+  uz: Daromadning mahsulot bo'yicha tuzilishi
+  zh: 按商品的收入构成
 params:
   Начало: "{{today|start_of_month}}"
 query: |

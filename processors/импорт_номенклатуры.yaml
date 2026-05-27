@@ -4,7 +4,35 @@ titles:
   en: Import items from JSON
   de: Artikel aus JSON importieren
   sr: Увоз артикала из JSON
+  az: Məhsulları JSON-dan idxal et
+  es: Importar artículos desde JSON
+  fr: Importer les articles depuis JSON
+  hy: Ներմուծել ապրանքներ JSON-ից
+  ka: პროდუქტების JSON-დან იმპორტი
+  kk: Тауарларды JSON-нан импорттау
+  pt: Importar itens de JSON
+  ro: Import articole din JSON
+  tr: Ürünleri JSON'dan içe aktar
+  uk: Імпорт товарів з JSON
+  uz: Mahsulotlarni JSON dan import qilish
+  zh: 从JSON导入商品
 params:
   - name: ФайлJSON
     type: string
     label: "JSON-строка с номенклатурой"
+    labels:
+      en: "JSON string with items"
+      de: "JSON-Zeichenkette mit Artikeln"
+      sr: "JSON ниска са артиклима"
+      az: "Məhsulların JSON-sətri"
+      es: "Cadena JSON con artículos"
+      fr: "Chaîne JSON avec articles"
+      hy: "Ապրանքներով JSON տող"
+      ka: "პროდუქტების JSON სტრიქონი"
+      kk: "Тауарлары бар JSON жолы"
+      pt: "String JSON com itens"
+      ro: "Șir JSON cu articole"
+      tr: "Ürünlerle JSON dizesi"
+      uk: "Рядок JSON з товарами"
+      uz: "Mahsulotlar bilan JSON qatori"
+      zh: "包含商品的JSON字符串"

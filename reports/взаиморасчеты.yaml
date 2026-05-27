@@ -4,13 +4,57 @@ titles:
   en: Accounts with counterparties
   de: Verrechnungen mit Geschäftspartnern
   sr: Међусобна обрачуна
+  az: Kontragentlərlə hesablaşma
+  es: Cuentas con contrapartes
+  fr: Comptes avec les contreparties
+  hy: Գործընկերների հետ հաշվարկ
+  ka: კონტრაგენტებთან ანგარიშსწორება
+  kk: Контрагенттермен есептесу
+  pt: Contas com contrapartes
+  ro: Conturi cu contrapărți
+  tr: Karşı taraflarla hesaplaşma
+  uk: Взаєморозрахунки з контрагентами
+  uz: Kontragentlar bilan hisob-kitob
+  zh: 往来对账
 params:
   - name: НаДату
     type: date
     label: На дату
+    labels:
+      en: On date
+      de: Zum Datum
+      sr: На датум
+      az: Tarixə
+      es: A fecha
+      fr: À la date
+      hy: Ամսաթվով
+      ka: თარიღით
+      kk: Күніне
+      pt: Na data
+      ro: La data
+      tr: Tarihe
+      uk: На дату
+      uz: Sanaga
+      zh: 截至
   - name: ТипКонтрагента
     type: select
     label: Тип
+    labels:
+      en: Type
+      de: Typ
+      sr: Тип
+      az: Əks-tərəf növü
+      es: Tipo contraparte
+      fr: Type contrepartie
+      hy: Գործընկերի տեսակ
+      ka: კონტრაგენტის ტიპი
+      kk: Контрагент түрі
+      pt: Tipo contraparte
+      ro: Tip contraparte
+      tr: Karşı taraf türü
+      uk: Тип контрагента
+      uz: Kontragent turi
+      zh: 往来单位类型
     options:
       - ""
       - Покупатель

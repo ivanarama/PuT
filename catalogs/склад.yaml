@@ -4,6 +4,35 @@ titles:
   en: Warehouse
   de: Lager
   sr: Магацин
+  az: Anbar
+  es: Almacén
+  fr: Entrepôt
+  hy: Պահեստ
+  ka: საწყობი
+  kk: Қойма
+  pt: Armazém
+  ro: Depozit
+  tr: Depo
+  uk: Склад
+  uz: Ombor
+  zh: 仓库
 fields:
   - name: Наименование
     type: string
+    label: Наименование
+    labels:
+      en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დასახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称

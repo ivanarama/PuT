@@ -4,18 +4,132 @@ titles:
   en: Accounts receivable / payable
   de: Verrechnungskonten
   sr: Међусобна обрачуна
+  az: Qarşılıqlı hesablaşma
+  es: Cuentas por cobrar / pagar
+  fr: Comptes clients / fournisseurs
+  hy: Փոխհաշվարկ
+  ka: ურთიერთგადახდები
+  kk: Өзара есептесу
+  pt: Contas a receber / pagar
+  ro: Conturi de creanțe / datorii
+  tr: Karşılıklı hesaplaşma
+  uk: Взаєморозрахунки
+  uz: O'zaro hisob-kitob
+  zh: 往来结算
 dimensions:
   - name: Контрагент
     type: string
+    label: Контрагент
+    labels:
+      en: Counterparty
+      de: Geschäftspartner
+      sr: Контрагент
+      az: Əks-tərəf
+      es: Contraparte
+      fr: Counterpartie
+      hy: Գործընկեր
+      ka: კონტრაგენტი
+      kk: Контрагент
+      pt: Contraparte
+      ro: Contraparte
+      tr: Karşı taraf
+      uk: Контрагент
+      uz: Kontragent
+      zh: 往来单位
   - name: Организация
     type: reference:Организация
+    label: Организация
+    labels:
+      en: Organization
+      de: Organisation
+      sr: Организација
+      az: Təşkilat
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
 resources:
   - name: Сумма
     type: number
+    label: Сумма
+    labels:
+      en: Amount
+      de: Betrag
+      sr: Износ
+      az: Məbləğ
+      es: Importe
+      fr: Montant
+      hy: Գումար
+      ka: თანხა
+      kk: Сомасы
+      pt: Valor
+      ro: Sumă
+      tr: Tutar
+      uk: Сума
+      uz: Miqdor
+      zh: 金额
 attributes:
   - name: ТипКонтрагента
     type: string
+    label: Тип контрагента
+    labels:
+      en: Counterparty type
+      de: Geschäftspartnertyp
+      sr: Врста контрагента
+      az: Əks-tərəf növü
+      es: Tipo contraparte
+      fr: Type contrepartie
+      hy: Գործընկերի տեսակ
+      ka: კონტრაგენტის ტიპი
+      kk: Контрагент түрі
+      pt: Tipo contraparte
+      ro: Tip contraparte
+      tr: Karşı taraf türü
+      uk: Тип контрагента
+      uz: Kontragent turi
+      zh: 往来单位类型
   - name: ДокументРеализации
     type: reference:РеализацияТоваров
+    label: Документ реализации
+    labels:
+      en: Sales document
+      de: Verkaufsbeleg
+      sr: Продајни документ
+      az: Satış sənədi
+      es: Documento venta
+      fr: Document vente
+      hy: Վաճառքի փաստաթուղթ
+      ka: გაყიდვის დოკუმენტი
+      kk: Сату құжаты
+      pt: Documento venda
+      ro: Document vânzare
+      tr: Satış belgesi
+      uk: Документ реалізації
+      uz: Sotuv hujjati
+      zh: 销售单据
   - name: ДокументПоступления
     type: string
+    label: Документ поступления
+    labels:
+      en: Purchase document
+      de: Einkaufsbeleg
+      sr: Документ набавке
+      az: Qəbul sənədi
+      es: Documento compra
+      fr: Document achat
+      hy: Մուտքի փաստաթուղթ
+      ka: შემოსვლის დოკუმენტი
+      kk: Кіріс құжаты
+      pt: Documento compra
+      ro: Document achiziție
+      tr: Giriş belgesi
+      uk: Документ надходження
+      uz: Qabul qilish hujjati
+      zh: 采购单据

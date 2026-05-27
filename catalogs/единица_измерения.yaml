@@ -4,16 +4,76 @@ titles:
   en: Unit of measure
   de: Maßeinheit
   sr: Јединица мере
+  az: Ölçü vahidi
+  es: Unidad medida
+  fr: Unité mesure
+  hy: Չափման միավոր
+  ka: საზომი ერთეული
+  kk: Өлшем бірлігі
+  pt: Unidade medida
+  ro: Unitate măsură
+  tr: Ölçü birimi
+  uk: Одиниця виміру
+  uz: O'lchov birligi
+  zh: 计量单位
 fields:
   - name: Наименование
     type: string
     label: Краткое (шт, кг)
+    labels:
+      en: Short (pcs, kg)
+      de: Kurz (Stk, kg)
+      sr: Кратко (ком, кг)
+      az: Qısa (əd, kq)
+      es: Corto (pza, kg)
+      fr: Court (pcs, kg)
+      hy: Կարճ (հատ, կգ)
+      ka: მოკლე (ცალი, კგ)
+      kk: Қысқа (дана, кг)
+      pt: Curto (pç, kg)
+      ro: Scurt (buc, kg)
+      tr: Kısa (ad, kg)
+      uk: Коротке (шт, кг)
+      uz: Qisqa (dona, kg)
+      zh: 简称（件、公斤）
   - name: ПолноеНаименование
     type: string
     label: Полное (штука, килограмм)
+    labels:
+      en: Full (piece, kilogram)
+      de: Vollständig (Stück, Kilogramm)
+      sr: Пуно (комад, килограм)
+      az: Tam (ədəd, kiloqram)
+      es: Completo (pieza, kilogramo)
+      fr: Complet (pièce, kilogramme)
+      hy: Ամբողջական (հատ, կիլոգրամ)
+      ka: სრული (ცალი, კილოგრამი)
+      kk: Толық (дана, килограмм)
+      pt: Completo (peça, quilograma)
+      ro: Complet (bucată, kilogram)
+      tr: Tam (adet, kilogram)
+      uk: Повне (штука, кілограм)
+      uz: To'liq (dona, kilogramm)
+      zh: 全称（件、公斤）
   - name: КодОКЕИ
     type: string
     label: Код ОКЕИ
+    labels:
+      en: OKEI code
+      de: OKEI-Code
+      sr: ОКЕИ кôд
+      az: ОКЕИ kodu
+      es: Código OKEY
+      fr: Code OKEY
+      hy: ՉՄԲ կոդ
+      ka: ოკეი კოდი
+      kk: ОКЕИ коды
+      pt: Código OKEY
+      ro: Cod OKI
+      tr: OKEY kodu
+      uk: Код ОКЕІ
+      uz: OKEY kodi
+      zh: OKEI代码
 predefined:
   - name: Штука
     fields:

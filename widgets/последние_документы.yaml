@@ -5,6 +5,18 @@ titles:
   en: My recent documents
   de: Meine letzten Dokumente
   sr: Моји недавни документи
+  az: Son sənədlərim
+  es: Mis documentos recientes
+  fr: Mes documents récents
+  hy: Իմ վերջին փաստաթղթերը
+  ka: ჩემი ბოლო დოკუმენტები
+  kk: Соңғы құжаттарым
+  pt: Meus documentos recentes
+  ro: Documentele mele recente
+  tr: Son belgelerim
+  uk: Мої останні документи
+  uz: So'nggi hujjatlarim
+  zh: 我的最近文档
 limit: 10
 scope: current_user
 entities:

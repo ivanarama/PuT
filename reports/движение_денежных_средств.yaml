@@ -4,16 +4,76 @@ titles:
   en: Cash flow for period
   de: Geldverkehr für den Zeitraum
   sr: Новчани токови за период
+  az: Dövr ərzində pul hərəkəti
+  es: Flujo de caja por período
+  fr: Flux de trésorerie pour la période
+  hy: Դրամական միջոցների շարժ ժամանակաշրջանում
+  ka: ფულადი საშუალებების მოძრაობა პერიოდში
+  kk: Кезеңдегі ақша қозғалысы
+  pt: Fluxo de caixa por período
+  ro: Flux de numerar pentru perioadă
+  tr: Dönemdeki nakit akışı
+  uk: Рух грошових коштів за період
+  uz: Davrdagi pul mablag'lari harakati
+  zh: 期间资金流动
 params:
   - name: НачалоПериода
     type: date
     label: С даты
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
   - name: КонецПериода
     type: date
     label: По дату
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
   - name: Касса
     type: reference:Касса
     label: Касса/счёт
+    labels:
+      en: Cash desk / account
+      de: Kasse / Konto
+      sr: Каса / рачун
+      az: Kassa / hesab
+      es: Caja / cuenta
+      fr: Caisse / compte
+      hy: Դրամարկղի / հաշիվ
+      ka: სალარო / ანგარიში
+      kk: Касса / шот
+      pt: Caixa / conta
+      ro: Casier / cont
+      tr: Kasa / hesap
+      uk: Каса / рахунок
+      uz: Kassa / hisob
+      zh: 收银/账户
 query: |
   ВЫБРАТЬ
     Касса,

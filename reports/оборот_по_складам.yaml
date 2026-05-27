@@ -4,13 +4,57 @@ titles:
   en: Warehouse turnover for period
   de: Lagerumsatz für den Zeitraum
   sr: Промет по магацинима за период
+  az: Dövr ərzində anbar dövriyyəsi
+  es: Rotación de almacén por período
+  fr: Rotation d'entrepôt pour la période
+  hy: Պահեստի շրջանառություն ժամանակաշրջանում
+  ka: საწყობის ბრუნვა პერიოდში
+  kk: Кезеңдегі қойма айналымы
+  pt: Rotatividade de armazém por período
+  ro: Rotație de depozit pentru perioadă
+  tr: Dönemdeki depo devri
+  uk: Обіг по складах за період
+  uz: Davrdagi ombor aylanmasi
+  zh: 期间仓库周转
 params:
   - name: НачалоПериода
     type: date
     label: С даты
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
   - name: КонецПериода
     type: date
     label: По дату
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
 query: |
   ВЫБРАТЬ
     Склад,

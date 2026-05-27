@@ -4,41 +4,340 @@ titles:
   en: Organization
   de: Unternehmen
   sr: Организација
+  az: Təşkilat
+  es: Organización
+  fr: Organisation
+  hy: Կազմակերպություն
+  ka: ორგანიზაცია
+  kk: Ұйым
+  pt: Organização
+  ro: Organizație
+  tr: Organizasyon
+  uk: Організація
+  uz: Tashkilot
+  zh: 组织
 fields:
   - name: Наименование
     type: string
+    label: Наименование
+    labels:
+      en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დასახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称
   - name: ПолноеНаименование
     type: string
+    label: Полное наименование
+    labels:
+      en: Full name
+      de: Vollständiger Name
+      sr: Пуни назив
+      az: Tam adı
+      es: Nombre completo
+      fr: Nom complet
+      hy: Ամբողջական անվանում
+      ka: სრული დასახელება
+      kk: Толық атауы
+      pt: Nome completo
+      ro: Denumire completă
+      tr: Tam ad
+      uk: Повне найменування
+      uz: To'liq nomi
+      zh: 全称
   - name: ИНН
     type: string
+    label: ИНН
+    labels:
+      en: Tax ID
+      de: Steuernummer
+      sr: ПИБ
+      az: VÖEN
+      es: NIF
+      fr: SIRET
+      hy: ՀՎՀՀ
+      ka: საიდენტიფიკაციო
+      kk: ЖСН
+      pt: NIF
+      ro: CUI
+      tr: Vergi no
+      uk: РНОКПП
+      uz: STIR
+      zh: 税号
   - name: КПП
     type: string
+    label: КПП
+    labels:
+      en: KPP
+      de: KPP
+      sr: КПП
+      az: KPP
+      es: KPP
+      fr: KPP
+      hy: ԿՊՊ
+      ka: კპპ
+      kk: КПП
+      pt: KPP
+      ro: KPP
+      tr: KPP
+      uk: КПП
+      uz: KPP
+      zh: KPP
   - name: ОГРН
     type: string
+    label: ОГРН
+    labels:
+      en: OGRN
+      de: OGRN
+      sr: ОГРН
+      az: VÖEN
+      es: OGRN
+      fr: OGRN
+      hy: ՊՏՀ
+      ka: საჯარო
+      kk: ОЖСН
+      pt: OGRN
+      ro: OGRN
+      tr: OGRN
+      uk: ОГРН
+      uz: OGRN
+      zh: OGRN
   - name: ОКПО
     type: string
+    label: ОКПО
+    labels:
+      en: OKPO
+      de: OKPO
+      sr: ОКПО
+      az: OKPO
+      es: OKPO
+      fr: OKPO
+      hy: ОКПО
+      ka: ОКПО
+      kk: ОКПО
+      pt: OKPO
+      ro: OKPO
+      tr: OKPO
+      uk: ОКПО
+      uz: OKPO
+      zh: OKPO
   - name: ЮридическийАдрес
     type: string
+    label: Юридический адрес
+    labels:
+      en: Legal address
+      de: Rechtsadresse
+      sr: Правна адреса
+      az: Hüquqi ünvan
+      es: Dirección legal
+      fr: Adresse légale
+      hy: Իրավական հասցե
+      ka: იურიდიული მისამართი
+      kk: Заңды мекенжай
+      pt: Endereço legal
+      ro: Adresă legală
+      tr: Yasal adres
+      uk: Юридична адреса
+      uz: Yuridik manzil
+      zh: 法定地址
   - name: ФактическийАдрес
     type: string
+    label: Фактический адрес
+    labels:
+      en: Actual address
+      de: Tatsächliche Adresse
+      sr: Стварна адреса
+      az: Faktiki ünvan
+      es: Dirección real
+      fr: Adresse réelle
+      hy: Փաստացի հասցե
+      ka: ფაქტიური მისამართი
+      kk: Нақты мекенжай
+      pt: Endereço real
+      ro: Adresă reală
+      tr: Fiili adres
+      uk: Фактична адреса
+      uz: Haqiqiy manzil
+      zh: 实际地址
   - name: Телефон
     type: string
+    label: Телефон
+    labels:
+      en: Phone
+      de: Telefon
+      sr: Телефон
+      az: Telefon
+      es: Teléfono
+      fr: Tél
+      hy: Հեռախոս
+      ka: ტელეფონი
+      kk: Телефон
+      pt: Telefone
+      ro: Telefon
+      tr: Telefon
+      uk: Телефон
+      uz: Telefon
+      zh: 电话
   - name: Email
     type: string
+    label: Email
+    labels:
+      en: Email
+      de: E-Mail
+      sr: Е-пошта
+      az: E-poçt
+      es: Correo
+      fr: Courriel
+      hy: Էլ. փոստ
+      ka: ელ. ფოსტა
+      kk: Email
+      pt: Email
+      ro: Email
+      tr: E-posta
+      uk: Email
+      uz: Email
+      zh: 邮箱
   - name: РасчётныйСчёт
     type: string
+    label: Расчётный счёт
+    labels:
+      en: Settlement account
+      de: Girokonto
+      sr: Текући рачун
+      az: Hesablaşma hesabı
+      es: Cuenta bancaria
+      fr: Compte bancaire
+      hy: Հաշվարկային հաշիվ
+      ka: ანგარიში
+      kk: Банк шоты
+      pt: Conta bancária
+      ro: Contă bancară
+      tr: Banka hesabı
+      uk: Розрахунковий рахунок
+      uz: Hisoblash hisobi
+      zh: 银行账户
   - name: НаименованиеБанка
     type: string
+    label: Наименование банка
+    labels:
+      en: Bank name
+      de: Bankname
+      sr: Назив банке
+      az: Bank adı
+      es: Nombre banco
+      fr: Nom banque
+      hy: Բանկի անվանում
+      ka: ბანკის დასახელება
+      kk: Банк атауы
+      pt: Nome banco
+      ro: Nume bancă
+      tr: Banka adı
+      uk: Найменування банку
+      uz: Bank nomi
+      zh: 银行名称
   - name: БИК
     type: string
+    label: БИК
+    labels:
+      en: BIK
+      de: BIK
+      sr: БИК
+      az: BIK
+      es: BIC
+      fr: BIC
+      hy: ԲԻԿ
+      ka: ბიკ
+      kk: БИК
+      pt: BIC
+      ro: BIC
+      tr: BİК
+      uk: БІК
+      uz: BIK
+      zh: BIC
   - name: КорреспондентскийСчёт
     type: string
+    label: Корреспондентский счёт
+    labels:
+      en: Correspondent account
+      de: Korrespondentenkonto
+      sr: Комерцијални рачун
+      az: Korrespondent hesabı
+      es: Cuenta corresp.
+      fr: Compte corresp.
+      hy: Միջբանկային հաշիվ
+      ka: კორესპონდენტული ანგარიში
+      kk: Корр. шот
+      pt: Conta corresp.
+      ro: Contă coresp.
+      tr: Karsılıklı hesap
+      uk: Кореспондентський рахунок
+      uz: Korrespondent hisobi
+      zh: 联行账户
   - name: Руководитель
     type: string
     label: ФИО руководителя
+    labels:
+      en: Director's full name
+      de: Name des Geschäftsführers
+      sr: Име и презиме директора
+      az: Direktorun tam adı
+      es: Nombre completo del director
+      fr: Nom complet du directeur
+      hy: Տնօրենի ամբողջական անունը
+      ka: დირექტორის სრული სახელი
+      kk: Директордың толық аты
+      pt: Nome completo do diretor
+      ro: Numele complet al directorului
+      tr: Müdürün tam adı
+      uk: ПІБ керівника
+      uz: Direktorning to'liq nomi
+      zh: 负责人姓名
   - name: ДолжностьРуководителя
     type: string
     default: "Директор"
+    label: Должность руководителя
+    labels:
+      en: Director's position
+      de: Position des Geschäftsführers
+      sr: Позиција директора
+      az: Direktor vəzifəsi
+      es: Cargo del director
+      fr: Poste du directeur
+      hy: Տնօրենի պաշտոն
+      ka: დირექტორის თანამდებობა
+      kk: Директор лауазымы
+      pt: Cargo do diretor
+      ro: Funcția directorului
+      tr: Müdür pozisyonu
+      uk: Посада керівника
+      uz: Direktor lavozimi
+      zh: 负责人职务
   - name: ГлавныйБухгалтер
     type: string
     label: ФИО главного бухгалтера
+    labels:
+      en: Chief accountant's full name
+      de: Name des Hauptbuchhalters
+      sr: Име и презиме главног књиговође
+      az: Baş mühasibin tam adı
+      es: Nombre completo del contador jefe
+      fr: Nom complet du comptable en chef
+      hy: Գլխավոր հաշվապահի ամբողջական անունը
+      ka: მთავარი ბუღალტრის სრული სახელი
+      kk: Бас бухгалтердың толық аты
+      pt: Nome completo do contador-chefe
+      ro: Numele complet al contabilului-șef
+      tr: Baş muhasebecinin tam adı
+      uk: ПІБ головного бухгалтера
+      uz: Bosh buxgalterning to'liq nomi
+      zh: 总会计师姓名

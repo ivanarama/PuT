@@ -4,14 +4,93 @@ titles:
   en: Items
   de: Artikel
   sr: Артикли
+  az: Məhsullar
+  es: Artículos
+  fr: Articles
+  hy: Ապրանքներ
+  ka: ნივთები
+  kk: Тауарлар
+  pt: Itens
+  ro: Articole
+  tr: Ürünler
+  uk: Номенклатура
+  uz: Mahsulotlar
+  zh: 物料
 hierarchical: true
 fields:
   - name: Наименование
     type: string
+    label: Наименование
+    labels:
+      en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დასახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称
   - name: Артикул
     type: string
+    label: Артикул
+    labels:
+      en: SKU
+      de: Artikelnummer
+      sr: Шифра артикла
+      az: Artikul
+      es: SKU
+      fr: Réf
+      hy: Արտիկուլ
+      ka: არტიკული
+      kk: Артикул
+      pt: SKU
+      ro: Cod
+      tr: Stok kodu
+      uk: Артикул
+      uz: Artikul
+      zh: SKU
   - name: ЕдиницаИзмерения
     type: reference:ЕдиницаИзмерения
+    label: Единица измерения
+    labels:
+      en: Unit of measure
+      de: Maßeinheit
+      sr: Јединица мере
+      az: Ölçü vahidi
+      es: Unidad medida
+      fr: Unité mesure
+      hy: Չափման միավոր
+      ka: საზომი ერთეული
+      kk: Өлшем бірлігі
+      pt: Unidade medida
+      ro: Unitate măsură
+      tr: Ölçü birimi
+      uk: Одиниця виміру
+      uz: O'lchov birligi
+      zh: 计量单位
   - name: СтавкаНДС
     type: reference:СтавкаНДС
     label: Ставка НДС по умолчанию
+    labels:
+      en: Default VAT rate
+      de: Standard-USt.-Satz
+      sr: Подразумевана стопа ПДВ
+      az: ƏDV dərəcəsi
+      es: Tasa IVA
+      fr: Taux TVA
+      hy: ԱԱՀ տոկոս
+      ka: დღგ განაკვეთი
+      kk: ҚҚС мөлшері
+      pt: Taxa IVA
+      ro: Cotă TVA
+      tr: KDV oranı
+      uk: Ставка ПДВ
+      uz: QQS stavkasi
+      zh: 增值税率

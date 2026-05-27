@@ -6,6 +6,18 @@ titles:
   en: Cash flow over 30 days
   de: Geldverkehr der letzten 30 Tage
   sr: Новчани токови за 30 дана
+  az: 30 günlük pul axını
+  es: Flujo de caja en 30 días
+  fr: Flux de trésorerie sur 30 jours
+  hy: 30 օրվա դրամական հոսք
+  ka: 30 დღის სალარო ნაკადი
+  kk: 30 күндік ақша ағыны
+  pt: Fluxo de caixa em 30 dias
+  ro: Flux de numerar pe 30 de zile
+  tr: 30 günlük nakit akışı
+  uk: Грошовий потік за 30 днів
+  uz: 30 kunlik pul oqimi
+  zh: 30天现金流
 params:
   Начало: "{{today|minus_days:30}}"
 query: |

@@ -4,16 +4,76 @@ titles:
   en: Goods movements for period
   de: Warenbewegungen für den Zeitraum
   sr: Кретања робе за период
+  az: Dövr ərzində mal hərəkəti
+  es: Movimiento de mercancías por período
+  fr: Mouvements de stock pour la période
+  hy: Ապրանքների շարժ ժամանակաշրջանում
+  ka: საქონლის მოძრაობა პერიოდში
+  kk: Кезеңдегі тауар қозғалысы
+  pt: Movimento de mercadorias por período
+  ro: Mișcare de mărfuri pentru perioadă
+  tr: Dönemdeki mal hareketleri
+  uk: Рух товарів за період
+  uz: Davrdagi tovar harakatlari
+  zh: 期间商品流动
 params:
   - name: НачалоПериода
     type: date
     label: С даты
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
   - name: КонецПериода
     type: date
     label: По дату
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
   - name: ВидДвижения
     type: select
     label: Вид движения
+    labels:
+      en: Movement type
+      de: Bewegungsart
+      sr: Врста кретања
+      az: Hərəkət növü
+      es: Tipo movimiento
+      fr: Type mouvement
+      hy: Շարժման տեսակ
+      ka: მოძრაობის ტიპი
+      kk: Қозғалыс түрі
+      pt: Tipo movimento
+      ro: Tip mișcare
+      tr: Hareket türü
+      uk: Вид руху
+      uz: Harakat turi
+      zh: 动态类型
     options:
       - ""
       - Приход

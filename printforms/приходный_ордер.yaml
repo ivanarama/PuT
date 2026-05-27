@@ -1,6 +1,22 @@
 name: ПриходныйОрдер
 document: ПоступлениеТоваров
 title: "Приходный ордер № {{Номер}} от {{Дата | date}}"
+titles:
+  en: "Receipt order № {{Номер}} of {{Дата | date}}"
+  de: "Wareneingangsschein № {{Номер}} vom {{Дата | date}}"
+  sr: "Пријемни налог бр. {{Номер}} од {{Дата | date}}"
+  az: "Qəbul orderi № {{Номер}} {{Дата | date}}"
+  es: "Orden de recepción № {{Номер}} del {{Дата | date}}"
+  fr: "Bon de réception № {{Номер}} du {{Дата | date}}"
+  hy: "Ընդունման օրդեր № {{Номер}} {{Дата | date}}"
+  ka: "მიღების ორდერი № {{Номер}} {{Дата | date}}"
+  kk: "Қабылдау ордері № {{Номер}} {{Дата | date}}"
+  pt: "Ordem de recebimento № {{Номер}} de {{Дата | date}}"
+  ro: "Ordin de recepție № {{Номер}} din {{Дата | date}}"
+  tr: "Kabul emri № {{Номер}} {{Дата | date}}"
+  uk: "Прибутковий ордер № {{Номер}} від {{Дата | date}}"
+  uz: "Qabul qilish buyrug'i № {{Номер}} {{Дата | date}}"
+  zh: "收货单 № {{Номер}} {{Дата | date}}"
 
 header: |
   **Организация**: {{Константы.НашаОрганизация}}

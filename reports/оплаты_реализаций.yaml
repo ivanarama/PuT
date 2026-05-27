@@ -4,16 +4,76 @@ titles:
   en: Customer payments by sales
   de: Kundenzahlungen je Verkauf
   sr: Уплате од купаца по продаји
+  az: Satışlar üzrə müştəri ödənişləri
+  es: Pagos de clientes por ventas
+  fr: Paiements clients par vente
+  hy: Հաճախորդների վճարումներ ըստ վաճառքների
+  ka: მომხმარებლის გადახდები გაყიდვების მიხედვით
+  kk: Сатылымдар бойынша тұтынушы төлемдері
+  pt: Pagamentos de clientes por vendas
+  ro: Plăți clienți pe vânzări
+  tr: Satışlara göre müşteri ödemeleri
+  uk: Оплати за реалізаціями
+  uz: Sotuvlar bo'yicha mijoz to'lovlari
+  zh: 按销售的客户付款
 params:
   - name: Контрагент
     type: reference:Контрагент
     label: Покупатель
+    labels:
+      en: Customer
+      de: Kunde
+      sr: Купац
+      az: Əks-tərəf
+      es: Contraparte
+      fr: Counterpartie
+      hy: Գործընկեր
+      ka: კონტრაგენტი
+      kk: Контрагент
+      pt: Contraparte
+      ro: Contraparte
+      tr: Karşı taraf
+      uk: Контрагент
+      uz: Kontragent
+      zh: 往来单位
   - name: НачалоПериода
     type: date
     label: С даты
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
   - name: КонецПериода
     type: date
     label: По дату
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
 query: |
   ВЫБРАТЬ
     ДокументРеализации,

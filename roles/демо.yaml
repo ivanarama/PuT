@@ -1,5 +1,38 @@
 name: Демо
+title: Демо
+titles:
+  en: Demo
+  de: Demo
+  sr: Демо
+  az: Demo
+  es: Demo
+  fr: Démo
+  hy: Դեմո
+  ka: დემო
+  kk: Демо
+  pt: Demo
+  ro: Demo
+  tr: Demo
+  uk: Демо
+  uz: Demo
+  zh: 演示
 description: Роль для демо-доступа — чтение и создание без удаления
+descriptions:
+  en: Role for demo access — read and create without deletion
+  de: Rolle für Demo-Zugriff — Lesen und Erstellen ohne Löschen
+  sr: Улога за демо приступ — читање и креирање без брисања
+  az: Demo giriş üçün rol — oxu və yarat, silmədən
+  es: Rol para acceso demo — lectura y creación sin eliminación
+  fr: Rôle pour accès démo — lecture et création sans suppression
+  hy: Դեմո մուտքի դեր — ընթերցում և ստեղծում առանց ջնջելու
+  ka: დემო წვდომის როლი — წაკითხვა და შექმნა წაშლის გარეშე
+  kk: Демо қатынау рөлі — оқу және құру, жойусыз
+  pt: Função para acesso demo — leitura e criação sem exclusão
+  ro: Rol pentru acces demo — citire și creare fără ștergere
+  tr: Demo erişim rolü — okuma ve oluşturma, silme yok
+  uk: Роль для демо-доступу — читання та створення без видалення
+  uz: Demo kirish uchun rol — o'qish va yaratish, o'chirishsiz
+  zh: 演示访问角色 — 可读可创建，不可删除
 permissions:
   catalogs:
     Контрагент: [read, write]

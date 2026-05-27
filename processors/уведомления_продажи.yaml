@@ -4,7 +4,36 @@ titles:
   en: Sales report via email
   de: Verkaufsbericht per E-Mail
   sr: Извештај о продаји путем е-поште
+  az: Satış hesabatı e-poçt ilə
+  es: Informe de ventas por correo electrónico
+  fr: Rapport des ventes par email
+  hy: Վաճառքի հաշվետվություն էլ. փոստով
+  ka: გაყიდვების ანგარიში ელ. ფოსტით
+  kk: Сатылым есебі эл. поштамен
+  pt: Relatório de vendas por email
+  ro: Raport vânzări prin email
+  tr: E-posta ile satış raporu
+  uk: Звіт про продажі електронною поштою
+  uz: Savdo hisoboti elektron pochta orqali
+  zh: 通过电子邮件发送销售报告
 params:
   - name: Кому
     type: string
+    label: Кому
+    labels:
+      en: To
+      de: An
+      sr: Коме
+      az: Kimə
+      es: A quién
+      fr: À qui
+      hy: Ում
+      ka: ვის
+      kk: Кімге
+      pt: Para quem
+      ro: Către
+      tr: Kime
+      uk: Кому
+      uz: Kimga
+      zh: 收件人
     default: ""

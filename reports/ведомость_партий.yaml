@@ -4,16 +4,76 @@ titles:
   en: Inventory lots (FIFO)
   de: Warenchargen-Übersicht (FIFO)
   sr: Преглед партија (ФИФО)
+  az: Mal partiyaları (FİFO)
+  es: Lotes de inventario (FIFO)
+  fr: Lots de stock (FIFO)
+  hy: Ապրանքա партии (ՖԻՖՈ)
+  ka: საქონლის პარტიები (FIFO)
+  kk: Тауар партиялары (ФИФО)
+  pt: Lotes de inventário (FIFO)
+  ro: Loturi de stoc (FIFO)
+  tr: Stok partileri (FIFO)
+  uk: Парії товарів (ФІФО)
+  uz: Tovar partiyalari (FIFO)
+  zh: 库存批次 (FIFO)
 params:
   - name: НаДату
     type: date
     label: На дату
+    labels:
+      en: On date
+      de: Zum Datum
+      sr: На датум
+      az: Tarixə
+      es: A fecha
+      fr: À la date
+      hy: Ամսաթվով
+      ka: თარიღით
+      kk: Күніне
+      pt: Na data
+      ro: La data
+      tr: Tarihe
+      uk: На дату
+      uz: Sanaga
+      zh: 截至
   - name: Номенклатура
     type: reference:Номенклатура
     label: Номенклатура
+    labels:
+      en: Item
+      de: Artikel
+      sr: Артикал
+      az: Adlandırma
+      es: Nomenclatura
+      fr: Nomenclature
+      hy: Անվանակարգ
+      ka: ნომენკლატურა
+      kk: Номенклатура
+      pt: Nomenclatura
+      ro: Nomenclatură
+      tr: Nomembüro
+      uk: Номенклатура
+      uz: Nomеnklatura
+      zh: 物料
   - name: Склад
     type: reference:Склад
     label: Склад
+    labels:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
 query: |
   ВЫБРАТЬ
     Номенклатура,

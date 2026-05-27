@@ -4,12 +4,75 @@ titles:
   en: Item prices
   de: Artikelpreise
   sr: Цене артикала
+  az: Mal qiymətləri
+  es: Precios de artículos
+  fr: Prix des articles
+  hy: Ապրանքների գներ
+  ka: საქონლის ფასები
+  kk: Тауар бағалары
+  pt: Preços de itens
+  ro: Prețuri articole
+  tr: Mal fiyatları
+  uk: Ціни номенклатури
+  uz: Tovar narxlari
+  zh: 物料价格
 periodic: true
 dimensions:
   - name: Номенклатура
     type: reference:Номенклатура
+    label: Номенклатура
+    labels:
+      en: Item
+      de: Artikel
+      sr: Артикал
+      az: Adlandırma
+      es: Nomenclatura
+      fr: Nomenclature
+      hy: Անվանակարգ
+      ka: ნომენკლატურა
+      kk: Номенклатура
+      pt: Nomenclatura
+      ro: Nomenclatură
+      tr: Nomembüro
+      uk: Номенклатура
+      uz: Nomеnklatura
+      zh: 物料
   - name: ТипЦен
     type: reference:ТипЦен
+    label: Тип цен
+    labels:
+      en: Price type
+      de: Preistyp
+      sr: Тип цене
+      az: Qiymət növü
+      es: Tipo precio
+      fr: Type prix
+      hy: Գնի տեսակ
+      ka: ფასის ტიპი
+      kk: Баға түрі
+      pt: Tipo preço
+      ro: Tip preț
+      tr: Fiyat tipi
+      uk: Тип ціни
+      uz: Narx turi
+      zh: 价格类型
 resources:
   - name: Цена
     type: number
+    label: Цена
+    labels:
+      en: Price
+      de: Preis
+      sr: Цена
+      az: Qiymət
+      es: Precio
+      fr: Prix
+      hy: Գին
+      ka: ფასი
+      kk: Бағасы
+      pt: Preço
+      ro: Preț
+      tr: Fiyat
+      uk: Ціна
+      uz: Narx
+      zh: 价格

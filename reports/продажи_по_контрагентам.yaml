@@ -4,13 +4,57 @@ titles:
   en: Sales by counterparty
   de: Verkäufe nach Geschäftspartner
   sr: Продаја по партнерима
+  az: Kontragentlər üzrə satışlar
+  es: Ventas por contraparte
+  fr: Ventes par contrepartie
+  hy: Վաճառք ըստ գործընկերների
+  ka: გაყიდვები კონტრაგენტების მიხედვით
+  kk: Контрагенттер бойынша сатылымдар
+  pt: Vendas por contraparte
+  ro: Vânzări pe contrapărți
+  tr: Karşı tarafa göre satışlar
+  uk: Продажі по контрагентах
+  uz: Kontragentlar bo'yicha sotuvlar
+  zh: 按往来单位的销售
 params:
   - name: НачалоПериода
     type: date
     label: С даты
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
   - name: КонецПериода
     type: date
     label: По дату
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
 query: |
   ВЫБРАТЬ
     р.Покупатель КАК Покупатель,

@@ -1,5 +1,38 @@
 name: Снабженец
+title: Снабженец
+titles:
+  en: Purchaser
+  de: Einkäufer
+  sr: Набављач
+  az: Təchizatçı
+  es: Comprador
+  fr: Acheteur
+  hy: Մատակարարող
+  ka: მომწოდებელი
+  kk: Жабдықтаушы
+  pt: Comprador
+  ro: Achizitor
+  tr: Satın alıcı
+  uk: Постачальник
+  uz: Ta'minotchi
+  zh: 采购员
 description: Закупки — работа с поставщиками, поступлениями и заказами
+descriptions:
+  en: Purchasing — supplier management, receipts, and orders
+  de: Einkauf — Lieferantenverwaltung, Zugänge und Bestellungen
+  sr: Набавке — рад са добављачима, пријемима и наруџбама
+  az: Satınalma — təchizatçı idarəetmə, qəbullar və sifarişlər
+  es: Compras — gestión de proveedores, recepciones y pedidos
+  fr: Achats — gestion des fournisseurs, réceptions et commandes
+  hy: Գնումներ — մատակարարների կառավարում, ընդունում և պատվերներ
+  ka: შესყიდვები — მომწოდებლების მართვა, მიღება და შეკვეთები
+  kk: Сатып алу — жабдықтаушы басқару, қабылдау және тапсырыстар
+  pt: Compras — gestão de fornecedores, recebimentos e pedidos
+  ro: Achiziții — management furnizori, recepții și comenzi
+  tr: Satın alma — tedarikçi yönetimi, kabuller ve siparişler
+  uk: Закупівлі — управління постачальниками, надходження та замовлення
+  uz: Xaridlar — yetkazib beruvchilarni boshqarish, qabul va buyurtmalar
+  zh: 采购 — 供应商管理、收货和订单
 permissions:
   catalogs:
     Контрагент: [read, write]

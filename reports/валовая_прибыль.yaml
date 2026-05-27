@@ -4,16 +4,76 @@ titles:
   en: Gross profit (FIFO)
   de: Rohgewinn (FIFO)
   sr: Бруто добит (ФИФО)
+  az: Brüt mənfəət (FİFO)
+  es: Beneficio bruto (FIFO)
+  fr: Bénéfice brut (FIFO)
+  hy: Համախառն շահույթ (ՖԻՖՈ)
+  ka: მარჯვენა მოგება (FIFO)
+  kk: Жалпы пайда (ФИФО)
+  pt: Lucro bruto (FIFO)
+  ro: Profit brut (FIFO)
+  tr: Brüt kâr (FIFO)
+  uk: Валовий прибуток (ФІФО)
+  uz: Yalpi foyda (FIFO)
+  zh: 毛利润 (FIFO)
 params:
   - name: Начало
     type: date
     label: "С даты"
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
   - name: Конец
     type: date
     label: "По дату"
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
   - name: Номенклатура
     type: reference:Номенклатура
     label: "Номенклатура"
+    labels:
+      en: Item
+      de: Artikel
+      sr: Артикал
+      az: Adlandırma
+      es: Nomenclatura
+      fr: Nomenclature
+      hy: Անվանակարգ
+      ka: ნომენკლატურა
+      kk: Номенклатура
+      pt: Nomenclatura
+      ro: Nomenclatură
+      tr: Nomembüro
+      uk: Номенклатура
+      uz: Nomеnklatura
+      zh: 物料
 query: |
   ВЫБРАТЬ
     Номенклатура,

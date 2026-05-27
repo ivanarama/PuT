@@ -6,6 +6,18 @@ constants:
       en: Our organization (default)
       de: Unsere Organisation (Standard)
       sr: Наша организација (подразумевано)
+      az: Bizim təşkilat (susmaya görə)
+      es: Nuestra organización (predeterminado)
+      fr: Notre organisation (par défaut)
+      hy: Մեր կազմակերպությունը (լռելյայն)
+      ka: ჩვენი ორგანიზაცია (ნაგულისხმევი)
+      kk: Біздің ұйым (әдепкі)
+      pt: Nossa organização (padrão)
+      ro: Organizația noastră (implicit)
+      tr: Kuruluşumuz (varsayılan)
+      uk: Наша організація (за замовчуванням)
+      uz: Bizning tashkilot (standart)
+      zh: 我们的机构（默认）
   - name: ОсновнаяВалюта
     type: string
     default: "RUB"
@@ -14,3 +26,15 @@ constants:
       en: Main accounting currency
       de: Hauptbuchungswährung
       sr: Главна књиговодствена валута
+      az: Əsas uçot valyutası
+      es: Moneda principal de contabilidad
+      fr: Devise principale de comptabilité
+      hy: Հիմնական հաշվառման արժույթ
+      ka: ძირითადი საანგარიშო ვალუტა
+      kk: Негізгі есеп валюта
+      pt: Moeda principal de contabilidade
+      ro: Moneda principală de contabilitate
+      tr: Ana muhasebe para birimi
+      uk: Основна облікова валюта
+      uz: Asosiy buxgalteriya valyutasi
+      zh: 主要核算币种

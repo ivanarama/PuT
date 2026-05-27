@@ -1,6 +1,22 @@
 name: НакладнаяНаПеремещение
 document: ПеремещениеТоваров
 title: "Накладная на перемещение № {{Номер}} от {{Дата | date}}"
+titles:
+  en: "Transfer waybill № {{Номер}} of {{Дата | date}}"
+  de: "Umlagerungslieferschein № {{Номер}} vom {{Дата | date}}"
+  sr: "Отпремница преноса бр. {{Номер}} од {{Дата | date}}"
+  az: "Köçürmə çatdırma sənədi № {{Номер}} {{Дата | date}}"
+  es: "Albarán de transferencia № {{Номер}} del {{Дата | date}}"
+  fr: "Bon de transfert № {{Номер}} du {{Дата | date}}"
+  hy: "Տեղափոխման փաստաթուղթ № {{Номер}} {{Дата | date}}"
+  ka: "გადატანის ჩამონათვალი № {{Номер}} {{Дата | date}}"
+  kk: "Ауыстыру жөнелтімі № {{Номер}} {{Дата | date}}"
+  pt: "Guia de transferência № {{Номер}} de {{Дата | date}}"
+  ro: "Aviz de transfer № {{Номер}} din {{Дата | date}}"
+  tr: "Transfer irsaliyesi № {{Номер}} {{Дата | date}}"
+  uk: "Накладна переміщення № {{Номер}} від {{Дата | date}}"
+  uz: "Ko'chirish hujjati № {{Номер}} {{Дата | date}}"
+  zh: "调拨单 № {{Номер}} {{Дата | date}}"
 
 header: |
   **Организация**: {{Константы.НашаОрганизация}}

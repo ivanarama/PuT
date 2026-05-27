@@ -4,10 +4,54 @@ titles:
   en: Recalculate item prices
   de: Artikelpreise neu berechnen
   sr: Прерачун цена артикала
+  az: Məhsul qiymətlərini yenidən hesabla
+  es: Recalcular precios de artículos
+  fr: Recalculer les prix des articles
+  hy: Վերահաշվարկել ապրանքների գները
+  ka: პროდუქტების ფასების გადაანგარიშება
+  kk: Тауар бағаларын қайта есептеу
+  pt: Recalcular preços dos itens
+  ro: Recalculare prețuri articole
+  tr: Ürün fiyatlarını yeniden hesapla
+  uk: Пере розрахунок цін товарів
+  uz: Mahsulot narxlarini qayta hisoblash
+  zh: 重新计算商品价格
 params:
   - name: Процент
     type: number
     label: Процент изменения цены
+    labels:
+      en: Price change percentage
+      de: Prozentsatz der Preisänderung
+      sr: Проценат промене цене
+      az: Qiymət dəyişikliyi faizi
+      es: Porcentaje de cambio de precio
+      fr: Pourcentage de changement de prix
+      hy: Գնի փոփոխության տոկոս
+      ka: ფასის ცვლილების პროცენტი
+      kk: Баға өзгерісінің пайызы
+      pt: Porcentagem de alteração de preço
+      ro: Procentaj de modificare a prețului
+      tr: Fiyat değişim yüzdesi
+      uk: Відсоток зміни ціни
+      uz: Narx o'zgarish foizi
+      zh: 价格变动百分比
   - name: Группа
     type: string
     label: Группа (оставьте пустым для всех)
+    labels:
+      en: Group (leave empty for all)
+      de: Gruppe (leer für alle)
+      sr: Група (оставите празно за све)
+      az: Qrup (hamısı üçün boş buraxın)
+      es: Grupo (dejar vacío para todos)
+      fr: Groupe (laisser vide pour tous)
+      hy: Խումբ (թողնել դատարկ՝ բոլորի համար)
+      ka: ჯგუფი (დატოვეთ ცარიელი ყველასთვის)
+      kk: Топ (барлығы үшін бос қалдырыңыз)
+      pt: Grupo (deixar vazio para todos)
+      ro: Grupă (lăsați gol pentru toate)
+      tr: Grup (tümü için boş bırakın)
+      uk: Група (залиште порожнім для всіх)
+      uz: Guruh (barchasi uchun bo'sh qoldiring)
+      zh: 组（留空表示全部）

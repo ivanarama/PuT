@@ -4,14 +4,111 @@ titles:
   en: Cash desk
   de: Kasse
   sr: Каса
+  az: Kassa
+  es: Caja
+  fr: Caisse
+  hy: Դրամարկղի
+  ka: სალარო
+  kk: Касса
+  pt: Caixa
+  ro: Casier
+  tr: Kasa
+  uk: Каса
+  uz: Kassa
+  zh: 现金
 fields:
   - name: Наименование
     type: string
+    label: Наименование
+    labels:
+      en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დաსახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称
   - name: Вид
     type: enum:ВидКассы
+    label: Вид кассы
+    labels:
+      en: Cash desk type
+      de: Kassenart
+      sr: Врста касе
+      az: Kassa növü
+      es: Tipo caja
+      fr: Type caisse
+      hy: Դրամարկղի տեսակ
+      ka: სალაროს ტიპი
+      kk: Касса түрі
+      pt: Tipo caixa
+      ro: Tip casier
+      tr: Kasa türü
+      uk: Вид каси
+      uz: Kassa turi
+      zh: 出纳类型
   - name: НомерСчёта
     type: string
+    label: Номер счёта
+    labels:
+      en: Account number
+      de: Kontonummer
+      sr: Број рачуна
+      az: Hesab nömrəsi
+      es: Nº cuenta
+      fr: N° compte
+      hy: Հաշվի համար
+      ka: ანგარიშის ნომერი
+      kk: Шот нөмірі
+      pt: Nº conta
+      ro: Nr. contă
+      tr: Hesap no
+      uk: Номер рахунку
+      uz: Hisob raqami
+      zh: 账号
   - name: Банк
     type: string
+    label: Банк
+    labels:
+      en: Bank
+      de: Bank
+      sr: Банка
+      az: Bank
+      es: Banco
+      fr: Banque
+      hy: Բանկ
+      ka: ბანკი
+      kk: Банк
+      pt: Banco
+      ro: Bancă
+      tr: Banka
+      uk: Банк
+      uz: Bank
+      zh: 银行
   - name: БИК
     type: string
+    label: БИК
+    labels:
+      en: BIK
+      de: BIK
+      sr: БИК
+      az: BIK
+      es: BIC
+      fr: BIC
+      hy: ԲԻԿ
+      ka: ბიკ
+      kk: БИК
+      pt: BIC
+      ro: BIC
+      tr: BİК
+      uk: БІК
+      uz: BIK
+      zh: BIC

@@ -6,6 +6,18 @@ titles:
   en: Sales over 30 days
   de: Verkäufe der letzten 30 Tage
   sr: Продаја за 30 дана
+  az: 30 günlük satışlar
+  es: Ventas en 30 días
+  fr: Ventes sur 30 jours
+  hy: 30 օրվա վաճառքներ
+  ka: 30 დღის გაყიდვები
+  kk: 30 күндік сатылым
+  pt: Vendas em 30 dias
+  ro: Vânzări pe 30 de zile
+  tr: 30 günlük satışlar
+  uk: Продажі за 30 днів
+  uz: 30 kunlik savdo
+  zh: 30天销售
 params:
   Начало: "{{today|minus_days:30}}"
 query: |

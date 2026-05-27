@@ -4,11 +4,57 @@ titles:
   en: VAT rate
   de: MwSt.-Satz
   sr: ПДВ стопа
+  az: ƏDV dərəcəsi
+  es: Tasa IVA
+  fr: Taux TVA
+  hy: ԱԱՀ տոկոս
+  ka: დღგ განაკვეთი
+  kk: ҚҚС мөлшері
+  pt: Taxa IVA
+  ro: Cotă TVA
+  tr: KDV oranı
+  uk: Ставка ПДВ
+  uz: QQS stavkasi
+  zh: 增值税率
 fields:
   - name: Наименование
     type: string
+    label: Наименование
+    labels:
+      en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დასახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称
   - name: Процент
     type: number
+    label: Процент
+    labels:
+      en: Percentage
+      de: Prozent
+      sr: Проценат
+      az: Faiz
+      es: Porcentaje
+      fr: Pourcentage
+      hy: Տոկոս
+      ka: პროცენტი
+      kk: Пайыз
+      pt: Porcentagem
+      ro: Procentaj
+      tr: Yüzde
+      uk: Відсоток
+      uz: Foiz
+      zh: 百分比
 predefined:
   - name: НДС20
     fields:

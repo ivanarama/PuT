@@ -5,6 +5,18 @@ titles:
   en: Revenue for month
   de: Umsatz im Monat
   sr: Приход у месецу
+  az: Aylıq gəlir
+  es: Ingresos del mes
+  fr: Chiffre d'affaires du mois
+  hy: Ամսական եկամուտ
+  ka: თვიური შემოსავალი
+  kk: Айлық табыс
+  pt: Receita mensal
+  ro: Venit lunar
+  tr: Aylık ciro
+  uk: Виручка за місяць
+  uz: Oylik daromad
+  zh: 月度收入
 format: money
 params:
   Начало: "{{today|start_of_month}}"

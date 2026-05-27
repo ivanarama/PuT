@@ -5,6 +5,18 @@ titles:
   en: Top items by revenue (month)
   de: Top-Artikel nach Umsatz (Monat)
   sr: Топ артикли по приходу (месец)
+  az: Gəlirə görə top məhsullar (ay)
+  es: Top artículos por ingresos (mes)
+  fr: Top articles par chiffre d'affaires (mois)
+  hy: Լավագույն ապրանքներ ըստ եկամտի (ամիս)
+  ka: საუკეთესო პროდუქტები შემოსავლის მიხედვით (თვე)
+  kk: Табыс бойынша топ тауарлар (ай)
+  pt: Top itens por receita (mês)
+  ro: Top articole după venit (lună)
+  tr: Gelire göre en çok satan ürünler (ay)
+  uk: Топ товарів за виручкою (місяць)
+  uz: Daromad bo'yicha top mahsulotlar (oy)
+  zh: 按收入排名的热门商品（月）
 limit: 10
 params:
   Начало: "{{today|start_of_month}}"
@@ -19,6 +31,61 @@ query: |
   СГРУППИРОВАТЬ ПО Номенклатура
   УПОРЯДОЧИТЬ ПО Выручка УБЫВ
 columns:
-  - { field: Номенклатура, label: "Номенклатура" }
-  - { field: Выручка,       label: "Выручка",  format: money,  align: right }
-  - { field: Прибыль,       label: "Прибыль",  format: money,  align: right }
+  - field: Номенклатура
+    label: "Номенклатура"
+    labels:
+      en: "Item"
+      de: "Artikel"
+      sr: "Артикал"
+      az: "Məhsul"
+      es: "Artículo"
+      fr: "Article"
+      hy: "Ապրանք"
+      ka: "პროდუქტი"
+      kk: "Тауар"
+      pt: "Item"
+      ro: "Articol"
+      tr: "Ürün"
+      uk: "Товар"
+      uz: "Mahsulot"
+      zh: "商品"
+  - field: Выручка
+    label: "Выручка"
+    labels:
+      en: "Revenue"
+      de: "Umsatz"
+      sr: "Приход"
+      az: "Gəlir"
+      es: "Ingreso"
+      fr: "Chiffre d'affaires"
+      hy: "Եկամուտ"
+      ka: "შემოსავალი"
+      kk: "Табыс"
+      pt: "Receita"
+      ro: "Venit"
+      tr: "Gelir"
+      uk: "Виручка"
+      uz: "Daromad"
+      zh: "收入"
+    format: money
+    align: right
+  - field: Прибыль
+    label: "Прибыль"
+    labels:
+      en: "Profit"
+      de: "Gewinn"
+      sr: "Добит"
+      az: "Mənfəət"
+      es: "Beneficio"
+      fr: "Bénéfice"
+      hy: "Շահույթ"
+      ka: "მოგება"
+      kk: "Пайда"
+      pt: "Lucro"
+      ro: "Profit"
+      tr: "Kâr"
+      uk: "Прибуток"
+      uz: "Foyda"
+      zh: "利润"
+    format: money
+    align: right

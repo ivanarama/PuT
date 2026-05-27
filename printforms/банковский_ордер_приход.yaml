@@ -1,6 +1,22 @@
 name: БанковскийОрдерПриход
 document: ПоступлениеНаРасчётныйСчёт
 title: "Банковский ордер (поступление) № {{Номер}} от {{Дата | date}}"
+titles:
+  en: "Bank order (receipt) № {{Номер}} of {{Дата | date}}"
+  de: "Bankordnung (Eingang) № {{Номер}} vom {{Дата | date}}"
+  sr: "Банковски налог (пријем) бр. {{Номер}} од {{Дата | date}}"
+  az: "Bank əmri (gəlir) № {{Номер}} {{Дата | date}}"
+  es: "Orden bancaria (ingreso) № {{Номер}} del {{Дата | date}}"
+  fr: "Ordre bancaire (entrée) № {{Номер}} du {{Дата | date}}"
+  hy: "Բանկային հանձնարարական (մուտք) № {{Номер}} {{Дата | date}}"
+  ka: "საბანკო ბრძანება (შემოსავალი) № {{Номер}} {{Дата | date}}"
+  kk: "Банк бұйрығы (кіріс) № {{Номер}} {{Дата | date}}"
+  pt: "Ordem bancária (receita) № {{Номер}} de {{Дата | date}}"
+  ro: "Ordin bancar (încasare) № {{Номер}} din {{Дата | date}}"
+  tr: "Banka emri (gelen) № {{Номер}} {{Дата | date}}"
+  uk: "Банківський ордер (прихід) № {{Номер}} від {{Дата | date}}"
+  uz: "Bank buyrug'i (kirish) № {{Номер}} {{Дата | date}}"
+  zh: "银行凭证（收款） № {{Номер}} {{Дата | date}}"
 
 header: |
   ## {{Константы.НашаОрганизация}}
