@@ -1,4 +1,4 @@
-name: Взаиморасчеты
+﻿name: Взаиморасчеты
 title: Взаиморасчёты
 titles:
   en: Accounts receivable / payable
@@ -19,8 +19,8 @@ titles:
 dimensions:
   - name: Контрагент
     type: string
-    label: Контрагент
-    labels:
+    title: Контрагент
+    titles:
       en: Counterparty
       de: Geschäftspartner
       sr: Контрагент
@@ -38,8 +38,8 @@ dimensions:
       zh: 往来单位
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -58,8 +58,8 @@ dimensions:
 resources:
   - name: Сумма
     type: number
-    label: Сумма
-    labels:
+    title: Сумма
+    titles:
       en: Amount
       de: Betrag
       sr: Износ
@@ -78,8 +78,8 @@ resources:
 attributes:
   - name: ТипКонтрагента
     type: string
-    label: Тип контрагента
-    labels:
+    title: Тип контрагента
+    titles:
       en: Counterparty type
       de: Geschäftspartnertyp
       sr: Врста контрагента
@@ -97,8 +97,8 @@ attributes:
       zh: 往来单位类型
   - name: ДокументРеализации
     type: reference:РеализацияТоваров
-    label: Документ реализации
-    labels:
+    title: Документ реализации
+    titles:
       en: Sales document
       de: Verkaufsbeleg
       sr: Продајни документ
@@ -116,8 +116,8 @@ attributes:
       zh: 销售单据
   - name: ДокументПоступления
     type: string
-    label: Документ поступления
-    labels:
+    title: Документ поступления
+    titles:
       en: Purchase document
       de: Einkaufsbeleg
       sr: Документ набавке

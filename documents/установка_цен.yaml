@@ -1,4 +1,4 @@
-name: УстановкаЦен
+﻿name: УстановкаЦен
 title: Установка цен
 titles:
   en: Price update
@@ -24,8 +24,8 @@ numerator:
 fields:
   - name: Номер
     type: string
-    label: Номер
-    labels:
+    title: Номер
+    titles:
       en: Number
       de: Nummer
       sr: Број
@@ -43,8 +43,8 @@ fields:
       zh: 编号
   - name: Дата
     type: date
-    label: Дата
-    labels:
+    title: Дата
+    titles:
       en: Date
       de: Datum
       sr: Датум
@@ -62,8 +62,8 @@ fields:
       zh: 日期
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -81,8 +81,8 @@ fields:
       zh: 组织
   - name: ТипЦен
     type: reference:ТипЦен
-    label: Тип цен
-    labels:
+    title: Тип цен
+    titles:
       en: Price type
       de: Preistyp
       sr: Тип цене
@@ -120,8 +120,8 @@ tableparts:
     fields:
       - name: Номенклатура
         type: reference:Номенклатура
-        label: Номенклатура
-        labels:
+        title: Номенклатура
+        titles:
           en: Item
           de: Artikel
           sr: Артикал
@@ -139,8 +139,8 @@ tableparts:
           zh: 物料
       - name: Цена
         type: number
-        label: Цена
-        labels:
+        title: Цена
+        titles:
           en: Price
           de: Preis
           sr: Цена

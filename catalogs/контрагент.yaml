@@ -1,4 +1,4 @@
-name: Контрагент
+﻿name: Контрагент
 title: Контрагент
 titles:
   en: Counterparty
@@ -19,8 +19,8 @@ titles:
 fields:
   - name: Наименование
     type: string
-    label: Наименование
-    labels:
+    title: Наименование
+    titles:
       en: Name
       de: Name
       sr: Назив
@@ -38,8 +38,8 @@ fields:
       zh: 名称
   - name: ПолноеНаименование
     type: string
-    label: Полное наименование
-    labels:
+    title: Полное наименование
+    titles:
       en: Full name
       de: Vollständiger Name
       sr: Пуни назив
@@ -57,8 +57,8 @@ fields:
       zh: 全称
   - name: Вид
     type: enum:ВидКонтрагента
-    label: Вид контрагента
-    labels:
+    title: Вид контрагента
+    titles:
       en: Counterparty type
       de: Geschäftspartnertyp
       sr: Врста контрагента
@@ -76,8 +76,8 @@ fields:
       zh: 往来单位类型
   - name: ИНН
     type: string
-    label: ИНН
-    labels:
+    title: ИНН
+    titles:
       en: Tax ID
       de: Steuernummer
       sr: ПИБ
@@ -95,8 +95,8 @@ fields:
       zh: 税号
   - name: КПП
     type: string
-    label: КПП
-    labels:
+    title: КПП
+    titles:
       en: KPP
       de: KPP
       sr: КПП
@@ -114,8 +114,8 @@ fields:
       zh: KPP
   - name: ОГРН
     type: string
-    label: ОГРН
-    labels:
+    title: ОГРН
+    titles:
       en: OGRN
       de: OGRN
       sr: ОГРН
@@ -133,8 +133,8 @@ fields:
       zh: OGRN
   - name: ОГРНИП
     type: string
-    label: ОГРНИП (для ИП)
-    labels:
+    title: ОГРНИП (для ИП)
+    titles:
       en: OGRNIP (for sole proprietor)
       de: OGRNIP (für Einzelunternehmer)
       sr: ОГРНИП (за предузетника)
@@ -152,8 +152,8 @@ fields:
       zh: OGRNIP（个体工商户）
   - name: ОКПО
     type: string
-    label: ОКПО
-    labels:
+    title: ОКПО
+    titles:
       en: OKPO
       de: OKPO
       sr: ОКПО
@@ -171,8 +171,8 @@ fields:
       zh: OKPO
   - name: Сайт
     type: string
-    label: Сайт
-    labels:
+    title: Сайт
+    titles:
       en: Website
       de: Webseite
       sr: Веб-сајт
@@ -190,8 +190,8 @@ fields:
       zh: 网站
   - name: ЮридическийАдрес
     type: string
-    label: Юридический адрес
-    labels:
+    title: Юридический адрес
+    titles:
       en: Legal address
       de: Rechtsadresse
       sr: Правна адреса
@@ -209,8 +209,8 @@ fields:
       zh: 法定地址
   - name: ФактическийАдрес
     type: string
-    label: Фактический адрес
-    labels:
+    title: Фактический адрес
+    titles:
       en: Actual address
       de: Tatsächliche Adresse
       sr: Стварна адреса
@@ -228,8 +228,8 @@ fields:
       zh: 实际地址
   - name: Телефон
     type: string
-    label: Телефон
-    labels:
+    title: Телефон
+    titles:
       en: Phone
       de: Telefon
       sr: Телефон
@@ -247,8 +247,8 @@ fields:
       zh: 电话
   - name: Email
     type: string
-    label: Email
-    labels:
+    title: Email
+    titles:
       en: Email
       de: E-Mail
       sr: Е-пошта
@@ -266,8 +266,8 @@ fields:
       zh: 邮箱
   - name: КонтактноеЛицо
     type: string
-    label: Контактное лицо
-    labels:
+    title: Контактное лицо
+    titles:
       en: Contact person
       de: Kontaktperson
       sr: Контакт особа
@@ -285,8 +285,8 @@ fields:
       zh: 联系人
   - name: ТипЦенПродажи
     type: reference:ТипЦен
-    label: Тип цен продажи по умолчанию
-    labels:
+    title: Тип цен продажи по умолчанию
+    titles:
       en: Default sales price type
       de: Standard-Verkaufspreistyp
       sr: Подразумевани тип цене продаје
@@ -304,8 +304,8 @@ fields:
       zh: 销售价格类型
   - name: РасчётныйСчёт
     type: string
-    label: Расчётный счёт
-    labels:
+    title: Расчётный счёт
+    titles:
       en: Settlement account
       de: Girokonto
       sr: Текући рачун
@@ -323,8 +323,8 @@ fields:
       zh: 银行账户
   - name: НаименованиеБанка
     type: string
-    label: Наименование банка
-    labels:
+    title: Наименование банка
+    titles:
       en: Bank name
       de: Bankname
       sr: Назив банке
@@ -342,8 +342,8 @@ fields:
       zh: 银行名称
   - name: БИК
     type: string
-    label: БИК
-    labels:
+    title: БИК
+    titles:
       en: BIK
       de: BIK
       sr: БИК
@@ -361,8 +361,8 @@ fields:
       zh: BIC
   - name: КорреспондентскийСчёт
     type: string
-    label: Корреспондентский счёт
-    labels:
+    title: Корреспондентский счёт
+    titles:
       en: Correspondent account
       de: Korrespondentenkonto
       sr: Комерцијални рачун

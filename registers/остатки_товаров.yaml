@@ -1,4 +1,4 @@
-name: ОстаткиТоваров
+﻿name: ОстаткиТоваров
 title: Остатки товаров
 titles:
   en: Inventory balances
@@ -19,8 +19,8 @@ titles:
 dimensions:
   - name: Номенклатура
     type: string
-    label: Номенклатура
-    labels:
+    title: Номенклатура
+    titles:
       en: Item
       de: Artikel
       sr: Артикал
@@ -38,8 +38,8 @@ dimensions:
       zh: 物料
   - name: Склад
     type: string
-    label: Склад
-    labels:
+    title: Склад
+    titles:
       en: Warehouse
       de: Lager
       sr: Магацин
@@ -57,8 +57,8 @@ dimensions:
       zh: 仓库
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -77,8 +77,8 @@ dimensions:
 resources:
   - name: Количество
     type: number
-    label: Количество
-    labels:
+    title: Количество
+    titles:
       en: Quantity
       de: Menge
       sr: Количина
@@ -96,8 +96,8 @@ resources:
       zh: 数量
   - name: Сумма
     type: number
-    label: Сумма
-    labels:
+    title: Сумма
+    titles:
       en: Amount
       de: Betrag
       sr: Износ

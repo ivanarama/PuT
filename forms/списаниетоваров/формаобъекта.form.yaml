@@ -1,0 +1,140 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: СписаниеТоваров
+  title:
+    ru: "Списание товаров"
+    en: "Write-off"
+    de: "Ausschuss"
+    sr: "Отпис робе"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.СписаниеТоваров
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Основное"
+          en: "General"
+          de: "Allgemein"
+          sr: "Опште"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Шапка документа"
+              en: "Document header"
+              de: "Belegkopf"
+              sr: "Заглавље документа"
+            children:
+              - kind: ПолеВвода
+                name: ПолеНомер
+                title:
+                  ru: "Номер"
+                  en: "Number"
+                  de: "Nummer"
+                  sr: "Број"
+                data_path: Объект.Номер
+                readonly: true
+                hint: "СПС-NNNNN"
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+                events:
+                  ПриИзменении: ДатаПриИзменении
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+                events:
+                  ПриИзменении: СкладПриИзменении
+              - kind: ПолеВвода
+                name: ПолеПричина
+                title:
+                  ru: "Причина"
+                  en: "Reason"
+                  de: "Grund"
+                  sr: "Разлог"
+                data_path: Объект.Причина
+              - kind: ПолеВвода
+                name: ПолеСумма
+                title:
+                  ru: "Сумма списания"
+                  en: "Write-off amount"
+                  de: "Ausschusssumme"
+                  sr: "Износ отписа"
+                data_path: Объект.Сумма
+                readonly: true
+
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "Списываемые товары"
+              en: "Items to write off"
+              de: "Ausschusspositionen"
+              sr: "Ставке за отпис"
+            children:
+              - kind: ТабличнаяЧасть
+                name: ТабТовары
+                title:
+                  ru: "Товары"
+                  en: "Items"
+                  de: "Artikel"
+                  sr: "Артикли"
+                data_path: Объект.Товары
+              - kind: Кнопка
+                name: КнопкаПересчитать
+                title:
+                  ru: "Пересчитать суммы"
+                  en: "Recalculate"
+                  de: "Neu berechnen"
+                  sr: "Прерачунај"
+                events:
+                  Нажатие: КнопкаПересчитатьНажатие
+              - kind: Кнопка
+                name: КнопкаОчистить
+                title:
+                  ru: "Очистить таблицу"
+                  en: "Clear table"
+                  de: "Leeren"
+                  sr: "Обриши табелу"
+                events:
+                  Нажатие: КнопкаОчиститьНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы
+  ПередЗаписью: ПередЗаписьюФормы
+  ПриЗаписи: ПриЗаписиФормы

@@ -1,4 +1,4 @@
-name: ОприходованиеТоваров
+﻿name: ОприходованиеТоваров
 title: Оприходование товаров
 titles:
   en: Inventory receipt
@@ -24,8 +24,8 @@ numerator:
 fields:
   - name: Номер
     type: string
-    label: Номер
-    labels:
+    title: Номер
+    titles:
       en: Number
       de: Nummer
       sr: Број
@@ -43,8 +43,8 @@ fields:
       zh: 编号
   - name: Дата
     type: date
-    label: Дата
-    labels:
+    title: Дата
+    titles:
       en: Date
       de: Datum
       sr: Датум
@@ -62,8 +62,8 @@ fields:
       zh: 日期
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -81,8 +81,8 @@ fields:
       zh: 组织
   - name: Склад
     type: reference:Склад
-    label: Склад
-    labels:
+    title: Склад
+    titles:
       en: Warehouse
       de: Lager
       sr: Магацин
@@ -100,8 +100,8 @@ fields:
       zh: 仓库
   - name: Причина
     type: string
-    label: Причина
-    labels:
+    title: Причина
+    titles:
       en: Reason
       de: Grund
       sr: Разлог
@@ -119,8 +119,8 @@ fields:
       zh: 原因
   - name: Сумма
     type: number
-    label: Сумма
-    labels:
+    title: Сумма
+    titles:
       en: Amount
       de: Betrag
       sr: Износ
@@ -158,8 +158,8 @@ tableparts:
     fields:
       - name: Номенклатура
         type: reference:Номенклатура
-        label: Номенклатура
-        labels:
+        title: Номенклатура
+        titles:
           en: Item
           de: Artikel
           sr: Артикал
@@ -177,8 +177,8 @@ tableparts:
           zh: 物料
       - name: Количество
         type: number
-        label: Количество
-        labels:
+        title: Количество
+        titles:
           en: Quantity
           de: Menge
           sr: Количина
@@ -196,8 +196,8 @@ tableparts:
           zh: 数量
       - name: Цена
         type: number
-        label: Цена
-        labels:
+        title: Цена
+        titles:
           en: Price
           de: Preis
           sr: Цена
@@ -215,8 +215,8 @@ tableparts:
           zh: 价格
       - name: Сумма
         type: number
-        label: Сумма
-        labels:
+        title: Сумма
+        titles:
           en: Amount
           de: Betrag
           sr: Износ

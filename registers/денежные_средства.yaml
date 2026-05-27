@@ -1,4 +1,4 @@
-name: ДенежныеСредства
+﻿name: ДенежныеСредства
 title: Денежные средства
 titles:
   en: Cash balances
@@ -19,8 +19,8 @@ titles:
 dimensions:
   - name: Касса
     type: reference:Касса
-    label: Касса
-    labels:
+    title: Касса
+    titles:
       en: Cash desk
       de: Kasse
       sr: Каса
@@ -38,8 +38,8 @@ dimensions:
       zh: 收银
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -58,8 +58,8 @@ dimensions:
 resources:
   - name: Сумма
     type: number
-    label: Сумма
-    labels:
+    title: Сумма
+    titles:
       en: Amount
       de: Betrag
       sr: Износ
@@ -78,8 +78,8 @@ resources:
 attributes:
   - name: Контрагент
     type: string
-    label: Контрагент
-    labels:
+    title: Контрагент
+    titles:
       en: Counterparty
       de: Geschäftspartner
       sr: Контрагент
@@ -97,8 +97,8 @@ attributes:
       zh: 往来单位
   - name: Основание
     type: string
-    label: Основание
-    labels:
+    title: Основание
+    titles:
       en: Basis
       de: Grundlage
       sr: Основа

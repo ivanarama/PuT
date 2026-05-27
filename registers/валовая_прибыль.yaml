@@ -1,4 +1,4 @@
-name: ВаловаяПрибыль
+﻿name: ВаловаяПрибыль
 title: Валовая прибыль
 titles:
   en: Gross profit
@@ -19,8 +19,8 @@ titles:
 dimensions:
   - name: Номенклатура
     type: reference:Номенклатура
-    label: Номенклатура
-    labels:
+    title: Номенклатура
+    titles:
       en: Item
       de: Artikel
       sr: Артикал
@@ -38,8 +38,8 @@ dimensions:
       zh: 物料
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -58,8 +58,8 @@ dimensions:
 resources:
   - name: Выручка
     type: number
-    label: Выручка
-    labels:
+    title: Выручка
+    titles:
       en: Revenue
       de: Erlös
       sr: Приход
@@ -77,8 +77,8 @@ resources:
       zh: 收入
   - name: Себестоимость
     type: number
-    label: Себестоимость
-    labels:
+    title: Себестоимость
+    titles:
       en: Cost price
       de: Selbstkosten
       sr: Набавна цена

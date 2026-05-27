@@ -1,4 +1,4 @@
-name: ПоступлениеТоваров
+﻿name: ПоступлениеТоваров
 title: Поступление товаров
 titles:
   en: Goods receipt
@@ -24,8 +24,8 @@ numerator:
 fields:
   - name: Номер
     type: string
-    label: Номер
-    labels:
+    title: Номер
+    titles:
       en: Number
       de: Nummer
       sr: Број
@@ -43,8 +43,8 @@ fields:
       zh: 编号
   - name: Дата
     type: date
-    label: Дата
-    labels:
+    title: Дата
+    titles:
       en: Date
       de: Datum
       sr: Датум
@@ -62,8 +62,8 @@ fields:
       zh: 日期
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -81,8 +81,8 @@ fields:
       zh: 组织
   - name: Поставщик
     type: reference:Контрагент
-    label: Поставщик
-    labels:
+    title: Поставщик
+    titles:
       en: Supplier
       de: Lieferant
       sr: Добављач
@@ -100,8 +100,8 @@ fields:
       zh: 供应商
   - name: Склад
     type: reference:Склад
-    label: Склад
-    labels:
+    title: Склад
+    titles:
       en: Warehouse
       de: Lager
       sr: Магацин
@@ -119,8 +119,8 @@ fields:
       zh: 仓库
   - name: СпособУчетаНДС
     type: enum:СпособУчетаНДС
-    label: НДС
-    labels:
+    title: НДС
+    titles:
       en: VAT
       de: USt.
       sr: ПДВ
@@ -138,8 +138,8 @@ fields:
       zh: 增值税
   - name: СуммаБезНДС
     type: number
-    label: Сумма без НДС
-    labels:
+    title: Сумма без НДС
+    titles:
       en: Amount excl. VAT
       de: Betrag o. USt.
       sr: Износ без ПДВ
@@ -157,8 +157,8 @@ fields:
       zh: 不含税金额
   - name: СуммаНДС
     type: number
-    label: Сумма НДС
-    labels:
+    title: Сумма НДС
+    titles:
       en: VAT amount
       de: USt.-Betrag
       sr: Износ ПДВ
@@ -176,8 +176,8 @@ fields:
       zh: 增值税额
   - name: Сумма
     type: number
-    label: Всего
-    labels:
+    title: Всего
+    titles:
       en: Total
       de: Gesamt
       sr: Укупно
@@ -215,8 +215,8 @@ tableparts:
     fields:
       - name: Номенклатура
         type: reference:Номенклатура
-        label: Номенклатура
-        labels:
+        title: Номенклатура
+        titles:
           en: Item
           de: Artikel
           sr: Артикал
@@ -234,8 +234,8 @@ tableparts:
           zh: 物料
       - name: Количество
         type: number
-        label: Количество
-        labels:
+        title: Количество
+        titles:
           en: Quantity
           de: Menge
           sr: Количина
@@ -253,8 +253,8 @@ tableparts:
           zh: 数量
       - name: Цена
         type: number
-        label: Цена
-        labels:
+        title: Цена
+        titles:
           en: Price
           de: Preis
           sr: Цена
@@ -272,8 +272,8 @@ tableparts:
           zh: 价格
       - name: СтавкаНДС
         type: reference:СтавкаНДС
-        label: Ставка НДС
-        labels:
+        title: Ставка НДС
+        titles:
           en: VAT rate
           de: USt.-Satz
           sr: Стопа ПДВ
@@ -291,8 +291,8 @@ tableparts:
           zh: 增值税率
       - name: СуммаНДС
         type: number
-        label: Сумма НДС
-        labels:
+        title: Сумма НДС
+        titles:
           en: VAT amount
           de: USt.-Betrag
           sr: Износ ПДВ
@@ -310,8 +310,8 @@ tableparts:
           zh: 增值税额
       - name: Сумма
         type: number
-        label: Сумма
-        labels:
+        title: Сумма
+        titles:
           en: Amount
           de: Betrag
           sr: Износ

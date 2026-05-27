@@ -1,4 +1,4 @@
-name: Валюта
+﻿name: Валюта
 title: Валюта
 titles:
   en: Currency
@@ -19,8 +19,8 @@ titles:
 fields:
   - name: Наименование
     type: string
-    label: Наименование
-    labels:
+    title: Наименование
+    titles:
       en: Name
       de: Name
       sr: Назив
@@ -38,8 +38,8 @@ fields:
       zh: 名称
   - name: Код
     type: string
-    label: Код
-    labels:
+    title: Код
+    titles:
       en: Code
       de: Code
       sr: Кôд

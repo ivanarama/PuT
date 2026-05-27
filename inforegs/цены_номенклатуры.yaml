@@ -1,4 +1,4 @@
-name: ЦеныНоменклатуры
+﻿name: ЦеныНоменклатуры
 title: Цены номенклатуры
 titles:
   en: Item prices
@@ -20,8 +20,8 @@ periodic: true
 dimensions:
   - name: Номенклатура
     type: reference:Номенклатура
-    label: Номенклатура
-    labels:
+    title: Номенклатура
+    titles:
       en: Item
       de: Artikel
       sr: Артикал
@@ -39,8 +39,8 @@ dimensions:
       zh: 物料
   - name: ТипЦен
     type: reference:ТипЦен
-    label: Тип цен
-    labels:
+    title: Тип цен
+    titles:
       en: Price type
       de: Preistyp
       sr: Тип цене
@@ -59,8 +59,8 @@ dimensions:
 resources:
   - name: Цена
     type: number
-    label: Цена
-    labels:
+    title: Цена
+    titles:
       en: Price
       de: Preis
       sr: Цена

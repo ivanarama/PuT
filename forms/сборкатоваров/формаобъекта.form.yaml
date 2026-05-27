@@ -1,0 +1,174 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: СборкаТоваров
+  title:
+    ru: "Сборка товаров"
+    en: "Assembly"
+    de: "Montage"
+    sr: "Састављање робе"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.СборкаТоваров
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Основное"
+          en: "General"
+          de: "Allgemein"
+          sr: "Опште"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Шапка документа"
+              en: "Document header"
+              de: "Belegkopf"
+              sr: "Заглавље документа"
+            children:
+              - kind: ПолеВвода
+                name: ПолеНомер
+                title:
+                  ru: "Номер"
+                  en: "Number"
+                  de: "Nummer"
+                  sr: "Број"
+                data_path: Объект.Номер
+                readonly: true
+                hint: "СБР-NNNNN"
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+                events:
+                  ПриИзменении: ДатаПриИзменении
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+                events:
+                  ПриИзменении: СкладПриИзменении
+              - kind: ПолеВвода
+                name: ПолеКомментарий
+                title:
+                  ru: "Комментарий"
+                  en: "Comment"
+                  de: "Kommentar"
+                  sr: "Коментар"
+                data_path: Объект.Комментарий
+              - kind: ПолеВвода
+                name: ПолеСумма
+                title:
+                  ru: "Сумма сборки"
+                  en: "Assembly cost"
+                  de: "Montagekosten"
+                  sr: "Трошак састављања"
+                data_path: Объект.Сумма
+                readonly: true
+                hint: "Рассчитывается при проведении из ФИФО-себестоимости комплектующих"
+
+      - kind: Страница
+        name: СтраницаРасход
+        title:
+          ru: "Комплектующие"
+          en: "Components"
+          de: "Komponenten"
+          sr: "Компоненте"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаРасход
+            title:
+              ru: "Списываемые комплектующие"
+              en: "Components to consume"
+              de: "Zu verbrauchende Komponenten"
+              sr: "Компоненте за расход"
+            children:
+              - kind: ТабличнаяЧасть
+                name: ТабРасход
+                title:
+                  ru: "Комплектующие"
+                  en: "Components"
+                  de: "Komponenten"
+                  sr: "Компоненте"
+                data_path: Объект.Расход
+              - kind: Кнопка
+                name: КнопкаОчиститьРасход
+                title:
+                  ru: "Очистить"
+                  en: "Clear"
+                  de: "Leeren"
+                  sr: "Обриши"
+                events:
+                  Нажатие: КнопкаОчиститьРасходНажатие
+
+      - kind: Страница
+        name: СтраницаПриход
+        title:
+          ru: "Продукция"
+          en: "Finished goods"
+          de: "Fertigprodukte"
+          sr: "Готова роба"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаПриход
+            title:
+              ru: "Готовая продукция"
+              en: "Finished goods to produce"
+              de: "Zu produzierende Fertigprodukte"
+              sr: "Готова роба за пријем"
+            children:
+              - kind: ТабличнаяЧасть
+                name: ТабПриход
+                title:
+                  ru: "Продукция"
+                  en: "Finished goods"
+                  de: "Fertigprodukte"
+                  sr: "Готова роба"
+                data_path: Объект.Приход
+              - kind: Кнопка
+                name: КнопкаОчиститьПриход
+                title:
+                  ru: "Очистить"
+                  en: "Clear"
+                  de: "Leeren"
+                  sr: "Обриши"
+                events:
+                  Нажатие: КнопкаОчиститьПриходНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы
+  ПередЗаписью: ПередЗаписьюФормы
+  ПриЗаписи: ПриЗаписиФормы

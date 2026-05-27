@@ -1,4 +1,4 @@
-name: ПоступлениеНаРасчётныйСчёт
+﻿name: ПоступлениеНаРасчётныйСчёт
 title: Поступление на расчётный счёт
 titles:
   en: Bank receipt
@@ -24,8 +24,8 @@ numerator:
 fields:
   - name: Номер
     type: string
-    label: Номер
-    labels:
+    title: Номер
+    titles:
       en: Number
       de: Nummer
       sr: Број
@@ -43,8 +43,8 @@ fields:
       zh: 编号
   - name: Дата
     type: date
-    label: Дата
-    labels:
+    title: Дата
+    titles:
       en: Date
       de: Datum
       sr: Датум
@@ -62,8 +62,8 @@ fields:
       zh: 日期
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -81,8 +81,8 @@ fields:
       zh: 组织
   - name: БанковскийСчёт
     type: reference:Касса
-    label: Расчётный счёт
-    labels:
+    title: Расчётный счёт
+    titles:
       en: Bank account
       de: Bankkonto
       sr: Банковски рачун
@@ -100,8 +100,8 @@ fields:
       zh: 银行账户
   - name: Контрагент
     type: reference:Контрагент
-    label: Контрагент
-    labels:
+    title: Контрагент
+    titles:
       en: Counterparty
       de: Geschäftspartner
       sr: Контрагент
@@ -119,8 +119,8 @@ fields:
       zh: 往来单位
   - name: ДокументРеализации
     type: reference:РеализацияТоваров
-    label: Документ реализации
-    labels:
+    title: Документ реализации
+    titles:
       en: Sales document
       de: Verkaufsbeleg
       sr: Продajни документ
@@ -138,8 +138,8 @@ fields:
       zh: 销售单据
   - name: ДокументПоступления
     type: reference:ПоступлениеТоваров
-    label: Документ поступления
-    labels:
+    title: Документ поступления
+    titles:
       en: Receipt document
       de: Eingangsbeleg
       sr: Пријемни документ
@@ -157,8 +157,8 @@ fields:
       zh: 采购单据
   - name: НомерПлатёжки
     type: string
-    label: Номер платёжного поручения
-    labels:
+    title: Номер платёжного поручения
+    titles:
       en: Payment order number
       de: Zahlungsauftragsnummer
       sr: Број налога за плаћање
@@ -176,8 +176,8 @@ fields:
       zh: 付款编号
   - name: ДатаПлатёжки
     type: date
-    label: Дата платёжного поручения
-    labels:
+    title: Дата платёжного поручения
+    titles:
       en: Payment order date
       de: Zahlungsauftragsdatum
       sr: Датум налога за плаћање
@@ -195,8 +195,8 @@ fields:
       zh: 付款日期
   - name: НазначениеПлатежа
     type: string
-    label: Назначение платежа
-    labels:
+    title: Назначение платежа
+    titles:
       en: Payment purpose
       de: Verwendungszweck
       sr: Сврха плаћања
@@ -214,8 +214,8 @@ fields:
       zh: 付款用途
   - name: Сумма
     type: number
-    label: Сумма
-    labels:
+    title: Сумма
+    titles:
       en: Amount
       de: Betrag
       sr: Износ

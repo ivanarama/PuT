@@ -1,0 +1,63 @@
+name: РазборкаТоваров
+title: Разборка товаров
+titles:
+  en: Disassembly
+  de: Demontage
+  sr: Растављање робе
+  az: Sökülmüş mallar
+  es: Desmontaje
+  fr: Désassemblage
+  hy: Ապամոնտաժ
+  ka: დაშლა
+  kk: Бұзып жинақтау
+  pt: Desmontagem
+  ro: Dezasamblare
+  tr: Söküm
+  uk: Розбірка товарів
+  uz: Ajratish
+  zh: 拆解
+posting: true
+numerator:
+  prefix: "РЗБ-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+  - name: Дата
+    type: date
+  - name: Организация
+    type: reference:Организация
+  - name: Склад
+    type: reference:Склад
+  - name: Комментарий
+    type: string
+  - name: Сумма
+    type: number
+tableparts:
+  - name: Расход
+    title: Разбираемая продукция
+    titles:
+      en: Product to disassemble
+      de: Zu demontierendes Produkt
+      sr: Роба за растављање
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Количество
+        type: number
+      - name: Себестоимость
+        type: number
+  - name: Приход
+    title: Комплектующие
+    titles:
+      en: Components
+      de: Komponenten
+      sr: Компоненте
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Количество
+        type: number
+      - name: Себестоимость
+        type: number

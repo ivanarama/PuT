@@ -1,4 +1,4 @@
-name: СтавкаНДС
+﻿name: СтавкаНДС
 title: Ставка НДС
 titles:
   en: VAT rate
@@ -19,8 +19,8 @@ titles:
 fields:
   - name: Наименование
     type: string
-    label: Наименование
-    labels:
+    title: Наименование
+    titles:
       en: Name
       de: Name
       sr: Назив
@@ -38,8 +38,8 @@ fields:
       zh: 名称
   - name: Процент
     type: number
-    label: Процент
-    labels:
+    title: Процент
+    titles:
       en: Percentage
       de: Prozent
       sr: Проценат

@@ -1,0 +1,235 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: Счёт
+  title:
+    ru: "Счёт на оплату"
+    en: "Invoice"
+    de: "Rechnung"
+    sr: "Рачун"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.Счёт
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Основное"
+          en: "General"
+          de: "Allgemein"
+          sr: "Опште"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Шапка документа"
+              en: "Document header"
+              de: "Belegkopf"
+              sr: "Заглавље документа"
+            children:
+              - kind: ПолеВвода
+                name: ПолеНомер
+                title:
+                  ru: "Номер"
+                  en: "Number"
+                  de: "Nummer"
+                  sr: "Број"
+                data_path: Объект.Номер
+                readonly: true
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+                events:
+                  ПриИзменении: ДатаПриИзменении
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеСрокОплаты
+                title:
+                  ru: "Срок оплаты"
+                  en: "Due date"
+                  de: "Fälligkeitsdatum"
+                  sr: "Рок плаћања"
+                data_path: Объект.СрокОплаты
+                choice: true
+
+          - kind: ГруппаФормы
+            name: ГруппаИтоги
+            title:
+              ru: "Итоги"
+              en: "Totals"
+              de: "Summen"
+              sr: "Укупно"
+            children:
+              - kind: ПолеВвода
+                name: ПолеСуммаБезНДС
+                title:
+                  ru: "Сумма без НДС"
+                  en: "Amount excl. VAT"
+                  de: "Betrag o. USt."
+                  sr: "Износ без ПДВ"
+                data_path: Объект.СуммаБезНДС
+                readonly: true
+              - kind: ПолеВвода
+                name: ПолеСуммаНДС
+                title:
+                  ru: "Сумма НДС"
+                  en: "VAT amount"
+                  de: "USt.-Betrag"
+                  sr: "Износ ПДВ"
+                data_path: Объект.СуммаНДС
+                readonly: true
+              - kind: ПолеВвода
+                name: ПолеСумма
+                title:
+                  ru: "Всего к оплате"
+                  en: "Total payable"
+                  de: "Gesamtbetrag"
+                  sr: "Укупно за плаћање"
+                data_path: Объект.Сумма
+                readonly: true
+
+      - kind: Страница
+        name: СтраницаКонтрагент
+        title:
+          ru: "Покупатель и склад"
+          en: "Customer & warehouse"
+          de: "Kunde & Lager"
+          sr: "Купац и магацин"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаРеквизиты
+            title:
+              ru: "Реквизиты покупателя"
+              en: "Customer details"
+              de: "Kundendaten"
+              sr: "Подаци о купцу"
+            children:
+              - kind: ПолеВвода
+                name: ПолеПокупатель
+                title:
+                  ru: "Покупатель"
+                  en: "Customer"
+                  de: "Kunde"
+                  sr: "Купац"
+                data_path: Объект.Покупатель
+                required: true
+                choice: true
+                events:
+                  ПриИзменении: ПокупательПриИзменении
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+                events:
+                  ПриИзменении: СкладПриИзменении
+              - kind: ПолеВвода
+                name: ПолеТипЦенПродажи
+                title:
+                  ru: "Тип цен продажи"
+                  en: "Sales price type"
+                  de: "Verkaufspreistyp"
+                  sr: "Тип цене продаје"
+                data_path: Объект.ТипЦенПродажи
+                choice: true
+                hint: "Заполняется из карточки покупателя"
+                events:
+                  ПриИзменении: ТипЦенПродажиПриИзменении
+              - kind: ПолеВвода
+                name: ПолеСпособУчетаНДС
+                title:
+                  ru: "НДС"
+                  en: "VAT"
+                  de: "USt."
+                  sr: "ПДВ"
+                data_path: Объект.СпособУчетаНДС
+                choice: true
+                events:
+                  ПриИзменении: СпособУчетаНДСПриИзменении
+              - kind: ПолеВвода
+                name: ПолеКомментарий
+                title:
+                  ru: "Комментарий"
+                  en: "Comment"
+                  de: "Kommentar"
+                  sr: "Коментар"
+                data_path: Объект.Комментарий
+
+      - kind: Страница
+        name: СтраницаТовары
+        title:
+          ru: "Товары"
+          en: "Items"
+          de: "Artikel"
+          sr: "Артикли"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "Состав счёта"
+              en: "Invoice contents"
+              de: "Rechnungsinhalt"
+              sr: "Садржај рачуна"
+            children:
+              - kind: ТабличнаяЧасть
+                name: ТабТовары
+                title:
+                  ru: "Товары"
+                  en: "Items"
+                  de: "Artikel"
+                  sr: "Артикли"
+                data_path: Объект.Товары
+              - kind: Кнопка
+                name: КнопкаПересчитать
+                title:
+                  ru: "Пересчитать суммы"
+                  en: "Recalculate"
+                  de: "Neu berechnen"
+                  sr: "Прерачунај"
+                events:
+                  Нажатие: КнопкаПересчитатьНажатие
+              - kind: Кнопка
+                name: КнопкаОчистить
+                title:
+                  ru: "Очистить таблицу"
+                  en: "Clear table"
+                  de: "Leeren"
+                  sr: "Обриши табелу"
+                events:
+                  Нажатие: КнопкаОчиститьНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы
+  ПередЗаписью: ПередЗаписьюФормы
+  ПриЗаписи: ПриЗаписиФормы

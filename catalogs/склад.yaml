@@ -1,4 +1,4 @@
-name: Склад
+﻿name: Склад
 title: Склад
 titles:
   en: Warehouse
@@ -19,8 +19,8 @@ titles:
 fields:
   - name: Наименование
     type: string
-    label: Наименование
-    labels:
+    title: Наименование
+    titles:
       en: Name
       de: Name
       sr: Назив

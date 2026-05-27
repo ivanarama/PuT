@@ -1,4 +1,4 @@
-name: Номенклатура
+﻿name: Номенклатура
 title: Номенклатура
 titles:
   en: Items
@@ -20,8 +20,8 @@ hierarchical: true
 fields:
   - name: Наименование
     type: string
-    label: Наименование
-    labels:
+    title: Наименование
+    titles:
       en: Name
       de: Name
       sr: Назив
@@ -39,8 +39,8 @@ fields:
       zh: 名称
   - name: Артикул
     type: string
-    label: Артикул
-    labels:
+    title: Артикул
+    titles:
       en: SKU
       de: Artikelnummer
       sr: Шифра артикла
@@ -58,8 +58,8 @@ fields:
       zh: SKU
   - name: ЕдиницаИзмерения
     type: reference:ЕдиницаИзмерения
-    label: Единица измерения
-    labels:
+    title: Единица измерения
+    titles:
       en: Unit of measure
       de: Maßeinheit
       sr: Јединица мере
@@ -77,8 +77,8 @@ fields:
       zh: 计量单位
   - name: СтавкаНДС
     type: reference:СтавкаНДС
-    label: Ставка НДС по умолчанию
-    labels:
+    title: Ставка НДС по умолчанию
+    titles:
       en: Default VAT rate
       de: Standard-USt.-Satz
       sr: Подразумевана стопа ПДВ

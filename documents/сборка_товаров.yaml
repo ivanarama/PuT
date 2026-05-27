@@ -1,0 +1,63 @@
+name: СборкаТоваров
+title: Сборка товаров
+titles:
+  en: Assembly
+  de: Montage
+  sr: Састављање робе
+  az: Yığılmış mallar
+  es: Montaje
+  fr: Assemblage
+  hy: Հավաքում
+  ka: აწყობა
+  kk: Жинақтау
+  pt: Montagem
+  ro: Asamblare
+  tr: Montaj
+  uk: Збірка товарів
+  uz: Yig'ish
+  zh: 组装
+posting: true
+numerator:
+  prefix: "СБР-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+  - name: Дата
+    type: date
+  - name: Организация
+    type: reference:Организация
+  - name: Склад
+    type: reference:Склад
+  - name: Комментарий
+    type: string
+  - name: Сумма
+    type: number
+tableparts:
+  - name: Расход
+    title: Комплектующие
+    titles:
+      en: Components
+      de: Komponenten
+      sr: Компоненте
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Количество
+        type: number
+      - name: Себестоимость
+        type: number
+  - name: Приход
+    title: Готовая продукция
+    titles:
+      en: Finished goods
+      de: Fertigprodukte
+      sr: Готова роба
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Количество
+        type: number
+      - name: Себестоимость
+        type: number

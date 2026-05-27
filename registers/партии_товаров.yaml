@@ -1,4 +1,4 @@
-name: ПартииТоваров
+﻿name: ПартииТоваров
 title: Партии товаров
 titles:
   en: Inventory lots
@@ -19,8 +19,8 @@ titles:
 dimensions:
   - name: Номенклатура
     type: reference:Номенклатура
-    label: Номенклатура
-    labels:
+    title: Номенклатура
+    titles:
       en: Item
       de: Artikel
       sr: Артикал
@@ -38,8 +38,8 @@ dimensions:
       zh: 物料
   - name: Склад
     type: string
-    label: Склад
-    labels:
+    title: Склад
+    titles:
       en: Warehouse
       de: Lager
       sr: Магацин
@@ -57,8 +57,8 @@ dimensions:
       zh: 仓库
   - name: ДатаПоставки
     type: date
-    label: Дата поставки
-    labels:
+    title: Дата поставки
+    titles:
       en: Supply date
       de: Lieferdatum
       sr: Датум испоруке
@@ -76,8 +76,8 @@ dimensions:
       zh: 供货日期
   - name: Организация
     type: reference:Организация
-    label: Организация
-    labels:
+    title: Организация
+    titles:
       en: Organization
       de: Organisation
       sr: Организација
@@ -96,8 +96,8 @@ dimensions:
 resources:
   - name: Количество
     type: number
-    label: Количество
-    labels:
+    title: Количество
+    titles:
       en: Quantity
       de: Menge
       sr: Количина
@@ -115,8 +115,8 @@ resources:
       zh: 数量
   - name: Сумма
     type: number
-    label: Сумма
-    labels:
+    title: Сумма
+    titles:
       en: Amount
       de: Betrag
       sr: Износ

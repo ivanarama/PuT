@@ -1,4 +1,4 @@
-name: ТипЦен
+﻿name: ТипЦен
 title: Тип цен
 titles:
   en: Price type
@@ -19,8 +19,8 @@ titles:
 fields:
   - name: Наименование
     type: string
-    label: Наименование
-    labels:
+    title: Наименование
+    titles:
       en: Name
       de: Name
       sr: Назив
@@ -38,8 +38,8 @@ fields:
       zh: 名称
   - name: ВидРасчета
     type: enum:ВидРасчета
-    label: Вид расчёта
-    labels:
+    title: Вид расчёта
+    titles:
       en: Calculation type
       de: Berechnungsart
       sr: Врста обрачунa
@@ -57,8 +57,8 @@ fields:
       zh: 计算类型
   - name: БазовыйТип
     type: reference:ТипЦен
-    label: Базовый тип
-    labels:
+    title: Базовый тип
+    titles:
       en: Base type
       de: Basistyp
       sr: Основни тип
@@ -76,8 +76,8 @@ fields:
       zh: 基本类型
   - name: Процент
     type: number
-    label: Процент
-    labels:
+    title: Процент
+    titles:
       en: Percentage
       de: Prozent
       sr: Проценат
@@ -95,8 +95,8 @@ fields:
       zh: 百分比
   - name: Округление
     type: number
-    label: Округление
-    labels:
+    title: Округление
+    titles:
       en: Rounding
       de: Rundung
       sr: Заокруживање

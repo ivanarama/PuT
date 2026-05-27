@@ -1,0 +1,140 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: ОприходованиеТоваров
+  title:
+    ru: "Оприходование товаров"
+    en: "Inventory receipt"
+    de: "Inventaraufnahme"
+    sr: "Пријем робе у магацин"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.ОприходованиеТоваров
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Основное"
+          en: "General"
+          de: "Allgemein"
+          sr: "Опште"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Шапка документа"
+              en: "Document header"
+              de: "Belegkopf"
+              sr: "Заглавље документа"
+            children:
+              - kind: ПолеВвода
+                name: ПолеНомер
+                title:
+                  ru: "Номер"
+                  en: "Number"
+                  de: "Nummer"
+                  sr: "Број"
+                data_path: Объект.Номер
+                readonly: true
+                hint: "ОПР-NNNNN"
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+                events:
+                  ПриИзменении: ДатаПриИзменении
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+                events:
+                  ПриИзменении: СкладПриИзменении
+              - kind: ПолеВвода
+                name: ПолеПричина
+                title:
+                  ru: "Причина"
+                  en: "Reason"
+                  de: "Grund"
+                  sr: "Разлог"
+                data_path: Объект.Причина
+              - kind: ПолеВвода
+                name: ПолеСумма
+                title:
+                  ru: "Сумма оприходования"
+                  en: "Receipt amount"
+                  de: "Aufnahmesumme"
+                  sr: "Износ пријема"
+                data_path: Объект.Сумма
+                readonly: true
+
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "Оприходуемые товары"
+              en: "Items to receive"
+              de: "Aufnahmepositionen"
+              sr: "Ставке за пријем"
+            children:
+              - kind: ТабличнаяЧасть
+                name: ТабТовары
+                title:
+                  ru: "Товары"
+                  en: "Items"
+                  de: "Artikel"
+                  sr: "Артикли"
+                data_path: Объект.Товары
+              - kind: Кнопка
+                name: КнопкаПересчитать
+                title:
+                  ru: "Пересчитать суммы"
+                  en: "Recalculate"
+                  de: "Neu berechnen"
+                  sr: "Прерачунај"
+                events:
+                  Нажатие: КнопкаПересчитатьНажатие
+              - kind: Кнопка
+                name: КнопкаОчистить
+                title:
+                  ru: "Очистить таблицу"
+                  en: "Clear table"
+                  de: "Leeren"
+                  sr: "Обриши табелу"
+                events:
+                  Нажатие: КнопкаОчиститьНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы
+  ПередЗаписью: ПередЗаписьюФормы
+  ПриЗаписи: ПриЗаписиФормы
