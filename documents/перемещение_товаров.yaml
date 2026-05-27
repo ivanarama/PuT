@@ -4,6 +4,18 @@ titles:
   en: Inventory transfer
   de: Warenumlagerung
   sr: Премештај робе
+  az: Malların köçürülməsi
+  es: Traslado de mercancías
+  fr: Transfert de stock
+  hy: Ապրանքների տեղափոխում
+  ka: საქონლის გადაადგილება
+  kk: Тауарларды ауыстырып тасу
+  pt: Transferência de mercadorias
+  ro: Transfer mărfuri
+  tr: Mal transferi
+  uk: Переміщення товарів
+  uz: Tovarlarni ko'chirish
+  zh: 商品调拨
 posting: true
 numerator:
   prefix: "ПЕР-"
@@ -12,22 +24,192 @@ numerator:
 fields:
   - name: Номер
     type: string
+    label: Номер
+    labels:
+      en: Number
+      de: Nummer
+      sr: Број
+      az: Nömrə
+      es: Número
+      fr: Numéro
+      hy: Համար
+      ka: ნომერი
+      kk: Нөмір
+      pt: Número
+      ro: Număr
+      tr: Numara
+      uk: Номер
+      uz: Raqam
+      zh: 编号
   - name: Дата
     type: date
+    label: Дата
+    labels:
+      en: Date
+      de: Datum
+      sr: Датум
+      az: Tarix
+      es: Fecha
+      fr: Date
+      hy: Ամսաթիվ
+      ka: თარიღი
+      kk: Күні
+      pt: Data
+      ro: Dată
+      tr: Tarih
+      uk: Дата
+      uz: Sana
+      zh: 日期
   - name: Организация
     type: reference:Организация
+    label: Организация
+    labels:
+      en: Organization
+      de: Organisation
+      sr: Организација
+      az: Təşkilat
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
   - name: СкладОтправитель
     type: reference:Склад
+    label: Склад-отправитель
+    labels:
+      en: Sending warehouse
+      de: Versandlager
+      sr: Магацин отпремања
+      az: Göndərən anbar
+      es: Almacén origen
+      fr: Entrepôt origine
+      hy: Ուղարկող պահեստ
+      ka: გამომგზავნი საწყობ
+      kk: Жөнелтуші қойма
+      pt: Armazém origem
+      ro: Depozit expeditor
+      tr: Gönderen depo
+      uk: Склад відправник
+      uz: Yuboruvchi ombor
+      zh: 发出仓库
   - name: СкладПолучатель
     type: reference:Склад
+    label: Склад-получатель
+    labels:
+      en: Receiving warehouse
+      de: Empfangslager
+      sr: Магацин пријема
+      az: Qəbul edən anbar
+      es: Almacén destino
+      fr: Entrepôt destination
+      hy: Ստացող պահեստ
+      ka: მიმღები საწყობ
+      kk: Қабылдаушы қойма
+      pt: Armazém destino
+      ro: Depozit destinatar
+      tr: Alan depo
+      uk: Склад одержувач
+      uz: Qabul qiluvchi ombor
+      zh: 接收仓库
   - name: Сумма
     type: number
+    label: Сумма
+    labels:
+      en: Amount
+      de: Betrag
+      sr: Износ
+      az: Məbləğ
+      es: Importe
+      fr: Montant
+      hy: Գումար
+      ka: თანხა
+      kk: Сомасы
+      pt: Valor
+      ro: Sumă
+      tr: Tutar
+      uk: Сума
+      uz: Miqdor
+      zh: 金额
 tableparts:
   - name: Товары
+    title: Товары
+    titles:
+      en: Items
+      de: Artikel
+      sr: Артикли
+      az: Mallar
+      es: Artículos
+      fr: Articles
+      hy: Ապրանքներ
+      ka: საქონელი
+      kk: Тауарлар
+      pt: Artigos
+      ro: Articole
+      tr: Mallar
+      uk: Товари
+      uz: Tovarlar
+      zh: 商品
     fields:
       - name: Номенклатура
         type: reference:Номенклатура
+        label: Номенклатура
+        labels:
+          en: Item
+          de: Artikel
+          sr: Артикал
+          az: Adlandırma
+          es: Nomenclatura
+          fr: Nomenclature
+          hy: Անվանակարգ
+          ka: ნომեნկლაտურა
+          kk: Номенклатура
+          pt: Nomenclatura
+          ro: Nomenclatură
+          tr: Nomembüro
+          uk: Номенклатура
+          uz: Nomеnklatura
+          zh: 物料
       - name: Количество
         type: number
+        label: Количество
+        labels:
+          en: Quantity
+          de: Menge
+          sr: Количина
+          az: Miqdar
+          es: Cantidad
+          fr: Quantité
+          hy: Քանակ
+          ka: რაოდენობა
+          kk: Саны
+          pt: Quantidade
+          ro: Cantitate
+          tr: Miktar
+          uk: Кількість
+          uz: Miqdor
+          zh: 数量
       - name: Себестоимость
         type: number
+        label: Себестоимость
+        labels:
+          en: Cost price
+          de: Selbstkosten
+          sr: Набавна цена
+          az: Maya dəyəri
+          es: Coste
+          fr: Coût
+          hy: Ինքնարժեք
+          ka: თვითღირებულება
+          kk: Өзіндік құны
+          pt: Custo
+          ro: Cost
+          tr: Maliyet
+          uk: Собівартість
+          uz: O'z narxi
+          zh: 成本

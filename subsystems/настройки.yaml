@@ -4,6 +4,18 @@ titles:
   en: Settings
   de: Einstellungen
   sr: Подешавања
+  az: Parametrlər
+  es: Configuración
+  fr: Paramètres
+  hy: Կարգավորումներ
+  ka: პარამეტრები
+  kk: Баптаулар
+  pt: Configurações
+  ro: Setări
+  tr: Ayarlar
+  uk: Налаштування
+  uz: Sozlamalar
+  zh: 设置
 order: 50
 contents:
   catalogs:  [Организация, НастройкиПользователя, ЕдиницаИзмерения, СтавкаНДС, ТипЦен, Валюта]

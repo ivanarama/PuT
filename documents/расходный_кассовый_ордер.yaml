@@ -4,6 +4,18 @@ titles:
   en: Cash payment voucher
   de: Kassenausgangsbeleg
   sr: Исплата из касе
+  az: Xərcləmə kassa orderi
+  es: Orden de pago de caja
+  fr: Bon de caisse de sortie
+  hy: Ծախսային կանխիկ օրդեր
+  ka: გასავლის სალარო ორდერი
+  kk: Шығыс касса ордері
+  pt: Ordem de pagamento de caixa
+  ro: Ordin de casă ieșire
+  tr: Çikan tahsilat makbuzu
+  uk: Видатковий касовий ордер
+  uz: Chiqish kassa ordeni
+  zh: 付款凭证
 posting: true
 numerator:
   prefix: "РКО-"
@@ -12,19 +24,172 @@ numerator:
 fields:
   - name: Номер
     type: string
+    label: Номер
+    labels:
+      en: Number
+      de: Nummer
+      sr: Број
+      az: Nömrə
+      es: Número
+      fr: Numéro
+      hy: Համար
+      ka: ნომერი
+      kk: Нөмір
+      pt: Número
+      ro: Număr
+      tr: Numara
+      uk: Номер
+      uz: Raqam
+      zh: 编号
   - name: Дата
     type: date
+    label: Дата
+    labels:
+      en: Date
+      de: Datum
+      sr: Датум
+      az: Tarix
+      es: Fecha
+      fr: Date
+      hy: Ամսաթիվ
+      ka: თარიღი
+      kk: Күні
+      pt: Data
+      ro: Dată
+      tr: Tarih
+      uk: Дата
+      uz: Sana
+      zh: 日期
   - name: Организация
     type: reference:Организация
+    label: Организация
+    labels:
+      en: Organization
+      de: Organisation
+      sr: Организација
+      az: Təşkilat
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
   - name: Касса
     type: reference:Касса
+    label: Касса
+    labels:
+      en: Cash desk
+      de: Kasse
+      sr: Каса
+      az: Kassa
+      es: Caja
+      fr: Caisse
+      hy: Դրամարկղի
+      ka: სალარო
+      kk: Касса
+      pt: Caixa
+      ro: Casier
+      tr: Kasa
+      uk: Каса
+      uz: Kassa
+      zh: 收银
   - name: Контрагент
     type: reference:Контрагент
+    label: Контрагент
+    labels:
+      en: Counterparty
+      de: Geschäftspartner
+      sr: Контрагент
+      az: Əks-tərəf
+      es: Contraparte
+      fr: Counterpartie
+      hy: Գործընկեր
+      ka: კონტრაგენტი
+      kk: Контрагент
+      pt: Contraparte
+      ro: Contraparte
+      tr: Karşı taraf
+      uk: Контрагент
+      uz: Kontragent
+      zh: 往来单位
   - name: ДокументРеализации
     type: reference:РеализацияТоваров
+    label: Документ реализации
+    labels:
+      en: Sales document
+      de: Verkaufsbeleg
+      sr: Продajни документ
+      az: Satış sənədi
+      es: Documento venta
+      fr: Document vente
+      hy: Վաճառքի փաստաթուղթ
+      ka: გაყიდვის დოკუმენტი
+      kk: Сату құжаты
+      pt: Documento venda
+      ro: Document vânzare
+      tr: Satış belgesi
+      uk: Документ реалізації
+      uz: Sotuv hujjati
+      zh: 销售单据
   - name: ДокументПоступления
     type: reference:ПоступлениеТоваров
+    label: Документ поступления
+    labels:
+      en: Receipt document
+      de: Eingangsbeleg
+      sr: Пријемни документ
+      az: Qəbul sənədi
+      es: Documento compra
+      fr: Document achat
+      hy: Մուտքի փաստաթուղթ
+      ka: შემოსვლის დოკუმენტი
+      kk: Кіріс құжаты
+      pt: Documento compra
+      ro: Document achiziție
+      tr: Giriş belgesi
+      uk: Документ надходження
+      uz: Qabul qilish hujjati
+      zh: 采购单据
   - name: Основание
     type: string
+    label: Основание
+    labels:
+      en: Base document
+      de: Beleggrundlage
+      sr: Основни документ
+      az: Əsas
+      es: Base
+      fr: Base
+      hy: Հիմք
+      ka: საფუძველი
+      kk: Негіздеме
+      pt: Base
+      ro: Bază
+      tr: Dayanak
+      uk: Підстава
+      uz: Asos
+      zh: 依据
   - name: Сумма
     type: number
+    label: Сумма
+    labels:
+      en: Amount
+      de: Betrag
+      sr: Износ
+      az: Məbləğ
+      es: Importe
+      fr: Montant
+      hy: Գումար
+      ka: თანხა
+      kk: Сомасы
+      pt: Valor
+      ro: Sumă
+      tr: Tutar
+      uk: Сума
+      uz: Miqdor
+      zh: 金额

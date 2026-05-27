@@ -4,6 +4,18 @@ titles:
   en: Cash & Bank
   de: Kasse & Bank
   sr: Каса и банка
+  az: Kassa
+  es: Caja
+  fr: Caisse
+  hy: Դրամարկղի
+  ka: სალარო
+  kk: Касса
+  pt: Caixa
+  ro: Casier
+  tr: Kasa
+  uk: Каса
+  uz: Kassa
+  zh: 现金
 order: 40
 contents:
   documents: [ПриходныйКассовыйОрдер, РасходныйКассовыйОрдер, ПоступлениеНаРасчётныйСчёт, СписаниеСРасчётногоСчёта]

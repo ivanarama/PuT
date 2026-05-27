@@ -4,6 +4,18 @@ titles:
   en: Price update
   de: Preisfestlegung
   sr: Подешавање цена
+  az: Qiymətlərin təyini
+  es: Actualización de precios
+  fr: Mise à jour des prix
+  hy: Գների սահմանում
+  ka: ფასების დადგენა
+  kk: Бағаларды орнату
+  pt: Atualização de preços
+  ro: Actualizare prețuri
+  tr: Fiyat güncelleme
+  uk: Встановлення цін
+  uz: Narxlarni o'rnatish
+  zh: 价格设定
 posting: true
 numerator:
   prefix: "УЦ-"
@@ -12,16 +24,135 @@ numerator:
 fields:
   - name: Номер
     type: string
+    label: Номер
+    labels:
+      en: Number
+      de: Nummer
+      sr: Број
+      az: Nömrə
+      es: Número
+      fr: Numéro
+      hy: Համար
+      ka: ნომერი
+      kk: Нөмір
+      pt: Número
+      ro: Număr
+      tr: Numara
+      uk: Номер
+      uz: Raqam
+      zh: 编号
   - name: Дата
     type: date
+    label: Дата
+    labels:
+      en: Date
+      de: Datum
+      sr: Датум
+      az: Tarix
+      es: Fecha
+      fr: Date
+      hy: Ամսաթիվ
+      ka: თარიღი
+      kk: Күні
+      pt: Data
+      ro: Dată
+      tr: Tarih
+      uk: Дата
+      uz: Sana
+      zh: 日期
   - name: Организация
     type: reference:Организация
+    label: Организация
+    labels:
+      en: Organization
+      de: Organisation
+      sr: Организација
+      az: Təşkilat
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
   - name: ТипЦен
     type: reference:ТипЦен
+    label: Тип цен
+    labels:
+      en: Price type
+      de: Preistyp
+      sr: Тип цене
+      az: Qiymət növü
+      es: Tipo precio
+      fr: Type prix
+      hy: Գնի տեսակը
+      ka: ფასის ტიპი
+      kk: Баға түрі
+      pt: Tipo preço
+      ro: Tip preț
+      tr: Fiyat tipi
+      uk: Тип ціни
+      uz: Narx turi
+      zh: 价格类型
 tableparts:
   - name: Цены
+    title: Цены
+    titles:
+      en: Prices
+      de: Preise
+      sr: Цене
+      az: Qiymətlər
+      es: Precios
+      fr: Prix
+      hy: Գներ
+      ka: ფასები
+      kk: Бағалар
+      pt: Preços
+      ro: Prețuri
+      tr: Fiyatlar
+      uk: Ціни
+      uz: Narxlar
+      zh: 价格
     fields:
       - name: Номенклатура
         type: reference:Номенклатура
+        label: Номенклатура
+        labels:
+          en: Item
+          de: Artikel
+          sr: Артикал
+          az: Adlandırma
+          es: Nomenclatura
+          fr: Nomenclature
+          hy: Անվանակարգ
+          ka: ნომენკლატურა
+          kk: Номенклатура
+          pt: Nomenclatura
+          ro: Nomenclatură
+          tr: Nomembüro
+          uk: Номенклатура
+          uz: Nomеnklatura
+          zh: 物料
       - name: Цена
         type: number
+        label: Цена
+        labels:
+          en: Price
+          de: Preis
+          sr: Цена
+          az: Qiymət
+          es: Precio
+          fr: Prix
+          hy: Գին
+          ka: ფასი
+          kk: Бағасы
+          pt: Preço
+          ro: Preț
+          tr: Fiyat
+          uk: Ціна
+          uz: Narx
+          zh: 价格

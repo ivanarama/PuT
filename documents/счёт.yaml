@@ -4,6 +4,18 @@ titles:
   en: Invoice
   de: Rechnung
   sr: Рачун
+  az: Hesab-faktura
+  es: Factura
+  fr: Facture
+  hy: Հաշիվ-ապրանքագիր
+  ka: ინვოისი
+  kk: Есеп-шот
+  pt: Fatura
+  ro: Factură
+  tr: Fatura
+  uk: Рахунок
+  uz: Hisob-faktura
+  zh: 发票
 posting: false
 numerator:
   prefix: "СЧ-"
@@ -12,42 +24,363 @@ numerator:
 fields:
   - name: Номер
     type: string
+    label: Номер
+    labels:
+      en: Number
+      de: Nummer
+      sr: Број
+      az: Nömrə
+      es: Número
+      fr: Numéro
+      hy: Համար
+      ka: ნომერი
+      kk: Нөміր
+      pt: Número
+      ro: Număr
+      tr: Numara
+      uk: Номер
+      uz: Raqam
+      zh: 编号
   - name: Дата
     type: date
+    label: Дата
+    labels:
+      en: Date
+      de: Datum
+      sr: Датум
+      az: Tarix
+      es: Fecha
+      fr: Date
+      hy: Ամսաթիվ
+      ka: თარიღი
+      kk: Күні
+      pt: Data
+      ro: Dată
+      tr: Tarih
+      uk: Дата
+      uz: Sana
+      zh: 日期
   - name: Организация
     type: reference:Организация
+    label: Организация
+    labels:
+      en: Organization
+      de: Organisation
+      sr: Организација
+      az: Təşkilat
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
   - name: Покупатель
     type: reference:Контрагент
+    label: Покупатель
+    labels:
+      en: Customer
+      de: Kunde
+      sr: Купац
+      az: Alıcı
+      es: Cliente
+      fr: Client
+      hy: Գնորդ
+      ka: მყიდველი
+      kk: Сатып алушы
+      pt: Cliente
+      ro: Client
+      tr: Müşteri
+      uk: Покупець
+      uz: Xaridor
+      zh: 客户
   - name: Склад
     type: reference:Склад
+    label: Склад
+    labels:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
   - name: ТипЦенПродажи
     type: reference:ТипЦен
+    label: Тип цен продажи
+    labels:
+      en: Sales price type
+      de: Verkaufspreistyp
+      sr: Тип цене продаје
+      az: Satış qiymət növü
+      es: Tipo precio venta
+      fr: Type prix vente
+      hy: Վաճառքի գնի տեսակի
+      ka: გაყიდვის ფასის ტიპი
+      kk: Сату баға түрі
+      pt: Tipo preço venda
+      ro: Tip preț vânzare
+      tr: Satış fiyat tipi
+      uk: Тип ціни продажу
+      uz: Sotuv narx turi
+      zh: 销售价格类型
   - name: СрокОплаты
     type: date
+    label: Срок оплаты
+    labels:
+      en: Due date
+      de: Fälligkeitsdatum
+      sr: Датум доспећа
+      az: Ödəniş müddəti
+      es: Fecha vencimiento
+      fr: Date échéance
+      hy: Վճարման ժամկետ
+      ka: გადახდის ვადა
+      kk: Төлем мерзімі
+      pt: Data vencimento
+      ro: Scadență
+      tr: Ödeme tarihi
+      uk: Термін оплати
+      uz: To'lov muddati
+      zh: 付款期限
   - name: Комментарий
     type: string
+    label: Комментарий
+    labels:
+      en: Comment
+      de: Kommentar
+      sr: Коментар
+      az: Şərh
+      es: Comentario
+      fr: Commentaire
+      hy: Մեկնաբանություն
+      ka: კომენტარი
+      kk: Түсініктеме
+      pt: Comentário
+      ro: Comentariu
+      tr: Yorum
+      uk: Коментар
+      uz: Izoh
+      zh: 备注
   - name: СпособУчетаНДС
     type: enum:СпособУчетаНДС
     label: НДС
+    labels:
+      en: VAT
+      de: USt.
+      sr: ПДВ
+      az: ƏDV
+      es: IVA
+      fr: TVA
+      hy: ԱԱՀ
+      ka: დღგ
+      kk: ҚҚС
+      pt: IVA
+      ro: TVA
+      tr: KDV
+      uk: ПДВ
+      uz: QQS
+      zh: 增值税
   - name: СуммаБезНДС
     type: number
+    label: Сумма без НДС
+    labels:
+      en: Amount excl. VAT
+      de: Betrag o. USt.
+      sr: Износ без ПДВ
+      az: ƏDV-siz məbləğ
+      es: Importe sin IVA
+      fr: Montant HT
+      hy: ԱԱՀ-առանց գումարի
+      ka: დღგ-ს გარეშე
+      kk: ҚҚС-сыз сомасы
+      pt: Valor sem IVA
+      ro: Sumă fără TVA
+      tr: KDV'siz tutar
+      uk: Сума без ПДВ
+      uz: QQS-siz miqdor
+      zh: 不含税金额
   - name: СуммаНДС
     type: number
+    label: Сумма НДС
+    labels:
+      en: VAT amount
+      de: USt.-Betrag
+      sr: Износ ПДВ
+      az: ƏDV məbləği
+      es: IVA importe
+      fr: Montant TVA
+      hy: ԱԱՀ գումարի
+      ka: დღგ თანხა
+      kk: ҚҚС сомасы
+      pt: Valor IVA
+      ro: Sumă TVA
+      tr: KDV tutarı
+      uk: Сума ПДВ
+      uz: QQS miqdori
+      zh: 增值税额
   - name: Сумма
     type: number
     label: Всего к оплате
+    labels:
+      en: Total payable
+      de: Gesamtbetrag
+      sr: Укупно за плаћање
+      az: Cəmi ödəniş
+      es: Total a pagar
+      fr: Total à payer
+      hy: Ընդհանուր վճար
+      ka: საერთო გადასახდელი
+      kk: Төлемге дейін
+      pt: Total a pagar
+      ro: Total de plată
+      tr: Toplam ödeme
+      uk: Всього до оплати
+      uz: To'lovga jami
+      zh: 应付总额
 tableparts:
   - name: Товары
+    title: Товары
+    titles:
+      en: Items
+      de: Artikel
+      sr: Артикли
+      az: Mallar
+      es: Artículos
+      fr: Articles
+      hy: Ապրանքներ
+      ka: საქონელი
+      kk: Тауарлар
+      pt: Artigos
+      ro: Articole
+      tr: Mallar
+      uk: Товари
+      uz: Tovarlar
+      zh: 商品
     fields:
       - name: Номенклатура
         type: reference:Номенклатура
+        label: Номенклатура
+        labels:
+          en: Item
+          de: Artikel
+          sr: Артикал
+          az: Adlandırma
+          es: Nomenclatura
+          fr: Nomenclature
+          hy: Անվանակարգ
+          ka: ნომენკლატურა
+          kk: Номенклатура
+          pt: Nomenclatura
+          ro: Nomenclatură
+          tr: Nomembüro
+          uk: Номенклатура
+          uz: Nomеnklatura
+          zh: 物料
       - name: Количество
         type: number
+        label: Количество
+        labels:
+          en: Quantity
+          de: Menge
+          sr: Количина
+          az: Miqdar
+          es: Cantidad
+          fr: Quantité
+          hy: Քանակ
+          ka: რაოდენობა
+          kk: Саны
+          pt: Quantidade
+          ro: Cantitate
+          tr: Miktar
+          uk: Кількість
+          uz: Miqdor
+          zh: 数量
       - name: Цена
         type: number
+        label: Цена
+        labels:
+          en: Price
+          de: Preis
+          sr: Цена
+          az: Qiymət
+          es: Precio
+          fr: Prix
+          hy: Գին
+          ka: ფასი
+          kk: Бағасы
+          pt: Preço
+          ro: Preț
+          tr: Fiyat
+          uk: Ціна
+          uz: Narx
+          zh: 价格
       - name: СтавкаНДС
         type: reference:СтавкаНДС
+        label: Ставка НДС
+        labels:
+          en: VAT rate
+          de: USt.-Satz
+          sr: Стопа ПДВ
+          az: ƏDV dərəcəsi
+          es: Tasa IVA
+          fr: Taux TVA
+          hy: ԱԱՀ տոկոսադրույք
+          ka: დღგ განაკვეთი
+          kk: ҚҚС мөлшері
+          pt: Taxa IVA
+          ro: Cotă TVA
+          tr: KDV oranı
+          uk: Ставка ПДВ
+          uz: QQS stavkasi
+          zh: 增值税率
       - name: СуммаНДС
         type: number
+        label: Сумма НДС
+        labels:
+          en: VAT amount
+          de: USt.-Betrag
+          sr: Износ ПДВ
+          az: ƏDV məbləği
+          es: IVA importe
+          fr: Montant TVA
+          hy: ԱԱՀ գումարի
+          ka: დღგ თანხა
+          kk: ҚҚС сомасы
+          pt: Valor IVA
+          ro: Sumă TVA
+          tr: KDV tutarı
+          uk: Сума ПДВ
+          uz: QQS miqdori
+          zh: 增值税额
       - name: Сумма
         type: number
+        label: Сумма
+        labels:
+          en: Amount
+          de: Betrag
+          sr: Износ
+          az: Məbləğ
+          es: Importe
+          fr: Montant
+          hy: Գումար
+          ka: თანხა
+          kk: Сомасы
+          pt: Valor
+          ro: Sumă
+          tr: Tutar
+          uk: Сума
+          uz: Miqdor
+          zh: 金额
