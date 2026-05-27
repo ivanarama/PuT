@@ -1,0 +1,68 @@
+name: ТоварыВПути
+title: Товары в пути
+titles:
+  en: Goods in transit
+  de: Waren Unterwegs
+  sr: Роба у транзиту
+  az: Yoldakı mallar
+  es: Mercancías en tránsito
+  fr: Marchandises en transit
+  hy: Ճանապարհի ապրանքներ
+  ka: გზაში მყოფი საქონელი
+  kk: Жолдағы тауарлар
+  pt: Mercadorias em trânsito
+  ro: Mărfuri în tranzit
+  tr: Yoldaki mallar
+  uk: Товари в дорозі
+  uz: Yoʻldagi tovarlar
+  zh: 在途商品
+params:
+  - name: НаДату
+    type: date
+    label: На дату
+    labels:
+      en: On date
+      de: Zum Datum
+      sr: На датум
+      az: Tarixə
+      es: A fecha
+      fr: À la date
+      hy: Ամսաթվով
+      ka: თარიღით
+      kk: Күніне
+      pt: Na data
+      ro: La data
+      tr: Tarihe
+      uk: На дату
+      uz: Sanaga
+      zh: 截至
+  - name: Склад
+    type: reference:Склад
+    label: Склад
+    labels:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
+query: |
+  ВЫБРАТЬ
+    Номенклатура,
+    Склад,
+    ЗаказПоставщику,
+    КоличествоОстаток КАК Количество,
+    СуммаОстаток КАК Сумма
+  ИЗ РегистрНакопления.ТоварыВПути.Остатки(&НаДату)
+  ГДЕ КоличествоОстаток > 0
+    И (&Склад ЕСТЬ ПУСТО ИЛИ Склад = &Склад)
+  УПОРЯДОЧИТЬ ПО Номенклатура, Склад

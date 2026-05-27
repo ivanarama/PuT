@@ -94,3 +94,22 @@ fields:
       uk: Ставка ПДВ
       uz: QQS stavkasi
       zh: 增值税率
+  - name: МинимальныйОстаток
+    type: number
+    title: Минимальный остаток
+    titles:
+      en: Minimum stock
+      de: Mindestbestand
+      sr: Минимална залиха
+      az: Minimal qalıq
+      es: Stock mínimo
+      fr: Stock minimum
+      hy: Նվազագույն մնացորդ
+      ka: მინიმალური ნაშთი
+      kk: Минималды қалдық
+      pt: Stock mínimo
+      ro: Stoc minim
+      tr: Minimum stok
+      uk: Мінімальний залишок
+      uz: Minimal qoldiq
+      zh: 最低库存

@@ -1,0 +1,67 @@
+name: РезервыТоваров
+title: Резервы товаров
+titles:
+  en: Goods reservations
+  de: Warenreservierungen
+  sr: Резерве робе
+  az: Mal rezervləri
+  es: Reservas de mercancías
+  fr: Réservations de marchandises
+  hy: Ապրանքների ռեզերվներ
+  ka: საქონლის რეზერვი
+  kk: Тауар резервтері
+  pt: Reservas de mercadorias
+  ro: Rezervări mărfuri
+  tr: Mal rezervasyonları
+  uk: Резерви товарів
+  uz: Tovar zaxiralari
+  zh: 商品预留
+params:
+  - name: НаДату
+    type: date
+    label: На дату
+    labels:
+      en: On date
+      de: Zum Datum
+      sr: На датум
+      az: Tarixə
+      es: A fecha
+      fr: À la date
+      hy: Ամսաթվով
+      ka: თარიღით
+      kk: Күніне
+      pt: Na data
+      ro: La data
+      tr: Tarihe
+      uk: На дату
+      uz: Sanaga
+      zh: 截至
+  - name: Склад
+    type: reference:Склад
+    label: Склад
+    labels:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
+query: |
+  ВЫБРАТЬ
+    Номенклатура,
+    Склад,
+    ЗаказПокупателя,
+    КоличествоОстаток КАК Количество
+  ИЗ РегистрНакопления.РезервыТоваров.Остатки(&НаДату)
+  ГДЕ КоличествоОстаток > 0
+    И (&Склад ЕСТЬ ПУСТО ИЛИ Склад = &Склад)
+  УПОРЯДОЧИТЬ ПО Номенклатура, Склад

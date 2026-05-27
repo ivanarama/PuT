@@ -1,0 +1,68 @@
+name: Неликвиды
+title: Неликвидные товары
+titles:
+  en: Slow-moving inventory
+  de: Ladenhüter
+  sr: Неликвидна роба
+  az: Qeyri-likvid mallar
+  es: Inventarios de lento movimiento
+  fr: Stocks dormants
+  hy: Ոչ իրացվելի ապրանքներ
+  ka: არალიკვიდური საქონელი
+  kk: Өтпейтін тауарлар
+  pt: Inventário de lenta movimentação
+  ro: Stocuri fără mișcare
+  tr: Hareketsiz stoklar
+  uk: Неліквідні товари
+  uz: Likvid bo'lmagan tovarlar
+  zh: 滞销库存
+params:
+  - name: НаДату
+    type: date
+    label: На дату
+    labels:
+      en: On date
+      de: Zum Datum
+      sr: На датум
+      az: Tarixə
+      es: A fecha
+      fr: À la date
+      hy: Ամսաթվով
+      ka: თარიღით
+      kk: Күніне
+      pt: Na data
+      ro: La data
+      tr: Tarihe
+      uk: На дату
+      uz: Sanaga
+      zh: 截至
+  - name: Склад
+    type: reference:Склад
+    label: Склад
+    labels:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
+query: |
+  ВЫБРАТЬ
+    Номенклатура,
+    Склад,
+    ДатаПоставки,
+    КоличествоОстаток КАК Количество,
+    СуммаОстаток КАК Себестоимость
+  ИЗ РегистрНакопления.ПартииТоваров.Остатки(&НаДату)
+  ГДЕ КоличествоОстаток > 0
+    И (&Склад ЕСТЬ ПУСТО ИЛИ Склад = &Склад)
+  УПОРЯДОЧИТЬ ПО ДатаПоставки, Номенклатура
