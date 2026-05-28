@@ -104,3 +104,60 @@ params:
       uk: "Експорт клієнт-банк"
       uz: "Mijoz-bank eksporti"
       zh: "客户端-银行导出"
+
+table_parts:
+  - name: Платежи
+    title: Платежи
+    titles:
+      en: Payments
+      de: Zahlungen
+      sr: Плаћања
+      az: Ödənişlər
+      es: Pagos
+      fr: Paiements
+      hy: Վճարումներ
+      ka: გადახდები
+      kk: Төлемдер
+      pt: Pagamentos
+      ro: Plăți
+      tr: Ödemeler
+      uk: Платежі
+      uz: To'lovlar
+      zh: 付款
+    fields:
+      - name: Дата
+        type: date
+        title: Дата
+        titles:
+          en: Date
+          de: Datum
+      - name: Тип
+        type: string
+        title: Тип
+        titles:
+          en: Type
+          de: Typ
+      - name: Контрагент
+        type: string
+        title: Контрагент
+        titles:
+          en: Counterparty
+          de: Geschäftspartner
+      - name: Сумма
+        type: number
+        title: Сумма
+        titles:
+          en: Amount
+          de: Betrag
+      - name: НазначениеПлатежа
+        type: string
+        title: Назначение платежа
+        titles:
+          en: Payment purpose
+          de: Verwendungszweck
+      - name: НомерПлатёжки
+        type: string
+        title: Номер платёжки
+        titles:
+          en: Payment number
+          de: Zahlungsnummer

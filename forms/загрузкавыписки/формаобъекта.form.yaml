@@ -1,0 +1,85 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: ЗагрузкаВыписки
+  title:
+    ru: "Загрузка банковской выписки"
+    en: "Load bank statement"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    main: true
+
+elements:
+  - kind: ГруппаФормы
+    name: ГруппаПараметры
+    title:
+      ru: "Параметры загрузки"
+      en: "Load parameters"
+    children:
+      - kind: ПолеВвода
+        name: ПолеБанковскийСчёт
+        title:
+          ru: "Банковский счёт"
+          en: "Bank account"
+        data_path: Объект.БанковскийСчёт
+        required: true
+        choice: true
+      - kind: ПолеВвода
+        name: ПолеФормат
+        title:
+          ru: "Формат выгрузки"
+          en: "Export format"
+        data_path: Объект.Формат
+        choice: true
+      - kind: ПолеВвода
+        name: ПолеТекстВыгрузки
+        title:
+          ru: "Выгрузка клиент-банка"
+          en: "Client-bank export"
+        data_path: Объект.ТекстВыгрузки
+
+  - kind: ГруппаФормы
+    name: ГруппаПредпросмотр
+    title:
+      ru: "Предпросмотр"
+      en: "Preview"
+    children:
+      - kind: ТабличнаяЧасть
+        name: ТаблицаПлатежей
+        title:
+          ru: "Платежи"
+          en: "Payments"
+        data_path: Платежи
+
+  - kind: ГруппаФормы
+    name: ГруппаДействия
+    title:
+      ru: "Действия"
+      en: "Actions"
+    children:
+      - kind: Кнопка
+        name: КнопкаЗагрузить
+        title:
+          ru: "Загрузить предпросмотр"
+          en: "Load preview"
+        events:
+          Нажатие: ЗагрузитьНажатие
+      - kind: Кнопка
+        name: КнопкаЗаписать
+        title:
+          ru: "Записать"
+          en: "Save"
+        events:
+          Нажатие: ЗаписатьНажатие
+      - kind: Кнопка
+        name: КнопкаЗаписатьИПровести
+        title:
+          ru: "Записать и провести"
+          en: "Save and post"
+        events:
+          Нажатие: ЗаписатьИПровестиНажатие
