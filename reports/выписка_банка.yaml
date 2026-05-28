@@ -1,0 +1,90 @@
+name: ВыпискаБанка
+title: Выписка банка
+titles:
+  en: Bank statement
+  de: Bankauszug
+  sr: Извод из банке
+  az: Bank çıxarışı
+  es: Extracto bancario
+  fr: Relevé bancaire
+  hy: Բանկային քաղվածք
+  ka: საბანკო ამონაწერი
+  kk: Банк шығарылымы
+  pt: Extrato bancário
+  ro: Extras bancar
+  tr: Banka ekstresi
+  uk: Банківська виписка
+  uz: Bank bayonnoma
+  zh: 银行对账单
+params:
+  - name: БанковскийСчёт
+    type: reference:Касса
+    label: Банковский счёт
+    labels:
+      en: Bank account
+      de: Bankkonto
+      sr: Банковни рачун
+      az: Bank hesabı
+      es: Cuenta bancaria
+      fr: Compte bancaire
+      hy: Բանկային հաշիվ
+      ka: საბანკო ანგარიში
+      kk: Банк шоты
+      pt: Conta bancária
+      ro: Cont bancar
+      tr: Banka hesabı
+      uk: Банківський рахунок
+      uz: Bank hisobvarag'i
+      zh: 银行账户
+    required: true
+  - name: НачалоПериода
+    type: date
+    label: С даты
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
+  - name: КонецПериода
+    type: date
+    label: По дату
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
+query: |
+  ВЫБРАТЬ
+    period КАК Дата,
+    Контрагент,
+    Основание КАК НазначениеПлатежа,
+    Документ,
+    ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Сумма ИНАЧЕ 0 КОНЕЦ КАК Приход,
+    ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ 0 КОНЕЦ КАК Расход
+  ИЗ РегистрНакопления.ДенежныеСредства
+  ГДЕ Касса = &БанковскийСчёт
+    И (&НачалоПериода ЕСТЬ ПУСТО ИЛИ period >= &НачалоПериода)
+    И (&КонецПериода ЕСТЬ ПУСТО ИЛИ period <= &КонецПериода)
+  УПОРЯДОЧИТЬ ПО period

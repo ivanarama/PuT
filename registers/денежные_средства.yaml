@@ -114,3 +114,22 @@ attributes:
       uk: Підстава
       uz: Asos
       zh: 依据
+  - name: Документ
+    type: string
+    title: Документ
+    titles:
+      en: Document
+      de: Beleg
+      sr: Документ
+      az: Sənəd
+      es: Documento
+      fr: Document
+      hy: Փաստաթուղթ
+      ka: დოკუმენტი
+      kk: Құжат
+      pt: Documento
+      ro: Document
+      tr: Belge
+      uk: Документ
+      uz: Hujjat
+      zh: 单据

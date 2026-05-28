@@ -1,0 +1,58 @@
+name: ЗагрузкаВыписки
+title: Загрузка банковской выписки
+titles:
+  en: Load bank statement
+  de: Bankauszug laden
+  sr: Увоз банковског извода
+  az: Bank çıxarışını yüklə
+  es: Cargar extracto bancario
+  fr: Charger relevé bancaire
+  hy: Բանկային քաղվածքի բեռնում
+  ka: საბანკო ამონაწერის ჩატვირთვა
+  kk: Банк шығарылымын жүктеу
+  pt: Carregar extrato bancário
+  ro: Încărcare extras bancar
+  tr: Banka ekstresi yükle
+  uk: Завантаження банківської виписки
+  uz: Bank bayonnomasini yuklash
+  zh: 加载银行对账单
+params:
+  - name: БанковскийСчёт
+    type: reference:Касса
+    label: Банковский счёт
+    labels:
+      en: Bank account
+      de: Bankkonto
+      sr: Банковни рачун
+      az: Bank hesabı
+      es: Cuenta bancaria
+      fr: Compte bancaire
+      hy: Բանկային հաշիվ
+      ka: საბანკო ანგარიში
+      kk: Банк шоты
+      pt: Conta bancária
+      ro: Cont bancar
+      tr: Banka hesabı
+      uk: Банківський рахунок
+      uz: Bank hisobvarag'i
+      zh: 银行账户
+    required: true
+  - name: ФайлJSON
+    type: string
+    label: "JSON с платежами"
+    labels:
+      en: "JSON with payments"
+      de: "JSON mit Zahlungen"
+      sr: "JSON са уплатама"
+      az: "Ödənişlərlə JSON"
+      es: "JSON con pagos"
+      fr: "JSON avec paiements"
+      hy: "Վճարումներով JSON"
+      ka: "გადახდებიან JSON"
+      kk: "Төлемдері бар JSON"
+      pt: "JSON com pagamentos"
+      ro: "JSON cu plăți"
+      tr: "Ödemelerle JSON"
+      uk: "JSON з платежами"
+      uz: "To'lovlar bilan JSON"
+      zh: "包含付款的JSON"
