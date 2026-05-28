@@ -37,22 +37,46 @@ params:
       uz: Bank hisobvarag'i
       zh: 银行账户
     required: true
-  - name: ФайлJSON
-    type: string
-    label: "JSON с платежами"
+  - name: Действие
+    type: choice
+    label: Действие
     labels:
-      en: "JSON with payments"
-      de: "JSON mit Zahlungen"
-      sr: "JSON са уплатама"
-      az: "Ödənişlərlə JSON"
-      es: "JSON con pagos"
-      fr: "JSON avec paiements"
-      hy: "Վճարումներով JSON"
-      ka: "გადახდებიან JSON"
-      kk: "Төлемдері бар JSON"
-      pt: "JSON com pagamentos"
-      ro: "JSON cu plăți"
-      tr: "Ödemelerle JSON"
-      uk: "JSON з платежами"
-      uz: "To'lovlar bilan JSON"
-      zh: "包含付款的JSON"
+      en: Action
+      de: Aktion
+      sr: Радња
+      az: Əməliyyat
+      es: Acción
+      fr: Action
+      hy: Գործողություն
+      ka: მოქმედება
+      kk: Әрекет
+      pt: Ação
+      ro: Acțiune
+      tr: İşlem
+      uk: Дія
+      uz: Harakat
+      zh: 操作
+    default: Предпросмотр
+    options:
+      - Предпросмотр
+      - Записать
+      - ЗаписатьИПровести
+  - name: ТекстВыгрузки
+    type: text
+    label: "Выгрузка клиент-банка"
+    labels:
+      en: "Client-bank export"
+      de: "Client-Bank-Export"
+      sr: "Извоз клијент-банке"
+      az: "Müştəri-bank ixracı"
+      es: "Exportación cliente-banco"
+      fr: "Export client-banque"
+      hy: "Հաճախորդ-բանկ արտահանում"
+      ka: "კლიენტ-ბანკის ექსპორტი"
+      kk: "Клиент-банк экспорты"
+      pt: "Exportação cliente-banco"
+      ro: "Export client-bancă"
+      tr: "Müşteri-bankası dışa aktarma"
+      uk: "Експорт клієнт-банк"
+      uz: "Mijoz-bank eksporti"
+      zh: "客户端-银行导出"
