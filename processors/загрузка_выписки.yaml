@@ -62,7 +62,7 @@ params:
       - Записать
       - ЗаписатьИПровести
   - name: ТекстВыгрузки
-    type: text
+    type: file
     label: "Выгрузка клиент-банка"
     labels:
       en: "Client-bank export"
