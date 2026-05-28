@@ -61,6 +61,30 @@ params:
       - Предпросмотр
       - Записать
       - ЗаписатьИПровести
+  - name: Формат
+    type: choice
+    label: Формат выгрузки
+    labels:
+      en: Export format
+      de: Exportformat
+      sr: Формат извоза
+      az: İxrac formatı
+      es: Formato de exportación
+      fr: Format d'export
+      hy: Արտահանման ձևաչափ
+      ka: ექსპორტის ფორმატი
+      kk: Экспорт пішімі
+      pt: Formato de exportação
+      ro: Format export
+      tr: Dışa aktarma formatı
+      uk: Формат експорту
+      uz: Eksport formati
+      zh: 导出格式
+    default: Авто
+    options:
+      - Авто
+      - 1CClientBankExchange
+      - JSON
   - name: ТекстВыгрузки
     type: file
     label: "Выгрузка клиент-банка"
