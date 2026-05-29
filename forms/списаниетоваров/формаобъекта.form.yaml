@@ -19,6 +19,21 @@ attributes:
     main: true
 
 elements:
+  - kind: ГруппаФормы
+    name: ГруппаДействия
+    title:
+      ru: "Действия"
+      en: "Actions"
+    children:
+      - kind: Кнопка
+        name: КнопкаПечать
+        title:
+          ru: "Печать"
+          en: "Print"
+          de: "Drucken"
+        events:
+          Нажатие: КнопкаПечатьНажатие
+
   - kind: СтраницыФормы
     name: ОсновныеЗакладки
     children:
@@ -89,15 +104,6 @@ elements:
                   de: "Grund"
                   sr: "Разлог"
                 data_path: Объект.Причина
-              - kind: ПолеВвода
-                name: ПолеСумма
-                title:
-                  ru: "Сумма списания"
-                  en: "Write-off amount"
-                  de: "Ausschusssumme"
-                  sr: "Износ отписа"
-                data_path: Объект.Сумма
-                readonly: true
 
           - kind: ГруппаФормы
             name: ГруппаТабЧасть
@@ -115,15 +121,6 @@ elements:
                   de: "Artikel"
                   sr: "Артикли"
                 data_path: Объект.Товары
-              - kind: Кнопка
-                name: КнопкаПересчитать
-                title:
-                  ru: "Пересчитать суммы"
-                  en: "Recalculate"
-                  de: "Neu berechnen"
-                  sr: "Прерачунај"
-                events:
-                  Нажатие: КнопкаПересчитатьНажатие
               - kind: Кнопка
                 name: КнопкаОчистить
                 title:

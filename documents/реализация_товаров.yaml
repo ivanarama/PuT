@@ -387,3 +387,22 @@ tableparts:
           uk: Сума
           uz: Miqdor
           zh: 金额
+      - name: Себестоимость
+        type: number
+        title: Себестоимость
+        titles:
+          en: Cost price
+          de: Selbstkosten
+          sr: Набавна цена
+          az: Maya dəyəri
+          es: Coste
+          fr: Coût
+          hy: Ինքնարժեք
+          ka: თვითღირებულება
+          kk: Өзіндік құны
+          pt: Custo
+          ro: Cost
+          tr: Maliyet
+          uk: Собівартість
+          uz: O'z narxi
+          zh: 成本

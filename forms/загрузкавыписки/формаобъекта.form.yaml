@@ -42,6 +42,7 @@ elements:
           ru: "Выгрузка клиент-банка"
           en: "Client-bank export"
         data_path: Объект.ТекстВыгрузки
+        type: file
 
   - kind: ГруппаФормы
     name: ГруппаПредпросмотр

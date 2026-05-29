@@ -18,6 +18,25 @@ constants:
       uk: Наша організація (за замовчуванням)
       uz: Bizning tashkilot (standart)
       zh: 我们的机构（默认）
+  - name: ДатаЗапретаРедактирования
+    type: date
+    label: Дата запрета редактирования
+    labels:
+      en: Edit lock date
+      de: Bearbeitungssperrdatum
+      sr: Датум забране измене
+      az: Redaktə qadağası tarixi
+      es: Fecha de bloqueo de edición
+      fr: Date de blocage des modifications
+      hy: Խմբագրման արգելքի ամսաթիվ
+      ka: რედაქტირების აკრძალვის თარიღი
+      kk: Өңдеуге тыйым салу күні
+      pt: Data de bloqueio de edição
+      ro: Dată interdicție de editare
+      tr: Düzenleme yasağı tarihi
+      uk: Дата заборони редагування
+      uz: Tahrirlash taqiqi sanasi
+      zh: 编辑禁止日期
   - name: ОсновнаяВалюта
     type: string
     default: "RUB"

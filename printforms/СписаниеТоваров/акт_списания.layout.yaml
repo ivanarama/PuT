@@ -1,0 +1,74 @@
+name: АктСписания
+document: СписаниеТоваров
+areas:
+  Заголовок:
+    rows:
+      - cells:
+          - text: "Акт списания №{{Номер}} от {{Дата}}"
+            bold: true
+            colspan: 4
+            align: center
+            fontSize: 14
+  Реквизиты:
+    rows:
+      - cells:
+          - text: "Организация:"
+          - parameter: Организация
+            colspan: 3
+      - cells:
+          - text: "Склад:"
+          - parameter: Склад
+            colspan: 3
+      - cells:
+          - text: "Причина:"
+          - parameter: Причина
+            colspan: 3
+  ШапкаТаблицы:
+    rows:
+      - cells:
+          - text: "№"
+            bold: true
+            align: center
+            backColor: "#E8E8E8"
+            width: 40px
+          - text: "Наименование"
+            bold: true
+            backColor: "#E8E8E8"
+          - text: "Кол-во"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+          - text: "Себестоимость"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+  СтрокаТаблицы:
+    rows:
+      - cells:
+          - parameter: НомерПП
+            align: center
+          - parameter: Номенклатура
+          - parameter: Количество
+            align: right
+          - parameter: Себестоимость
+            align: right
+  Подвал:
+    rows:
+      - cells:
+          - text: "Итого:"
+            bold: true
+            colspan: 3
+          - parameter: Итого
+            bold: true
+            align: right
+  Подписи:
+    rows:
+      - cells:
+          - text: "Комиссия: _________________________ /________________________/"
+            colspan: 4
+      - cells:
+          - text: "            _________________________ /________________________/"
+            colspan: 4
+      - cells:
+          - text: "            _________________________ /________________________/"
+            colspan: 4

@@ -117,25 +117,6 @@ fields:
       uk: Склад одержувач
       uz: Qabul qiluvchi ombor
       zh: 接收仓库
-  - name: Сумма
-    type: number
-    title: Сумма
-    titles:
-      en: Amount
-      de: Betrag
-      sr: Износ
-      az: Məbləğ
-      es: Importe
-      fr: Montant
-      hy: Գումար
-      ka: თანხა
-      kk: Сомасы
-      pt: Valor
-      ro: Sumă
-      tr: Tutar
-      uk: Сума
-      uz: Miqdor
-      zh: 金额
 tableparts:
   - name: Товары
     title: Товары
@@ -194,22 +175,4 @@ tableparts:
           uk: Кількість
           uz: Miqdor
           zh: 数量
-      - name: Себестоимость
-        type: number
-        title: Себестоимость
-        titles:
-          en: Cost price
-          de: Selbstkosten
-          sr: Набавна цена
-          az: Maya dəyəri
-          es: Coste
-          fr: Coût
-          hy: Ինքնարժեք
-          ka: თვითღირებულება
-          kk: Өзіндік құны
-          pt: Custo
-          ro: Cost
-          tr: Maliyet
-          uk: Собівартість
-          uz: O'z narxi
-          zh: 成本
+
