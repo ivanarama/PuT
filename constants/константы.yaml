@@ -37,6 +37,26 @@ constants:
       uk: Дата заборони редагування
       uz: Tahrirlash taqiqi sanasi
       zh: 编辑禁止日期
+  - name: КонтролироватьОстаткиПриРезерве
+    type: bool
+    default: false
+    label: Контролировать остатки при резервировании
+    labels:
+      en: Check stock when reserving
+      de: Bestand bei Reservierung prüfen
+      sr: Провери залихе при резервацији
+      az: Rezervləşdirərkən qalığı yoxla
+      es: Controlar existencias al reservar
+      fr: Contrôler le stock lors de la réservation
+      hy: Ստուգել մնացորդը պահուստավորելիս
+      ka: მარაგის შემოწმება დაჯავშნისას
+      kk: Резервтеу кезінде қалдықты бақылау
+      pt: Verificar estoque ao reservar
+      ro: Verifică stocul la rezervare
+      tr: Rezervasyonda stok kontrolü
+      uk: Контролювати залишки при резервуванні
+      uz: Rezervlashda qoldiqni nazorat qilish
+      zh: 预留时检查库存
   - name: ОсновнаяВалюта
     type: string
     default: "RUB"
