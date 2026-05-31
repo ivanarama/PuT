@@ -115,7 +115,7 @@ attributes:
       uz: Sotuv hujjati
       zh: 销售单据
   - name: ДокументПоступления
-    type: string
+    type: reference:ПоступлениеТоваров
     title: Документ поступления
     titles:
       en: Purchase document
