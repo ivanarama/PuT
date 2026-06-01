@@ -1,0 +1,81 @@
+name: ПользователиСписок
+type: list
+title: Пользователи
+titles:
+  en: Users
+  de: Benutzer
+  sr: Корисници
+  az: İstifadəçilər
+  es: Usuarios
+  fr: Utilisateurs
+  hy: "Օգտատերեր"
+  ka: "მომხმარებლები"
+  kk: "Пайдаланушылар"
+  pt: "Utilizadores"
+  ro: "Utilizatori"
+  tr: "Kullanıcılar"
+  uk: "Користувачі"
+  uz: "Foydalanuvchilar"
+  zh: "用户"
+limit: 15
+query: |
+  ВЫБРАТЬ
+    НастройкиПользователя.Наименование КАК Имя,
+    НастройкиПользователя.Организация,
+    НастройкиПользователя.Склад
+  ИЗ Справочник.НастройкиПользователя
+columns:
+  - field: Имя
+    label: "Имя"
+    labels:
+      en: "Name"
+      de: "Name"
+      sr: "Име"
+      az: "Ad"
+      es: "Nombre"
+      fr: "Nom"
+      hy: "Անուն"
+      ka: "სახელი"
+      kk: "Аты"
+      pt: "Nome"
+      ro: "Nume"
+      tr: "İsim"
+      uk: "Ім'я"
+      uz: "Ism"
+      zh: "名称"
+  - field: Организация
+    label: "Организация"
+    labels:
+      en: "Organization"
+      de: "Organisation"
+      sr: "Организација"
+      az: "Təşkilat"
+      es: "Organización"
+      fr: "Organisation"
+      hy: "Կազմակերպություն"
+      ka: "ორგანიზაცია"
+      kk: "Ұйым"
+      pt: "Organização"
+      ro: "Organizație"
+      tr: "Kuruluş"
+      uk: "Організація"
+      uz: "Tashkilot"
+      zh: "组织"
+  - field: Склад
+    label: "Склад по умолчанию"
+    labels:
+      en: "Default warehouse"
+      de: "Standardlager"
+      sr: "Подразумевани магацин"
+      az: "Varsayılan anbar"
+      es: "Almacén predeterminado"
+      fr: "Entrepôt par défaut"
+      hy: "Լռելյայն պահեստ"
+      ka: "ნაგულისხმევი საწყობი"
+      kk: "Әдепкі қойма"
+      pt: "Armazém padrão"
+      ro: "Depozit implicit"
+      tr: "Varsayılan depo"
+      uk: "Склад за замовчуванням"
+      uz: "Standart ombor"
+      zh: "默认仓库"

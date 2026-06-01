@@ -1,0 +1,21 @@
+groups:
+    - modules
+    - subsystems
+    - catalogs
+    - documents
+    - registers
+    - inforegisters
+    - accountregisters
+    - enums
+    - constants
+    - reports
+    - processors
+    - printforms
+    - managedforms
+    - widgets
+subsystems:
+    - Продажи
+    - Закупки
+    - Касса
+    - Склад
+    - Настройки

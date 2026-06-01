@@ -1,34 +1,34 @@
 name: ПрибыльПоДням
 type: chart
-chart_kind: line
-title: Прибыль за 30 дней
+chart_kind: bar
+title: Прибыль за квартал
 titles:
-  en: Profit over 30 days
-  de: Gewinn der letzten 30 Tage
-  sr: Добит за 30 дана
-  az: 30 günlük mənfəət
-  es: Beneficio en 30 días
-  fr: Bénéfice sur 30 jours
-  hy: "30 օրվա շահույթ"
-  ka: "30 დღის მოგება"
-  kk: "30 күндік пайда"
-  pt: "Lucro em 30 dias"
-  ro: "Profit pe 30 de zile"
-  tr: "30 günlük kâr"
-  uk: "Прибуток за 30 днів"
-  uz: "30 kunlik foyda"
-  zh: "30天利润"
+  en: Profit over quarter
+  de: Gewinn des Quartals
+  sr: Добит за квартал
+  az: Rüblük mənfəət
+  es: Beneficio trimestral
+  fr: Bénéfice trimestriel
+  hy: "Եռամսյակային շահույթ"
+  ka: "კვარტალური მოგება"
+  kk: "Тоқсандық пайда"
+  pt: "Lucro trimestrial"
+  ro: "Profit trimestrial"
+  tr: "Çeyreklik kâr"
+  uk: "Прибуток за квартал"
+  uz: "Choraklik foyda"
+  zh: "季度利润"
 params:
-  Начало: "{{today|minus_days:30}}"
+  Начало: "{{today|minus_days:90}}"
 query: |
   ВЫБРАТЬ
-    date(period) КАК Дата,
-    СУММА(Выручка) КАК Выручка,
-    СУММА(Себестоимость) КАК Себестоимость,
-    СУММА(Выручка) - СУММА(Себестоимость) КАК Прибыль
+    strftime('%Y-%m', period) КАК Месяц,
+    CAST(СУММА(Выручка) AS INTEGER) КАК Выручка,
+    CAST(СУММА(Себестоимость) AS INTEGER) КАК Себестоимость,
+    CAST(СУММА(Выручка) - СУММА(Себестоимость) AS INTEGER) КАК Прибыль
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало
-  СГРУППИРОВАТЬ ПО date(period)
-  УПОРЯДОЧИТЬ ПО date(period)
-x_field: Дата
+  СГРУППИРОВАТЬ ПО strftime('%Y-%m', period)
+  УПОРЯДОЧИТЬ ПО strftime('%Y-%m', period)
+x_field: Месяц
 y_fields: [Выручка, Прибыль]

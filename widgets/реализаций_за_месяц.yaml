@@ -1,0 +1,23 @@
+name: РеализацийЗаМесяц
+type: kpi
+title: Реализаций
+titles:
+  en: Sales
+  de: Verkäufe
+  sr: Продаја
+  az: Satışlar
+  es: Ventas
+  fr: Ventes
+  hy: "Վաճառքներ"
+  ka: "გაყიდვები"
+  kk: "Сатылымдар"
+  pt: "Vendas"
+  ro: "Vânzări"
+  tr: "Satışlar"
+  uk: "Реалізацій"
+  uz: "Sotuvlar"
+  zh: "销售"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Документ.РеализацияТоваров

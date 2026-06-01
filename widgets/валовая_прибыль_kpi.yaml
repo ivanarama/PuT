@@ -17,10 +17,10 @@ titles:
   uk: Валова прибуток за місяць
   uz: Oylik yalpi foyda
   zh: 月度毛利润
-format: money
+format: number
 params:
-  Начало: "{{today|start_of_month}}"
+  Начало: "{{today|minus_days:30}}"
 query: |
-  ВЫБРАТЬ СУММА(Выручка) - СУММА(Себестоимость) КАК Значение
+  ВЫБРАТЬ CAST(СУММА(Выручка) - СУММА(Себестоимость) AS INTEGER) КАК Значение
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало

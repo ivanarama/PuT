@@ -1,0 +1,23 @@
+name: ОрганизацийВсего
+type: kpi
+title: Организаций
+titles:
+  en: Organizations
+  de: Organisationen
+  sr: Организације
+  az: Təşkilatlar
+  es: Organizaciones
+  fr: Organisations
+  hy: "Կազմակերպություններ"
+  ka: "ორგანიზაციები"
+  kk: "Ұйымдар"
+  pt: "Organizações"
+  ro: "Organizații"
+  tr: "Kuruluşlar"
+  uk: "Організацій"
+  uz: "Tashkilotlar"
+  zh: "组织"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Справочник.Организация

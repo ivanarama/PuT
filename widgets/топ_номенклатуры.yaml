@@ -19,13 +19,13 @@ titles:
   zh: 按收入排名的热门商品（月）
 limit: 10
 params:
-  Начало: "{{today|start_of_month}}"
+  Начало: "{{today|minus_days:30}}"
 query: |
   ВЫБРАТЬ
     Номенклатура,
-    СУММА(Выручка)       КАК Выручка,
-    СУММА(Себестоимость) КАК Себестоимость,
-    СУММА(Выручка) - СУММА(Себестоимость) КАК Прибыль
+    CAST(СУММА(Выручка) AS INTEGER)       КАК Выручка,
+    CAST(СУММА(Себестоимость) AS INTEGER) КАК Себестоимость,
+    CAST(СУММА(Выручка) - СУММА(Себестоимость) AS INTEGER) КАК Прибыль
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало
   СГРУППИРОВАТЬ ПО Номенклатура
@@ -67,7 +67,7 @@ columns:
       uk: "Виручка"
       uz: "Daromad"
       zh: "收入"
-    format: money
+    format: number
     align: right
   - field: Прибыль
     label: "Прибыль"
@@ -87,5 +87,5 @@ columns:
       uk: "Прибуток"
       uz: "Foyda"
       zh: "利润"
-    format: money
+    format: number
     align: right

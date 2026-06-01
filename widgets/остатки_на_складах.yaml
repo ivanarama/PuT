@@ -17,16 +17,16 @@ titles:
   uk: "Залишки по складах"
   uz: "Omborlar bo'yicha qoldiq"
   zh: "按仓库的库存"
-limit: 15
+limit: 7
 query: |
   ВЫБРАТЬ
     Номенклатура,
-    Склад,
-    КоличествоОстаток КАК Количество,
-    СуммаОстаток КАК Сумма
+    СУММА(КоличествоОстаток) КАК Количество,
+    CAST(СУММА(СуммаОстаток) AS INTEGER) КАК Сумма
   ИЗ РегистрНакопления.ОстаткиТоваров.Остатки()
   ГДЕ КоличествоОстаток > 0
-  УПОРЯДОЧИТЬ ПО СуммаОстаток УБЫВ
+  СГРУППИРОВАТЬ ПО Номенклатура
+  УПОРЯДОЧИТЬ ПО Сумма УБЫВ
 columns:
   - field: Номенклатура
     label: "Номенклатура"
@@ -46,24 +46,6 @@ columns:
       uk: "Товар"
       uz: "Mahsulot"
       zh: "商品"
-  - field: Склад
-    label: "Склад"
-    labels:
-      en: "Warehouse"
-      de: "Lager"
-      sr: "Магацин"
-      az: "Anbar"
-      es: "Almacén"
-      fr: "Entrepôt"
-      hy: "Պահեստ"
-      ka: "საწყობ"
-      kk: "Қойма"
-      pt: "Armazém"
-      ro: "Depozit"
-      tr: "Depo"
-      uk: "Склад"
-      uz: "Ombor"
-      zh: "仓库"
   - field: Количество
     label: "Кол-во"
     labels:
@@ -102,5 +84,5 @@ columns:
       uk: "Сума"
       uz: "Miqdor"
       zh: "金额"
-    format: money
+    format: number
     align: right

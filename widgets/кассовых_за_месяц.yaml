@@ -1,0 +1,23 @@
+name: КассовыхЗаМесяц
+type: kpi
+title: Кассовых / Банк
+titles:
+  en: Cash & Bank
+  de: Kasse & Bank
+  sr: Каса и банка
+  az: Kassa və bank
+  es: Caja y banco
+  fr: Caisse et banque
+  hy: "Դրամարկղ և բանկ"
+  ka: "სალარო და ბანკი"
+  kk: "Касса және банк"
+  pt: "Caixa e banco"
+  ro: "Casă și bancă"
+  tr: "Kasa ve banka"
+  uk: "Каса та банк"
+  uz: "Kassa va bank"
+  zh: "现金/银行"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Документ.ПриходныйКассовыйОрдер

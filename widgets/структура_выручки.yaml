@@ -19,11 +19,11 @@ titles:
   uz: Daromadning mahsulot bo'yicha tuzilishi
   zh: 按商品的收入构成
 params:
-  Начало: "{{today|start_of_month}}"
+  Начало: "{{today|minus_days:30}}"
 query: |
   ВЫБРАТЬ
     Номенклатура,
-    СУММА(Выручка) КАК Сумма
+    CAST(СУММА(Выручка) AS INTEGER) КАК Сумма
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало
   СГРУППИРОВАТЬ ПО Номенклатура

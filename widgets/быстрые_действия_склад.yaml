@@ -1,0 +1,110 @@
+name: БыстрыеДействияСклад
+type: actions
+title: Создать
+titles:
+  en: Create
+  de: Erstellen
+  sr: Креирај
+  az: Yarat
+  es: Crear
+  fr: Créer
+  hy: Ստեղծել
+  ka: შექმნა
+  kk: Құру
+  pt: Criar
+  ro: Creare
+  tr: Oluştur
+  uk: Створити
+  uz: Yaratish
+  zh: 新建
+items:
+  - label: "Перемещение"
+    labels:
+      en: "Transfer"
+      de: "Umlagerung"
+      sr: "Пренос"
+      az: "Köçürmə"
+      es: "Transferencia"
+      fr: "Transfert"
+      hy: "Տեղափոխում"
+      ka: "გადატანა"
+      kk: "Ауыстыру"
+      pt: "Transferência"
+      ro: "Transfer"
+      tr: "Transfer"
+      uk: "Переміщення"
+      uz: "Ko'chirish"
+      zh: "调拨"
+    entity: ПеремещениеТоваров
+  - label: "Списание"
+    labels:
+      en: "Write-off"
+      de: "Abschreibung"
+      sr: "Отпис"
+      az: "Silinmə"
+      es: "Baja"
+      fr: "Radiation"
+      hy: "Գրում"
+      ka: "ჩამოწერა"
+      kk: "Жазу"
+      pt: "Baixa"
+      ro: "Casare"
+      tr: "Silme"
+      uk: "Списання"
+      uz: "Yozish"
+      zh: "核销"
+    entity: СписаниеТоваров
+  - label: "Оприходование"
+    labels:
+      en: "Receipt"
+      de: "Zugang"
+      sr: "Пријем"
+      az: "Qəbul"
+      es: "Recepción"
+      fr: "Réception"
+      hy: "Ընդունում"
+      ka: "მიღება"
+      kk: "Қабылдау"
+      pt: "Recebimento"
+      ro: "Recepție"
+      tr: "Kabul"
+      uk: "Оприходування"
+      uz: "Qabul qilish"
+      zh: "入库"
+    entity: ОприходованиеТоваров
+  - label: "Сборка"
+    labels:
+      en: "Assembly"
+      de: "Montage"
+      sr: "Монтажа"
+      az: "Yığma"
+      es: "Montaje"
+      fr: "Assemblage"
+      hy: "Հավաքում"
+      ka: "აწყობა"
+      kk: "Жинақтау"
+      pt: "Montagem"
+      ro: "Asamblare"
+      tr: "Montaj"
+      uk: "Збірка"
+      uz: "Yig'ish"
+      zh: "组装"
+    entity: СборкаТоваров
+  - label: "Разборка"
+    labels:
+      en: "Disassembly"
+      de: "Demontage"
+      sr: "Демонтажа"
+      az: "Sökmə"
+      es: "Desmontaje"
+      fr: "Désassemblage"
+      hy: "Ապամոնտաժ"
+      ka: "დაშლა"
+      kk: "Бұзу"
+      pt: "Desmontagem"
+      ro: "Dezasamblare"
+      tr: "Sökme"
+      uk: "Розбірка"
+      uz: "Sökish"
+      zh: "拆卸"
+    entity: РазборкаТоваров

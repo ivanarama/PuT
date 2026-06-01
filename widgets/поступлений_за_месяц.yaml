@@ -1,0 +1,23 @@
+name: ПоступленийЗаМесяц
+type: kpi
+title: Поступлений
+titles:
+  en: Receipts
+  de: Eingänge
+  sr: Пријеми
+  az: Daxilolmalar
+  es: Recepciones
+  fr: Réceptions
+  hy: "Մուտքեր"
+  ka: "მიღებები"
+  kk: "Түсімдер"
+  pt: "Receções"
+  ro: "Recepții"
+  tr: "Girişler"
+  uk: "Надходжень"
+  uz: "Qabullar"
+  zh: "入库"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Документ.ПоступлениеТоваров

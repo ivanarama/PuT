@@ -17,10 +17,10 @@ titles:
   uk: Виручка за місяць
   uz: Oylik daromad
   zh: 月度收入
-format: money
+format: number
 params:
-  Начало: "{{today|start_of_month}}"
+  Начало: "{{today|minus_days:30}}"
 query: |
-  ВЫБРАТЬ СУММА(Выручка) КАК Значение
+  ВЫБРАТЬ CAST(СУММА(Выручка) AS INTEGER) КАК Значение
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало

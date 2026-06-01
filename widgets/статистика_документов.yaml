@@ -1,0 +1,67 @@
+name: СтатистикаДокументов
+type: list
+title: Статистика по документам
+titles:
+  en: Document statistics
+  de: Belegstatistik
+  sr: Статистика докумената
+  az: Sənəd statistikası
+  es: Estadística de documentos
+  fr: Statistiques documents
+  hy: "Փաստաթղթերի վիճակագրություն"
+  ka: "დოკუმენტების სტატისტიკა"
+  kk: "Құжаттар статистикасы"
+  pt: "Estatística de documentos"
+  ro: "Statistici documente"
+  tr: "Belge istatistikleri"
+  uk: "Статистика документів"
+  uz: "Hujjatlar statistikasi"
+  zh: "单据统计"
+limit: 20
+query: |
+  ВЫБРАТЬ
+    "Реализация" КАК Тип,
+    Номер КАК Ид
+  ИЗ Документ.РеализацияТоваров
+  ОБЪЕДИНИТЬ ВСЕ
+  ВЫБРАТЬ
+    "Поступление",
+    Номер
+  ИЗ Документ.ПоступлениеТоваров
+columns:
+  - field: Тип
+    label: "Тип документа"
+    labels:
+      en: "Document type"
+      de: "Belegtyp"
+      sr: "Тип документа"
+      az: "Sənəd növü"
+      es: "Tipo documento"
+      fr: "Type de document"
+      hy: "Փաստաթղթի տեսակ"
+      ka: "დოკუმენტის ტიპი"
+      kk: "Құжат түрі"
+      pt: "Tipo documento"
+      ro: "Tip document"
+      tr: "Belge türü"
+      uk: "Тип документа"
+      uz: "Hujjat turi"
+      zh: "单据类型"
+  - field: Ид
+    label: "Номер"
+    labels:
+      en: "Number"
+      de: "Nummer"
+      sr: "Број"
+      az: "Nömrə"
+      es: "Número"
+      fr: "Numéro"
+      hy: "Համար"
+      ka: "ნომერი"
+      kk: "Нөмір"
+      pt: "Número"
+      ro: "Număr"
+      tr: "Numara"
+      uk: "Номер"
+      uz: "Raqam"
+      zh: "编号"

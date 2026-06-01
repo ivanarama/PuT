@@ -1,0 +1,110 @@
+name: БыстрыеДействияПродажи
+type: actions
+title: Создать
+titles:
+  en: Create
+  de: Erstellen
+  sr: Креирај
+  az: Yarat
+  es: Crear
+  fr: Créer
+  hy: Ստեղծել
+  ka: შექმნა
+  kk: Құру
+  pt: Criar
+  ro: Creare
+  tr: Oluştur
+  uk: Створити
+  uz: Yaratish
+  zh: 新建
+items:
+  - label: "Счёт"
+    labels:
+      en: "Invoice"
+      de: "Rechnung"
+      sr: "Рачун"
+      az: "Hesab"
+      es: "Factura"
+      fr: "Facture"
+      hy: "Հաշիվ-ապացույց"
+      ka: "ინვოისი"
+      kk: "Шот"
+      pt: "Fatura"
+      ro: "Factură"
+      tr: "Fatura"
+      uk: "Рахунок"
+      uz: "Hisob"
+      zh: "发票"
+    entity: Счёт
+  - label: "Реализация"
+    labels:
+      en: "Sale"
+      de: "Verkauf"
+      sr: "Продажа"
+      az: "Satış"
+      es: "Venta"
+      fr: "Vente"
+      hy: "Վաճառք"
+      ka: "გაყიდვა"
+      kk: "Сату"
+      pt: "Venda"
+      ro: "Vânzare"
+      tr: "Satış"
+      uk: "Продаж"
+      uz: "Savdo"
+      zh: "销售"
+    entity: РеализацияТоваров
+  - label: "Заказ покупателя"
+    labels:
+      en: "Customer order"
+      de: "Kundenbestellung"
+      sr: "Наручба купца"
+      az: "Müştəri sifarişi"
+      es: "Pedido de cliente"
+      fr: "Commande client"
+      hy: "Հաճախորդի պատվեր"
+      ka: "კლიენტის შეკვეთა"
+      kk: "Тұтынушы тапсырысы"
+      pt: "Pedido do cliente"
+      ro: "Comandă client"
+      tr: "Müşteri siparişi"
+      uk: "Замовлення покупця"
+      uz: "Mijoz buyurtmasi"
+      zh: "客户订单"
+    entity: ЗаказПокупателя
+  - label: "Возврат от покупателя"
+    labels:
+      en: "Customer return"
+      de: "Kundenrückgabe"
+      sr: "Поврат од купца"
+      az: "Müştəri qaytarılması"
+      es: "Devolución de cliente"
+      fr: "Retour client"
+      hy: "Հաճախորդի վերադարձ"
+      ka: "კლიენტის დაბრუნება"
+      kk: "Сатып алушыдан қайтару"
+      pt: "Devolução de cliente"
+      ro: "Returnare client"
+      tr: "Müşteri iadesi"
+      uk: "Повернення від покупця"
+      uz: "Mijoz qaytarishi"
+      zh: "客户退货"
+    entity: ВозвратОтПокупателя
+  - label: "Установка цен"
+    labels:
+      en: "Price setting"
+      de: "Preisfestlegung"
+      sr: "Постављање цена"
+      az: "Qiymət təyinetmə"
+      es: "Configuración de precios"
+      fr: "Définition des prix"
+      hy: "Գների սահմանում"
+      ka: "ფასების დაყენება"
+      kk: "Баға белгілеу"
+      pt: "Configuração de preços"
+      ro: "Setare prețuri"
+      tr: "Fiyat ayarı"
+      uk: "Встановлення цін"
+      uz: "Narx sozlash"
+      zh: "价格设置"
+    entity: УстановкаЦен

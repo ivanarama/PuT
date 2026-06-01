@@ -1,0 +1,23 @@
+name: СчетовЗаМесяц
+type: kpi
+title: Счетов
+titles:
+  en: Invoices
+  de: Rechnungen
+  sr: Фактуре
+  az: Fakturalar
+  es: Facturas
+  fr: Factures
+  hy: "Հաշիվ-ապրանքներ"
+  ka: "ინ voiსები"
+  kk: "Шоттар"
+  pt: "Faturas"
+  ro: "Facturi"
+  tr: "Faturalar"
+  uk: "Рахунків"
+  uz: "Hisob-fakturalar"
+  zh: "发票"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Документ.Счёт

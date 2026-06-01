@@ -1,0 +1,92 @@
+name: БыстрыеДействияКасса
+type: actions
+title: Создать
+titles:
+  en: Create
+  de: Erstellen
+  sr: Креирај
+  az: Yarat
+  es: Crear
+  fr: Créer
+  hy: Ստեղծել
+  ka: შექმნა
+  kk: Құру
+  pt: Criar
+  ro: Creare
+  tr: Oluştur
+  uk: Створити
+  uz: Yaratish
+  zh: 新建
+items:
+  - label: "ПКО"
+    labels:
+      en: "Cash receipt"
+      de: "Einzahlung"
+      sr: "Пријем готовине"
+      az: "Gəlir kassa"
+      es: "Ingreso de caja"
+      fr: "Encaissement"
+      hy: "Կassa մուտք"
+      ka: "სალაროს შემოსავალი"
+      kk: "Касса кіріс"
+      pt: "Recebimento de caixa"
+      ro: "Încasare casierie"
+      tr: "Gelen kasa"
+      uk: "ПКО"
+      uz: "Kassa kelish"
+      zh: "现金收款"
+    entity: ПриходныйКассовыйОрдер
+  - label: "РКО"
+    labels:
+      en: "Cash payment"
+      de: "Auszahlung"
+      sr: "Исплата готовине"
+      az: "Xərc kassa"
+      es: "Pago de caja"
+      fr: "Décaissement"
+      hy: "Կassa ելք"
+      ka: "სალაროს გასავალი"
+      kk: "Касса шығыс"
+      pt: "Pagamento de caixa"
+      ro: "Plată casierie"
+      tr: "Çıkan kasa"
+      uk: "РКО"
+      uz: "Kassa chiqish"
+      zh: "现金付款"
+    entity: РасходныйКассовыйОрдер
+  - label: "Банк-приход"
+    labels:
+      en: "Bank receipt"
+      de: "Bankeingang"
+      sr: "Банковни пријем"
+      az: "Bank gəliri"
+      es: "Ingreso bancario"
+      fr: "Encaissement bancaire"
+      hy: "Բանկային մուտք"
+      ka: "საბანკო შემოსავალი"
+      kk: "Банк кіріс"
+      pt: "Recebimento bancário"
+      ro: "Încasare bancară"
+      tr: "Banka gelen"
+      uk: "Банк-прихід"
+      uz: "Bank kirish"
+      zh: "银行收款"
+    entity: ПоступлениеНаРасчётныйСчёт
+  - label: "Банк-расход"
+    labels:
+      en: "Bank payment"
+      de: "Bankausgang"
+      sr: "Банковна исплата"
+      az: "Bank xərci"
+      es: "Pago bancario"
+      fr: "Décaissement bancaire"
+      hy: "Բանկային ելք"
+      ka: "საბანკო გასავალი"
+      kk: "Банк шығыс"
+      pt: "Pagamento bancário"
+      ro: "Plată bancară"
+      tr: "Banka çıkan"
+      uk: "Банк-видаток"
+      uz: "Bank chiqish"
+      zh: "银行付款"
+    entity: СписаниеСРасчётногоСчёта

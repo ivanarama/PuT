@@ -1,25 +1,25 @@
 name: ПродажиМесяца
 type: kpi
-title: Кол-во продаж за месяц
+title: Продаж за 30 дней
 titles:
-  en: Sales count for month
-  de: Anzahl Verkäufe im Monat
-  sr: Број продаја у месецу
-  az: Aylıq satış sayı
-  es: Cantidad de ventas del mes
-  fr: Nombre de ventes du mois
-  hy: Ամսական վաճառքների քանակ
-  ka: თვიური გაყიდვების რაოდენობა
-  kk: Айлық сатылым саны
-  pt: Quantidade de vendas do mês
-  ro: Număr vânzări lunar
-  tr: Aylık satış sayısı
-  uk: Кількість продажів за місяць
-  uz: Oylik savdo soni
-  zh: 月度销售笔数
+  en: Sales in 30 days
+  de: Verkäufe in 30 Tagen
+  sr: Продаја за 30 дана
+  az: 30 günlük satış sayı
+  es: Ventas en 30 días
+  fr: Ventes sur 30 jours
+  hy: 30 օրվա վաճառքներ
+  ka: 30 დღის გაყიდვები
+  kk: 30 күндік сатылым
+  pt: Vendas em 30 dias
+  ro: Vânzări în 30 zile
+  tr: 30 günlük satış
+  uk: Продажів за 30 днів
+  uz: 30 kunlik savdo soni
+  zh: 30天销售笔数
 format: number
 params:
-  Начало: "{{today|start_of_month}}"
+  Начало: "{{today|minus_days:30}}"
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Документ.РеализацияТоваров

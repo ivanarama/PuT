@@ -19,18 +19,18 @@ titles:
   zh: "月度热门客户"
 limit: 5
 params:
-  Начало: "{{today|start_of_month}}"
+  Начало: "{{today|minus_days:30}}"
 query: |
   ВЫБРАТЬ
-    Контрагент,
+    Покупатель,
     КОЛИЧЕСТВО(*) КАК Реализаций,
-    СУММА(Сумма) КАК Сумма
+    CAST(СУММА(Сумма) AS INTEGER) КАК Сумма
   ИЗ Документ.РеализацияТоваров
   ГДЕ Дата >= &Начало
-  СГРУППИРОВАТЬ ПО Контрагент
+  СГРУППИРОВАТЬ ПО Покупатель
   УПОРЯДОЧИТЬ ПО Сумма УБЫВ
 columns:
-  - field: Контрагент
+  - field: Покупатель
     label: "Покупатель"
     labels:
       en: "Customer"
@@ -86,5 +86,5 @@ columns:
       uk: "Сума"
       uz: "Miqdor"
       zh: "金额"
-    format: money
+    format: number
     align: right

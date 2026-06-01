@@ -1,33 +1,33 @@
 title: Главная — Торговля
 titles:
-  en: Home — Trade
-  de: Start — Handel
-  sr: Почетна — Трговина
-  az: Əsas — Ticarət
-  es: Inicio — Comercio
-  fr: Accueil — Commerce
-  hy: Գլխավոր — Առևտուր
-  ka: მთავარი — ვაჭრობა
-  kk: Басты — Сауда
-  pt: Início — Comércio
-  ro: Acasă — Comerț
-  tr: Ana Sayfa — Ticaret
-  uk: Головна — Торгівля
-  uz: Bosh sahifa — Savdo
-  zh: 首页 — 贸易
+    az: Əsas — Ticarət
+    de: Start — Handel
+    en: Home — Trade
+    es: Inicio — Comercio
+    fr: Accueil — Commerce
+    hy: Գլխավոր — Առևտուր
+    ka: მთავარი — ვაჭრობა
+    kk: Басты — Сауда
+    pt: Início — Comércio
+    ro: Acasă — Comerț
+    sr: Почетна — Трговина
+    tr: Ana Sayfa — Ticaret
+    uk: Головна — Торгівля
+    uz: Bosh sahifa — Savdo
+    zh: 首页 — 贸易
 layout: rows
 rows:
-  - widgets:
-      - ВыручкаМесяца
-      - ВаловаяПрибыльМесяца
-      - ПродажиМесяца
-      - КассаОстаток
-  - widgets:
-      - ПродажиПоДням
-      - ПрибыльПоДням
-  - widgets:
-      - ТопНоменклатуры
-      - СтруктураВыручки
-  - widgets:
-      - БыстрыеДействия
-      - ПоследниеДокументы
+    - widgets:
+        - ВыручкаМесяца
+        - ВаловаяПрибыльМесяца
+        - ПродажиМесяца
+        - КассаОстаток
+    - widgets:
+        - ПродажиПоДням
+        - ПрибыльПоДням
+    - widgets:
+        - ТопНоменклатуры
+        - СтруктураВыручки
+    - widgets:
+        - БыстрыеДействия
+        - ПоследниеДокументы

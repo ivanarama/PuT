@@ -1,0 +1,74 @@
+name: БыстрыеДействияЗакупки
+type: actions
+title: Создать
+titles:
+  en: Create
+  de: Erstellen
+  sr: Креирај
+  az: Yarat
+  es: Crear
+  fr: Créer
+  hy: Ստեղծել
+  ka: შექმნა
+  kk: Құру
+  pt: Criar
+  ro: Creare
+  tr: Oluştur
+  uk: Створити
+  uz: Yaratish
+  zh: 新建
+items:
+  - label: "Заказ поставщику"
+    labels:
+      en: "Supplier order"
+      de: "Lieferantenbestellung"
+      sr: "Наручба добављача"
+      az: "Təchizatçı sifarişi"
+      es: "Pedido a proveedor"
+      fr: "Commande fournisseur"
+      hy: "Մատակարարի պատվեր"
+      ka: "მომწოდებლის შეკვეთა"
+      kk: "Жабдықтаушы тапсырысы"
+      pt: "Pedido a fornecedor"
+      ro: "Comandă furnizor"
+      tr: "Tedarikçi siparişi"
+      uk: "Замовлення постачальнику"
+      uz: "Yetkazib beruvchiga buyurtma"
+      zh: "供应商订单"
+    entity: ЗаказПоставщику
+  - label: "Поступление"
+    labels:
+      en: "Receipt"
+      de: "Wareneingang"
+      sr: "Пријем"
+      az: "Qəbul"
+      es: "Recepción"
+      fr: "Réception"
+      hy: "Ընդունում"
+      ka: "მიღება"
+      kk: "Қабылдау"
+      pt: "Recebimento"
+      ro: "Recepție"
+      tr: "Kabul"
+      uk: "Надходження"
+      uz: "Qabul qilish"
+      zh: "收货"
+    entity: ПоступлениеТоваров
+  - label: "Возврат поставщику"
+    labels:
+      en: "Supplier return"
+      de: "Lieferantenrückgabe"
+      sr: "Поврат добављачу"
+      az: "Təchizatçıya qaytarılma"
+      es: "Devolución a proveedor"
+      fr: "Retour fournisseur"
+      hy: "Մատակարարին վերադարձ"
+      ka: "მომწოდებელზე დაბრუნება"
+      kk: "Жабдықтаушыға қайтару"
+      pt: "Devolução a fornecedor"
+      ro: "Returnare furnizor"
+      tr: "Tedarikçi iadesi"
+      uk: "Повернення постачальнику"
+      uz: "Yetkazib beruvchiga qaytarish"
+      zh: "退货给供应商"
+    entity: ВозвратПоставщику

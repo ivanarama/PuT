@@ -1,32 +1,32 @@
 name: ПродажиПоДням
 type: chart
 chart_kind: bar
-title: Продажи за 30 дней
+title: Продажи за квартал
 titles:
-  en: Sales over 30 days
-  de: Verkäufe der letzten 30 Tage
-  sr: Продаја за 30 дана
-  az: 30 günlük satışlar
-  es: Ventas en 30 días
-  fr: Ventes sur 30 jours
-  hy: 30 օրվա վաճառքներ
-  ka: 30 დღის გაყიდვები
-  kk: 30 күндік сатылым
-  pt: Vendas em 30 dias
-  ro: Vânzări pe 30 de zile
-  tr: 30 günlük satışlar
-  uk: Продажі за 30 днів
-  uz: 30 kunlik savdo
-  zh: 30天销售
+  en: Sales over quarter
+  de: Verkäufe des Quartals
+  sr: Продаја за квартал
+  az: Rüblük satışlar
+  es: Ventas del trimestre
+  fr: Ventes du trimestre
+  hy: "Եռամսյակային վաճառքներ"
+  ka: "კვარტალური გაყიდვები"
+  kk: "Тоқсандық сатылым"
+  pt: "Vendas do trimestre"
+  ro: "Vânzări trimestriale"
+  tr: "Çeyreklik satışlar"
+  uk: "Продажі за квартал"
+  uz: "Choraklik savdo"
+  zh: "季度销售"
 params:
-  Начало: "{{today|minus_days:30}}"
+  Начало: "{{today|minus_days:90}}"
 query: |
   ВЫБРАТЬ
-    date(Дата) КАК Дата,
-    СУММА(Сумма) КАК Сумма
+    strftime('%Y-%m', Дата) КАК Месяц,
+    CAST(СУММА(Сумма) AS INTEGER) КАК Сумма
   ИЗ Документ.РеализацияТоваров
   ГДЕ Дата >= &Начало
-  СГРУППИРОВАТЬ ПО date(Дата)
-  УПОРЯДОЧИТЬ ПО date(Дата)
-x_field: Дата
+  СГРУППИРОВАТЬ ПО strftime('%Y-%m', Дата)
+  УПОРЯДОЧИТЬ ПО strftime('%Y-%m', Дата)
+x_field: Месяц
 y_fields: [Сумма]

@@ -1,0 +1,23 @@
+name: ЗаказовПокупателейЗаМесяц
+type: kpi
+title: Заказов
+titles:
+  en: Orders
+  de: Aufträge
+  sr: Поруџбине
+  az: Sifarişlər
+  es: Pedidos
+  fr: Commandes
+  hy: "Պատվերներ"
+  ka: "შეკვეთები"
+  kk: "Тапсырыстар"
+  pt: "Encomendas"
+  ro: "Comenzi"
+  tr: "Siparişler"
+  uk: "Замовлень"
+  uz: "Buyurtmalar"
+  zh: "订单"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Документ.ЗаказПокупателя

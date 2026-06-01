@@ -1,0 +1,23 @@
+name: КонтрагентовВсего
+type: kpi
+title: Контрагенты
+titles:
+  en: Counterparties
+  de: Geschäftspartner
+  sr: Контрагенти
+  az: Əməkdaşlar
+  es: Contrapartes
+  fr: Tiers
+  hy: "Գործընկերներ"
+  ka: "კონტრაგენტები"
+  kk: "Контрагенттер"
+  pt: "Contrapartes"
+  ro: "Parteneri"
+  tr: "Cari hesaplar"
+  uk: "Контрагенти"
+  uz: "Kontragentlar"
+  zh: "往来单位"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Справочник.Контрагент

@@ -1,0 +1,79 @@
+name: СтатистикаСправочников
+type: list
+title: Записей в справочниках
+titles:
+  en: Catalog entries
+  de: Verzeichniseinträge
+  sr: Унеси у именицима
+  az: Kataloq qeydləri
+  es: Entradas de catálogo
+  fr: Entrées catalogues
+  hy: "Կատալոգի գրառումներ"
+  ka: "კატალოგის ჩანაწერები"
+  kk: "Каталог жазбалары"
+  pt: "Entradas do catálogo"
+  ro: "Înregistrări cataloage"
+  tr: "Katalog kayıtları"
+  uk: "Записів у довідниках"
+  uz: "Katalog yozuvlari"
+  zh: "目录条目"
+limit: 15
+query: |
+  ВЫБРАТЬ
+    "Номенклатура" КАК Справочник,
+    КОЛИЧЕСТВО(*) КАК Кол
+  ИЗ Справочник.Номенклатура
+  ОБЪЕДИНИТЬ ВСЕ
+  ВЫБРАТЬ
+    "Контрагенты",
+    КОЛИЧЕСТВО(*)
+  ИЗ Справочник.Контрагент
+  ОБЪЕДИНИТЬ ВСЕ
+  ВЫБРАТЬ
+    "Склады",
+    КОЛИЧЕСТВО(*)
+  ИЗ Справочник.Склад
+  ОБЪЕДИНИТЬ ВСЕ
+  ВЫБРАТЬ
+    "Организации",
+    КОЛИЧЕСТВО(*)
+  ИЗ Справочник.Организация
+columns:
+  - field: Справочник
+    label: "Справочник"
+    labels:
+      en: "Catalog"
+      de: "Verzeichnis"
+      sr: "Именик"
+      az: "Kataloq"
+      es: "Catálogo"
+      fr: "Catalogue"
+      hy: "Կատալոգ"
+      ka: "კატალოგი"
+      kk: "Каталог"
+      pt: "Catálogo"
+      ro: "Catalog"
+      tr: "Katalog"
+      uk: "Довідник"
+      uz: "Katalog"
+      zh: "目录"
+  - field: Кол
+    label: "Записей"
+    labels:
+      en: "Entries"
+      de: "Einträge"
+      sr: "Уноса"
+      az: "Qeyd"
+      es: "Entradas"
+      fr: "Entrées"
+      hy: "Գրառումներ"
+      ka: "ჩანაწერი"
+      kk: "Жазба"
+      pt: "Entradas"
+      ro: "Înregistrări"
+      tr: "Kayıt"
+      uk: "Записів"
+      uz: "Yozuvlar"
+      zh: "条目"
+    format: number
+    align: right

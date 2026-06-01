@@ -1,0 +1,23 @@
+name: ВозвратовЗаМесяц
+type: kpi
+title: Возвратов
+titles:
+  en: Returns
+  de: Retouren
+  sr: Поврати
+  az: Qaytarılmalar
+  es: Devoluciones
+  fr: Retours
+  hy: "Վերադարձներ"
+  ka: "დაბრუნებები"
+  kk: "Қайтарымдар"
+  pt: "Devoluções"
+  ro: "Retururi"
+  tr: "İadelar"
+  uk: "Повернень"
+  uz: "Qaytarishlar"
+  zh: "退货"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Документ.ВозвратОтПокупателя

@@ -1,0 +1,23 @@
+name: СкладовВсего
+type: kpi
+title: Складов
+titles:
+  en: Warehouses
+  de: Lager
+  sr: Магацини
+  az: Anbarlar
+  es: Almacenes
+  fr: Entrepôts
+  hy: "Պահեստներ"
+  ka: "საწყობები"
+  kk: "Қоймалар"
+  pt: "Armazéns"
+  ro: "Depozite"
+  tr: "Depolar"
+  uk: "Складів"
+  uz: "Omborlar"
+  zh: "仓库"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Справочник.Склад

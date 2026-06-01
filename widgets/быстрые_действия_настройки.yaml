@@ -1,0 +1,74 @@
+name: БыстрыеДействияНастройки
+type: actions
+title: Создать
+titles:
+  en: Create
+  de: Erstellen
+  sr: Креирај
+  az: Yarat
+  es: Crear
+  fr: Créer
+  hy: Ստեղծել
+  ka: შექმნა
+  kk: Құру
+  pt: Criar
+  ro: Creare
+  tr: Oluştur
+  uk: Створити
+  uz: Yaratish
+  zh: 新建
+items:
+  - label: "Установка цен"
+    labels:
+      en: "Price setting"
+      de: "Preisfestlegung"
+      sr: "Постављање цена"
+      az: "Qiymət təyinetmə"
+      es: "Configuración de precios"
+      fr: "Définition des prix"
+      hy: "Գների սահմանում"
+      ka: "ფასების დაყენება"
+      kk: "Баға белгілеу"
+      pt: "Configuração de preços"
+      ro: "Setare prețuri"
+      tr: "Fiyat ayarı"
+      uk: "Встановлення цін"
+      uz: "Narx sozlash"
+      zh: "价格设置"
+    entity: УстановкаЦен
+  - label: "Контрагент"
+    labels:
+      en: "Counterparty"
+      de: "Geschäftspartner"
+      sr: "Контрагент"
+      az: "Əks-tərəf"
+      es: "Contraparte"
+      fr: "Counterpartie"
+      hy: "Գործընկեր"
+      ka: "კონტრაგენტი"
+      kk: "Контрагент"
+      pt: "Contraparte"
+      ro: "Contraparte"
+      tr: "Karşı taraf"
+      uk: "Контрагент"
+      uz: "Kontragent"
+      zh: "往来单位"
+    entity: Контрагент
+  - label: "Номенклатура"
+    labels:
+      en: "Item"
+      de: "Artikel"
+      sr: "Артикал"
+      az: "Məhsul"
+      es: "Artículo"
+      fr: "Article"
+      hy: "Ապրանք"
+      ka: "პროდუქტი"
+      kk: "Тауар"
+      pt: "Item"
+      ro: "Articol"
+      tr: "Ürün"
+      uk: "Товар"
+      uz: "Mahsulot"
+      zh: "商品"
+    entity: Номенклатура

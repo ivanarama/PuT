@@ -1,0 +1,23 @@
+name: НоменклатураВсего
+type: kpi
+title: Номенклатура
+titles:
+  en: Items
+  de: Artikel
+  sr: Артикли
+  az: Məhsullar
+  es: Artículos
+  fr: Articles
+  hy: "Ապրանքներ"
+  ka: "პროდუქტები"
+  kk: "Тауарлар"
+  pt: "Itens"
+  ro: "Articole"
+  tr: "Ürünler"
+  uk: "Номенклатура"
+  uz: "Mahsulotlar"
+  zh: "商品"
+format: number
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Справочник.Номенклатура

@@ -1,29 +1,29 @@
 name: ТопПоставщики
 type: list
-title: Топ поставщики за месяц
+title: Топ поставщики за квартал
 titles:
-  en: Top suppliers (month)
-  de: Top-Lieferanten (Monat)
-  sr: Топ добављачи (месец)
-  az: Ən yaxşı təchizatçılar (ay)
-  es: Top proveedores (mes)
-  fr: Top fournisseurs (mois)
-  hy: Լավագույն մատակարարներ (ամիս)
-  ka: საუკეთესო მომწოდებლები (თვე)
-  kk: Топ жабдықтаушылар (ай)
-  pt: Top fornecedores (mês)
-  ro: Top furnizori (lună)
-  tr: En iyi tedarikçiler (ay)
-  uk: Топ постачальники (місяць)
-  uz: Top yetkazib beruvchilar (oy)
-  zh: 月度热门供应商
+  en: Top suppliers (quarter)
+  de: Top-Lieferanten (Quartal)
+  sr: Топ добављачи (квартал)
+  az: Ən yaxşı təchizatçılar (rüblük)
+  es: Top proveedores (trimestre)
+  fr: Top fournisseurs (trimestre)
+  hy: Լավագույն մատակարարներ (եռամսակ)
+  ka: საუკეთესო მომწოდებლები (კვარტალი)
+  kk: Топ жабдықтаушылар (тоқсан)
+  pt: Top fornecedores (trimestre)
+  ro: Top furnizori (trimestru)
+  tr: En iyi tedarikçiler (çeyrek)
+  uk: Топ постачальники (квартал)
+  uz: Top yetkazib beruvchilar (chorak)
+  zh: 季度热门供应商
 limit: 5
 params:
-  Начало: "{{today|start_of_month}}"
+  Начало: "{{today|minus_days:120}}"
 query: |
   ВЫБРАТЬ
     Контрагент,
-    СУММА(Сумма) КАК Сумма
+    CAST(СУММА(Сумма) AS INTEGER) КАК Сумма
   ИЗ РегистрНакопления.Взаиморасчеты
   ГДЕ ТипКонтрагента = "Поставщик"
     И вид_движения = "Расход"
@@ -67,5 +67,5 @@ columns:
       uk: "Сума закупівель"
       uz: "Xarid miqdori"
       zh: "采购金额"
-    format: money
+    format: number
     align: right

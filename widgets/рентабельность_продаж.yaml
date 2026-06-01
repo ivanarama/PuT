@@ -19,7 +19,7 @@ titles:
   zh: "销售利润率%"
 format: percent
 params:
-  Начало: "{{today|start_of_month}}"
+  Начало: "{{today|minus_days:30}}"
 query: |
   ВЫБРАТЬ
     ВЫБОР КОГДА СУММА(Выручка) > 0
