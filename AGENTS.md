@@ -32,9 +32,15 @@ src/*.os                модули DSL (логика объектов, обр�
 
 ## Рабочий цикл (всё headless, текст/JSON)
 
+Все команды — через бинарь `onebase`. Если оболочка отвечает `onebase: command not found`,
+он не установлен в PATH. Установка (нужен Go): `go install github.com/ivantit66/onebase/cmd/onebase@latest`
+и убедись, что каталог `go env GOPATH`/bin есть в PATH. Из исходников:
+`go build -o <dir-в-PATH>/onebase ./cmd/onebase`. Проверка: `onebase --help`.
+Внутри проекта флаг `--project` можно опускать — берётся текущий каталог.
+
 | Команда | Назначение |
 |---------|-----------|
-| `onebase check --project <dir>` | Валидация: синтаксис .os, неизвестные функции, YAML-схема, компиляция запросов. Выводит `file:line:col: message`, exit code ≠ 0 при ошибках. Запускай после каждой правки. |
+| `onebase check --project <dir>` | Валидация: синтаксис .os, неизвестные функции, YAML-схема, компиляция и исполнение запросов. Выводит `file:line:col: message`, exit code ≠ 0 при ошибках. Запускай после каждой правки. |
 | `onebase describe --project <dir>` | Вся структура конфигурации + список builtins в JSON. «Рентген» для понимания базы. |
 | `onebase procrun --project <dir> --proc <Имя> --set К=З --file П=путь` | Запуск обработки офлайн, печать `Сообщить()`. Отладка прикладной логики. |
 | `onebase run --project <dir> --sqlite <файл> --port N` | Поднять сервер (UI + REST). |
