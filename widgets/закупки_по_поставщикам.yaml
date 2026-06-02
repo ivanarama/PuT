@@ -1,0 +1,34 @@
+name: ЗакупкиПоПоставщикам
+type: chart
+chart_kind: pie
+title: Структура закупок по поставщикам
+titles:
+  en: Purchases breakdown by supplier
+  de: Einkaufsstruktur nach Lieferant
+  sr: Структура набавке по добављачу
+  az: Satınalmaların təchizatçı üzrə strukturu
+  es: Compras por proveedor
+  fr: Répartition des achats par fournisseur
+  hy: "Գնումների կառուցվածքն ըստ մատակարարների"
+  ka: "შესყიდვების სტრუქტურა მომწოდებლის მიხედვით"
+  kk: "Сатып алулардың жабдықтаушы бойынша құрылымы"
+  pt: "Compras por fornecedor"
+  ro: "Structura achizițiilor pe furnizori"
+  tr: "Tedarikçiye göre satın alma yapısı"
+  uk: "Структура закупівель за постачальниками"
+  uz: "Xaridlarning yetkazib beruvchi bo'yicha tuzilishi"
+  zh: "按供应商的采购构成"
+params:
+  Начало: "{{today|minus_days:120}}"
+query: |
+  ВЫБРАТЬ
+    Контрагент,
+    CAST(СУММА(Сумма) AS INTEGER) КАК Сумма
+  ИЗ РегистрНакопления.Взаиморасчеты
+  ГДЕ ТипКонтрагента = "Поставщик"
+    И вид_движения = "Расход"
+    И period >= &Начало
+  СГРУППИРОВАТЬ ПО Контрагент
+  УПОРЯДОЧИТЬ ПО Сумма УБЫВ
+x_field: Контрагент
+y_fields: [Сумма]

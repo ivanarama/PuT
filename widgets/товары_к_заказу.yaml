@@ -1,0 +1,91 @@
+name: ТоварыКЗаказу
+type: list
+title: Товары к заказу
+titles:
+  en: Items to reorder
+  de: Nachzubestellende Artikel
+  sr: Артикли за наручивање
+  az: Sifariş ediləcək mallar
+  es: Artículos a reabastecer
+  fr: Articles à commander
+  hy: "Պատվիրման ենթակա ապրանքներ"
+  ka: "შესაკვეთი საქონელი"
+  kk: "Тапсырыс беруге тауарлар"
+  pt: "Itens para reabastecer"
+  ro: "Articole de comandat"
+  tr: "Sipariş edilecek ürünler"
+  uk: "Товари до замовлення"
+  uz: "Buyurtma qilinadigan tovarlar"
+  zh: "待补货商品"
+limit: 10
+query: |
+  ВЫБРАТЬ
+    Н.Наименование КАК Номенклатура,
+    CAST(Н.МинимальныйОстаток AS INTEGER) КАК Минимум,
+    CAST(СУММА(ВЫБОР КОГДА Д.вид_движения = "Приход" ТОГДА Д.Количество ИНАЧЕ -Д.Количество КОНЕЦ) AS INTEGER) КАК Остаток
+  ИЗ Справочник.Номенклатура КАК Н
+    ЛЕВОЕ СОЕДИНЕНИЕ РегистрНакопления.ОстаткиТоваров КАК Д
+    ПО Д.Номенклатура = Н.Наименование
+  ГДЕ CAST(Н.МинимальныйОстаток AS INTEGER) > 0
+  СГРУППИРОВАТЬ ПО Н.Наименование, Н.МинимальныйОстаток
+  ИМЕЯ COALESCE(СУММА(ВЫБОР КОГДА Д.вид_движения = "Приход" ТОГДА Д.Количество ИНАЧЕ -Д.Количество КОНЕЦ), 0) < CAST(Н.МинимальныйОстаток AS INTEGER)
+  УПОРЯДОЧИТЬ ПО Остаток
+columns:
+  - field: Номенклатура
+    label: "Номенклатура"
+    labels:
+      en: "Item"
+      de: "Artikel"
+      sr: "Артикал"
+      az: "Məhsul"
+      es: "Artículo"
+      fr: "Article"
+      hy: "Ապրանք"
+      ka: "პროდუქტი"
+      kk: "Тауар"
+      pt: "Item"
+      ro: "Articol"
+      tr: "Ürün"
+      uk: "Товар"
+      uz: "Mahsulot"
+      zh: "商品"
+  - field: Остаток
+    label: "Остаток"
+    labels:
+      en: "On hand"
+      de: "Bestand"
+      sr: "Стање"
+      az: "Qalıq"
+      es: "Existencias"
+      fr: "Stock"
+      hy: "Մնացորդ"
+      ka: "ნაშთი"
+      kk: "Қалдық"
+      pt: "Saldo"
+      ro: "Stoc"
+      tr: "Mevcut"
+      uk: "Залишок"
+      uz: "Qoldiq"
+      zh: "现存"
+    format: number
+    align: right
+  - field: Минимум
+    label: "Минимум"
+    labels:
+      en: "Minimum"
+      de: "Minimum"
+      sr: "Минимум"
+      az: "Minimum"
+      es: "Mínimo"
+      fr: "Minimum"
+      hy: "Նվազագույն"
+      ka: "მინიმუმი"
+      kk: "Минимум"
+      pt: "Mínimo"
+      ro: "Minim"
+      tr: "Asgari"
+      uk: "Мінімум"
+      uz: "Minimum"
+      zh: "最低"
+    format: number
+    align: right
