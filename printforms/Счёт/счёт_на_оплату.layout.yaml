@@ -1,0 +1,156 @@
+name: СчётНаОплату
+document: Счёт
+areas:
+  БанковскиеРеквизиты:
+    rows:
+      - cells:
+          - text: "Банк получателя:"
+            bold: true
+            colspan: 2
+          - parameter: Банк
+            colspan: 4
+      - cells:
+          - text: "БИК:"
+          - parameter: БИК
+          - text: "Сч. №"
+          - parameter: КоррСчёт
+            colspan: 3
+      - cells:
+          - text: "ИНН:"
+          - parameter: ИНН
+          - text: "КПП:"
+          - parameter: КПП
+          - text: "Сч. №"
+          - parameter: РасчСчёт
+      - cells:
+          - text: "Получатель:"
+            bold: true
+            colspan: 2
+          - parameter: Получатель
+            colspan: 4
+  Заголовок:
+    rows:
+      - cells:
+          - text: "Счёт на оплату"
+            bold: true
+            colspan: 6
+            align: center
+            fontSize: 16
+      - cells:
+          - text: "№"
+            colspan: 1
+          - parameter: Номер
+            colspan: 2
+          - text: "от"
+          - parameter: Дата
+            colspan: 2
+  Поставщик:
+    rows:
+      - cells:
+          - text: "Поставщик (Исполнитель):"
+            bold: true
+            colspan: 6
+      - cells:
+          - parameter: Поставщик
+            colspan: 6
+  Покупатель:
+    rows:
+      - cells:
+          - text: "Покупатель (Заказчик):"
+            bold: true
+            colspan: 6
+      - cells:
+          - parameter: ПокупательИнфо
+            colspan: 6
+  ШапкаТаблицы:
+    rows:
+      - cells:
+          - text: "№"
+            bold: true
+            align: center
+            backColor: "#E8E8E8"
+            width: 35px
+          - text: "Товары (работы, услуги)"
+            bold: true
+            backColor: "#E8E8E8"
+          - text: "Кол-во"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+            width: 55px
+          - text: "Ед."
+            bold: true
+            align: center
+            backColor: "#E8E8E8"
+            width: 40px
+          - text: "Цена"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+            width: 80px
+          - text: "Сумма"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+            width: 90px
+  СтрокаТаблицы:
+    rows:
+      - cells:
+          - parameter: НомерПП
+            align: center
+          - parameter: Номенклатура
+          - parameter: Количество
+            align: right
+          - parameter: ЕдИзм
+            align: center
+          - parameter: Цена
+            align: right
+          - parameter: Сумма
+            align: right
+  Итого:
+    rows:
+      - cells:
+          - text: "Итого:"
+            bold: true
+            colspan: 5
+          - parameter: ИтогоСумма
+            bold: true
+            align: right
+  Подвал:
+    rows:
+      - cells:
+          - text: "Без налога (НДС): -"
+            colspan: 6
+      - cells:
+          - text: "Всего к оплате:"
+            bold: true
+            colspan: 5
+          - parameter: ВсегоКОплате
+            bold: true
+            align: right
+  СуммаПрописью:
+    rows:
+      - cells:
+          - parameter: СуммаПрописью
+            colspan: 6
+      - cells:
+          - parameter: ВсегоНаименований
+            colspan: 6
+            fontSize: 9
+  Предупреждение:
+    rows:
+      - cells:
+          - text: "Внимание! Оплата данного счета означает согласие с условиями поставки товара. Уведомление об оплате обязательно."
+            colspan: 6
+            fontSize: 8
+  Подпись:
+    rows:
+      - cells:
+          - parameter: ДолжностьРуководителя
+          - text: ": _________________________ /"
+          - parameter: ФИОРуководителя
+          - text: "/"
+            colspan: 2
+      - cells:
+          - text: "МП"
+            colspan: 6

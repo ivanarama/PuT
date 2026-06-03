@@ -1,0 +1,241 @@
+name: УПД
+document: РеализацияТоваров
+areas:
+  Заголовок:
+    rows:
+      - cells:
+          - text: "Универсальный передаточный документ"
+            bold: true
+            colspan: 8
+            align: center
+            fontSize: 14
+      - cells:
+          - text: "Счёт-фактура №"
+            colspan: 2
+          - parameter: Номер
+          - text: "от"
+          - parameter: Дата
+            colspan: 4
+      - cells:
+          - text: "(1) Статус: 2 — передаточный документ (акт)"
+            colspan: 8
+            fontSize: 9
+      - cells:
+          - text: "Исправление № -- от --"
+            colspan: 8
+            fontSize: 9
+  Продавец:
+    rows:
+      - cells:
+          - text: "(2) Продавец:"
+            bold: true
+            colspan: 2
+          - parameter: Продавец
+            colspan: 6
+      - cells:
+          - text: "(2а) Адрес:"
+            colspan: 2
+          - parameter: АдресПродавца
+            colspan: 6
+      - cells:
+          - text: "(2б) ИНН/КПП:"
+            colspan: 2
+          - parameter: ИННПродавца
+            colspan: 6
+  Покупатель:
+    rows:
+      - cells:
+          - text: "(6) Покупатель:"
+            bold: true
+            colspan: 2
+          - parameter: Покупатель
+            colspan: 6
+      - cells:
+          - text: "(6а) Адрес:"
+            colspan: 2
+          - parameter: АдресПокупателя
+            colspan: 6
+      - cells:
+          - text: "(6б) ИНН/КПП:"
+            colspan: 2
+          - parameter: ИННПокупателя
+            colspan: 6
+  Реквизиты:
+    rows:
+      - cells:
+          - text: "(3) Грузоотправитель:"
+            colspan: 2
+          - text: "он же"
+            colspan: 6
+      - cells:
+          - text: "(4) Грузополучатель:"
+            colspan: 2
+          - parameter: Грузополучатель
+            colspan: 6
+      - cells:
+          - text: "(5) К плат.-расч. док. №"
+            colspan: 2
+          - text: "-- от --"
+            colspan: 6
+      - cells:
+          - text: "(7) Валюта:"
+            colspan: 2
+          - text: "Российский рубль, 643"
+            colspan: 6
+  ШапкаТаблицы:
+    rows:
+      - cells:
+          - text: "№"
+            bold: true
+            align: center
+            backColor: "#E8E8E8"
+            width: 30px
+          - text: "Код"
+            bold: true
+            align: center
+            backColor: "#E8E8E8"
+            width: 60px
+          - text: "Наименование товара"
+            bold: true
+            backColor: "#E8E8E8"
+          - text: "Ед.изм."
+            bold: true
+            align: center
+            backColor: "#E8E8E8"
+            width: 55px
+          - text: "Кол-во"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+            width: 60px
+          - text: "Цена"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+            width: 80px
+          - text: "Ставка"
+            bold: true
+            align: center
+            backColor: "#E8E8E8"
+            width: 50px
+          - text: "Сумма"
+            bold: true
+            align: right
+            backColor: "#E8E8E8"
+            width: 90px
+  СтрокаТаблицы:
+    rows:
+      - cells:
+          - parameter: НомерПП
+            align: center
+          - parameter: Артикул
+            align: center
+          - parameter: Номенклатура
+          - parameter: ЕдИзм
+            align: center
+          - parameter: Количество
+            align: right
+          - parameter: Цена
+            align: right
+          - parameter: СтавкаНДС
+            align: center
+          - parameter: Сумма
+            align: right
+  Итого:
+    rows:
+      - cells:
+          - text: "Всего к оплате (9):"
+            bold: true
+            colspan: 7
+          - parameter: ИтогоСумма
+            bold: true
+            align: right
+  ПодвалНДС:
+    rows:
+      - cells:
+          - text: "Стоимость без НДС:"
+            colspan: 3
+          - parameter: СуммаБезНДС
+            align: right
+            colspan: 2
+          - text: "Сумма НДС:"
+          - parameter: СуммаНДС
+            align: right
+      - cells:
+          - text: "Всего с учётом НДС:"
+            bold: true
+            colspan: 3
+          - parameter: ВсегоСумма
+            bold: true
+            align: right
+            colspan: 4
+  ПодписиРуководство:
+    rows:
+      - cells:
+          - text: "Руководитель организации или иное уполномоченное лицо"
+            bold: true
+            colspan: 8
+      - cells:
+          - text: "_________________________ (подпись)"
+            colspan: 4
+          - text: "/"
+          - parameter: ФИОРуководителя
+          - text: "/ (ф.и.о.)"
+            colspan: 2
+      - cells:
+          - text: "Главный бухгалтер или иное уполномоченное лицо"
+            bold: true
+            colspan: 8
+      - cells:
+          - text: "_________________________ (подпись)"
+            colspan: 4
+          - text: "/"
+          - parameter: ФИОБухгалтера
+          - text: "/ (ф.и.о.)"
+            colspan: 2
+  ПодписиПередача:
+    rows:
+      - cells:
+          - text: "[10] Товар (груз) передал / услуги, результаты работ, права сдал"
+            bold: true
+            colspan: 8
+      - cells:
+          - text: "Должность: ____________ Подпись: ____________ /"
+            colspan: 4
+          - parameter: ФИОРуководителя
+          - text: "/"
+            colspan: 3
+      - cells:
+          - text: "Дата отгрузки:"
+          - parameter: ДатаОтгрузки
+            colspan: 6
+      - cells:
+          - text: "[15] Товар (груз) получил / услуги, результаты работ, права принял"
+            bold: true
+            colspan: 8
+      - cells:
+          - text: "Должность: ____________ Подпись: ____________ / __________________ /"
+            colspan: 8
+      - cells:
+          - text: "Дата получения:"
+          - text: "«____» ______________ 20____ г."
+            colspan: 7
+  Составитель:
+    rows:
+      - cells:
+          - text: "[14] Составитель (продавец):"
+            colspan: 3
+          - parameter: СоставительПродавец
+            colspan: 5
+      - cells:
+          - text: "[19] Составитель (покупатель):"
+            colspan: 3
+          - parameter: СоставительПокупатель
+            colspan: 5
+  МП:
+    rows:
+      - cells:
+          - text: "МП Продавца"
+            colspan: 4
+          - text: "МП Покупателя"
+            colspan: 4
