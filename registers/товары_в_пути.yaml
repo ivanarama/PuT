@@ -18,7 +18,7 @@ titles:
   zh: 在途商品
 dimensions:
   - name: Номенклатура
-    type: string
+    type: reference:Номенклатура
     title: Номенклатура
     titles:
       en: Item
@@ -37,7 +37,7 @@ dimensions:
       uz: Nomеnklatura
       zh: 物料
   - name: Склад
-    type: string
+    type: reference:Склад
     title: Склад
     titles:
       en: Warehouse
@@ -56,7 +56,7 @@ dimensions:
       uz: Ombor
       zh: 仓库
   - name: ЗаказПоставщику
-    type: string
+    type: reference:ЗаказПоставщику
     title: Заказ поставщику
     titles:
       en: Purchase order

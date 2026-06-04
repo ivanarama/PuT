@@ -18,7 +18,7 @@ titles:
   zh: 库存余额
 dimensions:
   - name: Номенклатура
-    type: string
+    type: reference:Номенклатура
     title: Номенклатура
     titles:
       en: Item
@@ -37,7 +37,7 @@ dimensions:
       uz: Nomеnklatura
       zh: 物料
   - name: Склад
-    type: string
+    type: reference:Склад
     title: Склад
     titles:
       en: Warehouse

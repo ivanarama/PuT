@@ -18,7 +18,7 @@ titles:
   zh: 往来结算
 dimensions:
   - name: Контрагент
-    type: string
+    type: reference:Контрагент
     title: Контрагент
     titles:
       en: Counterparty

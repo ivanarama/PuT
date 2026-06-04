@@ -37,7 +37,7 @@ dimensions:
       uz: Nomеnklatura
       zh: 物料
   - name: Склад
-    type: string
+    type: reference:Склад
     title: Склад
     titles:
       en: Warehouse
