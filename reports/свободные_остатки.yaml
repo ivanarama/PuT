@@ -1,0 +1,68 @@
+name: СвободныеОстатки
+title: Свободные остатки товаров
+titles:
+  en: Free inventory balances
+  de: Freie Warenbestände
+  sr: Слободни остаци робе
+  az: Azad mal qalıqları
+  es: Existencias libres
+  fr: Stocks disponibles
+  hy: Ազատ մնացորդներ
+  ka: თავისუფალი ნაშთი
+  kk: Бос тауар қалдығы
+  pt: Existências livres
+  ro: Stocuri disponibile
+  tr: Serbest stoklar
+  uk: Вільні залишки товарів
+  uz: Erkin tovar qoldiqlari
+  zh: 可用库存
+params:
+  - name: НаДату
+    type: date
+    label: На дату
+    labels:
+      en: On date
+      de: Zum Datum
+      sr: На датум
+      az: Tarixə
+      es: A fecha
+      fr: À la date
+      hy: Ամսաթվով
+      ka: თარიღით
+      kk: Күніне
+      pt: Na data
+      ro: La data
+      tr: Tarihe
+      uk: На дату
+      uz: Sanaga
+      zh: 截至
+  - name: Склад
+    type: reference:Склад
+    label: Склад
+    labels:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
+query: |
+  ВЫБРАТЬ
+    Номенклатура,
+    Склад,
+    СУММА(КоличествоОстаток) КАК Количество,
+    СУММА(СуммаОстаток) КАК Себестоимость
+  ИЗ РегистрНакопления.ПартииТоваров.Остатки(&НаДату)
+  ГДЕ КоличествоОстаток > 0
+    И (&Склад ЕСТЬ ПУСТО ИЛИ Склад = &Склад)
+  СГРУППИРОВАТЬ ПО Номенклатура, Склад
+  УПОРЯДОЧИТЬ ПО Номенклатура, Склад
