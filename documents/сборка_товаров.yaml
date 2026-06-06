@@ -46,8 +46,6 @@ tableparts:
         type: reference:Номенклатура
       - name: Количество
         type: number
-      - name: Себестоимость
-        type: number
   - name: Приход
     title: Готовая продукция
     titles:
@@ -58,6 +56,4 @@ tableparts:
       - name: Номенклатура
         type: reference:Номенклатура
       - name: Количество
-        type: number
-      - name: Себестоимость
         type: number

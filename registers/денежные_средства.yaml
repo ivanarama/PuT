@@ -77,7 +77,7 @@ resources:
       zh: 金额
 attributes:
   - name: Контрагент
-    type: string
+    type: reference:Контрагент
     title: Контрагент
     titles:
       en: Counterparty

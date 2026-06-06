@@ -77,7 +77,7 @@ resources:
       zh: 金额
 attributes:
   - name: ТипКонтрагента
-    type: string
+    type: enum:ВидКонтрагента
     title: Тип контрагента
     titles:
       en: Counterparty type

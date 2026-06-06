@@ -36,6 +36,25 @@ dimensions:
       uk: Номенклатура
       uz: Nomеnklatura
       zh: 物料
+  - name: Склад
+    type: reference:Склад
+    title: Склад
+    titles:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+      az: Anbar
+      es: Almacén
+      fr: Entrepôt
+      hy: Պահեստ
+      ka: საწყობ
+      kk: Қойма
+      pt: Armazém
+      ro: Depozit
+      tr: Depo
+      uk: Склад
+      uz: Ombor
+      zh: 仓库
   - name: Организация
     type: reference:Организация
     title: Организация

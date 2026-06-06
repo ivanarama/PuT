@@ -55,6 +55,25 @@ dimensions:
       uk: Склад
       uz: Ombor
       zh: 仓库
+  - name: ДокументПоступления
+    type: reference:ПоступлениеТоваров
+    title: Документ поступления
+    titles:
+      en: Purchase document
+      de: Einkaufsbeleg
+      sr: Документ набавке
+      az: Qəbul sənədi
+      es: Documento compra
+      fr: Document achat
+      hy: Մուտքի փաստաթուղթ
+      ka: შემოსვლის დოკუმენტი
+      kk: Кіріс құжаты
+      pt: Documento compra
+      ro: Document achiziție
+      tr: Giriş belgesi
+      uk: Документ надходження
+      uz: Qabul qilish hujjati
+      zh: 采购单据
   - name: ДатаПоставки
     type: date
     title: Дата поставки
