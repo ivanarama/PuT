@@ -236,35 +236,37 @@ elements:
                   de: "Artikel"
                   sr: "Артикли"
                 data_path: Объект.Товары
-              - kind: Кнопка
-                name: КнопкаПересчитать
-                title:
-                  ru: "Пересчитать суммы"
-                  en: "Recalculate amounts"
-                  de: "Summen neu berechnen"
-                  sr: "Прерачунај износе"
-                hint: "Пересчитать сумму и НДС по каждой строке"
-                events:
-                  Нажатие: КнопкаПересчитатьНажатие
-              - kind: Кнопка
-                name: КнопкаОчистить
-                title:
-                  ru: "Очистить таблицу"
-                  en: "Clear table"
-                  de: "Tabelle leeren"
-                  sr: "Обриши табелу"
-                events:
-                  Нажатие: КнопкаОчиститьНажатие
-              - kind: Кнопка
-                name: КнопкаПодбор
-                title:
-                  ru: "Заполнить по остаткам"
-                  en: "Fill from balances"
-                  de: "Aus Beständen füllen"
-                  sr: "Попуни из стања"
-                hint: "Добавить товары со свободным остатком на складе документа"
-                events:
-                  Нажатие: КнопкаПодборНажатие
+                children:
+                  - kind: Кнопка
+                    name: КнопкаПодбор
+                    title:
+                      ru: "Подбор"
+                      en: "Pick items"
+                      de: "Auswahl"
+                      sr: "Избор"
+                    hint: "Подобрать товары со свободным остатком на складе"
+                    events:
+                      Нажатие: КнопкаПодборНажатие
+                      Выбор: КнопкаПодборВыбор
+                  - kind: Кнопка
+                    name: КнопкаПересчитать
+                    title:
+                      ru: "Пересчитать суммы"
+                      en: "Recalculate amounts"
+                      de: "Summen neu berechnen"
+                      sr: "Прерачунај износе"
+                    hint: "Пересчитать сумму и НДС по каждой строке"
+                    events:
+                      Нажатие: КнопкаПересчитатьНажатие
+                  - kind: Кнопка
+                    name: КнопкаОчистить
+                    title:
+                      ru: "Очистить таблицу"
+                      en: "Clear table"
+                      de: "Tabelle leeren"
+                      sr: "Обриши табелу"
+                    events:
+                      Нажатие: КнопкаОчиститьНажатие
 
 events:
   ПриОткрытии: ПриОткрытииФормы
