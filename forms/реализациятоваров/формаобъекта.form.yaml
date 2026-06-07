@@ -229,6 +229,7 @@ elements:
               sr: "Садржај испоруке"
             children:
               - kind: ТабличнаяЧасть
+                use_grid: true
                 name: ТабТовары
                 title:
                   ru: "Товары"
@@ -236,6 +237,8 @@ elements:
                   de: "Artikel"
                   sr: "Артикли"
                 data_path: Объект.Товары
+                events:
+                  ПриИзменении: ТабТоварыПриИзменении
                 children:
                   - kind: Кнопка
                     name: КнопкаПодбор
