@@ -57,23 +57,3 @@ constants:
       uk: Контролювати залишки при резервуванні
       uz: Rezervlashda qoldiqni nazorat qilish
       zh: 预留时检查库存
-  - name: ОсновнаяВалюта
-    type: string
-    default: "RUB"
-    label: Основная валюта учёта
-    labels:
-      en: Main accounting currency
-      de: Hauptbuchungswährung
-      sr: Главна књиговодствена валута
-      az: Əsas uçot valyutası
-      es: Moneda principal de contabilidad
-      fr: Devise principale de comptabilité
-      hy: Հիմնական հաշվառման արժույթ
-      ka: ძირითადი საანგარიშო ვალუტა
-      kk: Негізгі есеп валюта
-      pt: Moeda principal de contabilidade
-      ro: Moneda principală de contabilitate
-      tr: Ana muhasebe para birimi
-      uk: Основна облікова валюта
-      uz: Asosiy buxgalteriya valyutasi
-      zh: 主要核算币种

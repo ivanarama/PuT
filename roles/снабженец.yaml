@@ -46,6 +46,7 @@ permissions:
     ЗаказПоставщику: [read, write, post, unpost]
     ПоступлениеТоваров: [read, write, post, unpost]
     Счёт: [read]
+    ВозвратПоставщику: [read, write, post, unpost]
   registers:
     ОстаткиТоваров: [read]
     ПартииТоваров: [read]
@@ -57,6 +58,8 @@ permissions:
     ОборотПоСкладам: [run]
     Взаиморасчеты: [run]
     АктСверки: [run]
+    ТоварыВПути: [run]
+    ОплатыПоступлений: [run]
   processors:
     импорт_номенклатуры: [run]
     выгрузка_в_excel: [run]

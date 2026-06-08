@@ -7,13 +7,13 @@ titles:
   az: Mal partiyaları
   es: Lotes de inventario
   fr: Lots de stock
-  hy: Ապրանքա партии
+  hy: Ապրանքների խմբաքանակ
   ka: საქონლის პარტიები
   kk: Тауар партиялары
   pt: Lotes de inventário
   ro: Loturi de stoc
   tr: Stok partileri
-  uk: Парії товарів
+  uk: Партії товарів
   uz: Tovar partiyalari
   zh: 库存批次
 dimensions:
@@ -32,7 +32,7 @@ dimensions:
       kk: Номенклатура
       pt: Nomenclatura
       ro: Nomenclatură
-      tr: Nomembüro
+      tr: Ürün
       uk: Номенклатура
       uz: Nomеnklatura
       zh: 物料

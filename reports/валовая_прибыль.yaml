@@ -8,7 +8,7 @@ titles:
   es: Beneficio bruto (FIFO)
   fr: Bénéfice brut (FIFO)
   hy: Համախառն շահույթ (ՖԻՖՈ)
-  ka: მარჯვენა მოგება (FIFO)
+  ka: მთლიანი მოგება (FIFO)
   kk: Жалпы пайда (ФИФО)
   pt: Lucro bruto (FIFO)
   ro: Profit brut (FIFO)
@@ -70,7 +70,7 @@ params:
       kk: Номенклатура
       pt: Nomenclatura
       ro: Nomenclatură
-      tr: Nomembüro
+      tr: Ürün
       uk: Номенклатура
       uz: Nomеnklatura
       zh: 物料

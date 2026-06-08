@@ -50,6 +50,8 @@ permissions:
     ПоступлениеТоваров: [read]
     ПриходныйКассовыйОрдер: [read, write, post, unpost]
     УстановкаЦен: [read, write, post, unpost]
+    ЗаказПокупателя: [read, write, post, unpost]
+    ВозвратОтПокупателя: [read, write, post, unpost]
   registers:
     Взаиморасчеты: [read]
     ДенежныеСредства: [read]
@@ -60,6 +62,8 @@ permissions:
     ОплатыРеализаций: [run]
     ЦеныНоменклатуры: [run]
     АктСверки: [run]
+    РезервыТоваров: [run]
+    СвободныеОстатки: [run]
   processors:
     реализация_из_счёта: [run]
     пересчёт_цен: [run]

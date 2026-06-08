@@ -10,17 +10,17 @@ titles:
   fr: Bénéfice brut du mois
   hy: Ամսական համախառն շահույթ
   ka: თვიური ბრუტო მოგება
-  kk: Айлық жабайы пайда
+  kk: Айлық жалпы пайда
   pt: Lucro bruto mensal
   ro: Profit brut lunar
   tr: Aylık brüt kâr
-  uk: Валова прибуток за місяць
+  uk: Валовий прибуток за місяць
   uz: Oylik yalpi foyda
   zh: 月度毛利润
 format: number
 params:
   Начало: "{{today|minus_days:30}}"
 query: |
-  ВЫБРАТЬ CAST(СУММА(Выручка) - СУММА(Себестоимость) AS INTEGER) КАК Значение
+  ВЫБРАТЬ CAST(ROUND(СУММА(Выручка) - СУММА(Себестоимость), 0) AS INTEGER) КАК Значение
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало

@@ -8,7 +8,7 @@ titles:
   es: Beneficio bruto
   fr: Bénéfice brut
   hy: Համախառն շահույթ
-  ka: მარჯვენა მოგება
+  ka: მთლიანი მოგება
   kk: Жалпы пайда
   pt: Lucro bruto
   ro: Profit brut
@@ -32,7 +32,7 @@ dimensions:
       kk: Номенклатура
       pt: Nomenclatura
       ro: Nomenclatură
-      tr: Nomembüro
+      tr: Ürün
       uk: Номенклатура
       uz: Nomеnklatura
       zh: 物料
@@ -91,7 +91,7 @@ resources:
       pt: Receita
       ro: Venit
       tr: Gelir
-      uk: Выручка
+      uk: Виручка
       uz: Daromad
       zh: 收入
   - name: Себестоимость

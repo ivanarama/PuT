@@ -56,6 +56,12 @@ permissions:
     ПоступлениеНаРасчётныйСчёт: [read, write, post, unpost]
     СписаниеСРасчётногоСчёта: [read, write, post, unpost]
     УстановкаЦен: [read, write, post, unpost]
+    ЗаказПокупателя: [read, write, post, unpost]
+    ЗаказПоставщику: [read, write, post, unpost]
+    ВозвратОтПокупателя: [read, write, post, unpost]
+    ВозвратПоставщику: [read, write, post, unpost]
+    СборкаТоваров: [read, write, post, unpost]
+    РазборкаТоваров: [read, write, post, unpost]
   registers:
     Взаиморасчеты: [read]
     ОстаткиТоваров: [read]
@@ -75,4 +81,9 @@ permissions:
     ОплатыРеализаций: [run]
     ОплатыПоступлений: [run]
     ЦеныНоменклатуры: [run]
+    ТоварыВПути: [run]
+    РезервыТоваров: [run]
+    СвободныеОстатки: [run]
+    Неликвиды: [run]
+    ВыпискаБанка: [run]
   processors: {}

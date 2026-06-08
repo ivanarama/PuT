@@ -7,13 +7,13 @@ titles:
   az: Mal partiyaları (FİFO)
   es: Lotes de inventario (FIFO)
   fr: Lots de stock (FIFO)
-  hy: Ապրանքա партии (ՖԻՖՈ)
+  hy: Ապրանքների խմբաքանակ (ՖԻՖՈ)
   ka: საქონლის პარტიები (FIFO)
   kk: Тауар партиялары (ФИФО)
   pt: Lotes de inventário (FIFO)
   ro: Loturi de stoc (FIFO)
   tr: Stok partileri (FIFO)
-  uk: Парії товарів (ФІФО)
+  uk: Партії товарів (ФІФО)
   uz: Tovar partiyalari (FIFO)
   zh: 库存批次 (FIFO)
 params:
@@ -51,7 +51,7 @@ params:
       kk: Номенклатура
       pt: Nomenclatura
       ro: Nomenclatură
-      tr: Nomembüro
+      tr: Ürün
       uk: Номенклатура
       uz: Nomеnklatura
       zh: 物料

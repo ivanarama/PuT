@@ -47,6 +47,10 @@ permissions:
     ОприходованиеТоваров: [read, write, post, unpost]
     ПеремещениеТоваров: [read, write, post, unpost]
     РеализацияТоваров: [read]
+    СборкаТоваров: [read, write, post, unpost]
+    РазборкаТоваров: [read, write, post, unpost]
+    ВозвратОтПокупателя: [read, write, post, unpost]
+    ВозвратПоставщику: [read, write, post, unpost]
   registers:
     ОстаткиТоваров: [read]
     ПартииТоваров: [read]
@@ -56,6 +60,10 @@ permissions:
     ДвиженияТоваров: [run]
     ВедомостьПартий: [run]
     ОборотПоСкладам: [run]
+    СвободныеОстатки: [run]
+    РезервыТоваров: [run]
+    ТоварыВПути: [run]
+    Неликвиды: [run]
   processors:
     импорт_номенклатуры: [run]
     выгрузка_в_excel: [run]
