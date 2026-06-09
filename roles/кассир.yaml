@@ -52,5 +52,5 @@ permissions:
     Взаиморасчеты: [run]
     АктСверки: [run]
   processors:
-    загрузка_выписки: [run]
-    выгрузка_в_excel: [run]
+    ЗагрузкаВыписки: [run]
+    ВыгрузкаВExcel: [run]
