@@ -4,32 +4,23 @@ titles:
   en: Stocktaking workplace
   de: Inventur-Arbeitsplatz
   sr: Радно место инвентуре
-# АРМ Инвентаризации (posting: false): пересчёт склада. По отклонению факта от
-# учёта создаёт ОприходованиеТоваров (излишки, цена = средняя из остатка) и
-# СписаниеТоваров (недостачи, себестоимость спишет FIFO).
-posting: false
-numerator:
-  prefix: "ИНВ-"
-  length: 5
-  period: year
-fields:
-  - name: Номер
-    type: string
-    title: Номер
-    titles: {en: Number, de: Nummer, sr: Број}
+# Обработка-инструмент: пересчёт склада; по отклонению создаёт Оприходование
+# (излишки, средняя цена) и Списание (недостачи, себестоимость спишет FIFO).
+params:
   - name: Дата
     type: date
-    title: Дата
-    titles: {en: Date, de: Datum, sr: Датум}
+    label: Дата
+    labels: {en: Date, de: Datum, sr: Датум}
   - name: Организация
     type: reference:Организация
-    title: Организация
-    titles: {en: Organization, de: Organisation, sr: Организација}
+    label: Организация
+    labels: {en: Organization, de: Organisation, sr: Организација}
   - name: Склад
     type: reference:Склад
-    title: Склад
-    titles: {en: Warehouse, de: Lager, sr: Магацин}
-tableparts:
+    label: Склад
+    labels: {en: Warehouse, de: Lager, sr: Магацин}
+    required: true
+table_parts:
   - name: Ведомость
     title: Ведомость
     titles: {en: Sheet, de: Liste, sr: Листа}

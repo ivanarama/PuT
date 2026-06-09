@@ -4,36 +4,28 @@ titles:
   en: Shipment workplace
   de: Versand-Arbeitsplatz
   sr: Радно место отпреме
-# АРМ Отгрузки (posting: false): отгрузка зарезервированного по заказам покупателя.
-# Создаёт РеализацииТоваров с привязкой к заказу — проведение снимает резерв и
-# списывает FIFO. Группировка строк по заказу: одна реализация на заказ.
-posting: false
-numerator:
-  prefix: "ОТГ-"
-  length: 5
-  period: year
-fields:
-  - name: Номер
-    type: string
-    title: Номер
-    titles: {en: Number, de: Nummer, sr: Број}
+# Обработка-инструмент: отгрузка зарезервированного по заказам покупателя.
+# Создаёт РеализацииТоваров с привязкой к заказу — проведение снимает резерв и FIFO.
+params:
   - name: Дата
     type: date
-    title: Дата
-    titles: {en: Date, de: Datum, sr: Датум}
+    label: Дата
+    labels: {en: Date, de: Datum, sr: Датум}
   - name: Организация
     type: reference:Организация
-    title: Организация
-    titles: {en: Organization, de: Organisation, sr: Организација}
+    label: Организация
+    labels: {en: Organization, de: Organisation, sr: Организација}
   - name: Покупатель
     type: reference:Контрагент
-    title: Покупатель
-    titles: {en: Customer, de: Kunde, sr: Купац}
+    label: Покупатель
+    labels: {en: Customer, de: Kunde, sr: Купац}
+    required: true
   - name: Склад
     type: reference:Склад
-    title: Склад
-    titles: {en: Warehouse, de: Lager, sr: Магацин}
-tableparts:
+    label: Склад
+    labels: {en: Warehouse, de: Lager, sr: Магацин}
+    required: true
+table_parts:
   - name: Строки
     title: Строки
     titles: {en: Lines, de: Zeilen, sr: Ставке}

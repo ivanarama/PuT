@@ -42,9 +42,6 @@ permissions:
     ЕдиницаИзмерения: [read]
     СтавкаНДС: [read]
   documents:
-    ПриёмкаТовара: [read, write]
-    ОтгрузкаЗаказов: [read, write]
-    ИнвентаризацияСклада: [read, write]
     ПоступлениеТоваров: [read, write, post, unpost]
     СписаниеТоваров: [read, write, post, unpost]
     ОприходованиеТоваров: [read, write, post, unpost]
@@ -68,5 +65,8 @@ permissions:
     ТоварыВПути: [run]
     Неликвиды: [run]
   processors:
+    ПриёмкаТовара: [run]
+    ОтгрузкаЗаказов: [run]
+    ИнвентаризацияСклада: [run]
     ИмпортНоменклатуры: [run]
     ВыгрузкаВExcel: [run]

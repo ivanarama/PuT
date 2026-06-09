@@ -5,40 +5,42 @@ titles:
   en: Open workplace
   de: Arbeitsplatz öffnen
   sr: Отвори радно место
+# АРМы — обработки (инструменты), открываются по URL обработки, а не как
+# создание документа. Альтернатива actions-виджету — навигация подсистемы.
 items:
   - label: "Продавец"
     labels:
       en: "Sales"
       de: "Verkauf"
       sr: "Продаја"
-    entity: РабочееМестоПродаж
+    url: /ui/processor/рабочееместопродаж
   - label: "Закупки"
     labels:
       en: "Purchasing"
       de: "Einkauf"
       sr: "Набавка"
-    entity: ПланЗакупок
+    url: /ui/processor/планзакупок
   - label: "Приёмка"
     labels:
       en: "Receipt"
       de: "Eingang"
       sr: "Пријем"
-    entity: ПриёмкаТовара
+    url: /ui/processor/приёмкатовара
   - label: "Отгрузка"
     labels:
       en: "Shipment"
       de: "Versand"
       sr: "Отпрема"
-    entity: ОтгрузкаЗаказов
+    url: /ui/processor/отгрузказаказов
   - label: "Касса"
     labels:
       en: "Cashier"
       de: "Kasse"
       sr: "Каса"
-    entity: РабочееМестоКассира
+    url: /ui/processor/рабочееместокассира
   - label: "Инвентаризация"
     labels:
       en: "Stocktaking"
       de: "Inventur"
       sr: "Инвентура"
-    entity: ИнвентаризацияСклада
+    url: /ui/processor/инвентаризациясклада

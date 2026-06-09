@@ -39,7 +39,6 @@ permissions:
     Контрагент: [read]
     Организация: [read]
   documents:
-    РабочееМестоКассира: [read, write]
     ПриходныйКассовыйОрдер: [read, write, post, unpost]
     РасходныйКассовыйОрдер: [read, write, post, unpost]
     ПоступлениеНаРасчётныйСчёт: [read, write, post, unpost]
@@ -53,5 +52,6 @@ permissions:
     Взаиморасчеты: [run]
     АктСверки: [run]
   processors:
+    РабочееМестоКассира: [run]
     ЗагрузкаВыписки: [run]
     ВыгрузкаВExcel: [run]

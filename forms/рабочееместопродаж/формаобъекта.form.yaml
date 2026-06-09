@@ -14,8 +14,6 @@ form:
 
 attributes:
   - name: Объект
-    type: DocumentRef.РабочееМестоПродаж
-    save: true
     main: true
 
 elements:
@@ -138,7 +136,7 @@ elements:
                   en: "Items"
                   de: "Artikel"
                   sr: "Артикли"
-                data_path: Объект.Товары
+                data_path: Товары
                 events:
                   ПриИзменении: ТабТоварыПриИзменении
                 children:

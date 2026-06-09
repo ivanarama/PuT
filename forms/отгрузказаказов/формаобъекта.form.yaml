@@ -14,8 +14,6 @@ form:
 
 attributes:
   - name: Объект
-    type: DocumentRef.ОтгрузкаЗаказов
-    save: true
     main: true
 
 elements:
@@ -103,7 +101,7 @@ elements:
                   en: "Lines"
                   de: "Zeilen"
                   sr: "Ставке"
-                data_path: Объект.Строки
+                data_path: Строки
                 children:
                   - kind: Кнопка
                     name: КнопкаЗаполнить

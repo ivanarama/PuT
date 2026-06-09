@@ -43,7 +43,6 @@ permissions:
     СтавкаНДС: [read]
     НастройкиПользователя: [read]
   documents:
-    ПланЗакупок: [read, write]
     ЗаказПоставщику: [read, write, post, unpost]
     ПоступлениеТоваров: [read, write, post, unpost]
     Счёт: [read]
@@ -62,5 +61,6 @@ permissions:
     ТоварыВПути: [run]
     ОплатыПоступлений: [run]
   processors:
+    ПланЗакупок: [run]
     ИмпортНоменклатуры: [run]
     ВыгрузкаВExcel: [run]

@@ -4,48 +4,41 @@ titles:
   en: Sales workplace
   de: Verkaufsarbeitsplatz
   sr: Радно место продаје
-# АРМ — надстройка над торговым ядром: сам движений не делает (posting: false),
-# а собирает свободные остатки, подбирает товар и пакетно создаёт/проводит
-# Реализацию (+ опционально ПКО). Удаление слоя АРМов учёт не ломает.
-posting: false
-numerator:
-  prefix: "РМП-"
-  length: 5
-  period: year
-fields:
-  - name: Номер
-    type: string
-    title: Номер
-    titles: {en: Number, de: Nummer, sr: Број}
+# АРМ — обработка (инструмент), а не документ: открывается из навигации, не
+# создаёт нумерованных экземпляров. Подбор по свободному остатку, оформление
+# Реализации (+ПКО) кнопками. Движения делает проведение создаваемых документов.
+params:
   - name: Дата
     type: date
-    title: Дата
-    titles: {en: Date, de: Datum, sr: Датум}
+    label: Дата
+    labels: {en: Date, de: Datum, sr: Датум}
   - name: Организация
     type: reference:Организация
-    title: Организация
-    titles: {en: Organization, de: Organisation, sr: Организација}
+    label: Организация
+    labels: {en: Organization, de: Organisation, sr: Организација}
   - name: Покупатель
     type: reference:Контрагент
-    title: Покупатель
-    titles: {en: Customer, de: Kunde, sr: Купац}
+    label: Покупатель
+    labels: {en: Customer, de: Kunde, sr: Купац}
+    required: true
   - name: Склад
     type: reference:Склад
-    title: Склад
-    titles: {en: Warehouse, de: Lager, sr: Магацин}
+    label: Склад
+    labels: {en: Warehouse, de: Lager, sr: Магацин}
+    required: true
   - name: ТипЦенПродажи
     type: reference:ТипЦен
-    title: Тип цен продажи
-    titles: {en: Sales price type, de: Verkaufspreistyp, sr: Тип цене продаје}
+    label: Тип цен продажи
+    labels: {en: Sales price type, de: Verkaufspreistyp, sr: Тип цене продаје}
   - name: Касса
     type: reference:Касса
-    title: Касса
-    titles: {en: Cash desk, de: Kasse, sr: Каса}
+    label: Касса
+    labels: {en: Cash desk, de: Kasse, sr: Каса}
   - name: ОплатитьСразу
     type: bool
-    title: Оплатить сразу
-    titles: {en: Pay immediately, de: Sofort bezahlen, sr: Плати одмах}
-tableparts:
+    label: Оплатить сразу (ПКО)
+    labels: {en: Pay immediately, de: Sofort bezahlen, sr: Плати одмах}
+table_parts:
   - name: Товары
     title: Товары
     titles: {en: Items, de: Artikel, sr: Артикли}

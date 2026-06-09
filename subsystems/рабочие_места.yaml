@@ -18,7 +18,7 @@ titles:
   zh: 工作台
 order: 5
 contents:
-    documents:
+    processors:
         - РабочееМестоПродаж
         - ПланЗакупок
         - ПриёмкаТовара

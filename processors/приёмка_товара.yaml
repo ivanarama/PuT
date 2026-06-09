@@ -4,40 +4,31 @@ titles:
   en: Goods receipt workplace
   de: Wareneingang-Arbeitsplatz
   sr: Радно место пријема
-# АРМ Приёмки (posting: false): приём товара по заказу поставщику со сверкой
-# (Расхождение = Принято − Заказано). Создаёт и проводит ПоступлениеТоваров —
-# оно закрывает товары в пути, пишет партии FIFO и долг поставщику.
-posting: false
-numerator:
-  prefix: "ПРИ-"
-  length: 5
-  period: year
-fields:
-  - name: Номер
-    type: string
-    title: Номер
-    titles: {en: Number, de: Nummer, sr: Број}
+# Обработка-инструмент: приём по заказу поставщику со сверкой, создаёт и проводит
+# ПоступлениеТоваров (закрытие товаров в пути, партии FIFO, долг поставщику).
+params:
   - name: Дата
     type: date
-    title: Дата
-    titles: {en: Date, de: Datum, sr: Датум}
+    label: Дата
+    labels: {en: Date, de: Datum, sr: Датум}
   - name: Организация
     type: reference:Организация
-    title: Организация
-    titles: {en: Organization, de: Organisation, sr: Организација}
-  - name: Поставщик
-    type: reference:Контрагент
-    title: Поставщик
-    titles: {en: Supplier, de: Lieferant, sr: Добављач}
-  - name: Склад
-    type: reference:Склад
-    title: Склад
-    titles: {en: Warehouse, de: Lager, sr: Магацин}
+    label: Организация
+    labels: {en: Organization, de: Organisation, sr: Организација}
   - name: ЗаказПоставщику
     type: reference:ЗаказПоставщику
-    title: Заказ поставщику
-    titles: {en: Purchase order, de: Bestellung, sr: Налог добављачу}
-tableparts:
+    label: Заказ поставщику
+    labels: {en: Purchase order, de: Bestellung, sr: Налог добављачу}
+    required: true
+  - name: Поставщик
+    type: reference:Контрагент
+    label: Поставщик
+    labels: {en: Supplier, de: Lieferant, sr: Добављач}
+  - name: Склад
+    type: reference:Склад
+    label: Склад
+    labels: {en: Warehouse, de: Lager, sr: Магацин}
+table_parts:
   - name: Товары
     title: Товары
     titles: {en: Items, de: Artikel, sr: Артикли}

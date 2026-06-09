@@ -14,8 +14,6 @@ form:
 
 attributes:
   - name: Объект
-    type: DocumentRef.ИнвентаризацияСклада
-    save: true
     main: true
 
 elements:
@@ -93,7 +91,7 @@ elements:
                   en: "Sheet"
                   de: "Liste"
                   sr: "Листа"
-                data_path: Объект.Ведомость
+                data_path: Ведомость
                 events:
                   ПриИзменении: ТабВедомостьПриИзменении
                 children:

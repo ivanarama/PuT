@@ -14,8 +14,6 @@ form:
 
 attributes:
   - name: Объект
-    type: DocumentRef.ПланЗакупок
-    save: true
     main: true
 
 elements:
@@ -104,7 +102,7 @@ elements:
                   en: "Demand"
                   de: "Bedarf"
                   sr: "Потреба"
-                data_path: Объект.Потребность
+                data_path: Потребность
                 children:
                   - kind: Кнопка
                     name: КнопкаРассчитать
