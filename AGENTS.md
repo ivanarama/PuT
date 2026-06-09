@@ -33,7 +33,7 @@ src/*.os                модули DSL (логика объектов, обр�
 ## Рабочий цикл (всё headless, текст/JSON)
 
 Все команды — через бинарь `onebase`. Если оболочка отвечает `onebase: command not found`,
-он не установлен в PATH. Установка (нужен Go): `go install github.com/ivantit66/onebase/cmd/onebase@latest`
+он не установлен в PATH. Установка (нужен Go): `go install github.com/ivanarama/onebase/cmd/onebase@latest`
 и убедись, что каталог `go env GOPATH`/bin есть в PATH. Из исходников:
 `go build -o <dir-в-PATH>/onebase ./cmd/onebase`. Проверка: `onebase --help`.
 Внутри проекта флаг `--project` можно опускать — берётся текущий каталог.
