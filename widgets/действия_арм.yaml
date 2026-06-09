@@ -1,0 +1,44 @@
+name: ДействияАРМ
+type: actions
+title: Открыть рабочее место
+titles:
+  en: Open workplace
+  de: Arbeitsplatz öffnen
+  sr: Отвори радно место
+items:
+  - label: "Продавец"
+    labels:
+      en: "Sales"
+      de: "Verkauf"
+      sr: "Продаја"
+    entity: РабочееМестоПродаж
+  - label: "Закупки"
+    labels:
+      en: "Purchasing"
+      de: "Einkauf"
+      sr: "Набавка"
+    entity: ПланЗакупок
+  - label: "Приёмка"
+    labels:
+      en: "Receipt"
+      de: "Eingang"
+      sr: "Пријем"
+    entity: ПриёмкаТовара
+  - label: "Отгрузка"
+    labels:
+      en: "Shipment"
+      de: "Versand"
+      sr: "Отпрема"
+    entity: ОтгрузкаЗаказов
+  - label: "Касса"
+    labels:
+      en: "Cashier"
+      de: "Kasse"
+      sr: "Каса"
+    entity: РабочееМестоКассира
+  - label: "Инвентаризация"
+    labels:
+      en: "Stocktaking"
+      de: "Inventur"
+      sr: "Инвентура"
+    entity: ИнвентаризацияСклада

@@ -1,0 +1,186 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: РабочееМестоПродаж
+  title:
+    ru: "АРМ Продавца"
+    en: "Sales workplace"
+    de: "Verkaufsarbeitsplatz"
+    sr: "Радно место продаје"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.РабочееМестоПродаж
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      # ── Вкладка 1: Параметры продажи ────────────────────────────────────
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Продажа"
+          en: "Sale"
+          de: "Verkauf"
+          sr: "Продаја"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Параметры продажи"
+              en: "Sale parameters"
+              de: "Verkaufsparameter"
+              sr: "Параметри продаје"
+            children:
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+                hint: "Заполняется автоматически, если не указана"
+              - kind: ПолеВвода
+                name: ПолеПокупатель
+                title:
+                  ru: "Покупатель"
+                  en: "Customer"
+                  de: "Kunde"
+                  sr: "Купац"
+                data_path: Объект.Покупатель
+                required: true
+                choice: true
+                events:
+                  ПриИзменении: ПокупательПриИзменении
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+                hint: "Подбор показывает свободный остаток этого склада"
+              - kind: ПолеВвода
+                name: ПолеТипЦенПродажи
+                title:
+                  ru: "Тип цен продажи"
+                  en: "Sales price type"
+                  de: "Verkaufspreistyp"
+                  sr: "Тип цене продаје"
+                data_path: Объект.ТипЦенПродажи
+                choice: true
+                hint: "Заполняется из карточки покупателя"
+                events:
+                  ПриИзменении: ТипЦенПродажиПриИзменении
+              - kind: ПолеВвода
+                name: ПолеКасса
+                title:
+                  ru: "Касса"
+                  en: "Cash desk"
+                  de: "Kasse"
+                  sr: "Каса"
+                data_path: Объект.Касса
+                choice: true
+                hint: "Наличная касса для оплаты сразу (ПКО)"
+              - kind: ПолеВвода
+                name: ПолеОплатитьСразу
+                title:
+                  ru: "Оплатить сразу (ПКО)"
+                  en: "Pay immediately (cash receipt)"
+                  de: "Sofort bezahlen"
+                  sr: "Плати одмах"
+                data_path: Объект.ОплатитьСразу
+
+      # ── Вкладка 2: Подбор товара ────────────────────────────────────────
+      - kind: Страница
+        name: СтраницаТовары
+        title:
+          ru: "Товары"
+          en: "Items"
+          de: "Artikel"
+          sr: "Артикли"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "Состав продажи"
+              en: "Sale contents"
+              de: "Verkaufsinhalt"
+              sr: "Садржај продаје"
+            children:
+              - kind: ТабличнаяЧасть
+                use_grid: true
+                name: ТабТовары
+                title:
+                  ru: "Товары"
+                  en: "Items"
+                  de: "Artikel"
+                  sr: "Артикли"
+                data_path: Объект.Товары
+                events:
+                  ПриИзменении: ТабТоварыПриИзменении
+                children:
+                  - kind: Кнопка
+                    name: КнопкаПодбор
+                    title:
+                      ru: "🔍 Подбор товара"
+                      en: "Pick items"
+                      de: "Auswahl"
+                      sr: "Избор"
+                    hint: "Подобрать товары со свободным остатком на складе"
+                    events:
+                      Нажатие: КнопкаПодборНажатие
+                      Выбор: КнопкаПодборВыбор
+                  - kind: Кнопка
+                    name: КнопкаОчистить
+                    title:
+                      ru: "Очистить"
+                      en: "Clear"
+                      de: "Leeren"
+                      sr: "Обриши"
+                    events:
+                      Нажатие: КнопкаОчиститьНажатие
+
+          - kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              ru: "Оформление"
+              en: "Checkout"
+              de: "Abschluss"
+              sr: "Издавање"
+            children:
+              - kind: Кнопка
+                name: КнопкаОформить
+                title:
+                  ru: "💰 Оформить продажу"
+                  en: "Process sale"
+                  de: "Verkauf abschließen"
+                  sr: "Изврши продају"
+                hint: "Создать и провести реализацию (и ПКО, если включена оплата)"
+                events:
+                  Нажатие: КнопкаОформитьНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы

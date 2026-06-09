@@ -1,0 +1,162 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: ПриёмкаТовара
+  title:
+    ru: "АРМ Приёмки"
+    en: "Goods receipt workplace"
+    de: "Wareneingang-Arbeitsplatz"
+    sr: "Радно место пријема"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.ПриёмкаТовара
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Приёмка"
+          en: "Receipt"
+          de: "Eingang"
+          sr: "Пријем"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Параметры приёмки"
+              en: "Receipt parameters"
+              de: "Eingangsparameter"
+              sr: "Параметри пријема"
+            children:
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеЗаказПоставщику
+                title:
+                  ru: "Заказ поставщику"
+                  en: "Purchase order"
+                  de: "Bestellung"
+                  sr: "Налог добављачу"
+                data_path: Объект.ЗаказПоставщику
+                required: true
+                choice: true
+                hint: "Заказ, по которому принимается товар"
+                events:
+                  ПриИзменении: ЗаказПриИзменении
+              - kind: ПолеВвода
+                name: ПолеПоставщик
+                title:
+                  ru: "Поставщик"
+                  en: "Supplier"
+                  de: "Lieferant"
+                  sr: "Добављач"
+                data_path: Объект.Поставщик
+                choice: true
+                hint: "Заполняется из заказа"
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                choice: true
+                hint: "Заполняется из заказа"
+
+      - kind: Страница
+        name: СтраницаТовары
+        title:
+          ru: "Товары"
+          en: "Items"
+          de: "Artikel"
+          sr: "Артикли"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "Сверка приёмки (расхождение < 0 — недопоставка)"
+              en: "Receipt reconciliation"
+              de: "Eingangsabgleich"
+              sr: "Усклађивање пријема"
+            children:
+              - kind: ТабличнаяЧасть
+                use_grid: true
+                name: ТабТовары
+                title:
+                  ru: "Товары"
+                  en: "Items"
+                  de: "Artikel"
+                  sr: "Артикли"
+                data_path: Объект.Товары
+                events:
+                  ПриИзменении: ТабТоварыПриИзменении
+                children:
+                  - kind: Кнопка
+                    name: КнопкаЗаполнить
+                    title:
+                      ru: "1️⃣ Заполнить по заказу"
+                      en: "Fill from order"
+                      de: "Aus Bestellung füllen"
+                      sr: "Попуни из налога"
+                    hint: "Подтянуть ожидаемые позиции (остаток в пути) и цены заказа"
+                    events:
+                      Нажатие: КнопкаЗаполнитьНажатие
+                  - kind: Кнопка
+                    name: КнопкаОчистить
+                    title:
+                      ru: "Очистить"
+                      en: "Clear"
+                      de: "Leeren"
+                      sr: "Обриши"
+                    events:
+                      Нажатие: КнопкаОчиститьНажатие
+
+          - kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              ru: "Оформление прихода"
+              en: "Receipt posting"
+              de: "Zugang buchen"
+              sr: "Књижење пријема"
+            children:
+              - kind: Кнопка
+                name: КнопкаСоздатьПоступление
+                title:
+                  ru: "2️⃣ Создать поступление"
+                  en: "Create receipt"
+                  de: "Zugang erstellen"
+                  sr: "Креирај пријем"
+                hint: "Провести ПоступлениеТоваров: закроет товары в пути, создаст партии FIFO и долг поставщику"
+                events:
+                  Нажатие: КнопкаСоздатьПоступлениеНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы

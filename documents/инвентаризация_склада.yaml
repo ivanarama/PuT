@@ -1,0 +1,52 @@
+name: ИнвентаризацияСклада
+title: АРМ Инвентаризации
+titles:
+  en: Stocktaking workplace
+  de: Inventur-Arbeitsplatz
+  sr: Радно место инвентуре
+# АРМ Инвентаризации (posting: false): пересчёт склада. По отклонению факта от
+# учёта создаёт ОприходованиеТоваров (излишки, цена = средняя из остатка) и
+# СписаниеТоваров (недостачи, себестоимость спишет FIFO).
+posting: false
+numerator:
+  prefix: "ИНВ-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+    title: Номер
+    titles: {en: Number, de: Nummer, sr: Број}
+  - name: Дата
+    type: date
+    title: Дата
+    titles: {en: Date, de: Datum, sr: Датум}
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles: {en: Organization, de: Organisation, sr: Организација}
+  - name: Склад
+    type: reference:Склад
+    title: Склад
+    titles: {en: Warehouse, de: Lager, sr: Магацин}
+tableparts:
+  - name: Ведомость
+    title: Ведомость
+    titles: {en: Sheet, de: Liste, sr: Листа}
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Номенклатура
+        titles: {en: Item, de: Artikel, sr: Артикал}
+      - name: Учёт
+        type: number
+        title: Учёт
+        titles: {en: Recorded, de: Buchbestand, sr: Књиговодствено}
+      - name: Факт
+        type: number
+        title: Факт
+        titles: {en: Actual, de: Ist-Bestand, sr: Стварно}
+      - name: Отклонение
+        type: number
+        title: Отклонение
+        titles: {en: Deviation, de: Abweichung, sr: Одступање}

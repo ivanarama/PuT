@@ -1,0 +1,52 @@
+name: РабочееМестоКассира
+title: АРМ Кассира
+titles:
+  en: Cashier workplace
+  de: Kassierer-Arbeitsplatz
+  sr: Радно место касира
+# АРМ Кассира (posting: false): дебиторка покупателей и кредиторка поставщикам в
+# одном окне из регистра Взаиморасчёты. Принимает/выдаёт оплату — создаёт и проводит
+# ПКО/РКО (движения по ДенежнымСредствам и Взаиморасчётам пишет их проведение).
+posting: false
+numerator:
+  prefix: "РМК-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+    title: Номер
+    titles: {en: Number, de: Nummer, sr: Број}
+  - name: Дата
+    type: date
+    title: Дата
+    titles: {en: Date, de: Datum, sr: Датум}
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles: {en: Organization, de: Organisation, sr: Организација}
+  - name: Касса
+    type: reference:Касса
+    title: Касса
+    titles: {en: Cash desk, de: Kasse, sr: Каса}
+tableparts:
+  - name: Долги
+    title: Долги
+    titles: {en: Debts, de: Schulden, sr: Дугови}
+    fields:
+      - name: Контрагент
+        type: reference:Контрагент
+        title: Контрагент
+        titles: {en: Counterparty, de: Geschäftspartner, sr: Контрагент}
+      - name: ТипКонтрагента
+        type: enum:ВидКонтрагента
+        title: Тип
+        titles: {en: Type, de: Typ, sr: Тип}
+      - name: Долг
+        type: number
+        title: Долг (+ нам / − мы)
+        titles: {en: Balance, de: Saldo, sr: Салдо}
+      - name: КОплате
+        type: number
+        title: К оплате
+        titles: {en: To pay, de: Zu zahlen, sr: За плаћање}

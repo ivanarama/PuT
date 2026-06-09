@@ -43,6 +43,7 @@ permissions:
     СтавкаНДС: [read]
     НастройкиПользователя: [read]
   documents:
+    ПланЗакупок: [read, write]
     ЗаказПоставщику: [read, write, post, unpost]
     ПоступлениеТоваров: [read, write, post, unpost]
     Счёт: [read]

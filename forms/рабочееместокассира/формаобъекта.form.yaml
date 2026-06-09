@@ -1,0 +1,148 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: РабочееМестоКассира
+  title:
+    ru: "АРМ Кассира"
+    en: "Cashier workplace"
+    de: "Kassierer-Arbeitsplatz"
+    sr: "Радно место касира"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.РабочееМестоКассира
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Касса"
+          en: "Cash desk"
+          de: "Kasse"
+          sr: "Каса"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Параметры"
+              en: "Parameters"
+              de: "Parameter"
+              sr: "Параметри"
+            children:
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеКасса
+                title:
+                  ru: "Касса"
+                  en: "Cash desk"
+                  de: "Kasse"
+                  sr: "Каса"
+                data_path: Объект.Касса
+                required: true
+                choice: true
+                hint: "Наличная касса для приёма/выдачи (ПКО/РКО)"
+
+      - kind: Страница
+        name: СтраницаДолги
+        title:
+          ru: "Долги"
+          en: "Debts"
+          de: "Schulden"
+          sr: "Дугови"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "Сальдо: + должны нам (покупатели), − должны мы (поставщики)"
+              en: "Balance: + owed to us, − owed by us"
+              de: "Saldo: + uns geschuldet, − von uns geschuldet"
+              sr: "Салдо: + нама дугују, − ми дугујемо"
+            children:
+              - kind: ТабличнаяЧасть
+                use_grid: true
+                name: ТабДолги
+                title:
+                  ru: "Долги"
+                  en: "Debts"
+                  de: "Schulden"
+                  sr: "Дугови"
+                data_path: Объект.Долги
+                children:
+                  - kind: Кнопка
+                    name: КнопкаРассчитать
+                    title:
+                      ru: "1️⃣ Рассчитать долги"
+                      en: "Calculate debts"
+                      de: "Schulden berechnen"
+                      sr: "Израчунај дугове"
+                    hint: "Сальдо взаиморасчётов по контрагентам организации"
+                    events:
+                      Нажатие: КнопкаРассчитатьНажатие
+                  - kind: Кнопка
+                    name: КнопкаОчистить
+                    title:
+                      ru: "Очистить"
+                      en: "Clear"
+                      de: "Leeren"
+                      sr: "Обриши"
+                    events:
+                      Нажатие: КнопкаОчиститьНажатие
+
+          - kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              ru: "Оплаты"
+              en: "Payments"
+              de: "Zahlungen"
+              sr: "Плаћања"
+            children:
+              - kind: Кнопка
+                name: КнопкаПринятьОплату
+                title:
+                  ru: "2️⃣ Принять оплату (ПКО)"
+                  en: "Receive payment"
+                  de: "Zahlung annehmen"
+                  sr: "Прими уплату"
+                hint: "По покупателям с долгом нам создаются приходные кассовые ордера"
+                events:
+                  Нажатие: КнопкаПринятьОплатуНажатие
+              - kind: Кнопка
+                name: КнопкаОплатитьПоставщику
+                title:
+                  ru: "3️⃣ Оплатить поставщику (РКО)"
+                  en: "Pay supplier"
+                  de: "Lieferant bezahlen"
+                  sr: "Плати добављачу"
+                hint: "По поставщикам, которым должны мы, создаются расходные кассовые ордера"
+                events:
+                  Нажатие: КнопкаОплатитьПоставщикуНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы

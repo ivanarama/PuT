@@ -1,0 +1,140 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: ИнвентаризацияСклада
+  title:
+    ru: "АРМ Инвентаризации"
+    en: "Stocktaking workplace"
+    de: "Inventur-Arbeitsplatz"
+    sr: "Радно место инвентуре"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.ИнвентаризацияСклада
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Инвентаризация"
+          en: "Stocktaking"
+          de: "Inventur"
+          sr: "Инвентура"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Параметры"
+              en: "Parameters"
+              de: "Parameter"
+              sr: "Параметри"
+            children:
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+                hint: "Склад, который пересчитываем"
+
+      - kind: Страница
+        name: СтраницаВедомость
+        title:
+          ru: "Ведомость"
+          en: "Sheet"
+          de: "Liste"
+          sr: "Листа"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "Отклонение = факт − учёт (− недостача, + излишек)"
+              en: "Deviation = actual − recorded"
+              de: "Abweichung = Ist − Buch"
+              sr: "Одступање = стварно − књиговодствено"
+            children:
+              - kind: ТабличнаяЧасть
+                use_grid: true
+                name: ТабВедомость
+                title:
+                  ru: "Ведомость"
+                  en: "Sheet"
+                  de: "Liste"
+                  sr: "Листа"
+                data_path: Объект.Ведомость
+                events:
+                  ПриИзменении: ТабВедомостьПриИзменении
+                children:
+                  - kind: Кнопка
+                    name: КнопкаЗаполнить
+                    title:
+                      ru: "1️⃣ Заполнить учётные остатки"
+                      en: "Fill recorded stock"
+                      de: "Buchbestand füllen"
+                      sr: "Попуни књиговодствено"
+                    hint: "Текущие остатки склада; факт заполняется = учёту, измените вручную"
+                    events:
+                      Нажатие: КнопкаЗаполнитьНажатие
+                  - kind: Кнопка
+                    name: КнопкаОчистить
+                    title:
+                      ru: "Очистить"
+                      en: "Clear"
+                      de: "Leeren"
+                      sr: "Обриши"
+                    events:
+                      Нажатие: КнопкаОчиститьНажатие
+
+          - kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              ru: "Оформление"
+              en: "Posting"
+              de: "Buchung"
+              sr: "Књижење"
+            children:
+              - kind: Кнопка
+                name: КнопкаОформить
+                title:
+                  ru: "2️⃣ Оформить излишки и недостачи"
+                  en: "Post surplus & shortage"
+                  de: "Überschuss & Fehlmenge buchen"
+                  sr: "Књижи вишак и мањак"
+                hint: "Излишки → Оприходование (средняя цена), недостачи → Списание (FIFO)"
+                events:
+                  Нажатие: КнопкаОформитьНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы

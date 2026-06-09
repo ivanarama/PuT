@@ -1,0 +1,149 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: ПланЗакупок
+  title:
+    ru: "АРМ Закупок"
+    en: "Purchase planning"
+    de: "Einkaufsplanung"
+    sr: "Планирање набавке"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.ПланЗакупок
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Параметры"
+          en: "Parameters"
+          de: "Parameter"
+          sr: "Параметри"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Параметры расчёта"
+              en: "Calculation parameters"
+              de: "Berechnungsparameter"
+              sr: "Параметри обрачуна"
+            children:
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+                hint: "Дефицит считается по остаткам этого склада"
+              - kind: ПолеВвода
+                name: ПолеПоставщик
+                title:
+                  ru: "Поставщик"
+                  en: "Supplier"
+                  de: "Lieferant"
+                  sr: "Добављач"
+                data_path: Объект.Поставщик
+                required: true
+                choice: true
+                hint: "Кому создавать заказы на дефицит"
+
+      - kind: Страница
+        name: СтраницаПотребность
+        title:
+          ru: "Потребность"
+          en: "Demand"
+          de: "Bedarf"
+          sr: "Потреба"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "Дефицит = резерв − остаток − в пути"
+              en: "Shortage = reserve − stock − in transit"
+              de: "Fehlmenge = Reserve − Bestand − unterwegs"
+              sr: "Мањак = резерва − стање − у путу"
+            children:
+              - kind: ТабличнаяЧасть
+                use_grid: true
+                name: ТабПотребность
+                title:
+                  ru: "Потребность"
+                  en: "Demand"
+                  de: "Bedarf"
+                  sr: "Потреба"
+                data_path: Объект.Потребность
+                children:
+                  - kind: Кнопка
+                    name: КнопкаРассчитать
+                    title:
+                      ru: "1️⃣ Рассчитать потребность"
+                      en: "Calculate demand"
+                      de: "Bedarf berechnen"
+                      sr: "Израчунај потребу"
+                    hint: "Резервы покупателей минус остаток и товары в пути"
+                    events:
+                      Нажатие: КнопкаРассчитатьНажатие
+                  - kind: Кнопка
+                    name: КнопкаОчистить
+                    title:
+                      ru: "Очистить"
+                      en: "Clear"
+                      de: "Leeren"
+                      sr: "Обриши"
+                    events:
+                      Нажатие: КнопкаОчиститьНажатие
+
+          - kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              ru: "Заказ поставщику"
+              en: "Purchase order"
+              de: "Bestellung"
+              sr: "Налог добављачу"
+            children:
+              - kind: Кнопка
+                name: КнопкаСоздатьЗаказ
+                title:
+                  ru: "2️⃣ Создать заказ поставщику"
+                  en: "Create purchase order"
+                  de: "Bestellung erstellen"
+                  sr: "Креирај налог"
+                hint: "По строкам с «К заказу» > 0 создаётся и проводится ЗаказПоставщику"
+                events:
+                  Нажатие: КнопкаСоздатьЗаказНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы

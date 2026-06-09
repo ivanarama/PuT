@@ -1,0 +1,64 @@
+name: ПланЗакупок
+title: АРМ Закупок
+titles:
+  en: Purchase planning
+  de: Einkaufsplanung
+  sr: Планирање набавке
+# АРМ Закупок (posting: false): считает дефицит = резерв покупателей − остаток −
+# товары в пути и пакетно создаёт ЗаказыПоставщику. Движений сам не делает —
+# их пишет проведение ЗаказаПоставщику (регистр ТоварыВПути).
+posting: false
+numerator:
+  prefix: "ПЛЗ-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+    title: Номер
+    titles: {en: Number, de: Nummer, sr: Број}
+  - name: Дата
+    type: date
+    title: Дата
+    titles: {en: Date, de: Datum, sr: Датум}
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles: {en: Organization, de: Organisation, sr: Организација}
+  - name: Склад
+    type: reference:Склад
+    title: Склад
+    titles: {en: Warehouse, de: Lager, sr: Магацин}
+  - name: Поставщик
+    type: reference:Контрагент
+    title: Поставщик
+    titles: {en: Supplier, de: Lieferant, sr: Добављач}
+tableparts:
+  - name: Потребность
+    title: Потребность
+    titles: {en: Demand, de: Bedarf, sr: Потреба}
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Номенклатура
+        titles: {en: Item, de: Artikel, sr: Артикал}
+      - name: Заказано
+        type: number
+        title: Заказано (резерв)
+        titles: {en: Reserved, de: Reserviert, sr: Резервисано}
+      - name: Остаток
+        type: number
+        title: Остаток
+        titles: {en: In stock, de: Bestand, sr: Стање}
+      - name: ВПути
+        type: number
+        title: В пути
+        titles: {en: In transit, de: Unterwegs, sr: У путу}
+      - name: Дефицит
+        type: number
+        title: Дефицит
+        titles: {en: Shortage, de: Fehlmenge, sr: Мањак}
+      - name: КЗаказу
+        type: number
+        title: К заказу
+        titles: {en: To order, de: Zu bestellen, sr: За наручити}

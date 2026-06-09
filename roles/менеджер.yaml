@@ -45,6 +45,8 @@ permissions:
     СтавкаНДС: [read]
     НастройкиПользователя: [read]
   documents:
+    РабочееМестоПродаж: [read, write]
+    ОтгрузкаЗаказов: [read, write]
     Счёт: [read, write]
     РеализацияТоваров: [read, write, post, unpost]
     ПоступлениеТоваров: [read]

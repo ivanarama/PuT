@@ -1,0 +1,72 @@
+name: РабочееМестоПродаж
+title: АРМ Продавца
+titles:
+  en: Sales workplace
+  de: Verkaufsarbeitsplatz
+  sr: Радно место продаје
+# АРМ — надстройка над торговым ядром: сам движений не делает (posting: false),
+# а собирает свободные остатки, подбирает товар и пакетно создаёт/проводит
+# Реализацию (+ опционально ПКО). Удаление слоя АРМов учёт не ломает.
+posting: false
+numerator:
+  prefix: "РМП-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+    title: Номер
+    titles: {en: Number, de: Nummer, sr: Број}
+  - name: Дата
+    type: date
+    title: Дата
+    titles: {en: Date, de: Datum, sr: Датум}
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles: {en: Organization, de: Organisation, sr: Организација}
+  - name: Покупатель
+    type: reference:Контрагент
+    title: Покупатель
+    titles: {en: Customer, de: Kunde, sr: Купац}
+  - name: Склад
+    type: reference:Склад
+    title: Склад
+    titles: {en: Warehouse, de: Lager, sr: Магацин}
+  - name: ТипЦенПродажи
+    type: reference:ТипЦен
+    title: Тип цен продажи
+    titles: {en: Sales price type, de: Verkaufspreistyp, sr: Тип цене продаје}
+  - name: Касса
+    type: reference:Касса
+    title: Касса
+    titles: {en: Cash desk, de: Kasse, sr: Каса}
+  - name: ОплатитьСразу
+    type: bool
+    title: Оплатить сразу
+    titles: {en: Pay immediately, de: Sofort bezahlen, sr: Плати одмах}
+tableparts:
+  - name: Товары
+    title: Товары
+    titles: {en: Items, de: Artikel, sr: Артикли}
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Номенклатура
+        titles: {en: Item, de: Artikel, sr: Артикал}
+      - name: Свободно
+        type: number
+        title: Свободно
+        titles: {en: Available, de: Verfügbar, sr: Слободно}
+      - name: Количество
+        type: number
+        title: Количество
+        titles: {en: Quantity, de: Menge, sr: Количина}
+      - name: Цена
+        type: number
+        title: Цена
+        titles: {en: Price, de: Preis, sr: Цена}
+      - name: Сумма
+        type: number
+        title: Сумма
+        titles: {en: Amount, de: Betrag, sr: Износ}

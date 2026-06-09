@@ -1,0 +1,60 @@
+name: ОтгрузкаЗаказов
+title: АРМ Отгрузки
+titles:
+  en: Shipment workplace
+  de: Versand-Arbeitsplatz
+  sr: Радно место отпреме
+# АРМ Отгрузки (posting: false): отгрузка зарезервированного по заказам покупателя.
+# Создаёт РеализацииТоваров с привязкой к заказу — проведение снимает резерв и
+# списывает FIFO. Группировка строк по заказу: одна реализация на заказ.
+posting: false
+numerator:
+  prefix: "ОТГ-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+    title: Номер
+    titles: {en: Number, de: Nummer, sr: Број}
+  - name: Дата
+    type: date
+    title: Дата
+    titles: {en: Date, de: Datum, sr: Датум}
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles: {en: Organization, de: Organisation, sr: Организација}
+  - name: Покупатель
+    type: reference:Контрагент
+    title: Покупатель
+    titles: {en: Customer, de: Kunde, sr: Купац}
+  - name: Склад
+    type: reference:Склад
+    title: Склад
+    titles: {en: Warehouse, de: Lager, sr: Магацин}
+tableparts:
+  - name: Строки
+    title: Строки
+    titles: {en: Lines, de: Zeilen, sr: Ставке}
+    fields:
+      - name: ЗаказПокупателя
+        type: reference:ЗаказПокупателя
+        title: Заказ покупателя
+        titles: {en: Sales order, de: Kundenauftrag, sr: Налог купца}
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Номенклатура
+        titles: {en: Item, de: Artikel, sr: Артикал}
+      - name: Резерв
+        type: number
+        title: Резерв
+        titles: {en: Reserved, de: Reserviert, sr: Резервисано}
+      - name: Остаток
+        type: number
+        title: Остаток
+        titles: {en: In stock, de: Bestand, sr: Стање}
+      - name: КОтгрузке
+        type: number
+        title: К отгрузке
+        titles: {en: To ship, de: Zu liefern, sr: За отпрему}

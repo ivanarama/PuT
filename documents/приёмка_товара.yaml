@@ -1,0 +1,64 @@
+name: ПриёмкаТовара
+title: АРМ Приёмки
+titles:
+  en: Goods receipt workplace
+  de: Wareneingang-Arbeitsplatz
+  sr: Радно место пријема
+# АРМ Приёмки (posting: false): приём товара по заказу поставщику со сверкой
+# (Расхождение = Принято − Заказано). Создаёт и проводит ПоступлениеТоваров —
+# оно закрывает товары в пути, пишет партии FIFO и долг поставщику.
+posting: false
+numerator:
+  prefix: "ПРИ-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+    title: Номер
+    titles: {en: Number, de: Nummer, sr: Број}
+  - name: Дата
+    type: date
+    title: Дата
+    titles: {en: Date, de: Datum, sr: Датум}
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles: {en: Organization, de: Organisation, sr: Организација}
+  - name: Поставщик
+    type: reference:Контрагент
+    title: Поставщик
+    titles: {en: Supplier, de: Lieferant, sr: Добављач}
+  - name: Склад
+    type: reference:Склад
+    title: Склад
+    titles: {en: Warehouse, de: Lager, sr: Магацин}
+  - name: ЗаказПоставщику
+    type: reference:ЗаказПоставщику
+    title: Заказ поставщику
+    titles: {en: Purchase order, de: Bestellung, sr: Налог добављачу}
+tableparts:
+  - name: Товары
+    title: Товары
+    titles: {en: Items, de: Artikel, sr: Артикли}
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Номенклатура
+        titles: {en: Item, de: Artikel, sr: Артикал}
+      - name: Заказано
+        type: number
+        title: Заказано (ожидается)
+        titles: {en: Expected, de: Erwartet, sr: Очекивано}
+      - name: Принято
+        type: number
+        title: Принято
+        titles: {en: Received, de: Erhalten, sr: Примљено}
+      - name: Цена
+        type: number
+        title: Цена
+        titles: {en: Price, de: Preis, sr: Цена}
+      - name: Расхождение
+        type: number
+        title: Расхождение
+        titles: {en: Discrepancy, de: Abweichung, sr: Одступање}

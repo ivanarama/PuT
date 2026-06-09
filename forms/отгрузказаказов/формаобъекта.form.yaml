@@ -1,0 +1,148 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: ОтгрузкаЗаказов
+  title:
+    ru: "АРМ Отгрузки"
+    en: "Shipment workplace"
+    de: "Versand-Arbeitsplatz"
+    sr: "Радно место отпреме"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.ОтгрузкаЗаказов
+    save: true
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Отгрузка"
+          en: "Shipment"
+          de: "Versand"
+          sr: "Отпрема"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Параметры отгрузки"
+              en: "Shipment parameters"
+              de: "Versandparameter"
+              sr: "Параметри отпреме"
+            children:
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                  de: "Datum"
+                  sr: "Датум"
+                data_path: Объект.Дата
+                required: true
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                  de: "Organisation"
+                  sr: "Организација"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеПокупатель
+                title:
+                  ru: "Покупатель"
+                  en: "Customer"
+                  de: "Kunde"
+                  sr: "Купац"
+                data_path: Объект.Покупатель
+                required: true
+                choice: true
+                hint: "Чьи заказы отгружаем"
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                  de: "Lager"
+                  sr: "Магацин"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+
+      - kind: Страница
+        name: СтраницаСтроки
+        title:
+          ru: "К отгрузке"
+          en: "To ship"
+          de: "Zu liefern"
+          sr: "За отпрему"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              ru: "К отгрузке = мин(резерв, остаток)"
+              en: "To ship = min(reserved, stock)"
+              de: "Zu liefern = min(Reserve, Bestand)"
+              sr: "За отпрему = мин(резерва, стање)"
+            children:
+              - kind: ТабличнаяЧасть
+                use_grid: true
+                name: ТабСтроки
+                title:
+                  ru: "Строки"
+                  en: "Lines"
+                  de: "Zeilen"
+                  sr: "Ставке"
+                data_path: Объект.Строки
+                children:
+                  - kind: Кнопка
+                    name: КнопкаЗаполнить
+                    title:
+                      ru: "1️⃣ Заполнить к отгрузке"
+                      en: "Fill to ship"
+                      de: "Zu liefern füllen"
+                      sr: "Попуни за отпрему"
+                    hint: "Резервы по заказам покупателя с учётом остатка склада"
+                    events:
+                      Нажатие: КнопкаЗаполнитьНажатие
+                  - kind: Кнопка
+                    name: КнопкаОчистить
+                    title:
+                      ru: "Очистить"
+                      en: "Clear"
+                      de: "Leeren"
+                      sr: "Обриши"
+                    events:
+                      Нажатие: КнопкаОчиститьНажатие
+
+          - kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              ru: "Отгрузка"
+              en: "Shipment"
+              de: "Versand"
+              sr: "Отпрема"
+            children:
+              - kind: Кнопка
+                name: КнопкаСоздатьРеализации
+                title:
+                  ru: "2️⃣ Создать реализации"
+                  en: "Create sales"
+                  de: "Verkäufe erstellen"
+                  sr: "Креирај продаје"
+                hint: "Одна реализация на заказ; проведение снимает резерв и списывает FIFO"
+                events:
+                  Нажатие: КнопкаСоздатьРеализацииНажатие
+
+events:
+  ПриОткрытии: ПриОткрытииФормы
