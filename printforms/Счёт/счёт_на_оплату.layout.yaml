@@ -1,8 +1,7 @@
 name: СчётНаОплату
 document: Счёт
 areas:
-  БанковскиеРеквизиты:
-    rows:
+  - rows:
       - cells:
           - text: "Банк получателя:"
             bold: true
@@ -12,7 +11,7 @@ areas:
       - cells:
           - text: "БИК:"
           - parameter: БИК
-          - text: "Сч. №"
+          - text: Сч. №
           - parameter: КоррСчёт
             colspan: 3
       - cells:
@@ -20,7 +19,7 @@ areas:
           - parameter: ИНН
           - text: "КПП:"
           - parameter: КПП
-          - text: "Сч. №"
+          - text: Сч. №
           - parameter: РасчСчёт
       - cells:
           - text: "Получатель:"
@@ -28,24 +27,24 @@ areas:
             colspan: 2
           - parameter: Получатель
             colspan: 4
-  Заголовок:
-    rows:
+    name: БанковскиеРеквизиты
+  - rows:
       - cells:
-          - text: "Счёт на оплату"
+          - text: Счёт на оплату [номер] от [дата]
             bold: true
             colspan: 6
             align: center
             fontSize: 16
       - cells:
-          - text: "№"
+          - text: №
             colspan: 1
           - parameter: Номер
             colspan: 2
-          - text: "от"
+          - text: от
           - parameter: Дата
             colspan: 2
-  Поставщик:
-    rows:
+    name: Заголовок
+  - rows:
       - cells:
           - text: "Поставщик (Исполнитель):"
             bold: true
@@ -53,8 +52,8 @@ areas:
       - cells:
           - parameter: Поставщик
             colspan: 6
-  Покупатель:
-    rows:
+    name: Поставщик
+  - rows:
       - cells:
           - text: "Покупатель (Заказчик):"
             bold: true
@@ -62,39 +61,39 @@ areas:
       - cells:
           - parameter: ПокупательИнфо
             colspan: 6
-  ШапкаТаблицы:
-    rows:
+    name: Покупатель
+  - rows:
       - cells:
-          - text: "№"
+          - text: №
             bold: true
             align: center
             backColor: "#E8E8E8"
             width: 35px
-          - text: "Товары (работы, услуги)"
+          - text: Товары (работы, услуги)
             bold: true
             backColor: "#E8E8E8"
-          - text: "Кол-во"
+          - text: Кол-во
             bold: true
             align: right
             backColor: "#E8E8E8"
             width: 55px
-          - text: "Ед."
+          - text: Ед.
             bold: true
             align: center
             backColor: "#E8E8E8"
             width: 40px
-          - text: "Цена"
+          - text: Цена
             bold: true
             align: right
             backColor: "#E8E8E8"
             width: 80px
-          - text: "Сумма"
+          - text: Сумма
             bold: true
             align: right
             backColor: "#E8E8E8"
             width: 90px
-  СтрокаТаблицы:
-    rows:
+    name: ШапкаТаблицы
+  - rows:
       - cells:
           - parameter: НомерПП
             align: center
@@ -107,8 +106,8 @@ areas:
             align: right
           - parameter: Сумма
             align: right
-  Итого:
-    rows:
+    name: СтрокаТаблицы
+  - rows:
       - cells:
           - text: "Итого:"
             bold: true
@@ -116,8 +115,8 @@ areas:
           - parameter: ИтогоСумма
             bold: true
             align: right
-  Подвал:
-    rows:
+    name: Итого
+  - rows:
       - cells:
           - text: "Без налога (НДС): -"
             colspan: 6
@@ -128,8 +127,8 @@ areas:
           - parameter: ВсегоКОплате
             bold: true
             align: right
-  СуммаПрописью:
-    rows:
+    name: Подвал
+  - rows:
       - cells:
           - parameter: СуммаПрописью
             colspan: 6
@@ -137,20 +136,21 @@ areas:
           - parameter: ВсегоНаименований
             colspan: 6
             fontSize: 9
-  Предупреждение:
-    rows:
+    name: СуммаПрописью
+  - rows:
       - cells:
-          - text: "Внимание! Оплата данного счета означает согласие с условиями поставки товара. Уведомление об оплате обязательно."
+          - text: Внимание! Оплата данного счета означает согласие с условиями поставки товара. Уведомление об оплате обязательно.
             colspan: 6
             fontSize: 8
-  Подпись:
-    rows:
+    name: Предупреждение
+  - rows:
       - cells:
           - parameter: ДолжностьРуководителя
           - text: ": _________________________ /"
           - parameter: ФИОРуководителя
-          - text: "/"
+          - text: /
             colspan: 2
       - cells:
-          - text: "МП"
+          - text: МП
             colspan: 6
+    name: Подпись
