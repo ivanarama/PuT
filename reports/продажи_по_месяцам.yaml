@@ -1,0 +1,110 @@
+name: ПродажиПоМесяцам
+title: Продажи по месяцам
+titles:
+  en: Sales by month
+  de: Verkäufe nach Monat
+  sr: Продаја по месецима
+  az: Aylar üzrə satışlar
+  es: Ventas por mes
+  fr: Ventes par mois
+  hy: Վաճառք ըստ ամիսների
+  ka: გაყიდვები თვეების მიხედვით
+  kk: Айлар бойынша сатылымдар
+  pt: Vendas por mês
+  ro: Vânzări pe lună
+  tr: Aylara göre satışlar
+  uk: Продажі по місяцях
+  uz: Oylar bo'yicha sotuvlar
+  zh: 按月销售
+params:
+  - name: Начало
+    type: date
+    label: "С даты"
+    labels:
+      en: From date
+      de: Von Datum
+      sr: Од датума
+      az: Başlanğıc
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
+  - name: Конец
+    type: date
+    label: "По дату"
+    labels:
+      en: To date
+      de: Bis Datum
+      sr: До датума
+      az: Son
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
+  - name: Организация
+    type: reference:Организация
+    label: "Организация"
+    labels:
+      en: Organization
+      de: Organisation
+      sr: Организација
+      az: Təşkilat
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
+# Пример КРОСС-ТАБЛИЦЫ (pivot) системы компоновки данных.
+# Запрос отдаёт ПЛОСКИЕ детальные строки (Номенклатура, Месяц, Выручка) —
+# группировку по строкам и колонкам, агрегацию и итоги выполняет блок composition.
+# Период регистра сворачиваем в «год-месяц» строкой "2026-03": strftime сортируется
+# хронологически (как строка ISO) и портируется на оба диалекта (strftime_compat).
+query: |
+  ВЫБРАТЬ
+    Номенклатура              КАК Номенклатура,
+    strftime("%Y-%m", period) КАК Месяц,
+    Выручка                   КАК Выручка
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ (&Начало ЕСТЬ ПУСТО ИЛИ period >= &Начало)
+    И (&Конец  ЕСТЬ ПУСТО ИЛИ period <= &Конец)
+    И (&Организация ЕСТЬ ПУСТО ИЛИ Организация = &Организация)
+  УПОРЯДОЧИТЬ ПО Номенклатура.Наименование
+# Кросс-таблица: непустой columns переключает компоновку в режим pivot —
+# groupings уходят в строки, columns — в колонки, measures считаются на пересечении.
+composition:
+  groupings:                       # измерения в строки (слева)
+    - Номенклатура
+  columns:                         # измерения в колонки (шапка) — ВКЛЮЧАЕТ кросс-режим
+    - Месяц
+  measures:                        # значение на пересечении строка × колонка
+    - { field: Выручка, agg: sum, title: "Выручка", format: "#,##0.00" }
+  totals:
+    grand: true                    # нижняя строка «ВСЕГО» по колонкам (в pivot рисуется всегда)
+  detail: false                    # детализация в кросс-режиме не выводится
+  conditional:                     # условное оформление работает поячеечно по агрегату
+    # сильный месяц по товару — зелёным фоном (порог иллюстративный, подстройте)
+    - when: "Выручка >= 30000"
+      field: Выручка
+      style: { background: "#e6ffed" }
+# chart и sort в кросс-режиме игнорируются движком: график отключён,
+# порядок строк задаётся УПОРЯДОЧИТЬ в запросе, колонок — авто-хронологический.
