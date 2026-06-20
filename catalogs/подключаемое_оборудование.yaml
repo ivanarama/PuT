@@ -1,0 +1,69 @@
+name: ПодключаемоеОборудование
+title: Подключаемое оборудование
+titles:
+  en: Connected equipment
+fields:
+  - name: Наименование
+    type: string
+    title: Наименование
+    titles:
+      en: Name
+  - name: ТипОборудования
+    type: enum:ТипОборудования
+    title: Тип оборудования
+    titles:
+      en: Equipment type
+  - name: Драйвер
+    type: string
+    title: Драйвер
+    titles:
+      en: Driver
+  - name: Порт
+    type: string
+    title: Порт / адрес
+    titles:
+      en: Port / address
+  - name: Ширина
+    type: number
+    title: Ширина (символов)
+    titles:
+      en: Width (chars)
+  # Поля декларативного протокола (драйвер «scripted»): описывают модель
+  # устройства данными, без программирования драйвера в платформе.
+  - name: КомандаЗапроса
+    type: string
+    title: Команда запроса (hex)
+    titles:
+      en: Request command (hex)
+  - name: Шаблон
+    type: string
+    title: Шаблон разбора ответа
+    titles:
+      en: Response parse template
+  - name: Множитель
+    type: number
+    title: Множитель
+    titles:
+      en: Multiplier
+predefined:
+  - name: ККТ_АТОЛ
+    fields:
+      Наименование: "ККТ АТОЛ (демо)"
+      ТипОборудования: ФискальныйРегистратор
+      Драйвер: atol_kkt
+      Порт: "127.0.0.1:16732"
+  - name: ПринтерЧеков
+    fields:
+      Наименование: "Чековый принтер (демо)"
+      ТипОборудования: ПринтерЧеков
+      Драйвер: escpos_tcp
+      Порт: "127.0.0.1:9100"
+  - name: Весы
+    fields:
+      Наименование: "Весы (демо, scripted)"
+      ТипОборудования: Весы
+      Драйвер: scripted
+      Порт: "127.0.0.1:5001"
+      КомандаЗапроса: "05"
+      Шаблон: "{вес} кг"
+      Множитель: 1

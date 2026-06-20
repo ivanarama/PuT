@@ -1,0 +1,35 @@
+name: ПробитьЧек
+title: РМК — пробить фискальный чек (54-ФЗ)
+titles:
+  en: POS — register fiscal receipt (FZ-54)
+params:
+  - name: Товар
+    type: string
+    label: Наименование товара
+    labels:
+      en: Item name
+  - name: Количество
+    type: number
+    label: Количество
+    labels:
+      en: Quantity
+  - name: Цена
+    type: number
+    label: Цена за единицу
+    labels:
+      en: Unit price
+  - name: СтавкаНДС
+    type: string
+    label: "Ставка НДС (ндс20 / ндс10 / ндс0 / безНдс)"
+    labels:
+      en: "VAT rate (ндс20 / ндс10 / ндс0 / безНдс)"
+  - name: Оплата
+    type: string
+    label: "Вид оплаты (наличные / безналичные)"
+    labels:
+      en: "Payment type (cash / card)"
+  - name: Порт
+    type: string
+    label: "Адрес сервиса АТОЛ, если не задан в справочнике (напр. 127.0.0.1:16732)"
+    labels:
+      en: "ATOL service address if not set in catalog (e.g. 127.0.0.1:16732)"
