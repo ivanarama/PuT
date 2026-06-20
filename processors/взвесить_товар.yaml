@@ -2,3 +2,17 @@ name: ВзвеситьТовар
 title: РМК — взвесить товар
 titles:
   en: POS — weigh item
+  de: Kasse — Artikel wiegen
+  sr: Каса — измери артикал
+  az: Kassa — məhsulu çək
+  es: Caja — pesar artículo
+  fr: Caisse — peser l'article
+  hy: Դրամարկղ — կշռել ապրանքը
+  ka: სალარო — საქონლის აწონვა
+  kk: Касса — тауарды өлшеу
+  pt: Caixa — pesar item
+  ro: Casă — cântărire articol
+  tr: Kasa — ürünü tart
+  uk: Каса — зважити товар
+  uz: Kassa — mahsulotni tortish
+  zh: 收银 — 称重商品

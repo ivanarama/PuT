@@ -2,34 +2,132 @@ name: ПробитьЧек
 title: РМК — пробить фискальный чек (54-ФЗ)
 titles:
   en: POS — register fiscal receipt (FZ-54)
+  de: Kasse — Fiskalbeleg registrieren (FZ-54)
+  sr: Каса — фискални рачун (ФЗ-54)
+  az: Kassa — fiskal çek (FZ-54)
+  es: Caja — registrar recibo fiscal (FZ-54)
+  fr: Caisse — enregistrer un ticket fiscal (FZ-54)
+  hy: Դրամարկղ — գրանցել ֆիսկալ կտրոն (FZ-54)
+  ka: სალარო — ფისკალური ჩეკის რეგისტრაცია (FZ-54)
+  kk: Касса — фискалдық чекті тіркеу (FZ-54)
+  pt: Caixa — registrar comprovante fiscal (FZ-54)
+  ro: Casă — înregistrare bon fiscal (FZ-54)
+  tr: Kasa — mali fiş kaydı (FZ-54)
+  uk: Каса — пробити фіскальний чек (ФЗ-54)
+  uz: Kassa — fiskal chekni roʻyxatga olish (FZ-54)
+  zh: 收银 — 登记财政收据（FZ-54）
 params:
   - name: Товар
     type: string
     label: Наименование товара
     labels:
       en: Item name
+      de: Artikelname
+      sr: Назив артикла
+      az: Məhsulun adı
+      es: Nombre del artículo
+      fr: Nom de l'article
+      hy: Ապրանքի անվանում
+      ka: საქონლის დასახელება
+      kk: Тауардың атауы
+      pt: Nome do item
+      ro: Denumirea articolului
+      tr: Ürün adı
+      uk: Найменування товару
+      uz: Mahsulot nomi
+      zh: 商品名称
   - name: Количество
     type: number
     label: Количество
     labels:
       en: Quantity
+      de: Menge
+      sr: Количина
+      az: Miqdar
+      es: Cantidad
+      fr: Quantité
+      hy: Քանակ
+      ka: რაოდენობა
+      kk: Саны
+      pt: Quantidade
+      ro: Cantitate
+      tr: Miktar
+      uk: Кількість
+      uz: Miqdor
+      zh: 数量
   - name: Цена
     type: number
     label: Цена за единицу
     labels:
       en: Unit price
+      de: Stückpreis
+      sr: Цена по јединици
+      az: Vahidin qiyməti
+      es: Precio unitario
+      fr: Prix unitaire
+      hy: Միավորի գին
+      ka: ერთეულის ფასი
+      kk: Бірлік бағасы
+      pt: Preço unitário
+      ro: Preț unitar
+      tr: Birim fiyat
+      uk: Ціна за одиницю
+      uz: Birlik narxi
+      zh: 单价
   - name: СтавкаНДС
     type: string
     label: "Ставка НДС (ндс20 / ндс10 / ндс0 / безНдс)"
     labels:
       en: "VAT rate (ндс20 / ндс10 / ндс0 / безНдс)"
+      de: "MwSt.-Satz (ндс20 / ндс10 / ндс0 / безНдс)"
+      sr: "ПДВ стопа (ндс20 / ндс10 / ндс0 / безНдс)"
+      az: "ƏDV dərəcəsi (ндс20 / ндс10 / ндс0 / безНдс)"
+      es: "Tasa de IVA (ндс20 / ндс10 / ндс0 / безНдс)"
+      fr: "Taux de TVA (ндс20 / ндс10 / ндс0 / безНдс)"
+      hy: "ԱԱՀ դրույք (ндс20 / ндс10 / ндс0 / безНдс)"
+      ka: "დღგ განაკვეთი (ндс20 / ндс10 / ндс0 / безНдс)"
+      kk: "ҚҚС мөлшерлемесі (ндс20 / ндс10 / ндс0 / безНдс)"
+      pt: "Taxa de IVA (ндс20 / ндс10 / ндс0 / безНдс)"
+      ro: "Cotă TVA (ндс20 / ндс10 / ндс0 / безНдс)"
+      tr: "KDV oranı (ндс20 / ндс10 / ндс0 / безНдс)"
+      uk: "Ставка ПДВ (ндс20 / ндс10 / ндс0 / безНдс)"
+      uz: "QQS stavkasi (ндс20 / ндс10 / ндс0 / безНдс)"
+      zh: "增值税率（ндс20 / ндс10 / ндс0 / безНдс）"
   - name: Оплата
     type: string
     label: "Вид оплаты (наличные / безналичные)"
     labels:
       en: "Payment type (cash / card)"
+      de: "Zahlungsart (наличные / безналичные)"
+      sr: "Врста плаћања (наличные / безналичные)"
+      az: "Ödəniş növü (наличные / безналичные)"
+      es: "Tipo de pago (наличные / безналичные)"
+      fr: "Mode de paiement (наличные / безналичные)"
+      hy: "Վճարման տեսակ (наличные / безналичные)"
+      ka: "გადახდის ტიპი (наличные / безналичные)"
+      kk: "Төлем түрі (наличные / безналичные)"
+      pt: "Tipo de pagamento (наличные / безналичные)"
+      ro: "Tip de plată (наличные / безналичные)"
+      tr: "Ödeme türü (наличные / безналичные)"
+      uk: "Вид оплати (наличные / безналичные)"
+      uz: "Toʻlov turi (наличные / безналичные)"
+      zh: "支付方式（наличные / безналичные）"
   - name: Порт
     type: string
     label: "Адрес сервиса АТОЛ, если не задан в справочнике (напр. 127.0.0.1:16732)"
     labels:
-      en: "ATOL service address if not set in catalog (e.g. 127.0.0.1:16732)"
+      en: "ATOL service address if not set in the catalog (e.g. 127.0.0.1:16732)"
+      de: "ATOL-Dienstadresse, falls nicht im Verzeichnis gesetzt (z. B. 127.0.0.1:16732)"
+      sr: "Адреса ATOL сервиса ако није задата у шифарнику (нпр. 127.0.0.1:16732)"
+      az: "Kataloqda təyin edilməyibsə, ATOL xidmətinin ünvanı (məs. 127.0.0.1:16732)"
+      es: "Dirección del servicio ATOL si no está en el catálogo (p. ej. 127.0.0.1:16732)"
+      fr: "Adresse du service ATOL si non définie dans le référentiel (ex. 127.0.0.1:16732)"
+      hy: "ATOL ծառայության հասցե, եթե սահմանված չէ տեղեկագրքում (օր. 127.0.0.1:16732)"
+      ka: "ATOL სერვისის მისამართი, თუ ცნობარში არ არის მითითებული (მაგ. 127.0.0.1:16732)"
+      kk: "Анықтамалықта көрсетілмесе, ATOL қызметінің мекенжайы (мыс. 127.0.0.1:16732)"
+      pt: "Endereço do serviço ATOL se não definido no catálogo (ex. 127.0.0.1:16732)"
+      ro: "Adresa serviciului ATOL dacă nu este setată în nomenclator (ex. 127.0.0.1:16732)"
+      tr: "Katalogda ayarlı değilse ATOL hizmet adresi (örn. 127.0.0.1:16732)"
+      uk: "Адреса сервісу ATOL, якщо не задана в довіднику (напр. 127.0.0.1:16732)"
+      uz: "Katalogda koʻrsatilmagan boʻlsa, ATOL xizmati manzili (mas. 127.0.0.1:16732)"
+      zh: "若目录中未设置，则为ATOL服务地址（例如 127.0.0.1:16732）"

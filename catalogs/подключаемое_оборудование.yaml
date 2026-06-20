@@ -2,32 +2,116 @@ name: ПодключаемоеОборудование
 title: Подключаемое оборудование
 titles:
   en: Connected equipment
+  de: Anschließbare Geräte
+  sr: Прикључива опрема
+  az: Qoşula bilən avadanlıq
+  es: Equipo conectable
+  fr: Équipement connectable
+  hy: Միացվող սարքավորում
+  ka: დასაკავშირებელი აღჭურვილობა
+  kk: Қосылатын жабдық
+  pt: Equipamento conectável
+  ro: Echipament conectabil
+  tr: Bağlanabilir ekipman
+  uk: Підключуване обладнання
+  uz: Ulanadigan uskuna
+  zh: 可连接设备
 fields:
   - name: Наименование
     type: string
     title: Наименование
     titles:
       en: Name
+      de: Name
+      sr: Назив
+      az: Adlandırma
+      es: Nombre
+      fr: Nom
+      hy: Անվանում
+      ka: დასახელება
+      kk: Атауы
+      pt: Nome
+      ro: Denumire
+      tr: Ad
+      uk: Найменування
+      uz: Nomi
+      zh: 名称
   - name: ТипОборудования
     type: enum:ТипОборудования
     title: Тип оборудования
     titles:
       en: Equipment type
+      de: Gerätetyp
+      sr: Тип опреме
+      az: Avadanlıq növü
+      es: Tipo de equipo
+      fr: Type d'équipement
+      hy: Սարքավորման տեսակ
+      ka: აღჭურვილობის ტიპი
+      kk: Жабдық түрі
+      pt: Tipo de equipamento
+      ro: Tip de echipament
+      tr: Ekipman türü
+      uk: Тип обладнання
+      uz: Uskuna turi
+      zh: 设备类型
   - name: Драйвер
     type: string
     title: Драйвер
     titles:
       en: Driver
+      de: Treiber
+      sr: Драјвер
+      az: Drayver
+      es: Controlador
+      fr: Pilote
+      hy: Դրայվեր
+      ka: დრაივერი
+      kk: Драйвер
+      pt: Driver
+      ro: Driver
+      tr: Sürücü
+      uk: Драйвер
+      uz: Drayver
+      zh: 驱动程序
   - name: Порт
     type: string
     title: Порт / адрес
     titles:
       en: Port / address
+      de: Port / Adresse
+      sr: Порт / адреса
+      az: Port / ünvan
+      es: Puerto / dirección
+      fr: Port / adresse
+      hy: Պորտ / հասցե
+      ka: პორტი / მისამართი
+      kk: Порт / мекенжай
+      pt: Porta / endereço
+      ro: Port / adresă
+      tr: Port / adres
+      uk: Порт / адреса
+      uz: Port / manzil
+      zh: 端口 / 地址
   - name: Ширина
     type: number
     title: Ширина (символов)
     titles:
       en: Width (chars)
+      de: Breite (Zeichen)
+      sr: Ширина (знакова)
+      az: En (simvol)
+      es: Ancho (caracteres)
+      fr: Largeur (caractères)
+      hy: Լայնություն (նիշ)
+      ka: სიგანე (სიმბოლო)
+      kk: Ені (таңба)
+      pt: Largura (caracteres)
+      ro: Lățime (caractere)
+      tr: Genişlik (karakter)
+      uk: Ширина (символів)
+      uz: Kenglik (belgi)
+      zh: 宽度（字符）
   # Поля декларативного протокола (драйвер «scripted»): описывают модель
   # устройства данными, без программирования драйвера в платформе.
   - name: КомандаЗапроса
@@ -35,16 +119,58 @@ fields:
     title: Команда запроса (hex)
     titles:
       en: Request command (hex)
+      de: Abfragebefehl (hex)
+      sr: Команда упита (hex)
+      az: Sorğu əmri (hex)
+      es: Comando de solicitud (hex)
+      fr: Commande de requête (hex)
+      hy: Հարցման հրաման (hex)
+      ka: მოთხოვნის ბრძანება (hex)
+      kk: Сұраныс командасы (hex)
+      pt: Comando de solicitação (hex)
+      ro: Comandă de interogare (hex)
+      tr: Sorgu komutu (hex)
+      uk: Команда запиту (hex)
+      uz: So‘rov buyrug‘i (hex)
+      zh: 请求命令（hex）
   - name: Шаблон
     type: string
     title: Шаблон разбора ответа
     titles:
       en: Response parse template
+      de: Antwort-Parsing-Vorlage
+      sr: Шаблон рашчлањивања одговора
+      az: Cavabın təhlil şablonu
+      es: Plantilla de análisis de respuesta
+      fr: Modèle d'analyse de la réponse
+      hy: Պատասխանի վերլուծման ձևանմուշ
+      ka: პასუხის გარჩევის შაბლონი
+      kk: Жауапты талдау үлгісі
+      pt: Modelo de análise da resposta
+      ro: Șablon de analiză a răspunsului
+      tr: Yanıt ayrıştırma şablonu
+      uk: Шаблон розбору відповіді
+      uz: Javobni tahlil qilish shabloni
+      zh: 响应解析模板
   - name: Множитель
     type: number
     title: Множитель
     titles:
       en: Multiplier
+      de: Multiplikator
+      sr: Множилац
+      az: Vuruq
+      es: Multiplicador
+      fr: Multiplicateur
+      hy: Բազմապատկիչ
+      ka: მამრავლი
+      kk: Көбейткіш
+      pt: Multiplicador
+      ro: Multiplicator
+      tr: Çarpan
+      uk: Множник
+      uz: Koʻpaytuvchi
+      zh: 乘数
 predefined:
   - name: ККТ_АТОЛ
     fields:

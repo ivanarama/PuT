@@ -2,29 +2,113 @@ name: ПечатьЧека
 title: РМК — печать нефискального чека
 titles:
   en: POS — print non-fiscal receipt
+  de: Kasse — nicht-fiskalischen Beleg drucken
+  sr: Каса — штампај нефискални рачун
+  az: Kassa — qeyri-fiskal çek çap et
+  es: Caja — imprimir recibo no fiscal
+  fr: Caisse — imprimer un ticket non fiscal
+  hy: Դրամարկղ — տպել ոչ ֆիսկալ կտրոն
+  ka: სალარო — არაფისკალური ჩეკის ბეჭდვა
+  kk: Касса — фискалдық емес чекті басып шығару
+  pt: Caixa — imprimir recibo não fiscal
+  ro: Casă — tipărire bon nefiscal
+  tr: Kasa — mali olmayan fiş yazdır
+  uk: Каса — друк нефіскального чека
+  uz: Kassa — nofiskal chekni chop etish
+  zh: 收银 — 打印非财政收据
 params:
   - name: Товар
     type: string
     label: Наименование товара
     labels:
       en: Item name
+      de: Artikelname
+      sr: Назив артикла
+      az: Məhsulun adı
+      es: Nombre del artículo
+      fr: Nom de l'article
+      hy: Ապրանքի անվանում
+      ka: საქონლის დასახელება
+      kk: Тауардың атауы
+      pt: Nome do item
+      ro: Denumirea articolului
+      tr: Ürün adı
+      uk: Найменування товару
+      uz: Mahsulot nomi
+      zh: 商品名称
   - name: Количество
     type: number
     label: Количество
     labels:
       en: Quantity
+      de: Menge
+      sr: Количина
+      az: Miqdar
+      es: Cantidad
+      fr: Quantité
+      hy: Քանակ
+      ka: რაოდენობა
+      kk: Саны
+      pt: Quantidade
+      ro: Cantitate
+      tr: Miktar
+      uk: Кількість
+      uz: Miqdor
+      zh: 数量
   - name: Цена
     type: number
     label: Цена за единицу
     labels:
       en: Unit price
+      de: Stückpreis
+      sr: Цена по јединици
+      az: Vahidin qiyməti
+      es: Precio unitario
+      fr: Prix unitaire
+      hy: Միավորի գին
+      ka: ერთეულის ფასი
+      kk: Бірлік бағасы
+      pt: Preço unitário
+      ro: Preț unitar
+      tr: Birim fiyat
+      uk: Ціна за одиницю
+      uz: Birlik narxi
+      zh: 单价
   - name: Оплата
     type: string
     label: "Вид оплаты (Наличные / Карта)"
     labels:
       en: "Payment type (cash / card)"
+      de: "Zahlungsart (Наличные / Карта)"
+      sr: "Врста плаћања (Наличные / Карта)"
+      az: "Ödəniş növü (Наличные / Карта)"
+      es: "Tipo de pago (Наличные / Карта)"
+      fr: "Mode de paiement (Наличные / Карта)"
+      hy: "Վճարման տեսակ (Наличные / Карта)"
+      ka: "გადახდის ტიპი (Наличные / Карта)"
+      kk: "Төлем түрі (Наличные / Карта)"
+      pt: "Tipo de pagamento (Наличные / Карта)"
+      ro: "Tip de plată (Наличные / Карта)"
+      tr: "Ödeme türü (Наличные / Карта)"
+      uk: "Вид оплати (Наличные / Карта)"
+      uz: "Toʻlov turi (Наличные / Карта)"
+      zh: "支付方式（Наличные / Карта）"
   - name: Порт
     type: string
     label: "Порт принтера, если не задан в справочнике (напр. 127.0.0.1:9100)"
     labels:
-      en: "Printer port if not set in catalog (e.g. 127.0.0.1:9100)"
+      en: "Printer port if not set in the catalog (e.g. 127.0.0.1:9100)"
+      de: "Druckerport, falls nicht im Verzeichnis gesetzt (z. B. 127.0.0.1:9100)"
+      sr: "Порт штампача ако није задат у шифарнику (нпр. 127.0.0.1:9100)"
+      az: "Kataloqda təyin edilməyibsə, printer portu (məs. 127.0.0.1:9100)"
+      es: "Puerto de la impresora si no está en el catálogo (p. ej. 127.0.0.1:9100)"
+      fr: "Port de l'imprimante si non défini dans le référentiel (ex. 127.0.0.1:9100)"
+      hy: "Տպիչի պորտ, եթե սահմանված չէ տեղեկագրքում (օր. 127.0.0.1:9100)"
+      ka: "პრინტერის პორტი, თუ ცნობარში არ არის მითითებული (მაგ. 127.0.0.1:9100)"
+      kk: "Анықтамалықта көрсетілмесе, принтер порты (мыс. 127.0.0.1:9100)"
+      pt: "Porta da impressora se não definida no catálogo (ex. 127.0.0.1:9100)"
+      ro: "Portul imprimantei dacă nu este setat în nomenclator (ex. 127.0.0.1:9100)"
+      tr: "Katalogda ayarlı değilse yazıcı portu (örn. 127.0.0.1:9100)"
+      uk: "Порт принтера, якщо не заданий у довіднику (напр. 127.0.0.1:9100)"
+      uz: "Katalogda koʻrsatilmagan boʻlsa, printer porti (mas. 127.0.0.1:9100)"
+      zh: "若目录中未设置，则为打印机端口（例如 127.0.0.1:9100）"
