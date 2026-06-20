@@ -1,0 +1,9 @@
+name: ПризнакПредмета
+title: Признак предмета расчёта (тег 1212)
+titles:
+  en: Payment subject attribute (FFD tag 1212)
+values:
+  - Товар
+  - Услуга
+  - Работа
+  - Платёж

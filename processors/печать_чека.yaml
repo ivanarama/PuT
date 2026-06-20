@@ -1,0 +1,30 @@
+name: ПечатьЧека
+title: РМК — печать нефискального чека
+titles:
+  en: POS — print non-fiscal receipt
+params:
+  - name: Товар
+    type: string
+    label: Наименование товара
+    labels:
+      en: Item name
+  - name: Количество
+    type: number
+    label: Количество
+    labels:
+      en: Quantity
+  - name: Цена
+    type: number
+    label: Цена за единицу
+    labels:
+      en: Unit price
+  - name: Оплата
+    type: string
+    label: "Вид оплаты (Наличные / Карта)"
+    labels:
+      en: "Payment type (cash / card)"
+  - name: Порт
+    type: string
+    label: "Порт принтера, если не задан в справочнике (напр. 127.0.0.1:9100)"
+    labels:
+      en: "Printer port if not set in catalog (e.g. 127.0.0.1:9100)"
