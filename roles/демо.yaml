@@ -35,6 +35,7 @@ descriptions:
   zh: 演示访问角色 — 可读可创建，不可删除
 permissions:
   catalogs:
+    Валюта: [read]
     Контрагент: [read, write]
     Номенклатура: [read, write]
     Склад: [read, write]

@@ -17,6 +17,7 @@ titles:
     uz: Xaridlar
     zh: 采购
 order: 20
+roles: [Снабженец, Управленец, Демо]
 contents:
     catalogs:
         - Валюта

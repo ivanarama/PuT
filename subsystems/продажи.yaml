@@ -17,6 +17,7 @@ titles:
     uz: Savdo
     zh: 销售
 order: 10
+roles: [Менеджер, Управленец, Демо]
 contents:
     catalogs:
         - Валюта
