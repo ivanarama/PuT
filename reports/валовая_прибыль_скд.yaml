@@ -1,119 +1,147 @@
 name: ВаловаяПрибыльСКД
 title: Валовая прибыль (СКД)
 titles:
-  en: Gross profit (data composition)
-  de: Rohgewinn (Datenkomposition)
-  sr: Бруто добит (композиција података)
-  az: Brüt mənfəət (məlumat kompozisiyası)
-  es: Beneficio bruto (composición de datos)
-  fr: Bénéfice brut (composition de données)
-  hy: Համախառն շահույթ (տվյալների կազմ)
-  ka: მთლიანი მოგება (მონაცემთა კომპოზიცია)
-  kk: Жалпы пайда (деректер композициясы)
-  pt: Lucro bruto (composição de dados)
-  ro: Profit brut (compoziție de date)
-  tr: Brüt kâr (veri kompozisyonu)
-  uk: Валовий прибуток (компонування даних)
-  uz: Yalpi foyda (ma'lumotlar kompozitsiyasi)
-  zh: 毛利润（数据组合）
+    az: Brüt mənfəət (məlumat kompozisiyası)
+    de: Rohgewinn (Datenkomposition)
+    en: Gross profit (data composition)
+    es: Beneficio bruto (composición de datos)
+    fr: Bénéfice brut (composition de données)
+    hy: Համախառն շահույթ (տվյալների կազմ)
+    ka: მთლიანი მოგება (მონაცემთა კომპოზიცია)
+    kk: Жалпы пайда (деректер композициясы)
+    pt: Lucro bruto (composição de dados)
+    ro: Profit brut (compoziție de date)
+    sr: Бруто добит (композиција података)
+    tr: Brüt kâr (veri kompozisyonu)
+    uk: Валовий прибуток (компонування даних)
+    uz: Yalpi foyda (ma'lumotlar kompozitsiyasi)
+    zh: 毛利润（数据组合）
 params:
-  - name: Начало
-    type: date
-    label: "С даты"
-    labels:
-      en: From date
-      de: Von Datum
-      sr: Од датума
-      az: Başlanğıc
-      es: Inicio
-      fr: Début
-      hy: Սկիզբ
-      ka: დასაწყისი
-      kk: Басы
-      pt: Início
-      ro: Început
-      tr: Başlangıç
-      uk: Початок
-      uz: Boshlanish
-      zh: 开始
-  - name: Конец
-    type: date
-    label: "По дату"
-    labels:
-      en: To date
-      de: Bis Datum
-      sr: До датума
-      az: Son
-      es: Fin
-      fr: Fin
-      hy: Վերջ
-      ka: დასრულება
-      kk: Соңы
-      pt: Fim
-      ro: Sfârșit
-      tr: Bitiş
-      uk: Кінець
-      uz: Tugash
-      zh: 结束
-  - name: Организация
-    type: reference:Организация
-    label: "Организация"
-    labels:
-      en: Organization
-      de: Organisation
-      sr: Организација
-      az: Təşkilat
-      es: Organización
-      fr: Organisation
-      hy: Կազմակերպություն
-      ka: ორგანიზაცია
-      kk: Ұйым
-      pt: Organização
-      ro: Organizație
-      tr: Kuruluş
-      uk: Організація
-      uz: Tashkilot
-      zh: 组织
+    - name: Начало
+      type: date
+      label: С даты
+      labels:
+        az: Başlanğıc
+        de: Von Datum
+        en: From date
+        es: Inicio
+        fr: Début
+        hy: Սկիզբ
+        ka: დასაწყისი
+        kk: Басы
+        pt: Início
+        ro: Început
+        sr: Од датума
+        tr: Başlangıç
+        uk: Початок
+        uz: Boshlanish
+        zh: 开始
+    - name: Конец
+      type: date
+      label: По дату
+      labels:
+        az: Son
+        de: Bis Datum
+        en: To date
+        es: Fin
+        fr: Fin
+        hy: Վերջ
+        ka: დასრულება
+        kk: Соңы
+        pt: Fim
+        ro: Sfârșit
+        sr: До датума
+        tr: Bitiş
+        uk: Кінець
+        uz: Tugash
+        zh: 结束
+    - name: Организация
+      type: reference:Организация
+      label: Организация
+      labels:
+        az: Təşkilat
+        de: Organisation
+        en: Organization
+        es: Organización
+        fr: Organisation
+        hy: Կազմակերպություն
+        ka: ორგანიზაცია
+        kk: Ұйым
+        pt: Organização
+        ro: Organizație
+        sr: Организација
+        tr: Kuruluş
+        uk: Організація
+        uz: Tashkilot
+        zh: 组织
 # Запрос отдаёт ПЛОСКИЕ детальные строки (без СГРУППИРОВАТЬ/УПОРЯДОЧИТЬ) —
 # группировку, итоги и сортировку выполняет блок composition (лайт-СКД) в Go.
 query: |
-  ВЫБРАТЬ
-    Организация   КАК Организация,
-    Номенклатура  КАК Номенклатура,
-    Выручка       КАК Выручка,
-    Себестоимость КАК Себестоимость,
-    CAST(Выручка AS NUMERIC) - CAST(Себестоимость AS NUMERIC) КАК ВаловаяПрибыль
-  ИЗ РегистрНакопления.ВаловаяПрибыль
-  ГДЕ (&Начало ЕСТЬ ПУСТО ИЛИ period >= &Начало)
-    И (&Конец  ЕСТЬ ПУСТО ИЛИ period <= &Конец)
-    И (&Организация ЕСТЬ ПУСТО ИЛИ Организация = &Организация)
+    ВЫБРАТЬ
+      Организация   КАК Организация,
+      Номенклатура  КАК Номенклатура,
+      Выручка       КАК Выручка,
+      Себестоимость КАК Себестоимость,
+      CAST(Выручка AS NUMERIC) - CAST(Себестоимость AS NUMERIC) КАК ВаловаяПрибыль
+    ИЗ РегистрНакопления.ВаловаяПрибыль
+    ГДЕ (&Начало ЕСТЬ ПУСТО ИЛИ period >= &Начало)
+      И (&Конец  ЕСТЬ ПУСТО ИЛИ period <= &Конец)
+      И (&Организация ЕСТЬ ПУСТО ИЛИ Организация = &Организация)
 # Система компоновки данных: два уровня группировки, итоги,
 # условное оформление по подытогам и декларативный график (ECharts).
 composition:
-  groupings:                       # порядок = вложенность уровней
-    - Организация
-    - Номенклатура
-  measures:                        # sum через decimal; format скрывает float-артефакт при выводе
-    - { field: Выручка,        agg: sum, title: "Выручка",         format: "#,##0.00" }
-    - { field: Себестоимость,  agg: sum, title: "Себестоимость",   format: "#,##0.00" }
-    - { field: ВаловаяПрибыль, agg: sum, title: "Валовая прибыль", format: "#,##0.00" }
-  totals:                          # подытоги по группам + общий итог
-    grand: true
-    subtotals: true
-  detail: false                    # без строк-движений: группировка до номенклатуры
-  sort:
-    - { field: ВаловаяПрибыль, dir: desc }
-  conditional:                     # оформление по подытогам групп; первое правило — победитель
-    # убыточная группа целиком — красным жирным
-    - when: "ВаловаяПрибыль < 0"
-      field: ""
-      style: { color: "#c00000", bold: true }
-    # крупная прибыль — зелёный фон ячейки (порог иллюстративный, подстройте)
-    - when: "ВаловаяПрибыль > 100000"
-      field: ВаловаяПрибыль
-      style: { background: "#e6ffed" }
-  chart:                           # столбцы прибыли по организациям (верхний уровень)
-    type: bar
-    category: Организация
-    series:
-      - ВаловаяПрибыль
+    groupings:
+        - Организация
+        - Номенклатура
+    columns: []
+    measures:
+        - field: Выручка
+          agg: sum
+          title: Выручка
+          align: ""
+          format: '#,##0.00'
+          expr: ""
+        - field: Себестоимость
+          agg: sum
+          title: Себестоимость
+          align: ""
+          format: '#,##0.00'
+          expr: ""
+        - field: ВаловаяПрибыль
+          agg: sum
+          title: Валовая прибыль
+          align: ""
+          format: '#,##0.00'
+          expr: ""
+    totals:
+        grand: true
+        subtotals: true
+    detail: false
+    sort:
+        - field: ВаловаяПрибыль
+          dir: desc
+    conditional:
+        - when: ВаловаяПрибыль < 0
+          field: ""
+          style:
+            color: '#c00000'
+            background: ""
+            bold: true
+            italic: false
+        - when: ВаловаяПрибыль > 100000
+          field: ВаловаяПрибыль
+          style:
+            color: ""
+            background: '#e6ffed'
+            bold: false
+            italic: false
+    appearance:
+        lines: ""
+        zebra: false
+    chart:
+        type: bar
+        category: Номенклатура
+        series:
+            - ВаловаяПрибыль
+    detail_link: ""
+    detail_entity: ""
