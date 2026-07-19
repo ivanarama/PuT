@@ -3,3 +3,14 @@ version: "1.0"
 author: Иван Титов
 copyright: © 2026 Иван Титов
 license: MIT
+llm:
+  enabled: true
+  endpoints:
+    - {name: z_ai, kind: anthropic, base_url: https://api.z.ai/api/anthropic, api_key: "${env:ZAI_KEY}"}
+  models:
+    - {name: glm-5.1, endpoint: z_ai}
+  profiles:
+    - {task: анализ, models: [glm-5.1]}
+    - {task: чат, models: [glm-5.1]}
+    - {task: конфигуратор, models: [glm-5.1]}
+  default_profile: анализ

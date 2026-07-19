@@ -17,6 +17,7 @@ titles:
     uz: Kassa
     zh: 现金
 order: 30
+roles: [Кассир, Менеджер, Управленец, Демо]
 contents:
     catalogs:
         - Касса

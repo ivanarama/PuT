@@ -17,6 +17,7 @@ titles:
     uz: Ombor
     zh: 仓库
 order: 40
+roles: [Кладовщик, Управленец, Демо]
 contents:
     catalogs:
         - ЕдиницаИзмерения

@@ -17,6 +17,7 @@ titles:
     uz: Savdo
     zh: 销售
 order: 10
+roles: [Менеджер, Управленец, Демо]
 contents:
     catalogs:
         - Валюта
@@ -49,6 +50,8 @@ contents:
         - НастройкаТиповЦен
         - ПересчётЦен
         - РеализацияИзСчёта
+    pages:
+        - Панель
 home_page:
     title: Главная
     layout: rows

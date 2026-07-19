@@ -1,350 +1,78 @@
 name: ВозвратОтПокупателя
 title: Возврат от покупателя
 titles:
-  en: Customer return
-  de: Kundenrücksendung
-  sr: Повраћај од купца
-  az: Alıcıdan qaytarılma
-  es: Devolución del cliente
-  fr: Retour client
-  hy: Հաճախորդի վերադարձ
-  ka: მომხმარებლის დაბრუნება
-  kk: Сатып алушыдан қайтару
-  pt: Devolução do cliente
-  ro: Retur client
-  tr: Müşteri iadesi
-  uk: Повернення від покупця
-  uz: Xaridordan qaytarish
-  zh: 客户退货
+    az: Alıcıdan qaytarılma
+    de: Kundenrücksendung
+    en: Customer return
+    es: Devolución del cliente
+    fr: Retour client
+    hy: Հաճախորդի վերադարձ
+    ka: მომხმარებლის დაბრუნება
+    kk: Сатып алушыдан қайтару
+    pt: Devolução do cliente
+    ro: Retur client
+    sr: Повраћај од купца
+    tr: Müşteri iadesi
+    uk: Повернення від покупця
+    uz: Xaridordan qaytarish
+    zh: 客户退货
 posting: true
 based_on:
-  - РеализацияТоваров
+    - РеализацияТоваров
 numerator:
-  prefix: "ВОЗ-"
-  length: 5
-  period: year
+    prefix: ВОЗ-
+    length: 5
+    period: year
 fields:
-  - name: Номер
-    type: string
-    title: Номер
-    titles:
-      en: Number
-      de: Nummer
-      sr: Број
-      az: Nömrə
-      es: Número
-      fr: Numéro
-      hy: Համար
-      ka: ნომერი
-      kk: Нөмір
-      pt: Número
-      ro: Număr
-      tr: Numara
-      uk: Номер
-      uz: Raqam
-      zh: 编号
-  - name: Дата
-    type: date
-    title: Дата
-    titles:
-      en: Date
-      de: Datum
-      sr: Датум
-      az: Tarix
-      es: Fecha
-      fr: Date
-      hy: Ամսաթիվ
-      ka: თარიღი
-      kk: Күні
-      pt: Data
-      ro: Dată
-      tr: Tarih
-      uk: Дата
-      uz: Sana
-      zh: 日期
-  - name: Организация
-    type: reference:Организация
-    title: Организация
-    titles:
-      en: Organization
-      de: Organisation
-      sr: Организација
-      az: Təşkilat
-      es: Organización
-      fr: Organisation
-      hy: Կազմակերպություն
-      ka: ორგანიზაცია
-      kk: Ұйым
-      pt: Organização
-      ro: Organizație
-      tr: Kuruluş
-      uk: Організація
-      uz: Tashkilot
-      zh: 组织
-  - name: Покупатель
-    type: reference:Контрагент
-    title: Покупатель
-    titles:
-      en: Customer
-      de: Kunde
-      sr: Купац
-      az: Alıcı
-      es: Cliente
-      fr: Client
-      hy: Գնորդ
-      ka: მყიდველი
-      kk: Сатып алушы
-      pt: Cliente
-      ro: Client
-      tr: Müşteri
-      uk: Покупець
-      uz: Xaridor
-      zh: 客户
-  - name: Склад
-    type: reference:Склад
-    title: Склад
-    titles:
-      en: Warehouse
-      de: Lager
-      sr: Магацин
-      az: Anbar
-      es: Almacén
-      fr: Entrepôt
-      hy: Պահեստ
-      ka: საწყობ
-      kk: Қойма
-      pt: Armazém
-      ro: Depozit
-      tr: Depo
-      uk: Склад
-      uz: Ombor
-      zh: 仓库
-  - name: Основание
-    type: reference:РеализацияТоваров
-    title: Основание
-    titles:
-      en: Base document
-      de: Beleggrundlage
-      sr: Основни документ
-      az: Əsas
-      es: Base
-      fr: Base
-      hy: Հիմք
-      ka: საფუძველი
-      kk: Негіздеме
-      pt: Base
-      ro: Bază
-      tr: Dayanak
-      uk: Підстава
-      uz: Asos
-      zh: 依据
-  - name: СпособУчетаНДС
-    type: enum:СпособУчетаНДС
-    title: НДС
-    titles:
-      en: VAT
-      de: USt.
-      sr: ПДВ
-      az: ƏDV
-      es: IVA
-      fr: TVA
-      hy: ԱԱՀ
-      ka: დღგ
-      kk: ҚҚС
-      pt: IVA
-      ro: TVA
-      tr: KDV
-      uk: ПДВ
-      uz: QQS
-      zh: 增值税
-  - name: СуммаБезНДС
-    type: number
-    title: Сумма без НДС
-    titles:
-      en: Amount excl. VAT
-      de: Betrag o. USt.
-      sr: Износ без ПДВ
-      az: ƏDV-siz məbləğ
-      es: Importe sin IVA
-      fr: Montant HT
-      hy: ԱԱՀ-առանց գումարի
-      ka: დღგ-ს გარეშე
-      kk: ҚҚС-сыз сомасы
-      pt: Valor sem IVA
-      ro: Sumă fără TVA
-      tr: KDV'siz tutar
-      uk: Сума без ПДВ
-      uz: QQS-siz miqdor
-      zh: 不含税金额
-  - name: СуммаНДС
-    type: number
-    title: Сумма НДС
-    titles:
-      en: VAT amount
-      de: USt.-Betrag
-      sr: Износ ПДВ
-      az: ƏDV məbləği
-      es: IVA importe
-      fr: Montant TVA
-      hy: ԱԱՀ գումարի
-      ka: დღგ თანხა
-      kk: ҚҚС сомасы
-      pt: Valor IVA
-      ro: Sumă TVA
-      tr: KDV tutarı
-      uk: Сума ПДВ
-      uz: QQS miqdori
-      zh: 增值税额
-  - name: Сумма
-    type: number
-    title: Всего к возврату
-    titles:
-      en: Total to return
-      de: Rückgabe gesamt
-      sr: Укупно за повраћај
-      az: Cəmi qaytarılacaq
-      es: Total a devolver
-      fr: Total à rembourser
-      hy: Ընդհանուր վերադարձ
-      ka: საერთო დასაბრუნებელი
-      kk: Қайтаруға дейін
-      pt: Total a devolver
-      ro: Total de retur
-      tr: İade toplamı
-      uk: Всього до повернення
-      uz: Qaytarishga jami
-      zh: 退货总额
+    - name: Номер
+      type: string
+    - name: Дата
+      type: date
+    - name: Организация
+      type: reference:Организация
+    - name: Покупатель
+      type: reference:Контрагент
+    - name: Склад
+      type: reference:Склад
+    - name: Основание
+      type: reference:РеализацияТоваров
+    - name: СпособУчетаНДС
+      type: enum:СпособУчетаНДС
+    - name: СуммаБезНДС
+      type: number
+    - name: СуммаНДС
+      type: number
+    - name: Сумма
+      type: number
 tableparts:
-  - name: Товары
-    title: Товары
-    titles:
-      en: Items
-      de: Artikel
-      sr: Артикли
-      az: Mallar
-      es: Artículos
-      fr: Articles
-      hy: Ապրանքներ
-      ka: საქონელი
-      kk: Тауарлар
-      pt: Artigos
-      ro: Articole
-      tr: Mallar
-      uk: Товари
-      uz: Tovarlar
-      zh: 商品
-    fields:
-      - name: Номенклатура
-        type: reference:Номенклатура
-        title: Номенклатура
-        titles:
-          en: Item
-          de: Artikel
-          sr: Артикал
-          az: Adlandırma
-          es: Nomenclatura
-          fr: Nomenclature
-          hy: Անվանակարգ
-          ka: ნომენკლატურა
-          kk: Номенклатура
-          pt: Nomenclatura
-          ro: Nomenclatură
-          tr: Ürün
-          uk: Номенклатура
-          uz: Nomеnklatura
-          zh: 物料
-      - name: Количество
-        type: number
-        title: Количество
-        titles:
-          en: Quantity
-          de: Menge
-          sr: Количина
-          az: Miqdar
-          es: Cantidad
-          fr: Quantité
-          hy: Քանակ
-          ka: რაოდენობა
-          kk: Саны
-          pt: Quantidade
-          ro: Cantitate
-          tr: Miktar
-          uk: Кількість
-          uz: Miqdor
-          zh: 数量
-      - name: Цена
-        type: number
-        title: Цена
-        titles:
-          en: Price
-          de: Preis
-          sr: Цена
-          az: Qiymət
-          es: Precio
-          fr: Prix
-          hy: Գին
-          ka: ფასი
-          kk: Бағасы
-          pt: Preço
-          ro: Preț
-          tr: Fiyat
-          uk: Ціна
-          uz: Narx
-          zh: 价格
-      - name: СтавкаНДС
-        type: reference:СтавкаНДС
-        title: Ставка НДС
-        titles:
-          en: VAT rate
-          de: USt.-Satz
-          sr: Стопа ПДВ
-          az: ƏDV dərəcəsi
-          es: Tasa IVA
-          fr: Taux TVA
-          hy: ԱԱՀ տոկոսադրույք
-          ka: დღგ განაკვეთი
-          kk: ҚҚС мөлшері
-          pt: Taxa IVA
-          ro: Cotă TVA
-          tr: KDV oranı
-          uk: Ставка ПДВ
-          uz: QQS stavkasi
-          zh: 增值税率
-      - name: СуммаНДС
-        type: number
-        title: Сумма НДС
-        titles:
-          en: VAT amount
-          de: USt.-Betrag
-          sr: Износ ПДВ
-          az: ƏDV məbləği
-          es: IVA importe
-          fr: Montant TVA
-          hy: ԱԱՀ գումարի
-          ka: დღგ თანხა
-          kk: ҚҚС сомасы
-          pt: Valor IVA
-          ro: Sumă TVA
-          tr: KDV tutarı
-          uk: Сума ПДВ
-          uz: QQS miqdori
-          zh: 增值税额
-      - name: Сумма
-        type: number
-        title: Сумма
-        titles:
-          en: Amount
-          de: Betrag
-          sr: Износ
-          az: Məbləğ
-          es: Importe
-          fr: Montant
-          hy: Գումար
-          ka: თანხა
-          kk: Сомасы
-          pt: Valor
-          ro: Sumă
-          tr: Tutar
-          uk: Сума
-          uz: Miqdor
-          zh: 金额
+    - name: Товары
+      title: Товары
+      titles:
+        az: Mallar
+        de: Artikel
+        en: Items
+        es: Artículos
+        fr: Articles
+        hy: Ապրանքներ
+        ka: საქონელი
+        kk: Тауарлар
+        pt: Artigos
+        ro: Articole
+        sr: Артикли
+        tr: Mallar
+        uk: Товари
+        uz: Tovarlar
+        zh: 商品
+      fields:
+        - name: Номенклатура
+          type: reference:Номенклатура
+        - name: Количество
+          type: number(5,2)
+        - name: Цена
+          type: number
+        - name: СтавкаНДС
+          type: reference:СтавкаНДС
+        - name: СуммаНДС
+          type: number
+        - name: Сумма
+          type: number

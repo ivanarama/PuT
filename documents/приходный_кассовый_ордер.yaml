@@ -1,195 +1,42 @@
 name: ПриходныйКассовыйОрдер
 title: Приходный кассовый ордер
 titles:
-  en: Cash receipt voucher
-  de: Kasseneingangsbeleg
-  sr: Уплата у касу
-  az: Gəlir kassa orderi
-  es: Orden de ingreso de caja
-  fr: Bon de caisse d'entrée
-  hy: Եկամտային կանխիկ օրդեր
-  ka: შემოსავლის სალარო ორდერი
-  kk: Кіріс касса ордері
-  pt: Ordem de recebimento de caixa
-  ro: Ordin de casă intrare
-  tr: Gelen tahsilat makbuzu
-  uk: Прибутковий касовий ордер
-  uz: Kirish kassa ordeni
-  zh: 收款凭证
+    az: Gəlir kassa orderi
+    de: Kasseneingangsbeleg
+    en: Cash receipt voucher
+    es: Orden de ingreso de caja
+    fr: Bon de caisse d'entrée
+    hy: Եկամտային կանխիկ օրդեր
+    ka: შემოსავლის სალარო ორდერი
+    kk: Кіріс касса ордері
+    pt: Ordem de recebimento de caixa
+    ro: Ordin de casă intrare
+    sr: Уплата у касу
+    tr: Gelen tahsilat makbuzu
+    uk: Прибутковий касовий ордер
+    uz: Kirish kassa ordeni
+    zh: 收款凭证
 posting: true
 numerator:
-  prefix: "ПКО-"
-  length: 5
-  period: year
+    prefix: ПКО-
+    length: 5
+    period: year
 fields:
-  - name: Номер
-    type: string
-    title: Номер
-    titles:
-      en: Number
-      de: Nummer
-      sr: Број
-      az: Nömrə
-      es: Número
-      fr: Numéro
-      hy: Համար
-      ka: ნომერი
-      kk: Нөмір
-      pt: Número
-      ro: Număr
-      tr: Numara
-      uk: Номер
-      uz: Raqam
-      zh: 编号
-  - name: Дата
-    type: date
-    title: Дата
-    titles:
-      en: Date
-      de: Datum
-      sr: Датум
-      az: Tarix
-      es: Fecha
-      fr: Date
-      hy: Ամսաթիվ
-      ka: თარიღი
-      kk: Күні
-      pt: Data
-      ro: Dată
-      tr: Tarih
-      uk: Дата
-      uz: Sana
-      zh: 日期
-  - name: Организация
-    type: reference:Организация
-    title: Организация
-    titles:
-      en: Organization
-      de: Organisation
-      sr: Организација
-      az: Təşkilat
-      es: Organización
-      fr: Organisation
-      hy: Կազմակերպություն
-      ka: ორგანიზაცია
-      kk: Ұйым
-      pt: Organização
-      ro: Organizație
-      tr: Kuruluş
-      uk: Організація
-      uz: Tashkilot
-      zh: 组织
-  - name: Касса
-    type: reference:Касса
-    title: Касса
-    titles:
-      en: Cash desk
-      de: Kasse
-      sr: Каса
-      az: Kassa
-      es: Caja
-      fr: Caisse
-      hy: Դրամարկղի
-      ka: სალარო
-      kk: Касса
-      pt: Caixa
-      ro: Casier
-      tr: Kasa
-      uk: Каса
-      uz: Kassa
-      zh: 收银
-  - name: Контрагент
-    type: reference:Контрагент
-    title: Контрагент
-    titles:
-      en: Counterparty
-      de: Geschäftspartner
-      sr: Контрагент
-      az: Əks-tərəf
-      es: Contraparte
-      fr: Counterpartie
-      hy: Գործընկեր
-      ka: კონტრაგენტი
-      kk: Контрагент
-      pt: Contraparte
-      ro: Contraparte
-      tr: Karşı taraf
-      uk: Контрагент
-      uz: Kontragent
-      zh: 往来单位
-  - name: ДокументРеализации
-    type: reference:РеализацияТоваров
-    title: Документ реализации
-    titles:
-      en: Sales document
-      de: Verkaufsbeleg
-      sr: Продajни документ
-      az: Satış sənədi
-      es: Documento venta
-      fr: Document vente
-      hy: Վաճառքի փաստաթուղթ
-      ka: გაყიდვის დოკუმენტი
-      kk: Сату құжаты
-      pt: Documento venda
-      ro: Document vânzare
-      tr: Satış belgesi
-      uk: Документ реалізації
-      uz: Sotuv hujjati
-      zh: 销售单据
-  - name: ДокументПоступления
-    type: reference:ПоступлениеТоваров
-    title: Документ поступления
-    titles:
-      en: Receipt document
-      de: Eingangsbeleg
-      sr: Пријемни документ
-      az: Qəbul sənədi
-      es: Documento compra
-      fr: Document achat
-      hy: Մուտքի փաստաթուղթ
-      ka: შემოსვლის დოკუმენტი
-      kk: Кіріс құжаты
-      pt: Documento compra
-      ro: Document achiziție
-      tr: Giriş belgesi
-      uk: Документ надходження
-      uz: Qabul qilish hujjati
-      zh: 采购单据
-  - name: Основание
-    type: string
-    title: Основание
-    titles:
-      en: Base document
-      de: Beleggrundlage
-      sr: Основни документ
-      az: Əsas
-      es: Base
-      fr: Base
-      hy: Հիմք
-      ka: საფუძველი
-      kk: Негіздеме
-      pt: Base
-      ro: Bază
-      tr: Dayanak
-      uk: Підстава
-      uz: Asos
-      zh: 依据
-  - name: Сумма
-    type: number
-    title: Сумма
-    titles:
-      en: Amount
-      de: Betrag
-      sr: Износ
-      az: Məbləğ
-      es: Importe
-      fr: Montant
-      hy: Գումար
-      ka: თანხა
-      kk: Сомасы
-      pt: Valor
-      ro: Sumă
-      tr: Tutar
-      uk: Сума
-      uz: Miqdor
-      zh: 金额
+    - name: Номер
+      type: string
+    - name: Дата
+      type: date
+    - name: Организация
+      type: reference:Организация
+    - name: Касса
+      type: reference:Касса
+    - name: Контрагент
+      type: reference:Контрагент
+    - name: ДокументРеализации
+      type: reference:РеализацияТоваров
+    - name: ДокументПоступления
+      type: reference:ПоступлениеТоваров
+    - name: Основание
+      type: string
+    - name: Сумма
+      type: number

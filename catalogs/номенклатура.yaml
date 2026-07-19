@@ -113,3 +113,22 @@ fields:
       uk: Мінімальний залишок
       uz: Minimal qoldiq
       zh: 最低库存
+  - name: ОсновноеИзображение
+    type: image
+    title: Основное изображение
+    titles:
+      en: Main image
+      de: Hauptbild
+      sr: Главна слика
+      az: Əsas şəkil
+      es: Imagen principal
+      fr: Image principale
+      hy: Գլխավոր պատկեր
+      ka: მთავარი სურათი
+      kk: Негізгі сурет
+      pt: Imagem principal
+      ro: Imagine principală
+      tr: Ana görsel
+      uk: Основне зображення
+      uz: Asosiy rasm
+      zh: 主图
