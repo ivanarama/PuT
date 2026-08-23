@@ -207,6 +207,7 @@ elements:
               sr: "Садржај налога"
             children:
               - kind: ТабличнаяЧасть
+                use_grid: true
                 name: ТабТовары
                 title:
                   ru: "Товары"
@@ -214,6 +215,8 @@ elements:
                   de: "Artikel"
                   sr: "Артикли"
                 data_path: Объект.Товары
+                events:
+                  ПриИзменении: ТабТоварыПриИзменении
               - kind: Кнопка
                 name: КнопкаПересчитать
                 title:
