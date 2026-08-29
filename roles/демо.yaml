@@ -46,7 +46,7 @@ permissions:
     СтавкаНДС: [read, write]
     НастройкиПользователя: [read, write]
   documents:
-    Счёт: [read, write]
+    Счёт: [read, write, post, unpost]
     РеализацияТоваров: [read, write, post, unpost]
     ПоступлениеТоваров: [read, write, post, unpost]
     СписаниеТоваров: [read, write, post, unpost]
@@ -64,10 +64,15 @@ permissions:
     СборкаТоваров: [read, write, post, unpost]
     РазборкаТоваров: [read, write, post, unpost]
   registers:
-    Взаиморасчеты: [read]
-    ОстаткиТоваров: [read]
-    ПартииТоваров: [read]
-    ДенежныеСредства: [read]
+    Взаиморасчеты: [read, write]
+    ОстаткиТоваров: [read, write]
+    ПартииТоваров: [read, write]
+    ДенежныеСредства: [read, write]
+    ВаловаяПрибыль: [read, write]
+    РезервыТоваров: [read, write]
+    ТоварыВПути: [read, write]
+  inforegs:
+    ЦеныНоменклатуры: [read]
   reports:
     ОстаткиТоваров: [run]
     ДвиженияТоваров: [run]
