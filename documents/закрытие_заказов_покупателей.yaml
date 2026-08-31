@@ -1,0 +1,92 @@
+name: ЗакрытиеЗаказовПокупателей
+title: Закрытие заказов покупателей
+titles:
+  en: Sales orders closing
+  de: Kundenaufträge abschließen
+  sr: Затварање налога купаца
+posting: true
+numerator:
+  prefix: "ЗЗК-"
+  length: 5
+  period: year
+based_on:
+  - ЗаказПокупателя
+fields:
+  - name: Номер
+    type: string
+    title: Номер
+    titles:
+      en: Number
+      de: Nummer
+      sr: Број
+  - name: Дата
+    type: date
+    title: Дата
+    titles:
+      en: Date
+      de: Datum
+      sr: Датум
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles:
+      en: Organization
+      de: Organisation
+      sr: Организација
+  - name: Покупатель
+    type: reference:Контрагент
+    title: Покупатель
+    titles:
+      en: Customer
+      de: Kunde
+      sr: Купац
+  - name: Склад
+    type: reference:Склад
+    title: Склад
+    titles:
+      en: Warehouse
+      de: Lager
+      sr: Магацин
+  - name: Комментарий
+    type: string
+    title: Комментарий
+    titles:
+      en: Comment
+      de: Kommentar
+      sr: Коментар
+tableparts:
+  - name: Заказы
+    title: Заказы к закрытию
+    titles:
+      en: Orders to close
+      de: Aufträge zu schließen
+      sr: Налози за затварање
+    fields:
+      - name: ЗаказПокупателя
+        type: reference:ЗаказПокупателя
+        title: Заказ покупателя
+        titles:
+          en: Sales order
+          de: Kundenauftrag
+          sr: Налог купца
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Номенклатура
+        titles:
+          en: Item
+          de: Artikel
+          sr: Артикал
+      - name: Количество
+        type: number
+        title: Снимаемый остаток
+        titles:
+          en: Canceled quantity
+          de: Stornierte Menge
+          sr: Количина за отказ
+      - name: ПричинаЗакрытия
+        type: string
+        title: Причина закрытия
+        titles:
+          en: Reason
+          de: Grund
+          sr: Разлог
