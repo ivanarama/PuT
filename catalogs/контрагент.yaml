@@ -378,3 +378,10 @@ fields:
       uk: Кореспондентський рахунок
       uz: Korrespondent hisobi
       zh: 联行账户
+  - name: ПроцентСкидки
+    type: number
+    title: Скидка (%)
+    titles:
+      en: Discount (%)
+      de: Rabatt (%)
+      sr: Попуст (%)

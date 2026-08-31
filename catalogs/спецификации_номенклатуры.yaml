@@ -1,0 +1,64 @@
+name: СпецификацииНоменклатуры
+title: Спецификации номенклатуры
+titles:
+  en: Bills of materials
+  de: Stücklisten
+  sr: Саставнице
+fields:
+  - name: Наименование
+    type: string
+    title: Наименование
+    titles:
+      en: Name
+      de: Name
+      sr: Назив
+  - name: Номенклатура
+    type: reference:Номенклатура
+    title: Готовая продукция / Комплект
+    titles:
+      en: Finished product / Kit
+      de: Fertigprodukt / Set
+      sr: Готов производ / Комплет
+  - name: Количество
+    type: number
+    title: Количество комплекта
+    titles:
+      en: Kit quantity
+      de: Set-Menge
+      sr: Количина комплета
+  - name: Комментарий
+    type: string
+    title: Комментарий
+    titles:
+      en: Comment
+      de: Kommentar
+      sr: Коментар
+tableparts:
+  - name: Состав
+    title: Состав комплекта (материалы)
+    titles:
+      en: Components
+      de: Komponenten
+      sr: Компоненте
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Комплектующая
+        titles:
+          en: Component item
+          de: Komponente
+          sr: Компонента
+      - name: Количество
+        type: number
+        title: Количество
+        titles:
+          en: Quantity
+          de: Menge
+          sr: Количина
+      - name: ЕдиницаИзмерения
+        type: reference:ЕдиницаИзмерения
+        title: Ед. изм.
+        titles:
+          en: Unit
+          de: Einheit
+          sr: Јед. мере

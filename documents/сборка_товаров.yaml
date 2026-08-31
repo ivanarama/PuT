@@ -32,6 +32,13 @@ fields:
     type: reference:Склад
   - name: Комментарий
     type: string
+  - name: Спецификация
+    type: reference:СпецификацииНоменклатуры
+    title: Спецификация
+    titles:
+      en: Bill of materials
+      de: Stückliste
+      sr: Саставница
   - name: Сумма
     type: number
 tableparts:

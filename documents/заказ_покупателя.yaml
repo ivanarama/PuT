@@ -386,3 +386,17 @@ tableparts:
           uk: Сума
           uz: Miqdor
           zh: 金额
+      - name: ПроцентСкидки
+        type: number
+        title: Скидка (%)
+        titles:
+          en: Discount (%)
+          de: Rabatt (%)
+          sr: Попуст (%)
+      - name: СуммаСкидки
+        type: number
+        title: Сумма скидки
+        titles:
+          en: Discount amount
+          de: Rabattbetrag
+          sr: Износ попуста
