@@ -348,3 +348,10 @@ tableparts:
           uk: Сума
           uz: Miqdor
           zh: 金额
+      - name: ЗаказПокупателя
+        type: reference:ЗаказПокупателя
+        title: Заказ покупателя
+        titles:
+          en: Sales order
+          de: Kundenauftrag
+          sr: Налог купца

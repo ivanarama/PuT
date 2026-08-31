@@ -74,6 +74,13 @@ dimensions:
       uk: Замовлення постачальнику
       uz: Yetkazib beruvchi buyurtmasi
       zh: 采购订单
+  - name: ЗаказПокупателя
+    type: reference:ЗаказПокупателя
+    title: Заказ покупателя
+    titles:
+      en: Sales order
+      de: Kundenauftrag
+      sr: Налог купца
 resources:
   - name: Количество
     type: number

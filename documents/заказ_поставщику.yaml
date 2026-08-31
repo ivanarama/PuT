@@ -17,6 +17,8 @@ titles:
   uz: Yetkazib beruvchi buyurtmasi
   zh: 采购订单
 posting: true
+based_on:
+  - ЗаказПокупателя
 numerator:
   prefix: "ЗПС-"
   length: 5
@@ -346,3 +348,10 @@ tableparts:
           uk: Сума
           uz: Miqdor
           zh: 金额
+      - name: ЗаказПокупателя
+        type: reference:ЗаказПокупателя
+        title: Заказ покупателя
+        titles:
+          en: Sales order
+          de: Kundenauftrag
+          sr: Налог купца

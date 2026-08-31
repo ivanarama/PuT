@@ -54,3 +54,11 @@ table_parts:
         type: number
         title: К заказу
         titles: {en: To order, de: Zu bestellen, sr: За наручити}
+      - name: Цена
+        type: number
+        title: Цена
+        titles: {en: Price, de: Preis, sr: Цена}
+      - name: Сумма
+        type: number
+        title: Сумма
+        titles: {en: Amount, de: Betrag, sr: Износ}
