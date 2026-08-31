@@ -1,0 +1,25 @@
+name: ВидДоговора
+title: Вид договора
+titles:
+  en: Contract type
+  de: Vertragsart
+  sr: Врста уговора
+values:
+  - name: СПокупателем
+    title: С покупателем
+    titles:
+      en: With customer
+      de: Mit Kunde
+      sr: Са купцем
+  - name: СПоставщиком
+    title: С поставщиком
+    titles:
+      en: With supplier
+      de: Mit Lieferant
+      sr: Са добављачем
+  - name: Прочее
+    title: Прочее
+    titles:
+      en: Other
+      de: Sonstiges
+      sr: Остало

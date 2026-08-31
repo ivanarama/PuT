@@ -1,0 +1,68 @@
+name: КорректировкаДолга
+title: Корректировка долга
+titles:
+  en: Debt adjustment
+  de: Schuldenbereinigung
+  sr: Корекција дуга
+posting: true
+numerator:
+  prefix: "КРД-"
+  length: 5
+  period: year
+fields:
+  - name: Номер
+    type: string
+    title: Номер
+    titles:
+      en: Number
+      de: Nummer
+      sr: Број
+  - name: Дата
+    type: date
+    title: Дата
+    titles:
+      en: Date
+      de: Datum
+      sr: Датум
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles:
+      en: Organization
+      de: Organisation
+      sr: Организација
+  - name: ВидОперации
+    type: enum:ВидОперацииКорректировкиДолга
+    title: Вид операции
+    titles:
+      en: Operation type
+      de: Vorgangsart
+      sr: Врста операције
+  - name: Контрагент
+    type: reference:Контрагент
+    title: Контрагент
+    titles:
+      en: Counterparty
+      de: Geschäftspartner
+      sr: Партнер
+  - name: КонтрагентПолучатель
+    type: reference:Контрагент
+    title: Контрагент-получатель долга
+    titles:
+      en: Recipient counterparty
+      de: Empfänger-Geschäftspartner
+      sr: Партнер прималац дуга
+  - name: Сумма
+    type: number
+    title: Сумма корректировки
+    titles:
+      en: Amount
+      de: Betrag
+      sr: Износ
+  - name: Комментарий
+    type: string
+    title: Комментарий
+    titles:
+      en: Comment
+      de: Kommentar
+      sr: Коментар

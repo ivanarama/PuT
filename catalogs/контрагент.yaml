@@ -385,3 +385,10 @@ fields:
       en: Discount (%)
       de: Rabatt (%)
       sr: Попуст (%)
+  - name: КредитныйЛимит
+    type: number
+    title: Кредитный лимит
+    titles:
+      en: Credit limit
+      de: Kreditlimit
+      sr: Кредитни лимит
