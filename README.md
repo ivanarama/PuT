@@ -6,7 +6,9 @@
 
 Сопровождение GitHub issues и pull requests выполняется независимым конвейером
 TRIAGE → FIX → REVIEW → MERGE. Полномочия, метки и диагностика описаны в
-**[MAINTENANCE.md](MAINTENANCE.md)**.
+**[MAINTENANCE.md](MAINTENANCE.md)**. Интеграционное REVIEW после обновления
+базовой ветки выполняется single-flight: сначала ревью и merge одного PR, затем
+обновление следующего, без самопорождаемого пинг-понга ревью.
 
 ---
 

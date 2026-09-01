@@ -11,6 +11,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
@@ -22,6 +23,8 @@ var (
 	completionLine = regexp.MustCompile(`(?m)^<!-- pp:head-reviewed ([0-9a-f]{40}) review-comment=([0-9]+) claim=([0-9]+) epoch-sha256=([0-9a-f]{64}) -->$`)
 	claimLine      = regexp.MustCompile(`(?m)^<!-- pp:review-claim ([0-9a-f]{40}) review-comment=([0-9]+) epoch-sha256=([0-9a-f]{64}) -->$`)
 	reviewAgain    = regexp.MustCompile(`(?m)^pp:review-again$`)
+	baseSyncIntent = regexp.MustCompile(`(?m)^<!-- pp:base-sync-intent from=([0-9a-f]{40}) base=([0-9a-f]{40}) review-comment=([0-9]+) claim=([0-9]+) completion=([0-9]+) ship-event=([A-Za-z0-9_=-]+) previous=([0-9]+|none) -->$`)
+	baseSyncDone   = regexp.MustCompile(`(?m)^<!-- pp:base-sync-done intent=([0-9]+) from=([0-9a-f]{40}) to=([0-9a-f]{40}) base=([0-9a-f]{40}) previous=([0-9]+|none) ship-event=([A-Za-z0-9_=-]+) -->$`)
 )
 
 type apiUser struct {
@@ -62,6 +65,7 @@ type candidate struct {
 	URL    string `json:"url"`
 	Head   string `json:"head"`
 	Depth  int    `json:"review_depth"`
+	Stage  string `json:"stage"`
 }
 
 type finding struct {
@@ -226,16 +230,17 @@ func analyze(prs []apiPull, owner string) report {
 		})
 		labels := labelSet(pr.Labels)
 		depth := reviewDepth(pr.Comments, owner)
-		item := candidate{Number: pr.Number, Title: pr.Title, URL: pr.HTMLURL, Head: pr.Head.SHA, Depth: depth}
+		item := candidate{Number: pr.Number, Title: pr.Title, URL: pr.HTMLURL, Head: pr.Head.SHA, Depth: depth, Stage: "review"}
 		currentCompletions, latestCompletion, latestOverride := currentProtocolState(pr.Comments, owner, pr.Head.SHA)
+		carryDone, carryIntentOpen := baseSyncRESTState(pr.Comments, owner, pr.Head.SHA)
 
 		if labels["changes-requested"] && labels["needs-decision"] {
 			result.add("yellow", "route_transition_open", pr.Number,
 				"одновременно стоят changes-requested и needs-decision; допустимо только во время handoff")
 		}
-		if labels["ship"] && (labels["changes-requested"] || labels["needs-decision"]) {
+		if labels["ship"] && labels["changes-requested"] {
 			result.add("red", "ship_with_blocking_route", pr.Number,
-				"ship конфликтует с блокирующим маршрутом")
+				"ship конфликтует с changes-requested; интеграционный REVIEW должен снять разрешение")
 		}
 		if duplicateCompletionEpoch(pr.Comments, owner, pr.Head.SHA) {
 			result.add("red", "same_head_reviewed_twice", pr.Number,
@@ -246,7 +251,29 @@ func analyze(prs []apiPull, owner string) report {
 				"на текущем HEAD есть claim без committed completion; нужен recovery")
 		}
 
-		if pr.Draft || labels["ship"] || labels["hold"] {
+		if pr.Draft || labels["hold"] {
+			continue
+		}
+		if labels["ship"] {
+			switch {
+			case labels["needs-decision"]:
+				result.HumanWaiting = append(result.HumanWaiting, item)
+			case carryDone && currentCompletions == 0:
+				item.Stage = "integration-review"
+				result.ReviewCandidates = append(result.ReviewCandidates, item)
+				result.add("yellow", "base_sync_waiting_review", pr.Number,
+					"ship сохранён; текущий HEAD ожидает интеграционное REVIEW")
+			case carryIntentOpen:
+				result.add("yellow", "base_sync_recovery", pr.Number,
+					"есть pp:base-sync-intent без done; MERGE должен восстановить транзакцию")
+			case currentCompletions == 0 && depth > 0:
+				// REST cannot prove legacy merge parents or timeline edge order. REVIEW
+				// still performs the full GraphQL gate before any mutation.
+				item.Stage = "legacy-integration-review"
+				result.ReviewCandidates = append(result.ReviewCandidates, item)
+				result.add("yellow", "legacy_ship_waiting_review_validation", pr.Number,
+					"повторный ship после старого base-sync: REVIEW должен проверить GraphQL lineage")
+			}
 			continue
 		}
 		overrideOpen := latestOverride > latestCompletion
@@ -266,6 +293,7 @@ func analyze(prs []apiPull, owner string) report {
 		}
 	}
 	sortCandidates(result.ReviewCandidates)
+	applySingleFlight(&result)
 	sortCandidates(result.FixCandidates)
 	sortCandidates(result.HumanWaiting)
 	return result
@@ -284,6 +312,17 @@ func checkContract(result *report, path string) {
 				"активный REVIEW contract не гарантирует breadth-first порядок")
 			return
 		}
+	}
+	skillsRoot := filepath.Dir(filepath.Dir(path))
+	mergeData, err := os.ReadFile(filepath.Join(skillsRoot, "merge-shepherd", "SKILL.md"))
+	if err != nil || !strings.Contains(text, "pp:base-sync-done") ||
+		!strings.Contains(text, "legacy re-ship") ||
+		!strings.Contains(text, "single-flight-барьер") ||
+		!strings.Contains(string(mergeData), "pp:base-sync-intent") ||
+		!strings.Contains(string(mergeData), "legacy reauthorized") ||
+		!strings.Contains(string(mergeData), "single-flight-барьер") {
+		result.add("red", "unsafe_base_sync_contract", 0,
+			"активные REVIEW/MERGE contracts не защищают ship и single-flight при base-sync/legacy re-ship")
 	}
 }
 
@@ -386,6 +425,44 @@ func currentClaimCount(comments []apiComment, owner, head string) int {
 	return count
 }
 
+type baseSyncIntentShape struct {
+	from, previous, shipEvent string
+}
+
+// baseSyncRESTState is only an operational hint. Mutation contracts prove
+// comment nodes, timeline edges and commit parents with stable GraphQL snapshots.
+func baseSyncRESTState(comments []apiComment, owner, head string) (doneCurrent, intentOpen bool) {
+	intents := map[int64]baseSyncIntentShape{}
+	doneIntents := map[int64]bool{}
+	for _, comment := range comments {
+		if !trustedUnedited(comment, owner) {
+			continue
+		}
+		if match := baseSyncIntent.FindStringSubmatch(comment.Body); match != nil {
+			intents[comment.ID] = baseSyncIntentShape{from: match[1], previous: match[7], shipEvent: match[6]}
+		}
+		if match := baseSyncDone.FindStringSubmatch(comment.Body); match != nil {
+			intentID, err := strconv.ParseInt(match[1], 10, 64)
+			intent, ok := intents[intentID]
+			if err != nil || !ok || intentID >= comment.ID || intent.from != match[2] ||
+				intent.previous != match[5] || intent.shipEvent != match[6] {
+				continue
+			}
+			doneIntents[intentID] = true
+			if match[3] == head {
+				doneCurrent = true
+			}
+		}
+	}
+	for id := range intents {
+		if !doneIntents[id] {
+			intentOpen = true
+			break
+		}
+	}
+	return doneCurrent, intentOpen
+}
+
 func duplicateCompletionEpoch(comments []apiComment, owner, head string) bool {
 	ids := map[int64]bool{}
 	for _, comment := range comments {
@@ -414,11 +491,37 @@ func duplicateCompletionEpoch(comments []apiComment, owner, head string) bool {
 
 func sortCandidates(items []candidate) {
 	sort.Slice(items, func(i, j int) bool {
+		if candidatePriority(items[i].Stage) != candidatePriority(items[j].Stage) {
+			return candidatePriority(items[i].Stage) < candidatePriority(items[j].Stage)
+		}
+		if candidatePriority(items[i].Stage) == 0 {
+			return items[i].Number < items[j].Number
+		}
 		if items[i].Depth == items[j].Depth {
 			return items[i].Number < items[j].Number
 		}
 		return items[i].Depth < items[j].Depth
 	})
+}
+
+func candidatePriority(stage string) int {
+	switch stage {
+	case "integration-review", "legacy-integration-review":
+		return 0
+	default:
+		return 1
+	}
+}
+
+func applySingleFlight(result *report) {
+	if len(result.ReviewCandidates) == 0 || candidatePriority(result.ReviewCandidates[0].Stage) != 0 {
+		return
+	}
+	owner := result.ReviewCandidates[0]
+	deferred := len(result.ReviewCandidates) - 1
+	result.ReviewCandidates = []candidate{owner}
+	result.add("yellow", "single_flight_barrier", owner.Number,
+		fmt.Sprintf("владелец base-sync барьера; REVIEW запускает только его, отложено кандидатов: %d", deferred))
 }
 
 func printReport(writer io.Writer, result report) {
