@@ -133,7 +133,7 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    или app. Никогда не сравнивай числовые REST ids комментариев и label events:
    они принадлежат разным таблицам и не задают общий порядок.
 
-   Разрешены ровно три способа связать этот ship-transition с текущим proof:
+   Разрешены ровно четыре способа связать этот ship-transition с текущим proof:
 
    - **обычный:** edge `ship` расположен после edges review-комментария, claim и
      completion текущего SHA;
@@ -145,6 +145,9 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
      до intent/done-протокола, а человек заново поставил `ship` после anchor
      этого HEAD и интеграционное REVIEW уже создало для него каноничный proof с
      outcome `reviewed`.
+   - **protocol-recovery reauthorized:** текущий HEAD — точный `to` trusted
+     intent/done handoff с невалидным исходным carry; новый trusted `ship` стоит
+     после edge done, а REVIEW уже создало каноничный proof текущего HEAD.
 
    Legacy reauthorization валидна только если текущий HEAD `to` — merge-коммит
    ровно с двумя parents `[from, base]`; `from` имеет каноничный proof `reviewed`
@@ -155,6 +158,12 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    label допустимо. Докажи условия двумя стабильными GraphQL snapshot и REST
    parents; похожий merge message доказательством не считается. Новый push
    после re-ship отменяет разрешение.
+
+   Protocol-recovery reauthorization требует exact intent/done, parents
+   `[from, base]`, каноничный source proof, один `PullRequestCommit`, `base` как
+   предка текущего `main`, отсутствие HEAD/base events после done и последний
+   trusted `ship` от `ivanarama` после edge done. Исходный stale event не
+   оживает; новый label разрешает только точный HEAD и отменяется новым push.
 
    Base-sync carry состоит из точных отдельных строк:
 
@@ -180,12 +189,13 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    постановка, edit/delete marker, чужой head event или разрыв `previous`
    отменяют carry.
 
-   Если текущий HEAD равен `to` валидного последнего done либо является точным
-   legacy base-sync с re-ship после его anchor, но каноничного proof текущего
+   Если текущий HEAD равен `to` валидного последнего done, является точным
+   legacy base-sync с re-ship после его anchor либо имеет protocol-recovery
+   re-ship после done, но каноничного proof текущего
    HEAD ещё нет, это **не stale ship**: ничего не меняй, зафиксируй «ожидает
    интеграционное REVIEW» и переходи к следующему PR. Во всех остальных случаях
    отсутствие актуальной завершённой пары, более поздний override либо
-   отсутствие обычного/carried/legacy-reauthorized разрешения — stale `ship`.
+   отсутствие обычного/carried/legacy/protocol-recovery разрешения — stale `ship`.
    Выполни атомарную передачу в REVIEW: сними `ship` через REST → сверь удаление
    → оставь комментарий «ship снят: текущий HEAD ещё не прошёл ревью» → прекрати
    обработку PR. После снятия `ship` комментарий является завершающим шагом этой
@@ -199,9 +209,10 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
 
 3. По состоянию:
    - **BEHIND** → после полного label+SHA+authorization-гейта, включая допустимое
-     legacy reauthorization, сохрани проверенный SHA, текущий `baseRefOid`, ids
+     legacy либо protocol-recovery reauthorization, сохрани проверенный SHA, текущий `baseRefOid`, ids
      proof, node id исходного ship-transition и id предыдущего done (`none` для
-     первого sync). Сначала опубликуй exact intent:
+     первого sync). Для protocol-recovery начинай новую исправленную цепочку с
+     `previous=none`. Сначала опубликуй exact intent:
 
      ```
      <!-- pp:base-sync-intent from=<SHA> base=<baseRefOid> review-comment=<id> claim=<id> completion=<id> ship-event=<node id> previous=<done id|none> -->
