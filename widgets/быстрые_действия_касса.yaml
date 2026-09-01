@@ -18,6 +18,24 @@ titles:
   uz: Yaratish
   zh: 新建
 items:
+  - label: "РМК (Касса)"
+    labels:
+      en: "Cashier Workplace"
+      de: "Kassenarbeitsplatz"
+      sr: "Касирско радно место"
+      az: "Kassir iş yeri"
+      es: "Puesto de cajero"
+      fr: "Poste de caissier"
+      hy: "Գանձապահի աշխատատեղ"
+      ka: "მოლარის სამუშაო ადგილი"
+      kk: "Кассир жұмыс орны"
+      pt: "Posto de caixa"
+      ro: "Post de casier"
+      tr: "Kasiyer iş yeri"
+      uk: "РМК (Каса)"
+      uz: "Kassir ish joyi"
+      zh: "收银员工作台"
+    url: /ui/processor/рабочееместокассира
   - label: "ПКО"
     labels:
       en: "Cash receipt"

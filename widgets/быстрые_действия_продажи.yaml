@@ -18,6 +18,24 @@ titles:
   uz: Yaratish
   zh: 新建
 items:
+  - label: "АРМ Продажи"
+    labels:
+      en: "Sales Workplace"
+      de: "Verkaufsarbeitsplatz"
+      sr: "Радно место продаје"
+      az: "Satış iş yeri"
+      es: "Puesto de ventas"
+      fr: "Poste de vente"
+      hy: "Վաճառքի աշխատատեղ"
+      ka: "გაყიდვების სამუშაო ადგილი"
+      kk: "Сату жұмыс орны"
+      pt: "Posto de vendas"
+      ro: "Post de vânzări"
+      tr: "Satış iş yeri"
+      uk: "АРМ Продажі"
+      uz: "Savdo ish joyi"
+      zh: "销售工作台"
+    url: /ui/processor/рабочееместопродаж
   - label: "Счёт"
     labels:
       en: "Invoice"

@@ -18,6 +18,42 @@ titles:
   uz: Yaratish
   zh: 新建
 items:
+  - label: "План закупок"
+    labels:
+      en: "Purchasing Plan"
+      de: "Einkaufsplan"
+      sr: "План набавке"
+      az: "Satınalma planı"
+      es: "Plan de compras"
+      fr: "Plan d'achats"
+      hy: "Գնումների պլան"
+      ka: "შესყიდვების გეგმა"
+      kk: "Сатып алу жоспары"
+      pt: "Plano de compras"
+      ro: "Plan de achiziții"
+      tr: "Satın alma planı"
+      uk: "План закупівель"
+      uz: "Xaridlar rejasi"
+      zh: "采购计划"
+    url: /ui/processor/планзакупок
+  - label: "Приёмка товара"
+    labels:
+      en: "Goods Receipt"
+      de: "Warenannahme"
+      sr: "Пријем робе"
+      az: "Malların qəbulu"
+      es: "Recepción de mercancías"
+      fr: "Réception de marchandises"
+      hy: "Ապրանքների ընդունում"
+      ka: "საქონლის მიღება"
+      kk: "Тауар қабылдау"
+      pt: "Recebimento de mercadorias"
+      ro: "Recepție mărfuri"
+      tr: "Mal kabulü"
+      uk: "Приймання товару"
+      uz: "Tovarlarni qabul qilish"
+      zh: "货物验收"
+    url: /ui/processor/приёмкатовара
   - label: "Заказ поставщику"
     labels:
       en: "Supplier order"
