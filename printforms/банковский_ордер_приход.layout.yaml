@@ -1,0 +1,68 @@
+name: БанковскийОрдерПриход
+document: ПоступлениеНаРасчётныйСчёт
+areas:
+    - name: Заголовок
+      rows:
+        - cells:
+            - text: Банковский ордер (поступление) № {{Номер}} от {{Дата | date}}
+              bold: true
+              align: center
+              fontSize: 14
+              colspan: 1
+    - name: Шапка
+      rows:
+        - cells:
+            - text: '{{Константы.НашаОрганизация.Наименование}}'
+              bold: true
+              fontSize: 14
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Счёт зачисления: {{БанковскийСчёт.НомерСчёта}} ({{БанковскийСчёт.Банк}})'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Плательщик: {{Контрагент.ПолноеНаименование}}'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'ИНН: {{Контрагент.ИНН}}, КПП: {{Контрагент.КПП}}'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Платёжное поручение: № {{НомерПлатёжки}} от {{ДатаПлатёжки | date}}'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Назначение платежа: {{НазначениеПлатежа}}'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Сумма: {{Сумма | number:2}} руб.'
+              colspan: 1
+        - cells:
+            - colspan: 1
+    - name: Подвал
+      rows:
+        - cells:
+            - colspan: 1
+              borders:
+                bottom: thin
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Главный бухгалтер: _________________________'
+              colspan: 1
+        - cells:
+            - colspan: 1
+binding:
+    sequence:
+        - Заголовок
+        - Шапка
+        - Подвал

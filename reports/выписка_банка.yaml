@@ -36,7 +36,6 @@ params:
       uk: Банківський рахунок
       uz: Bank hisobvarag'i
       zh: 银行账户
-    required: true
   - name: НачалоПериода
     type: date
     label: С даты

@@ -1,0 +1,68 @@
+name: ПриходныйКассовыйОрдер
+document: ПриходныйКассовыйОрдер
+areas:
+    - name: Заголовок
+      rows:
+        - cells:
+            - text: Приходный кассовый ордер № {{Номер}} от {{Дата | date}}
+              bold: true
+              align: center
+              fontSize: 14
+              colspan: 1
+    - name: Шапка
+      rows:
+        - cells:
+            - text: '{{Константы.НашаОрганизация.Наименование}}'
+              bold: true
+              fontSize: 14
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Касса/счёт: {{Касса.Наименование}} ({{Касса.Вид}})'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Принято от: {{Контрагент.Наименование}} ({{Контрагент.Вид}})'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Основание: {{Основание}}'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Сумма: {{Сумма | number:2}} рублей'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Сумма прописью: {{Сумма | spell}}'
+              colspan: 1
+        - cells:
+            - colspan: 1
+    - name: Подвал
+      rows:
+        - cells:
+            - colspan: 1
+              borders:
+                bottom: thin
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Главный бухгалтер: _________________________'
+              colspan: 1
+        - cells:
+            - colspan: 1
+        - cells:
+            - text: 'Кассир:            _________________________'
+              colspan: 1
+        - cells:
+            - colspan: 1
+binding:
+    sequence:
+        - Заголовок
+        - Шапка
+        - Подвал

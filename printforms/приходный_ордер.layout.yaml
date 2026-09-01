@@ -1,0 +1,117 @@
+name: ПриходныйОрдер
+document: ПоступлениеТоваров
+columns:
+    - width: 40px
+    - {}
+    - {}
+    - {}
+    - {}
+areas:
+    - name: Заголовок
+      rows:
+        - cells:
+            - text: Приходный ордер № {{Номер}} от {{Дата | date}}
+              bold: true
+              align: center
+              fontSize: 14
+              colspan: 5
+    - name: Шапка
+      rows:
+        - cells:
+            - text: 'Организация: {{Константы.НашаОрганизация.Наименование}}'
+              colspan: 5
+        - cells:
+            - colspan: 5
+        - cells:
+            - text: 'Поставщик: {{Поставщик.Наименование}}'
+              colspan: 5
+        - cells:
+            - colspan: 5
+        - cells:
+            - text: 'Склад: {{Склад.Наименование}}'
+              colspan: 5
+        - cells:
+            - colspan: 5
+    - name: ШапкаТаблицы
+      rows:
+        - cells:
+            - text: №
+              bold: true
+              border: all
+            - text: Наименование
+              bold: true
+              border: all
+            - text: Количество
+              bold: true
+              align: right
+              border: all
+            - text: Цена
+              bold: true
+              align: right
+              border: all
+            - text: Сумма
+              bold: true
+              align: right
+              border: all
+    - name: Строка
+      rows:
+        - cells:
+            - parameter: Кол0
+              border: all
+            - parameter: Кол1
+              border: all
+            - parameter: Кол2
+              align: right
+              border: all
+            - parameter: Кол3
+              align: right
+              border: all
+            - parameter: Кол4
+              align: right
+              border: all
+    - name: Итоги
+      rows:
+        - cells:
+            - border: all
+            - border: all
+            - parameter: Итог2
+              bold: true
+              align: right
+              border: all
+            - border: all
+            - text: 'Итого: {{Итог.Товары.Сумма | number:2}}'
+              bold: true
+              align: right
+              border: all
+    - name: Подвал
+      rows:
+        - cells:
+            - colspan: 5
+              borders:
+                bottom: thin
+        - cells:
+            - colspan: 5
+        - cells:
+            - text: 'Принял: _________________________ Сдал: _________________________'
+              colspan: 5
+        - cells:
+            - colspan: 5
+binding:
+    sequence:
+        - Заголовок
+        - Шапка
+        - ШапкаТаблицы
+        - Строка
+        - Итоги
+        - Подвал
+    parameters:
+        Итог2: Итог.Товары.Количество | number:0
+    repeat:
+        - area: Строка
+          source: Товары
+          parameters:
+            Кол0: '@row'
+            Кол1: Номенклатура.Наименование
+            Кол2: Количество | number:0
+            Кол3: Цена | number:2
+            Кол4: Сумма | number:2

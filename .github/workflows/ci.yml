@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Validation & Smoke Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Install OneBase CLI
+        run: go install github.com/ivantit66/onebase/cmd/onebase@latest
+
+      - name: Run onebase check
+        run: onebase check --project .
+
+      - name: Run onebase lint
+        run: onebase lint --project .
+
+      - name: Run smoke migration & populate demo database
+        run: |
+          onebase migrate --project . --sqlite ci_demo.db
+          onebase procrun --project . --sqlite ci_demo.db --proc ЗаполнитьТестовуюБазу

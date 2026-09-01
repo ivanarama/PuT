@@ -1,24 +1,16 @@
 name: ВидОперацииКорректировкиДолга
-title: Вид операции корректировки долга
-titles:
-  en: Debt adjustment operation type
-  de: Art der Schuldenregulierung
-  sr: Врста операције корекције дуга
 values:
   - name: Взаимозачет
-    title: Взаимозачёт
     titles:
       en: Mutual offset
       de: Aufrechnung
       sr: Компензација
   - name: ПереносЗадолженности
-    title: Перенос задолженности
     titles:
       en: Transfer of debt
       de: Schuldenübertragung
       sr: Пренос дуга
   - name: СписаниеЗадолженности
-    title: Списание задолженности
     titles:
       en: Debt write-off
       de: Schuldenabschreibung

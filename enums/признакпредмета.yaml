@@ -1,21 +1,4 @@
 name: ПризнакПредмета
-title: Признак предмета расчёта (тег 1212)
-titles:
-  en: Payment subject attribute (FFD tag 1212)
-  de: Berechnungsgegenstand-Merkmal (Tag 1212)
-  sr: Ознака предмета обрачуна (таг 1212)
-  az: Hesablaşma predmetinin əlaməti (teq 1212)
-  es: Atributo del objeto de cálculo (etiqueta 1212)
-  fr: Attribut de l'objet de calcul (tag 1212)
-  hy: Հաշվարկի առարկայի հատկանիշ (պիտակ 1212)
-  ka: ანგარიშსწორების საგნის ნიშანი (ტეგი 1212)
-  kk: Есеп айырысу нысанының белгісі (тег 1212)
-  pt: Atributo do objeto de cálculo (tag 1212)
-  ro: Atributul obiectului de decontare (eticheta 1212)
-  tr: Hesaplama nesnesi özelliği (etiket 1212)
-  uk: Ознака предмета розрахунку (тег 1212)
-  uz: Hisob-kitob predmeti belgisi (teg 1212)
-  zh: 结算对象标志（标签1212）
 values:
   - Товар
   - Услуга

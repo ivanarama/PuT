@@ -1,21 +1,4 @@
 name: СистемаНалогообложения
-title: Система налогообложения (СНО)
-titles:
-  en: Taxation system
-  de: Steuersystem
-  sr: Порески систем
-  az: Vergi sistemi
-  es: Sistema tributario
-  fr: Régime fiscal
-  hy: Հարկման համակարգ
-  ka: დაბეგვრის სისტემა
-  kk: Салық салу жүйесі
-  pt: Sistema de tributação
-  ro: Sistem de impozitare
-  tr: Vergilendirme sistemi
-  uk: Система оподаткування
-  uz: Soliqqa tortish tizimi
-  zh: 税收制度
 values:
   - ОСН
   - УСН_Доход

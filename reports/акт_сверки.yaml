@@ -36,7 +36,6 @@ params:
       uk: Контрагент
       uz: Kontragent
       zh: 往来单位
-    required: true
   - name: НачалоПериода
     type: date
     label: С даты

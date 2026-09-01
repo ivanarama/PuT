@@ -1,21 +1,4 @@
 name: ТипОборудования
-title: Тип оборудования
-titles:
-  en: Equipment type
-  de: Gerätetyp
-  sr: Тип опреме
-  az: Avadanlıq növü
-  es: Tipo de equipo
-  fr: Type d'équipement
-  hy: Սարքավորման տեսակ
-  ka: აღჭურვილობის ტიპი
-  kk: Жабдық түрі
-  pt: Tipo de equipamento
-  ro: Tip de echipament
-  tr: Ekipman türü
-  uk: Тип обладнання
-  uz: Uskuna turi
-  zh: 设备类型
 values:
   - ПринтерЧеков
   - Сканер
