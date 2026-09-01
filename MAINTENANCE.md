@@ -41,6 +41,7 @@ GitHub-запись разрешена только от аккаунта `ivana
 ```text
 onebase check --project .
 onebase lint --project .
+go test ./...
 ```
 
 Для изменений метаданных, миграций или исполняемой логики дополнительно
@@ -55,6 +56,7 @@ breadth-first порядок REVIEW. Проверка read-only, не вызыв
 
 ```powershell
 go run ./tools/pipelinehealth/main.go -json
+go test ./tools/pipelinehealth/...
 ```
 
 Зелёный статус означает, что инварианты соблюдены. Жёлтый означает ожидаемый

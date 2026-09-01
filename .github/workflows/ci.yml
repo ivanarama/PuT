@@ -20,6 +20,9 @@ jobs:
         with:
           go-version: '1.25'
 
+      - name: Run Go tests
+        run: go test ./...
+
       - name: Build OneBase CLI
         run: |
           git clone --depth 1 https://github.com/ivanarama/onebase.git /tmp/onebase
