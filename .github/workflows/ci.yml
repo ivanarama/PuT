@@ -18,10 +18,12 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.22'
+          go-version: '1.25'
 
-      - name: Install OneBase CLI
-        run: go install github.com/ivantit66/onebase/cmd/onebase@latest
+      - name: Build OneBase CLI
+        run: |
+          git clone --depth 1 https://github.com/ivanarama/onebase.git /tmp/onebase
+          cd /tmp/onebase && go build -o /usr/local/bin/onebase ./cmd/onebase
 
       - name: Run onebase check
         run: onebase check --project .

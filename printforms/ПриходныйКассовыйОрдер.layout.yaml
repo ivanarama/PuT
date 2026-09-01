@@ -1,10 +1,10 @@
-name: РасходныйКассовыйОрдер
-document: РасходныйКассовыйОрдер
+name: ПриходныйКассовыйОрдер
+document: ПриходныйКассовыйОрдер
 areas:
     - name: Заголовок
       rows:
         - cells:
-            - text: Расходный кассовый ордер № {{Номер}} от {{Дата | date}}
+            - text: Приходный кассовый ордер № {{Номер}} от {{Дата | date}}
               bold: true
               align: center
               fontSize: 14
@@ -24,7 +24,7 @@ areas:
         - cells:
             - colspan: 1
         - cells:
-            - text: 'Выдать: {{Контрагент.Наименование}} ({{Контрагент.Вид}})'
+            - text: 'Принято от: {{Контрагент.Наименование}} ({{Контрагент.Вид}})'
               colspan: 1
         - cells:
             - colspan: 1
@@ -38,11 +38,6 @@ areas:
               colspan: 1
         - cells:
             - colspan: 1
-        - cells:
-            - text: 'Сумма прописью: {{Сумма | spell}}'
-              colspan: 1
-        - cells:
-            - colspan: 1
     - name: Подвал
       rows:
         - cells:
@@ -52,17 +47,12 @@ areas:
         - cells:
             - colspan: 1
         - cells:
-            - text: 'Руководитель:      _________________________'
-              colspan: 1
-        - cells:
-            - colspan: 1
-        - cells:
             - text: 'Главный бухгалтер: _________________________'
               colspan: 1
         - cells:
             - colspan: 1
         - cells:
-            - text: 'Получил:           _________________________'
+            - text: 'Кассир:            _________________________'
               colspan: 1
         - cells:
             - colspan: 1

@@ -4,7 +4,7 @@ areas:
   Заголовок:
     rows:
       - cells:
-          - text: "Акт списания №{{Номер}} от {{Дата}}"
+          - parameter: Заголовок
             bold: true
             colspan: 4
             align: center

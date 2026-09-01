@@ -70,11 +70,6 @@ areas:
         - cells:
             - colspan: 1
         - cells:
-            - text: 'Сумма прописью: {{Сумма | spell}}'
-              colspan: 1
-        - cells:
-            - colspan: 1
-        - cells:
             - text: 'Назначение платежа: {{НазначениеПлатежа}}'
               colspan: 1
         - cells:

@@ -4,16 +4,15 @@ areas:
   Заголовок:
     rows:
       - cells:
-          - text: Накладная
+          - parameter: Заголовок
             bold: true
-            colspan: 4
+            colspan: 5
             align: center
             fontSize: 16
-            textColor: "#db0a0a"
   ШапкаТаблицы:
     rows:
       - cells:
-          - text: №
+          - text: "№"
             bold: true
             align: center
             backColor: "#E8E8E8"
