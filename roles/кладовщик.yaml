@@ -1,38 +1,5 @@
 name: Кладовщик
-title: Кладовщик
-titles:
-  en: Storekeeper
-  de: Lagerist
-  sr: Магацинер
-  az: Anbarçı
-  es: Almacenero
-  fr: Magasinier
-  hy: Պահեստապետ
-  ka: მესაწყობე
-  kk: Қоймашы
-  pt: Armazenista
-  ro: Depozitar
-  tr: Depo sorumlusu
-  uk: Кладовщик
-  uz: Omborchi
-  zh: 库管员
 description: Работа со складом, поступлениями, списаниями и перемещениями
-descriptions:
-  en: Warehouse operations — receipts, write-offs, and transfers
-  de: Lagerverwaltung — Zugänge, Abschreibungen und Umlagerungen
-  sr: Магацински послови — пријеми, отписи и преноси
-  az: Anbar əməliyyatları — qəbullar, silinmələr və köçürmələr
-  es: Operaciones de almacén — recepciones, bajas y transferencias
-  fr: Opérations d'entrepôt — réceptions, radiations et transferts
-  hy: Պահեստի գործունեություն — ընդունում, գրում և տեղափոխում
-  ka: საწყობის ოპერაციები — მიღება, ჩამოწერა და გადატანა
-  kk: Қойма операциялары — қабылдау, жазу және ауыстыру
-  pt: Operações de armazém — recebimentos, baixas e transferências
-  ro: Operațiuni depozit — recepții, casări și transferuri
-  tr: Depo işlemleri — kabuller, silmeler ve transferler
-  uk: Складські операції — надходження, списання та переміщення
-  uz: Ombor operatsiyalari — qabul, yozish va ko'chirish
-  zh: 仓库操作 — 收货、核销和调拨
 permissions:
   catalogs:
     Номенклатура: [read, write]
@@ -41,6 +8,8 @@ permissions:
     Организация: [read]
     ЕдиницаИзмерения: [read]
     СтавкаНДС: [read]
+    СпецификацииНоменклатуры: [read, write]
+    ПодключаемоеОборудование: [read]
   documents:
     ПоступлениеТоваров: [read, write, post, unpost]
     СписаниеТоваров: [read, write, post, unpost]

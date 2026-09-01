@@ -1,38 +1,5 @@
 name: Управленец
-title: Управленец
-titles:
-  en: Executive
-  de: Führungskraft
-  sr: Руководилац
-  az: Rəhbər
-  es: Directivo
-  fr: Dirigeant
-  hy: Ղեկավար
-  ka: ხელმძღვანელი
-  kk: Басшы
-  pt: Executivo
-  ro: Director
-  tr: Yönetici
-  uk: Управлінець
-  uz: Rahbar
-  zh: 管理者
 description: Руководитель — видит показатели, отчёты и документы всех разделов, ничего не создаёт
-descriptions:
-  en: Executive — sees KPIs, reports and documents across all areas, creates nothing
-  de: Führungskraft — sieht Kennzahlen, Berichte und Belege aller Bereiche, erstellt nichts
-  sr: Руководилац — види показатеље, извештаје и документе свих области, ништа не креира
-  az: Rəhbər — bütün bölmələrin göstəricilərini, hesabatlarını və sənədlərini görür, heç nə yaratmır
-  es: Directivo — ve indicadores, informes y documentos de todas las áreas, no crea nada
-  fr: Dirigeant — voit les indicateurs, rapports et documents de tous les domaines, ne crée rien
-  hy: Ղեկավար — տեսնում է բոլոր բաժինների ցուցանիշները, հաշվետվությունները և փաստաթղթերը, ոչինչ չի ստեղծում
-  ka: ხელმძღვანელი — ხედავს ყველა განყოფილების მაჩვენებლებს, ანგარიშებს და დოკუმენტებს, არაფერს ქმნის
-  kk: Басшы — барлық бөлімдердің көрсеткіштерін, есептерін және құжаттарын көреді, ештеңе жасамайды
-  pt: Executivo — vê indicadores, relatórios e documentos de todas as áreas, não cria nada
-  ro: Director — vede indicatorii, rapoartele și documentele tuturor zonelor, nu creează nimic
-  tr: Yönetici — tüm bölümlerin göstergelerini, raporlarını ve belgelerini görür, hiçbir şey oluşturmaz
-  uk: Управлінець — бачить показники, звіти й документи всіх розділів, нічого не створює
-  uz: Rahbar — barcha bo'limlarning ko'rsatkichlari, hisobotlari va hujjatlarini ko'radi, hech narsa yaratmaydi
-  zh: 管理者 — 查看所有板块的指标、报表和单据，不创建任何内容
 permissions:
   catalogs:
     Валюта: [read]
@@ -45,6 +12,9 @@ permissions:
     Склад: [read]
     СтавкаНДС: [read]
     ТипЦен: [read]
+    ДоговорыКонтрагентов: [read]
+    ПодключаемоеОборудование: [read]
+    СпецификацииНоменклатуры: [read]
   documents:
     ВозвратОтПокупателя: [read]
     ВозвратПоставщику: [read]
@@ -63,6 +33,9 @@ permissions:
     СписаниеТоваров: [read]
     Счёт: [read]
     УстановкаЦен: [read]
+    ЗакрытиеЗаказовПокупателей: [read]
+    ЗакрытиеЗаказовПоставщикам: [read]
+    КорректировкаДолга: [read]
   registers:
     ВаловаяПрибыль: [read]
     Взаиморасчеты: [read]
@@ -94,6 +67,11 @@ permissions:
     СвободныеОстатки: [run]
     ТоварыВПути: [run]
     ЦеныНоменклатуры: [run]
+    ABCАнализПродаж: [run]
+    АнализЗаказовПокупателей: [run]
+    АнализЗаказовПоставщикам: [run]
+    ПлатежныйКалендарь: [run]
   processors:
     ПланЗакупок: [run]
     ВыгрузкаВExcel: [run]
+    ВыгрузкаБП3: [run]

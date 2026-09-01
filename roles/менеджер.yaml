@@ -1,38 +1,5 @@
 name: Менеджер
-title: Менеджер
-titles:
-  en: Manager
-  de: Manager
-  sr: Менаџер
-  az: Menecer
-  es: Gerente
-  fr: Responsable
-  hy: Մենեջեր
-  ka: მენეჯერი
-  kk: Менеджер
-  pt: Gerente
-  ro: Manager
-  tr: Müdür
-  uk: Менеджер
-  uz: Menejer
-  zh: 经理
 description: Менеджер по продажам
-descriptions:
-  en: Sales manager
-  de: Vertriebsmitarbeiter
-  sr: Менаџер продаје
-  az: Satış meneceri
-  es: Gerente de ventas
-  fr: Responsable commercial
-  hy: Վաճառքի մենեջեր
-  ka: გაყიდვების მენეჯერი
-  kk: Сатылым менеджері
-  pt: Gerente de vendas
-  ro: Manager de vânzări
-  tr: Satış müdürü
-  uk: Менеджер з продажу
-  uz: Savdo menejeri
-  zh: 销售经理
 permissions:
   catalogs:
     Контрагент: [read, write]
@@ -44,6 +11,9 @@ permissions:
     ЕдиницаИзмерения: [read]
     СтавкаНДС: [read]
     НастройкиПользователя: [read]
+    ДоговорыКонтрагентов: [read, write]
+    СпецификацииНоменклатуры: [read]
+    ПодключаемоеОборудование: [read]
   documents:
     Счёт: [read, write]
     РеализацияТоваров: [read, write, post, unpost]
@@ -52,6 +22,8 @@ permissions:
     УстановкаЦен: [read, write, post, unpost]
     ЗаказПокупателя: [read, write, post, unpost]
     ВозвратОтПокупателя: [read, write, post, unpost]
+    ЗакрытиеЗаказовПокупателей: [read, write, post, unpost]
+    КорректировкаДолга: [read, write, post, unpost]
   registers:
     Взаиморасчеты: [read]
     ДенежныеСредства: [read]
@@ -64,6 +36,9 @@ permissions:
     АктСверки: [run]
     РезервыТоваров: [run]
     СвободныеОстатки: [run]
+    ABCАнализПродаж: [run]
+    АнализЗаказовПокупателей: [run]
+    ПлатежныйКалендарь: [run]
   processors:
     РабочееМестоПродаж: [run]
     ОтгрузкаЗаказов: [run]

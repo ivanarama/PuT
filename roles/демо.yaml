@@ -1,38 +1,5 @@
 name: Демо
-title: Демо
-titles:
-  en: Demo
-  de: Demo
-  sr: Демо
-  az: Demo
-  es: Demo
-  fr: Démo
-  hy: Դեմո
-  ka: დემო
-  kk: Демо
-  pt: Demo
-  ro: Demo
-  tr: Demo
-  uk: Демо
-  uz: Demo
-  zh: 演示
 description: Роль для демо-доступа — чтение и создание без удаления
-descriptions:
-  en: Role for demo access — read and create without deletion
-  de: Rolle für Demo-Zugriff — Lesen und Erstellen ohne Löschen
-  sr: Улога за демо приступ — читање и креирање без брисања
-  az: Demo giriş üçün rol — oxu və yarat, silmədən
-  es: Rol para acceso demo — lectura y creación sin eliminación
-  fr: Rôle pour accès démo — lecture et création sans suppression
-  hy: Դեմո մուտքի դեր — ընթերցում և ստեղծում առանց ջնջելու
-  ka: დემო წვდომის როლი — წაკითხვა და შექმნა წაშლის გარეშე
-  kk: Демо қатынау рөлі — оқу және құру, жойусыз
-  pt: Função para acesso demo — leitura e criação sem exclusão
-  ro: Rol pentru acces demo — citire și creare fără ștergere
-  tr: Demo erişim rolü — okuma ve oluşturma, silme yok
-  uk: Роль для демо-доступу — читання та створення без видалення
-  uz: Demo kirish uchun rol — o'qish va yaratish, o'chirishsiz
-  zh: 演示访问角色 — 可读可创建，不可删除
 permissions:
   catalogs:
     Валюта: [read]
@@ -45,6 +12,9 @@ permissions:
     ЕдиницаИзмерения: [read, write]
     СтавкаНДС: [read, write]
     НастройкиПользователя: [read, write]
+    ДоговорыКонтрагентов: [read, write]
+    ПодключаемоеОборудование: [read, write]
+    СпецификацииНоменклатуры: [read, write]
   documents:
     Счёт: [read, write, post, unpost]
     РеализацияТоваров: [read, write, post, unpost]
@@ -63,6 +33,9 @@ permissions:
     ВозвратПоставщику: [read, write, post, unpost]
     СборкаТоваров: [read, write, post, unpost]
     РазборкаТоваров: [read, write, post, unpost]
+    ЗакрытиеЗаказовПокупателей: [read, write, post, unpost]
+    ЗакрытиеЗаказовПоставщикам: [read, write, post, unpost]
+    КорректировкаДолга: [read, write, post, unpost]
   registers:
     Взаиморасчеты: [read, write]
     ОстаткиТоваров: [read, write]
@@ -77,12 +50,14 @@ permissions:
     ОстаткиТоваров: [run]
     ДвиженияТоваров: [run]
     ВаловаяПрибыль: [run]
+    ВаловаяПрибыльСКД: [run]
     Взаиморасчеты: [run]
     ОстаткиДенежныхСредств: [run]
     ДвижениеДенежныхСредств: [run]
     ВедомостьПартий: [run]
     АктСверки: [run]
     ПродажиПоКонтрагентам: [run]
+    ПродажиПоМесяцам: [run]
     ОборотПоСкладам: [run]
     ОплатыРеализаций: [run]
     ОплатыПоступлений: [run]
@@ -92,10 +67,15 @@ permissions:
     СвободныеОстатки: [run]
     Неликвиды: [run]
     ВыпискаБанка: [run]
+    ABCАнализПродаж: [run]
+    АнализЗаказовПокупателей: [run]
+    АнализЗаказовПоставщикам: [run]
+    ПлатежныйКалендарь: [run]
   processors:
     # Демо-сервер: всё, кроме перезаполнения базы (ЗаполнитьТестовуюБазу — админская).
     ВзвеситьТовар: [run]
     ВыгрузкаВExcel: [run]
+    ВыгрузкаБП3: [run]
     ЗагрузкаВыписки: [run]
     ИмпортНоменклатуры: [run]
     ИнвентаризацияСклада: [run]
