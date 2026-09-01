@@ -61,6 +61,17 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    уведомление не шлётся).
    За один прогон вливай не больше **3** PR.
 
+   Перед обычной сортировкой примени глобальный single-flight-барьер. Среди всех
+   `ship`-PR найди самый ранний по номеру доказанный незавершённый handoff:
+   открытый `pp:base-sync-intent`, текущий `to` валидного done без нового proof
+   либо legacy re-ship текущего HEAD без нового proof. Только этот PR является
+   владельцем барьера. Если он ждёт REVIEW, не меняй **ни один** PR и закончи
+   весь MERGE. Если его `to` уже получил каноничный proof `reviewed`, обрабатывай
+   владельца раньше обычной очереди. При нескольких legacy re-ship выбери только
+   минимальный номер; остальные сохраняют `ship`, но ждут. Нельзя заранее
+   обновлять или мержить следующий PR: это изменит `main` и обесценит аудит
+   владельца барьера.
+
    Фильтр списка не является достаточным гейтом: метки могут измениться, пока ты
    работаешь с PR или ждёшь CI. Перед **каждым внешним изменением PR**
    (`update-branch`, push разрешённого конфликта, комментарий, постановка метки,
@@ -109,28 +120,74 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    Этот committed-маркер доказывает, что его точная `Outcome-Label` была
    подтверждена перед публикацией; последующее изменение маршрутных меток не
    стирает аудит. После completion не должно быть отдельной строки
-   `pp:review-again`. Нет актуальной завершённой пары либо есть более поздний
-   override — это stale `ship`, а не разрешение на мерж нового кода. Выполни
-   специальную атомарную передачу в REVIEW: сними `ship` через REST → сверь
-   удаление → оставь комментарий «ship снят: текущий HEAD ещё не прошёл ревью» →
-   прекрати обработку PR. После снятия `ship` обычный гейт закономерно закрыт,
-   поэтому комментарий является разрешённым завершающим шагом **этой же
-   транзакции**, а не новой независимой мутацией. Если комментарий не удался,
-   безопасное состояние уже достигнуто: PR не сольётся и REVIEW подхватит SHA.
-   Никакие update/push/merge до успешного SHA-гейта недопустимы.
+   `pp:review-again`.
 
    Текущее наличие `ship` недостаточно. В полном стабильном GraphQL epoch выбери
    **последний переход именно метки `ship`** (`LabeledEvent` или
    `UnlabeledEvent`) строго по позиции server-ordered edge/cursor; учитывай
-   события всех actors. Он обязан быть `LabeledEvent` от `ivanarama` и его edge
-   обязан располагаться после edges review-комментария, claim и completion
-   текущего SHA. Все три proof-комментария не редактированы, поэтому отдельного
-   межтипового сравнения с edit timestamp нет. Старый trusted `LabeledEvent`, после
+   события всех actors. Он обязан быть `LabeledEvent` от `ivanarama`. Старый trusted `LabeledEvent`, после
    которого человек снял метку, не оживает от повторной постановки другим actor
    или app. Никогда не сравнивай числовые REST ids комментариев и label events:
-   они принадлежат разным таблицам и не задают общий порядок. Если edge-order
-   недоступен или переход отсутствует — stale `ship`, метку нужно снять и
-   поставить заново.
+   они принадлежат разным таблицам и не задают общий порядок.
+
+   Разрешены ровно три способа связать этот ship-transition с текущим proof:
+
+   - **обычный:** edge `ship` расположен после edges review-комментария, claim и
+     completion текущего SHA;
+   - **carried:** тот же непрерывно присутствующий `ship` был поставлен после
+     proof исходного SHA, а текущий HEAD достигнут только валидной цепочкой
+     автоматических base-sync и после последнего звена уже получил новый
+     каноничный proof с outcome `reviewed`;
+   - **legacy reauthorized:** текущий HEAD — точный legacy base-sync, сделанный
+     до intent/done-протокола, а человек заново поставил `ship` после anchor
+     этого HEAD и интеграционное REVIEW уже создало для него каноничный proof с
+     outcome `reviewed`.
+
+   Legacy reauthorization валидна только если текущий HEAD `to` — merge-коммит
+   ровно с двумя parents `[from, base]`; `from` имеет каноничный proof `reviewed`
+   и trusted `ship` после него; между этим ship и `to` есть ровно один
+   `PullRequestCommit` и нет иных HEAD/base lifecycle events; `base` — предок
+   текущего `main`; а последний ship-transition — новый trusted `LabeledEvent`
+   от `ivanarama` после anchor `to`. Старое снятие `ship` между `to` и новым
+   label допустимо. Докажи условия двумя стабильными GraphQL snapshot и REST
+   parents; похожий merge message доказательством не считается. Новый push
+   после re-ship отменяет разрешение.
+
+   Base-sync carry состоит из точных отдельных строк:
+
+   ```
+   <!-- pp:base-sync-intent from=<40hex> base=<40hex> review-comment=<id> claim=<id> completion=<id> ship-event=<GraphQL node id> previous=<done id|none> -->
+   <!-- pp:base-sync-done intent=<id> from=<40hex> to=<40hex> base=<40hex> previous=<done id|none> ship-event=<GraphQL node id> -->
+   ```
+
+   Оба комментария должны быть от `ivanarama`, не редактированы и server-ordered
+   в указанном порядке. `done` ссылается на самый ранний валидный intent для
+   данного `from`; их `from`, `previous` и `ship-event` совпадают. Для первого
+   звена `previous=none`, intent адресует каноничные review/claim/completion
+   `from`, а `ship-event` либо идёт после них обычным способом, либо является
+   доказанным legacy reauthorization после anchor `from`. Для следующего
+   `previous` указывает на предыдущий done, его `to` равен новому `from`, а
+   новый intent адресует каноничный proof этого `from`. Каждый переход после
+   intent — ровно один `PullRequestCommit` без force-push/delete/restore/base-
+   change; commit `to` имеет ровно двух родителей `[from, base]`, а `base` —
+   предок текущего `main`. Проверяй parents через
+   `repos/ivanarama/PuT/commits/<to>` и адресуй intent/done по node id в обоих
+   полных GraphQL snapshot. Последний переход `ship` во всей carry-цепочке
+   обязан оставаться исходным trusted `LabeledEvent`: снятие/повторная
+   постановка, edit/delete marker, чужой head event или разрыв `previous`
+   отменяют carry.
+
+   Если текущий HEAD равен `to` валидного последнего done либо является точным
+   legacy base-sync с re-ship после его anchor, но каноничного proof текущего
+   HEAD ещё нет, это **не stale ship**: ничего не меняй, зафиксируй «ожидает
+   интеграционное REVIEW» и переходи к следующему PR. Во всех остальных случаях
+   отсутствие актуальной завершённой пары, более поздний override либо
+   отсутствие обычного/carried/legacy-reauthorized разрешения — stale `ship`.
+   Выполни атомарную передачу в REVIEW: сними `ship` через REST → сверь удаление
+   → оставь комментарий «ship снят: текущий HEAD ещё не прошёл ревью» → прекрати
+   обработку PR. После снятия `ship` комментарий является завершающим шагом этой
+   же транзакции. Никакие update/push/merge до успешного SHA+authorization-гейта
+   недопустимы.
 
 2. Очередь при `strict: true` строго последовательна — работай с одним PR до
    конца, потом следующий. Состояние: `gh pr view <N> --json
@@ -138,21 +195,42 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    по нему снимается `in-work`).
 
 3. По состоянию:
-   - **BEHIND** → после полного label+SHA-гейта сохрани проверенный SHA и выполни
-     compare-and-update с ним:
+   - **BEHIND** → после полного label+SHA+authorization-гейта, включая допустимое
+     legacy reauthorization, сохрани проверенный SHA, текущий `baseRefOid`, ids
+     proof, node id исходного ship-transition и id предыдущего done (`none` для
+     первого sync). Сначала опубликуй exact intent:
+
+     ```
+     <!-- pp:base-sync-intent from=<SHA> base=<baseRefOid> review-comment=<id> claim=<id> completion=<id> ship-event=<node id> previous=<done id|none> -->
+     ```
+
+     Перечитай полный timeline. Продолжает только самый ранний валидный intent
+     для этой пары `from` + authorization. Затем повтори полный гейт и вызови
+     compare-and-update:
 
      ```
      echo '{"expected_head_sha":"<проверенный SHA>"}' | \
        gh api -X PUT repos/ivanarama/PuT/pulls/<N>/update-branch --input -
      ```
 
-     При `422` сначала снова прочитай HEAD. Только несовпадение с сохранённым SHA
-     означает гонку и требует stale-ship передачи в REVIEW. Если SHA тот же,
-     это validation/rate-limit отказ: `ship` не снимай, зафиксируй диагноз и
-     закончи `НЕ СМОГ` либо `НУЖЕН ЧЕЛОВЕК`. Успешная команда
-     меняет HEAD, поэтому старое ревью больше недействительно: сразу выполни
-     атомарную передачу из п. 1 (снять `ship`, сверить, прокомментировать) и
-     прекрати обработку PR. CI и новый `ship` будут уже после повторного REVIEW.
+     При `422` сначала снова прочитай HEAD. Если он равен `from`, это
+     validation/rate-limit отказ: `ship` не снимай, intent оставь для recovery.
+     Если HEAD другой, восстанови самый ранний intent: допустим только новый
+     merge-коммит с parents `[from, base]` и ровно один соответствующий
+     `PullRequestCommit`; любой иной переход — stale-ship передача.
+
+     После успешного update или доказанного recovery прочитай новый HEAD и его
+     parents, повтори стабильный timeline gate и опубликуй exact done:
+
+     ```
+     <!-- pp:base-sync-done intent=<id> from=<SHA> to=<новый SHA> base=<второй parent> previous=<done id|none> ship-event=<node id> -->
+     ```
+
+     Если процесс упал после intent, следующий MERGE восстанавливает самый
+     ранний intent: при `HEAD == from` повторяет CAS update; при доказанном
+     `[from, base]` публикует отсутствующий done. После done метку `ship` **не
+     снимай**; прекрати **весь запуск MERGE** со статусом «ожидает интеграционное REVIEW».
+     REVIEW проверит новый HEAD, а MERGE продолжит без второго клика человека.
      (`gh pr update-branch` в этой версии gh не работает.)
    - **DIRTY (конфликт)** → чинить в отдельном worktree, привязанном к SHA
      последнего успешного гейта. Сначала обнови main
@@ -183,16 +261,18 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
      PR, в финале `НУЖЕН ЧЕЛОВЕК`. `ship` не снимай: решение человека о мерже
      остаётся, но `needs-decision` паркует попытки до разрешения конфликта.
      После механического разрешения перед push ещё раз выполни полный
-     label+SHA-гейт. REST-сверка перед push не атомарна, поэтому используй
+     label+SHA-гейт, создай и выбери самый ранний `pp:base-sync-intent` по тем же
+     правилам, что для BEHIND, затем повтори гейт. REST-сверка перед push не атомарна, поэтому используй
      точный refspec вместе с compare-and-swap lease:
      `git push --force-with-lease=refs/heads/<ветка-PR>:<сохранённый SHA> origin HEAD:refs/heads/<ветка-PR>`.
      Lease failure означает гонку: ничего не перезаписывай и `ship` не снимай.
      После успешного push перечитай PR через REST и проверь,
      что новый `.head.sha` равен локальному `git rev-parse HEAD`; иначе не
      снимай `ship`, зафиксируй ошибку доставки и закончи `НУЖЕН ЧЕЛОВЕК`.
-     Подтверждённый push меняет HEAD: затем убери worktree, выполни атомарную
-     передачу из п. 1 (снять `ship`, сверить, прокомментировать) и прекрати
-     обработку PR. Ждать CI и мержить новый SHA без повторного REVIEW нельзя.
+     Подтверждённый push меняет HEAD: проверь parents `[from, base]`, единственный
+     `PullRequestCommit`, опубликуй `pp:base-sync-done`, убери worktree и прекрати
+     **весь запуск MERGE**, сохранив `ship`. Ждать CI и мержить новый SHA без
+     интеграционного REVIEW нельзя; второй человеческий `ship` не нужен.
    - **CLEAN + требуемые проверки зелёные** → мерж (п. 5).
 
 4. Ожидание CI: цикл «`sleep 120` → перечитать статус», не дольше **35 минут**
@@ -226,7 +306,8 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    обоих полных ответов; любое отличие требует начать пару заново.
 
    В одном серверном снимке должны одновременно выполняться условия: HEAD равен
-   проверенному SHA; `state == OPEN`; `baseRefName == "main"`;
+   проверенному SHA; `state == OPEN`; `baseRefName == "main"`; сохранённый
+   `baseRefOid` принадлежит тому же снимку;
    есть `ship`; нет `hold` и актуального `needs-decision`;
    `labels.pageInfo.hasNextPage == false`; адресованный epoch anchor существует
    и точно совпадает с сохранёнными node id/type/payload (для override-
@@ -240,9 +321,11 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    `BaseRefDeletedEvent` (даже если после ABA-перехода
    `H → X → H` текущий `headRefOid` снова равен проверенному SHA), нет
    `CommentDeletedEvent`, а claim остаётся earliest; **последний** ship-transition среди возвращённых
-   `LabeledEvent`/`UnlabeledEvent` — `LabeledEvent` от `ivanarama`, а его edge
-   расположен после edges всех трёх адресованных комментариев в том же
-   server-ordered timeline; после
+   `LabeledEvent`/`UnlabeledEvent` — `LabeledEvent` от `ivanarama`. Для обычного
+   разрешения его edge расположен после edges всех трёх адресованных
+   комментариев. Для carried/legacy-разрешения оба снимка дополнительно
+   адресуют intent/done либо legacy lineage, исходный ship-event и доказывают
+   отсутствие более позднего недопустимого ship/head-transition; после
    completion нет `pp:review-again`. Предыдущий comment-watermark обязан
    присутствовать среди `comments(last:100)`: если его вытеснили 100+ новых
    комментариев, snapshot не доказывает отсутствие override — требуется новый
@@ -269,7 +352,7 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
        ... on IssueComment{id fullDatabaseId createdAt lastEditedAt author{login} body}
      }
      repository(owner:$owner,name:$name){pullRequest(number:$number){
-       headRefOid baseRefName state labels(first:100){nodes{name} pageInfo{hasNextPage}}
+       headRefOid baseRefOid baseRefName state labels(first:100){nodes{name} pageInfo{hasNextPage}}
        comments(last:100){nodes{fullDatabaseId createdAt lastEditedAt author{login} body}}
        timelineItems(first:100,after:$epochCursor,itemTypes:[PULL_REQUEST_COMMIT,HEAD_REF_FORCE_PUSHED_EVENT,HEAD_REF_DELETED_EVENT,HEAD_REF_RESTORED_EVENT,BASE_REF_CHANGED_EVENT,BASE_REF_FORCE_PUSHED_EVENT,BASE_REF_DELETED_EVENT,MERGED_EVENT,ISSUE_COMMENT,COMMENT_DELETED_EVENT,LABELED_EVENT,UNLABELED_EVENT]){
          updatedAt
