@@ -1,0 +1,64 @@
+name: ПриходныйКассовыйОрдер
+document: ПриходныйКассовыйОрдер
+areas:
+  - name: Заголовок
+    rows:
+      - cells:
+          - parameter: Заголовок
+            bold: true
+            align: center
+            fontSize: 14
+            colspan: 1
+  - name: Шапка
+    rows:
+      - cells:
+          - parameter: Организация
+            bold: true
+            fontSize: 14
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: Касса
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: ПринятоОт
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: Основание
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: СуммаЧислом
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: СуммаПрописью
+            bold: true
+            colspan: 1
+      - cells:
+          - colspan: 1
+  - name: Подвал
+    rows:
+      - cells:
+          - colspan: 1
+            borders:
+              bottom: thin
+      - cells:
+          - colspan: 1
+      - cells:
+          - text: 'Главный бухгалтер: _________________________'
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - text: 'Кассир:            _________________________'
+            colspan: 1
+      - cells:
+          - colspan: 1

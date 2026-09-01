@@ -1,0 +1,100 @@
+name: ПлатёжноеПоручение
+document: СписаниеСРасчётногоСчёта
+areas:
+  - name: Заголовок
+    rows:
+      - cells:
+          - parameter: Заголовок
+            bold: true
+            align: center
+            fontSize: 14
+            colspan: 1
+  - name: Шапка
+    rows:
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: Плательщик
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: СчётПлательщика
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: БанкПлательщика
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - colspan: 1
+            borders:
+              bottom: thin
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: Получатель
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: ИННКПППолучателя
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: СчётПолучателя
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: БанкПолучателя
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: КоррСчётПолучателя
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: СуммаЧислом
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: СуммаПрописью
+            bold: true
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - parameter: НазначениеПлатежа
+            colspan: 1
+      - cells:
+          - colspan: 1
+  - name: Подвал
+    rows:
+      - cells:
+          - colspan: 1
+            borders:
+              bottom: thin
+      - cells:
+          - colspan: 1
+      - cells:
+          - text: 'Руководитель:      _________________________'
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - text: 'Главный бухгалтер: _________________________'
+            colspan: 1
+      - cells:
+          - colspan: 1
+      - cells:
+          - text: МП
+            colspan: 1
+      - cells:
+          - colspan: 1

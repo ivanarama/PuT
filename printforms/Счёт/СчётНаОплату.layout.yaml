@@ -30,19 +30,10 @@ areas:
     name: БанковскиеРеквизиты
   - rows:
       - cells:
-          - text: Счёт на оплату [номер] от [дата]
+          - parameter: Заголовок
             bold: true
             colspan: 6
-            align: center
             fontSize: 16
-      - cells:
-          - text: №
-            colspan: 1
-          - parameter: Номер
-            colspan: 2
-          - text: от
-          - parameter: Дата
-            colspan: 2
     name: Заголовок
   - rows:
       - cells:
