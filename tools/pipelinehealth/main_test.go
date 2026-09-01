@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
+	"runtime"
+	"strings"
 	"testing"
 )
 
@@ -10,6 +14,31 @@ const (
 	headB = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
 	epoch = "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
 )
+
+func TestReviewSkillUsesHealthReportAsExclusiveAllowlist(t *testing.T) {
+	_, file, _, ok := runtime.Caller(0)
+	if !ok {
+		t.Fatal("runtime.Caller failed")
+	}
+	root := filepath.Clean(filepath.Join(filepath.Dir(file), "..", ".."))
+	data, err := os.ReadFile(filepath.Join(root, ".claude", "skills", "review-queue", "SKILL.md"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	compact := strings.Join(strings.Fields(string(data)), " ")
+	for _, fragment := range []string{
+		"Исполняемый preflight — единственный источник списка кандидатов",
+		"go run ./tools/pipelinehealth/main.go -json",
+		"`review_candidates` — **исключительный allowlist этого запуска**",
+		"Если в `findings` есть `single_flight_barrier`, действуй fail-closed",
+		"**не переходи к обычной очереди**",
+		"Расхождение означает стоп без подстановки следующего PR",
+	} {
+		if !strings.Contains(compact, strings.Join(strings.Fields(fragment), " ")) {
+			t.Errorf("review contract is missing %q", fragment)
+		}
+	}
+}
 
 func testPR(number int, head string, labels ...string) apiPull {
 	item := apiPull{Number: number, Title: "PR", HTMLURL: "https://example.test/pr", State: "open"}
