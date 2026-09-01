@@ -209,17 +209,20 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
 
 3. По состоянию:
    - **BEHIND** → после полного label+SHA+authorization-гейта, включая допустимое
-     legacy либо protocol-recovery reauthorization, сохрани проверенный SHA, текущий `baseRefOid`, ids
+     legacy либо protocol-recovery reauthorization, сохрани проверенный SHA, ids
      proof, node id исходного ship-transition и id предыдущего done (`none` для
      первого sync). Для protocol-recovery начинай новую исправленную цепочку с
-     `previous=none`. Сначала опубликуй exact intent:
+     `previous=none`. Tip `main` получи только через
+     `gh api repos/ivanarama/PuT/git/ref/heads/main --jq .object.sha`;
+     `PullRequest.baseRefOid` не используй как tip ветки. Сначала опубликуй exact intent:
 
      ```
-     <!-- pp:base-sync-intent from=<SHA> base=<baseRefOid> review-comment=<id> claim=<id> completion=<id> ship-event=<node id> previous=<done id|none> -->
+     <!-- pp:base-sync-intent from=<SHA> base=<authoritative main ref SHA> review-comment=<id> claim=<id> completion=<id> ship-event=<node id> previous=<done id|none> -->
      ```
 
      Перечитай полный timeline. Продолжает только самый ранний валидный intent
-     для этой пары `from` + authorization. Затем повтори полный гейт и вызови
+     для этой пары `from` + authorization. Непосредственно перед update ещё раз
+     прочитай `refs/heads/main`, затем повтори полный гейт и вызови
      compare-and-update:
 
      ```
@@ -234,7 +237,10 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
      `PullRequestCommit`; любой иной переход — stale-ship передача.
 
      После успешного update или доказанного recovery прочитай новый HEAD и его
-     parents, повтори стабильный timeline gate и опубликуй exact done:
+     parents. `done.base` равен фактическому второму parent. Если он отличается
+     от `intent.base`, разрешай это только при ancestry
+     `intent.base → done.base → current main`, сохранив остальные fences, и
+     покажи `base_sync_base_advanced`. Повтори gate и опубликуй exact done:
 
      ```
      <!-- pp:base-sync-done intent=<id> from=<SHA> to=<новый SHA> base=<второй parent> previous=<done id|none> ship-event=<node id> -->
