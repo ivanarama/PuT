@@ -28,6 +28,9 @@ func TestReviewSkillUsesHealthReportAsExclusiveAllowlist(t *testing.T) {
 	compact := strings.Join(strings.Fields(string(data)), " ")
 	for _, fragment := range []string{
 		"Исполняемый preflight — единственный источник списка кандидатов",
+		"Get-Command gh -ErrorAction SilentlyContinue",
+		"C:\\Program Files\\GitHub CLI\\gh.exe",
+		"GitHub CLI not found in PATH or the standard Windows location",
 		"go run ./tools/pipelinehealth/main.go -json",
 		"`review_candidates` — **исключительный allowlist этого запуска**",
 		"Если в `findings` есть `single_flight_barrier`, действуй fail-closed",
