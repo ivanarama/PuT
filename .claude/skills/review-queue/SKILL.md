@@ -63,7 +63,15 @@ description: Ревью открытых PR ivanarama/PuT перед мерже�
    } else {
      throw 'GitHub CLI not found in PATH or the standard Windows location'
    }
-   go run ./tools/pipelinehealth/main.go -json
+   $goCommand = Get-Command go -ErrorAction SilentlyContinue
+   if ($goCommand) {
+     $goExe = $goCommand.Source
+   } elseif (Test-Path -LiteralPath 'C:\Program Files\Go\bin\go.exe') {
+     $goExe = 'C:\Program Files\Go\bin\go.exe'
+   } else {
+     throw 'Go not found in PATH or the standard Windows location'
+   }
+   & $goExe run ./tools/pipelinehealth/main.go -json
    ```
 
    Ошибка команды, stderr вместо JSON или неразбираемый JSON означают
