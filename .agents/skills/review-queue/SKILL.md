@@ -13,7 +13,10 @@ description: "Независимое ревью открытых pull requests i
    single-flight-владение интеграционным REVIEW: за запуск проверяется только
    первый доказанный base-sync/legacy re-ship, общий `main` не изменяется.
    `review_candidates` из обязательного `pipelinehealth` preflight — закрытый
-   allowlist; не строй запасную очередь при barrier или пустом allowlist.
+   allowlist; не строй запасную очередь. Пока владелец ждёт MERGE/recovery,
+   обычные stage `review` остаются разрешёнными. Интеграционная проверка
+   переиспользует content-proof и смотрит только base-sync дельту, конфликты и
+   CI, а не повторяет весь содержательный аудит.
 6. На Windows используй PowerShell-эквиваленты команд, сохраняя семантику и проверяя коды возврата. Перед обязательными проверками убедись, что доступны `onebase`, `git` и `gh`.
 7. Полную `references/legacy-protocol.md` читай только при `action=fallback`;
    не загружай её в обычном tool-пути.
