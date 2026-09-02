@@ -15,17 +15,32 @@ const (
 	epoch = "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
 )
 
+func repositoryText(t *testing.T, root, name string) string {
+	t.Helper()
+	path := filepath.Join(root, name)
+	data, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if filepath.Base(path) == "SKILL.md" {
+		legacy, legacyErr := os.ReadFile(filepath.Join(filepath.Dir(path), "references", "legacy-protocol.md"))
+		if legacyErr == nil {
+			data = append(append(data, '\n'), legacy...)
+		} else if !os.IsNotExist(legacyErr) {
+			t.Fatal(legacyErr)
+		}
+	}
+	return string(data)
+}
+
 func TestReviewSkillUsesHealthReportAsExclusiveAllowlist(t *testing.T) {
 	_, file, _, ok := runtime.Caller(0)
 	if !ok {
 		t.Fatal("runtime.Caller failed")
 	}
 	root := filepath.Clean(filepath.Join(filepath.Dir(file), "..", ".."))
-	data, err := os.ReadFile(filepath.Join(root, ".claude", "skills", "review-queue", "SKILL.md"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	compact := strings.Join(strings.Fields(string(data)), " ")
+	data := repositoryText(t, root, filepath.Join(".claude", "skills", "review-queue", "SKILL.md"))
+	compact := strings.Join(strings.Fields(data), " ")
 	for _, fragment := range []string{
 		"Исполняемый preflight — единственный источник списка кандидатов",
 		"Get-Command gh -ErrorAction SilentlyContinue",
@@ -52,11 +67,8 @@ func TestMergeDoesNotReportWaitingAsProductive(t *testing.T) {
 		t.Fatal("runtime.Caller failed")
 	}
 	root := filepath.Clean(filepath.Join(filepath.Dir(file), "..", ".."))
-	data, err := os.ReadFile(filepath.Join(root, ".claude", "skills", "merge-shepherd", "SKILL.md"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	compact := strings.Join(strings.Fields(string(data)), " ")
+	data := repositoryText(t, root, filepath.Join(".claude", "skills", "merge-shepherd", "SKILL.md"))
+	compact := strings.Join(strings.Fields(data), " ")
 	for _, fragment := range []string{
 		"`ГОТОВО` означает, что запуск совершил хотя бы одну durable-мутацию",
 		"Если запуск только обнаружил, что владелец single-flight ждёт REVIEW",
@@ -97,11 +109,8 @@ func TestMalformedProtocolCarryCanBeExplicitlyReauthorized(t *testing.T) {
 		},
 	}
 	for name, fragments := range checks {
-		data, err := os.ReadFile(filepath.Join(root, name))
-		if err != nil {
-			t.Fatal(err)
-		}
-		compact := strings.Join(strings.Fields(string(data)), " ")
+		data := repositoryText(t, root, name)
+		compact := strings.Join(strings.Fields(data), " ")
 		for _, fragment := range fragments {
 			if !strings.Contains(compact, strings.Join(strings.Fields(fragment), " ")) {
 				t.Errorf("%s is missing %q", name, fragment)
