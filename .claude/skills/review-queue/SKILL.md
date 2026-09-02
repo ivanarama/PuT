@@ -27,4 +27,8 @@ python -m promptpilot.project_pipeline --config pipelinectl.json next review
 completion публикует только инструмент. Если он остановился после частичной
 транзакции, ничего не исправляй вслепую: recovery выполнит fallback.
 
+Для `target.stage=review` выполняй полное содержательное ревью текущего HEAD.
+Для `integration-review` / `legacy-integration-review` не повторяй его: проверь
+только доказанную base-sync дельту, разрешение конфликтов и актуальные CI.
+
 Только `action=completed` допускает `ИТОГ: ГОТОВО (...)`.
