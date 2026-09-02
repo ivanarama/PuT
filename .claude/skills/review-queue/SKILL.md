@@ -344,6 +344,16 @@ description: Ревью открытых PR ivanarama/PuT перед мерже�
    следующим push. Докажи условия двумя стабильными GraphQL snapshot и REST
    parents; похожий merge message доказательством не считается.
 
+   Protocol-recovery re-ship — отдельный узкий путь для handoff, у которого уже
+   есть trusted не редактированные intent/done, но исходный carry невалиден.
+   Текущий HEAD обязан точно равняться `to`; commit имеет parents `[from, base]`;
+   source proof `from` каноничен; между intent и done был ровно один
+   `PullRequestCommit`; `base` — предок текущего `main`; а последний trusted
+   `ship` от `ivanarama` расположен после edge done. После done не допускаются
+   HEAD/base lifecycle events. Новый label разрешает только точный текущий HEAD,
+   не делает старый carry валидным и отменяется следующим push. Новый base-sync
+   после успешного REVIEW начинает исправленную цепочку с `previous=none`.
+
    Контрольная таблица — применяй её буквально:
 
    | Состояние | Действие |
@@ -352,6 +362,7 @@ description: Ревью открытых PR ivanarama/PuT перед мерже�
    | есть `ship`, но нет валидного незавершённого `pp:base-sync-done` и нет legacy re-ship для текущего HEAD | пропустить |
    | есть `ship`, текущий HEAD равен `to` валидной carry-цепочки и ещё не имеет committed-пары | единственное интеграционное REVIEW запуска; после committed-пары закончить весь этап |
    | есть `ship`, текущий HEAD ещё без committed-пары и валиден legacy re-ship после его anchor | единственное интеграционное REVIEW запуска; после committed-пары закончить весь этап |
+   | есть `ship`, текущий HEAD ещё без committed-пары и валиден protocol-recovery re-ship после его done | единственное интеграционное REVIEW запуска; после committed-пары закончить весь этап |
    | есть каноничный committed-маркер и `changes-requested` / `needs-decision`, более позднего override нет | пропустить: мяч у FIX / человека |
    | после committed-пары есть непоглощённый override при `changes-requested` / `needs-decision` | REVIEW продолжает; старая маршрутная метка не является стопом |
    | есть валидный `PP-Fix-Transition` нового HEAD и незавершённая post-push фаза | пропустить: мяч у финализации FIX |

@@ -46,6 +46,42 @@ func TestReviewSkillUsesHealthReportAsExclusiveAllowlist(t *testing.T) {
 	}
 }
 
+func TestMalformedProtocolCarryCanBeExplicitlyReauthorized(t *testing.T) {
+	_, file, _, ok := runtime.Caller(0)
+	if !ok {
+		t.Fatal("runtime.Caller failed")
+	}
+	root := filepath.Clean(filepath.Join(filepath.Dir(file), "..", ".."))
+	checks := map[string][]string{
+		filepath.Join(".claude", "skills", "review-queue", "SKILL.md"): {
+			"Protocol-recovery re-ship — отдельный узкий путь",
+			"последний trusted `ship` от `ivanarama` расположен после edge done",
+			"не делает старый carry валидным",
+		},
+		filepath.Join(".claude", "skills", "merge-shepherd", "SKILL.md"): {
+			"Разрешены ровно четыре способа",
+			"**protocol-recovery reauthorized:**",
+			"Для protocol-recovery начинай новую исправленную цепочку",
+		},
+		"MAINTENANCE.md": {
+			"переавторизовать точный текущий HEAD новым `ship` после done",
+			"начинает исправленную цепочку с `previous=none`",
+		},
+	}
+	for name, fragments := range checks {
+		data, err := os.ReadFile(filepath.Join(root, name))
+		if err != nil {
+			t.Fatal(err)
+		}
+		compact := strings.Join(strings.Fields(string(data)), " ")
+		for _, fragment := range fragments {
+			if !strings.Contains(compact, strings.Join(strings.Fields(fragment), " ")) {
+				t.Errorf("%s is missing %q", name, fragment)
+			}
+		}
+	}
+}
+
 func testPR(number int, head string, labels ...string) apiPull {
 	item := apiPull{Number: number, Title: "PR", HTMLURL: "https://example.test/pr", State: "open"}
 	item.Head.SHA = head
