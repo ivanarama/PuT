@@ -12,6 +12,11 @@ TRIAGE → FIX → REVIEW → MERGE. Полномочия, метки и диа�
 только после merge, а не сразу после готового review proof.
 Машинный `pipelinehealth`-allowlist обязателен для выбора REVIEW и не позволяет
 агенту обойти владельца барьера собственным списком кандидатов.
+Обычные REVIEW и готовые CLEAN MERGE проходят через общий `pipelinectl`
+PromptPilot: Claude и Codex получают один JSON-контракт и lease на точный HEAD.
+Base-sync, carry, конфликт и recovery автоматически возвращаются к полной
+процедуре skills. PuT-серии при этом остаются выключенными, пока их явно не
+возобновят в PromptPilot.
 
 ---
 
