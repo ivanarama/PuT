@@ -332,6 +332,11 @@ description: Ревью открытых PR ivanarama/PuT перед мерже�
    должен равняться `to` последнего done. Intent без done — незавершённая
    транзакция MERGE, её REVIEW не захватывает.
 
+   `intent.base` — tip `refs/heads/main` перед update, `done.base` — фактический
+   второй parent. При их различии требуй ancestry
+   `intent.base → done.base → current main` и все обычные timeline/HEAD fences;
+   health должен показывать `base_sync_base_advanced`.
+
    Legacy re-ship нужен только для веток, которые MERGE обновил до внедрения
    intent/done. Он валиден, когда текущий HEAD `to` — merge-коммит ровно с двумя
    parents `[from, base]`; `from` имеет каноничный proof `reviewed` и trusted

@@ -57,6 +57,9 @@ REVIEW в этот промежуток не берёт следующий PR, �
 переавторизовать точный текущий HEAD новым `ship` после done. REVIEW доказывает
 parents, source proof и отсутствие последующего push; следующий base-sync
 начинает исправленную цепочку с `previous=none`.
+Tip `main` для intent читается напрямую из `git/ref/heads/main`, не из
+`PullRequest.baseRefOid`; done записывает фактический второй parent. Сдвиг base
+между intent и done виден как `base_sync_base_advanced` и требует ancestry gate.
 
 ## Обязательные проверки PuT
 

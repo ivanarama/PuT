@@ -57,15 +57,21 @@ func TestMalformedProtocolCarryCanBeExplicitlyReauthorized(t *testing.T) {
 			"Protocol-recovery re-ship — отдельный узкий путь",
 			"последний trusted `ship` от `ivanarama` расположен после edge done",
 			"не делает старый carry валидным",
+			"`intent.base` — tip `refs/heads/main` перед update",
+			"`intent.base → done.base → current main`",
 		},
 		filepath.Join(".claude", "skills", "merge-shepherd", "SKILL.md"): {
 			"Разрешены ровно четыре способа",
 			"**protocol-recovery reauthorized:**",
 			"Для protocol-recovery начинай новую исправленную цепочку",
+			"gh api repos/ivanarama/PuT/git/ref/heads/main --jq .object.sha",
+			"`PullRequest.baseRefOid` не используй как tip ветки",
+			"`done.base` равен фактическому второму parent",
 		},
 		"MAINTENANCE.md": {
 			"переавторизовать точный текущий HEAD новым `ship` после done",
 			"начинает исправленную цепочку с `previous=none`",
+			"Сдвиг base между intent и done виден как `base_sync_base_advanced`",
 		},
 	}
 	for name, fragments := range checks {
@@ -230,6 +236,17 @@ func TestLegacyReShipOnlyExposesFirstCandidate(t *testing.T) {
 	if len(got.ReviewCandidates) != 1 || got.ReviewCandidates[0].Number != 20 ||
 		got.ReviewCandidates[0].Stage != "legacy-integration-review" {
 		t.Fatalf("legacy single-flight owner is not exclusive: %+v", got.ReviewCandidates)
+	}
+}
+
+func TestBaseAdvanceBetweenIntentAndDoneIsVisible(t *testing.T) {
+	item := addComment(testPR(77, headB, "ship"), 30,
+		fmt.Sprintf("<!-- pp:base-sync-intent from=%s base=%s review-comment=20 claim=25 completion=29 ship-event=LE_test previous=none -->", headA, headA))
+	item = addComment(item, 31,
+		fmt.Sprintf("<!-- pp:base-sync-done intent=30 from=%s to=%s base=%s previous=none ship-event=LE_test -->", headA, headB, headB))
+	got := analyze([]apiPull{item}, "ivanarama")
+	if !hasFinding(got, "base_sync_base_advanced") {
+		t.Fatalf("base advance between intent and done is invisible: %+v", got)
 	}
 }
 
