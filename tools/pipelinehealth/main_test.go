@@ -46,6 +46,28 @@ func TestReviewSkillUsesHealthReportAsExclusiveAllowlist(t *testing.T) {
 	}
 }
 
+func TestMergeDoesNotReportWaitingAsProductive(t *testing.T) {
+	_, file, _, ok := runtime.Caller(0)
+	if !ok {
+		t.Fatal("runtime.Caller failed")
+	}
+	root := filepath.Clean(filepath.Join(filepath.Dir(file), "..", ".."))
+	data, err := os.ReadFile(filepath.Join(root, ".claude", "skills", "merge-shepherd", "SKILL.md"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	compact := strings.Join(strings.Fields(string(data)), " ")
+	for _, fragment := range []string{
+		"`ГОТОВО` означает, что запуск совершил хотя бы одну durable-мутацию",
+		"Если запуск только обнаружил, что владелец single-flight ждёт REVIEW",
+		"это `ПУСТО`, а не `ГОТОВО`",
+	} {
+		if !strings.Contains(compact, strings.Join(strings.Fields(fragment), " ")) {
+			t.Errorf("merge outcome contract is missing %q", fragment)
+		}
+	}
+}
+
 func TestMalformedProtocolCarryCanBeExplicitlyReauthorized(t *testing.T) {
 	_, file, _, ok := runtime.Caller(0)
 	if !ok {
