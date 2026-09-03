@@ -44,6 +44,17 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
 
 ## Процедура
 
+До ручной очереди обработай результат `pipelinectl next merge`. Для
+`action=cleanup` выполни только `complete merge-cleanup`: уже merged PR нельзя
+отправлять в merge API повторно. При `fallback` незавершённый доверенный
+`pp:merge-cleanup-intent` старше обычной очереди; не обходи его выбором
+следующего PR. Intent привязан к exact HEAD, hash review-proof, hash raw UTF-8
+тела и sorted closing issues этого repository; qualified-ссылка на другой
+repository локальной issue не считается. Если PR уже merged, верни транзакцию
+в deterministic cleanup; если открытый PR изменил HEAD/body/proof/ship или
+timeline неоднозначна, закончи `НУЖЕН ЧЕЛОВЕК`. Завершение подтверждает только
+точный `pp:merge-cleanup-done` для intent, HEAD и merge commit.
+
 1. Очередь: получи **все** открытые PR пагинированным REST, затем локально
    оставь метку `ship`, исключи `hold` и `needs-decision`. После
    single-flight/recovery упорядочь обычные PR по effective priority, затем

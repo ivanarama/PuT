@@ -84,6 +84,27 @@ func TestMergeDoesNotReportWaitingAsProductive(t *testing.T) {
 	}
 }
 
+func TestMergeContractRecoversCleanupWithoutSecondMerge(t *testing.T) {
+	_, file, _, ok := runtime.Caller(0)
+	if !ok {
+		t.Fatal("runtime.Caller failed")
+	}
+	root := filepath.Clean(filepath.Join(filepath.Dir(file), "..", ".."))
+	data := repositoryText(t, root, filepath.Join(".claude", "skills", "merge-shepherd", "SKILL.md"))
+	compact := strings.Join(strings.Fields(data), " ")
+	for _, fragment := range []string{
+		"`cleanup`: GitHub уже подтвердил merge",
+		"`complete merge-cleanup`",
+		"`pp:merge-cleanup-intent`",
+		"`pp:merge-cleanup-done`",
+		"не отправляй второй merge",
+	} {
+		if !strings.Contains(compact, strings.Join(strings.Fields(fragment), " ")) {
+			t.Errorf("merge cleanup contract is missing %q", fragment)
+		}
+	}
+}
+
 func TestMalformedProtocolCarryCanBeExplicitlyReauthorized(t *testing.T) {
 	_, file, _, ok := runtime.Caller(0)
 	if !ok {

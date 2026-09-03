@@ -67,6 +67,22 @@ Tip `main` для intent читается напрямую из `git/ref/heads/m
 `PullRequest.baseRefOid`; done записывает фактический второй parent. Сдвиг base
 между intent и done виден как `base_sync_base_advanced` и требует ancestry gate.
 
+## Восстановление после merge
+
+Перед compare-and-merge общий `pipelinectl` PromptPilot публикует неизменяемый
+`pp:merge-cleanup-intent`, привязанный к exact HEAD, review-proof, raw UTF-8
+телу PR и closing issues только репозитория `ivanarama/PuT`. После marker он
+повторяет timeline, label, proof и CI-гейты. Qualified-ссылка на другой
+repository не превращается в локальный номер issue.
+
+Если процесс оборвался, следующий MERGE сначала восстанавливает самый ранний
+незавершённый intent. Для уже merged PR он возвращает `action=cleanup` и не
+посылает merge второй раз. `complete merge-cleanup` доказывает серверный
+`MergedEvent`, снимает `in-work` только с закрытых связанных issues,
+идемпотентно завершает PLAN-handoff, снимает `ship` и последним публикует
+`pp:merge-cleanup-done`. Неоднозначный или изменившийся intent блокирует новую
+merge-цель и сразу виден как причина эскалации, а не теряется до следующего дня.
+
 ## Обязательные проверки PuT
 
 ```text
