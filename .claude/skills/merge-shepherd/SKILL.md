@@ -23,5 +23,10 @@ python -m promptpilot.project_pipeline --config pipelinectl.json next merge
 trusted `ship` и зелёной проверкой `validate`. Base-sync, carry, legacy re-ship,
 конфликт и recovery всегда обрабатывает полная процедура.
 
+После merge plan-PR со строками `Plan-Issue: #N` и `Plan-Path: Plans/<file>.md`
+заверши PLAN-handoff: проверь открытую issue с `approved` + `plan-in-review`,
+опубликуй `pp:plan-ready`, добавь `ready-fix`, затем сними `plan-in-review` и
+`needs-decision`. Если handoff не завершился, не скрывай post-merge блокер.
+
 Только `action=completed` означает `ИТОГ: ГОТОВО`; ожидание без мутации —
 `ИТОГ: ПУСТО`.

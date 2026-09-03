@@ -1,9 +1,9 @@
 # Конвейер сопровождения PuT
 
-Репозиторий обслуживается четырьмя независимыми этапами PromptPilot:
+Репозиторий обслуживается пятью независимыми этапами PromptPilot:
 
 ```text
-issue → TRIAGE → ready-fix/needs-decision → FIX → PR → REVIEW
+issue → TRIAGE → ready-fix/needs-decision → PLAN при необходимости → FIX → PR → REVIEW
       → reviewed → решение человека ship → MERGE
 ```
 
@@ -15,6 +15,7 @@ issue → TRIAGE → ready-fix/needs-decision → FIX → PR → REVIEW
 | Этап | Каноническая процедура | Лимит одного прогона |
 |---|---|---:|
 | TRIAGE | `.claude/skills/triage-issues/SKILL.md` | 5 issues |
+| PLAN | `.claude/skills/plan-approved/SKILL.md` | 1 issue |
 | FIX | `.claude/skills/fix-approved/SKILL.md` | 1 issue или PR |
 | REVIEW | `.claude/skills/review-queue/SKILL.md` | 2 PR |
 | MERGE | `.claude/skills/merge-shepherd/SKILL.md` | 3 PR |
@@ -27,6 +28,8 @@ issue → TRIAGE → ready-fix/needs-decision → FIX → PR → REVIEW
 - `ready-fix` — очевидный воспроизведённый дефект, который разрешено исправить автоматически.
 - `needs-decision` — требуется решение человека.
 - `approved` и `decision:N` — человек разрешил реализацию и выбрал вариант.
+- `plan-needed` — выбранный вариант требует сначала отдельный plan-PR.
+- `plan-in-review` — plan-PR создан; после его merge issue вернётся в FIX.
 - `in-work` — по issue уже открыт PR.
 - `changes-requested` — REVIEW вернул PR на доработку.
 - `reviewed` — блокирующих замечаний нет, но merge ещё не разрешён.

@@ -62,6 +62,19 @@ type apiPull struct {
 	Comments []apiComment `json:"-"`
 }
 
+type apiIssue struct {
+	Number       int          `json:"number"`
+	Title        string       `json:"title"`
+	HTMLURL      string       `json:"html_url"`
+	CreatedAt    string       `json:"created_at"`
+	UpdatedAt    string       `json:"updated_at"`
+	State        string       `json:"state"`
+	PullRequest  any          `json:"pull_request"`
+	CommentCount int          `json:"comments"`
+	Labels       []apiLabel   `json:"labels"`
+	Thread       []apiComment `json:"thread,omitempty"`
+}
+
 type candidate struct {
 	Number         int    `json:"number"`
 	Title          string `json:"title"`
@@ -78,6 +91,7 @@ type finding struct {
 	Severity string `json:"severity"`
 	Code     string `json:"code"`
 	PR       int    `json:"pr,omitempty"`
+	Issue    int    `json:"issue,omitempty"`
 	Message  string `json:"message"`
 }
 
@@ -87,6 +101,7 @@ type report struct {
 	Scope                   string      `json:"scope"`
 	Scheduler               string      `json:"scheduler"`
 	Checked                 int         `json:"checked"`
+	IssuesChecked           int         `json:"issues_checked"`
 	ReviewCandidates        []candidate `json:"review_candidates"`
 	ReviewBacklog           []candidate `json:"review_backlog"`
 	ContentReviewCandidates []candidate `json:"content_review_candidates"`
@@ -94,6 +109,7 @@ type report struct {
 	IntegrationOwner        *candidate  `json:"integration_owner,omitempty"`
 	MergeCandidates         []candidate `json:"merge_candidates"`
 	MergeExecutable         []candidate `json:"merge_executable"`
+	PlanCandidates          []candidate `json:"plan_candidates"`
 	FixCandidates           []candidate `json:"fix_candidates"`
 	HumanWaiting            []candidate `json:"human_waiting"`
 	Findings                []finding   `json:"findings"`
@@ -104,6 +120,7 @@ func main() {
 	owner := flag.String("owner", "ivanarama", "trusted pipeline account")
 	contract := flag.String("contract", ".claude/skills/review-queue/SKILL.md", "active REVIEW contract")
 	fixture := flag.String("prs", "", "read a JSON fixture instead of GitHub")
+	issueFixture := flag.String("issues", "", "read an issue JSON fixture instead of GitHub")
 	asJSON := flag.Bool("json", false, "print machine-readable JSON")
 	flag.Parse()
 
@@ -111,7 +128,12 @@ func main() {
 	if err != nil {
 		fail(err)
 	}
+	issues, err := loadIssues(*repo, *issueFixture, *fixture != "")
+	if err != nil {
+		fail(err)
+	}
 	result := analyze(prs, *owner)
+	analyzeIssues(&result, issues)
 	checkContract(&result, *contract)
 	result.finish()
 
@@ -193,6 +215,40 @@ func loadPulls(repo, fixture string) ([]apiPull, error) {
 	return prs, nil
 }
 
+func loadIssues(repo, fixture string, skipLive bool) ([]apiIssue, error) {
+	if fixture != "" {
+		data, err := os.ReadFile(fixture)
+		if err != nil {
+			return nil, err
+		}
+		var issues []apiIssue
+		if err := json.Unmarshal(data, &issues); err != nil {
+			return nil, fmt.Errorf("decode issue fixture: %w", err)
+		}
+		return issues, nil
+	}
+	if skipLive {
+		return []apiIssue{}, nil
+	}
+	gh := os.Getenv("GH_EXE")
+	if gh == "" {
+		gh = "gh"
+	}
+	var all []apiIssue
+	if err := ghJSONLines(gh, &all, "api", "--paginate",
+		"repos/"+repo+"/issues?state=open&per_page=100&sort=created&direction=asc",
+		"--jq", ".[]"); err != nil {
+		return nil, fmt.Errorf("list issues: %w", err)
+	}
+	issues := make([]apiIssue, 0, len(all))
+	for _, issue := range all {
+		if issue.PullRequest == nil && issue.CommentCount > 0 {
+			issues = append(issues, issue)
+		}
+	}
+	return issues, nil
+}
+
 func ghJSONLines(gh string, destination any, args ...string) error {
 	// GH_EXE is an explicit operator setting, and arguments are passed without a shell.
 	//nolint:gosec // The executable path is trusted configuration, not GitHub data.
@@ -228,7 +284,7 @@ func analyze(prs []apiPull, owner string) report {
 		State: "green", Scope: "fast REST snapshot; mutation gates remain GraphQL",
 		Scheduler: "two-lane-safety-priority-aging-depth-number", Checked: len(prs),
 		ReviewCandidates: []candidate{}, ContentReviewCandidates: []candidate{},
-		ReviewBacklog: []candidate{}, ReviewedWaitingShip: []candidate{}, MergeCandidates: []candidate{}, MergeExecutable: []candidate{}, FixCandidates: []candidate{},
+		ReviewBacklog: []candidate{}, ReviewedWaitingShip: []candidate{}, MergeCandidates: []candidate{}, MergeExecutable: []candidate{}, PlanCandidates: []candidate{}, FixCandidates: []candidate{},
 		HumanWaiting: []candidate{}, Findings: []finding{},
 	}
 	now := time.Now().UTC()
@@ -353,6 +409,44 @@ func analyze(prs []apiPull, owner string) report {
 	return result
 }
 
+func analyzeIssues(result *report, issues []apiIssue) {
+	result.IssuesChecked = len(issues)
+	now := time.Now().UTC()
+	for _, issue := range issues {
+		if issue.State != "open" {
+			continue
+		}
+		labels := labelSet(issue.Labels)
+		priority, prioritySource := queuePriority(labels, issue.CreatedAt, now)
+		item := candidate{
+			Number: issue.Number, Title: issue.Title, URL: issue.HTMLURL,
+			Stage: "fix-issue", Priority: priority, PrioritySource: prioritySource,
+			UpdatedAt: issue.UpdatedAt,
+		}
+		if labels["hold"] || labels["manual"] {
+			continue
+		}
+		switch {
+		case labels["plan-needed"] && labels["approved"]:
+			item.Stage = "plan"
+			result.PlanCandidates = append(result.PlanCandidates, item)
+		case labels["plan-needed"]:
+			item.Stage = "plan-needs-approval"
+			result.HumanWaiting = append(result.HumanWaiting, item)
+		case labels["plan-in-review"]:
+			// The plan PR is visible in REVIEW; product FIX must wait for its merge.
+		case labels["approved"] || labels["ready-fix"] && !labels["needs-decision"]:
+			result.FixCandidates = append(result.FixCandidates, item)
+		case labels["needs-decision"]:
+			item.Stage = "human-decision"
+			result.HumanWaiting = append(result.HumanWaiting, item)
+		}
+	}
+	sortCandidates(result.PlanCandidates)
+	sortCandidates(result.FixCandidates)
+	sortCandidates(result.HumanWaiting)
+}
+
 func checkContract(result *report, path string) {
 	data, err := readContract(path)
 	if err != nil {
@@ -382,6 +476,10 @@ func checkContract(result *report, path string) {
 		!strings.Contains(string(mergeData), "single-flight-барьер") {
 		result.add("red", "unsafe_base_sync_contract", 0,
 			"активные REVIEW/MERGE contracts не защищают ship и single-flight при base-sync/legacy re-ship")
+	}
+	if _, err := readContract(filepath.Join(skillsRoot, "plan-approved", "SKILL.md")); err != nil {
+		result.add("red", "plan_contract_unreadable", 0,
+			"активный PLAN contract отсутствует или не читается")
 	}
 }
 
@@ -433,9 +531,9 @@ func (result *report) finish() {
 		owner = fmt.Sprintf("#%d(%s)", result.IntegrationOwner.Number, result.IntegrationOwner.Stage)
 	}
 	result.Summary = fmt.Sprintf(
-		"PR: %d; REVIEW исполняемо: %d (следующие %s); всего ждут REVIEW: %d; содержательное: %d; интеграционный владелец: %s; ждут ship: %d; MERGE исполняемо: %d; всего MERGE: %d; FIX: %d; человек: %d; сигналов: %d",
-		result.Checked, len(result.ReviewCandidates), next, len(result.ReviewBacklog),
-		len(result.ContentReviewCandidates), owner, len(result.ReviewedWaitingShip), len(result.MergeExecutable), len(result.MergeCandidates), len(result.FixCandidates), len(result.HumanWaiting), len(result.Findings))
+		"PR: %d; issues: %d; REVIEW исполняемо: %d (следующие %s); всего ждут REVIEW: %d; содержательное: %d; интеграционный владелец: %s; ждут ship: %d; MERGE исполняемо: %d; всего MERGE: %d; PLAN: %d; FIX: %d; человек: %d; сигналов: %d",
+		result.Checked, result.IssuesChecked, len(result.ReviewCandidates), next, len(result.ReviewBacklog),
+		len(result.ContentReviewCandidates), owner, len(result.ReviewedWaitingShip), len(result.MergeExecutable), len(result.MergeCandidates), len(result.PlanCandidates), len(result.FixCandidates), len(result.HumanWaiting), len(result.Findings))
 }
 
 func (result *report) add(severity, code string, pr int, message string) {

@@ -399,3 +399,35 @@ func TestShipWithoutReviewHistoryRemainsInitialReviewCandidate(t *testing.T) {
 		t.Fatalf("sticky ship did not remain reviewable: %+v", got)
 	}
 }
+
+func issueWithLabels(number int, labels ...string) apiIssue {
+	item := apiIssue{
+		Number: number, Title: "Issue", HTMLURL: "https://example.test/issue",
+		CreatedAt: "2026-09-01T00:00:00Z", UpdatedAt: "2026-09-02T00:00:00Z", State: "open",
+	}
+	for _, label := range labels {
+		item.Labels = append(item.Labels, apiLabel{Name: label})
+	}
+	return item
+}
+
+func TestIssueQueuesSeparatePlanFixAndHumanWork(t *testing.T) {
+	result := analyze(nil, "ivanarama")
+	analyzeIssues(&result, []apiIssue{
+		issueWithLabels(10, "plan-needed", "approved", "queue:p0"),
+		issueWithLabels(11, "approved"),
+		issueWithLabels(12, "ready-fix"),
+		issueWithLabels(13, "needs-decision"),
+		issueWithLabels(14, "plan-in-review", "approved"),
+	})
+
+	if len(result.PlanCandidates) != 1 || result.PlanCandidates[0].Number != 10 || result.PlanCandidates[0].Priority != 0 {
+		t.Fatalf("plan candidate not exposed with priority: %+v", result.PlanCandidates)
+	}
+	if len(result.FixCandidates) != 2 {
+		t.Fatalf("fix issues not exposed: %+v", result.FixCandidates)
+	}
+	if len(result.HumanWaiting) != 1 || result.HumanWaiting[0].Number != 13 {
+		t.Fatalf("human issues not separated: %+v", result.HumanWaiting)
+	}
+}
