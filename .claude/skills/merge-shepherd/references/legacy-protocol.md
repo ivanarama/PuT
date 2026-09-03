@@ -140,10 +140,12 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
 
    Разрешены ровно четыре способа связать этот ship-transition с текущим proof:
 
-   - **обычный:** edge `ship` расположен после edges review-комментария, claim и
-     completion текущего SHA;
-   - **carried:** тот же непрерывно присутствующий `ship` был поставлен после
-     proof исходного SHA, а текущий HEAD достигнут только валидной цепочкой
+   - **обычный sticky:** edge `ship` расположен после anchor текущего SHA;
+     каноничный proof `reviewed` того же SHA может завершиться позже. Так
+     разрешение «сливать после успешного ревью» не гоняется с финальным
+     служебным completion;
+   - **carried:** тот же непрерывно присутствующий `ship` был поставлен в эпохе
+     исходного SHA после его anchor, а текущий HEAD достигнут только валидной цепочкой
      автоматических base-sync и после последнего звена уже получил новый
      каноничный proof с outcome `reviewed`;
    - **legacy reauthorized:** текущий HEAD — точный legacy base-sync, сделанный
@@ -181,7 +183,8 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    в указанном порядке. `done` ссылается на самый ранний валидный intent для
    данного `from`; их `from`, `previous` и `ship-event` совпадают. Для первого
    звена `previous=none`, intent адресует каноничные review/claim/completion
-   `from`, а `ship-event` либо идёт после них обычным способом, либо является
+   `from`, а `ship-event` идёт после anchor `from` (до или после completion)
+   либо является
    доказанным legacy reauthorization после anchor `from`. Для следующего
    `previous` указывает на предыдущий done, его `to` равен новому `from`, а
    новый intent адресует каноничный proof этого `from`. Каждый переход после
@@ -194,7 +197,9 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    постановка, edit/delete marker, чужой head event или разрыв `previous`
    отменяют carry.
 
-   Если текущий HEAD равен `to` валидного последнего done, является точным
+   Если это первый аудит текущего HEAD и последний переход `ship` — trusted
+   `LabeledEvent` после его anchor, разрешение просто ждёт обычного REVIEW:
+   метку не снимай и PR не обновляй. То же правило действует, если текущий HEAD равен `to` валидного последнего done, является точным
    legacy base-sync с re-ship после его anchor либо имеет protocol-recovery
    re-ship после done, но каноничного proof текущего
    HEAD ещё нет, это **не stale ship**: ничего не меняй, зафиксируй «ожидает
@@ -347,8 +352,8 @@ description: Пастьба мерж-очереди ivanarama/PuT — влива
    `H → X → H` текущий `headRefOid` снова равен проверенному SHA), нет
    `CommentDeletedEvent`, а claim остаётся earliest; **последний** ship-transition среди возвращённых
    `LabeledEvent`/`UnlabeledEvent` — `LabeledEvent` от `ivanarama`. Для обычного
-   разрешения его edge расположен после edges всех трёх адресованных
-   комментариев. Для carried/legacy-разрешения оба снимка дополнительно
+   sticky-разрешения его edge расположен после anchor текущего HEAD; каноничный
+   proof может завершиться позже в той же неизменной epoch. Для carried/legacy-разрешения оба снимка дополнительно
    адресуют intent/done либо legacy lineage, исходный ship-event и доказывают
    отсутствие более позднего недопустимого ship/head-transition; после
    completion нет `pp:review-again`. Предыдущий comment-watermark обязан

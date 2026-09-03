@@ -247,7 +247,7 @@ func analyze(prs []apiPull, owner string) report {
 		priority, prioritySource := queuePriority(labels, pr.CreatedAt, now)
 		item := candidate{Number: pr.Number, Title: pr.Title, URL: pr.HTMLURL, Head: pr.Head.SHA, Depth: depth, Stage: "review", Priority: priority, PrioritySource: prioritySource, UpdatedAt: pr.UpdatedAt}
 		currentCompletions, latestCompletion, latestOverride := currentProtocolState(pr.Comments, owner, pr.Head.SHA)
-		carryDone, carryIntentOpen, baseAdvanced := baseSyncRESTState(pr.Comments, owner, pr.Head.SHA)
+		carryDone, carryIntentOpen, baseAdvanced, protocolHistory := baseSyncRESTState(pr.Comments, owner, pr.Head.SHA)
 		if baseAdvanced {
 			result.add("yellow", "base_sync_base_advanced", pr.Number,
 				"base сдвинулся между intent и done; GraphQL gate должен проверить actual parent и ancestry")
@@ -307,6 +307,12 @@ func analyze(prs []apiPull, owner string) report {
 				result.ReviewCandidates = append(result.ReviewCandidates, item)
 				result.add("yellow", "legacy_ship_waiting_review_validation", pr.Number,
 					"повторный ship после старого base-sync: REVIEW должен проверить GraphQL lineage")
+			case currentCompletions == 0 && depth == 0 && !protocolHistory:
+				// ship is sticky intent for this exact HEAD, not proof that review has
+				// already happened. Keep a first-time PR executable in the content lane.
+				result.ContentReviewCandidates = append(result.ContentReviewCandidates, item)
+				result.add("yellow", "ship_waiting_initial_review", pr.Number,
+					"ship сохранён как разрешение слить этот HEAD после успешного REVIEW")
 			case currentCompletions > 0:
 				item.Stage = "merge"
 				result.MergeCandidates = append(result.MergeCandidates, item)
@@ -504,7 +510,7 @@ type baseSyncIntentShape struct {
 
 // baseSyncRESTState is only an operational hint. Mutation contracts prove
 // comment nodes, timeline edges and commit parents with stable GraphQL snapshots.
-func baseSyncRESTState(comments []apiComment, owner, head string) (doneCurrent, intentOpen, baseAdvanced bool) {
+func baseSyncRESTState(comments []apiComment, owner, head string) (doneCurrent, intentOpen, baseAdvanced, protocolHistory bool) {
 	intents := map[int64]baseSyncIntentShape{}
 	doneIntents := map[int64]bool{}
 	for _, comment := range comments {
@@ -512,9 +518,11 @@ func baseSyncRESTState(comments []apiComment, owner, head string) (doneCurrent, 
 			continue
 		}
 		if match := baseSyncIntent.FindStringSubmatch(comment.Body); match != nil {
+			protocolHistory = true
 			intents[comment.ID] = baseSyncIntentShape{from: match[1], base: match[2], previous: match[7], shipEvent: match[6]}
 		}
 		if match := baseSyncDone.FindStringSubmatch(comment.Body); match != nil {
+			protocolHistory = true
 			intentID, err := strconv.ParseInt(match[1], 10, 64)
 			intent, ok := intents[intentID]
 			if err != nil || !ok || intentID >= comment.ID || intent.from != match[2] ||
@@ -534,7 +542,7 @@ func baseSyncRESTState(comments []apiComment, owner, head string) (doneCurrent, 
 			break
 		}
 	}
-	return doneCurrent, intentOpen, baseAdvanced
+	return doneCurrent, intentOpen, baseAdvanced, protocolHistory
 }
 
 func duplicateCompletionEpoch(comments []apiComment, owner, head string) bool {
