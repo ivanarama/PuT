@@ -14,6 +14,8 @@ python -m promptpilot.project_pipeline --config pipelinectl.json next merge
 ```
 
 - `merge`: вызови показанный `complete merge` с неизменённым `lease`;
+- `cleanup`: GitHub уже подтвердил merge; вызови показанный
+  `complete merge-cleanup` с неизменённым `lease` и не отправляй второй merge;
 - `wait` или `empty`: ничего не меняй, `ИТОГ: ПУСТО`;
 - `fallback`: полностью прочитай
   [references/legacy-protocol.md](references/legacy-protocol.md) и следуй ему;
@@ -22,6 +24,13 @@ python -m promptpilot.project_pipeline --config pipelinectl.json next merge
 Быстрый путь допустим только для `CLEAN` PR с обычным каноничным proof, новым
 trusted `ship` и зелёной проверкой `validate`. Base-sync, carry, legacy re-ship,
 конфликт и recovery всегда обрабатывает полная процедура.
+
+До merge CLI сохраняет точный `pp:merge-cleanup-intent`. После сбоя следующий
+MERGE находит intent даже у уже закрытого PR и возвращает `action=cleanup`:
+проверяет серверный `MergedEvent`, снимает `in-work` только с закрытых
+same-repository issues, идемпотентно завершает PLAN-handoff, снимает `ship` и
+последним пишет `pp:merge-cleanup-done`. Пока самый ранний intent не завершён
+либо не эскалирован как неоднозначный, следующую merge-цель не выбирай.
 
 После merge plan-PR со строками `Plan-Issue: #N` и `Plan-Path: Plans/<file>.md`
 заверши PLAN-handoff: проверь открытую issue с `approved` + `plan-in-review`,
