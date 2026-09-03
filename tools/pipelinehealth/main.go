@@ -49,6 +49,7 @@ type apiPull struct {
 	Title     string `json:"title"`
 	HTMLURL   string `json:"html_url"`
 	CreatedAt string `json:"created_at"`
+	UpdatedAt string `json:"updated_at"`
 	State     string `json:"state"`
 	Draft     bool   `json:"draft"`
 	Head      struct {
@@ -70,6 +71,7 @@ type candidate struct {
 	Stage          string `json:"stage"`
 	Priority       int    `json:"priority"`
 	PrioritySource string `json:"priority_source"`
+	UpdatedAt      string `json:"updated_at"`
 }
 
 type finding struct {
@@ -91,6 +93,7 @@ type report struct {
 	ReviewedWaitingShip     []candidate `json:"reviewed_waiting_ship"`
 	IntegrationOwner        *candidate  `json:"integration_owner,omitempty"`
 	MergeCandidates         []candidate `json:"merge_candidates"`
+	MergeExecutable         []candidate `json:"merge_executable"`
 	FixCandidates           []candidate `json:"fix_candidates"`
 	HumanWaiting            []candidate `json:"human_waiting"`
 	Findings                []finding   `json:"findings"`
@@ -225,7 +228,7 @@ func analyze(prs []apiPull, owner string) report {
 		State: "green", Scope: "fast REST snapshot; mutation gates remain GraphQL",
 		Scheduler: "two-lane-safety-priority-aging-depth-number", Checked: len(prs),
 		ReviewCandidates: []candidate{}, ContentReviewCandidates: []candidate{},
-		ReviewBacklog: []candidate{}, ReviewedWaitingShip: []candidate{}, MergeCandidates: []candidate{}, FixCandidates: []candidate{},
+		ReviewBacklog: []candidate{}, ReviewedWaitingShip: []candidate{}, MergeCandidates: []candidate{}, MergeExecutable: []candidate{}, FixCandidates: []candidate{},
 		HumanWaiting: []candidate{}, Findings: []finding{},
 	}
 	now := time.Now().UTC()
@@ -242,7 +245,7 @@ func analyze(prs []apiPull, owner string) report {
 		labels := labelSet(pr.Labels)
 		depth := reviewDepth(pr.Comments, owner)
 		priority, prioritySource := queuePriority(labels, pr.CreatedAt, now)
-		item := candidate{Number: pr.Number, Title: pr.Title, URL: pr.HTMLURL, Head: pr.Head.SHA, Depth: depth, Stage: "review", Priority: priority, PrioritySource: prioritySource}
+		item := candidate{Number: pr.Number, Title: pr.Title, URL: pr.HTMLURL, Head: pr.Head.SHA, Depth: depth, Stage: "review", Priority: priority, PrioritySource: prioritySource, UpdatedAt: pr.UpdatedAt}
 		currentCompletions, latestCompletion, latestOverride := currentProtocolState(pr.Comments, owner, pr.Head.SHA)
 		carryDone, carryIntentOpen, baseAdvanced := baseSyncRESTState(pr.Comments, owner, pr.Head.SHA)
 		if baseAdvanced {
@@ -330,6 +333,7 @@ func analyze(prs []apiPull, owner string) report {
 	sortCandidates(result.ContentReviewCandidates)
 	sortCandidates(result.ReviewCandidates)
 	applySingleFlight(&result)
+	setMergeExecutable(&result)
 	result.ReviewBacklog = append(result.ReviewBacklog, result.ContentReviewCandidates...)
 	if result.IntegrationOwner != nil && candidatePriority(result.IntegrationOwner.Stage) == 1 {
 		result.ReviewBacklog = append(result.ReviewBacklog, *result.IntegrationOwner)
@@ -337,6 +341,7 @@ func analyze(prs []apiPull, owner string) report {
 	sortCandidates(result.ReviewBacklog)
 	sortCandidates(result.ReviewedWaitingShip)
 	sortCandidates(result.MergeCandidates)
+	sortCandidates(result.MergeExecutable)
 	sortCandidates(result.FixCandidates)
 	sortCandidates(result.HumanWaiting)
 	return result
@@ -422,9 +427,9 @@ func (result *report) finish() {
 		owner = fmt.Sprintf("#%d(%s)", result.IntegrationOwner.Number, result.IntegrationOwner.Stage)
 	}
 	result.Summary = fmt.Sprintf(
-		"PR: %d; REVIEW исполняемо: %d (следующие %s); всего ждут REVIEW: %d; содержательное: %d; интеграционный владелец: %s; ждут ship: %d; MERGE: %d; FIX: %d; человек: %d; сигналов: %d",
+		"PR: %d; REVIEW исполняемо: %d (следующие %s); всего ждут REVIEW: %d; содержательное: %d; интеграционный владелец: %s; ждут ship: %d; MERGE исполняемо: %d; всего MERGE: %d; FIX: %d; человек: %d; сигналов: %d",
 		result.Checked, len(result.ReviewCandidates), next, len(result.ReviewBacklog),
-		len(result.ContentReviewCandidates), owner, len(result.ReviewedWaitingShip), len(result.MergeCandidates), len(result.FixCandidates), len(result.HumanWaiting), len(result.Findings))
+		len(result.ContentReviewCandidates), owner, len(result.ReviewedWaitingShip), len(result.MergeExecutable), len(result.MergeCandidates), len(result.FixCandidates), len(result.HumanWaiting), len(result.Findings))
 }
 
 func (result *report) add(severity, code string, pr int, message string) {
@@ -647,6 +652,22 @@ func applySingleFlight(result *report) {
 	result.ReviewCandidates = []candidate{owner}
 	result.add("yellow", "single_flight_barrier", owner.Number,
 		fmt.Sprintf("владелец интеграционной полосы; REVIEW проверяет только интеграционную дельту этого PR, содержательных кандидатов отложено: %d, следующих интеграционных: %d", len(result.ContentReviewCandidates), deferredIntegration))
+}
+
+func setMergeExecutable(result *report) {
+	if result.IntegrationOwner == nil {
+		result.MergeExecutable = append([]candidate{}, result.MergeCandidates...)
+		return
+	}
+	if candidatePriority(result.IntegrationOwner.Stage) != 0 {
+		return
+	}
+	for _, item := range result.MergeCandidates {
+		if item.Number == result.IntegrationOwner.Number {
+			result.MergeExecutable = []candidate{item}
+			return
+		}
+	}
 }
 
 func printReport(writer io.Writer, result report) {
