@@ -181,7 +181,8 @@ description: Реализация заявок ivanarama/PuT с меткой rea
    уже не входит в обычную FIX-очередь, но ещё не имеет handoff-done. Затем
    открытые issues по точному predicate
    **`approved` OR (`ready-fix` AND NOT `needs-decision`)**, затем минус `hold`,
-   минус `manual`. `ready-fix + needs-decision` без `approved` — ход человека,
+   минус `manual`, минус `plan-needed` и `plan-in-review`. `ready-fix +
+   needs-decision` без `approved` — ход человека,
    не FIX;
    исключи ишью, на которые уже есть открытый PR: ищи `#N` в `title`/`body`
    уже полученного в п. 1 **полного пагинированного списка**, не запускай новый
@@ -252,7 +253,8 @@ description: Реализация заявок ivanarama/PuT с меткой rea
    Если у заявки есть комментарий человека с решением, он старше плана триажа.
 
    Сохрани исходный issue-contract: `state`, точные `title`/`body`, релевантные
-   labels (`ready-fix`, `approved`, `hold`, `manual`, `needs-decision`, все
+   labels (`ready-fix`, `approved`, `hold`, `manual`, `needs-decision`,
+   `plan-needed`, `plan-in-review`, все
    `decision:N`) и **все** комментарии с `id`, `updated_at`, автором и body.
    Зафиксируй точное основание eligibility: `approved` либо
    `ready-fix-without-needs-decision`. В
@@ -270,7 +272,7 @@ description: Реализация заявок ivanarama/PuT с меткой rea
    версия triage, поэтому обе части обязательны.
 
    Если корректный источник выбора сформировать нельзя и требуется ранний п. 9
-   (нет plan-файла, отсутствует рекомендация, номер не существует или меток
+   (отсутствует рекомендация, номер не существует или меток
    `decision:*` несколько), не выдумывай выбранное решение. Сохрани отдельный
    `issue-handoff fingerprint`: весь тот же issue-contract, обязательную версию
    каноничного triage, точный набор decision/route labels и точный код причины
@@ -284,11 +286,14 @@ description: Реализация заявок ivanarama/PuT с меткой rea
    совпадение исходного issue-contract. Новый `hold`, закрытие, edit triage,
    смена решения или причины handoff закрывают гейт без единой мутации.
 
-   **Заявка сделана планом, а плана нет — не бери её.** Если разбор или
+   **Заявка сделана планом, а плана нет — передай её PLAN.** Если разбор или
    комментарий человека называют работу планом (`Plans/NNN-*.md` или «планом N»),
    а такого файла в `Plans/` не лежит, план ещё не написан: срезов нет, границы
-   не проведены, и твой PR ляжет мимо будущего плана. Это случай п. 9 — вопрос в
-   заявку, `needs-decision`, снять `approved`/`ready-fix`.
+   не проведены. После повторной сверки issue-contract опубликуй комментарий с
+   `<!-- pp:plan-needed issue=<N> triage-comment=<id> choice=<source> -->`,
+   добавь и сверь `plan-needed`, затем сними `in-work` и `ready-fix`.
+   `approved`, `needs-decision`, `decision:*` и `queue:p*` сохрани. Заверши
+   `ИТОГ: ГОТОВО (#<N> передана в PLAN)`; продуктовый код не начинай.
 
    Причина — не формальность. Работа, оформляемая планом, обычно задевает
    несколько заявок сразу (#1167 и #1169 — общий тип даты), а ты берёшь одну
