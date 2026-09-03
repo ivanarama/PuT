@@ -51,12 +51,13 @@ func TestReviewSkillUsesTwoLaneExecutableAllowlist(t *testing.T) {
 		"C:\\Program Files\\Go\\bin\\go.exe",
 		"Go not found in PATH or the standard Windows location",
 		"& $goExe run ./tools/pipelinehealth/main.go -json",
-		"`review_candidates` — **исключительный allowlist этого запуска**",
+		"`review_candidates` — **исключительный allowlist для выбора новой цели**",
 		"`single_flight_barrier` защищает только интеграционную полосу, а не всю очередь",
 		"обычное содержательное REVIEW не блокируется",
 		"Следующий интеграционный PR при этом брать нельзя",
 		"Интеграционное REVIEW не повторяет содержательный аудит",
-		"Расхождение означает стоп без подстановки следующего PR",
+		"Для обычного аудита он обязан входить в `content_review_candidates`",
+		"Изменились только чужие PR, приоритеты, `main` или интеграционная полоса",
 	} {
 		if !strings.Contains(compact, strings.Join(strings.Fields(fragment), " ")) {
 			t.Errorf("review contract is missing %q", fragment)
@@ -404,6 +405,7 @@ func issueWithLabels(number int, labels ...string) apiIssue {
 	item := apiIssue{
 		Number: number, Title: "Issue", HTMLURL: "https://example.test/issue",
 		CreatedAt: "2026-09-01T00:00:00Z", UpdatedAt: "2026-09-02T00:00:00Z", State: "open",
+		Thread: []apiComment{issueComment(10, "<!-- pp:triage -->")},
 	}
 	for _, label := range labels {
 		item.Labels = append(item.Labels, apiLabel{Name: label})
@@ -419,7 +421,7 @@ func TestIssueQueuesSeparatePlanFixAndHumanWork(t *testing.T) {
 		issueWithLabels(12, "ready-fix"),
 		issueWithLabels(13, "needs-decision"),
 		issueWithLabels(14, "plan-in-review", "approved"),
-	})
+	}, nil, "ivanarama")
 
 	if len(result.PlanCandidates) != 1 || result.PlanCandidates[0].Number != 10 || result.PlanCandidates[0].Priority != 0 {
 		t.Fatalf("plan candidate not exposed with priority: %+v", result.PlanCandidates)
@@ -429,5 +431,46 @@ func TestIssueQueuesSeparatePlanFixAndHumanWork(t *testing.T) {
 	}
 	if len(result.HumanWaiting) != 1 || result.HumanWaiting[0].Number != 13 {
 		t.Fatalf("human issues not separated: %+v", result.HumanWaiting)
+	}
+}
+
+func issueComment(id int64, body string) apiComment {
+	timestamp := fmt.Sprintf("2026-09-01T10:%02d:00Z", id%60)
+	return apiComment{ID: id, CreatedAt: timestamp, UpdatedAt: timestamp,
+		User: apiUser{Login: "ivanarama"}, Body: body}
+}
+
+func TestFixQueueExcludesInWorkAndOpenPullReferences(t *testing.T) {
+	result := analyze(nil, "ivanarama")
+	issues := []apiIssue{
+		issueWithLabels(20, "approved", "in-work"),
+		issueWithLabels(21, "approved"),
+		issueWithLabels(22, "approved"),
+	}
+	prs := []apiPull{{Number: 100, State: "open", Title: "fix: issue #21", Body: "Fixes #21"}}
+	analyzeIssues(&result, issues, prs, "ivanarama")
+
+	if len(result.FixCandidates) != 1 || result.FixCandidates[0].Number != 22 {
+		t.Fatalf("FIX queue included work already owned by a PR: %+v", result.FixCandidates)
+	}
+}
+
+func TestFixQueueRequiresCompletedTriageRoute(t *testing.T) {
+	fingerprint := strings.Repeat("a", 64)
+	root := issueComment(10, "<!-- pp:triage -->\nreply=none\n<!-- pp:triage-route-claim fingerprint-sha256="+fingerprint+" owner=11111111-1111-1111-1111-111111111111 -->")
+	unfinished := issueWithLabels(30, "approved")
+	unfinished.Thread = []apiComment{root}
+	complete := issueWithLabels(31, "approved")
+	complete.Thread = []apiComment{root,
+		issueComment(11, "<!-- pp:triage-route-labels claim=10 fingerprint-sha256="+fingerprint+" events-through=1 labels-sha256="+fingerprint+" -->"),
+		issueComment(12, "<!-- pp:triage-route-done claim=10 fingerprint-sha256="+fingerprint+" -->")}
+	result := analyze(nil, "ivanarama")
+	analyzeIssues(&result, []apiIssue{unfinished, complete}, nil, "ivanarama")
+
+	if len(result.FixCandidates) != 1 || result.FixCandidates[0].Number != 31 {
+		t.Fatalf("FIX queue accepted an unfinished TRIAGE handoff: %+v", result.FixCandidates)
+	}
+	if !hasFinding(result, "fix_issue_not_executable") {
+		t.Fatalf("unfinished TRIAGE handoff was not diagnosed: %+v", result.Findings)
 	}
 }
