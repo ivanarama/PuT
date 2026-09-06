@@ -75,6 +75,25 @@ dimensions:
       uz: Tashkilot
       zh: 组织
 resources:
+  - name: Количество
+    type: number
+    title: Количество
+    titles:
+      en: Quantity
+      de: Menge
+      sr: Количина
+      az: Miqdar
+      es: Cantidad
+      fr: Quantité
+      hy: Քանակ
+      ka: რაოდენობა
+      kk: Саны
+      pt: Quantidade
+      ro: Cantitate
+      tr: Miktar
+      uk: Кількість
+      uz: Miqdor
+      zh: 数量
   - name: Выручка
     type: number
     title: Выручка
@@ -94,6 +113,44 @@ resources:
       uk: Виручка
       uz: Daromad
       zh: 收入
+  - name: СуммаСНДС
+    type: number
+    title: Сумма с НДС
+    titles:
+      en: Amount with VAT
+      de: Betrag inkl. MwSt.
+      sr: Износ са ПДВ
+      az: ƏDV daxil məbləğ
+      es: Importe con IVA
+      fr: Montant TTC
+      hy: Գումար ԱԱՀ-ով
+      ka: თანხა დღგ-ით
+      kk: ҚҚС-пен сомасы
+      pt: Valor com IVA
+      ro: Sumă cu TVA
+      tr: KDV dahil tutar
+      uk: Сума з ПДВ
+      uz: QQS bilan summa
+      zh: 含税金额
+  - name: СуммаНДС
+    type: number
+    title: Сумма НДС
+    titles:
+      en: VAT amount
+      de: MwSt.-Betrag
+      sr: Износ ПДВ
+      az: ƏDV məbləği
+      es: Importe del IVA
+      fr: Montant de la TVA
+      hy: ԱԱՀ-ի գումար
+      ka: დღგ-ის თანხა
+      kk: ҚҚС сомасы
+      pt: Valor do IVA
+      ro: Sumă TVA
+      tr: KDV tutarı
+      uk: Сума ПДВ
+      uz: QQS summasi
+      zh: 增值税额
   - name: Себестоимость
     type: number
     title: Себестоимость
