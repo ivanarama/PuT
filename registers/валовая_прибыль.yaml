@@ -170,3 +170,22 @@ resources:
       uk: Собівартість
       uz: O'z narxi
       zh: 成本
+  - name: СебестоимостьСНДС
+    type: number
+    title: Себестоимость с НДС
+    titles:
+      en: Cost price with VAT
+      de: Selbstkosten inkl. MwSt.
+      sr: Набавна цена са ПДВ
+      az: ƏDV daxil maya dəyəri
+      es: Coste con IVA
+      fr: Coût TTC
+      hy: Ինքնարժեք ԱԱՀ-ով
+      ka: თვითღირებულება დღგ-ით
+      kk: ҚҚС-пен өзіндік құны
+      pt: Custo com IVA
+      ro: Cost cu TVA
+      tr: KDV dahil maliyet
+      uk: Собівартість з ПДВ
+      uz: QQS bilan o'z narxi
+      zh: 含税成本
