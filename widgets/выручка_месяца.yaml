@@ -21,6 +21,6 @@ format: number
 params:
   Начало: "{{today|minus_days:30}}"
 query: |
-  ВЫБРАТЬ CAST(ROUND(СУММА(Выручка), 0) AS INTEGER) КАК Значение
+  ВЫБРАТЬ CAST(ROUND(СУММА(СуммаСНДС), 0) AS INTEGER) КАК Значение
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало

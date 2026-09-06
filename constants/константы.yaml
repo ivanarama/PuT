@@ -57,3 +57,23 @@ constants:
       uk: Контролювати залишки при резервуванні
       uz: Rezervlashda qoldiqni nazorat qilish
       zh: 预留时检查库存
+  - name: УправленческийУчетСНДС
+    type: bool
+    default: true
+    label: Управленческий учёт с учётом НДС
+    labels:
+      en: Management accounting with VAT
+      de: Management-Buchhaltung inkl. MwSt.
+      sr: Управљачко рачуноводство са ПДВ-ом
+      az: ƏDV ilə idarəetmə uçotu
+      es: Contabilidad de gestión con IVA
+      fr: Comptabilité de gestion avec TVA
+      hy: Կառավարչական հաշվառում ԱԱՀ-ով
+      ka: მმართველობითი აღრიცხვა დღგ-ით
+      kk: ҚҚС-пен басқару есебі
+      pt: Contabilidade de gestão com IVA
+      ro: Contabilitate de gestiune cu TVA
+      tr: KDV dahil yönetim muhasebesi
+      uk: Управлінський облік з ПДВ
+      uz: QQS bilan boshqaruv hisobi
+      zh: 含增值税管理会计
