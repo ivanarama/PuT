@@ -1,0 +1,20 @@
+name: ЗакрытиеМесяца
+title: Закрытие месяца и расчёт себестоимости
+titles:
+  en: Month-End Closing and Cost Recalculation
+params:
+  - name: Организация
+    type: reference:Организация
+    label: "Организация"
+    labels:
+      en: Organization
+  - name: ДатаНачала
+    type: date
+    label: "Дата начала"
+    labels:
+      en: Start Date
+  - name: ДатаОкончания
+    type: date
+    label: "Дата окончания"
+    labels:
+      en: End Date

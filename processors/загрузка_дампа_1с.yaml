@@ -1,0 +1,11 @@
+name: ЗагрузкаДампа1С
+title: Загрузка дампа 1С
+titles:
+  en: Import 1C Dump
+  de: 1C-Dump importieren
+params:
+  - name: ФайлJSON
+    type: file
+    label: "Файл дампа 1С (JSON)"
+    labels:
+      en: "1C dump file (JSON)"

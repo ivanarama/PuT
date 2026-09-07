@@ -348,3 +348,11 @@ tableparts:
           uk: Сума
           uz: Miqdor
           zh: 金额
+      - name: Склад
+        type: reference:Склад
+        title: Склад
+        titles:
+          en: Warehouse
+          de: Lager
+          sr: Складиште
+          uk: Склад

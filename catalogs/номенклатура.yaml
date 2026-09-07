@@ -132,3 +132,10 @@ fields:
       uk: Основне зображення
       uz: Asosiy rasm
       zh: 主图
+  - name: Услуга
+    type: bool
+    title: Услуга
+    titles:
+      en: Service
+      ru: Услуга
+

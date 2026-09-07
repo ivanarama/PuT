@@ -77,3 +77,13 @@ constants:
       uk: Управлінський облік з ПДВ
       uz: QQS bilan boshqaruv hisobi
       zh: 含增值税管理会计
+  - name: РазрешитьОтрицательныеОстатки
+    type: bool
+    default: false
+    label: Разрешить списание при нехватке остатков
+    labels:
+      en: Allow negative inventory
+      de: Negative Bestände zulassen
+      sr: Дозволи негативне залихе
+      uk: Дозволити від'ємні залишки
+

@@ -167,7 +167,7 @@ tableparts:
           es: Cantidad
           fr: Quantité
           hy: Քանակ
-          ka: რაოდეնობა
+          ka: რაოდენობა
           kk: Саны
           pt: Quantidade
           ro: Cantitate
@@ -175,4 +175,12 @@ tableparts:
           uk: Кількість
           uz: Miqdor
           zh: 数量
+      - name: Склад
+        type: reference:Склад
+        title: Склад
+        titles:
+          en: Warehouse
+          de: Lager
+          sr: Складиште
+          uk: Склад
 

@@ -76,3 +76,11 @@ tableparts:
           type: number
         - name: Сумма
           type: number
+        - name: Склад
+          type: reference:Склад
+          title: Склад
+          titles:
+            en: Warehouse
+            de: Lager
+            sr: Складиште
+            uk: Склад

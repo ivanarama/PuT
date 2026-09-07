@@ -355,3 +355,11 @@ tableparts:
           en: Sales order
           de: Kundenauftrag
           sr: Налог купца
+      - name: Склад
+        type: reference:Склад
+        title: Склад
+        titles:
+          en: Warehouse
+          de: Lager
+          sr: Складиште
+          uk: Склад
