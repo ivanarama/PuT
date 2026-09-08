@@ -1,31 +1,18 @@
-name: Номенклатура
-title: Номенклатура
-titles:
-  en: Items
-  de: Artikel
-  sr: Артикли
-  az: Məhsullar
-  es: Artículos
-  fr: Articles
-  hy: Ապրանքներ
-  ka: ნივთები
-  kk: Тауарлар
-  pt: Itens
-  ro: Articole
-  tr: Ürünler
-  uk: Номенклатура
-  uz: Mahsulotlar
-  zh: 物料
-hierarchical: true
 fields:
-  - name: Наименование
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Наименование
     title: Наименование
     titles:
-      en: Name
-      de: Name
-      sr: Назив
       az: Adlandırma
+      de: Name
+      en: Name
       es: Nombre
       fr: Nom
       hy: Անվանում
@@ -33,18 +20,18 @@ fields:
       kk: Атауы
       pt: Nome
       ro: Denumire
+      sr: Назив
       tr: Ad
       uk: Найменування
       uz: Nomi
       zh: 名称
-  - name: Артикул
     type: string
+  - name: Артикул
     title: Артикул
     titles:
-      en: SKU
-      de: Artikelnummer
-      sr: Шифра артикла
       az: Artikul
+      de: Artikelnummer
+      en: SKU
       es: SKU
       fr: Réf
       hy: Արտիկուլ
@@ -52,18 +39,18 @@ fields:
       kk: Артикул
       pt: SKU
       ro: Cod
+      sr: Шифра артикла
       tr: Stok kodu
       uk: Артикул
       uz: Artikul
       zh: SKU
+    type: string
   - name: ЕдиницаИзмерения
-    type: reference:ЕдиницаИзмерения
     title: Единица измерения
     titles:
-      en: Unit of measure
-      de: Maßeinheit
-      sr: Јединица мере
       az: Ölçü vahidi
+      de: Maßeinheit
+      en: Unit of measure
       es: Unidad medida
       fr: Unité mesure
       hy: Չափման միավոր
@@ -71,18 +58,18 @@ fields:
       kk: Өлшем бірлігі
       pt: Unidade medida
       ro: Unitate măsură
+      sr: Јединица мере
       tr: Ölçü birimi
       uk: Одиниця виміру
       uz: O'lchov birligi
       zh: 计量单位
+    type: reference:ЕдиницаИзмерения
   - name: СтавкаНДС
-    type: reference:СтавкаНДС
     title: Ставка НДС по умолчанию
     titles:
-      en: Default VAT rate
-      de: Standard-USt.-Satz
-      sr: Подразумевана стопа ПДВ
       az: ƏDV dərəcəsi
+      de: Standard-USt.-Satz
+      en: Default VAT rate
       es: Tasa IVA
       fr: Taux TVA
       hy: ԱԱՀ տոկոս
@@ -90,18 +77,18 @@ fields:
       kk: ҚҚС мөлшері
       pt: Taxa IVA
       ro: Cotă TVA
+      sr: Подразумевана стопа ПДВ
       tr: KDV oranı
       uk: Ставка ПДВ
       uz: QQS stavkasi
       zh: 增值税率
+    type: reference:СтавкаНДС
   - name: МинимальныйОстаток
-    type: number
     title: Минимальный остаток
     titles:
-      en: Minimum stock
-      de: Mindestbestand
-      sr: Минимална залиха
       az: Minimal qalıq
+      de: Mindestbestand
+      en: Minimum stock
       es: Stock mínimo
       fr: Stock minimum
       hy: Նվազագույն մնացորդ
@@ -109,18 +96,18 @@ fields:
       kk: Минималды қалдық
       pt: Stock mínimo
       ro: Stoc minim
+      sr: Минимална залиха
       tr: Minimum stok
       uk: Мінімальний залишок
       uz: Minimal qoldiq
       zh: 最低库存
+    type: number
   - name: ОсновноеИзображение
-    type: image
     title: Основное изображение
     titles:
-      en: Main image
-      de: Hauptbild
-      sr: Главна слика
       az: Əsas şəkil
+      de: Hauptbild
+      en: Main image
       es: Imagen principal
       fr: Image principale
       hy: Գլխավոր պատկեր
@@ -128,14 +115,34 @@ fields:
       kk: Негізгі сурет
       pt: Imagem principal
       ro: Imagine principală
+      sr: Главна слика
       tr: Ana görsel
       uk: Основне зображення
       uz: Asosiy rasm
       zh: 主图
+    type: image
   - name: Услуга
-    type: bool
     title: Услуга
     titles:
       en: Service
       ru: Услуга
-
+    type: bool
+hierarchical: true
+name: Номенклатура
+title: Номенклатура
+titles:
+  az: Məhsullar
+  de: Artikel
+  en: Items
+  es: Artículos
+  fr: Articles
+  hy: Ապրանքներ
+  ka: ნივთები
+  kk: Тауарлар
+  pt: Itens
+  ro: Articole
+  sr: Артикли
+  tr: Ürünler
+  uk: Номенклатура
+  uz: Mahsulotlar
+  zh: 物料

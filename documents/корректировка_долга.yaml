@@ -1,68 +1,76 @@
-name: КорректировкаДолга
-title: Корректировка долга
-titles:
-  en: Debt adjustment
-  de: Schuldenbereinigung
-  sr: Корекција дуга
-posting: true
-numerator:
-  prefix: "КРД-"
-  length: 5
-  period: year
 fields:
-  - name: Номер
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Номер
     title: Номер
     titles:
-      en: Number
       de: Nummer
+      en: Number
       sr: Број
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
       de: Datum
+      en: Date
       sr: Датум
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
       de: Organisation
+      en: Organization
       sr: Организација
+    type: reference:Организация
   - name: ВидОперации
-    type: enum:ВидОперацииКорректировкиДолга
     title: Вид операции
     titles:
-      en: Operation type
       de: Vorgangsart
+      en: Operation type
       sr: Врста операције
+    type: enum:ВидОперацииКорректировкиДолга
   - name: Контрагент
-    type: reference:Контрагент
     title: Контрагент
     titles:
-      en: Counterparty
       de: Geschäftspartner
+      en: Counterparty
       sr: Партнер
-  - name: КонтрагентПолучатель
     type: reference:Контрагент
+  - name: КонтрагентПолучатель
     title: Контрагент-получатель долга
     titles:
-      en: Recipient counterparty
       de: Empfänger-Geschäftspartner
+      en: Recipient counterparty
       sr: Партнер прималац дуга
+    type: reference:Контрагент
   - name: Сумма
-    type: number
     title: Сумма корректировки
     titles:
-      en: Amount
       de: Betrag
+      en: Amount
       sr: Износ
+    type: number
   - name: Комментарий
-    type: string
     title: Комментарий
     titles:
-      en: Comment
       de: Kommentar
+      en: Comment
       sr: Коментар
+    type: string
+name: КорректировкаДолга
+numerator:
+  length: 5
+  period: year
+  prefix: "КРД-"
+posting: true
+title: Корректировка долга
+titles:
+  de: Schuldenbereinigung
+  en: Debt adjustment
+  sr: Корекција дуга

@@ -1,42 +1,50 @@
+fields:
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
+    type: string
+  - name: Номер
+    type: string
+  - name: Дата
+    type: date
+  - name: Организация
+    type: reference:Организация
+  - name: Касса
+    type: reference:Касса
+  - name: Контрагент
+    type: reference:Контрагент
+  - name: ДокументРеализации
+    type: reference:РеализацияТоваров
+  - name: ДокументПоступления
+    type: reference:ПоступлениеТоваров
+  - name: Основание
+    type: string
+  - name: Сумма
+    type: number
 name: ПриходныйКассовыйОрдер
+numerator:
+  length: 5
+  period: year
+  prefix: ПКО-
+posting: true
 title: Приходный кассовый ордер
 titles:
-    az: Gəlir kassa orderi
-    de: Kasseneingangsbeleg
-    en: Cash receipt voucher
-    es: Orden de ingreso de caja
-    fr: Bon de caisse d'entrée
-    hy: Եկամտային կանխիկ օրդեր
-    ka: შემოსავლის სალარო ორდერი
-    kk: Кіріс касса ордері
-    pt: Ordem de recebimento de caixa
-    ro: Ordin de casă intrare
-    sr: Уплата у касу
-    tr: Gelen tahsilat makbuzu
-    uk: Прибутковий касовий ордер
-    uz: Kirish kassa ordeni
-    zh: 收款凭证
-posting: true
-numerator:
-    prefix: ПКО-
-    length: 5
-    period: year
-fields:
-    - name: Номер
-      type: string
-    - name: Дата
-      type: date
-    - name: Организация
-      type: reference:Организация
-    - name: Касса
-      type: reference:Касса
-    - name: Контрагент
-      type: reference:Контрагент
-    - name: ДокументРеализации
-      type: reference:РеализацияТоваров
-    - name: ДокументПоступления
-      type: reference:ПоступлениеТоваров
-    - name: Основание
-      type: string
-    - name: Сумма
-      type: number
+  az: Gəlir kassa orderi
+  de: Kasseneingangsbeleg
+  en: Cash receipt voucher
+  es: Orden de ingreso de caja
+  fr: Bon de caisse d'entrée
+  hy: Եկամտային կանխիկ օրդեր
+  ka: შემოსავლის სალარო ორდერი
+  kk: Кіріс касса ордері
+  pt: Ordem de recebimento de caixa
+  ro: Ordin de casă intrare
+  sr: Уплата у касу
+  tr: Gelen tahsilat makbuzu
+  uk: Прибутковий касовий ордер
+  uz: Kirish kassa ordeni
+  zh: 收款凭证

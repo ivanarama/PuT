@@ -1,0 +1,143 @@
+name: ЗагрузкаЭДО
+title: Сопоставление и загрузка документов ЭДО (УПД)
+titles:
+  en: EDO XML Invoice matching and import
+  de: EDO XML Rechnungsmatching und Import
+  sr: Увоз и упаривање ЕДО докумената
+params:
+  - name: ФайлЭДО
+    type: file
+    label: Файл УПД (XML) / ЭДО
+    labels:
+      en: EDO / UPD XML file
+      de: EDO / UPD XML Datei
+      sr: ЕДО / УПД XML датотека
+    required: true
+  - name: Организация
+    type: reference:Организация
+    label: Организация (Покупатель)
+    labels:
+      en: Organization (Buyer)
+      de: Organisation (Käufer)
+      sr: Организација (Купац)
+  - name: Поставщик
+    type: reference:Контрагент
+    label: Поставщик (Продавец)
+    labels:
+      en: Supplier (Seller)
+      de: Lieferant (Verkäufer)
+      sr: Добављач (Продавац)
+  - name: Склад
+    type: reference:Склад
+    label: Склад поступления
+    labels:
+      en: Warehouse
+      de: Lager
+      sr: Складиште
+  - name: Договор
+    type: string
+    label: Договор
+    labels:
+      en: Contract
+      de: Vertrag
+      sr: Уговор
+  - name: ВариантПоиска
+    type: choice
+    label: Вариант сопоставления
+    labels:
+      en: Matching strategy
+      de: Suchstrategie
+      sr: Стратегија упаривања
+    default: "Умный поиск (все варианты)"
+    options:
+      - "Умный поиск (все варианты)"
+      - "По артикулу"
+      - "По наименованию"
+      - "По коду"
+      - "Артикул + Наименование"
+  - name: ПрефиксАртикула
+    type: string
+    label: Префикс артикула поставщика
+    labels:
+      en: Supplier SKU prefix to strip
+      de: SKU-Präfix des Lieferanten
+      sr: Префикс шифре добављача
+  - name: ОчищатьСпецсимволы
+    type: bool
+    label: Очищать спецсимволы и пробелы в артикулах
+    labels:
+      en: Clean special characters and spaces in SKU
+      de: Sonderzeichen und Leerzeichen in SKU bereinigen
+      sr: Очисти специјалне знаке и размаке
+    default: true
+  - name: СоздаватьНедостающую
+    type: bool
+    label: Автоматически создавать отсутствующую номенклатуру
+    labels:
+      en: Auto-create missing nomenclature items
+      de: Fehlende Artikel automatisch anlegen
+      sr: Аутоматски креирај нову номенклатуру
+    default: false
+  - name: СохранятьСопоставления
+    type: bool
+    label: Сохранять сопоставления поставщика в базу
+    labels:
+      en: Save supplier mappings to database
+      de: Lieferantenzuordnungen speichern
+      sr: Сачувај упаривања добављача
+    default: true
+  - name: Действие
+    type: choice
+    label: Действие
+    labels:
+      en: Action
+      de: Aktion
+      sr: Радња
+    default: Предпросмотр
+    options:
+      - Предпросмотр
+      - "Создать документ"
+      - "Создать и провести"
+
+table_parts:
+  - name: Товары
+    title: Товары документа
+    titles:
+      en: Document items
+      de: Dokumentpositionen
+      sr: Позиције документа
+    fields:
+      - name: НомерСтроки
+        type: number
+        title: №
+      - name: Статус
+        type: string
+        title: Статус
+      - name: НаимТов
+        type: string
+        title: Наименование поставщика
+      - name: Артикул
+        type: string
+        title: Артикул поставщика
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Номенклатура базы
+      - name: Количество
+        type: number
+        title: Количество
+      - name: Цена
+        type: number
+        title: Цена
+      - name: Сумма
+        type: number
+        title: Сумма
+      - name: СтавкаНДС
+        type: string
+        title: НДС
+      - name: СуммаНДС
+        type: number
+        title: Сумма НДС
+      - name: Всего
+        type: number
+        title: Всего
+

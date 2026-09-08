@@ -1,0 +1,169 @@
+schema: onebase.form/v1
+
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: ЗагрузкаЭДО
+  title:
+    ru: "Сопоставление и загрузка ЭДО (УПД)"
+    en: "EDO (UPD) matching and import"
+    de: "EDO-Abgleich und Import"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+events:
+  ПриОткрытии: ПриОткрытииФормы
+
+attributes:
+  - name: Объект
+    main: true
+
+elements:
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+      - kind: Страница
+        name: СтраницаПараметры
+        title:
+          ru: "1. Параметры и файл"
+          en: "1. Parameters & File"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаФайл
+            title:
+              ru: "Файл электронного документа (УПД XML)"
+              en: "EDO File (UPD XML)"
+            children:
+              - kind: ПолеВвода
+                name: ПолеФайлЭДО
+                title:
+                  ru: "Файл УПД (XML) / Текст"
+                  en: "UPD XML file"
+                data_path: Объект.ФайлЭДО
+                type: file
+                required: true
+
+          - kind: ГруппаФормы
+            name: ГруппаРеквизиты
+            title:
+              ru: "Основные реквизиты документа"
+              en: "Main document attributes"
+            children:
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация (Покупатель)"
+                  en: "Organization"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеПоставщик
+                title:
+                  ru: "Поставщик (Продавец)"
+                  en: "Supplier"
+                data_path: Объект.Поставщик
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад поступления"
+                  en: "Warehouse"
+                data_path: Объект.Склад
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеДоговор
+                title:
+                  ru: "Договор"
+                  en: "Contract"
+                data_path: Объект.Договор
+
+          - kind: ГруппаФормы
+            name: ГруппаНастройкиПоиска
+            title:
+              ru: "Настройки умного поиска и сопоставления"
+              en: "Matching settings"
+            children:
+              - kind: ПолеВвода
+                name: ПолеВариантПоиска
+                title:
+                  ru: "Вариант сопоставления"
+                  en: "Matching mode"
+                data_path: Объект.ВариантПоиска
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеПрефиксАртикула
+                title:
+                  ru: "Префикс артикула поставщика (отсекать при поиске)"
+                  en: "SKU prefix"
+                data_path: Объект.ПрефиксАртикула
+              - kind: Флажок
+                name: ПолеОчищатьСпецсимволы
+                title:
+                  ru: "Очищать спецсимволы, дефисы и пробелы в артикулах"
+                  en: "Clean special characters"
+                data_path: Объект.ОчищатьСпецсимволы
+              - kind: Флажок
+                name: ПолеСоздаватьНедостающую
+                title:
+                  ru: "Автоматически создавать отсутствующую номенклатуру"
+                  en: "Auto-create missing items"
+                data_path: Объект.СоздаватьНедостающую
+              - kind: Флажок
+                name: ПолеСохранятьСопоставления
+                title:
+                  ru: "Сохранять сопоставления в регистр сведений"
+                  en: "Save mappings to inforeg"
+                data_path: Объект.СохранятьСопоставления
+
+          - kind: ГруппаФормы
+            name: ГруппаКнопкаРазбор
+            children:
+              - kind: Кнопка
+                name: КнопкаРазобрать
+                title:
+                  ru: "🔍 1. Загрузить и сопоставить позиции"
+                  en: "🔍 1. Parse and match items"
+                events:
+                  Нажатие: КнопкаРазобратьНажатие
+
+      - kind: Страница
+        name: СтраницаСопоставление
+        title:
+          ru: "2. Таблица сопоставления и создание документа"
+          en: "2. Matching table & Creation"
+        children:
+          - kind: ТабличнаяЧасть
+            name: ТабТовары
+            title:
+              ru: "Позиции документа УПД и статус сопоставления"
+              en: "Document items"
+            data_path: Товары
+            use_grid: true
+
+          - kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              ru: "Оформление поступления"
+              en: "Create receipt"
+            children:
+              - kind: Кнопка
+                name: КнопкаСоздатьНедостающие
+                title:
+                  ru: "✨ Создать отсутствующую номенклатуру"
+                  en: "Create missing items"
+                events:
+                  Нажатие: КнопкаСоздатьНедостающиеНажатие
+              - kind: Кнопка
+                name: КнопкаСоздатьДокумент
+                title:
+                  ru: "📄 Создать Поступление товаров"
+                  en: "Create Goods Receipt"
+                events:
+                  Нажатие: КнопкаСоздатьДокументНажатие
+              - kind: Кнопка
+                name: КнопкаСоздатьИПровести
+                title:
+                  ru: "🚀 Создать и провести Поступление"
+                  en: "Create & Post Receipt"
+                events:
+                  Нажатие: КнопкаСоздатьИПровестиНажатие

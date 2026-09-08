@@ -1,277 +1,266 @@
-schema: onebase.form/v1
-
-form:
-  name: ФормаОбъекта
-  kind: object
-  entity: РеализацияТоваров
-  title:
-    ru: "Реализация товаров"
-    en: "Sales of goods"
-    de: "Warenverkauf"
-    sr: "Продаја робе"
-  auto_save_settings: true
-  vertical_scroll: auto
-
 attributes:
-  - name: Объект
-    type: DocumentRef.РеализацияТоваров
+  - main: true
+    name: Объект
     save: true
-    main: true
+    type: DocumentRef.РеализацияТоваров
   - name: КешИтога
-    type: "decimal(15,2)"
     save: false
-
+    type: "decimal(15,2)"
 commands:
-  - name: ПересчитатьКоманда
-    title:
-      ru: "Пересчитать итоги"
-      en: "Recalculate totals"
-      de: "Summen neu berechnen"
-      sr: "Прерачунај укупно"
-    action: КнопкаПересчитатьНажатие
+  - action: КнопкаПересчитатьНажатие
+    name: ПересчитатьКоманда
     picture: stdpic:Refresh
-
+    title:
+      de: "Summen neu berechnen"
+      en: "Recalculate totals"
+      ru: "Пересчитать итоги"
+      sr: "Прерачунај укупно"
 elements:
-  - kind: СтраницыФормы
-    name: ОсновныеЗакладки
-    children:
-
+  - children:
       # ── Вкладка 1: Основное ─────────────────────────────────────────────
-      - kind: Страница
-        name: СтраницаОсновное
-        title:
-          ru: "Основное"
-          en: "General"
-          de: "Allgemein"
-          sr: "Опште"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаШапка
-            title:
-              ru: "Шапка документа"
-              en: "Document header"
-              de: "Belegkopf"
-              sr: "Заглавље документа"
-            children:
-              - kind: ПолеВвода
-                name: ПолеНомер
-                title:
-                  ru: "Номер"
-                  en: "Number"
-                  de: "Nummer"
-                  sr: "Број"
-                data_path: Объект.Номер
-                readonly: true
+      - children:
+          - children:
+              - data_path: Объект.Номер
                 hint: "РЕА-NNNNN"
-              - kind: ПолеВвода
-                name: ПолеДата
+                kind: ПолеВвода
+                name: ПолеНомер
+                readonly: true
                 title:
-                  ru: "Дата"
-                  en: "Date"
-                  de: "Datum"
-                  sr: "Датум"
-                data_path: Объект.Дата
-                required: true
-                hint: "Дата совершения отгрузки покупателю"
+                  de: "Nummer"
+                  en: "Number"
+                  ru: "Номер"
+                  sr: "Број"
+              - data_path: Объект.Дата
                 events:
                   ПриИзменении: ДатаПриИзменении
-              - kind: ПолеВвода
+                hint: "Дата совершения отгрузки покупателю"
+                kind: ПолеВвода
+                name: ПолеДата
+                required: true
+                title:
+                  de: "Datum"
+                  en: "Date"
+                  ru: "Дата"
+                  sr: "Датум"
+              - choice: true
+                data_path: Объект.Организация
+                hint: "Заполняется автоматически, если не указана"
+                kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  ru: "Организация"
-                  en: "Organization"
                   de: "Organisation"
+                  en: "Organization"
+                  ru: "Организация"
                   sr: "Организација"
-                data_path: Объект.Организация
-                choice: true
-                hint: "Заполняется автоматически, если не указана"
-
-          - kind: ГруппаФормы
+            kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              de: "Belegkopf"
+              en: "Document header"
+              ru: "Шапка документа"
+              sr: "Заглавље документа"
+          - children:
+              - data_path: Объект.СуммаБезНДС
+                kind: ПолеВвода
+                name: ПолеСуммаБезНДС
+                readonly: true
+                title:
+                  de: "Betrag o. USt."
+                  en: "Amount excl. VAT"
+                  ru: "Сумма без НДС"
+                  sr: "Износ без ПДВ"
+              - data_path: Объект.СуммаНДС
+                kind: ПолеВвода
+                name: ПолеСуммаНДС
+                readonly: true
+                title:
+                  de: "USt.-Betrag"
+                  en: "VAT amount"
+                  ru: "Сумма НДС"
+                  sr: "Износ ПДВ"
+              - data_path: Объект.Сумма
+                hint: "Рассчитывается автоматически из строк табличной части"
+                kind: ПолеВвода
+                name: ПолеСумма
+                readonly: true
+                title:
+                  de: "Gesamtbetrag"
+                  en: "Total payable"
+                  ru: "Всего к оплате"
+                  sr: "Укупно за плаћање"
+            kind: ГруппаФормы
             name: ГруппаИтоги
             title:
-              ru: "Итоги"
-              en: "Totals"
               de: "Summen"
+              en: "Totals"
+              ru: "Итоги"
               sr: "Укупно"
-            children:
-              - kind: ПолеВвода
-                name: ПолеСуммаБезНДС
-                title:
-                  ru: "Сумма без НДС"
-                  en: "Amount excl. VAT"
-                  de: "Betrag o. USt."
-                  sr: "Износ без ПДВ"
-                data_path: Объект.СуммаБезНДС
-                readonly: true
-              - kind: ПолеВвода
-                name: ПолеСуммаНДС
-                title:
-                  ru: "Сумма НДС"
-                  en: "VAT amount"
-                  de: "USt.-Betrag"
-                  sr: "Износ ПДВ"
-                data_path: Объект.СуммаНДС
-                readonly: true
-              - kind: ПолеВвода
-                name: ПолеСумма
-                title:
-                  ru: "Всего к оплате"
-                  en: "Total payable"
-                  de: "Gesamtbetrag"
-                  sr: "Укупно за плаћање"
-                data_path: Объект.Сумма
-                readonly: true
-                hint: "Рассчитывается автоматически из строк табличной части"
-
-      # ── Вкладка 2: Покупатель и склад ───────────────────────────────────
-      - kind: Страница
-        name: СтраницаКонтрагент
+        kind: Страница
+        name: СтраницаОсновное
         title:
-          ru: "Покупатель и склад"
-          en: "Customer & warehouse"
-          de: "Kunde & Lager"
-          sr: "Купац и магацин"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаКонтрагент
-            title:
-              ru: "Реквизиты покупателя"
-              en: "Customer details"
-              de: "Kundendaten"
-              sr: "Подаци о купцу"
-            children:
-              - kind: ПолеВвода
-                name: ПолеПокупатель
-                title:
-                  ru: "Покупатель"
-                  en: "Customer"
-                  de: "Kunde"
-                  sr: "Купац"
+          de: "Allgemein"
+          en: "General"
+          ru: "Основное"
+          sr: "Опште"
+      # ── Вкладка 2: Покупатель и склад ───────────────────────────────────
+      - children:
+          - children:
+              - choice: true
                 data_path: Объект.Покупатель
-                required: true
-                choice: true
-                hint: "Контрагент-получатель отгрузки"
                 events:
                   ПриИзменении: ПокупательПриИзменении
-              - kind: ПолеВвода
-                name: ПолеСклад
-                title:
-                  ru: "Склад"
-                  en: "Warehouse"
-                  de: "Lager"
-                  sr: "Магацин"
-                data_path: Объект.Склад
+                hint: "Контрагент-получатель отгрузки"
+                kind: ПолеВвода
+                name: ПолеПокупатель
                 required: true
-                choice: true
-                hint: "Со склада списываются остатки при проведении (ФИФО)"
-                events:
-                  ПриИзменении: СкладПриИзменении
-              - kind: ПолеВвода
-                name: ПолеТипЦенПродажи
                 title:
-                  ru: "Тип цен продажи"
-                  en: "Sales price type"
-                  de: "Verkaufspreistyp"
-                  sr: "Тип цене продаје"
+                  de: "Kunde"
+                  en: "Customer"
+                  ru: "Покупатель"
+                  sr: "Купац"
+              - choice: true
+                data_path: Объект.Склад
+                hint: "Со склада списываются остатки при проведении (ФИФО)"
+                kind: ПолеВвода
+                name: ПолеСклад
+                required: true
+                title:
+                  de: "Lager"
+                  en: "Warehouse"
+                  ru: "Склад"
+                  sr: "Магацин"
+              - choice: true
                 data_path: Объект.ТипЦенПродажи
-                choice: true
-                hint: "Заполняется автоматически из карточки покупателя"
                 events:
                   ПриИзменении: ТипЦенПродажиПриИзменении
-              - kind: ПолеВвода
+                hint: "Заполняется автоматически из карточки покупателя"
+                kind: ПолеВвода
+                name: ПолеТипЦенПродажи
+                title:
+                  de: "Verkaufspreistyp"
+                  en: "Sales price type"
+                  ru: "Тип цен продажи"
+                  sr: "Тип цене продаје"
+              - choice: true
+                data_path: Объект.ЗаказПокупателя
+                hint: "Заказ, по которому отгружается товар (снимает резерв)"
+                kind: ПолеВвода
                 name: ПолеЗаказПокупателя
                 title:
-                  ru: "Заказ покупателя"
-                  en: "Sales order"
                   de: "Kundenauftrag"
+                  en: "Sales order"
+                  ru: "Заказ покупателя"
                   sr: "Налог купца"
-                data_path: Объект.ЗаказПокупателя
-                choice: true
-                hint: "Заказ, по которому отгружается товар (снимает резерв)"
-              - kind: ПолеВвода
+              - choice: true
+                data_path: Объект.Основание
+                hint: "Счёт, на основании которого создана реализация"
+                kind: ПолеВвода
                 name: ПолеОснование
                 title:
-                  ru: "Основание"
-                  en: "Base document"
                   de: "Beleggrundlage"
+                  en: "Base document"
+                  ru: "Основание"
                   sr: "Основни документ"
-                data_path: Объект.Основание
-                choice: true
-                hint: "Счёт, на основании которого создана реализация"
-              - kind: ПолеВвода
-                name: ПолеСпособУчетаНДС
-                title:
-                  ru: "НДС"
-                  en: "VAT"
-                  de: "USt."
-                  sr: "ПДВ"
+              - choice: true
                 data_path: Объект.СпособУчетаНДС
-                choice: true
-                hint: "ВТомЧисле — НДС включён в сумму, Сверху — НДС сверху"
                 events:
                   ПриИзменении: СпособУчетаНДСПриИзменении
-
-      # ── Вкладка 3: Товары ───────────────────────────────────────────────
-      - kind: Страница
-        name: СтраницаТовары
-        title:
-          ru: "Товары"
-          en: "Items"
-          de: "Artikel"
-          sr: "Артикли"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаТабЧасть
-            title:
-              ru: "Состав отгрузки"
-              en: "Shipment contents"
-              de: "Lieferumfang"
-              sr: "Садржај испоруке"
-            children:
-              - kind: ТабличнаяЧасть
-                use_grid: true
-                name: ТабТовары
+                hint: "ВТомЧисле — НДС включён в сумму, Сверху — НДС сверху"
+                kind: ПолеВвода
+                name: ПолеСпособУчетаНДС
                 title:
-                  ru: "Товары"
-                  en: "Items"
-                  de: "Artikel"
-                  sr: "Артикли"
+                  de: "USt."
+                  en: "VAT"
+                  ru: "НДС"
+                  sr: "ПДВ"
+            kind: ГруппаФормы
+            name: ГруппаКонтрагент
+            title:
+              de: "Kundendaten"
+              en: "Customer details"
+              ru: "Реквизиты покупателя"
+              sr: "Подаци о купцу"
+        kind: Страница
+        name: СтраницаКонтрагент
+        title:
+          de: "Kunde & Lager"
+          en: "Customer & warehouse"
+          ru: "Покупатель и склад"
+          sr: "Купац и магацин"
+      # ── Вкладка 3: Товары ───────────────────────────────────────────────
+      - children:
+          - children:
+              - children:
+                  - events:
+                      Выбор: КнопкаПодборВыбор
+                      Нажатие: КнопкаПодборНажатие
+                    hint: "Подобрать товары со свободным остатком на складе"
+                    kind: Кнопка
+                    name: КнопкаПодбор
+                    title:
+                      de: "Auswahl"
+                      en: "Pick items"
+                      ru: "Подбор"
+                      sr: "Избор"
+                  - events:
+                      Нажатие: КнопкаПересчитатьНажатие
+                    hint: "Пересчитать сумму и НДС по каждой строке"
+                    kind: Кнопка
+                    name: КнопкаПересчитать
+                    title:
+                      de: "Summen neu berechnen"
+                      en: "Recalculate amounts"
+                      ru: "Пересчитать суммы"
+                      sr: "Прерачунај износе"
+                  - events:
+                      Нажатие: КнопкаОчиститьНажатие
+                    kind: Кнопка
+                    name: КнопкаОчистить
+                    title:
+                      de: "Tabelle leeren"
+                      en: "Clear table"
+                      ru: "Очистить таблицу"
+                      sr: "Обриши табелу"
                 data_path: Объект.Товары
                 events:
                   ПриИзменении: ТабТоварыПриИзменении
-                children:
-                  - kind: Кнопка
-                    name: КнопкаПодбор
-                    title:
-                      ru: "Подбор"
-                      en: "Pick items"
-                      de: "Auswahl"
-                      sr: "Избор"
-                    hint: "Подобрать товары со свободным остатком на складе"
-                    events:
-                      Нажатие: КнопкаПодборНажатие
-                      Выбор: КнопкаПодборВыбор
-                  - kind: Кнопка
-                    name: КнопкаПересчитать
-                    title:
-                      ru: "Пересчитать суммы"
-                      en: "Recalculate amounts"
-                      de: "Summen neu berechnen"
-                      sr: "Прерачунај износе"
-                    hint: "Пересчитать сумму и НДС по каждой строке"
-                    events:
-                      Нажатие: КнопкаПересчитатьНажатие
-                  - kind: Кнопка
-                    name: КнопкаОчистить
-                    title:
-                      ru: "Очистить таблицу"
-                      en: "Clear table"
-                      de: "Tabelle leeren"
-                      sr: "Обриши табелу"
-                    events:
-                      Нажатие: КнопкаОчиститьНажатие
-
+                kind: ТабличнаяЧасть
+                name: ТабТовары
+                title:
+                  de: "Artikel"
+                  en: "Items"
+                  ru: "Товары"
+                  sr: "Артикли"
+                use_grid: true
+            kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              de: "Lieferumfang"
+              en: "Shipment contents"
+              ru: "Состав отгрузки"
+              sr: "Садржај испоруке"
+        kind: Страница
+        name: СтраницаТовары
+        title:
+          de: "Artikel"
+          en: "Items"
+          ru: "Товары"
+          sr: "Артикли"
+    kind: СтраницыФормы
+    name: ОсновныеЗакладки
 events:
-  ПриОткрытии: ПриОткрытииФормы
   ПередЗаписью: ПередЗаписьюФормы
   ПриЗаписи: ПриЗаписиФормы
+  ПриОткрытии: ПриОткрытииФормы
+form:
+  auto_save_settings: true
+  entity: РеализацияТоваров
+  kind: object
+  name: ФормаОбъекта
+  title:
+    de: "Warenverkauf"
+    en: "Sales of goods"
+    ru: "Реализация товаров"
+    sr: "Продаја робе"
+  vertical_scroll: auto
+schema: onebase.form/v1

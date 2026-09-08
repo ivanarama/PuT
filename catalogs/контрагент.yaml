@@ -1,30 +1,18 @@
-name: Контрагент
-title: Контрагент
-titles:
-  en: Counterparty
-  de: Geschäftspartner
-  sr: Партнер
-  az: Əks-tərəf
-  es: Contraparte
-  fr: Contrepartie
-  hy: Գործընկեր
-  ka: კონტრაგენტი
-  kk: Контрагент
-  pt: Contraparte
-  ro: Contrapartidă
-  tr: Karşı taraf
-  uk: Контрагент
-  uz: Kontragent
-  zh: 往来单位
 fields:
-  - name: Наименование
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Наименование
     title: Наименование
     titles:
-      en: Name
-      de: Name
-      sr: Назив
       az: Adlandırma
+      de: Name
+      en: Name
       es: Nombre
       fr: Nom
       hy: Անվանում
@@ -32,18 +20,18 @@ fields:
       kk: Атауы
       pt: Nome
       ro: Denumire
+      sr: Назив
       tr: Ad
       uk: Найменування
       uz: Nomi
       zh: 名称
-  - name: ПолноеНаименование
     type: string
+  - name: ПолноеНаименование
     title: Полное наименование
     titles:
-      en: Full name
-      de: Vollständiger Name
-      sr: Пуни назив
       az: Tam adı
+      de: Vollständiger Name
+      en: Full name
       es: Nombre completo
       fr: Nom complet
       hy: Ամբողջական անվանում
@@ -51,18 +39,18 @@ fields:
       kk: Толық атауы
       pt: Nome completo
       ro: Denumire completă
+      sr: Пуни назив
       tr: Tam ad
       uk: Повне найменування
       uz: To'liq nomi
       zh: 全称
+    type: string
   - name: Вид
-    type: enum:ВидКонтрагента
     title: Вид контрагента
     titles:
-      en: Counterparty type
-      de: Geschäftspartnertyp
-      sr: Врста контрагента
       az: Əks-tərəf növü
+      de: Geschäftspartnertyp
+      en: Counterparty type
       es: Tipo contraparte
       fr: Type contrepartie
       hy: Գործընկերոջ տեսակ
@@ -70,18 +58,18 @@ fields:
       kk: Контрагент түрі
       pt: Tipo contraparte
       ro: Tip contrapartidă
+      sr: Врста контрагента
       tr: Karşı taraf türü
       uk: Вид контрагента
       uz: Kontragent turi
       zh: 往来单位类型
+    type: enum:ВидКонтрагента
   - name: ИНН
-    type: string
     title: ИНН
     titles:
-      en: Tax ID
-      de: Steuernummer
-      sr: ПИБ
       az: VÖEN
+      de: Steuernummer
+      en: Tax ID
       es: NIF
       fr: SIRET
       hy: ՀՎՀՀ
@@ -89,18 +77,18 @@ fields:
       kk: ЖСН
       pt: NIF
       ro: CUI
+      sr: ПИБ
       tr: Vergi no
       uk: РНОКПП
       uz: STIR
       zh: 税号
-  - name: КПП
     type: string
+  - name: КПП
     title: КПП
     titles:
-      en: KPP
-      de: KPP
-      sr: КПП
       az: KPP
+      de: KPP
+      en: KPP
       es: KPP
       fr: KPP
       hy: ԿՊՊ
@@ -108,18 +96,18 @@ fields:
       kk: КПП
       pt: KPP
       ro: KPP
+      sr: КПП
       tr: KPP
       uk: КПП
       uz: KPP
       zh: KPP
-  - name: ОГРН
     type: string
+  - name: ОГРН
     title: ОГРН
     titles:
-      en: OGRN
-      de: OGRN
-      sr: ОГРН
       az: VÖEN
+      de: OGRN
+      en: OGRN
       es: OGRN
       fr: OGRN
       hy: ՊՏՀ
@@ -127,18 +115,18 @@ fields:
       kk: ОЖСН
       pt: OGRN
       ro: OGRN
+      sr: ОГРН
       tr: OGRN
       uk: ОГРН
       uz: OGRN
       zh: OGRN
-  - name: ОГРНИП
     type: string
+  - name: ОГРНИП
     title: ОГРНИП (для ИП)
     titles:
-      en: OGRNIP (for sole proprietor)
-      de: OGRNIP (für Einzelunternehmer)
-      sr: ОГРНИП (за предузетника)
       az: ОГРНИП (fərdi sahibkar üçün)
+      de: OGRNIP (für Einzelunternehmer)
+      en: OGRNIP (for sole proprietor)
       es: OGRNIP (para autónomo)
       fr: OGRNIP (pour auto-entrepreneur)
       hy: ОГРНИП (անհատ ձեռնարկատիրոջ համար)
@@ -146,18 +134,18 @@ fields:
       kk: ОГРНИП (жеке кәсіпкер үшін)
       pt: OGRNIP (para autónomo)
       ro: OGRNIP (pentru PFA)
+      sr: ОГРНИП (за предузетника)
       tr: ОГРНИП (şahıs firması için)
       uk: ОГРНИП (для ФОП)
       uz: ОГРНИП (yakka tartibdagi tadbirkor uchun)
       zh: OGRNIP（个体工商户）
-  - name: ОКПО
     type: string
+  - name: ОКПО
     title: ОКПО
     titles:
-      en: OKPO
-      de: OKPO
-      sr: ОКПО
       az: OKPO
+      de: OKPO
+      en: OKPO
       es: OKPO
       fr: OKPO
       hy: ОКПО
@@ -165,18 +153,18 @@ fields:
       kk: ОКПО
       pt: OKPO
       ro: OKPO
+      sr: ОКПО
       tr: OKPO
       uk: ОКПО
       uz: OKPO
       zh: OKPO
-  - name: Сайт
     type: string
+  - name: Сайт
     title: Сайт
     titles:
-      en: Website
-      de: Webseite
-      sr: Веб-сајт
       az: Sayt
+      de: Webseite
+      en: Website
       es: Web
       fr: Site
       hy: Կայք
@@ -184,18 +172,18 @@ fields:
       kk: Сайт
       pt: Site
       ro: Site
+      sr: Веб-сајт
       tr: Web sitesi
       uk: Сайт
       uz: Sayt
       zh: 网站
-  - name: ЮридическийАдрес
     type: string
+  - name: ЮридическийАдрес
     title: Юридический адрес
     titles:
-      en: Legal address
-      de: Rechtsadresse
-      sr: Правна адреса
       az: Hüquqi ünvan
+      de: Rechtsadresse
+      en: Legal address
       es: Dirección legal
       fr: Adresse légale
       hy: Իրավական հասցե
@@ -203,18 +191,18 @@ fields:
       kk: Заңды мекенжай
       pt: Endereço legal
       ro: Adresă legală
+      sr: Правна адреса
       tr: Yasal adres
       uk: Юридична адреса
       uz: Yuridik manzil
       zh: 法定地址
-  - name: ФактическийАдрес
     type: string
+  - name: ФактическийАдрес
     title: Фактический адрес
     titles:
-      en: Actual address
-      de: Tatsächliche Adresse
-      sr: Стварна адреса
       az: Faktiki ünvan
+      de: Tatsächliche Adresse
+      en: Actual address
       es: Dirección real
       fr: Adresse réelle
       hy: Փաստացի հասցե
@@ -222,18 +210,18 @@ fields:
       kk: Нақты мекенжай
       pt: Endereço real
       ro: Adresă reală
+      sr: Стварна адреса
       tr: Fiili adres
       uk: Фактична адреса
       uz: Haqiqiy manzil
       zh: 实际地址
-  - name: Телефон
     type: string
+  - name: Телефон
     title: Телефон
     titles:
-      en: Phone
-      de: Telefon
-      sr: Телефон
       az: Telefon
+      de: Telefon
+      en: Phone
       es: Teléfono
       fr: Tél
       hy: Հեռախոս
@@ -241,18 +229,18 @@ fields:
       kk: Телефон
       pt: Telefone
       ro: Telefon
+      sr: Телефон
       tr: Telefon
       uk: Телефон
       uz: Telefon
       zh: 电话
-  - name: Email
     type: string
+  - name: Email
     title: Email
     titles:
-      en: Email
-      de: E-Mail
-      sr: Е-пошта
       az: E-poçt
+      de: E-Mail
+      en: Email
       es: Correo
       fr: Courriel
       hy: Էլ. փոստ
@@ -260,18 +248,18 @@ fields:
       kk: Email
       pt: Email
       ro: Email
+      sr: Е-пошта
       tr: E-posta
       uk: Email
       uz: Email
       zh: 邮箱
-  - name: КонтактноеЛицо
     type: string
+  - name: КонтактноеЛицо
     title: Контактное лицо
     titles:
-      en: Contact person
-      de: Kontaktperson
-      sr: Контакт особа
       az: Əlaqə şəxsi
+      de: Kontaktperson
+      en: Contact person
       es: Persona contacto
       fr: Personne contact
       hy: Կոնտակտային անձ
@@ -279,18 +267,18 @@ fields:
       kk: Байланыс тұлғасы
       pt: Pessoa contato
       ro: Persoană contact
+      sr: Контакт особа
       tr: İletişim kişisi
       uk: Контактна особа
       uz: Aloqa shaxsi
       zh: 联系人
+    type: string
   - name: ТипЦенПродажи
-    type: reference:ТипЦен
     title: Тип цен продажи по умолчанию
     titles:
-      en: Default sales price type
-      de: Standard-Verkaufspreistyp
-      sr: Подразумевани тип цене продаје
       az: Satış qiymət növü
+      de: Standard-Verkaufspreistyp
+      en: Default sales price type
       es: Tipo precio venta
       fr: Type prix vente
       hy: Վաճառքի գնի տեսակի
@@ -298,18 +286,18 @@ fields:
       kk: Сату баға түрі
       pt: Tipo preço venda
       ro: Tip preț vânzare
+      sr: Подразумевани тип цене продаје
       tr: Satış fiyat tipi
       uk: Тип ціни продажу
       uz: Sotuv narx turi
       zh: 销售价格类型
+    type: reference:ТипЦен
   - name: РасчётныйСчёт
-    type: string
     title: Расчётный счёт
     titles:
-      en: Settlement account
-      de: Girokonto
-      sr: Текући рачун
       az: Hesablaşma hesabı
+      de: Girokonto
+      en: Settlement account
       es: Cuenta bancaria
       fr: Compte bancaire
       hy: Հաշվարկային հաշիվ
@@ -317,18 +305,18 @@ fields:
       kk: Банк шоты
       pt: Conta bancária
       ro: Contă bancară
+      sr: Текући рачун
       tr: Banka hesabı
       uk: Розрахунковий рахунок
       uz: Hisoblash hisobi
       zh: 银行账户
-  - name: НаименованиеБанка
     type: string
+  - name: НаименованиеБанка
     title: Наименование банка
     titles:
-      en: Bank name
-      de: Bankname
-      sr: Назив банке
       az: Bank adı
+      de: Bankname
+      en: Bank name
       es: Nombre banco
       fr: Nom banque
       hy: Բանկի անվանում
@@ -336,18 +324,18 @@ fields:
       kk: Банк атауы
       pt: Nome banco
       ro: Nume bancă
+      sr: Назив банке
       tr: Banka adı
       uk: Найменування банку
       uz: Bank nomi
       zh: 银行名称
-  - name: БИК
     type: string
+  - name: БИК
     title: БИК
     titles:
-      en: BIK
-      de: BIK
-      sr: БИК
       az: BIK
+      de: BIK
+      en: BIK
       es: BIC
       fr: BIC
       hy: ԲԻԿ
@@ -355,18 +343,18 @@ fields:
       kk: БИК
       pt: BIC
       ro: BIC
+      sr: БИК
       tr: BİK
       uk: БІК
       uz: BIK
       zh: BIC
-  - name: КорреспондентскийСчёт
     type: string
+  - name: КорреспондентскийСчёт
     title: Корреспондентский счёт
     titles:
-      en: Correspondent account
-      de: Korrespondentenkonto
-      sr: Комерцијални рачун
       az: Korrespondent hesabı
+      de: Korrespondentenkonto
+      en: Correspondent account
       es: Cuenta corresp.
       fr: Compte corresp.
       hy: Միջբանկային հաշիվ
@@ -374,21 +362,41 @@ fields:
       kk: Корр. шот
       pt: Conta corresp.
       ro: Contă coresp.
+      sr: Комерцијални рачун
       tr: Karsılıklı hesap
       uk: Кореспондентський рахунок
       uz: Korrespondent hisobi
       zh: 联行账户
+    type: string
   - name: ПроцентСкидки
-    type: number
     title: Скидка (%)
     titles:
-      en: Discount (%)
       de: Rabatt (%)
+      en: Discount (%)
       sr: Попуст (%)
-  - name: КредитныйЛимит
     type: number
+  - name: КредитныйЛимит
     title: Кредитный лимит
     titles:
-      en: Credit limit
       de: Kreditlimit
+      en: Credit limit
       sr: Кредитни лимит
+    type: number
+name: Контрагент
+title: Контрагент
+titles:
+  az: Əks-tərəf
+  de: Geschäftspartner
+  en: Counterparty
+  es: Contraparte
+  fr: Contrepartie
+  hy: Գործընկեր
+  ka: კონტრაგენტი
+  kk: Контрагент
+  pt: Contraparte
+  ro: Contrapartidă
+  sr: Партнер
+  tr: Karşı taraf
+  uk: Контрагент
+  uz: Kontragent
+  zh: 往来单位

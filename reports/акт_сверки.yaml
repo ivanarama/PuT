@@ -1,30 +1,10 @@
 name: АктСверки
-title: Акт сверки взаиморасчётов с контрагентом
-titles:
-  en: Reconciliation statement
-  de: Abstimmungserklärung
-  sr: Изјава о усклађивању
-  az: Uyğunlaşdırma aktı
-  es: Declaración de conciliación
-  fr: Relevé de rapprochement
-  hy: Հաշվառման ակտ
-  ka: შეთანხმების აქტი
-  kk: Түзету актісі
-  pt: Declaração de reconciliação
-  ro: Declarație de reconciliere
-  tr: Mutabakat beyanı
-  uk: Акт звірки
-  uz: Kelishilgan hisob-akt
-  zh: 对账单
 params:
-  - name: Контрагент
-    type: reference:Контрагент
-    label: Контрагент
+  - label: Контрагент
     labels:
-      en: Counterparty
-      de: Geschäftspartner
-      sr: Контрагент
       az: Əks-tərəf
+      de: Geschäftspartner
+      en: Counterparty
       es: Contraparte
       fr: Counterpartie
       hy: Գործընկեր
@@ -32,18 +12,37 @@ params:
       kk: Контрагент
       pt: Contraparte
       ro: Contraparte
+      sr: Контрагент
       tr: Karşı taraf
       uk: Контрагент
       uz: Kontragent
       zh: 往来单位
-  - name: НачалоПериода
-    type: date
-    label: С даты
+    name: Контрагент
+    type: reference:Контрагент
+  - label: Организация
     labels:
-      en: From date
-      de: Von Datum
-      sr: Од датума
+      az: Təşkilat
+      de: Organisation
+      en: Organization
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      sr: Организација
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
+    name: Организация
+    type: reference:Организация
+  - label: С даты
+    labels:
       az: Başlanğıc
+      de: Von Datum
+      en: From date
       es: Inicio
       fr: Début
       hy: Սկիզբ
@@ -51,18 +50,18 @@ params:
       kk: Басы
       pt: Início
       ro: Început
+      sr: Од датума
       tr: Başlangıç
       uk: Початок
       uz: Boshlanish
       zh: 开始
-  - name: КонецПериода
+    name: НачалоПериода
     type: date
-    label: По дату
+  - label: По дату
     labels:
-      en: To date
-      de: Bis Datum
-      sr: До датума
       az: Son
+      de: Bis Datum
+      en: To date
       es: Fin
       fr: Fin
       hy: Վերջ
@@ -70,10 +69,13 @@ params:
       kk: Соңы
       pt: Fim
       ro: Sfârșit
+      sr: До датума
       tr: Bitiş
       uk: Кінець
       uz: Tugash
       zh: 结束
+    name: КонецПериода
+    type: date
 query: |
   ВЫБРАТЬ
     period КАК Дата,
@@ -81,6 +83,24 @@ query: |
     ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ 0 КОНЕЦ КАК Расход
   ИЗ РегистрНакопления.Взаиморасчеты
   ГДЕ Контрагент = &Контрагент
+    И (&Организация ЕСТЬ ПУСТО ИЛИ Организация = &Организация)
     И (&НачалоПериода ЕСТЬ ПУСТО ИЛИ period >= &НачалоПериода)
     И (&КонецПериода ЕСТЬ ПУСТО ИЛИ period <= &КонецПериода)
   УПОРЯДОЧИТЬ ПО period
+title: Акт сверки взаиморасчётов с контрагентом
+titles:
+  az: Uyğunlaşdırma aktı
+  de: Abstimmungserklärung
+  en: Reconciliation statement
+  es: Declaración de conciliación
+  fr: Relevé de rapprochement
+  hy: Հաշվառման ակտ
+  ka: შეთანხმების აქტი
+  kk: Түзету актісі
+  pt: Declaração de reconciliação
+  ro: Declarație de reconciliere
+  sr: Изјава о усклађивању
+  tr: Mutabakat beyanı
+  uk: Акт звірки
+  uz: Kelishilgan hisob-akt
+  zh: 对账单

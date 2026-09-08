@@ -1,143 +1,133 @@
-schema: onebase.form/v1
-
-form:
-  name: ФормаОбъекта
-  kind: object
-  entity: ОприходованиеТоваров
-  title:
-    ru: "Оприходование товаров"
-    en: "Inventory receipt"
-    de: "Inventaraufnahme"
-    sr: "Пријем робе у магацин"
-  auto_save_settings: true
-  vertical_scroll: auto
-
 attributes:
-  - name: Объект
-    type: DocumentRef.ОприходованиеТоваров
+  - main: true
+    name: Объект
     save: true
-    main: true
-
+    type: DocumentRef.ОприходованиеТоваров
 elements:
-  - kind: СтраницыФормы
-    name: ОсновныеЗакладки
-    children:
-
-      - kind: Страница
-        name: СтраницаОсновное
-        title:
-          ru: "Основное"
-          en: "General"
-          de: "Allgemein"
-          sr: "Опште"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаШапка
-            title:
-              ru: "Шапка документа"
-              en: "Document header"
-              de: "Belegkopf"
-              sr: "Заглавље документа"
-            children:
-              - kind: ПолеВвода
-                name: ПолеНомер
-                title:
-                  ru: "Номер"
-                  en: "Number"
-                  de: "Nummer"
-                  sr: "Број"
-                data_path: Объект.Номер
-                readonly: true
+  - children:
+      - children:
+          - children:
+              - data_path: Объект.Номер
                 hint: "ОПР-NNNNN"
-              - kind: ПолеВвода
-                name: ПолеДата
+                kind: ПолеВвода
+                name: ПолеНомер
+                readonly: true
                 title:
-                  ru: "Дата"
-                  en: "Date"
-                  de: "Datum"
-                  sr: "Датум"
-                data_path: Объект.Дата
+                  de: "Nummer"
+                  en: "Number"
+                  ru: "Номер"
+                  sr: "Број"
+              - data_path: Объект.Дата
+                kind: ПолеВвода
+                name: ПолеДата
                 required: true
-                events:
-                  ПриИзменении: ДатаПриИзменении
-              - kind: ПолеВвода
+                title:
+                  de: "Datum"
+                  en: "Date"
+                  ru: "Дата"
+                  sr: "Датум"
+              - choice: true
+                data_path: Объект.Организация
+                kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  ru: "Организация"
-                  en: "Organization"
                   de: "Organisation"
+                  en: "Organization"
+                  ru: "Организация"
                   sr: "Организација"
-                data_path: Объект.Организация
-                choice: true
-              - kind: ПолеВвода
-                name: ПолеСклад
-                title:
-                  ru: "Склад"
-                  en: "Warehouse"
-                  de: "Lager"
-                  sr: "Магацин"
+              - choice: true
                 data_path: Объект.Склад
+                kind: ПолеВвода
+                name: ПолеСклад
                 required: true
-                choice: true
-                events:
-                  ПриИзменении: СкладПриИзменении
-              - kind: ПолеВвода
+                title:
+                  de: "Lager"
+                  en: "Warehouse"
+                  ru: "Склад"
+                  sr: "Магацин"
+              - data_path: Объект.Причина
+                kind: ПолеВвода
                 name: ПолеПричина
                 title:
-                  ru: "Причина"
-                  en: "Reason"
                   de: "Grund"
+                  en: "Reason"
+                  ru: "Причина"
                   sr: "Разлог"
-                data_path: Объект.Причина
-              - kind: ПолеВвода
+              - data_path: Объект.Сумма
+                kind: ПолеВвода
                 name: ПолеСумма
-                title:
-                  ru: "Сумма оприходования"
-                  en: "Receipt amount"
-                  de: "Aufnahmesumme"
-                  sr: "Износ пријема"
-                data_path: Объект.Сумма
                 readonly: true
-
-          - kind: ГруппаФормы
-            name: ГруппаТабЧасть
-            title:
-              ru: "Оприходуемые товары"
-              en: "Items to receive"
-              de: "Aufnahmepositionen"
-              sr: "Ставке за пријем"
-            children:
-              - kind: ТабличнаяЧасть
-                use_grid: true
-                name: ТабТовары
                 title:
-                  ru: "Товары"
-                  en: "Items"
-                  de: "Artikel"
-                  sr: "Артикли"
-                data_path: Объект.Товары
+                  de: "Aufnahmesumme"
+                  en: "Receipt amount"
+                  ru: "Сумма оприходования"
+                  sr: "Износ пријема"
+            kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              de: "Belegkopf"
+              en: "Document header"
+              ru: "Шапка документа"
+              sr: "Заглавље документа"
+          - children:
+              - data_path: Объект.Товары
                 events:
                   ПриИзменении: ТабТоварыПриИзменении
-              - kind: Кнопка
+                kind: ТабличнаяЧасть
+                name: ТабТовары
+                title:
+                  de: "Artikel"
+                  en: "Items"
+                  ru: "Товары"
+                  sr: "Артикли"
+                use_grid: true
+              - events:
+                  Нажатие: КнопкаПересчитатьНажатие
+                kind: Кнопка
                 name: КнопкаПересчитать
                 title:
-                  ru: "Пересчитать суммы"
-                  en: "Recalculate"
                   de: "Neu berechnen"
+                  en: "Recalculate"
+                  ru: "Пересчитать суммы"
                   sr: "Прерачунај"
-                events:
-                  Нажатие: КнопкаПересчитатьНажатие
-              - kind: Кнопка
+              - events:
+                  Нажатие: КнопкаОчиститьНажатие
+                kind: Кнопка
                 name: КнопкаОчистить
                 title:
-                  ru: "Очистить таблицу"
-                  en: "Clear table"
                   de: "Leeren"
+                  en: "Clear table"
+                  ru: "Очистить таблицу"
                   sr: "Обриши табелу"
-                events:
-                  Нажатие: КнопкаОчиститьНажатие
-
+            kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              de: "Aufnahmepositionen"
+              en: "Items to receive"
+              ru: "Оприходуемые товары"
+              sr: "Ставке за пријем"
+        kind: Страница
+        name: СтраницаОсновное
+        title:
+          de: "Allgemein"
+          en: "General"
+          ru: "Основное"
+          sr: "Опште"
+    kind: СтраницыФормы
+    name: ОсновныеЗакладки
 events:
-  ПриОткрытии: ПриОткрытииФормы
   ПередЗаписью: ПередЗаписьюФормы
   ПриЗаписи: ПриЗаписиФормы
+  ПриОткрытии: ПриОткрытииФормы
+form:
+  auto_save_settings: true
+  entity: ОприходованиеТоваров
+  kind: object
+  name: ФормаОбъекта
+  title:
+    de: "Inventaraufnahme"
+    en: "Inventory receipt"
+    ru: "Оприходование товаров"
+    sr: "Пријем робе у магацин"
+  vertical_scroll: auto
+schema: onebase.form/v1

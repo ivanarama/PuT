@@ -1,37 +1,20 @@
-name: ЗаказПоставщику
-title: Заказ поставщику
-titles:
-  en: Purchase order
-  de: Lieferantenbestellung
-  sr: Налог добављачу
-  az: Təchizatçı sifarişi
-  es: Pedido proveedor
-  fr: Commande fournisseur
-  hy: Մատակարարի պատվեր
-  ka: მომწოდებლის შეკვეთა
-  kk: Жабдықтаушы тапсырысы
-  pt: Encomenda fornecedor
-  ro: Comandă furnizor
-  tr: Tedarikçi siparişi
-  uk: Замовлення постачальнику
-  uz: Yetkazib beruvchi buyurtmasi
-  zh: 采购订单
-posting: true
 based_on:
   - ЗаказПокупателя
-numerator:
-  prefix: "ЗПС-"
-  length: 5
-  period: year
 fields:
-  - name: Номер
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Номер
     title: Номер
     titles:
-      en: Number
-      de: Nummer
-      sr: Број
       az: Nömrə
+      de: Nummer
+      en: Number
       es: Número
       fr: Numéro
       hy: Համար
@@ -39,18 +22,18 @@ fields:
       kk: Нөмір
       pt: Número
       ro: Număr
+      sr: Број
       tr: Numara
       uk: Номер
       uz: Raqam
       zh: 编号
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
-      de: Datum
-      sr: Датум
       az: Tarix
+      de: Datum
+      en: Date
       es: Fecha
       fr: Date
       hy: Ամսաթիվ
@@ -58,18 +41,18 @@ fields:
       kk: Күні
       pt: Data
       ro: Dată
+      sr: Датум
       tr: Tarih
       uk: Дата
       uz: Sana
       zh: 日期
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
-      de: Organisation
-      sr: Организација
       az: Təşkilat
+      de: Organisation
+      en: Organization
       es: Organización
       fr: Organisation
       hy: Կազմակերպություն
@@ -77,18 +60,18 @@ fields:
       kk: Ұйым
       pt: Organização
       ro: Organizație
+      sr: Организација
       tr: Kuruluş
       uk: Організація
       uz: Tashkilot
       zh: 组织
+    type: reference:Организация
   - name: Поставщик
-    type: reference:Контрагент
     title: Поставщик
     titles:
-      en: Supplier
-      de: Lieferant
-      sr: Добављач
       az: Təchizatçı
+      de: Lieferant
+      en: Supplier
       es: Proveedor
       fr: Fournisseur
       hy: Մատակարար
@@ -96,18 +79,18 @@ fields:
       kk: Жабдықтаушы
       pt: Fornecedor
       ro: Furnizor
+      sr: Добављач
       tr: Tedarikçi
       uk: Постачальник
       uz: Yetkazib beruvchi
       zh: 供应商
+    type: reference:Контрагент
   - name: Склад
-    type: reference:Склад
     title: Склад
     titles:
-      en: Warehouse
-      de: Lager
-      sr: Магацин
       az: Anbar
+      de: Lager
+      en: Warehouse
       es: Almacén
       fr: Entrepôt
       hy: Պահեստ
@@ -115,18 +98,18 @@ fields:
       kk: Қойма
       pt: Armazém
       ro: Depozit
+      sr: Магацин
       tr: Depo
       uk: Склад
       uz: Ombor
       zh: 仓库
+    type: reference:Склад
   - name: СпособУчетаНДС
-    type: enum:СпособУчетаНДС
     title: НДС
     titles:
-      en: VAT
-      de: USt.
-      sr: ПДВ
       az: ƏDV
+      de: USt.
+      en: VAT
       es: IVA
       fr: TVA
       hy: ԱԱՀ
@@ -134,18 +117,18 @@ fields:
       kk: ҚҚС
       pt: IVA
       ro: TVA
+      sr: ПДВ
       tr: KDV
       uk: ПДВ
       uz: QQS
       zh: 增值税
+    type: enum:СпособУчетаНДС
   - name: Комментарий
-    type: string
     title: Комментарий
     titles:
-      en: Comment
-      de: Kommentar
-      sr: Коментар
       az: Şərh
+      de: Kommentar
+      en: Comment
       es: Comentario
       fr: Commentaire
       hy: Մեկնաբանություն
@@ -153,18 +136,18 @@ fields:
       kk: Түсініктеме
       pt: Comentário
       ro: Comentariu
+      sr: Коментар
       tr: Yorum
       uk: Коментар
       uz: Izoh
       zh: 备注
+    type: string
   - name: СуммаБезНДС
-    type: number
     title: Сумма без НДС
     titles:
-      en: Amount excl. VAT
-      de: Betrag o. USt.
-      sr: Износ без ПДВ
       az: ƏDV-siz məbləğ
+      de: Betrag o. USt.
+      en: Amount excl. VAT
       es: Importe sin IVA
       fr: Montant HT
       hy: ԱԱՀ-առանց գումարի
@@ -172,18 +155,18 @@ fields:
       kk: ҚҚС-сыз сомасы
       pt: Valor sem IVA
       ro: Sumă fără TVA
+      sr: Износ без ПДВ
       tr: KDV'siz tutar
       uk: Сума без ПДВ
       uz: QQS-siz miqdor
       zh: 不含税金额
-  - name: СуммаНДС
     type: number
+  - name: СуммаНДС
     title: Сумма НДС
     titles:
-      en: VAT amount
-      de: USt.-Betrag
-      sr: Износ ПДВ
       az: ƏDV məbləği
+      de: USt.-Betrag
+      en: VAT amount
       es: IVA importe
       fr: Montant TVA
       hy: ԱԱՀ գումարի
@@ -191,18 +174,18 @@ fields:
       kk: ҚҚС сомасы
       pt: Valor IVA
       ro: Sumă TVA
+      sr: Износ ПДВ
       tr: KDV tutarı
       uk: Сума ПДВ
       uz: QQS miqdori
       zh: 增值税额
-  - name: Сумма
     type: number
+  - name: Сумма
     title: Всего
     titles:
-      en: Total
-      de: Gesamt
-      sr: Укупно
       az: Cəmi
+      de: Gesamt
+      en: Total
       es: Total
       fr: Total
       hy: Ընդհանուր
@@ -210,38 +193,26 @@ fields:
       kk: Барлығы
       pt: Total
       ro: Total
+      sr: Укупно
       tr: Toplam
       uk: Всього
       uz: Jami
       zh: 合计
+    type: number
+name: ЗаказПоставщику
+numerator:
+  length: 5
+  period: year
+  prefix: "ЗПС-"
+posting: true
 tableparts:
-  - name: Товары
-    title: Товары
-    titles:
-      en: Items
-      de: Artikel
-      sr: Артикли
-      az: Mallar
-      es: Artículos
-      fr: Articles
-      hy: Ապրանքներ
-      ka: საქონელი
-      kk: Тауарлар
-      pt: Artigos
-      ro: Articole
-      tr: Mallar
-      uk: Товари
-      uz: Tovarlar
-      zh: 商品
-    fields:
+  - fields:
       - name: Номенклатура
-        type: reference:Номенклатура
         title: Номенклатура
         titles:
-          en: Item
-          de: Artikel
-          sr: Артикал
           az: Adlandırma
+          de: Artikel
+          en: Item
           es: Nomenclatura
           fr: Nomenclature
           hy: Անվանակարգ
@@ -249,18 +220,18 @@ tableparts:
           kk: Номенклатура
           pt: Nomenclatura
           ro: Nomenclatură
+          sr: Артикал
           tr: Ürün
           uk: Номенклатура
           uz: Nomеnklatura
           zh: 物料
+        type: reference:Номенклатура
       - name: Количество
-        type: number
         title: Количество
         titles:
-          en: Quantity
-          de: Menge
-          sr: Количина
           az: Miqdar
+          de: Menge
+          en: Quantity
           es: Cantidad
           fr: Quantité
           hy: Քանակ
@@ -268,18 +239,18 @@ tableparts:
           kk: Саны
           pt: Quantidade
           ro: Cantitate
+          sr: Количина
           tr: Miktar
           uk: Кількість
           uz: Miqdor
           zh: 数量
-      - name: Цена
         type: number
+      - name: Цена
         title: Цена
         titles:
-          en: Price
-          de: Preis
-          sr: Цена
           az: Qiymət
+          de: Preis
+          en: Price
           es: Precio
           fr: Prix
           hy: Գին
@@ -287,18 +258,18 @@ tableparts:
           kk: Бағасы
           pt: Preço
           ro: Preț
+          sr: Цена
           tr: Fiyat
           uk: Ціна
           uz: Narx
           zh: 价格
+        type: number
       - name: СтавкаНДС
-        type: reference:СтавкаНДС
         title: Ставка НДС
         titles:
-          en: VAT rate
-          de: USt.-Satz
-          sr: Стопа ПДВ
           az: ƏDV dərəcəsi
+          de: USt.-Satz
+          en: VAT rate
           es: Tasa IVA
           fr: Taux TVA
           hy: ԱԱՀ տոկոսադրույք
@@ -306,18 +277,18 @@ tableparts:
           kk: ҚҚС мөлшері
           pt: Taxa IVA
           ro: Cotă TVA
+          sr: Стопа ПДВ
           tr: KDV oranı
           uk: Ставка ПДВ
           uz: QQS stavkasi
           zh: 增值税率
+        type: reference:СтавкаНДС
       - name: СуммаНДС
-        type: number
         title: Сумма НДС
         titles:
-          en: VAT amount
-          de: USt.-Betrag
-          sr: Износ ПДВ
           az: ƏDV məbləği
+          de: USt.-Betrag
+          en: VAT amount
           es: IVA importe
           fr: Montant TVA
           hy: ԱԱՀ գումարի
@@ -325,18 +296,18 @@ tableparts:
           kk: ҚҚС сомасы
           pt: Valor IVA
           ro: Sumă TVA
+          sr: Износ ПДВ
           tr: KDV tutarı
           uk: Сума ПДВ
           uz: QQS miqdori
           zh: 增值税额
-      - name: Сумма
         type: number
+      - name: Сумма
         title: Сумма
         titles:
-          en: Amount
-          de: Betrag
-          sr: Износ
           az: Məbləğ
+          de: Betrag
+          en: Amount
           es: Importe
           fr: Montant
           hy: Գումար
@@ -344,22 +315,59 @@ tableparts:
           kk: Сомасы
           pt: Valor
           ro: Sumă
+          sr: Износ
           tr: Tutar
           uk: Сума
           uz: Miqdor
           zh: 金额
+        type: number
       - name: ЗаказПокупателя
-        type: reference:ЗаказПокупателя
         title: Заказ покупателя
         titles:
-          en: Sales order
           de: Kundenauftrag
+          en: Sales order
           sr: Налог купца
+        type: reference:ЗаказПокупателя
       - name: Склад
-        type: reference:Склад
         title: Склад
         titles:
-          en: Warehouse
           de: Lager
+          en: Warehouse
           sr: Складиште
           uk: Склад
+        type: reference:Склад
+    name: Товары
+    title: Товары
+    titles:
+      az: Mallar
+      de: Artikel
+      en: Items
+      es: Artículos
+      fr: Articles
+      hy: Ապրանքներ
+      ka: საქონელი
+      kk: Тауарлар
+      pt: Artigos
+      ro: Articole
+      sr: Артикли
+      tr: Mallar
+      uk: Товари
+      uz: Tovarlar
+      zh: 商品
+title: Заказ поставщику
+titles:
+  az: Təchizatçı sifarişi
+  de: Lieferantenbestellung
+  en: Purchase order
+  es: Pedido proveedor
+  fr: Commande fournisseur
+  hy: Մատակարարի պատվեր
+  ka: მომწოდებლის შეკვეთა
+  kk: Жабдықтаушы тапсырысы
+  pt: Encomenda fornecedor
+  ro: Comandă furnizor
+  sr: Налог добављачу
+  tr: Tedarikçi siparişi
+  uk: Замовлення постачальнику
+  uz: Yetkazib beruvchi buyurtmasi
+  zh: 采购订单

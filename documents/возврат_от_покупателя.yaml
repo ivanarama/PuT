@@ -1,86 +1,94 @@
+based_on:
+  - РеализацияТоваров
+fields:
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
+    type: string
+  - name: Номер
+    type: string
+  - name: Дата
+    type: date
+  - name: Организация
+    type: reference:Организация
+  - name: Покупатель
+    type: reference:Контрагент
+  - name: Склад
+    type: reference:Склад
+  - name: Основание
+    type: reference:РеализацияТоваров
+  - name: СпособУчетаНДС
+    type: enum:СпособУчетаНДС
+  - name: СуммаБезНДС
+    type: number
+  - name: СуммаНДС
+    type: number
+  - name: Сумма
+    type: number
 name: ВозвратОтПокупателя
+numerator:
+  length: 5
+  period: year
+  prefix: ВОЗ-
+posting: true
+tableparts:
+  - fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Количество
+        type: number(5,2)
+      - name: Цена
+        type: number
+      - name: СтавкаНДС
+        type: reference:СтавкаНДС
+      - name: СуммаНДС
+        type: number
+      - name: Сумма
+        type: number
+      - name: Склад
+        title: Склад
+        titles:
+          de: Lager
+          en: Warehouse
+          sr: Складиште
+          uk: Склад
+        type: reference:Склад
+    name: Товары
+    title: Товары
+    titles:
+      az: Mallar
+      de: Artikel
+      en: Items
+      es: Artículos
+      fr: Articles
+      hy: Ապրանքներ
+      ka: საქონელი
+      kk: Тауарлар
+      pt: Artigos
+      ro: Articole
+      sr: Артикли
+      tr: Mallar
+      uk: Товари
+      uz: Tovarlar
+      zh: 商品
 title: Возврат от покупателя
 titles:
-    az: Alıcıdan qaytarılma
-    de: Kundenrücksendung
-    en: Customer return
-    es: Devolución del cliente
-    fr: Retour client
-    hy: Հաճախորդի վերադարձ
-    ka: მომხმარებლის დაბრუნება
-    kk: Сатып алушыдан қайтару
-    pt: Devolução do cliente
-    ro: Retur client
-    sr: Повраћај од купца
-    tr: Müşteri iadesi
-    uk: Повернення від покупця
-    uz: Xaridordan qaytarish
-    zh: 客户退货
-posting: true
-based_on:
-    - РеализацияТоваров
-numerator:
-    prefix: ВОЗ-
-    length: 5
-    period: year
-fields:
-    - name: Номер
-      type: string
-    - name: Дата
-      type: date
-    - name: Организация
-      type: reference:Организация
-    - name: Покупатель
-      type: reference:Контрагент
-    - name: Склад
-      type: reference:Склад
-    - name: Основание
-      type: reference:РеализацияТоваров
-    - name: СпособУчетаНДС
-      type: enum:СпособУчетаНДС
-    - name: СуммаБезНДС
-      type: number
-    - name: СуммаНДС
-      type: number
-    - name: Сумма
-      type: number
-tableparts:
-    - name: Товары
-      title: Товары
-      titles:
-        az: Mallar
-        de: Artikel
-        en: Items
-        es: Artículos
-        fr: Articles
-        hy: Ապրանքներ
-        ka: საქონელი
-        kk: Тауарлар
-        pt: Artigos
-        ro: Articole
-        sr: Артикли
-        tr: Mallar
-        uk: Товари
-        uz: Tovarlar
-        zh: 商品
-      fields:
-        - name: Номенклатура
-          type: reference:Номенклатура
-        - name: Количество
-          type: number(5,2)
-        - name: Цена
-          type: number
-        - name: СтавкаНДС
-          type: reference:СтавкаНДС
-        - name: СуммаНДС
-          type: number
-        - name: Сумма
-          type: number
-        - name: Склад
-          type: reference:Склад
-          title: Склад
-          titles:
-            en: Warehouse
-            de: Lager
-            sr: Складиште
-            uk: Склад
+  az: Alıcıdan qaytarılma
+  de: Kundenrücksendung
+  en: Customer return
+  es: Devolución del cliente
+  fr: Retour client
+  hy: Հաճախորդի վերադարձ
+  ka: მომხმარებლის დაბრუნება
+  kk: Сатып алушыдан қайтару
+  pt: Devolução do cliente
+  ro: Retur client
+  sr: Повраћај од купца
+  tr: Müşteri iadesi
+  uk: Повернення від покупця
+  uz: Xaridordan qaytarish
+  zh: 客户退货

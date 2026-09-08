@@ -1,35 +1,18 @@
-name: РасходныйКассовыйОрдер
-title: Расходный кассовый ордер
-titles:
-  en: Cash payment voucher
-  de: Kassenausgangsbeleg
-  sr: Исплата из касе
-  az: Xərcləmə kassa orderi
-  es: Orden de pago de caja
-  fr: Bon de caisse de sortie
-  hy: Ծախսային կանխիկ օրդեր
-  ka: გასავლის სალარო ორდერი
-  kk: Шығыс касса ордері
-  pt: Ordem de pagamento de caixa
-  ro: Ordin de casă ieșire
-  tr: Çikan tahsilat makbuzu
-  uk: Видатковий касовий ордер
-  uz: Chiqish kassa ordeni
-  zh: 付款凭证
-posting: true
-numerator:
-  prefix: "РКО-"
-  length: 5
-  period: year
 fields:
-  - name: Номер
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Номер
     title: Номер
     titles:
-      en: Number
-      de: Nummer
-      sr: Број
       az: Nömrə
+      de: Nummer
+      en: Number
       es: Número
       fr: Numéro
       hy: Համար
@@ -37,18 +20,18 @@ fields:
       kk: Нөмір
       pt: Número
       ro: Număr
+      sr: Број
       tr: Numara
       uk: Номер
       uz: Raqam
       zh: 编号
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
-      de: Datum
-      sr: Датум
       az: Tarix
+      de: Datum
+      en: Date
       es: Fecha
       fr: Date
       hy: Ամսաթիվ
@@ -56,18 +39,18 @@ fields:
       kk: Күні
       pt: Data
       ro: Dată
+      sr: Датум
       tr: Tarih
       uk: Дата
       uz: Sana
       zh: 日期
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
-      de: Organisation
-      sr: Организација
       az: Təşkilat
+      de: Organisation
+      en: Organization
       es: Organización
       fr: Organisation
       hy: Կազմակերպություն
@@ -75,18 +58,18 @@ fields:
       kk: Ұйым
       pt: Organização
       ro: Organizație
+      sr: Организација
       tr: Kuruluş
       uk: Організація
       uz: Tashkilot
       zh: 组织
+    type: reference:Организация
   - name: Касса
-    type: reference:Касса
     title: Касса
     titles:
-      en: Cash desk
-      de: Kasse
-      sr: Каса
       az: Kassa
+      de: Kasse
+      en: Cash desk
       es: Caja
       fr: Caisse
       hy: Դրամարկղի
@@ -94,18 +77,18 @@ fields:
       kk: Касса
       pt: Caixa
       ro: Casier
+      sr: Каса
       tr: Kasa
       uk: Каса
       uz: Kassa
       zh: 收银
+    type: reference:Касса
   - name: Контрагент
-    type: reference:Контрагент
     title: Контрагент
     titles:
-      en: Counterparty
-      de: Geschäftspartner
-      sr: Контрагент
       az: Əks-tərəf
+      de: Geschäftspartner
+      en: Counterparty
       es: Contraparte
       fr: Counterpartie
       hy: Գործընկեր
@@ -113,18 +96,18 @@ fields:
       kk: Контрагент
       pt: Contraparte
       ro: Contraparte
+      sr: Контрагент
       tr: Karşı taraf
       uk: Контрагент
       uz: Kontragent
       zh: 往来单位
+    type: reference:Контрагент
   - name: ДокументРеализации
-    type: reference:РеализацияТоваров
     title: Документ реализации
     titles:
-      en: Sales document
-      de: Verkaufsbeleg
-      sr: Продajни документ
       az: Satış sənədi
+      de: Verkaufsbeleg
+      en: Sales document
       es: Documento venta
       fr: Document vente
       hy: Վաճառքի փաստաթուղթ
@@ -132,18 +115,18 @@ fields:
       kk: Сату құжаты
       pt: Documento venda
       ro: Document vânzare
+      sr: Продajни документ
       tr: Satış belgesi
       uk: Документ реалізації
       uz: Sotuv hujjati
       zh: 销售单据
+    type: reference:РеализацияТоваров
   - name: ДокументПоступления
-    type: reference:ПоступлениеТоваров
     title: Документ поступления
     titles:
-      en: Receipt document
-      de: Eingangsbeleg
-      sr: Пријемни документ
       az: Qəbul sənədi
+      de: Eingangsbeleg
+      en: Receipt document
       es: Documento compra
       fr: Document achat
       hy: Մուտքի փաստաթուղթ
@@ -151,18 +134,18 @@ fields:
       kk: Кіріс құжаты
       pt: Documento compra
       ro: Document achiziție
+      sr: Пријемни документ
       tr: Giriş belgesi
       uk: Документ надходження
       uz: Qabul qilish hujjati
       zh: 采购单据
+    type: reference:ПоступлениеТоваров
   - name: Основание
-    type: string
     title: Основание
     titles:
-      en: Base document
-      de: Beleggrundlage
-      sr: Основни документ
       az: Əsas
+      de: Beleggrundlage
+      en: Base document
       es: Base
       fr: Base
       hy: Հիմք
@@ -170,18 +153,18 @@ fields:
       kk: Негіздеме
       pt: Base
       ro: Bază
+      sr: Основни документ
       tr: Dayanak
       uk: Підстава
       uz: Asos
       zh: 依据
+    type: string
   - name: Сумма
-    type: number
     title: Сумма
     titles:
-      en: Amount
-      de: Betrag
-      sr: Износ
       az: Məbləğ
+      de: Betrag
+      en: Amount
       es: Importe
       fr: Montant
       hy: Գումար
@@ -189,7 +172,32 @@ fields:
       kk: Сомасы
       pt: Valor
       ro: Sumă
+      sr: Износ
       tr: Tutar
       uk: Сума
       uz: Miqdor
       zh: 金额
+    type: number
+name: РасходныйКассовыйОрдер
+numerator:
+  length: 5
+  period: year
+  prefix: "РКО-"
+posting: true
+title: Расходный кассовый ордер
+titles:
+  az: Xərcləmə kassa orderi
+  de: Kassenausgangsbeleg
+  en: Cash payment voucher
+  es: Orden de pago de caja
+  fr: Bon de caisse de sortie
+  hy: Ծախսային կանխիկ օրդեր
+  ka: გასავლის სალარო ორდერი
+  kk: Шығыс касса ордері
+  pt: Ordem de pagamento de caixa
+  ro: Ordin de casă ieșire
+  sr: Исплата из касе
+  tr: Çikan tahsilat makbuzu
+  uk: Видатковий касовий ордер
+  uz: Chiqish kassa ordeni
+  zh: 付款凭证
