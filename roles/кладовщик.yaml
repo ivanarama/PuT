@@ -16,6 +16,7 @@ permissions:
     СписаниеТоваров: [read, write, post, unpost]
     ОприходованиеТоваров: [read, write, post, unpost]
     ПеремещениеТоваров: [read, write, post, unpost]
+    ПересчетТоваров: [read, write]
     РеализацияТоваров: [read, write, post, unpost]
     СборкаТоваров: [read, write, post, unpost]
     РазборкаТоваров: [read, write, post, unpost]
