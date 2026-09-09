@@ -1,30 +1,10 @@
 name: ОплатыРеализаций
-title: Оплаты по реализациям
-titles:
-  en: Customer payments by sales
-  de: Kundenzahlungen je Verkauf
-  sr: Уплате од купаца по продаји
-  az: Satışlar üzrə müştəri ödənişləri
-  es: Pagos de clientes por ventas
-  fr: Paiements clients par vente
-  hy: Հաճախորդների վճարումներ ըստ վաճառքների
-  ka: მომხმარებლის გადახდები გაყიდვების მიხედვით
-  kk: Сатылымдар бойынша тұтынушы төлемдері
-  pt: Pagamentos de clientes por vendas
-  ro: Plăți clienți pe vânzări
-  tr: Satışlara göre müşteri ödemeleri
-  uk: Оплати за реалізаціями
-  uz: Sotuvlar bo'yicha mijoz to'lovlari
-  zh: 按销售的客户付款
 params:
-  - name: Контрагент
-    type: reference:Контрагент
-    label: Покупатель
+  - label: Покупатель
     labels:
-      en: Customer
-      de: Kunde
-      sr: Купац
       az: Əks-tərəf
+      de: Kunde
+      en: Customer
       es: Contraparte
       fr: Counterpartie
       hy: Գործընկեր
@@ -32,18 +12,18 @@ params:
       kk: Контрагент
       pt: Contraparte
       ro: Contraparte
+      sr: Купац
       tr: Karşı taraf
       uk: Контрагент
       uz: Kontragent
       zh: 往来单位
-  - name: НачалоПериода
-    type: date
-    label: С даты
+    name: Контрагент
+    type: reference:Контрагент
+  - label: С даты
     labels:
-      en: From date
-      de: Von Datum
-      sr: Од датума
       az: Başlanğıc
+      de: Von Datum
+      en: From date
       es: Inicio
       fr: Début
       hy: Սկիզբ
@@ -51,18 +31,18 @@ params:
       kk: Басы
       pt: Início
       ro: Început
+      sr: Од датума
       tr: Başlangıç
       uk: Початок
       uz: Boshlanish
       zh: 开始
-  - name: КонецПериода
+    name: НачалоПериода
     type: date
-    label: По дату
+  - label: По дату
     labels:
-      en: To date
-      de: Bis Datum
-      sr: До датума
       az: Son
+      de: Bis Datum
+      en: To date
       es: Fin
       fr: Fin
       hy: Վերջ
@@ -70,17 +50,32 @@ params:
       kk: Соңы
       pt: Fim
       ro: Sfârșit
+      sr: До датума
       tr: Bitiş
       uk: Кінець
       uz: Tugash
       zh: 结束
+    name: КонецПериода
+    type: date
+  - label: Просрочено на дату
+    labels:
+      de: Überfällig zum
+      en: Overdue as of
+    name: НаДату
+    type: date
 query: |
   ВЫБРАТЬ
     ДокументРеализации,
     Контрагент,
+    МАКСИМУМ(СрокОплаты) КАК СрокОплаты,
     СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Сумма ИНАЧЕ 0 КОНЕЦ) КАК Долг,
     СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ 0 КОНЕЦ) КАК Оплачено,
-    СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ) КАК Остаток
+    СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ) КАК Остаток,
+    ВЫБОР КОГДА &НаДату ЕСТЬ ПУСТО ТОГДА 0
+      ИНАЧЕ ВЫБОР КОГДА СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ) > 0
+        И МАКСИМУМ(СрокОплаты) ЕСТЬ НЕ ПУСТО И МАКСИМУМ(СрокОплаты) < &НаДату
+        ТОГДА СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ)
+        ИНАЧЕ 0 КОНЕЦ КАК Просрочено
   ИЗ РегистрНакопления.Взаиморасчеты
   ГДЕ ДокументРеализации ЕСТЬ НЕ ПУСТО
     И (&Контрагент ЕСТЬ ПУСТО ИЛИ Контрагент = &Контрагент)
@@ -88,3 +83,20 @@ query: |
     И (&КонецПериода ЕСТЬ ПУСТО ИЛИ period <= &КонецПериода)
   СГРУППИРОВАТЬ ПО ДокументРеализации, Контрагент
   УПОРЯДОЧИТЬ ПО Остаток УБЫВ
+title: Оплаты по реализациям
+titles:
+  az: Satışlar üzrə müştəri ödənişləri
+  de: Kundenzahlungen je Verkauf
+  en: Customer payments by sales
+  es: Pagos de clientes por ventas
+  fr: Paiements clients par vente
+  hy: Հաճախորդների վճարումներ ըստ վաճառքների
+  ka: მომხმარებლის გადახდები გაყიდვების მიხედვით
+  kk: Сатылымдар бойынша тұтынушы төлемдері
+  pt: Pagamentos de clientes por vendas
+  ro: Plăți clienți pe vânzări
+  sr: Уплате од купаца по продаји
+  tr: Satışlara göre müşteri ödemeleri
+  uk: Оплати за реалізаціями
+  uz: Sotuvlar bo'yicha mijoz to'lovlari
+  zh: 按销售的客户付款

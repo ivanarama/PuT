@@ -72,6 +72,14 @@ elements:
                   en: "Total"
                   ru: "Всего"
                   sr: "Укупно"
+              - data_path: Объект.СрокОплаты
+                kind: ПолеВвода
+                name: ПолеСрокОплаты
+                title:
+                  de: "Zahlungsziel"
+                  en: "Payment due"
+                  ru: "Срок оплаты"
+                  sr: "Rok plaćanja"
             kind: ГруппаФормы
             name: ГруппаИтоги
             title:

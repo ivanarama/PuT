@@ -1,30 +1,10 @@
 name: ОплатыПоступлений
-title: Оплаты поставщикам по поступлениям
-titles:
-  en: Supplier payments by receipts
-  de: Lieferantenzahlungen je Eingang
-  sr: Плаћања добављачима по пријемима
-  az: Qəbullar üzrə təchizatçılara ödənişlər
-  es: Pagos a proveedores por recibos
-  fr: Paiements fournisseurs par réception
-  hy: Մատակարարների վճարումներ ըստ մուտքերի
-  ka: მომწოდებლების გადახდები მიღებების მიხედვით
-  kk: Жеткізілімдер бойынша жеткізушілерге төлемдер
-  pt: Pagamentos a fornecedores por recebimentos
-  ro: Plăți furnizori pe recepții
-  tr: Teslimatlara göre tedarikçi ödemeleri
-  uk: Оплати постачальникам за надходженнями
-  uz: Yetkazib berishlar bo'yicha yetkazib beruvchilarga to'lovlar
-  zh: 按采购的供应商付款
 params:
-  - name: Контрагент
-    type: reference:Контрагент
-    label: Поставщик
+  - label: Поставщик
     labels:
-      en: Supplier
-      de: Lieferant
-      sr: Добављач
       az: Əks-tərəf
+      de: Lieferant
+      en: Supplier
       es: Contraparte
       fr: Counterpartie
       hy: Գործընկեր
@@ -32,18 +12,18 @@ params:
       kk: Контрагент
       pt: Contraparte
       ro: Contraparte
+      sr: Добављач
       tr: Karşı taraf
       uk: Контрагент
       uz: Kontragent
       zh: 往来单位
-  - name: НачалоПериода
-    type: date
-    label: С даты
+    name: Контрагент
+    type: reference:Контрагент
+  - label: С даты
     labels:
-      en: From date
-      de: Von Datum
-      sr: Од датума
       az: Başlanğıc
+      de: Von Datum
+      en: From date
       es: Inicio
       fr: Début
       hy: Սկիզբ
@@ -51,18 +31,18 @@ params:
       kk: Басы
       pt: Início
       ro: Început
+      sr: Од датума
       tr: Başlangıç
       uk: Початок
       uz: Boshlanish
       zh: 开始
-  - name: КонецПериода
+    name: НачалоПериода
     type: date
-    label: По дату
+  - label: По дату
     labels:
-      en: To date
-      de: Bis Datum
-      sr: До датума
       az: Son
+      de: Bis Datum
+      en: To date
       es: Fin
       fr: Fin
       hy: Վերջ
@@ -70,17 +50,32 @@ params:
       kk: Соңы
       pt: Fim
       ro: Sfârșit
+      sr: До датума
       tr: Bitiş
       uk: Кінець
       uz: Tugash
       zh: 结束
+    name: КонецПериода
+    type: date
+  - label: Просрочено на дату
+    labels:
+      de: Überfällig zum
+      en: Overdue as of
+    name: НаДату
+    type: date
 query: |
   ВЫБРАТЬ
     ДокументПоступления,
     Контрагент,
+    МАКСИМУМ(СрокОплаты) КАК СрокОплаты,
     СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ 0 КОНЕЦ) КАК Долг,
     СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Сумма ИНАЧЕ 0 КОНЕЦ) КАК Оплачено,
-    СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ) КАК Остаток
+    СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ) КАК Остаток,
+    ВЫБОР КОГДА &НаДату ЕСТЬ ПУСТО ТОГДА 0
+      ИНАЧЕ ВЫБОР КОГДА СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ) > 0
+        И МАКСИМУМ(СрокОплаты) ЕСТЬ НЕ ПУСТО И МАКСИМУМ(СрокОплаты) < &НаДату
+        ТОГДА СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ)
+        ИНАЧЕ 0 КОНЕЦ КАК Просрочено
   ИЗ РегистрНакопления.Взаиморасчеты
   ГДЕ ДокументПоступления ЕСТЬ НЕ ПУСТО
     И (&Контрагент ЕСТЬ ПУСТО ИЛИ Контрагент = &Контрагент)
@@ -88,3 +83,20 @@ query: |
     И (&КонецПериода ЕСТЬ ПУСТО ИЛИ period <= &КонецПериода)
   СГРУППИРОВАТЬ ПО ДокументПоступления, Контрагент
   УПОРЯДОЧИТЬ ПО Остаток УБЫВ
+title: Оплаты поставщикам по поступлениям
+titles:
+  az: Qəbullar üzrə təchizatçılara ödənişlər
+  de: Lieferantenzahlungen je Eingang
+  en: Supplier payments by receipts
+  es: Pagos a proveedores por recibos
+  fr: Paiements fournisseurs par réception
+  hy: Մատակարարների վճարումներ ըստ մուտքերի
+  ka: მომწოდებლების გადახდები მიღებების მიხედვით
+  kk: Жеткізілімдер бойынша жеткізушілерге төлемдер
+  pt: Pagamentos a fornecedores por recebimentos
+  ro: Plăți furnizori pe recepții
+  sr: Плаћања добављачима по пријемима
+  tr: Teslimatlara göre tedarikçi ödemeleri
+  uk: Оплати постачальникам за надходженнями
+  uz: Yetkazib berishlar bo'yicha yetkazib beruvchilarga to'lovlar
+  zh: 按采购的供应商付款
