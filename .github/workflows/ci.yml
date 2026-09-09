@@ -38,3 +38,6 @@ jobs:
         run: |
           onebase migrate --project . --sqlite ci_demo.db
           onebase procrun --project . --sqlite ci_demo.db --proc ЗаполнитьТестовуюБазу
+
+      - name: Run scenario tests (суммы ЭДО/проведения/идемпотентность)
+        run: bash scripts/scenario_tests.sh
