@@ -36,4 +36,4 @@ params:
       uk: "Очистити документи перед завантаженням"
       uz: "Yuklashdan oldin hujjatlarni tozalash"
       zh: "加载前清除文档"
-    default: true
+    default: false
