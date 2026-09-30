@@ -102,6 +102,13 @@ fields:
       uz: Sabab
       zh: 原因
     type: string
+  - name: Пересчет
+    title: Пересчёт товаров
+    titles:
+      de: Inventurauszählung
+      en: Stock recount
+      uk: Перерахунок товарів
+    type: reference:ПересчетТоваров
   - name: Сумма
     title: Сумма
     titles:
