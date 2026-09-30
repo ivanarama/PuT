@@ -44,3 +44,6 @@ jobs:
       # Каждый тест выполняется в своей транзакции с откатом.
       - name: Run configuration tests
         run: onebase test --project . --sqlite ci_demo.db
+
+      - name: Run scenario tests (суммы ЭДО/проведения/идемпотентность)
+        run: bash scripts/scenario_tests.sh
