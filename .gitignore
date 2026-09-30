@@ -28,3 +28,8 @@ uploads/
 # Сгенерированные демо-картинки номенклатуры (генератор — scripts/gen_demo_images.go;
 # base64 уже встроен в src/заполнитьтестовуюбазу.proc.os)
 scripts/demo_images/
+
+# Служебные файлы локальных прогонов: блокировка базы рядом с ней и временные
+# базы сценарных тестов (scripts/scenario_tests.sh).
+*.onebase.lock
+.put_ci_*
