@@ -1,89 +1,10 @@
-name: Взаиморасчеты
-title: Взаиморасчёты
-titles:
-  en: Accounts receivable / payable
-  de: Verrechnungskonten
-  sr: Међусобна обрачуна
-  az: Qarşılıqlı hesablaşma
-  es: Cuentas por cobrar / pagar
-  fr: Comptes clients / fournisseurs
-  hy: Փոխհաշվարկ
-  ka: ურთიერთგადახდები
-  kk: Өзара есептесу
-  pt: Contas a receber / pagar
-  ro: Conturi de creanțe / datorii
-  tr: Karşılıklı hesaplaşma
-  uk: Взаєморозрахунки
-  uz: O'zaro hisob-kitob
-  zh: 往来结算
-dimensions:
-  - name: Контрагент
-    type: reference:Контрагент
-    title: Контрагент
-    titles:
-      en: Counterparty
-      de: Geschäftspartner
-      sr: Контрагент
-      az: Əks-tərəf
-      es: Contraparte
-      fr: Counterpartie
-      hy: Գործընկեր
-      ka: კონტრაგენტი
-      kk: Контрагент
-      pt: Contraparte
-      ro: Contraparte
-      tr: Karşı taraf
-      uk: Контрагент
-      uz: Kontragent
-      zh: 往来单位
-  - name: Организация
-    type: reference:Организация
-    title: Организация
-    titles:
-      en: Organization
-      de: Organisation
-      sr: Организација
-      az: Təşkilat
-      es: Organización
-      fr: Organisation
-      hy: Կազմակերպություն
-      ka: ორგანიზაცია
-      kk: Ұйым
-      pt: Organização
-      ro: Organizație
-      tr: Kuruluş
-      uk: Організація
-      uz: Tashkilot
-      zh: 组织
-resources:
-  - name: Сумма
-    type: number
-    title: Сумма
-    titles:
-      en: Amount
-      de: Betrag
-      sr: Износ
-      az: Məbləğ
-      es: Importe
-      fr: Montant
-      hy: Գումար
-      ka: თანხა
-      kk: Сомасы
-      pt: Valor
-      ro: Sumă
-      tr: Tutar
-      uk: Сума
-      uz: Miqdor
-      zh: 金额
 attributes:
   - name: ТипКонтрагента
-    type: enum:ВидКонтрагента
     title: Тип контрагента
     titles:
-      en: Counterparty type
-      de: Geschäftspartnertyp
-      sr: Врста контрагента
       az: Əks-tərəf növü
+      de: Geschäftspartnertyp
+      en: Counterparty type
       es: Tipo contraparte
       fr: Type contrepartie
       hy: Գործընկերի տեսակ
@@ -91,18 +12,18 @@ attributes:
       kk: Контрагент түрі
       pt: Tipo contraparte
       ro: Tip contraparte
+      sr: Врста контрагента
       tr: Karşı taraf türü
       uk: Тип контрагента
       uz: Kontragent turi
       zh: 往来单位类型
+    type: enum:ВидКонтрагента
   - name: ДокументРеализации
-    type: reference:РеализацияТоваров
     title: Документ реализации
     titles:
-      en: Sales document
-      de: Verkaufsbeleg
-      sr: Продајни документ
       az: Satış sənədi
+      de: Verkaufsbeleg
+      en: Sales document
       es: Documento venta
       fr: Document vente
       hy: Վաճառքի փաստաթուղթ
@@ -110,18 +31,26 @@ attributes:
       kk: Сату құжаты
       pt: Documento venda
       ro: Document vânzare
+      sr: Продајни документ
       tr: Satış belgesi
       uk: Документ реалізації
       uz: Sotuv hujjati
       zh: 销售单据
+    type: reference:РеализацияТоваров
+  - name: СрокОплаты
+    title: Срок оплаты
+    titles:
+      de: Zahlungsziel
+      en: Payment due date
+      sr: Rok plaćanja
+      uk: Строк оплати
+    type: date
   - name: ДокументПоступления
-    type: reference:ПоступлениеТоваров
     title: Документ поступления
     titles:
-      en: Purchase document
-      de: Einkaufsbeleg
-      sr: Документ набавке
       az: Qəbul sənədi
+      de: Einkaufsbeleg
+      en: Purchase document
       es: Documento compra
       fr: Document achat
       hy: Մուտքի փաստաթուղթ
@@ -129,7 +58,86 @@ attributes:
       kk: Кіріс құжаты
       pt: Documento compra
       ro: Document achiziție
+      sr: Документ набавке
       tr: Giriş belgesi
       uk: Документ надходження
       uz: Qabul qilish hujjati
       zh: 采购单据
+    type: reference:ПоступлениеТоваров
+dimensions:
+  - name: Контрагент
+    title: Контрагент
+    titles:
+      az: Əks-tərəf
+      de: Geschäftspartner
+      en: Counterparty
+      es: Contraparte
+      fr: Counterpartie
+      hy: Գործընկեր
+      ka: კონტრაგენტი
+      kk: Контрагент
+      pt: Contraparte
+      ro: Contraparte
+      sr: Контрагент
+      tr: Karşı taraf
+      uk: Контрагент
+      uz: Kontragent
+      zh: 往来单位
+    type: reference:Контрагент
+  - name: Организация
+    title: Организация
+    titles:
+      az: Təşkilat
+      de: Organisation
+      en: Organization
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      sr: Организација
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
+    type: reference:Организация
+name: Взаиморасчеты
+resources:
+  - name: Сумма
+    title: Сумма
+    titles:
+      az: Məbləğ
+      de: Betrag
+      en: Amount
+      es: Importe
+      fr: Montant
+      hy: Գումար
+      ka: თანხა
+      kk: Сомасы
+      pt: Valor
+      ro: Sumă
+      sr: Износ
+      tr: Tutar
+      uk: Сума
+      uz: Miqdor
+      zh: 金额
+    type: number
+title: Взаиморасчёты
+titles:
+  az: Qarşılıqlı hesablaşma
+  de: Verrechnungskonten
+  en: Accounts receivable / payable
+  es: Cuentas por cobrar / pagar
+  fr: Comptes clients / fournisseurs
+  hy: Փոխհաշվարկ
+  ka: ურთიერთგადახდები
+  kk: Өзара есептесу
+  pt: Contas a receber / pagar
+  ro: Conturi de creanțe / datorii
+  sr: Међусобна обрачуна
+  tr: Karşılıklı hesaplaşma
+  uk: Взаєморозрахунки
+  uz: O'zaro hisob-kitob
+  zh: 往来结算
