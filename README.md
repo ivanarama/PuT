@@ -15,7 +15,10 @@ TRIAGE → FIX → REVIEW → MERGE. Полномочия, метки и диа�
 Обычные REVIEW и готовые CLEAN MERGE проходят через общий `pipelinectl`
 PromptPilot: Claude и Codex получают один JSON-контракт и lease на точный HEAD.
 Base-sync, carry, конфликт и recovery автоматически возвращаются к полной
-процедуре skills. PuT-серии при этом остаются выключенными, пока их явно не
+процедуре skills. Перед merge CLI сохраняет crash-safe intent; если процесс
+оборвался после слияния, следующий запуск выполняет только cleanup закрытых
+issues и служебных меток, не повторяя merge. PuT-серии при этом остаются
+выключенными, пока их явно не
 возобновят в PromptPilot.
 
 ---
