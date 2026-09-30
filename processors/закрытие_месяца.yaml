@@ -18,3 +18,8 @@ params:
     label: "Дата окончания"
     labels:
       en: End Date
+  - name: УстановитьДатуЗапрета
+    type: bool
+    label: "Закрыть период (установить дату запрета по дату окончания)"
+    labels:
+      en: Close the period (set the change lock date to the end date)
