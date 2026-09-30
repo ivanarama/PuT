@@ -1,0 +1,73 @@
+name: ПересчетТоваров
+title: Пересчёт товаров
+titles:
+  en: Stock recount
+  de: Inventurauszählung
+  sr: Пребројавање робе
+posting: false
+numerator:
+  prefix: "ПЕРС-"
+  length: 5
+  period: year
+fields:
+  - name: Идентификатор1С
+    type: string
+    title: Идентификатор 1С
+    titles:
+      en: 1C identifier
+      de: 1C-Kennung
+  - name: Номер
+    type: string
+    title: Номер
+    titles:
+      en: Number
+      de: Nummer
+  - name: Дата
+    type: date
+    title: Дата
+    titles:
+      en: Date
+      de: Datum
+  - name: Организация
+    type: reference:Организация
+    title: Организация
+    titles:
+      en: Organization
+      de: Organisation
+  - name: Склад
+    type: reference:Склад
+    title: Склад
+    titles:
+      en: Warehouse
+      de: Lager
+  - name: Комментарий
+    type: string
+    title: Комментарий
+    titles:
+      en: Comment
+      de: Kommentar
+tableparts:
+  - name: Товары
+    title: Товары
+    titles:
+      en: Items
+      de: Artikel
+    fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+        title: Номенклатура
+        titles:
+          en: Item
+          de: Artikel
+      - name: КоличествоУчёт
+        type: number
+        title: Учтено
+        titles:
+          en: Book qty
+          de: Buchbestand
+      - name: КоличествоФакт
+        type: number
+        title: Фактически
+        titles:
+          en: Counted qty
+          de: Gezählt

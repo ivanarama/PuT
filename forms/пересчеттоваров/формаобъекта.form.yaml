@@ -1,0 +1,104 @@
+schema: onebase.form/v1
+
+# Без объявления события обработчики модуля формы не вызываются: умолчания
+# организации и склада не подставлялись, проверки перед записью не работали.
+events:
+  ПередЗаписью: ПередЗаписьюФормы
+  ПриОткрытии: ПриОткрытииФормы
+form:
+  name: ФормаОбъекта
+  kind: object
+  entity: ПересчетТоваров
+  title:
+    ru: "Пересчёт товаров"
+    en: "Stock recount"
+  auto_save_settings: true
+  vertical_scroll: auto
+
+attributes:
+  - name: Объект
+    type: DocumentRef.ПересчетТоваров
+    save: true
+    main: true
+
+elements:
+  - kind: ГруппаФормы
+    name: ГруппаДействия
+    title:
+      ru: "Действия"
+      en: "Actions"
+    children:
+      - kind: Кнопка
+        name: КнопкаЗаполнить
+        title:
+          ru: "Заполнить по учётным остаткам"
+          en: "Fill from book stock"
+        events:
+          Нажатие: КнопкаЗаполнитьНажатие
+      - kind: Кнопка
+        name: КнопкаОформить
+        title:
+          ru: "Оформить излишки и недостачи"
+          en: "Create surplus/shortage docs"
+        events:
+          Нажатие: КнопкаОформитьНажатие
+
+  - kind: СтраницыФормы
+    name: ОсновныеЗакладки
+    children:
+
+      - kind: Страница
+        name: СтраницаОсновное
+        title:
+          ru: "Основное"
+          en: "General"
+        children:
+          - kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              ru: "Шапка документа"
+              en: "Header"
+            children:
+              - kind: ПолеВвода
+                name: ПолеНомер
+                title:
+                  ru: "Номер"
+                  en: "Number"
+                data_path: Объект.Номер
+                readonly: true
+              - kind: ПолеВвода
+                name: ПолеДата
+                title:
+                  ru: "Дата"
+                  en: "Date"
+                data_path: Объект.Дата
+                required: true
+              - kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  ru: "Организация"
+                  en: "Organization"
+                data_path: Объект.Организация
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеСклад
+                title:
+                  ru: "Склад"
+                  en: "Warehouse"
+                data_path: Объект.Склад
+                required: true
+                choice: true
+              - kind: ПолеВвода
+                name: ПолеКомментарий
+                title:
+                  ru: "Комментарий"
+                  en: "Comment"
+                data_path: Объект.Комментарий
+
+          - kind: ТабличнаяЧасть
+            name: ТабТовары
+            title:
+              ru: "Результаты пересчёта"
+              en: "Recount results"
+            data_path: Объект.Товары
+            use_grid: true

@@ -21,6 +21,7 @@ permissions:
     ПоступлениеТоваров: [read, write, post, unpost]
     СписаниеТоваров: [read, write, post, unpost]
     ОприходованиеТоваров: [read, write, post, unpost]
+    ПересчетТоваров: [read, write]
     ПеремещениеТоваров: [read, write, post, unpost]
     ПриходныйКассовыйОрдер: [read, write, post, unpost]
     РасходныйКассовыйОрдер: [read, write, post, unpost]
