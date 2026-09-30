@@ -1,14 +1,6 @@
 based_on:
   - ЗаказПоставщику
 fields:
-  - name: СрокОплаты
-    title: Срок оплаты
-    titles:
-      de: Zahlungsziel
-      en: Payment due date
-      sr: Rok plaćanja
-      uk: Строк оплати
-    type: date
   - name: Идентификатор1С
     title: Идентификатор 1С
     titles:
@@ -93,6 +85,14 @@ fields:
       uz: Yetkazib beruvchi
       zh: 供应商
     type: reference:Контрагент
+  - name: СрокОплаты
+    title: Срок оплаты
+    titles:
+      de: Zahlungsziel
+      en: Payment due date
+      sr: Rok plaćanja
+      uk: Строк оплати
+    type: date
   - name: Склад
     title: Склад
     titles:
