@@ -1,30 +1,18 @@
-name: Организация
-title: Организация
-titles:
-  en: Organization
-  de: Unternehmen
-  sr: Организација
-  az: Təşkilat
-  es: Organización
-  fr: Organisation
-  hy: Կազմակերպություն
-  ka: ორგანიზაცია
-  kk: Ұйым
-  pt: Organização
-  ro: Organizație
-  tr: Organizasyon
-  uk: Організація
-  uz: Tashkilot
-  zh: 组织
 fields:
-  - name: Наименование
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Наименование
     title: Наименование
     titles:
-      en: Name
-      de: Name
-      sr: Назив
       az: Adlandırma
+      de: Name
+      en: Name
       es: Nombre
       fr: Nom
       hy: Անվանում
@@ -32,18 +20,18 @@ fields:
       kk: Атауы
       pt: Nome
       ro: Denumire
+      sr: Назив
       tr: Ad
       uk: Найменування
       uz: Nomi
       zh: 名称
-  - name: ПолноеНаименование
     type: string
+  - name: ПолноеНаименование
     title: Полное наименование
     titles:
-      en: Full name
-      de: Vollständiger Name
-      sr: Пуни назив
       az: Tam adı
+      de: Vollständiger Name
+      en: Full name
       es: Nombre completo
       fr: Nom complet
       hy: Ամբողջական անվանում
@@ -51,18 +39,18 @@ fields:
       kk: Толық атауы
       pt: Nome completo
       ro: Denumire completă
+      sr: Пуни назив
       tr: Tam ad
       uk: Повне найменування
       uz: To'liq nomi
       zh: 全称
-  - name: ИНН
     type: string
+  - name: ИНН
     title: ИНН
     titles:
-      en: Tax ID
-      de: Steuernummer
-      sr: ПИБ
       az: VÖEN
+      de: Steuernummer
+      en: Tax ID
       es: NIF
       fr: SIRET
       hy: ՀՎՀՀ
@@ -70,18 +58,18 @@ fields:
       kk: ЖСН
       pt: NIF
       ro: CUI
+      sr: ПИБ
       tr: Vergi no
       uk: РНОКПП
       uz: STIR
       zh: 税号
-  - name: КПП
     type: string
+  - name: КПП
     title: КПП
     titles:
-      en: KPP
-      de: KPP
-      sr: КПП
       az: KPP
+      de: KPP
+      en: KPP
       es: KPP
       fr: KPP
       hy: ԿՊՊ
@@ -89,18 +77,18 @@ fields:
       kk: КПП
       pt: KPP
       ro: KPP
+      sr: КПП
       tr: KPP
       uk: КПП
       uz: KPP
       zh: KPP
-  - name: ОГРН
     type: string
+  - name: ОГРН
     title: ОГРН
     titles:
-      en: OGRN
-      de: OGRN
-      sr: ОГРН
       az: VÖEN
+      de: OGRN
+      en: OGRN
       es: OGRN
       fr: OGRN
       hy: ՊՏՀ
@@ -108,18 +96,18 @@ fields:
       kk: ОЖСН
       pt: OGRN
       ro: OGRN
+      sr: ОГРН
       tr: OGRN
       uk: ОГРН
       uz: OGRN
       zh: OGRN
-  - name: ОКПО
     type: string
+  - name: ОКПО
     title: ОКПО
     titles:
-      en: OKPO
-      de: OKPO
-      sr: ОКПО
       az: OKPO
+      de: OKPO
+      en: OKPO
       es: OKPO
       fr: OKPO
       hy: ОКПО
@@ -127,18 +115,18 @@ fields:
       kk: ОКПО
       pt: OKPO
       ro: OKPO
+      sr: ОКПО
       tr: OKPO
       uk: ОКПО
       uz: OKPO
       zh: OKPO
-  - name: ЮридическийАдрес
     type: string
+  - name: ЮридическийАдрес
     title: Юридический адрес
     titles:
-      en: Legal address
-      de: Rechtsadresse
-      sr: Правна адреса
       az: Hüquqi ünvan
+      de: Rechtsadresse
+      en: Legal address
       es: Dirección legal
       fr: Adresse légale
       hy: Իրավական հասցե
@@ -146,18 +134,18 @@ fields:
       kk: Заңды мекенжай
       pt: Endereço legal
       ro: Adresă legală
+      sr: Правна адреса
       tr: Yasal adres
       uk: Юридична адреса
       uz: Yuridik manzil
       zh: 法定地址
-  - name: ФактическийАдрес
     type: string
+  - name: ФактическийАдрес
     title: Фактический адрес
     titles:
-      en: Actual address
-      de: Tatsächliche Adresse
-      sr: Стварна адреса
       az: Faktiki ünvan
+      de: Tatsächliche Adresse
+      en: Actual address
       es: Dirección real
       fr: Adresse réelle
       hy: Փաստացի հասցե
@@ -165,18 +153,18 @@ fields:
       kk: Нақты мекенжай
       pt: Endereço real
       ro: Adresă reală
+      sr: Стварна адреса
       tr: Fiili adres
       uk: Фактична адреса
       uz: Haqiqiy manzil
       zh: 实际地址
-  - name: Телефон
     type: string
+  - name: Телефон
     title: Телефон
     titles:
-      en: Phone
-      de: Telefon
-      sr: Телефон
       az: Telefon
+      de: Telefon
+      en: Phone
       es: Teléfono
       fr: Tél
       hy: Հեռախոս
@@ -184,18 +172,18 @@ fields:
       kk: Телефон
       pt: Telefone
       ro: Telefon
+      sr: Телефон
       tr: Telefon
       uk: Телефон
       uz: Telefon
       zh: 电话
-  - name: Email
     type: string
+  - name: Email
     title: Email
     titles:
-      en: Email
-      de: E-Mail
-      sr: Е-пошта
       az: E-poçt
+      de: E-Mail
+      en: Email
       es: Correo
       fr: Courriel
       hy: Էլ. փոստ
@@ -203,18 +191,18 @@ fields:
       kk: Email
       pt: Email
       ro: Email
+      sr: Е-пошта
       tr: E-posta
       uk: Email
       uz: Email
       zh: 邮箱
-  - name: РасчётныйСчёт
     type: string
+  - name: РасчётныйСчёт
     title: Расчётный счёт
     titles:
-      en: Settlement account
-      de: Girokonto
-      sr: Текући рачун
       az: Hesablaşma hesabı
+      de: Girokonto
+      en: Settlement account
       es: Cuenta bancaria
       fr: Compte bancaire
       hy: Հաշվարկային հաշիվ
@@ -222,18 +210,18 @@ fields:
       kk: Банк шоты
       pt: Conta bancária
       ro: Contă bancară
+      sr: Текући рачун
       tr: Banka hesabı
       uk: Розрахунковий рахунок
       uz: Hisoblash hisobi
       zh: 银行账户
-  - name: НаименованиеБанка
     type: string
+  - name: НаименованиеБанка
     title: Наименование банка
     titles:
-      en: Bank name
-      de: Bankname
-      sr: Назив банке
       az: Bank adı
+      de: Bankname
+      en: Bank name
       es: Nombre banco
       fr: Nom banque
       hy: Բանկի անվանում
@@ -241,18 +229,18 @@ fields:
       kk: Банк атауы
       pt: Nome banco
       ro: Nume bancă
+      sr: Назив банке
       tr: Banka adı
       uk: Найменування банку
       uz: Bank nomi
       zh: 银行名称
-  - name: БИК
     type: string
+  - name: БИК
     title: БИК
     titles:
-      en: BIK
-      de: BIK
-      sr: БИК
       az: BIK
+      de: BIK
+      en: BIK
       es: BIC
       fr: BIC
       hy: ԲԻԿ
@@ -260,18 +248,18 @@ fields:
       kk: БИК
       pt: BIC
       ro: BIC
+      sr: БИК
       tr: BİК
       uk: БІК
       uz: BIK
       zh: BIC
-  - name: КорреспондентскийСчёт
     type: string
+  - name: КорреспондентскийСчёт
     title: Корреспондентский счёт
     titles:
-      en: Correspondent account
-      de: Korrespondentenkonto
-      sr: Комерцијални рачун
       az: Korrespondent hesabı
+      de: Korrespondentenkonto
+      en: Correspondent account
       es: Cuenta corresp.
       fr: Compte corresp.
       hy: Միջբանկային հաշիվ
@@ -279,18 +267,18 @@ fields:
       kk: Корр. шот
       pt: Conta corresp.
       ro: Contă coresp.
+      sr: Комерцијални рачун
       tr: Karsılıklı hesap
       uk: Кореспондентський рахунок
       uz: Korrespondent hisobi
       zh: 联行账户
-  - name: Руководитель
     type: string
+  - name: Руководитель
     title: ФИО руководителя
     titles:
-      en: Director's full name
-      de: Name des Geschäftsführers
-      sr: Име и презиме директора
       az: Direktorun tam adı
+      de: Name des Geschäftsführers
+      en: Director's full name
       es: Nombre completo del director
       fr: Nom complet du directeur
       hy: Տնօրենի ամբողջական անունը
@@ -298,19 +286,19 @@ fields:
       kk: Директордың толық аты
       pt: Nome completo do diretor
       ro: Numele complet al directorului
+      sr: Име и презиме директора
       tr: Müdürün tam adı
       uk: ПІБ керівника
       uz: Direktorning to'liq nomi
       zh: 负责人姓名
-  - name: ДолжностьРуководителя
     type: string
-    default: "Директор"
+  - default: "Директор"
+    name: ДолжностьРуководителя
     title: Должность руководителя
     titles:
-      en: Director's position
-      de: Position des Geschäftsführers
-      sr: Позиција директора
       az: Direktor vəzifəsi
+      de: Position des Geschäftsführers
+      en: Director's position
       es: Cargo del director
       fr: Poste du directeur
       hy: Տնօրենի պաշտոն
@@ -318,18 +306,18 @@ fields:
       kk: Директор лауазымы
       pt: Cargo do diretor
       ro: Funcția directorului
+      sr: Позиција директора
       tr: Müdür pozisyonu
       uk: Посада керівника
       uz: Direktor lavozimi
       zh: 负责人职务
-  - name: ГлавныйБухгалтер
     type: string
+  - name: ГлавныйБухгалтер
     title: ФИО главного бухгалтера
     titles:
-      en: Chief accountant's full name
-      de: Name des Hauptbuchhalters
-      sr: Име и презиме главног књиговође
       az: Baş mühasibin tam adı
+      de: Name des Hauptbuchhalters
+      en: Chief accountant's full name
       es: Nombre completo del contador jefe
       fr: Nom complet du comptable en chef
       hy: Գլխավոր հաշվապահի ամբողջական անունը
@@ -337,7 +325,27 @@ fields:
       kk: Бас бухгалтердың толық аты
       pt: Nome completo do contador-chefe
       ro: Numele complet al contabilului-șef
+      sr: Име и презиме главног књиговође
       tr: Baş muhasebecinin tam adı
       uk: ПІБ головного бухгалтера
       uz: Bosh buxgalterning to'liq nomi
       zh: 总会计师姓名
+    type: string
+name: Организация
+title: Организация
+titles:
+  az: Təşkilat
+  de: Unternehmen
+  en: Organization
+  es: Organización
+  fr: Organisation
+  hy: Կազմակերպություն
+  ka: ორგანიზაცია
+  kk: Ұйым
+  pt: Organização
+  ro: Organizație
+  sr: Организација
+  tr: Organizasyon
+  uk: Організація
+  uz: Tashkilot
+  zh: 组织

@@ -1,30 +1,18 @@
-name: Склад
-title: Склад
-titles:
-  en: Warehouse
-  de: Lager
-  sr: Магацин
-  az: Anbar
-  es: Almacén
-  fr: Entrepôt
-  hy: Պահեստ
-  ka: საწყობი
-  kk: Қойма
-  pt: Armazém
-  ro: Depozit
-  tr: Depo
-  uk: Склад
-  uz: Ombor
-  zh: 仓库
 fields:
-  - name: Наименование
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Наименование
     title: Наименование
     titles:
-      en: Name
-      de: Name
-      sr: Назив
       az: Adlandırma
+      de: Name
+      en: Name
       es: Nombre
       fr: Nom
       hy: Անվանում
@@ -32,7 +20,27 @@ fields:
       kk: Атауы
       pt: Nome
       ro: Denumire
+      sr: Назив
       tr: Ad
       uk: Найменування
       uz: Nomi
       zh: 名称
+    type: string
+name: Склад
+title: Склад
+titles:
+  az: Anbar
+  de: Lager
+  en: Warehouse
+  es: Almacén
+  fr: Entrepôt
+  hy: Պահեստ
+  ka: საწყობი
+  kk: Қойма
+  pt: Armazém
+  ro: Depozit
+  sr: Магацин
+  tr: Depo
+  uk: Склад
+  uz: Ombor
+  zh: 仓库

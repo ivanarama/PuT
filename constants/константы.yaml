@@ -1,12 +1,9 @@
 constants:
-  - name: НашаОрганизация
-    type: reference:Организация
-    label: Наша организация (по умолчанию)
+  - label: Наша организация (по умолчанию)
     labels:
-      en: Our organization (default)
-      de: Unsere Organisation (Standard)
-      sr: Наша организација (подразумевано)
       az: Bizim təşkilat (susmaya görə)
+      de: Unsere Organisation (Standard)
+      en: Our organization (default)
       es: Nuestra organización (predeterminado)
       fr: Notre organisation (par défaut)
       hy: Մեր կազմակերպությունը (լռելյայն)
@@ -14,18 +11,18 @@ constants:
       kk: Біздің ұйым (әдепкі)
       pt: Nossa organização (padrão)
       ro: Organizația noastră (implicit)
+      sr: Наша организација (подразумевано)
       tr: Kuruluşumuz (varsayılan)
       uk: Наша організація (за замовчуванням)
       uz: Bizning tashkilot (standart)
       zh: 我们的机构（默认）
-  - name: ДатаЗапретаРедактирования
-    type: date
-    label: Дата запрета редактирования
+    name: НашаОрганизация
+    type: reference:Организация
+  - label: Дата запрета редактирования
     labels:
-      en: Edit lock date
-      de: Bearbeitungssperrdatum
-      sr: Датум забране измене
       az: Redaktə qadağası tarixi
+      de: Bearbeitungssperrdatum
+      en: Edit lock date
       es: Fecha de bloqueo de edición
       fr: Date de blocage des modifications
       hy: Խմբագրման արգելքի ամսաթիվ
@@ -33,19 +30,19 @@ constants:
       kk: Өңдеуге тыйым салу күні
       pt: Data de bloqueio de edição
       ro: Dată interdicție de editare
+      sr: Датум забране измене
       tr: Düzenleme yasağı tarihi
       uk: Дата заборони редагування
       uz: Tahrirlash taqiqi sanasi
       zh: 编辑禁止日期
-  - name: КонтролироватьОстаткиПриРезерве
-    type: bool
-    default: false
+    name: ДатаЗапретаРедактирования
+    type: date
+  - default: false
     label: Контролировать остатки при резервировании
     labels:
-      en: Check stock when reserving
-      de: Bestand bei Reservierung prüfen
-      sr: Провери залихе при резервацији
       az: Rezervləşdirərkən qalığı yoxla
+      de: Bestand bei Reservierung prüfen
+      en: Check stock when reserving
       es: Controlar existencias al reservar
       fr: Contrôler le stock lors de la réservation
       hy: Ստուգել մնացորդը պահուստավորելիս
@@ -53,7 +50,19 @@ constants:
       kk: Резервтеу кезінде қалдықты бақылау
       pt: Verificar estoque ao reservar
       ro: Verifică stocul la rezervare
+      sr: Провери залихе при резервацији
       tr: Rezervasyonda stok kontrolü
       uk: Контролювати залишки при резервуванні
       uz: Rezervlashda qoldiqni nazorat qilish
       zh: 预留时检查库存
+    name: КонтролироватьОстаткиПриРезерве
+    type: bool
+  - default: false
+    label: Разрешить списание при нехватке остатков
+    labels:
+      de: Negative Bestände zulassen
+      en: Allow negative inventory
+      sr: Дозволи негативне залихе
+      uk: Дозволити від'ємні залишки
+    name: РазрешитьОтрицательныеОстатки
+    type: bool

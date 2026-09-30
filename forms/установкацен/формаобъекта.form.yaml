@@ -1,113 +1,105 @@
-schema: onebase.form/v1
-
-form:
-  name: ФормаОбъекта
-  kind: object
-  entity: УстановкаЦен
-  title:
-    ru: "Установка цен"
-    en: "Price update"
-    de: "Preisaktualisierung"
-    sr: "Утврђивање цена"
-  auto_save_settings: true
-  vertical_scroll: auto
-
 attributes:
-  - name: Объект
-    type: DocumentRef.УстановкаЦен
+  - main: true
+    name: Объект
     save: true
-    main: true
-
+    type: DocumentRef.УстановкаЦен
 elements:
-  - kind: СтраницыФормы
-    name: ОсновныеЗакладки
-    children:
-
-      - kind: Страница
-        name: СтраницаОсновное
-        title:
-          ru: "Основное"
-          en: "General"
-          de: "Allgemein"
-          sr: "Опште"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаШапка
-            title:
-              ru: "Шапка документа"
-              en: "Document header"
-              de: "Belegkopf"
-              sr: "Заглавље документа"
-            children:
-              - kind: ПолеВвода
-                name: ПолеНомер
-                title:
-                  ru: "Номер"
-                  en: "Number"
-                  de: "Nummer"
-                  sr: "Број"
-                data_path: Объект.Номер
-                readonly: true
+  - children:
+      - children:
+          - children:
+              - data_path: Объект.Номер
                 hint: "УЦ-NNNNN"
-              - kind: ПолеВвода
-                name: ПолеДата
+                kind: ПолеВвода
+                name: ПолеНомер
+                readonly: true
                 title:
-                  ru: "Дата"
-                  en: "Date"
-                  de: "Datum"
-                  sr: "Датум"
-                data_path: Объект.Дата
+                  de: "Nummer"
+                  en: "Number"
+                  ru: "Номер"
+                  sr: "Број"
+              - data_path: Объект.Дата
+                kind: ПолеВвода
+                name: ПолеДата
                 required: true
-                events:
-                  ПриИзменении: ДатаПриИзменении
-              - kind: ПолеВвода
+                title:
+                  de: "Datum"
+                  en: "Date"
+                  ru: "Дата"
+                  sr: "Датум"
+              - choice: true
+                data_path: Объект.Организация
+                kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  ru: "Организация"
-                  en: "Organization"
                   de: "Organisation"
+                  en: "Organization"
+                  ru: "Организация"
                   sr: "Организација"
-                data_path: Объект.Организация
-                choice: true
-              - kind: ПолеВвода
-                name: ПолеТипЦен
-                title:
-                  ru: "Тип цен"
-                  en: "Price type"
-                  de: "Preistyp"
-                  sr: "Тип цене"
+              - choice: true
                 data_path: Объект.ТипЦен
-                required: true
-                choice: true
                 hint: "Цены какого типа устанавливаются этим документом"
-
-          - kind: ГруппаФормы
-            name: ГруппаТабЧасть
+                kind: ПолеВвода
+                name: ПолеТипЦен
+                required: true
+                title:
+                  de: "Preistyp"
+                  en: "Price type"
+                  ru: "Тип цен"
+                  sr: "Тип цене"
+            kind: ГруппаФормы
+            name: ГруппаШапка
             title:
-              ru: "Цены номенклатуры"
-              en: "Item prices"
-              de: "Artikelpreise"
-              sr: "Цене артикала"
-            children:
-              - kind: ТабличнаяЧасть
+              de: "Belegkopf"
+              en: "Document header"
+              ru: "Шапка документа"
+              sr: "Заглавље документа"
+          - children:
+              - data_path: Объект.Цены
+                kind: ТабличнаяЧасть
                 name: ТабЦены
                 title:
-                  ru: "Цены"
-                  en: "Prices"
                   de: "Preise"
+                  en: "Prices"
+                  ru: "Цены"
                   sr: "Цене"
-                data_path: Объект.Цены
-              - kind: Кнопка
+              - events:
+                  Нажатие: КнопкаОчиститьНажатие
+                kind: Кнопка
                 name: КнопкаОчистить
                 title:
-                  ru: "Очистить таблицу"
-                  en: "Clear table"
                   de: "Leeren"
+                  en: "Clear table"
+                  ru: "Очистить таблицу"
                   sr: "Обриши табелу"
-                events:
-                  Нажатие: КнопкаОчиститьНажатие
-
+            kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              de: "Artikelpreise"
+              en: "Item prices"
+              ru: "Цены номенклатуры"
+              sr: "Цене артикала"
+        kind: Страница
+        name: СтраницаОсновное
+        title:
+          de: "Allgemein"
+          en: "General"
+          ru: "Основное"
+          sr: "Опште"
+    kind: СтраницыФормы
+    name: ОсновныеЗакладки
 events:
-  ПриОткрытии: ПриОткрытииФормы
   ПередЗаписью: ПередЗаписьюФормы
   ПриЗаписи: ПриЗаписиФормы
+  ПриОткрытии: ПриОткрытииФормы
+form:
+  auto_save_settings: true
+  entity: УстановкаЦен
+  kind: object
+  name: ФормаОбъекта
+  title:
+    de: "Preisaktualisierung"
+    en: "Price update"
+    ru: "Установка цен"
+    sr: "Утврђивање цена"
+  vertical_scroll: auto
+schema: onebase.form/v1

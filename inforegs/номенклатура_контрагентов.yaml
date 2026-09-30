@@ -1,0 +1,33 @@
+﻿name: НоменклатураКонтрагентов
+title: Номенклатура контрагентов
+titles:
+  en: Counterparty item mappings
+  de: Nomenklatur der Geschäftspartner
+  sr: Номенклатура пословних партнера
+dimensions:
+  - name: Контрагент
+    title: Контрагент
+    titles:
+      en: Counterparty
+    type: reference:Контрагент
+  - name: АртикулПоставщика
+    title: Артикул поставщика
+    titles:
+      en: Supplier SKU
+    type: string
+  - name: НаименованиеПоставщика
+    title: Наименование у поставщика
+    titles:
+      en: Supplier item name
+    type: string
+resources:
+  - name: Номенклатура
+    title: Номенклатура базы
+    titles:
+      en: Internal nomenclature
+    type: reference:Номенклатура
+  - name: Штрихкод
+    title: Штрихкод
+    titles:
+      en: Barcode
+    type: string

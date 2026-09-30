@@ -1,35 +1,18 @@
-name: ПеремещениеТоваров
-title: Перемещение товаров
-titles:
-  en: Inventory transfer
-  de: Warenumlagerung
-  sr: Премештај робе
-  az: Malların köçürülməsi
-  es: Traslado de mercancías
-  fr: Transfert de stock
-  hy: Ապրանքների տեղափոխում
-  ka: საქონლის გადაადგილება
-  kk: Тауарларды ауыстырып тасу
-  pt: Transferência de mercadorias
-  ro: Transfer mărfuri
-  tr: Mal transferi
-  uk: Переміщення товарів
-  uz: Tovarlarni ko'chirish
-  zh: 商品调拨
-posting: true
-numerator:
-  prefix: "ПЕР-"
-  length: 5
-  period: year
 fields:
-  - name: Номер
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Номер
     title: Номер
     titles:
-      en: Number
-      de: Nummer
-      sr: Број
       az: Nömrə
+      de: Nummer
+      en: Number
       es: Número
       fr: Numéro
       hy: Համար
@@ -37,18 +20,18 @@ fields:
       kk: Нөмір
       pt: Número
       ro: Număr
+      sr: Број
       tr: Numara
       uk: Номер
       uz: Raqam
       zh: 编号
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
-      de: Datum
-      sr: Датум
       az: Tarix
+      de: Datum
+      en: Date
       es: Fecha
       fr: Date
       hy: Ամսաթիվ
@@ -56,18 +39,18 @@ fields:
       kk: Күні
       pt: Data
       ro: Dată
+      sr: Датум
       tr: Tarih
       uk: Дата
       uz: Sana
       zh: 日期
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
-      de: Organisation
-      sr: Организација
       az: Təşkilat
+      de: Organisation
+      en: Organization
       es: Organización
       fr: Organisation
       hy: Կազմակերպություն
@@ -75,18 +58,18 @@ fields:
       kk: Ұйым
       pt: Organização
       ro: Organizație
+      sr: Организација
       tr: Kuruluş
       uk: Організація
       uz: Tashkilot
       zh: 组织
+    type: reference:Организация
   - name: СкладОтправитель
-    type: reference:Склад
     title: Склад-отправитель
     titles:
-      en: Sending warehouse
-      de: Versandlager
-      sr: Магацин отпремања
       az: Göndərən anbar
+      de: Versandlager
+      en: Sending warehouse
       es: Almacén origen
       fr: Entrepôt origine
       hy: Ուղարկող պահեստ
@@ -94,18 +77,18 @@ fields:
       kk: Жөнелтуші қойма
       pt: Armazém origem
       ro: Depozit expeditor
+      sr: Магацин отпремања
       tr: Gönderen depo
       uk: Склад відправник
       uz: Yuboruvchi ombor
       zh: 发出仓库
-  - name: СкладПолучатель
     type: reference:Склад
+  - name: СкладПолучатель
     title: Склад-получатель
     titles:
-      en: Receiving warehouse
-      de: Empfangslager
-      sr: Магацин пријема
       az: Qəbul edən anbar
+      de: Empfangslager
+      en: Receiving warehouse
       es: Almacén destino
       fr: Entrepôt destination
       hy: Ստացող պահեստ
@@ -113,38 +96,26 @@ fields:
       kk: Қабылдаушы қойма
       pt: Armazém destino
       ro: Depozit destinatar
+      sr: Магацин пријема
       tr: Alan depo
       uk: Склад одержувач
       uz: Qabul qiluvchi ombor
       zh: 接收仓库
+    type: reference:Склад
+name: ПеремещениеТоваров
+numerator:
+  length: 5
+  period: year
+  prefix: "ПЕР-"
+posting: true
 tableparts:
-  - name: Товары
-    title: Товары
-    titles:
-      en: Items
-      de: Artikel
-      sr: Артикли
-      az: Mallar
-      es: Artículos
-      fr: Articles
-      hy: Ապրանքներ
-      ka: საქონელი
-      kk: Тауарлар
-      pt: Artigos
-      ro: Articole
-      tr: Mallar
-      uk: Товари
-      uz: Tovarlar
-      zh: 商品
-    fields:
+  - fields:
       - name: Номенклатура
-        type: reference:Номенклатура
         title: Номенклатура
         titles:
-          en: Item
-          de: Artikel
-          sr: Артикал
           az: Adlandırma
+          de: Artikel
+          en: Item
           es: Nomenclatura
           fr: Nomenclature
           hy: Անվանակարգ
@@ -152,18 +123,18 @@ tableparts:
           kk: Номенклатура
           pt: Nomenclatura
           ro: Nomenclatură
+          sr: Артикал
           tr: Ürün
           uk: Номенклатура
           uz: Nomеnklatura
           zh: 物料
+        type: reference:Номенклатура
       - name: Количество
-        type: number
         title: Количество
         titles:
-          en: Quantity
-          de: Menge
-          sr: Количина
           az: Miqdar
+          de: Menge
+          en: Quantity
           es: Cantidad
           fr: Quantité
           hy: Քանակ
@@ -171,8 +142,44 @@ tableparts:
           kk: Саны
           pt: Quantidade
           ro: Cantitate
+          sr: Количина
           tr: Miktar
           uk: Кількість
           uz: Miqdor
           zh: 数量
-
+        type: number
+    name: Товары
+    title: Товары
+    titles:
+      az: Mallar
+      de: Artikel
+      en: Items
+      es: Artículos
+      fr: Articles
+      hy: Ապրանքներ
+      ka: საქონელი
+      kk: Тауарлар
+      pt: Artigos
+      ro: Articole
+      sr: Артикли
+      tr: Mallar
+      uk: Товари
+      uz: Tovarlar
+      zh: 商品
+title: Перемещение товаров
+titles:
+  az: Malların köçürülməsi
+  de: Warenumlagerung
+  en: Inventory transfer
+  es: Traslado de mercancías
+  fr: Transfert de stock
+  hy: Ապրանքների տեղափոխում
+  ka: საქონლის გადაადგილება
+  kk: Тауарларды ауыстырып тасу
+  pt: Transferência de mercadorias
+  ro: Transfer mărfuri
+  sr: Премештај робе
+  tr: Mal transferi
+  uk: Переміщення товарів
+  uz: Tovarlarni ko'chirish
+  zh: 商品调拨

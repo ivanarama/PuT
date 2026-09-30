@@ -1,35 +1,18 @@
-name: Счёт
-title: Счёт
-titles:
-  en: Invoice
-  de: Rechnung
-  sr: Рачун
-  az: Hesab-faktura
-  es: Factura
-  fr: Facture
-  hy: Հաշիվ-ապրանքագիր
-  ka: ინვოისი
-  kk: Есеп-шот
-  pt: Fatura
-  ro: Factură
-  tr: Fatura
-  uk: Рахунок
-  uz: Hisob-faktura
-  zh: 发票
-posting: false
-numerator:
-  prefix: "СЧ-"
-  length: 5
-  period: year
 fields:
-  - name: Номер
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Номер
     title: Номер
     titles:
-      en: Number
-      de: Nummer
-      sr: Број
       az: Nömrə
+      de: Nummer
+      en: Number
       es: Número
       fr: Numéro
       hy: Համար
@@ -37,18 +20,18 @@ fields:
       kk: Нөміր
       pt: Número
       ro: Număr
+      sr: Број
       tr: Numara
       uk: Номер
       uz: Raqam
       zh: 编号
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
-      de: Datum
-      sr: Датум
       az: Tarix
+      de: Datum
+      en: Date
       es: Fecha
       fr: Date
       hy: Ամսաթիվ
@@ -56,18 +39,18 @@ fields:
       kk: Күні
       pt: Data
       ro: Dată
+      sr: Датум
       tr: Tarih
       uk: Дата
       uz: Sana
       zh: 日期
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
-      de: Organisation
-      sr: Организација
       az: Təşkilat
+      de: Organisation
+      en: Organization
       es: Organización
       fr: Organisation
       hy: Կազմակերպություն
@@ -75,18 +58,18 @@ fields:
       kk: Ұйым
       pt: Organização
       ro: Organizație
+      sr: Организација
       tr: Kuruluş
       uk: Організація
       uz: Tashkilot
       zh: 组织
+    type: reference:Организация
   - name: Покупатель
-    type: reference:Контрагент
     title: Покупатель
     titles:
-      en: Customer
-      de: Kunde
-      sr: Купац
       az: Alıcı
+      de: Kunde
+      en: Customer
       es: Cliente
       fr: Client
       hy: Գնորդ
@@ -94,18 +77,18 @@ fields:
       kk: Сатып алушы
       pt: Cliente
       ro: Client
+      sr: Купац
       tr: Müşteri
       uk: Покупець
       uz: Xaridor
       zh: 客户
+    type: reference:Контрагент
   - name: Склад
-    type: reference:Склад
     title: Склад
     titles:
-      en: Warehouse
-      de: Lager
-      sr: Магацин
       az: Anbar
+      de: Lager
+      en: Warehouse
       es: Almacén
       fr: Entrepôt
       hy: Պահեստ
@@ -113,18 +96,18 @@ fields:
       kk: Қойма
       pt: Armazém
       ro: Depozit
+      sr: Магацин
       tr: Depo
       uk: Склад
       uz: Ombor
       zh: 仓库
+    type: reference:Склад
   - name: ТипЦенПродажи
-    type: reference:ТипЦен
     title: Тип цен продажи
     titles:
-      en: Sales price type
-      de: Verkaufspreistyp
-      sr: Тип цене продаје
       az: Satış qiymət növü
+      de: Verkaufspreistyp
+      en: Sales price type
       es: Tipo precio venta
       fr: Type prix vente
       hy: Վաճառքի գնի տեսակի
@@ -132,18 +115,18 @@ fields:
       kk: Сату баға түрі
       pt: Tipo preço venda
       ro: Tip preț vânzare
+      sr: Тип цене продаје
       tr: Satış fiyat tipi
       uk: Тип ціни продажу
       uz: Sotuv narx turi
       zh: 销售价格类型
+    type: reference:ТипЦен
   - name: СрокОплаты
-    type: date
     title: Срок оплаты
     titles:
-      en: Due date
-      de: Fälligkeitsdatum
-      sr: Датум доспећа
       az: Ödəniş müddəti
+      de: Fälligkeitsdatum
+      en: Due date
       es: Fecha vencimiento
       fr: Date échéance
       hy: Վճարման ժամկետ
@@ -151,18 +134,18 @@ fields:
       kk: Төлем мерзімі
       pt: Data vencimento
       ro: Scadență
+      sr: Датум доспећа
       tr: Ödeme tarihi
       uk: Термін оплати
       uz: To'lov muddati
       zh: 付款期限
+    type: date
   - name: Комментарий
-    type: string
     title: Комментарий
     titles:
-      en: Comment
-      de: Kommentar
-      sr: Коментар
       az: Şərh
+      de: Kommentar
+      en: Comment
       es: Comentario
       fr: Commentaire
       hy: Մեկնաբանություն
@@ -170,18 +153,18 @@ fields:
       kk: Түсініктеме
       pt: Comentário
       ro: Comentariu
+      sr: Коментар
       tr: Yorum
       uk: Коментар
       uz: Izoh
       zh: 备注
+    type: string
   - name: СпособУчетаНДС
-    type: enum:СпособУчетаНДС
     title: НДС
     titles:
-      en: VAT
-      de: USt.
-      sr: ПДВ
       az: ƏDV
+      de: USt.
+      en: VAT
       es: IVA
       fr: TVA
       hy: ԱԱՀ
@@ -189,18 +172,18 @@ fields:
       kk: ҚҚС
       pt: IVA
       ro: TVA
+      sr: ПДВ
       tr: KDV
       uk: ПДВ
       uz: QQS
       zh: 增值税
+    type: enum:СпособУчетаНДС
   - name: СуммаБезНДС
-    type: number
     title: Сумма без НДС
     titles:
-      en: Amount excl. VAT
-      de: Betrag o. USt.
-      sr: Износ без ПДВ
       az: ƏDV-siz məbləğ
+      de: Betrag o. USt.
+      en: Amount excl. VAT
       es: Importe sin IVA
       fr: Montant HT
       hy: ԱԱՀ-առանց գումարի
@@ -208,18 +191,18 @@ fields:
       kk: ҚҚС-сыз сомасы
       pt: Valor sem IVA
       ro: Sumă fără TVA
+      sr: Износ без ПДВ
       tr: KDV'siz tutar
       uk: Сума без ПДВ
       uz: QQS-siz miqdor
       zh: 不含税金额
-  - name: СуммаНДС
     type: number
+  - name: СуммаНДС
     title: Сумма НДС
     titles:
-      en: VAT amount
-      de: USt.-Betrag
-      sr: Износ ПДВ
       az: ƏDV məbləği
+      de: USt.-Betrag
+      en: VAT amount
       es: IVA importe
       fr: Montant TVA
       hy: ԱԱՀ գումարի
@@ -227,18 +210,18 @@ fields:
       kk: ҚҚС сомасы
       pt: Valor IVA
       ro: Sumă TVA
+      sr: Износ ПДВ
       tr: KDV tutarı
       uk: Сума ПДВ
       uz: QQS miqdori
       zh: 增值税额
-  - name: Сумма
     type: number
+  - name: Сумма
     title: Всего к оплате
     titles:
-      en: Total payable
-      de: Gesamtbetrag
-      sr: Укупно за плаћање
       az: Cəmi ödəniş
+      de: Gesamtbetrag
+      en: Total payable
       es: Total a pagar
       fr: Total à payer
       hy: Ընդհանուր վճար
@@ -246,38 +229,26 @@ fields:
       kk: Төлемге дейін
       pt: Total a pagar
       ro: Total de plată
+      sr: Укупно за плаћање
       tr: Toplam ödeme
       uk: Всього до оплати
       uz: To'lovga jami
       zh: 应付总额
+    type: number
+name: Счёт
+numerator:
+  length: 5
+  period: year
+  prefix: "СЧ-"
+posting: false
 tableparts:
-  - name: Товары
-    title: Товары
-    titles:
-      en: Items
-      de: Artikel
-      sr: Артикли
-      az: Mallar
-      es: Artículos
-      fr: Articles
-      hy: Ապրանքներ
-      ka: საქონელი
-      kk: Тауарлар
-      pt: Artigos
-      ro: Articole
-      tr: Mallar
-      uk: Товари
-      uz: Tovarlar
-      zh: 商品
-    fields:
+  - fields:
       - name: Номенклатура
-        type: reference:Номенклатура
         title: Номенклатура
         titles:
-          en: Item
-          de: Artikel
-          sr: Артикал
           az: Adlandırma
+          de: Artikel
+          en: Item
           es: Nomenclatura
           fr: Nomenclature
           hy: Անվանակարգ
@@ -285,18 +256,18 @@ tableparts:
           kk: Номенклатура
           pt: Nomenclatura
           ro: Nomenclatură
+          sr: Артикал
           tr: Ürün
           uk: Номенклатура
           uz: Nomеnklatura
           zh: 物料
+        type: reference:Номенклатура
       - name: Количество
-        type: number
         title: Количество
         titles:
-          en: Quantity
-          de: Menge
-          sr: Количина
           az: Miqdar
+          de: Menge
+          en: Quantity
           es: Cantidad
           fr: Quantité
           hy: Քանակ
@@ -304,18 +275,18 @@ tableparts:
           kk: Саны
           pt: Quantidade
           ro: Cantitate
+          sr: Количина
           tr: Miktar
           uk: Кількість
           uz: Miqdor
           zh: 数量
-      - name: Цена
         type: number
+      - name: Цена
         title: Цена
         titles:
-          en: Price
-          de: Preis
-          sr: Цена
           az: Qiymət
+          de: Preis
+          en: Price
           es: Precio
           fr: Prix
           hy: Գին
@@ -323,18 +294,18 @@ tableparts:
           kk: Бағасы
           pt: Preço
           ro: Preț
+          sr: Цена
           tr: Fiyat
           uk: Ціна
           uz: Narx
           zh: 价格
+        type: number
       - name: СтавкаНДС
-        type: reference:СтавкаНДС
         title: Ставка НДС
         titles:
-          en: VAT rate
-          de: USt.-Satz
-          sr: Стопа ПДВ
           az: ƏDV dərəcəsi
+          de: USt.-Satz
+          en: VAT rate
           es: Tasa IVA
           fr: Taux TVA
           hy: ԱԱՀ տոկոսադրույք
@@ -342,18 +313,18 @@ tableparts:
           kk: ҚҚС мөлшері
           pt: Taxa IVA
           ro: Cotă TVA
+          sr: Стопа ПДВ
           tr: KDV oranı
           uk: Ставка ПДВ
           uz: QQS stavkasi
           zh: 增值税率
+        type: reference:СтавкаНДС
       - name: СуммаНДС
-        type: number
         title: Сумма НДС
         titles:
-          en: VAT amount
-          de: USt.-Betrag
-          sr: Износ ПДВ
           az: ƏDV məbləği
+          de: USt.-Betrag
+          en: VAT amount
           es: IVA importe
           fr: Montant TVA
           hy: ԱԱՀ գումարի
@@ -361,18 +332,18 @@ tableparts:
           kk: ҚҚС сомасы
           pt: Valor IVA
           ro: Sumă TVA
+          sr: Износ ПДВ
           tr: KDV tutarı
           uk: Сума ПДВ
           uz: QQS miqdori
           zh: 增值税额
-      - name: Сумма
         type: number
+      - name: Сумма
         title: Сумма
         titles:
-          en: Amount
-          de: Betrag
-          sr: Износ
           az: Məbləğ
+          de: Betrag
+          en: Amount
           es: Importe
           fr: Montant
           hy: Գումար
@@ -380,21 +351,66 @@ tableparts:
           kk: Сомасы
           pt: Valor
           ro: Sumă
+          sr: Износ
           tr: Tutar
           uk: Сума
           uz: Miqdor
           zh: 金额
-      - name: ПроцентСкидки
         type: number
+      - name: ПроцентСкидки
         title: Скидка (%)
         titles:
-          en: Discount (%)
           de: Rabatt (%)
+          en: Discount (%)
           sr: Попуст (%)
-      - name: СуммаСкидки
         type: number
+      - name: СуммаСкидки
         title: Сумма скидки
         titles:
-          en: Discount amount
           de: Rabattbetrag
+          en: Discount amount
           sr: Износ попуста
+        type: number
+      - name: Склад
+        title: Склад
+        titles:
+          de: Lager
+          en: Warehouse
+          sr: Складиште
+          uk: Склад
+        type: reference:Склад
+    name: Товары
+    title: Товары
+    titles:
+      az: Mallar
+      de: Artikel
+      en: Items
+      es: Artículos
+      fr: Articles
+      hy: Ապրանքներ
+      ka: საქონელი
+      kk: Тауарлар
+      pt: Artigos
+      ro: Articole
+      sr: Артикли
+      tr: Mallar
+      uk: Товари
+      uz: Tovarlar
+      zh: 商品
+title: Счёт
+titles:
+  az: Hesab-faktura
+  de: Rechnung
+  en: Invoice
+  es: Factura
+  fr: Facture
+  hy: Հաշիվ-ապրանքագիր
+  ka: ინვოისი
+  kk: Есеп-шот
+  pt: Fatura
+  ro: Factură
+  sr: Рачун
+  tr: Fatura
+  uk: Рахунок
+  uz: Hisob-faktura
+  zh: 发票

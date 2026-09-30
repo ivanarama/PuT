@@ -1,27 +1,12 @@
-name: СборкаТоваров
-title: Сборка товаров
-titles:
-  en: Assembly
-  de: Montage
-  sr: Састављање робе
-  az: Yığılmış mallar
-  es: Montaje
-  fr: Assemblage
-  hy: Հավաքում
-  ka: აწყობა
-  kk: Жинақтау
-  pt: Montagem
-  ro: Asamblare
-  tr: Montaj
-  uk: Збірка товарів
-  uz: Yig'ish
-  zh: 组装
-posting: true
-numerator:
-  prefix: "СБР-"
-  length: 5
-  period: year
 fields:
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
+    type: string
   - name: Номер
     type: string
   - name: Дата
@@ -33,34 +18,57 @@ fields:
   - name: Комментарий
     type: string
   - name: Спецификация
-    type: reference:СпецификацииНоменклатуры
     title: Спецификация
     titles:
-      en: Bill of materials
       de: Stückliste
+      en: Bill of materials
       sr: Саставница
+    type: reference:СпецификацииНоменклатуры
   - name: Сумма
     type: number
+name: СборкаТоваров
+numerator:
+  length: 5
+  period: year
+  prefix: "СБР-"
+posting: true
 tableparts:
-  - name: Расход
+  - fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Количество
+        type: number
+    name: Расход
     title: Комплектующие
     titles:
-      en: Components
       de: Komponenten
+      en: Components
       sr: Компоненте
-    fields:
+  - fields:
       - name: Номенклатура
         type: reference:Номенклатура
       - name: Количество
         type: number
-  - name: Приход
+    name: Приход
     title: Готовая продукция
     titles:
-      en: Finished goods
       de: Fertigprodukte
+      en: Finished goods
       sr: Готова роба
-    fields:
-      - name: Номенклатура
-        type: reference:Номенклатура
-      - name: Количество
-        type: number
+title: Сборка товаров
+titles:
+  az: Yığılmış mallar
+  de: Montage
+  en: Assembly
+  es: Montaje
+  fr: Assemblage
+  hy: Հավաքում
+  ka: აწყობა
+  kk: Жинақтау
+  pt: Montagem
+  ro: Asamblare
+  sr: Састављање робе
+  tr: Montaj
+  uk: Збірка товарів
+  uz: Yig'ish
+  zh: 组装

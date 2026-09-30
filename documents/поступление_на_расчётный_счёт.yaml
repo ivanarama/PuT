@@ -1,35 +1,18 @@
-name: ПоступлениеНаРасчётныйСчёт
-title: Поступление на расчётный счёт
-titles:
-  en: Bank receipt
-  de: Bankeingang
-  sr: Прилив на рачун
-  az: Hesablaşma hesabına daxilolma
-  es: Ingreso en cuenta bancaria
-  fr: Encaissement bancaire
-  hy: Մուտք հաշվարկային հաշիվ
-  ka: ანგარიშზე შემოსვლა
-  kk: Банк шотына түсім
-  pt: Recebimento bancário
-  ro: Încasare bancară
-  tr: Banka girişi
-  uk: Надходження на розрахунковий рахунок
-  uz: Hisoblash hisobiga tushish
-  zh: 银行收款
-posting: true
-numerator:
-  prefix: "БНК-П-"
-  length: 5
-  period: year
 fields:
-  - name: Номер
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
     type: string
+  - name: Номер
     title: Номер
     titles:
-      en: Number
-      de: Nummer
-      sr: Број
       az: Nömrə
+      de: Nummer
+      en: Number
       es: Número
       fr: Numéro
       hy: Համար
@@ -37,18 +20,18 @@ fields:
       kk: Нөмір
       pt: Número
       ro: Număr
+      sr: Број
       tr: Numara
       uk: Номер
       uz: Raqam
       zh: 编号
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
-      de: Datum
-      sr: Датум
       az: Tarix
+      de: Datum
+      en: Date
       es: Fecha
       fr: Date
       hy: Ամսաթիվ
@@ -56,18 +39,18 @@ fields:
       kk: Күні
       pt: Data
       ro: Dată
+      sr: Датум
       tr: Tarih
       uk: Дата
       uz: Sana
       zh: 日期
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
-      de: Organisation
-      sr: Организација
       az: Təşkilat
+      de: Organisation
+      en: Organization
       es: Organización
       fr: Organisation
       hy: Կազմակերպություն
@@ -75,18 +58,18 @@ fields:
       kk: Ұйым
       pt: Organização
       ro: Organizație
+      sr: Организација
       tr: Kuruluş
       uk: Організація
       uz: Tashkilot
       zh: 组织
+    type: reference:Организация
   - name: БанковскийСчёт
-    type: reference:Касса
     title: Расчётный счёт
     titles:
-      en: Bank account
-      de: Bankkonto
-      sr: Банковски рачун
       az: Hesablaşma hesabı
+      de: Bankkonto
+      en: Bank account
       es: Cuenta bancaria
       fr: Compte bancaire
       hy: Հաշվարկային հաշիվ
@@ -94,18 +77,18 @@ fields:
       kk: Банк шоты
       pt: Conta bancária
       ro: Contă bancară
+      sr: Банковски рачун
       tr: Banka hesabı
       uk: Розрахунковий рахунок
       uz: Hisoblash hisobi
       zh: 银行账户
+    type: reference:Касса
   - name: Контрагент
-    type: reference:Контрагент
     title: Контрагент
     titles:
-      en: Counterparty
-      de: Geschäftspartner
-      sr: Контрагент
       az: Əks-tərəf
+      de: Geschäftspartner
+      en: Counterparty
       es: Contraparte
       fr: Counterpartie
       hy: Գործընկեր
@@ -113,18 +96,18 @@ fields:
       kk: Контрагент
       pt: Contraparte
       ro: Contraparte
+      sr: Контрагент
       tr: Karşı taraf
       uk: Контрагент
       uz: Kontragent
       zh: 往来单位
+    type: reference:Контрагент
   - name: ДокументРеализации
-    type: reference:РеализацияТоваров
     title: Документ реализации
     titles:
-      en: Sales document
-      de: Verkaufsbeleg
-      sr: Продajни документ
       az: Satış sənədi
+      de: Verkaufsbeleg
+      en: Sales document
       es: Documento venta
       fr: Document vente
       hy: Վաճառքի փաստաթուղթ
@@ -132,18 +115,18 @@ fields:
       kk: Сату құжаты
       pt: Documento venda
       ro: Document vânzare
+      sr: Продajни документ
       tr: Satış belgesi
       uk: Документ реалізації
       uz: Sotuv hujjati
       zh: 销售单据
+    type: reference:РеализацияТоваров
   - name: ДокументПоступления
-    type: reference:ПоступлениеТоваров
     title: Документ поступления
     titles:
-      en: Receipt document
-      de: Eingangsbeleg
-      sr: Пријемни документ
       az: Qəbul sənədi
+      de: Eingangsbeleg
+      en: Receipt document
       es: Documento compra
       fr: Document achat
       hy: Մուտքի փաստաթուղթ
@@ -151,18 +134,18 @@ fields:
       kk: Кіріс құжаты
       pt: Documento compra
       ro: Document achiziție
+      sr: Пријемни документ
       tr: Giriş belgesi
       uk: Документ надходження
       uz: Qabul qilish hujjati
       zh: 采购单据
+    type: reference:ПоступлениеТоваров
   - name: НомерПлатёжки
-    type: string
     title: Номер платёжного поручения
     titles:
-      en: Payment order number
-      de: Zahlungsauftragsnummer
-      sr: Број налога за плаћање
       az: Ödəniş nömrəsi
+      de: Zahlungsauftragsnummer
+      en: Payment order number
       es: Nº pago
       fr: N° paiement
       hy: Վճարման համար
@@ -170,18 +153,18 @@ fields:
       kk: Төлем нөмірі
       pt: Nº pagamento
       ro: Nr. plată
+      sr: Број налога за плаћање
       tr: Ödeme no
       uk: Номер платіжки
       uz: To'lov raqami
       zh: 付款编号
+    type: string
   - name: ДатаПлатёжки
-    type: date
     title: Дата платёжного поручения
     titles:
-      en: Payment order date
-      de: Zahlungsauftragsdatum
-      sr: Датум налога за плаћање
       az: Ödəniş tarixi
+      de: Zahlungsauftragsdatum
+      en: Payment order date
       es: Fecha pago
       fr: Date paiement
       hy: Վճարման ամսաթիվ
@@ -189,18 +172,18 @@ fields:
       kk: Төлем күні
       pt: Data pagamento
       ro: Dată plată
+      sr: Датум налога за плаћање
       tr: Ödeme tarihi
       uk: Дата платіжки
       uz: To'lov sanasi
       zh: 付款日期
+    type: date
   - name: НазначениеПлатежа
-    type: string
     title: Назначение платежа
     titles:
-      en: Payment purpose
-      de: Verwendungszweck
-      sr: Сврха плаћања
       az: Ödəniş məqsədi
+      de: Verwendungszweck
+      en: Payment purpose
       es: Concepto pago
       fr: Objet paiement
       hy: Վճարման նպատակ
@@ -208,18 +191,18 @@ fields:
       kk: Төлем мақсаты
       pt: Finalidade pagamento
       ro: Scopul plății
+      sr: Сврха плаћања
       tr: Ödeme amacı
       uk: Призначення платежу
       uz: To'lov maqsadi
       zh: 付款用途
+    type: string
   - name: Сумма
-    type: number
     title: Сумма
     titles:
-      en: Amount
-      de: Betrag
-      sr: Износ
       az: Məbləğ
+      de: Betrag
+      en: Amount
       es: Importe
       fr: Montant
       hy: Գումար
@@ -227,7 +210,32 @@ fields:
       kk: Сомасы
       pt: Valor
       ro: Sumă
+      sr: Износ
       tr: Tutar
       uk: Сума
       uz: Miqdor
       zh: 金额
+    type: number
+name: ПоступлениеНаРасчётныйСчёт
+numerator:
+  length: 5
+  period: year
+  prefix: "БНК-П-"
+posting: true
+title: Поступление на расчётный счёт
+titles:
+  az: Hesablaşma hesabına daxilolma
+  de: Bankeingang
+  en: Bank receipt
+  es: Ingreso en cuenta bancaria
+  fr: Encaissement bancaire
+  hy: Մուտք հաշվարկային հաշիվ
+  ka: ანგარიშზე შემოსვლა
+  kk: Банк шотына түсім
+  pt: Recebimento bancário
+  ro: Încasare bancară
+  sr: Прилив на рачун
+  tr: Banka girişi
+  uk: Надходження на розрахунковий рахунок
+  uz: Hisoblash hisobiga tushish
+  zh: 银行收款

@@ -1,141 +1,114 @@
-schema: onebase.form/v1
-
-form:
-  name: ФормаОбъекта
-  kind: object
-  entity: ПеремещениеТоваров
-  title:
-    ru: "Перемещение товаров"
-    en: "Inventory transfer"
-    de: "Lagerumbuchung"
-    sr: "Пребацивање робе"
-  auto_save_settings: true
-  vertical_scroll: auto
-
 attributes:
-  - name: Объект
-    type: DocumentRef.ПеремещениеТоваров
+  - main: true
+    name: Объект
     save: true
-    main: true
-
+    type: DocumentRef.ПеремещениеТоваров
 elements:
-  - kind: ГруппаФормы
-    name: ГруппаДействия
-    title:
-      ru: "Действия"
-      en: "Actions"
-    children:
-      - kind: Кнопка
-        name: КнопкаПечать
-        title:
-          ru: "Печать"
-          en: "Print"
-          de: "Drucken"
-        events:
-          Нажатие: КнопкаПечатьНажатие
-
-  - kind: СтраницыФормы
-    name: ОсновныеЗакладки
-    children:
-
-      - kind: Страница
-        name: СтраницаОсновное
-        title:
-          ru: "Основное"
-          en: "General"
-          de: "Allgemein"
-          sr: "Опште"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаШапка
-            title:
-              ru: "Шапка документа"
-              en: "Document header"
-              de: "Belegkopf"
-              sr: "Заглавље документа"
-            children:
-              - kind: ПолеВвода
-                name: ПолеНомер
-                title:
-                  ru: "Номер"
-                  en: "Number"
-                  de: "Nummer"
-                  sr: "Број"
-                data_path: Объект.Номер
-                readonly: true
+  - children:
+      - children:
+          - children:
+              - data_path: Объект.Номер
                 hint: "ПЕР-NNNNN"
-              - kind: ПолеВвода
-                name: ПолеДата
+                kind: ПолеВвода
+                name: ПолеНомер
+                readonly: true
                 title:
-                  ru: "Дата"
-                  en: "Date"
-                  de: "Datum"
-                  sr: "Датум"
-                data_path: Объект.Дата
+                  de: "Nummer"
+                  en: "Number"
+                  ru: "Номер"
+                  sr: "Број"
+              - data_path: Объект.Дата
+                kind: ПолеВвода
+                name: ПолеДата
                 required: true
-                events:
-                  ПриИзменении: ДатаПриИзменении
-              - kind: ПолеВвода
+                title:
+                  de: "Datum"
+                  en: "Date"
+                  ru: "Дата"
+                  sr: "Датум"
+              - choice: true
+                data_path: Объект.Организация
+                kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  ru: "Организация"
-                  en: "Organization"
                   de: "Organisation"
+                  en: "Organization"
+                  ru: "Организация"
                   sr: "Организација"
-                data_path: Объект.Организация
-                choice: true
-              - kind: ПолеВвода
-                name: ПолеСкладОтправитель
-                title:
-                  ru: "Склад-отправитель"
-                  en: "From warehouse"
-                  de: "Quelllager"
-                  sr: "Магацин отпремања"
+              - choice: true
                 data_path: Объект.СкладОтправитель
+                kind: ПолеВвода
+                name: ПолеСкладОтправитель
                 required: true
-                choice: true
-                events:
-                  ПриИзменении: СкладОтправительПриИзменении
-              - kind: ПолеВвода
-                name: ПолеСкладПолучатель
                 title:
-                  ru: "Склад-получатель"
-                  en: "To warehouse"
-                  de: "Ziellager"
-                  sr: "Магацин пријема"
+                  de: "Quelllager"
+                  en: "From warehouse"
+                  ru: "Склад-отправитель"
+                  sr: "Магацин отпремања"
+              - choice: true
                 data_path: Объект.СкладПолучатель
+                kind: ПолеВвода
+                name: ПолеСкладПолучатель
                 required: true
-                choice: true
-                events:
-                  ПриИзменении: СкладПолучательПриИзменении
-
-          - kind: ГруппаФормы
-            name: ГруппаТабЧасть
+                title:
+                  de: "Ziellager"
+                  en: "To warehouse"
+                  ru: "Склад-получатель"
+                  sr: "Магацин пријема"
+            kind: ГруппаФормы
+            name: ГруппаШапка
             title:
-              ru: "Перемещаемые товары"
-              en: "Items to transfer"
-              de: "Umbuchungspositionen"
-              sr: "Ставке за пребацивање"
-            children:
-              - kind: ТабличнаяЧасть
+              de: "Belegkopf"
+              en: "Document header"
+              ru: "Шапка документа"
+              sr: "Заглавље документа"
+          - children:
+              - data_path: Объект.Товары
+                kind: ТабличнаяЧасть
                 name: ТабТовары
                 title:
-                  ru: "Товары"
-                  en: "Items"
                   de: "Artikel"
+                  en: "Items"
+                  ru: "Товары"
                   sr: "Артикли"
-                data_path: Объект.Товары
-              - kind: Кнопка
+              - events:
+                  Нажатие: КнопкаОчиститьНажатие
+                kind: Кнопка
                 name: КнопкаОчистить
                 title:
-                  ru: "Очистить таблицу"
-                  en: "Clear table"
                   de: "Leeren"
+                  en: "Clear table"
+                  ru: "Очистить таблицу"
                   sr: "Обриши табелу"
-                events:
-                  Нажатие: КнопкаОчиститьНажатие
-
+            kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              de: "Umbuchungspositionen"
+              en: "Items to transfer"
+              ru: "Перемещаемые товары"
+              sr: "Ставке за пребацивање"
+        kind: Страница
+        name: СтраницаОсновное
+        title:
+          de: "Allgemein"
+          en: "General"
+          ru: "Основное"
+          sr: "Опште"
+    kind: СтраницыФормы
+    name: ОсновныеЗакладки
 events:
-  ПриОткрытии: ПриОткрытииФормы
   ПередЗаписью: ПередЗаписьюФормы
   ПриЗаписи: ПриЗаписиФормы
+  ПриОткрытии: ПриОткрытииФормы
+form:
+  auto_save_settings: true
+  entity: ПеремещениеТоваров
+  kind: object
+  name: ФормаОбъекта
+  title:
+    de: "Lagerumbuchung"
+    en: "Inventory transfer"
+    ru: "Перемещение товаров"
+    sr: "Пребацивање робе"
+  vertical_scroll: auto
+schema: onebase.form/v1

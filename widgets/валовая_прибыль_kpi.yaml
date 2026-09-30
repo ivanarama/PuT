@@ -1,11 +1,16 @@
+format: number
 name: ВаловаяПрибыльМесяца
-type: kpi
+params:
+  Начало: "{{today|minus_days:30}}"
+query: |
+  ВЫБРАТЬ CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)) - СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0 ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ)), 0) AS INTEGER) КАК Значение
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ period >= &Начало
 title: Валовая прибыль за месяц
 titles:
-  en: Gross profit for month
-  de: Rohgewinn des Monats
-  sr: Бруто добит у месецу
   az: Aylıq brüt mənfəət
+  de: Rohgewinn des Monats
+  en: Gross profit for month
   es: Beneficio bruto mensual
   fr: Bénéfice brut du mois
   hy: Ամսական համախառն շահույթ
@@ -13,14 +18,9 @@ titles:
   kk: Айлық жалпы пайда
   pt: Lucro bruto mensal
   ro: Profit brut lunar
+  sr: Бруто добит у месецу
   tr: Aylık brüt kâr
   uk: Валовий прибуток за місяць
   uz: Oylik yalpi foyda
   zh: 月度毛利润
-format: number
-params:
-  Начало: "{{today|minus_days:30}}"
-query: |
-  ВЫБРАТЬ CAST(ROUND(СУММА(Выручка) - СУММА(Себестоимость), 0) AS INTEGER) КАК Значение
-  ИЗ РегистрНакопления.ВаловаяПрибыль
-  ГДЕ period >= &Начало
+type: kpi

@@ -1,43 +1,10 @@
-name: ТопНоменклатуры
-type: list
-title: Топ номенклатуры по выручке (месяц)
-titles:
-  en: Top items by revenue (month)
-  de: Top-Artikel nach Umsatz (Monat)
-  sr: Топ артикли по приходу (месец)
-  az: Gəlirə görə top məhsullar (ay)
-  es: Top artículos por ingresos (mes)
-  fr: Top articles par chiffre d'affaires (mois)
-  hy: Լավագույն ապրանքներ ըստ եկամտի (ամիս)
-  ka: საუკეთესო პროდუქტები შემოსავლის მიხედვით (თვე)
-  kk: Табыс бойынша топ тауарлар (ай)
-  pt: Top itens por receita (mês)
-  ro: Top articole după venit (lună)
-  tr: Gelire göre en çok satan ürünler (ay)
-  uk: Топ товарів за виручкою (місяць)
-  uz: Daromad bo'yicha top mahsulotlar (oy)
-  zh: 按收入排名的热门商品（月）
-limit: 10
-params:
-  Начало: "{{today|minus_days:30}}"
-query: |
-  ВЫБРАТЬ
-    Номенклатура,
-    CAST(ROUND(СУММА(Выручка), 0) AS INTEGER)       КАК Выручка,
-    CAST(ROUND(СУММА(Себестоимость), 0) AS INTEGER) КАК Себестоимость,
-    CAST(ROUND(СУММА(Выручка) - СУММА(Себестоимость), 0) AS INTEGER) КАК Прибыль
-  ИЗ РегистрНакопления.ВаловаяПрибыль
-  ГДЕ period >= &Начало
-  СГРУППИРОВАТЬ ПО Номенклатура
-  УПОРЯДОЧИТЬ ПО Выручка УБЫВ
 columns:
   - field: Номенклатура
     label: "Номенклатура"
     labels:
-      en: "Item"
-      de: "Artikel"
-      sr: "Артикал"
       az: "Məhsul"
+      de: "Artikel"
+      en: "Item"
       es: "Artículo"
       fr: "Article"
       hy: "Ապրանք"
@@ -45,17 +12,19 @@ columns:
       kk: "Тауар"
       pt: "Item"
       ro: "Articol"
+      sr: "Артикал"
       tr: "Ürün"
       uk: "Товар"
       uz: "Mahsulot"
       zh: "商品"
-  - field: Выручка
+  - align: right
+    field: Выручка
+    format: number
     label: "Выручка"
     labels:
-      en: "Revenue"
-      de: "Umsatz"
-      sr: "Приход"
       az: "Gəlir"
+      de: "Umsatz"
+      en: "Revenue"
       es: "Ingreso"
       fr: "Chiffre d'affaires"
       hy: "Եկամուտ"
@@ -63,19 +32,19 @@ columns:
       kk: "Табыс"
       pt: "Receita"
       ro: "Venit"
+      sr: "Приход"
       tr: "Gelir"
       uk: "Виручка"
       uz: "Daromad"
       zh: "收入"
+  - align: right
+    field: Прибыль
     format: number
-    align: right
-  - field: Прибыль
     label: "Прибыль"
     labels:
-      en: "Profit"
-      de: "Gewinn"
-      sr: "Добит"
       az: "Mənfəət"
+      de: "Gewinn"
+      en: "Profit"
       es: "Beneficio"
       fr: "Bénéfice"
       hy: "Շահույթ"
@@ -83,9 +52,40 @@ columns:
       kk: "Пайда"
       pt: "Lucro"
       ro: "Profit"
+      sr: "Добит"
       tr: "Kâr"
       uk: "Прибуток"
       uz: "Foyda"
       zh: "利润"
-    format: number
-    align: right
+limit: 10
+name: ТопНоменклатуры
+params:
+  Начало: "{{today|minus_days:30}}"
+query: |
+  ВЫБРАТЬ
+    Номенклатура,
+    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)), 0) AS INTEGER)       КАК Выручка,
+    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0 ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ)), 0) AS INTEGER) КАК Себестоимость,
+    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)) - СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0 ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ)), 0) AS INTEGER) КАК Прибыль
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ period >= &Начало
+  СГРУППИРОВАТЬ ПО Номенклатура
+  УПОРЯДОЧИТЬ ПО Выручка УБЫВ
+title: Топ номенклатуры по выручке (месяц)
+titles:
+  az: Gəlirə görə top məhsullar (ay)
+  de: Top-Artikel nach Umsatz (Monat)
+  en: Top items by revenue (month)
+  es: Top artículos por ingresos (mes)
+  fr: Top articles par chiffre d'affaires (mois)
+  hy: Լավագույն ապրանքներ ըստ եկամտի (ամիս)
+  ka: საუკეთესო პროდუქტები შემოსავლის მიხედვით (თვე)
+  kk: Табыс бойынша топ тауарлар (ай)
+  pt: Top itens por receita (mês)
+  ro: Top articole după venit (lună)
+  sr: Топ артикли по приходу (месец)
+  tr: Gelire göre en çok satan ürünler (ay)
+  uk: Топ товарів за виручкою (місяць)
+  uz: Daromad bo'yicha top mahsulotlar (oy)
+  zh: 按收入排名的热门商品（月）
+type: list

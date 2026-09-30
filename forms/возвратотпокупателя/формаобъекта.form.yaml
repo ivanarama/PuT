@@ -1,217 +1,208 @@
-schema: onebase.form/v1
-
-form:
-  name: ФормаОбъекта
-  kind: object
-  entity: ВозвратОтПокупателя
-  title:
-    ru: "Возврат от покупателя"
-    en: "Customer return"
-    de: "Kundenrücksendung"
-    sr: "Повраћај од купца"
-  auto_save_settings: true
-  vertical_scroll: auto
-
 attributes:
-  - name: Объект
-    type: DocumentRef.ВозвратОтПокупателя
+  - main: true
+    name: Объект
     save: true
-    main: true
-
+    type: DocumentRef.ВозвратОтПокупателя
 elements:
-  - kind: СтраницыФормы
-    name: ОсновныеЗакладки
-    children:
-
-      - kind: Страница
-        name: СтраницаОсновное
-        title:
-          ru: "Основное"
-          en: "General"
-          de: "Allgemein"
-          sr: "Опште"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаШапка
-            title:
-              ru: "Шапка документа"
-              en: "Document header"
-              de: "Belegkopf"
-              sr: "Заглавље документа"
-            children:
-              - kind: ПолеВвода
-                name: ПолеНомер
-                title:
-                  ru: "Номер"
-                  en: "Number"
-                  de: "Nummer"
-                  sr: "Број"
-                data_path: Объект.Номер
-                readonly: true
+  - children:
+      - children:
+          - children:
+              - data_path: Объект.Номер
                 hint: "ВОЗ-NNNNN"
-              - kind: ПолеВвода
-                name: ПолеДата
+                kind: ПолеВвода
+                name: ПолеНомер
+                readonly: true
                 title:
-                  ru: "Дата"
-                  en: "Date"
-                  de: "Datum"
-                  sr: "Датум"
-                data_path: Объект.Дата
-                required: true
+                  de: "Nummer"
+                  en: "Number"
+                  ru: "Номер"
+                  sr: "Број"
+              - data_path: Объект.Дата
                 events:
                   ПриИзменении: ДатаПриИзменении
-              - kind: ПолеВвода
+                kind: ПолеВвода
+                name: ПолеДата
+                required: true
+                title:
+                  de: "Datum"
+                  en: "Date"
+                  ru: "Дата"
+                  sr: "Датум"
+              - choice: true
+                data_path: Объект.Организация
+                kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  ru: "Организация"
-                  en: "Organization"
                   de: "Organisation"
+                  en: "Organization"
+                  ru: "Организация"
                   sr: "Организација"
-                data_path: Объект.Организация
-                choice: true
-              - kind: ПолеВвода
-                name: ПолеОснование
-                title:
-                  ru: "Основание"
-                  en: "Base document"
-                  de: "Beleggrundlage"
-                  sr: "Основни документ"
-                data_path: Объект.Основание
-                readonly: true
+              - data_path: Объект.Основание
                 hint: "Реализация, на основании которой создан возврат"
-
-          - kind: ГруппаФормы
+                kind: ПолеВвода
+                name: ПолеОснование
+                readonly: true
+                title:
+                  de: "Beleggrundlage"
+                  en: "Base document"
+                  ru: "Основание"
+                  sr: "Основни документ"
+            kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              de: "Belegkopf"
+              en: "Document header"
+              ru: "Шапка документа"
+              sr: "Заглавље документа"
+          - children:
+              - data_path: Объект.СуммаБезНДС
+                kind: ПолеВвода
+                name: ПолеСуммаБезНДС
+                readonly: true
+                title:
+                  de: "Betrag o. USt."
+                  en: "Amount excl. VAT"
+                  ru: "Сумма без НДС"
+                  sr: "Износ без ПДВ"
+              - data_path: Объект.СуммаНДС
+                kind: ПолеВвода
+                name: ПолеСуммаНДС
+                readonly: true
+                title:
+                  de: "USt.-Betrag"
+                  en: "VAT amount"
+                  ru: "Сумма НДС"
+                  sr: "Износ ПДВ"
+              - data_path: Объект.Сумма
+                kind: ПолеВвода
+                name: ПолеСумма
+                readonly: true
+                title:
+                  de: "Rückgabe gesamt"
+                  en: "Total to return"
+                  ru: "Всего к возврату"
+                  sr: "Укупно за повраћај"
+            kind: ГруппаФормы
             name: ГруппаИтоги
             title:
-              ru: "Итоги"
-              en: "Totals"
               de: "Summen"
+              en: "Totals"
+              ru: "Итоги"
               sr: "Укупно"
-            children:
-              - kind: ПолеВвода
-                name: ПолеСуммаБезНДС
-                title:
-                  ru: "Сумма без НДС"
-                  en: "Amount excl. VAT"
-                  de: "Betrag o. USt."
-                  sr: "Износ без ПДВ"
-                data_path: Объект.СуммаБезНДС
-                readonly: true
-              - kind: ПолеВвода
-                name: ПолеСуммаНДС
-                title:
-                  ru: "Сумма НДС"
-                  en: "VAT amount"
-                  de: "USt.-Betrag"
-                  sr: "Износ ПДВ"
-                data_path: Объект.СуммаНДС
-                readonly: true
-              - kind: ПолеВвода
-                name: ПолеСумма
-                title:
-                  ru: "Всего к возврату"
-                  en: "Total to return"
-                  de: "Rückgabe gesamt"
-                  sr: "Укупно за повраћај"
-                data_path: Объект.Сумма
-                readonly: true
-
-      - kind: Страница
-        name: СтраницаКонтрагент
+        kind: Страница
+        name: СтраницаОсновное
         title:
-          ru: "Покупатель и склад"
-          en: "Customer & warehouse"
-          de: "Kunde & Lager"
-          sr: "Купац и магацин"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаРеквизиты
-            title:
-              ru: "Реквизиты покупателя"
-              en: "Customer details"
-              de: "Kundendaten"
-              sr: "Подаци о купцу"
-            children:
-              - kind: ПолеВвода
-                name: ПолеПокупатель
-                title:
-                  ru: "Покупатель"
-                  en: "Customer"
-                  de: "Kunde"
-                  sr: "Купац"
+          de: "Allgemein"
+          en: "General"
+          ru: "Основное"
+          sr: "Опште"
+      - children:
+          - children:
+              - choice: true
                 data_path: Объект.Покупатель
+                kind: ПолеВвода
+                name: ПолеПокупатель
                 required: true
-                choice: true
-                events:
-                  ПриИзменении: ПокупательПриИзменении
-              - kind: ПолеВвода
-                name: ПолеСклад
                 title:
-                  ru: "Склад"
-                  en: "Warehouse"
-                  de: "Lager"
-                  sr: "Магацин"
+                  de: "Kunde"
+                  en: "Customer"
+                  ru: "Покупатель"
+                  sr: "Купац"
+              - choice: true
                 data_path: Объект.Склад
+                kind: ПолеВвода
+                name: ПолеСклад
                 required: true
-                choice: true
-                events:
-                  ПриИзменении: СкладПриИзменении
-              - kind: ПолеВвода
-                name: ПолеСпособУчетаНДС
                 title:
-                  ru: "НДС"
-                  en: "VAT"
-                  de: "USt."
-                  sr: "ПДВ"
+                  de: "Lager"
+                  en: "Warehouse"
+                  ru: "Склад"
+                  sr: "Магацин"
+              - choice: true
                 data_path: Объект.СпособУчетаНДС
-                choice: true
                 events:
                   ПриИзменении: СпособУчетаНДСПриИзменении
-
-      - kind: Страница
-        name: СтраницаТовары
-        title:
-          ru: "Товары"
-          en: "Items"
-          de: "Artikel"
-          sr: "Артикли"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаТабЧасть
+                kind: ПолеВвода
+                name: ПолеСпособУчетаНДС
+                title:
+                  de: "USt."
+                  en: "VAT"
+                  ru: "НДС"
+                  sr: "ПДВ"
+            kind: ГруппаФормы
+            name: ГруппаРеквизиты
             title:
-              ru: "Возвращаемые товары"
-              en: "Returned items"
-              de: "Rückgabepositionen"
-              sr: "Враћене ставке"
-            children:
-              - kind: ТабличнаяЧасть
+              de: "Kundendaten"
+              en: "Customer details"
+              ru: "Реквизиты покупателя"
+              sr: "Подаци о купцу"
+        kind: Страница
+        name: СтраницаКонтрагент
+        title:
+          de: "Kunde & Lager"
+          en: "Customer & warehouse"
+          ru: "Покупатель и склад"
+          sr: "Купац и магацин"
+      - children:
+          - children:
+              - data_path: Объект.Товары
+                events:
+                  ПриИзменении: ТабТоварыПриИзменении
+                kind: ТабличнаяЧасть
                 name: ТабТовары
                 title:
-                  ru: "Товары"
-                  en: "Items"
                   de: "Artikel"
+                  en: "Items"
+                  ru: "Товары"
                   sr: "Артикли"
-                data_path: Объект.Товары
-              - kind: Кнопка
+                use_grid: true
+              - events:
+                  Нажатие: КнопкаПересчитатьНажатие
+                kind: Кнопка
                 name: КнопкаПересчитать
                 title:
-                  ru: "Пересчитать суммы"
-                  en: "Recalculate"
                   de: "Neu berechnen"
+                  en: "Recalculate"
+                  ru: "Пересчитать суммы"
                   sr: "Прерачунај"
-                events:
-                  Нажатие: КнопкаПересчитатьНажатие
-              - kind: Кнопка
+              - events:
+                  Нажатие: КнопкаОчиститьНажатие
+                kind: Кнопка
                 name: КнопкаОчистить
                 title:
-                  ru: "Очистить таблицу"
-                  en: "Clear table"
                   de: "Leeren"
+                  en: "Clear table"
+                  ru: "Очистить таблицу"
                   sr: "Обриши табелу"
-                events:
-                  Нажатие: КнопкаОчиститьНажатие
-
+            kind: ГруппаФормы
+            name: ГруппаТабЧасть
+            title:
+              de: "Rückgabepositionen"
+              en: "Returned items"
+              ru: "Возвращаемые товары"
+              sr: "Враћене ставке"
+        kind: Страница
+        name: СтраницаТовары
+        title:
+          de: "Artikel"
+          en: "Items"
+          ru: "Товары"
+          sr: "Артикли"
+    kind: СтраницыФормы
+    name: ОсновныеЗакладки
 events:
-  ПриОткрытии: ПриОткрытииФормы
   ПередЗаписью: ПередЗаписьюФормы
   ПриЗаписи: ПриЗаписиФормы
+  ПриОткрытии: ПриОткрытииФормы
+form:
+  auto_save_settings: true
+  entity: ВозвратОтПокупателя
+  kind: object
+  name: ФормаОбъекта
+  title:
+    de: "Kundenrücksendung"
+    en: "Customer return"
+    ru: "Возврат от покупателя"
+    sr: "Повраћај од купца"
+  vertical_scroll: auto
+schema: onebase.form/v1

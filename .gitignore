@@ -6,6 +6,8 @@ docs/
 *.db
 *.sqlite
 *.sqlite3
+data/
+scratch/
 
 # Логи
 *.log

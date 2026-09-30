@@ -1,147 +1,190 @@
-name: ВаловаяПрибыльСКД
-title: Валовая прибыль (СКД)
-titles:
-    az: Brüt mənfəət (məlumat kompozisiyası)
-    de: Rohgewinn (Datenkomposition)
-    en: Gross profit (data composition)
-    es: Beneficio bruto (composición de datos)
-    fr: Bénéfice brut (composition de données)
-    hy: Համախառն շահույթ (տվյալների կազմ)
-    ka: მთლიანი მოგება (მონაცემთა კომპოზიცია)
-    kk: Жалпы пайда (деректер композициясы)
-    pt: Lucro bruto (composição de dados)
-    ro: Profit brut (compoziție de date)
-    sr: Бруто добит (композиција података)
-    tr: Brüt kâr (veri kompozisyonu)
-    uk: Валовий прибуток (компонування даних)
-    uz: Yalpi foyda (ma'lumotlar kompozitsiyasi)
-    zh: 毛利润（数据组合）
-params:
-    - name: Начало
-      type: date
-      label: С даты
-      labels:
-        az: Başlanğıc
-        de: Von Datum
-        en: From date
-        es: Inicio
-        fr: Début
-        hy: Սկիզբ
-        ka: დასაწყისი
-        kk: Басы
-        pt: Início
-        ro: Început
-        sr: Од датума
-        tr: Başlangıç
-        uk: Початок
-        uz: Boshlanish
-        zh: 开始
-    - name: Конец
-      type: date
-      label: По дату
-      labels:
-        az: Son
-        de: Bis Datum
-        en: To date
-        es: Fin
-        fr: Fin
-        hy: Վերջ
-        ka: დასრულება
-        kk: Соңы
-        pt: Fim
-        ro: Sfârșit
-        sr: До датума
-        tr: Bitiş
-        uk: Кінець
-        uz: Tugash
-        zh: 结束
-    - name: Организация
-      type: reference:Организация
-      label: Организация
-      labels:
-        az: Təşkilat
-        de: Organisation
-        en: Organization
-        es: Organización
-        fr: Organisation
-        hy: Կազմակերպություն
-        ka: ორგანიზაცია
-        kk: Ұйым
-        pt: Organização
-        ro: Organizație
-        sr: Организација
-        tr: Kuruluş
-        uk: Організація
-        uz: Tashkilot
-        zh: 组织
-# Запрос отдаёт ПЛОСКИЕ детальные строки (без СГРУППИРОВАТЬ/УПОРЯДОЧИТЬ) —
-# группировку, итоги и сортировку выполняет блок composition (лайт-СКД) в Go.
-query: |
-    ВЫБРАТЬ
-      Организация   КАК Организация,
-      Номенклатура  КАК Номенклатура,
-      Выручка       КАК Выручка,
-      Себестоимость КАК Себестоимость,
-      CAST(Выручка AS NUMERIC) - CAST(Себестоимость AS NUMERIC) КАК ВаловаяПрибыль
-    ИЗ РегистрНакопления.ВаловаяПрибыль
-    ГДЕ (&Начало ЕСТЬ ПУСТО ИЛИ period >= &Начало)
-      И (&Конец  ЕСТЬ ПУСТО ИЛИ period <= &Конец)
-      И (&Организация ЕСТЬ ПУСТО ИЛИ Организация = &Организация)
-# Система компоновки данных: два уровня группировки, итоги,
 # условное оформление по подытогам и декларативный график (ECharts).
 composition:
-    groupings:
-        - Организация
-        - Номенклатура
-    columns: []
-    measures:
-        - field: Выручка
-          agg: sum
-          title: Выручка
-          align: ""
-          format: '#,##0.00'
-          expr: ""
-        - field: Себестоимость
-          agg: sum
-          title: Себестоимость
-          align: ""
-          format: '#,##0.00'
-          expr: ""
-        - field: ВаловаяПрибыль
-          agg: sum
-          title: Валовая прибыль
-          align: ""
-          format: '#,##0.00'
-          expr: ""
-    totals:
-        grand: true
-        subtotals: true
-    detail: false
-    sort:
-        - field: ВаловаяПрибыль
-          dir: desc
-    conditional:
-        - when: ВаловаяПрибыль < 0
-          field: ""
-          style:
-            color: '#c00000'
-            background: ""
-            bold: true
-            italic: false
-        - when: ВаловаяПрибыль > 100000
-          field: ВаловаяПрибыль
-          style:
-            color: ""
-            background: '#e6ffed'
-            bold: false
-            italic: false
-    appearance:
-        lines: ""
-        zebra: false
-    chart:
-        type: bar
-        category: Номенклатура
-        series:
-            - ВаловаяПрибыль
-    detail_link: ""
-    detail_entity: ""
+  appearance:
+    lines: ""
+    zebra: false
+  chart:
+    category: Номенклатура
+    series:
+      - ВаловаяПрибыль
+    type: bar
+  columns: []
+  conditional:
+    - field: ""
+      style:
+        background: ""
+        bold: true
+        color: '#c00000'
+        italic: false
+      when: ВаловаяПрибыль < 0
+    - field: ВаловаяПрибыль
+      style:
+        background: '#e6ffed'
+        bold: false
+        color: ""
+        italic: false
+      when: ВаловаяПрибыль > 100000
+  detail: false
+  detail_entity: ""
+  detail_link: ""
+  groupings:
+    - Организация
+    - Номенклатура
+  measures:
+    - agg: sum
+      align: ""
+      expr: ""
+      field: Количество
+      format: '#,##0.000'
+      title: Количество
+    - agg: sum
+      align: ""
+      expr: ""
+      field: СуммаСНДС
+      format: '#,##0.00'
+      title: Сумма с НДС
+    - agg: sum
+      align: ""
+      expr: ""
+      field: СуммаНДС
+      format: '#,##0.00'
+      title: Сумма НДС
+    - agg: sum
+      align: ""
+      expr: ""
+      field: Выручка
+      format: '#,##0.00'
+      title: Выручка
+    - agg: sum
+      align: ""
+      expr: ""
+      field: Себестоимость
+      format: '#,##0.00'
+      title: Себестоимость
+    - agg: sum
+      align: ""
+      expr: ""
+      field: ВаловаяПрибыль
+      format: '#,##0.00'
+      title: Валовая прибыль
+  sort:
+    - dir: desc
+      field: ВаловаяПрибыль
+  totals:
+    grand: true
+    subtotals: true
+name: ВаловаяПрибыльСКД
+params:
+  - label: С даты
+    labels:
+      az: Başlanğıc
+      de: Von Datum
+      en: From date
+      es: Inicio
+      fr: Début
+      hy: Սկիզբ
+      ka: დასაწყისი
+      kk: Басы
+      pt: Início
+      ro: Început
+      sr: Од датума
+      tr: Başlangıç
+      uk: Початок
+      uz: Boshlanish
+      zh: 开始
+    name: Начало
+    type: date
+  - label: По дату
+    labels:
+      az: Son
+      de: Bis Datum
+      en: To date
+      es: Fin
+      fr: Fin
+      hy: Վերջ
+      ka: დასრულება
+      kk: Соңы
+      pt: Fim
+      ro: Sfârșit
+      sr: До датума
+      tr: Bitiş
+      uk: Кінець
+      uz: Tugash
+      zh: 结束
+    name: Конец
+    type: date
+  - label: Организация
+    labels:
+      az: Təşkilat
+      de: Organisation
+      en: Organization
+      es: Organización
+      fr: Organisation
+      hy: Կազմակերպություն
+      ka: ორგანიზაცია
+      kk: Ұйым
+      pt: Organização
+      ro: Organizație
+      sr: Организација
+      tr: Kuruluş
+      uk: Організація
+      uz: Tashkilot
+      zh: 组织
+    name: Организация
+    type: reference:Организация
+  - default: true
+    label: "С учётом НДС"
+    labels:
+      az: ƏDV daxil
+      de: Inkl. MwSt.
+      en: Including VAT
+      es: Con IVA
+      fr: Avec TVA
+      hy: ԱԱՀ-ով
+      ka: დღგ-ით
+      kk: ҚҚС қоса
+      pt: Com IVA
+      ro: Cu TVA
+      sr: Са ПДВ
+      tr: KDV dahil
+      uk: З урахуванням ПДВ
+      uz: QQS bilan
+      zh: 含增值税
+    name: СУчетомНДС
+    type: bool
+# Запрос отдаёт ПЛОСКИЕ детальные строки (без СГРУППИРОВАТЬ/УПОРЯДОЧИТЬ) —
+
+# группировку, итоги и сортировку выполняет блок composition (лайт-СКД) в Go.
+query: |
+  ВЫБРАТЬ
+    Организация   КАК Организация,
+    Номенклатура  КАК Номенклатура,
+    ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * Количество    КАК Количество,
+    ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * СуммаСНДС     КАК СуммаСНДС,
+    ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * СуммаНДС      КАК СуммаНДС,
+    ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА &СУчетомНДС = Истина И (СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0) ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ) КАК Выручка,
+    ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА &СУчетомНДС = Истина И (СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0) ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ) КАК Себестоимость,
+    CAST(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА &СУчетомНДС = Истина И (СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0) ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ) AS NUMERIC) - CAST(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА &СУчетомНДС = Истина И (СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0) ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ) AS NUMERIC) КАК ВаловаяПрибыль
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ (&Начало ЕСТЬ ПУСТО ИЛИ period >= &Начало)
+    И (&Конец  ЕСТЬ ПУСТО ИЛИ period <= &Конец)
+    И (&Организация ЕСТЬ ПУСТО ИЛИ Организация = &Организация)
+# Система компоновки данных: два уровня группировки, итоги,
+
+title: Валовая прибыль (СКД)
+titles:
+  az: Brüt mənfəət (məlumat kompozisiyası)
+  de: Rohgewinn (Datenkomposition)
+  en: Gross profit (data composition)
+  es: Beneficio bruto (composición de datos)
+  fr: Bénéfice brut (composition de données)
+  hy: Համախառն շահույթ (տվյալների կազմ)
+  ka: მთლიანი მოგება (მონაცემთა კომპოზიცია)
+  kk: Жалпы пайда (деректер композициясы)
+  pt: Lucro bruto (composição de dados)
+  ro: Profit brut (compoziție de date)
+  sr: Бруто добит (композиција података)
+  tr: Brüt kâr (veri kompozisyonu)
+  uk: Валовий прибуток (компонування даних)
+  uz: Yalpi foyda (ma'lumotlar kompozitsiyasi)
+  zh: 毛利润（数据组合）

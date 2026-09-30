@@ -1,27 +1,12 @@
-name: РазборкаТоваров
-title: Разборка товаров
-titles:
-  en: Disassembly
-  de: Demontage
-  sr: Растављање робе
-  az: Sökülmüş mallar
-  es: Desmontaje
-  fr: Désassemblage
-  hy: Ապամոնտաժ
-  ka: დაშლა
-  kk: Бұзып жинақтау
-  pt: Desmontagem
-  ro: Dezasamblare
-  tr: Söküm
-  uk: Розбірка товарів
-  uz: Ajratish
-  zh: 拆解
-posting: true
-numerator:
-  prefix: "РЗБ-"
-  length: 5
-  period: year
 fields:
+  - name: Идентификатор1С
+    title: Идентификатор 1С
+    titles:
+      de: 1C-Kennung
+      en: 1C identifier
+      sr: 1С идентификатор
+      uk: Ідентифікатор 1С
+    type: string
   - name: Номер
     type: string
   - name: Дата
@@ -33,34 +18,57 @@ fields:
   - name: Комментарий
     type: string
   - name: Спецификация
-    type: reference:СпецификацииНоменклатуры
     title: Спецификация
     titles:
-      en: Bill of materials
       de: Stückliste
+      en: Bill of materials
       sr: Саставница
+    type: reference:СпецификацииНоменклатуры
   - name: Сумма
     type: number
+name: РазборкаТоваров
+numerator:
+  length: 5
+  period: year
+  prefix: "РЗБ-"
+posting: true
 tableparts:
-  - name: Расход
+  - fields:
+      - name: Номенклатура
+        type: reference:Номенклатура
+      - name: Количество
+        type: number
+    name: Расход
     title: Разбираемая продукция
     titles:
-      en: Product to disassemble
       de: Zu demontierendes Produkt
+      en: Product to disassemble
       sr: Роба за растављање
-    fields:
+  - fields:
       - name: Номенклатура
         type: reference:Номенклатура
       - name: Количество
         type: number
-  - name: Приход
+    name: Приход
     title: Комплектующие
     titles:
-      en: Components
       de: Komponenten
+      en: Components
       sr: Компоненте
-    fields:
-      - name: Номенклатура
-        type: reference:Номенклатура
-      - name: Количество
-        type: number
+title: Разборка товаров
+titles:
+  az: Sökülmüş mallar
+  de: Demontage
+  en: Disassembly
+  es: Desmontaje
+  fr: Désassemblage
+  hy: Ապամոնտաժ
+  ka: დაშლა
+  kk: Бұзып жинақтау
+  pt: Desmontagem
+  ro: Dezasamblare
+  sr: Растављање робе
+  tr: Söküm
+  uk: Розбірка товарів
+  uz: Ajratish
+  zh: 拆解

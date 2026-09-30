@@ -1,11 +1,22 @@
+format: number
 name: СреднийЧек
-type: kpi
+params:
+  Начало: "{{today|minus_days:30}}"
+query: |
+  ВЫБРАТЬ
+    ВЫБОР КОГДА т.Чеков > 0
+      ТОГДА CAST(ROUND(т.Выр / т.Чеков, 0) AS INTEGER)
+      ИНАЧЕ 0 КОНЕЦ КАК Значение
+  ИЗ (ВЫБРАТЬ
+        СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)) КАК Выр,
+        КОЛИЧЕСТВО(РАЗЛИЧНЫЕ ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Регистратор КОНЕЦ) КАК Чеков
+      ИЗ РегистрНакопления.ВаловаяПрибыль
+      ГДЕ period >= &Начало) КАК т
 title: Средний чек за месяц
 titles:
-  en: Average check (month)
-  de: Durchschnittsbon (Monat)
-  sr: Просечна сметка (месец)
   az: Orta çek (ay)
+  de: Durchschnittsbon (Monat)
+  en: Average check (month)
   es: Ticket medio (mes)
   fr: Panier moyen (mois)
   hy: "Միջին չեկ (ամիս)"
@@ -13,15 +24,9 @@ titles:
   kk: "Орташа чек (ай)"
   pt: "Ticket médio (mês)"
   ro: "Bon mediu (lună)"
+  sr: Просечна сметка (месец)
   tr: "Ortalama fiş (ay)"
   uk: "Середній чек (місяць)"
   uz: "O'rtacha chek (oy)"
   zh: "月度客单价"
-format: number
-params:
-  Начало: "{{today|minus_days:30}}"
-query: |
-  ВЫБРАТЬ
-    CAST(ROUND(СУММА(Выручка) / КОЛИЧЕСТВО(РАЗЛИЧНЫЕ Регистратор), 0) AS INTEGER) КАК Значение
-  ИЗ РегистрНакопления.ВаловаяПрибыль
-  ГДЕ period >= &Начало
+type: kpi

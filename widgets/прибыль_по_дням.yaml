@@ -1,12 +1,22 @@
-name: ПрибыльПоДням
-type: chart
 chart_kind: bar
+name: ПрибыльПоДням
+params:
+  Начало: "{{today|minus_days:90}}"
+query: |
+  ВЫБРАТЬ
+    strftime('%Y-%m', period) КАК Месяц,
+    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)), 0) AS INTEGER) КАК Выручка,
+    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0 ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ)), 0) AS INTEGER) КАК Себестоимость,
+    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)) - СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0 ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ)), 0) AS INTEGER) КАК Прибыль
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ period >= &Начало
+  СГРУППИРОВАТЬ ПО strftime('%Y-%m', period)
+  УПОРЯДОЧИТЬ ПО strftime('%Y-%m', period)
 title: Прибыль за квартал
 titles:
-  en: Profit over quarter
-  de: Gewinn des Quartals
-  sr: Добит за квартал
   az: Rüblük mənfəət
+  de: Gewinn des Quartals
+  en: Profit over quarter
   es: Beneficio trimestral
   fr: Bénéfice trimestriel
   hy: "Եռամսյակային շահույթ"
@@ -14,21 +24,11 @@ titles:
   kk: "Тоқсандық пайда"
   pt: "Lucro trimestrial"
   ro: "Profit trimestrial"
+  sr: Добит за квартал
   tr: "Çeyreklik kâr"
   uk: "Прибуток за квартал"
   uz: "Choraklik foyda"
   zh: "季度利润"
-params:
-  Начало: "{{today|minus_days:90}}"
-query: |
-  ВЫБРАТЬ
-    strftime('%Y-%m', period) КАК Месяц,
-    CAST(ROUND(СУММА(Выручка), 0) AS INTEGER) КАК Выручка,
-    CAST(ROUND(СУММА(Себестоимость), 0) AS INTEGER) КАК Себестоимость,
-    CAST(ROUND(СУММА(Выручка) - СУММА(Себестоимость), 0) AS INTEGER) КАК Прибыль
-  ИЗ РегистрНакопления.ВаловаяПрибыль
-  ГДЕ period >= &Начало
-  СГРУППИРОВАТЬ ПО strftime('%Y-%m', period)
-  УПОРЯДОЧИТЬ ПО strftime('%Y-%m', period)
+type: chart
 x_field: Месяц
 y_fields: [Выручка, Прибыль]

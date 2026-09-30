@@ -1,12 +1,20 @@
-name: СтруктураВыручки
-type: chart
 chart_kind: pie
+name: СтруктураВыручки
+params:
+  Начало: "{{today|minus_days:30}}"
+query: |
+  ВЫБРАТЬ
+    Номенклатура,
+    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)), 0) AS INTEGER) КАК Сумма
+  ИЗ РегистрНакопления.ВаловаяПрибыль
+  ГДЕ period >= &Начало
+  СГРУППИРОВАТЬ ПО Номенклатура
+  УПОРЯДОЧИТЬ ПО Сумма УБЫВ
 title: Структура выручки по номенклатуре
 titles:
-  en: Revenue breakdown by item
-  de: Umsatzstruktur nach Artikel
-  sr: Структура прихода по артиклу
   az: Gəlirin məhsul üzrə strukturu
+  de: Umsatzstruktur nach Artikel
+  en: Revenue breakdown by item
   es: Desglose de ingresos por artículo
   fr: Répartition du chiffre d'affaires par article
   hy: Եկամտի կառուցվածքը ըստ ապրանքների
@@ -14,19 +22,11 @@ titles:
   kk: Табыстың тауар бойынша құрылымы
   pt: Composição da receita por item
   ro: Structura veniturilor pe articole
+  sr: Структура прихода по артиклу
   tr: Ciroğun ürün bazlı dağılımı
   uk: Структура виручки за товарами
   uz: Daromadning mahsulot bo'yicha tuzilishi
   zh: 按商品的收入构成
-params:
-  Начало: "{{today|minus_days:30}}"
-query: |
-  ВЫБРАТЬ
-    Номенклатура,
-    CAST(ROUND(СУММА(Выручка), 0) AS INTEGER) КАК Сумма
-  ИЗ РегистрНакопления.ВаловаяПрибыль
-  ГДЕ period >= &Начало
-  СГРУППИРОВАТЬ ПО Номенклатура
-  УПОРЯДОЧИТЬ ПО Сумма УБЫВ
+type: chart
 x_field: Номенклатура
 y_fields: [Сумма]

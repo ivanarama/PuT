@@ -1,146 +1,139 @@
-schema: onebase.form/v1
-
-form:
-  name: ФормаОбъекта
-  kind: object
-  entity: ОтгрузкаЗаказов
-  title:
-    ru: "АРМ Отгрузки"
-    en: "Shipment workplace"
-    de: "Versand-Arbeitsplatz"
-    sr: "Радно место отпреме"
-  auto_save_settings: true
-  vertical_scroll: auto
-
 attributes:
-  - name: Объект
-    main: true
-
+  - main: true
+    name: Объект
 elements:
-  - kind: СтраницыФормы
-    name: ОсновныеЗакладки
-    children:
-
-      - kind: Страница
-        name: СтраницаОсновное
-        title:
-          ru: "Отгрузка"
-          en: "Shipment"
-          de: "Versand"
-          sr: "Отпрема"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаШапка
-            title:
-              ru: "Параметры отгрузки"
-              en: "Shipment parameters"
-              de: "Versandparameter"
-              sr: "Параметри отпреме"
-            children:
-              - kind: ПолеВвода
+  - children:
+      - children:
+          - children:
+              - data_path: Объект.Дата
+                kind: ПолеВвода
                 name: ПолеДата
-                title:
-                  ru: "Дата"
-                  en: "Date"
-                  de: "Datum"
-                  sr: "Датум"
-                data_path: Объект.Дата
                 required: true
-              - kind: ПолеВвода
+                title:
+                  de: "Datum"
+                  en: "Date"
+                  ru: "Дата"
+                  sr: "Датум"
+              - choice: true
+                data_path: Объект.Организация
+                kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  ru: "Организация"
-                  en: "Organization"
                   de: "Organisation"
+                  en: "Organization"
+                  ru: "Организация"
                   sr: "Организација"
-                data_path: Объект.Организация
-                choice: true
-              - kind: ПолеВвода
-                name: ПолеПокупатель
-                title:
-                  ru: "Покупатель"
-                  en: "Customer"
-                  de: "Kunde"
-                  sr: "Купац"
+              - choice: true
                 data_path: Объект.Покупатель
-                required: true
-                choice: true
                 hint: "Чьи заказы отгружаем"
-              - kind: ПолеВвода
-                name: ПолеСклад
-                title:
-                  ru: "Склад"
-                  en: "Warehouse"
-                  de: "Lager"
-                  sr: "Магацин"
-                data_path: Объект.Склад
+                kind: ПолеВвода
+                name: ПолеПокупатель
                 required: true
-                choice: true
-
-      - kind: Страница
-        name: СтраницаСтроки
-        title:
-          ru: "К отгрузке"
-          en: "To ship"
-          de: "Zu liefern"
-          sr: "За отпрему"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаТабЧасть
-            title:
-              ru: "К отгрузке = мин(резерв, остаток)"
-              en: "To ship = min(reserved, stock)"
-              de: "Zu liefern = min(Reserve, Bestand)"
-              sr: "За отпрему = мин(резерва, стање)"
-            children:
-              - kind: ТабличнаяЧасть
-                use_grid: true
-                name: ТабСтроки
                 title:
-                  ru: "Строки"
-                  en: "Lines"
-                  de: "Zeilen"
-                  sr: "Ставке"
-                data_path: Строки
-                children:
-                  - kind: Кнопка
+                  de: "Kunde"
+                  en: "Customer"
+                  ru: "Покупатель"
+                  sr: "Купац"
+              - choice: true
+                data_path: Объект.Склад
+                kind: ПолеВвода
+                name: ПолеСклад
+                required: true
+                title:
+                  de: "Lager"
+                  en: "Warehouse"
+                  ru: "Склад"
+                  sr: "Магацин"
+            kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              de: "Versandparameter"
+              en: "Shipment parameters"
+              ru: "Параметры отгрузки"
+              sr: "Параметри отпреме"
+        kind: Страница
+        name: СтраницаОсновное
+        title:
+          de: "Versand"
+          en: "Shipment"
+          ru: "Отгрузка"
+          sr: "Отпрема"
+      - children:
+          - children:
+              - children:
+                  - events:
+                      Нажатие: КнопкаЗаполнитьНажатие
+                    hint: "Резервы по заказам покупателя с учётом остатка склада"
+                    kind: Кнопка
                     name: КнопкаЗаполнить
                     title:
-                      ru: "1️⃣ Заполнить к отгрузке"
-                      en: "Fill to ship"
                       de: "Zu liefern füllen"
+                      en: "Fill to ship"
+                      ru: "1️⃣ Заполнить к отгрузке"
                       sr: "Попуни за отпрему"
-                    hint: "Резервы по заказам покупателя с учётом остатка склада"
-                    events:
-                      Нажатие: КнопкаЗаполнитьНажатие
-                  - kind: Кнопка
+                  - events:
+                      Нажатие: КнопкаОчиститьНажатие
+                    kind: Кнопка
                     name: КнопкаОчистить
                     title:
-                      ru: "Очистить"
-                      en: "Clear"
                       de: "Leeren"
+                      en: "Clear"
+                      ru: "Очистить"
                       sr: "Обриши"
-                    events:
-                      Нажатие: КнопкаОчиститьНажатие
-
-          - kind: ГруппаФормы
-            name: ГруппаДействия
+                data_path: Строки
+                kind: ТабличнаяЧасть
+                name: ТабСтроки
+                title:
+                  de: "Zeilen"
+                  en: "Lines"
+                  ru: "Строки"
+                  sr: "Ставке"
+                use_grid: true
+            kind: ГруппаФормы
+            name: ГруппаТабЧасть
             title:
-              ru: "Отгрузка"
-              en: "Shipment"
-              de: "Versand"
-              sr: "Отпрема"
-            children:
-              - kind: Кнопка
+              de: "Zu liefern = min(Reserve, Bestand)"
+              en: "To ship = min(reserved, stock)"
+              ru: "К отгрузке = мин(резерв, остаток)"
+              sr: "За отпрему = мин(резерва, стање)"
+          - children:
+              - events:
+                  Нажатие: КнопкаСоздатьРеализацииНажатие
+                hint: "Одна реализация на заказ; проведение снимает резерв и списывает FIFO"
+                kind: Кнопка
                 name: КнопкаСоздатьРеализации
                 title:
-                  ru: "2️⃣ Создать реализации"
-                  en: "Create sales"
                   de: "Verkäufe erstellen"
+                  en: "Create sales"
+                  ru: "2️⃣ Создать реализации"
                   sr: "Креирај продаје"
-                hint: "Одна реализация на заказ; проведение снимает резерв и списывает FIFO"
-                events:
-                  Нажатие: КнопкаСоздатьРеализацииНажатие
-
+            kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              de: "Versand"
+              en: "Shipment"
+              ru: "Отгрузка"
+              sr: "Отпрема"
+        kind: Страница
+        name: СтраницаСтроки
+        title:
+          de: "Zu liefern"
+          en: "To ship"
+          ru: "К отгрузке"
+          sr: "За отпрему"
+    kind: СтраницыФормы
+    name: ОсновныеЗакладки
 events:
   ПриОткрытии: ПриОткрытииФормы
+form:
+  auto_save_settings: true
+  entity: ОтгрузкаЗаказов
+  kind: object
+  name: ФормаОбъекта
+  title:
+    de: "Versand-Arbeitsplatz"
+    en: "Shipment workplace"
+    ru: "АРМ Отгрузки"
+    sr: "Радно место отпреме"
+  vertical_scroll: auto
+schema: onebase.form/v1
