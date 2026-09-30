@@ -1,0 +1,28 @@
+name: Штрихкоды
+title: Штрихкоды номенклатуры
+titles:
+  en: Item barcodes
+  de: Artikelebarcode
+  sr: Баркодови артикала
+fields:
+  - name: Штрихкод
+    title: Штрихкод
+    titles:
+      en: Barcode
+      de: Barcode
+      sr: Баркод
+    type: string
+  - name: Номенклатура
+    title: Номенклатура
+    titles:
+      en: Item
+      de: Artikel
+      sr: Артикал
+    type: reference:Номенклатура
+  - name: ЕдиницаИзмерения
+    title: Единица измерения
+    titles:
+      en: Unit
+      de: Einheit
+      sr: Јединица
+    type: reference:ЕдиницаИзмерения

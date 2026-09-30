@@ -30,6 +30,10 @@ params:
     type: reference:ТипЦен
     label: Тип цен продажи
     labels: {en: Sales price type, de: Verkaufspreistyp, sr: Тип цене продаје}
+  - name: Штрихкод
+    type: string
+    label: Сканирование штрихкода
+    labels: {en: Barcode scan, de: Barcode-Scan, sr: Скенирање баркода}
   - name: Касса
     type: reference:Касса
     label: Касса

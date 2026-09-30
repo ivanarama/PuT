@@ -10,6 +10,9 @@ form:
   auto_save_settings: true
   vertical_scroll: auto
 
+events:
+  ПриОткрытии: ПриОткрытииФормы
+
 attributes:
   - name: Объект
     main: true
