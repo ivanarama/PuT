@@ -558,6 +558,8 @@ func checkContract(result *report, path string) {
 		!strings.Contains(text, "legacy re-ship") ||
 		!strings.Contains(text, "single-flight-барьер") ||
 		!strings.Contains(string(mergeData), "pp:base-sync-intent") ||
+		!strings.Contains(string(mergeData), "pp:merge-cleanup-intent") ||
+		!strings.Contains(string(mergeData), "complete merge-cleanup") ||
 		!strings.Contains(string(mergeData), "legacy reauthorized") ||
 		!strings.Contains(string(mergeData), "single-flight-барьер") {
 		result.add("red", "unsafe_base_sync_contract", 0,
