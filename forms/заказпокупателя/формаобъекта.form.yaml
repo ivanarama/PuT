@@ -17,6 +17,7 @@ elements:
                   en: "Number"
                   ru: "Номер"
                   sr: "Број"
+                width: 220
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
@@ -26,25 +27,7 @@ elements:
                   en: "Date"
                   ru: "Дата"
                   sr: "Датум"
-              - choice: true
-                data_path: Объект.Организация
-                kind: ПолеВвода
-                name: ПолеОрганизация
-                title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
-              - choice: true
-                data_path: Объект.Основание
-                hint: "Счёт, на основании которого создан заказ"
-                kind: ПолеВвода
-                name: ПолеОснование
-                title:
-                  de: "Beleggrundlage"
-                  en: "Base document"
-                  ru: "Основание"
-                  sr: "Основни документ"
+                width: 220
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
@@ -52,50 +35,7 @@ elements:
               en: "Document header"
               ru: "Шапка документа"
               sr: "Заглавље документа"
-          - children:
-              - data_path: Объект.СуммаБезНДС
-                kind: ПолеВвода
-                name: ПолеСуммаБезНДС
-                readonly: true
-                title:
-                  de: "Betrag o. USt."
-                  en: "Amount excl. VAT"
-                  ru: "Сумма без НДС"
-                  sr: "Износ без ПДВ"
-              - data_path: Объект.СуммаНДС
-                kind: ПолеВвода
-                name: ПолеСуммаНДС
-                readonly: true
-                title:
-                  de: "USt.-Betrag"
-                  en: "VAT amount"
-                  ru: "Сумма НДС"
-                  sr: "Износ ПДВ"
-              - data_path: Объект.Сумма
-                hint: "Рассчитывается автоматически из строк табличной части"
-                kind: ПолеВвода
-                name: ПолеСумма
-                readonly: true
-                title:
-                  de: "Gesamt"
-                  en: "Total"
-                  ru: "Всего"
-                  sr: "Укупно"
-            kind: ГруппаФормы
-            name: ГруппаИтоги
-            title:
-              de: "Summen"
-              en: "Totals"
-              ru: "Итоги"
-              sr: "Укупно"
-        kind: Страница
-        name: СтраницаОсновное
-        title:
-          de: "Allgemein"
-          en: "General"
-          ru: "Основное"
-          sr: "Опште"
-      - children:
+            orientation: horizontal
           - children:
               - choice: true
                 data_path: Объект.Покупатель
@@ -109,6 +49,7 @@ elements:
                   en: "Customer"
                   ru: "Покупатель"
                   sr: "Купац"
+                width: 320
               - choice: true
                 data_path: Объект.Склад
                 kind: ПолеВвода
@@ -119,6 +60,7 @@ elements:
                   en: "Warehouse"
                   ru: "Склад"
                   sr: "Магацин"
+                width: 320
               - choice: true
                 data_path: Объект.ТипЦенПродажи
                 events:
@@ -131,6 +73,7 @@ elements:
                   en: "Sales price type"
                   ru: "Тип цен продажи"
                   sr: "Тип цене продаје"
+                width: 320
               - choice: true
                 data_path: Объект.СпособУчетаНДС
                 events:
@@ -143,14 +86,7 @@ elements:
                   en: "VAT"
                   ru: "НДС"
                   sr: "ПДВ"
-              - data_path: Объект.Комментарий
-                kind: ПолеВвода
-                name: ПолеКомментарий
-                title:
-                  de: "Kommentar"
-                  en: "Comment"
-                  ru: "Комментарий"
-                  sr: "Коментар"
+                width: 320
             kind: ГруппаФормы
             name: ГруппаКонтрагент
             title:
@@ -158,13 +94,55 @@ elements:
               en: "Customer details"
               ru: "Реквизиты покупателя"
               sr: "Подаци о купцу"
+            orientation: horizontal
+          - children:
+              - data_path: Объект.СуммаБезНДС
+                kind: ПолеВвода
+                name: ПолеСуммаБезНДС
+                readonly: true
+                title:
+                  de: "Betrag o. USt."
+                  en: "Amount excl. VAT"
+                  ru: "Сумма без НДС"
+                  sr: "Износ без ПДВ"
+                width: 220
+              - data_path: Объект.СуммаНДС
+                kind: ПолеВвода
+                name: ПолеСуммаНДС
+                readonly: true
+                title:
+                  de: "USt.-Betrag"
+                  en: "VAT amount"
+                  ru: "Сумма НДС"
+                  sr: "Износ ПДВ"
+                width: 220
+              - data_path: Объект.Сумма
+                hint: "Рассчитывается автоматически из строк табличной части"
+                kind: ПолеВвода
+                name: ПолеСумма
+                readonly: true
+                title:
+                  de: "Gesamt"
+                  en: "Total"
+                  ru: "Всего"
+                  sr: "Укупно"
+                width: 220
+            kind: ГруппаФормы
+            name: ГруппаИтоги
+            title:
+              de: "Summen"
+              en: "Totals"
+              ru: "Итоги"
+              sr: "Укупно"
+            orientation: horizontal
+            background: '#eff6ff'
         kind: Страница
-        name: СтраницаКонтрагент
+        name: СтраницаОсновное
         title:
-          de: "Kunde & Lager"
-          en: "Customer & warehouse"
-          ru: "Покупатель и склад"
-          sr: "Купац и магацин"
+          de: "Allgemein"
+          en: "General"
+          ru: "Основное"
+          sr: "Опште"
       - children:
           - children:
               - data_path: Объект.Товары
@@ -221,6 +199,54 @@ elements:
           en: "Items"
           ru: "Товары"
           sr: "Артикли"
+      - children:
+          - kind: ГруппаФормы
+            name: ГруппаДополнительно
+            title:
+              ru: Дополнительные реквизиты
+              en: Additional details
+              de: Weitere Angaben
+              sr: Додатни подаци
+            children:
+              - choice: true
+                data_path: Объект.Организация
+                kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  de: "Organisation"
+                  en: "Organization"
+                  ru: "Организация"
+                  sr: "Организација"
+                width: 320
+              - choice: true
+                data_path: Объект.Основание
+                hint: "Счёт, на основании которого создан заказ"
+                kind: ПолеВвода
+                name: ПолеОснование
+                title:
+                  de: "Beleggrundlage"
+                  en: "Base document"
+                  ru: "Основание"
+                  sr: "Основни документ"
+                width: 320
+              - data_path: Объект.Комментарий
+                kind: ПолеВвода
+                name: ПолеКомментарий
+                title:
+                  de: "Kommentar"
+                  en: "Comment"
+                  ru: "Комментарий"
+                  sr: "Коментар"
+                multiline: true
+                halign: stretch
+            orientation: horizontal
+        kind: Страница
+        name: СтраницаКонтрагент
+        title:
+          ru: Дополнительно
+          en: Details
+          de: Weitere Angaben
+          sr: Додатно
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:

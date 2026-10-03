@@ -94,3 +94,166 @@ home_page:
         - widgets:
             - ТопНоменклатуры
             - ТопПокупатели
+
+menu:
+  sections:
+  - id: sales-work
+    title: Заказы и отгрузка
+    titles:
+      en: Orders and fulfilment
+    icon: shopping-cart
+    items:
+    - target: processor:РабочееМестоПродаж
+      id: sales-processor-ef592cc658
+    - target: document:ЗаказПокупателя
+      id: sales-document-4aaa16b771
+    - target: document:Счёт
+      id: sales-document-e1da46b833
+    - target: document:РеализацияТоваров
+      id: sales-document-57fe772677
+    groups:
+    - id: sales-fulfilment
+      title: Отгрузка и возвраты
+      titles:
+        en: Shipping and returns
+      icon: package-check
+      items:
+      - target: processor:ОтгрузкаЗаказов
+        id: sales-processor-d3ac662e0c
+      - target: processor:РеализацияИзСчёта
+        id: sales-processor-dd313da2d3
+      - target: document:ВозвратОтПокупателя
+        id: sales-document-e1d0e67842
+      - target: document:ЗакрытиеЗаказовПокупателей
+        id: sales-document-1ab08f15ef
+  - id: sales-customers
+    title: Клиенты и расчёты
+    titles:
+      en: Customers and settlements
+    icon: users
+    items:
+    - target: catalog:Контрагент
+      id: sales-catalog-103b090669
+    - target: catalog:ДоговорыКонтрагентов
+      id: sales-catalog-c8a1bd78bc
+    groups:
+    - id: sales-payments
+      title: Оплаты и задолженность
+      titles:
+        en: Payments and debt
+      icon: wallet
+      items:
+      - target: document:ПриходныйКассовыйОрдер
+        id: sales-document-1e41208271
+      - target: document:ПоступлениеНаРасчётныйСчёт
+        id: sales-document-c1e100106f
+      - target: document:КорректировкаДолга
+        id: sales-document-9c9e758b25
+      - target: report:ОплатыРеализаций
+        id: sales-report-2835e9207c
+      - target: report:Взаиморасчеты
+        id: sales-report-d427b5b85a
+      - target: report:АктСверки
+        id: sales-report-c91c6a3b3d
+  - id: sales-prices
+    title: Товары и цены
+    titles:
+      en: Products and pricing
+    icon: tags
+    items:
+    - target: catalog:Номенклатура
+      id: sales-catalog-7624619d53
+    - target: catalog:ТипЦен
+      id: sales-catalog-3d3680a7c5
+    groups:
+    - id: sales-price-tools
+      title: Управление ценами
+      titles:
+        en: Price management
+      icon: badge-dollar-sign
+      items:
+      - target: document:УстановкаЦен
+        id: sales-document-da3f3dc311
+      - target: processor:ПересчётЦен
+        id: sales-processor-ae1ddec939
+      - target: processor:НастройкаТиповЦен
+        id: sales-processor-2069eaf086
+      - target: report:ЦеныНоменклатуры
+        id: sales-report-e7aa50dc40
+    - id: sales-reference
+      title: Реквизиты и нормативы
+      titles:
+        en: Business reference data
+      icon: book-open
+      items:
+      - target: catalog:Организация
+        id: sales-catalog-f468d47562
+      - target: catalog:Валюта
+        id: sales-catalog-050a964d9f
+      - target: catalog:ЕдиницаИзмерения
+        id: sales-catalog-1eae5fc563
+      - target: catalog:СтавкаНДС
+        id: sales-catalog-1a5f1ddf1c
+  - id: sales-analysis
+    title: Результаты продаж
+    titles:
+      en: Sales performance
+    icon: chart-no-axes-combined
+    items:
+    - target: report:АнализЗаказовПокупателей
+      id: sales-report-f94cdca46f
+    - target: report:ВаловаяПрибыль
+      id: sales-report-c2a1f3d390
+    - target: report:ABCАнализПродаж
+      id: sales-report-538aa5c6c2
+    groups:
+    - id: sales-reports
+      title: Отчёты и сводки
+      titles:
+        en: Reports and summaries
+      icon: chart-column
+      items:
+      - target: report:ВаловаяПрибыльСКД
+        id: sales-report-b071fc7fa9
+      - target: report:КнигаПродаж
+        id: sales-report-d169e475b6
+      - target: report:ПродажиПоКонтрагентам
+        id: sales-report-ca04b83a41
+      - target: report:ПродажиПоМесяцам
+        id: sales-report-b2510847f9
+      - target: report:ОстаткиТоваров
+        id: sales-report-d670fe8748
+      - target: report:РезервыТоваров
+        id: sales-report-cfa9047091
+      - target: page:Панель
+        id: sales-page-3114237f04
+    - id: sales-accounting
+      title: Данные учёта
+      titles:
+        en: Accounting data
+      icon: database
+      items:
+      - target: register:ВаловаяПрибыль:balances
+        id: sales-register-ca82e7d91f
+      - target: register:ВаловаяПрибыль:movements
+        id: sales-register-50b1668b46
+      - target: register:Взаиморасчеты:balances
+        id: sales-register-75eaef5c7d
+      - target: register:Взаиморасчеты:movements
+        id: sales-register-3839a81b53
+      - target: register:РезервыТоваров:balances
+        id: sales-register-c82aa355b4
+      - target: register:РезервыТоваров:movements
+        id: sales-register-314fd20cd8
+    - id: sales-service
+      title: Обмен и обслуживание
+      titles:
+        en: Exchange and maintenance
+      icon: wrench
+      items:
+      - target: processor:ВыгрузкаВExcel
+        id: sales-processor-ab859dc12c
+      - target: processor:УведомленияПродажи
+        id: sales-processor-003a575973
+      - target: processor:ЗакрытиеМесяца
+        id: sales-processor-f3df3ffe1a

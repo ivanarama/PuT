@@ -17,19 +17,481 @@ titles:
     zh: 首页 — 贸易
 layout: rows
 rows:
-    - widgets:
-        - ВыручкаМесяца
-        - ВаловаяПрибыльМесяца
-        - РентабельностьПродаж
-        - КассаОстаток
-        - ДебиторскаяЗадолженность
-    - widgets:
-        - ПродажиПоДням
-        - ПрибыльПоДням
-    - widgets:
-        - СтруктураВыручки
-        - ТопНоменклатуры
-    - widgets:
-        - БыстрыеДействия
-        - ПоследниеДокументы
-        - СчетовЗаМесяц
+- widgets:
+  - БыстрыеДействия
+- widgets:
+  - ВыручкаМесяца
+  - ВаловаяПрибыльМесяца
+  - РентабельностьПродаж
+- widgets:
+  - КассаОстаток
+  - ДебиторскаяЗадолженность
+  - СчетовЗаМесяц
+- widgets:
+  - ТоварыКЗаказу
+  - ОжидаемыеПоставки
+- widgets:
+  - ПродажиПоДням
+  - ПрибыльПоДням
+- widgets:
+  - СтруктураВыручки
+  - ТопНоменклатуры
+- widgets:
+  - ПоследниеДокументы
+
+menu:
+  sections:
+  - id: home-sales
+    title: Продажи
+    titles:
+      en: Sales
+    icon: shopping-cart
+    items:
+    - target: processor:РабочееМестоПродаж
+      id: home-sales-processor-ef592cc658
+    - target: document:ЗаказПокупателя
+      id: home-sales-document-4aaa16b771
+    - target: document:Счёт
+      id: home-sales-document-e1da46b833
+    - target: document:РеализацияТоваров
+      id: home-sales-document-57fe772677
+    groups:
+    - id: home-sales-work
+      title: Заказы и отгрузка
+      titles:
+        en: Orders and fulfilment
+      icon: shopping-cart
+      items:
+      - target: processor:ОтгрузкаЗаказов
+        id: home-sales-processor-d3ac662e0c
+      - target: processor:РеализацияИзСчёта
+        id: home-sales-processor-dd313da2d3
+      - target: document:ВозвратОтПокупателя
+        id: home-sales-document-e1d0e67842
+      - target: document:ЗакрытиеЗаказовПокупателей
+        id: home-sales-document-1ab08f15ef
+    - id: home-sales-customers
+      title: Клиенты и расчёты
+      titles:
+        en: Customers and settlements
+      icon: users
+      items:
+      - target: catalog:Контрагент
+        id: home-sales-catalog-103b090669
+      - target: catalog:ДоговорыКонтрагентов
+        id: home-sales-catalog-c8a1bd78bc
+      - target: document:ПриходныйКассовыйОрдер
+        id: home-sales-document-1e41208271
+      - target: document:ПоступлениеНаРасчётныйСчёт
+        id: home-sales-document-c1e100106f
+      - target: document:КорректировкаДолга
+        id: home-sales-document-9c9e758b25
+      - target: report:ОплатыРеализаций
+        id: home-sales-report-2835e9207c
+      - target: report:Взаиморасчеты
+        id: home-sales-report-d427b5b85a
+      - target: report:АктСверки
+        id: home-sales-report-c91c6a3b3d
+    - id: home-sales-prices
+      title: Товары и цены
+      titles:
+        en: Products and pricing
+      icon: tags
+      items:
+      - target: catalog:Номенклатура
+        id: home-sales-catalog-7624619d53
+      - target: catalog:ТипЦен
+        id: home-sales-catalog-3d3680a7c5
+      - target: document:УстановкаЦен
+        id: home-sales-document-da3f3dc311
+      - target: processor:ПересчётЦен
+        id: home-sales-processor-ae1ddec939
+      - target: processor:НастройкаТиповЦен
+        id: home-sales-processor-2069eaf086
+      - target: report:ЦеныНоменклатуры
+        id: home-sales-report-e7aa50dc40
+      - target: catalog:Организация
+        id: home-sales-catalog-f468d47562
+      - target: catalog:Валюта
+        id: home-sales-catalog-050a964d9f
+      - target: catalog:ЕдиницаИзмерения
+        id: home-sales-catalog-1eae5fc563
+      - target: catalog:СтавкаНДС
+        id: home-sales-catalog-1a5f1ddf1c
+    - id: home-sales-analysis
+      title: Результаты продаж
+      titles:
+        en: Sales performance
+      icon: chart-no-axes-combined
+      items:
+      - target: report:АнализЗаказовПокупателей
+        id: home-sales-report-f94cdca46f
+      - target: report:ВаловаяПрибыль
+        id: home-sales-report-c2a1f3d390
+      - target: report:ABCАнализПродаж
+        id: home-sales-report-538aa5c6c2
+      - target: report:ВаловаяПрибыльСКД
+        id: home-sales-report-b071fc7fa9
+      - target: report:КнигаПродаж
+        id: home-sales-report-d169e475b6
+      - target: report:ПродажиПоКонтрагентам
+        id: home-sales-report-ca04b83a41
+      - target: report:ПродажиПоМесяцам
+        id: home-sales-report-b2510847f9
+      - target: report:ОстаткиТоваров
+        id: home-sales-report-d670fe8748
+      - target: report:РезервыТоваров
+        id: home-sales-report-cfa9047091
+      - target: register:ВаловаяПрибыль:balances
+        id: home-sales-register-ca82e7d91f
+      - target: register:ВаловаяПрибыль:movements
+        id: home-sales-register-50b1668b46
+      - target: register:Взаиморасчеты:balances
+        id: home-sales-register-75eaef5c7d
+      - target: register:Взаиморасчеты:movements
+        id: home-sales-register-3839a81b53
+      - target: register:РезервыТоваров:balances
+        id: home-sales-register-c82aa355b4
+      - target: register:РезервыТоваров:movements
+        id: home-sales-register-314fd20cd8
+      - target: processor:ВыгрузкаВExcel
+        id: home-sales-processor-ab859dc12c
+      - target: processor:УведомленияПродажи
+        id: home-sales-processor-003a575973
+      - target: processor:ЗакрытиеМесяца
+        id: home-sales-processor-f3df3ffe1a
+  - id: home-purchase
+    title: Закупки
+    titles:
+      en: Purchasing
+    icon: truck
+    items:
+    - target: processor:ПланЗакупок
+      id: home-purchase-processor-8a5867d4e8
+    - target: processor:ПриёмкаТовара
+      id: home-purchase-processor-a6ab717934
+    - target: document:ЗаказПоставщику
+      id: home-purchase-document-89ec8b3fa6
+    - target: document:ПоступлениеТоваров
+      id: home-purchase-document-c29e8cf19a
+    groups:
+    - id: home-purchase-work
+      title: Заказ и приёмка
+      titles:
+        en: Ordering and receiving
+      icon: truck
+      items:
+      - target: document:ВозвратПоставщику
+        id: home-purchase-document-b388e1dc7b
+      - target: document:ЗакрытиеЗаказовПоставщикам
+        id: home-purchase-document-d04e824ed1
+    - id: home-purchase-suppliers
+      title: Поставщики и расчёты
+      titles:
+        en: Suppliers and settlements
+      icon: handshake
+      items:
+      - target: catalog:Контрагент
+        id: home-purchase-catalog-103b090669
+      - target: catalog:ДоговорыКонтрагентов
+        id: home-purchase-catalog-c8a1bd78bc
+      - target: document:РасходныйКассовыйОрдер
+        id: home-purchase-document-81fc3a67e5
+      - target: document:КорректировкаДолга
+        id: home-purchase-document-9c9e758b25
+      - target: report:ОплатыПоступлений
+        id: home-purchase-report-db2467a336
+      - target: report:Взаиморасчеты
+        id: home-purchase-report-d427b5b85a
+      - target: report:АктСверки
+        id: home-purchase-report-c91c6a3b3d
+    - id: home-purchase-products
+      title: Товары и обмен
+      titles:
+        en: Products and exchange
+      icon: package
+      items:
+      - target: catalog:Номенклатура
+        id: home-purchase-catalog-7624619d53
+      - target: catalog:ТипЦен
+        id: home-purchase-catalog-3d3680a7c5
+      - target: processor:ИмпортНоменклатуры
+        id: home-purchase-processor-ba0566e5c6
+      - target: processor:ЗагрузкаЭДО
+        id: home-purchase-processor-a6af7a7afe
+      - target: processor:ВыгрузкаВExcel
+        id: home-purchase-processor-ab859dc12c
+      - target: inforeg:НоменклатураКонтрагентов
+        id: home-purchase-inforeg-f660ecc791
+      - target: report:ЦеныНоменклатуры
+        id: home-purchase-report-e7aa50dc40
+      - target: catalog:Организация
+        id: home-purchase-catalog-f468d47562
+      - target: catalog:Валюта
+        id: home-purchase-catalog-050a964d9f
+      - target: catalog:ЕдиницаИзмерения
+        id: home-purchase-catalog-1eae5fc563
+      - target: catalog:СтавкаНДС
+        id: home-purchase-catalog-1a5f1ddf1c
+    - id: home-purchase-analysis
+      title: Контроль закупок
+      titles:
+        en: Purchasing control
+      icon: clipboard-check
+      items:
+      - target: report:АнализЗаказовПоставщикам
+        id: home-purchase-report-a88a44c8f1
+      - target: report:ТоварыВПути
+        id: home-purchase-report-190533934e
+      - target: report:ДвиженияТоваров
+        id: home-purchase-report-057cc9a2b5
+      - target: report:КнигаПокупок
+        id: home-purchase-report-f33a170aa5
+      - target: register:ТоварыВПути:balances
+        id: home-purchase-register-e3a06519a7
+      - target: register:ТоварыВПути:movements
+        id: home-purchase-register-8569d79d65
+      - target: register:Взаиморасчеты:balances
+        id: home-purchase-register-75eaef5c7d
+      - target: register:Взаиморасчеты:movements
+        id: home-purchase-register-3839a81b53
+      - target: register:ПартииТоваров:balances
+        id: home-purchase-register-30da39fef2
+      - target: register:ПартииТоваров:movements
+        id: home-purchase-register-350a2355be
+      - target: register:ОстаткиТоваров:balances
+        id: home-purchase-register-13ae720e30
+      - target: register:ОстаткиТоваров:movements
+        id: home-purchase-register-c5cb600e6a
+  - id: home-warehouse
+    title: Склад
+    titles:
+      en: Warehouse
+    icon: warehouse
+    items:
+    - target: processor:ПриёмкаТовара
+      id: home-warehouse-processor-a6ab717934
+    - target: processor:ОтгрузкаЗаказов
+      id: home-warehouse-processor-d3ac662e0c
+    - target: processor:ИнвентаризацияСклада
+      id: home-warehouse-processor-18afc3b92a
+    groups:
+    - id: home-warehouse-work
+      title: Складские операции
+      titles:
+        en: Warehouse operations
+      icon: warehouse
+      items:
+      - target: document:ПоступлениеТоваров
+        id: home-warehouse-document-c29e8cf19a
+      - target: document:РеализацияТоваров
+        id: home-warehouse-document-57fe772677
+      - target: document:ПеремещениеТоваров
+        id: home-warehouse-document-13dd25d0de
+      - target: document:ПересчетТоваров
+        id: home-warehouse-document-c724646b12
+      - target: document:ОприходованиеТоваров
+        id: home-warehouse-document-86a0072f07
+      - target: document:СписаниеТоваров
+        id: home-warehouse-document-c5bc2f5000
+      - target: document:ВозвратОтПокупателя
+        id: home-warehouse-document-e1d0e67842
+      - target: document:ВозвратПоставщику
+        id: home-warehouse-document-b388e1dc7b
+    - id: home-warehouse-products
+      title: Товары и комплекты
+      titles:
+        en: Products and kits
+      icon: package
+      items:
+      - target: catalog:Номенклатура
+        id: home-warehouse-catalog-7624619d53
+      - target: catalog:Склад
+        id: home-warehouse-catalog-958f1133ae
+      - target: catalog:СпецификацииНоменклатуры
+        id: home-warehouse-catalog-18ca7200d9
+      - target: document:СборкаТоваров
+        id: home-warehouse-document-2152be03f3
+      - target: document:РазборкаТоваров
+        id: home-warehouse-document-942fefb7b0
+      - target: catalog:Штрихкоды
+        id: home-warehouse-catalog-0340959eef
+      - target: catalog:ЕдиницаИзмерения
+        id: home-warehouse-catalog-1eae5fc563
+      - target: catalog:ПодключаемоеОборудование
+        id: home-warehouse-catalog-ba4ded0938
+      - target: inforeg:ЦеныНоменклатуры
+        id: home-warehouse-inforeg-713cdae8b1
+      - target: processor:ВзвеситьТовар
+        id: home-warehouse-processor-bb7a11b90e
+      - target: processor:ИмпортНоменклатуры
+        id: home-warehouse-processor-ba0566e5c6
+      - target: processor:ВыгрузкаВExcel
+        id: home-warehouse-processor-ab859dc12c
+    - id: home-warehouse-control
+      title: Контроль запасов
+      titles:
+        en: Inventory control
+      icon: chart-column
+      items:
+      - target: report:СвободныеОстатки
+        id: home-warehouse-report-07184e5473
+      - target: report:ОстаткиТоваров
+        id: home-warehouse-report-d670fe8748
+      - target: report:РезервыТоваров
+        id: home-warehouse-report-cfa9047091
+      - target: report:ВедомостьПартий
+        id: home-warehouse-report-9d4558879d
+      - target: report:ДвиженияТоваров
+        id: home-warehouse-report-057cc9a2b5
+      - target: report:Неликвиды
+        id: home-warehouse-report-34e160a7aa
+      - target: report:ОборотПоСкладам
+        id: home-warehouse-report-bc7f415528
+      - target: report:ТоварыВПути
+        id: home-warehouse-report-190533934e
+      - target: register:ОстаткиТоваров:balances
+        id: home-warehouse-register-13ae720e30
+      - target: register:ОстаткиТоваров:movements
+        id: home-warehouse-register-c5cb600e6a
+      - target: register:ПартииТоваров:balances
+        id: home-warehouse-register-30da39fef2
+      - target: register:ПартииТоваров:movements
+        id: home-warehouse-register-350a2355be
+      - target: register:РезервыТоваров:balances
+        id: home-warehouse-register-c82aa355b4
+      - target: register:РезервыТоваров:movements
+        id: home-warehouse-register-314fd20cd8
+      - target: register:ТоварыВПути:balances
+        id: home-warehouse-register-e3a06519a7
+      - target: register:ТоварыВПути:movements
+        id: home-warehouse-register-8569d79d65
+      - target: processor:ЗакрытиеМесяца
+        id: home-warehouse-processor-f3df3ffe1a
+  - id: home-cash
+    title: Касса и банк
+    titles:
+      en: Cash & Bank
+    icon: banknote
+    items:
+    - target: processor:РабочееМестоКассира
+      id: home-cash-processor-9cf49bbe96
+    - target: catalog:Касса
+      id: home-cash-catalog-2b63083158
+    groups:
+    - id: home-cash-work
+      title: Касса и банк
+      titles:
+        en: Cash and bank
+      icon: banknote
+      items:
+      - target: document:ПриходныйКассовыйОрдер
+        id: home-cash-document-1e41208271
+      - target: document:ПоступлениеНаРасчётныйСчёт
+        id: home-cash-document-c1e100106f
+      - target: document:РасходныйКассовыйОрдер
+        id: home-cash-document-81fc3a67e5
+      - target: document:СписаниеСРасчётногоСчёта
+        id: home-cash-document-ef813b396e
+      - target: processor:ЗагрузкаВыписки
+        id: home-cash-processor-e2eeb1cc85
+    - id: home-cash-settlements
+      title: Расчёты и планирование
+      titles:
+        en: Settlements and planning
+      icon: calendar-days
+      items:
+      - target: catalog:Контрагент
+        id: home-cash-catalog-103b090669
+      - target: report:ПлатежныйКалендарь
+        id: home-cash-report-8daeefc0e4
+      - target: report:АктСверки
+        id: home-cash-report-c91c6a3b3d
+      - target: report:ОстаткиДенежныхСредств
+        id: home-cash-report-a5905e88aa
+      - target: report:ДвижениеДенежныхСредств
+        id: home-cash-report-9ecf0c521f
+      - target: report:ВыпискаБанка
+        id: home-cash-report-1f3c652a9d
+      - target: report:УправленческийБаланс
+        id: home-cash-report-a4dfd633cd
+      - target: register:ДенежныеСредства:balances
+        id: home-cash-register-21ec2d3c3f
+      - target: register:ДенежныеСредства:movements
+        id: home-cash-register-63517c206b
+      - target: register:Взаиморасчеты:balances
+        id: home-cash-register-75eaef5c7d
+      - target: register:Взаиморасчеты:movements
+        id: home-cash-register-3839a81b53
+    - id: home-cash-equipment
+      title: Оборудование и обмен
+      titles:
+        en: Equipment and exchange
+      icon: printer
+      items:
+      - target: catalog:ПодключаемоеОборудование
+        id: home-cash-catalog-ba4ded0938
+      - target: processor:ПробитьЧек
+        id: home-cash-processor-6f0fc5277a
+      - target: processor:ПечатьЧека
+        id: home-cash-processor-20ea531676
+      - target: processor:ВзвеситьТовар
+        id: home-cash-processor-bb7a11b90e
+      - target: processor:ВыгрузкаБП3
+        id: home-cash-processor-c6955660f2
+      - target: processor:ВыгрузкаВExcel
+        id: home-cash-processor-ab859dc12c
+  - id: home-settings
+    title: Настройки
+    titles:
+      en: Settings
+    icon: settings
+    items:
+    - target: catalog:Организация
+      id: home-settings-catalog-f468d47562
+    - target: catalog:НастройкиПользователя
+      id: home-settings-catalog-583367db24
+    groups:
+    - id: home-settings-trade
+      title: Параметры торговли
+      titles:
+        en: Trade settings
+      icon: settings
+      items:
+      - target: catalog:ЕдиницаИзмерения
+        id: home-settings-catalog-1eae5fc563
+      - target: catalog:СтавкаНДС
+        id: home-settings-catalog-1a5f1ddf1c
+      - target: catalog:Валюта
+        id: home-settings-catalog-050a964d9f
+      - target: catalog:ТипЦен
+        id: home-settings-catalog-3d3680a7c5
+      - target: processor:НастройкаТиповЦен
+        id: home-settings-processor-2069eaf086
+    - id: home-settings-service
+      title: Обслуживание базы
+      titles:
+        en: Database maintenance
+      icon: wrench
+      items:
+      - target: processor:ЗаполнитьТестовуюБазу
+        id: home-settings-processor-c74c83d05b
+  - id: home-service
+    title: Сервис и диагностика
+    titles:
+      en: Service and diagnostics
+    icon: wrench
+    items:
+    - target: journal:ВсеОперации
+      id: home-service-journal-6954ac94c6
+    - target: system:constants
+      id: home-service-system-924cbd464a
+    groups:
+    - id: home-data-import
+      title: Перенос данных
+      titles:
+        en: Data migration
+      icon: file-down
+      items:
+      - target: processor:ЗагрузкаДампа1С
+        id: home-service-processor-bd5656dd65

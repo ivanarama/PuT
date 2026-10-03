@@ -416,3 +416,37 @@ titles:
   uk: Замовлення покупця
   uz: Xaridor buyurtmasi
   zh: 客户订单
+list_form:
+  - Номер
+  - Дата
+  - Покупатель
+  - Склад
+  - Сумма
+detail_panel:
+  title: Номер
+  width: 360
+  tabs:
+    - name: Документ
+      titles:
+        en: Document
+        de: Beleg
+        sr: Документ
+      fields:
+        - Номер
+        - Дата
+        - Покупатель
+        - Склад
+        - СуммаБезНДС
+        - СуммаНДС
+        - Сумма
+    - name: Условия
+      titles:
+        en: Terms
+        de: Konditionen
+        sr: Услови
+      fields:
+        - Организация
+        - ТипЦенПродажи
+        - СпособУчетаНДС
+        - Основание
+        - Комментарий
