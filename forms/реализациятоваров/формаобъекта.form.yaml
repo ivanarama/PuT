@@ -17,7 +17,6 @@ commands:
       sr: "Прерачунај укупно"
 elements:
   - children:
-      # ── Вкладка 1: Основное ─────────────────────────────────────────────
       - children:
           - children:
               - data_path: Объект.Номер
@@ -30,6 +29,7 @@ elements:
                   en: "Number"
                   ru: "Номер"
                   sr: "Број"
+                width: 220
               - data_path: Объект.Дата
                 events:
                   ПриИзменении: ДатаПриИзменении
@@ -42,52 +42,7 @@ elements:
                   en: "Date"
                   ru: "Дата"
                   sr: "Датум"
-              - choice: true
-                data_path: Объект.Организация
-                hint: "Заполняется автоматически, если не указана"
-                kind: ПолеВвода
-                name: ПолеОрганизация
-                title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
-            kind: ГруппаФормы
-            name: ГруппаШапка
-            title:
-              de: "Belegkopf"
-              en: "Document header"
-              ru: "Шапка документа"
-              sr: "Заглавље документа"
-          - children:
-              - data_path: Объект.СуммаБезНДС
-                kind: ПолеВвода
-                name: ПолеСуммаБезНДС
-                readonly: true
-                title:
-                  de: "Betrag o. USt."
-                  en: "Amount excl. VAT"
-                  ru: "Сумма без НДС"
-                  sr: "Износ без ПДВ"
-              - data_path: Объект.СуммаНДС
-                kind: ПолеВвода
-                name: ПолеСуммаНДС
-                readonly: true
-                title:
-                  de: "USt.-Betrag"
-                  en: "VAT amount"
-                  ru: "Сумма НДС"
-                  sr: "Износ ПДВ"
-              - data_path: Объект.Сумма
-                hint: "Рассчитывается автоматически из строк табличной части"
-                kind: ПолеВвода
-                name: ПолеСумма
-                readonly: true
-                title:
-                  de: "Gesamtbetrag"
-                  en: "Total payable"
-                  ru: "Всего к оплате"
-                  sr: "Укупно за плаћање"
+                width: 220
               - data_path: Объект.СрокОплаты
                 kind: ПолеВвода
                 name: ПолеСрокОплаты
@@ -96,22 +51,15 @@ elements:
                   en: "Payment due"
                   ru: "Срок оплаты"
                   sr: "Rok plaćanja"
+                width: 220
             kind: ГруппаФормы
-            name: ГруппаИтоги
+            name: ГруппаШапка
             title:
-              de: "Summen"
-              en: "Totals"
-              ru: "Итоги"
-              sr: "Укупно"
-        kind: Страница
-        name: СтраницаОсновное
-        title:
-          de: "Allgemein"
-          en: "General"
-          ru: "Основное"
-          sr: "Опште"
-      # ── Вкладка 2: Покупатель и склад ───────────────────────────────────
-      - children:
+              de: "Belegkopf"
+              en: "Document header"
+              ru: "Шапка документа"
+              sr: "Заглавље документа"
+            orientation: horizontal
           - children:
               - choice: true
                 data_path: Объект.Покупатель
@@ -126,6 +74,7 @@ elements:
                   en: "Customer"
                   ru: "Покупатель"
                   sr: "Купац"
+                width: 320
               - choice: true
                 data_path: Объект.Склад
                 hint: "Со склада списываются остатки при проведении (ФИФО)"
@@ -137,6 +86,7 @@ elements:
                   en: "Warehouse"
                   ru: "Склад"
                   sr: "Магацин"
+                width: 320
               - choice: true
                 data_path: Объект.ТипЦенПродажи
                 events:
@@ -149,26 +99,7 @@ elements:
                   en: "Sales price type"
                   ru: "Тип цен продажи"
                   sr: "Тип цене продаје"
-              - choice: true
-                data_path: Объект.ЗаказПокупателя
-                hint: "Заказ, по которому отгружается товар (снимает резерв)"
-                kind: ПолеВвода
-                name: ПолеЗаказПокупателя
-                title:
-                  de: "Kundenauftrag"
-                  en: "Sales order"
-                  ru: "Заказ покупателя"
-                  sr: "Налог купца"
-              - choice: true
-                data_path: Объект.Основание
-                hint: "Счёт, на основании которого создана реализация"
-                kind: ПолеВвода
-                name: ПолеОснование
-                title:
-                  de: "Beleggrundlage"
-                  en: "Base document"
-                  ru: "Основание"
-                  sr: "Основни документ"
+                width: 320
               - choice: true
                 data_path: Объект.СпособУчетаНДС
                 events:
@@ -181,6 +112,7 @@ elements:
                   en: "VAT"
                   ru: "НДС"
                   sr: "ПДВ"
+                width: 320
             kind: ГруппаФормы
             name: ГруппаКонтрагент
             title:
@@ -188,14 +120,55 @@ elements:
               en: "Customer details"
               ru: "Реквизиты покупателя"
               sr: "Подаци о купцу"
+            orientation: horizontal
+          - children:
+              - data_path: Объект.СуммаБезНДС
+                kind: ПолеВвода
+                name: ПолеСуммаБезНДС
+                readonly: true
+                title:
+                  de: "Betrag o. USt."
+                  en: "Amount excl. VAT"
+                  ru: "Сумма без НДС"
+                  sr: "Износ без ПДВ"
+                width: 220
+              - data_path: Объект.СуммаНДС
+                kind: ПолеВвода
+                name: ПолеСуммаНДС
+                readonly: true
+                title:
+                  de: "USt.-Betrag"
+                  en: "VAT amount"
+                  ru: "Сумма НДС"
+                  sr: "Износ ПДВ"
+                width: 220
+              - data_path: Объект.Сумма
+                hint: "Рассчитывается автоматически из строк табличной части"
+                kind: ПолеВвода
+                name: ПолеСумма
+                readonly: true
+                title:
+                  de: "Gesamtbetrag"
+                  en: "Total payable"
+                  ru: "Всего к оплате"
+                  sr: "Укупно за плаћање"
+                width: 220
+            kind: ГруппаФормы
+            name: ГруппаИтоги
+            title:
+              de: "Summen"
+              en: "Totals"
+              ru: "Итоги"
+              sr: "Укупно"
+            orientation: horizontal
+            background: '#eff6ff'
         kind: Страница
-        name: СтраницаКонтрагент
+        name: СтраницаОсновное
         title:
-          de: "Kunde & Lager"
-          en: "Customer & warehouse"
-          ru: "Покупатель и склад"
-          sr: "Купац и магацин"
-      # ── Вкладка 3: Товары ───────────────────────────────────────────────
+          de: "Allgemein"
+          en: "General"
+          ru: "Основное"
+          sr: "Опште"
       - children:
           - children:
               - children:
@@ -254,6 +227,56 @@ elements:
           en: "Items"
           ru: "Товары"
           sr: "Артикли"
+      - children:
+          - kind: ГруппаФормы
+            name: ГруппаДополнительно
+            title:
+              ru: Дополнительные реквизиты
+              en: Additional details
+              de: Weitere Angaben
+              sr: Додатни подаци
+            children:
+              - choice: true
+                data_path: Объект.Организация
+                hint: "Заполняется автоматически, если не указана"
+                kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  de: "Organisation"
+                  en: "Organization"
+                  ru: "Организация"
+                  sr: "Организација"
+                width: 320
+              - choice: true
+                data_path: Объект.ЗаказПокупателя
+                hint: "Заказ, по которому отгружается товар (снимает резерв)"
+                kind: ПолеВвода
+                name: ПолеЗаказПокупателя
+                title:
+                  de: "Kundenauftrag"
+                  en: "Sales order"
+                  ru: "Заказ покупателя"
+                  sr: "Налог купца"
+                width: 320
+              - choice: true
+                data_path: Объект.Основание
+                hint: "Счёт, на основании которого создана реализация"
+                kind: ПолеВвода
+                name: ПолеОснование
+                title:
+                  de: "Beleggrundlage"
+                  en: "Base document"
+                  ru: "Основание"
+                  sr: "Основни документ"
+                width: 320
+            orientation: horizontal
+        kind: Страница
+        name: СтраницаКонтрагент
+        title:
+          ru: Дополнительно
+          en: Details
+          de: Weitere Angaben
+          sr: Додатно
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:

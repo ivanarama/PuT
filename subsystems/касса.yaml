@@ -63,3 +63,111 @@ home_page:
         - widgets:
             - ДенежныйПоток
             - ВыручкаПротивРасхода
+
+menu:
+  sections:
+  - id: cash-work
+    title: Касса и банк
+    titles:
+      en: Cash and bank
+    icon: banknote
+    items:
+    - target: processor:РабочееМестоКассира
+      id: cash-processor-9cf49bbe96
+    - target: catalog:Касса
+      id: cash-catalog-2b63083158
+    groups:
+    - id: cash-receipts
+      title: Приём оплат
+      titles:
+        en: Receive payments
+      icon: arrow-down-left
+      items:
+      - target: document:ПриходныйКассовыйОрдер
+        id: cash-document-1e41208271
+      - target: document:ПоступлениеНаРасчётныйСчёт
+        id: cash-document-c1e100106f
+    - id: cash-payments
+      title: Выплаты и банковская выписка
+      titles:
+        en: Payments and bank statement
+      icon: arrow-up-right
+      items:
+      - target: document:РасходныйКассовыйОрдер
+        id: cash-document-81fc3a67e5
+      - target: document:СписаниеСРасчётногоСчёта
+        id: cash-document-ef813b396e
+      - target: processor:ЗагрузкаВыписки
+        id: cash-processor-e2eeb1cc85
+  - id: cash-settlements
+    title: Расчёты и планирование
+    titles:
+      en: Settlements and planning
+    icon: calendar-days
+    items:
+    - target: catalog:Контрагент
+      id: cash-catalog-103b090669
+    - target: report:ПлатежныйКалендарь
+      id: cash-report-8daeefc0e4
+    - target: report:АктСверки
+      id: cash-report-c91c6a3b3d
+    groups:
+    - id: cash-reports
+      title: Отчёты о деньгах
+      titles:
+        en: Money reports
+      icon: chart-column
+      items:
+      - target: report:ОстаткиДенежныхСредств
+        id: cash-report-a5905e88aa
+      - target: report:ДвижениеДенежныхСредств
+        id: cash-report-9ecf0c521f
+      - target: report:ВыпискаБанка
+        id: cash-report-1f3c652a9d
+      - target: report:УправленческийБаланс
+        id: cash-report-a4dfd633cd
+    - id: cash-accounting
+      title: Данные учёта
+      titles:
+        en: Accounting data
+      icon: database
+      items:
+      - target: register:ДенежныеСредства:balances
+        id: cash-register-21ec2d3c3f
+      - target: register:ДенежныеСредства:movements
+        id: cash-register-63517c206b
+      - target: register:Взаиморасчеты:balances
+        id: cash-register-75eaef5c7d
+      - target: register:Взаиморасчеты:movements
+        id: cash-register-3839a81b53
+  - id: cash-equipment
+    title: Оборудование и обмен
+    titles:
+      en: Equipment and exchange
+    icon: printer
+    items:
+    - target: catalog:ПодключаемоеОборудование
+      id: cash-catalog-ba4ded0938
+    groups:
+    - id: cash-checks
+      title: Чеки и весы
+      titles:
+        en: Receipts and scales
+      icon: receipt
+      items:
+      - target: processor:ПробитьЧек
+        id: cash-processor-6f0fc5277a
+      - target: processor:ПечатьЧека
+        id: cash-processor-20ea531676
+      - target: processor:ВзвеситьТовар
+        id: cash-processor-bb7a11b90e
+    - id: cash-export
+      title: Выгрузка данных
+      titles:
+        en: Data export
+      icon: file-up
+      items:
+      - target: processor:ВыгрузкаБП3
+        id: cash-processor-c6955660f2
+      - target: processor:ВыгрузкаВExcel
+        id: cash-processor-ab859dc12c

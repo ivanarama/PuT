@@ -52,3 +52,53 @@ home_page:
     - widgets:
         - ПользователиСписок
         - ПоследняяАктивность
+
+menu:
+  sections:
+  - id: settings-trade
+    title: Параметры торговли
+    titles:
+      en: Trade settings
+    icon: settings
+    items:
+    - target: catalog:Организация
+      id: settings-catalog-f468d47562
+    - target: catalog:НастройкиПользователя
+      id: settings-catalog-583367db24
+    groups:
+    - id: settings-reference
+      title: Единицы, налоги и валюта
+      titles:
+        en: Units, taxes and currency
+      icon: book-open
+      items:
+      - target: catalog:ЕдиницаИзмерения
+        id: settings-catalog-1eae5fc563
+      - target: catalog:СтавкаНДС
+        id: settings-catalog-1a5f1ddf1c
+      - target: catalog:Валюта
+        id: settings-catalog-050a964d9f
+    - id: settings-prices
+      title: Типы цен
+      titles:
+        en: Price types
+      icon: tags
+      items:
+      - target: catalog:ТипЦен
+        id: settings-catalog-3d3680a7c5
+      - target: processor:НастройкаТиповЦен
+        id: settings-processor-2069eaf086
+  - id: settings-service
+    title: Обслуживание базы
+    titles:
+      en: Database maintenance
+    icon: wrench
+    groups:
+    - id: settings-demo
+      title: Демонстрационные данные
+      titles:
+        en: Demo data
+      icon: flask-conical
+      items:
+      - target: processor:ЗаполнитьТестовуюБазу
+        id: settings-processor-c74c83d05b

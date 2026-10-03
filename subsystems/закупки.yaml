@@ -79,3 +79,142 @@ home_page:
             - ТоварыКЗаказу
             - ОжидаемыеПоставки
             - ТопПоставщики
+
+menu:
+  sections:
+  - id: purchase-work
+    title: Заказ и приёмка
+    titles:
+      en: Ordering and receiving
+    icon: truck
+    items:
+    - target: processor:ПланЗакупок
+      id: purchase-processor-8a5867d4e8
+    - target: processor:ПриёмкаТовара
+      id: purchase-processor-a6ab717934
+    - target: document:ЗаказПоставщику
+      id: purchase-document-89ec8b3fa6
+    - target: document:ПоступлениеТоваров
+      id: purchase-document-c29e8cf19a
+    groups:
+    - id: purchase-returns
+      title: Возвраты и закрытие заказов
+      titles:
+        en: Returns and order closing
+      icon: undo-2
+      items:
+      - target: document:ВозвратПоставщику
+        id: purchase-document-b388e1dc7b
+      - target: document:ЗакрытиеЗаказовПоставщикам
+        id: purchase-document-d04e824ed1
+  - id: purchase-suppliers
+    title: Поставщики и расчёты
+    titles:
+      en: Suppliers and settlements
+    icon: handshake
+    items:
+    - target: catalog:Контрагент
+      id: purchase-catalog-103b090669
+    - target: catalog:ДоговорыКонтрагентов
+      id: purchase-catalog-c8a1bd78bc
+    groups:
+    - id: purchase-payments
+      title: Оплаты и задолженность
+      titles:
+        en: Payments and debt
+      icon: wallet
+      items:
+      - target: document:РасходныйКассовыйОрдер
+        id: purchase-document-81fc3a67e5
+      - target: document:КорректировкаДолга
+        id: purchase-document-9c9e758b25
+      - target: report:ОплатыПоступлений
+        id: purchase-report-db2467a336
+      - target: report:Взаиморасчеты
+        id: purchase-report-d427b5b85a
+      - target: report:АктСверки
+        id: purchase-report-c91c6a3b3d
+  - id: purchase-products
+    title: Товары и обмен
+    titles:
+      en: Products and exchange
+    icon: package
+    items:
+    - target: catalog:Номенклатура
+      id: purchase-catalog-7624619d53
+    - target: catalog:ТипЦен
+      id: purchase-catalog-3d3680a7c5
+    groups:
+    - id: purchase-import
+      title: Номенклатура и документы поставщика
+      titles:
+        en: Supplier products and documents
+      icon: file-down
+      items:
+      - target: processor:ИмпортНоменклатуры
+        id: purchase-processor-ba0566e5c6
+      - target: processor:ЗагрузкаЭДО
+        id: purchase-processor-a6af7a7afe
+      - target: processor:ВыгрузкаВExcel
+        id: purchase-processor-ab859dc12c
+      - target: inforeg:НоменклатураКонтрагентов
+        id: purchase-inforeg-f660ecc791
+      - target: report:ЦеныНоменклатуры
+        id: purchase-report-e7aa50dc40
+    - id: purchase-reference
+      title: Реквизиты и нормативы
+      titles:
+        en: Business reference data
+      icon: book-open
+      items:
+      - target: catalog:Организация
+        id: purchase-catalog-f468d47562
+      - target: catalog:Валюта
+        id: purchase-catalog-050a964d9f
+      - target: catalog:ЕдиницаИзмерения
+        id: purchase-catalog-1eae5fc563
+      - target: catalog:СтавкаНДС
+        id: purchase-catalog-1a5f1ddf1c
+  - id: purchase-analysis
+    title: Контроль закупок
+    titles:
+      en: Purchasing control
+    icon: clipboard-check
+    items:
+    - target: report:АнализЗаказовПоставщикам
+      id: purchase-report-a88a44c8f1
+    - target: report:ТоварыВПути
+      id: purchase-report-190533934e
+    groups:
+    - id: purchase-reports
+      title: Движение и книга покупок
+      titles:
+        en: Movements and purchase ledger
+      icon: chart-column
+      items:
+      - target: report:ДвиженияТоваров
+        id: purchase-report-057cc9a2b5
+      - target: report:КнигаПокупок
+        id: purchase-report-f33a170aa5
+    - id: purchase-accounting
+      title: Данные учёта
+      titles:
+        en: Accounting data
+      icon: database
+      items:
+      - target: register:ТоварыВПути:balances
+        id: purchase-register-e3a06519a7
+      - target: register:ТоварыВПути:movements
+        id: purchase-register-8569d79d65
+      - target: register:Взаиморасчеты:balances
+        id: purchase-register-75eaef5c7d
+      - target: register:Взаиморасчеты:movements
+        id: purchase-register-3839a81b53
+      - target: register:ПартииТоваров:balances
+        id: purchase-register-30da39fef2
+      - target: register:ПартииТоваров:movements
+        id: purchase-register-350a2355be
+      - target: register:ОстаткиТоваров:balances
+        id: purchase-register-13ae720e30
+      - target: register:ОстаткиТоваров:movements
+        id: purchase-register-c5cb600e6a

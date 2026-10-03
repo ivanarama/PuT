@@ -414,3 +414,37 @@ titles:
   uk: Рахунок
   uz: Hisob-faktura
   zh: 发票
+list_form:
+  - Номер
+  - Дата
+  - Покупатель
+  - Сумма
+  - СрокОплаты
+detail_panel:
+  title: Номер
+  width: 360
+  tabs:
+    - name: Документ
+      titles:
+        en: Document
+        de: Beleg
+        sr: Документ
+      fields:
+        - Номер
+        - Дата
+        - Покупатель
+        - Склад
+        - СуммаБезНДС
+        - СуммаНДС
+        - Сумма
+    - name: Условия
+      titles:
+        en: Terms
+        de: Konditionen
+        sr: Услови
+      fields:
+        - Организация
+        - ТипЦенПродажи
+        - СпособУчетаНДС
+        - СрокОплаты
+        - Комментарий

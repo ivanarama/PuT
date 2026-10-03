@@ -79,3 +79,143 @@ home_page:
             - НеликвидыСписок
         - widgets:
             - ОжидаемыеПоставки
+
+menu:
+  sections:
+  - id: warehouse-work
+    title: Складские операции
+    titles:
+      en: Warehouse operations
+    icon: warehouse
+    items:
+    - target: processor:ПриёмкаТовара
+      id: warehouse-processor-a6ab717934
+    - target: processor:ОтгрузкаЗаказов
+      id: warehouse-processor-d3ac662e0c
+    - target: processor:ИнвентаризацияСклада
+      id: warehouse-processor-18afc3b92a
+    groups:
+    - id: warehouse-movement
+      title: Поступление, отгрузка и перемещение
+      titles:
+        en: Receiving, shipping and transfers
+      icon: arrow-right-left
+      items:
+      - target: document:ПоступлениеТоваров
+        id: warehouse-document-c29e8cf19a
+      - target: document:РеализацияТоваров
+        id: warehouse-document-57fe772677
+      - target: document:ПеремещениеТоваров
+        id: warehouse-document-13dd25d0de
+    - id: warehouse-adjustments
+      title: Инвентаризация и корректировки
+      titles:
+        en: Inventory and adjustments
+      icon: clipboard-list
+      items:
+      - target: document:ПересчетТоваров
+        id: warehouse-document-c724646b12
+      - target: document:ОприходованиеТоваров
+        id: warehouse-document-86a0072f07
+      - target: document:СписаниеТоваров
+        id: warehouse-document-c5bc2f5000
+      - target: document:ВозвратОтПокупателя
+        id: warehouse-document-e1d0e67842
+      - target: document:ВозвратПоставщику
+        id: warehouse-document-b388e1dc7b
+  - id: warehouse-products
+    title: Товары и комплекты
+    titles:
+      en: Products and kits
+    icon: package
+    items:
+    - target: catalog:Номенклатура
+      id: warehouse-catalog-7624619d53
+    - target: catalog:Склад
+      id: warehouse-catalog-958f1133ae
+    groups:
+    - id: warehouse-kits
+      title: Сборка и разборка
+      titles:
+        en: Assembly and disassembly
+      icon: boxes
+      items:
+      - target: catalog:СпецификацииНоменклатуры
+        id: warehouse-catalog-18ca7200d9
+      - target: document:СборкаТоваров
+        id: warehouse-document-2152be03f3
+      - target: document:РазборкаТоваров
+        id: warehouse-document-942fefb7b0
+    - id: warehouse-reference
+      title: Штрихкоды, цены и оборудование
+      titles:
+        en: Barcodes, prices and equipment
+      icon: barcode
+      items:
+      - target: catalog:Штрихкоды
+        id: warehouse-catalog-0340959eef
+      - target: catalog:ЕдиницаИзмерения
+        id: warehouse-catalog-1eae5fc563
+      - target: catalog:ПодключаемоеОборудование
+        id: warehouse-catalog-ba4ded0938
+      - target: inforeg:ЦеныНоменклатуры
+        id: warehouse-inforeg-713cdae8b1
+      - target: processor:ВзвеситьТовар
+        id: warehouse-processor-bb7a11b90e
+      - target: processor:ИмпортНоменклатуры
+        id: warehouse-processor-ba0566e5c6
+      - target: processor:ВыгрузкаВExcel
+        id: warehouse-processor-ab859dc12c
+  - id: warehouse-control
+    title: Контроль запасов
+    titles:
+      en: Inventory control
+    icon: chart-column
+    items:
+    - target: report:СвободныеОстатки
+      id: warehouse-report-07184e5473
+    - target: report:ОстаткиТоваров
+      id: warehouse-report-d670fe8748
+    - target: report:РезервыТоваров
+      id: warehouse-report-cfa9047091
+    groups:
+    - id: warehouse-reports
+      title: Партии, движение и неликвиды
+      titles:
+        en: Batches, movements and slow stock
+      icon: clipboard-check
+      items:
+      - target: report:ВедомостьПартий
+        id: warehouse-report-9d4558879d
+      - target: report:ДвиженияТоваров
+        id: warehouse-report-057cc9a2b5
+      - target: report:Неликвиды
+        id: warehouse-report-34e160a7aa
+      - target: report:ОборотПоСкладам
+        id: warehouse-report-bc7f415528
+      - target: report:ТоварыВПути
+        id: warehouse-report-190533934e
+    - id: warehouse-accounting
+      title: Данные учёта и закрытие
+      titles:
+        en: Accounting data and closing
+      icon: database
+      items:
+      - target: register:ОстаткиТоваров:balances
+        id: warehouse-register-13ae720e30
+      - target: register:ОстаткиТоваров:movements
+        id: warehouse-register-c5cb600e6a
+      - target: register:ПартииТоваров:balances
+        id: warehouse-register-30da39fef2
+      - target: register:ПартииТоваров:movements
+        id: warehouse-register-350a2355be
+      - target: register:РезервыТоваров:balances
+        id: warehouse-register-c82aa355b4
+      - target: register:РезервыТоваров:movements
+        id: warehouse-register-314fd20cd8
+      - target: register:ТоварыВПути:balances
+        id: warehouse-register-e3a06519a7
+      - target: register:ТоварыВПути:movements
+        id: warehouse-register-8569d79d65
+      - target: processor:ЗакрытиеМесяца
+        id: warehouse-processor-f3df3ffe1a
