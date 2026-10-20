@@ -1,7 +1,7 @@
 chart_kind: pie
 name: ПрибыльПоНоменклатуре
 params:
-  Начало: "{{today|minus_days:30}}"
+  Начало: '{{today|minus_days:30}}'
 query: |
   ВЫБРАТЬ
     Номенклатура,
@@ -10,6 +10,10 @@ query: |
   ГДЕ period >= &Начало
   СГРУППИРОВАТЬ ПО Номенклатура
   УПОРЯДОЧИТЬ ПО Прибыль УБЫВ
+refresh_on:
+  - данные.возвратотпокупателя
+  - данные.поступлениетоваров
+  - данные.реализациятоваров
 title: Структура прибыли по номенклатуре
 titles:
   az: Mənfəətin məhsul üzrə strukturu
@@ -17,16 +21,17 @@ titles:
   en: Profit breakdown by item
   es: Desglose de beneficio por artículo
   fr: Répartition du bénéfice par article
-  hy: "Շահույթի կառուցվածքը ըստ ապրանքների"
-  ka: "მოგების სტრუქტურა პროდუქტის მიხედვით"
-  kk: "Пайда құрылымы тауар бойынша"
-  pt: "Composição do lucro por item"
-  ro: "Structura profitului pe articole"
+  hy: Շահույթի կառուցվածքը ըստ ապրանքների
+  ka: მოგების სტრუქტურა პროდუქტის მიხედვით
+  kk: Пайда құрылымы тауар бойынша
+  pt: Composição do lucro por item
+  ro: Structura profitului pe articole
   sr: Структура добити по артиклу
-  tr: "Kârın ürün bazlı dağılımı"
-  uk: "Структура прибутку за товарами"
-  uz: "Foydaning mahsulot bo'yicha tuzilishi"
-  zh: "按商品的利润构成"
+  tr: Kârın ürün bazlı dağılımı
+  uk: Структура прибутку за товарами
+  uz: Foydaning mahsulot bo'yicha tuzilishi
+  zh: 按商品的利润构成
 type: chart
 x_field: Номенклатура
-y_fields: [Прибыль]
+y_fields:
+  - Прибыль

@@ -1,23 +1,26 @@
-name: СреднийЧекНастроек
-type: kpi
-title: Всего документов
-titles:
-  en: Total documents
-  de: Belege gesamt
-  sr: Укупно докумената
-  az: Cəmi sənədlər
-  es: Total documentos
-  fr: Total documents
-  hy: "Ընդհանուր փաստաթղթեր"
-  ka: "სულ დოკუმენტი"
-  kk: "Барлық құжаттар"
-  pt: "Total documentos"
-  ro: "Total documente"
-  tr: "Toplam belge"
-  uk: "Всього документів"
-  uz: "Jami hujjatlar"
-  zh: "单据总计"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: СреднийЧекНастроек
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Документ.РеализацияТоваров
+refresh_on:
+  - данные.реализациятоваров
+title: Всего документов
+titles:
+  az: Cəmi sənədlər
+  de: Belege gesamt
+  en: Total documents
+  es: Total documentos
+  fr: Total documents
+  hy: Ընդհանուր փաստաթղթեր
+  ka: სულ დოკუმენტი
+  kk: Барлық құжаттар
+  pt: Total documentos
+  ro: Total documente
+  sr: Укупно докумената
+  tr: Toplam belge
+  uk: Всього документів
+  uz: Jami hujjatlar
+  zh: 单据总计
+type: kpi

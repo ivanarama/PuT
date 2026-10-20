@@ -6,94 +6,97 @@ attributes:
 elements:
   - children:
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Номер
                 kind: ПолеВвода
                 name: ПолеНомер
                 readonly: true
                 title:
-                  de: "Nummer"
-                  en: "Number"
-                  ru: "Номер"
-                  sr: "Број"
+                  de: Nummer
+                  en: Number
+                  ru: Номер
+                  sr: Број
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.СрокОплаты
                 kind: ПолеВвода
                 name: ПолеСрокОплаты
                 title:
-                  de: "Fälligkeitsdatum"
-                  en: "Due date"
-                  ru: "Срок оплаты"
-                  sr: "Рок плаћања"
+                  de: Fälligkeitsdatum
+                  en: Due date
+                  ru: Срок оплаты
+                  sr: Рок плаћања
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Belegkopf"
-              en: "Document header"
-              ru: "Шапка документа"
-              sr: "Заглавље документа"
-          - children:
+              de: Belegkopf
+              en: Document header
+              ru: Шапка документа
+              sr: Заглавље документа
+          - background: '#f0fdf4'
+            children:
               - data_path: Объект.СуммаБезНДС
                 kind: ПолеВвода
                 name: ПолеСуммаБезНДС
                 readonly: true
                 title:
-                  de: "Betrag o. USt."
-                  en: "Amount excl. VAT"
-                  ru: "Сумма без НДС"
-                  sr: "Износ без ПДВ"
+                  de: Betrag o. USt.
+                  en: Amount excl. VAT
+                  ru: Сумма без НДС
+                  sr: Износ без ПДВ
               - data_path: Объект.СуммаНДС
                 kind: ПолеВвода
                 name: ПолеСуммаНДС
                 readonly: true
                 title:
-                  de: "USt.-Betrag"
-                  en: "VAT amount"
-                  ru: "Сумма НДС"
-                  sr: "Износ ПДВ"
+                  de: USt.-Betrag
+                  en: VAT amount
+                  ru: Сумма НДС
+                  sr: Износ ПДВ
               - data_path: Объект.Сумма
                 kind: ПолеВвода
                 name: ПолеСумма
                 readonly: true
                 title:
-                  de: "Gesamtbetrag"
-                  en: "Total payable"
-                  ru: "Всего к оплате"
-                  sr: "Укупно за плаћање"
+                  de: Gesamtbetrag
+                  en: Total payable
+                  ru: Всего к оплате
+                  sr: Укупно за плаћање
             kind: ГруппаФормы
             name: ГруппаИтоги
             title:
-              de: "Summen"
-              en: "Totals"
-              ru: "Итоги"
-              sr: "Укупно"
+              de: Summen
+              en: Totals
+              ru: Итоги
+              sr: Укупно
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Allgemein"
-          en: "General"
-          ru: "Основное"
-          sr: "Опште"
+          de: Allgemein
+          en: General
+          ru: Основное
+          sr: Опште
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - choice: true
                 data_path: Объект.Покупатель
                 events:
@@ -102,32 +105,32 @@ elements:
                 name: ПолеПокупатель
                 required: true
                 title:
-                  de: "Kunde"
-                  en: "Customer"
-                  ru: "Покупатель"
-                  sr: "Купац"
+                  de: Kunde
+                  en: Customer
+                  ru: Покупатель
+                  sr: Купац
               - choice: true
                 data_path: Объект.Склад
                 kind: ПолеВвода
                 name: ПолеСклад
                 required: true
                 title:
-                  de: "Lager"
-                  en: "Warehouse"
-                  ru: "Склад"
-                  sr: "Магацин"
+                  de: Lager
+                  en: Warehouse
+                  ru: Склад
+                  sr: Магацин
               - choice: true
                 data_path: Объект.ТипЦенПродажи
                 events:
                   ПриИзменении: ТипЦенПродажиПриИзменении
-                hint: "Заполняется из карточки покупателя"
+                hint: Заполняется из карточки покупателя
                 kind: ПолеВвода
                 name: ПолеТипЦенПродажи
                 title:
-                  de: "Verkaufspreistyp"
-                  en: "Sales price type"
-                  ru: "Тип цен продажи"
-                  sr: "Тип цене продаје"
+                  de: Verkaufspreistyp
+                  en: Sales price type
+                  ru: Тип цен продажи
+                  sr: Тип цене продаје
               - choice: true
                 data_path: Объект.СпособУчетаНДС
                 events:
@@ -135,77 +138,78 @@ elements:
                 kind: ПолеВвода
                 name: ПолеСпособУчетаНДС
                 title:
-                  de: "USt."
-                  en: "VAT"
-                  ru: "НДС"
-                  sr: "ПДВ"
+                  de: USt.
+                  en: VAT
+                  ru: НДС
+                  sr: ПДВ
               - data_path: Объект.Комментарий
                 kind: ПолеВвода
                 name: ПолеКомментарий
                 title:
-                  de: "Kommentar"
-                  en: "Comment"
-                  ru: "Комментарий"
-                  sr: "Коментар"
+                  de: Kommentar
+                  en: Comment
+                  ru: Комментарий
+                  sr: Коментар
             kind: ГруппаФормы
             name: ГруппаРеквизиты
             title:
-              de: "Kundendaten"
-              en: "Customer details"
-              ru: "Реквизиты покупателя"
-              sr: "Подаци о купцу"
+              de: Kundendaten
+              en: Customer details
+              ru: Реквизиты покупателя
+              sr: Подаци о купцу
         kind: Страница
         name: СтраницаКонтрагент
         title:
-          de: "Kunde & Lager"
-          en: "Customer & warehouse"
-          ru: "Покупатель и склад"
-          sr: "Купац и магацин"
+          de: Kunde & Lager
+          en: Customer & warehouse
+          ru: Покупатель и склад
+          sr: Купац и магацин
       - children:
-          - children:
+          - background: '#f8fafc'
+            children:
               - data_path: Объект.Товары
                 events:
                   ПриИзменении: ТабТоварыПриИзменении
                 kind: ТабличнаяЧасть
                 name: ТабТовары
                 title:
-                  de: "Artikel"
-                  en: "Items"
-                  ru: "Товары"
-                  sr: "Артикли"
+                  de: Artikel
+                  en: Items
+                  ru: Товары
+                  sr: Артикли
                 use_grid: true
               - events:
                   Нажатие: КнопкаПересчитатьНажатие
                 kind: Кнопка
                 name: КнопкаПересчитать
                 title:
-                  de: "Neu berechnen"
-                  en: "Recalculate"
-                  ru: "Пересчитать суммы"
-                  sr: "Прерачунај"
+                  de: Neu berechnen
+                  en: Recalculate
+                  ru: Пересчитать суммы
+                  sr: Прерачунај
               - events:
                   Нажатие: КнопкаОчиститьНажатие
                 kind: Кнопка
                 name: КнопкаОчистить
                 title:
-                  de: "Leeren"
-                  en: "Clear table"
-                  ru: "Очистить таблицу"
-                  sr: "Обриши табелу"
+                  de: Leeren
+                  en: Clear table
+                  ru: Очистить таблицу
+                  sr: Обриши табелу
             kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              de: "Rechnungsinhalt"
-              en: "Invoice contents"
-              ru: "Состав счёта"
-              sr: "Садржај рачуна"
+              de: Rechnungsinhalt
+              en: Invoice contents
+              ru: Состав счёта
+              sr: Садржај рачуна
         kind: Страница
         name: СтраницаТовары
         title:
-          de: "Artikel"
-          en: "Items"
-          ru: "Товары"
-          sr: "Артикли"
+          de: Artikel
+          en: Items
+          ru: Товары
+          sr: Артикли
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -218,9 +222,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Rechnung"
-    en: "Invoice"
-    ru: "Счёт на оплату"
-    sr: "Рачун"
+    de: Rechnung
+    en: Invoice
+    ru: Счёт на оплату
+    sr: Рачун
   vertical_scroll: auto
 schema: onebase.form/v1

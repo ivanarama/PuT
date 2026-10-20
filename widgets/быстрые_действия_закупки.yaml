@@ -1,11 +1,100 @@
+items:
+  - label: План закупок
+    labels:
+      az: Satınalma planı
+      de: Einkaufsplan
+      en: Purchasing Plan
+      es: Plan de compras
+      fr: Plan d'achats
+      hy: Գնումների պլան
+      ka: შესყიდვების გეგმა
+      kk: Сатып алу жоспары
+      pt: Plano de compras
+      ro: Plan de achiziții
+      sr: План набавке
+      tr: Satın alma planı
+      uk: План закупівель
+      uz: Xaridlar rejasi
+      zh: 采购计划
+    url: /ui/processor/планзакупок
+  - label: Приёмка товара
+    labels:
+      az: Malların qəbulu
+      de: Warenannahme
+      en: Goods Receipt
+      es: Recepción de mercancías
+      fr: Réception de marchandises
+      hy: Ապրանքների ընդունում
+      ka: საქონლის მიღება
+      kk: Тауар қабылдау
+      pt: Recebimento de mercadorias
+      ro: Recepție mărfuri
+      sr: Пријем робе
+      tr: Mal kabulü
+      uk: Приймання товару
+      uz: Tovarlarni qabul qilish
+      zh: 货物验收
+    url: /ui/processor/приёмкатовара
+  - entity: ЗаказПоставщику
+    label: Заказ поставщику
+    labels:
+      az: Təchizatçı sifarişi
+      de: Lieferantenbestellung
+      en: Supplier order
+      es: Pedido a proveedor
+      fr: Commande fournisseur
+      hy: Մատակարարի պատվեր
+      ka: მომწოდებლის შეკვეთა
+      kk: Жабдықтаушы тапсырысы
+      pt: Pedido a fornecedor
+      ro: Comandă furnizor
+      sr: Наручба добављача
+      tr: Tedarikçi siparişi
+      uk: Замовлення постачальнику
+      uz: Yetkazib beruvchiga buyurtma
+      zh: 供应商订单
+  - entity: ПоступлениеТоваров
+    label: Поступление
+    labels:
+      az: Qəbul
+      de: Wareneingang
+      en: Receipt
+      es: Recepción
+      fr: Réception
+      hy: Ընդունում
+      ka: მიღება
+      kk: Қабылдау
+      pt: Recebimento
+      ro: Recepție
+      sr: Пријем
+      tr: Kabul
+      uk: Надходження
+      uz: Qabul qilish
+      zh: 收货
+  - entity: ВозвратПоставщику
+    label: Возврат поставщику
+    labels:
+      az: Təchizatçıya qaytarılma
+      de: Lieferantenrückgabe
+      en: Supplier return
+      es: Devolución a proveedor
+      fr: Retour fournisseur
+      hy: Մատակարարին վերադարձ
+      ka: მომწოდებელზე დაბრუნება
+      kk: Жабдықтаушыға қайтару
+      pt: Devolução a fornecedor
+      ro: Returnare furnizor
+      sr: Поврат добављачу
+      tr: Tedarikçi iadesi
+      uk: Повернення постачальнику
+      uz: Yetkazib beruvchiga qaytarish
+      zh: 退货给供应商
 name: БыстрыеДействияЗакупки
-type: actions
 title: Создать
 titles:
-  en: Create
-  de: Erstellen
-  sr: Креирај
   az: Yarat
+  de: Erstellen
+  en: Create
   es: Crear
   fr: Créer
   hy: Ստեղծել
@@ -13,98 +102,9 @@ titles:
   kk: Құру
   pt: Criar
   ro: Creare
+  sr: Креирај
   tr: Oluştur
   uk: Створити
   uz: Yaratish
   zh: 新建
-items:
-  - label: "План закупок"
-    labels:
-      en: "Purchasing Plan"
-      de: "Einkaufsplan"
-      sr: "План набавке"
-      az: "Satınalma planı"
-      es: "Plan de compras"
-      fr: "Plan d'achats"
-      hy: "Գնումների պլան"
-      ka: "შესყიდვების გეგმა"
-      kk: "Сатып алу жоспары"
-      pt: "Plano de compras"
-      ro: "Plan de achiziții"
-      tr: "Satın alma planı"
-      uk: "План закупівель"
-      uz: "Xaridlar rejasi"
-      zh: "采购计划"
-    url: /ui/processor/планзакупок
-  - label: "Приёмка товара"
-    labels:
-      en: "Goods Receipt"
-      de: "Warenannahme"
-      sr: "Пријем робе"
-      az: "Malların qəbulu"
-      es: "Recepción de mercancías"
-      fr: "Réception de marchandises"
-      hy: "Ապրանքների ընդունում"
-      ka: "საქონლის მიღება"
-      kk: "Тауар қабылдау"
-      pt: "Recebimento de mercadorias"
-      ro: "Recepție mărfuri"
-      tr: "Mal kabulü"
-      uk: "Приймання товару"
-      uz: "Tovarlarni qabul qilish"
-      zh: "货物验收"
-    url: /ui/processor/приёмкатовара
-  - label: "Заказ поставщику"
-    labels:
-      en: "Supplier order"
-      de: "Lieferantenbestellung"
-      sr: "Наручба добављача"
-      az: "Təchizatçı sifarişi"
-      es: "Pedido a proveedor"
-      fr: "Commande fournisseur"
-      hy: "Մատակարարի պատվեր"
-      ka: "მომწოდებლის შეკვეთა"
-      kk: "Жабдықтаушы тапсырысы"
-      pt: "Pedido a fornecedor"
-      ro: "Comandă furnizor"
-      tr: "Tedarikçi siparişi"
-      uk: "Замовлення постачальнику"
-      uz: "Yetkazib beruvchiga buyurtma"
-      zh: "供应商订单"
-    entity: ЗаказПоставщику
-  - label: "Поступление"
-    labels:
-      en: "Receipt"
-      de: "Wareneingang"
-      sr: "Пријем"
-      az: "Qəbul"
-      es: "Recepción"
-      fr: "Réception"
-      hy: "Ընդունում"
-      ka: "მიღება"
-      kk: "Қабылдау"
-      pt: "Recebimento"
-      ro: "Recepție"
-      tr: "Kabul"
-      uk: "Надходження"
-      uz: "Qabul qilish"
-      zh: "收货"
-    entity: ПоступлениеТоваров
-  - label: "Возврат поставщику"
-    labels:
-      en: "Supplier return"
-      de: "Lieferantenrückgabe"
-      sr: "Поврат добављачу"
-      az: "Təchizatçıya qaytarılma"
-      es: "Devolución a proveedor"
-      fr: "Retour fournisseur"
-      hy: "Մատակարարին վերադարձ"
-      ka: "მომწოდებელზე დაბრუნება"
-      kk: "Жабдықтаушыға қайтару"
-      pt: "Devolução a fornecedor"
-      ro: "Returnare furnizor"
-      tr: "Tedarikçi iadesi"
-      uk: "Повернення постачальнику"
-      uz: "Yetkazib beruvchiga qaytarish"
-      zh: "退货给供应商"
-    entity: ВозвратПоставщику
+type: actions

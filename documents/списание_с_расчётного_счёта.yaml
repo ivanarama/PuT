@@ -216,11 +216,19 @@ fields:
       uz: Miqdor
       zh: 金额
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Контрагент
+list_refresh_on:
+  - данные.списаниесрасчётногосчёта
 name: СписаниеСРасчётногоСчёта
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "БНК-Р-"
+  prefix: БНК-Р-
 posting: true
 title: Списание с расчётного счёта
 titles:

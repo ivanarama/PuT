@@ -1,0 +1,59 @@
+{
+  "base_url": "${BASE_URL}",
+  "locale": "ru-RU",
+  "viewport": {"width": 1440, "height": 1050},
+  "screenshots": [
+    {
+      "file": "navigation-sales.png", "path": "/ui/?subsystem=Продажи", "selector": ".app-body",
+      "wait_for": "#ob-nav [data-nav-id='cfg:sales-work']"
+    },
+    {
+      "file": "home.png", "path": "/ui/", "selector": "main",
+      "wait_for": ".w-chart-canvas canvas >> nth=0"
+    },
+    {
+      "file": "widget-filters.png", "path": "/ui/",
+      "selector": "[data-widget-name='ТопПокупатели']",
+      "steps": [{"action": "click", "selector": "[data-widget-name='ТопПокупатели'] summary"}],
+      "wait_for": "[data-widget-name='ТопПокупатели'] details[open]"
+    },
+    {
+      "file": "customer.png", "path": "/ui/catalog/Контрагент/${CUSTOMER}", "selector": "main",
+      "wait_for": "#vt-body-Неоплаченные tr:first-child td:first-child input"
+    },
+    {
+      "file": "product.png", "path": "/ui/catalog/Номенклатура/${PRODUCT}", "selector": "main",
+      "wait_for": "#vt-body-Цены tr:first-child td:first-child input"
+    },
+    {
+      "file": "order.png", "path": "/ui/document/ЗаказПокупателя/${ORDER}", "selector": "main",
+      "wait_for": "[name='СледующийЭтап']"
+    },
+    {
+      "file": "closing-result.png", "path": "/ui/processor/ЗакрытиеМесяца", "selector": "fieldset:has([name='РезультатЗадачи'])",
+      "steps": [
+        {"action": "fill", "selector": "[name='ДатаНачала']", "value": "${MONTH_START}"},
+        {"action": "fill", "selector": "[name='ДатаОкончания']", "value": "${TODAY}"},
+        {"action": "fill", "selector": "[name='ИдЗадачи']", "value": "${JOB}"},
+        {"action": "click", "selector": "button:has-text('Обновить результат')"}
+      ],
+      "wait_for": "[name='РезультатЗадачи']",
+      "mask": ["[name='ИдЗадачи']"]
+    },
+    {
+      "file": "assembly.png", "path": "/ui/document/СборкаТоваров/new", "selector": "main",
+      "steps": [
+        {"action": "select", "selector": "[name='ИзделиеПодбора']", "value": "${ASSEMBLY_PRODUCT}"},
+        {"action": "select", "selector": "[name='Спецификация']", "value": "${SPEC}"},
+        {"action": "click", "selector": "button:has-text('Заполнить по спецификации (заменить состав)')"},
+        {"action": "click", "selector": "button[data-tab-idx='1']"}
+      ],
+      "wait_for": "button[data-tab-idx='1'].active"
+    },
+    {
+      "file": "sales-workplace.png", "path": "/ui/processor/РабочееМестоПродаж", "selector": "main",
+      "steps": [{"action": "select", "selector": "[name='Покупатель']", "value": "${CUSTOMER}"}],
+      "wait_for": "[name='Штрихкод']"
+    }
+  ]
+}

@@ -1,24 +1,25 @@
-name: ВозвратовЗаМесяц
-type: kpi
-title: Возвратов
-titles:
-  en: Returns
-  de: Retouren
-  sr: Поврати
-  az: Qaytarılmalar
-  es: Devoluciones
-  fr: Retours
-  hy: "Վերադարձներ"
-  ka: "დაბრუნებები"
-  kk: "Қайтарымдар"
-  pt: "Devoluções"
-  ro: "Retururi"
-  tr: "İadelar"
-  uk: "Повернень"
-  uz: "Qaytarishlar"
-  zh: "退货"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: ВозвратовЗаМесяц
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Документ.ВозвратОтПокупателя
   ГДЕ posted = Истина
+title: Возвратов
+titles:
+  az: Qaytarılmalar
+  de: Retouren
+  en: Returns
+  es: Devoluciones
+  fr: Retours
+  hy: Վերադարձներ
+  ka: დაბრუნებები
+  kk: Қайтарымдар
+  pt: Devoluções
+  ro: Retururi
+  sr: Поврати
+  tr: İadelar
+  uk: Повернень
+  uz: Qaytarishlar
+  zh: 退货
+type: kpi

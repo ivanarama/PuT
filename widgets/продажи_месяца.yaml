@@ -1,11 +1,19 @@
+format: number
+link: /ui/report/ПродажиПоМесяцам
 name: ПродажиМесяца
-type: kpi
+params:
+  Начало: '{{today|start_of_month}}'
+query: |
+  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
+  ИЗ Документ.РеализацияТоваров
+  ГДЕ Дата >= &Начало И posted = Истина
+refresh_on:
+  - данные.реализациятоваров
 title: Продаж за 30 дней
 titles:
-  en: Sales in 30 days
-  de: Verkäufe in 30 Tagen
-  sr: Продаја за 30 дана
   az: 30 günlük satış sayı
+  de: Verkäufe in 30 Tagen
+  en: Sales in 30 days
   es: Ventas en 30 días
   fr: Ventes sur 30 jours
   hy: 30 օրվա վաճառքներ
@@ -13,14 +21,9 @@ titles:
   kk: 30 күндік сатылым
   pt: Vendas em 30 dias
   ro: Vânzări în 30 zile
+  sr: Продаја за 30 дана
   tr: 30 günlük satış
   uk: Продажів за 30 днів
   uz: 30 kunlik savdo soni
   zh: 30天销售笔数
-format: number
-params:
-  Начало: "{{today|minus_days:30}}"
-query: |
-  ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
-  ИЗ Документ.РеализацияТоваров
-  ГДЕ Дата >= &Начало И posted = Истина
+type: kpi

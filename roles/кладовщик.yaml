@@ -1,44 +1,118 @@
-name: Кладовщик
 description: Работа со складом, поступлениями, списаниями и перемещениями
+name: Кладовщик
 permissions:
   catalogs:
-    Номенклатура: [read, write]
-    Склад: [read]
-    Контрагент: [read]
-    Организация: [read]
-    ЕдиницаИзмерения: [read]
-    Штрихкоды: [read, write]
-    СтавкаНДС: [read]
-    СпецификацииНоменклатуры: [read, write]
-    ПодключаемоеОборудование: [read]
+    ЕдиницаИзмерения:
+      - read
+    Контрагент:
+      - read
+    Номенклатура:
+      - read
+      - write
+    Организация:
+      - read
+    ПодключаемоеОборудование:
+      - read
+    Склад:
+      - read
+    СпецификацииНоменклатуры:
+      - read
+      - write
+    СтавкаНДС:
+      - read
+    Штрихкоды:
+      - read
+      - write
   documents:
-    ПоступлениеТоваров: [read, write, post, unpost]
-    СписаниеТоваров: [read, write, post, unpost]
-    ОприходованиеТоваров: [read, write, post, unpost]
-    ПеремещениеТоваров: [read, write, post, unpost]
-    ПересчетТоваров: [read, write]
-    РеализацияТоваров: [read, write, post, unpost]
-    СборкаТоваров: [read, write, post, unpost]
-    РазборкаТоваров: [read, write, post, unpost]
-    ВозвратОтПокупателя: [read, write, post, unpost]
-    ВозвратПоставщику: [read, write, post, unpost]
-  registers:
-    ОстаткиТоваров: [read]
-    ПартииТоваров: [read]
-    Взаиморасчеты: [read]
-  reports:
-    ОстаткиТоваров: [run]
-    ДвиженияТоваров: [run]
-    ВедомостьПартий: [run]
-    ОборотПоСкладам: [run]
-    СвободныеОстатки: [run]
-    РезервыТоваров: [run]
-    ТоварыВПути: [run]
-    Неликвиды: [run]
+    ВозвратОтПокупателя:
+      - read
+      - write
+      - post
+      - unpost
+    ВозвратПоставщику:
+      - read
+      - write
+      - post
+      - unpost
+    ОприходованиеТоваров:
+      - read
+      - write
+      - post
+      - unpost
+    ПеремещениеТоваров:
+      - read
+      - write
+      - post
+      - unpost
+    ПересчетТоваров:
+      - read
+      - write
+    ПоступлениеТоваров:
+      - read
+      - write
+      - post
+      - unpost
+    РазборкаТоваров:
+      - read
+      - write
+      - post
+      - unpost
+    РеализацияТоваров:
+      - read
+      - write
+      - post
+      - unpost
+    СборкаТоваров:
+      - read
+      - write
+      - post
+      - unpost
+    СписаниеТоваров:
+      - read
+      - write
+      - post
+      - unpost
+  inforegs:
+    ЦеныНоменклатуры:
+      - read
   processors:
-    ПриёмкаТовара: [run]
-    ОтгрузкаЗаказов: [run]
-    ИнвентаризацияСклада: [run]
-    ИмпортНоменклатуры: [run]
-    ВыгрузкаВExcel: [run]
-    ВзвеситьТовар: [run]
+    ВзвеситьТовар:
+      - run
+    ВыгрузкаВExcel:
+      - run
+    ИмпортНоменклатуры:
+      - run
+    ИнвентаризацияСклада:
+      - run
+    ОтгрузкаЗаказов:
+      - run
+    ПриёмкаТовара:
+      - run
+  registers:
+    Взаиморасчеты:
+      - read
+    ОстаткиТоваров:
+      - read
+    ПартииТоваров:
+      - read
+    РезервыТоваров:
+      - read
+    ТоварыВПути:
+      - read
+  reports:
+    ВедомостьПартий:
+      - run
+    ДвиженияТоваров:
+      - run
+    Неликвиды:
+      - run
+    ОборотПоСкладам:
+      - run
+    ОстаткиТоваров:
+      - run
+    РезервыТоваров:
+      - run
+    СвободныеОстатки:
+      - run
+    ТоварыВПути:
+      - run

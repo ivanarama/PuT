@@ -1,30 +1,10 @@
-name: ЕдиницаИзмерения
-title: Единица измерения
-titles:
-  en: Unit of measure
-  de: Maßeinheit
-  sr: Јединица мере
-  az: Ölçü vahidi
-  es: Unidad medida
-  fr: Unité mesure
-  hy: Չափման միավոր
-  ka: საზომი ერთეული
-  kk: Өлшем бірлігі
-  pt: Unidade medida
-  ro: Unitate măsură
-  tr: Ölçü birimi
-  uk: Одиниця виміру
-  uz: O'lchov birligi
-  zh: 计量单位
 fields:
   - name: Наименование
-    type: string
     title: Краткое (шт, кг)
     titles:
-      en: Short (pcs, kg)
-      de: Kurz (Stk, kg)
-      sr: Кратко (ком, кг)
       az: Qısa (əd, kq)
+      de: Kurz (Stk, kg)
+      en: Short (pcs, kg)
       es: Corto (pza, kg)
       fr: Court (pcs, kg)
       hy: Կարճ (հատ, կգ)
@@ -32,18 +12,18 @@ fields:
       kk: Қысқа (дана, кг)
       pt: Curto (pç, kg)
       ro: Scurt (buc, kg)
+      sr: Кратко (ком, кг)
       tr: Kısa (ad, kg)
       uk: Коротке (шт, кг)
       uz: Qisqa (dona, kg)
       zh: 简称（件、公斤）
-  - name: ПолноеНаименование
     type: string
+  - name: ПолноеНаименование
     title: Полное (штука, килограмм)
     titles:
-      en: Full (piece, kilogram)
-      de: Vollständig (Stück, Kilogramm)
-      sr: Пуно (комад, килограм)
       az: Tam (ədəd, kiloqram)
+      de: Vollständig (Stück, Kilogramm)
+      en: Full (piece, kilogram)
       es: Completo (pieza, kilogramo)
       fr: Complet (pièce, kilogramme)
       hy: Ամբողջական (հատ, կիլոգրամ)
@@ -51,18 +31,18 @@ fields:
       kk: Толық (дана, килограмм)
       pt: Completo (peça, quilograma)
       ro: Complet (bucată, kilogram)
+      sr: Пуно (комад, килограм)
       tr: Tam (adet, kilogram)
       uk: Повне (штука, кілограм)
       uz: To'liq (dona, kilogramm)
       zh: 全称（件、公斤）
-  - name: КодОКЕИ
     type: string
+  - name: КодОКЕИ
     title: Код ОКЕИ
     titles:
-      en: OKEI code
-      de: OKEI-Code
-      sr: ОКЕИ кôд
       az: ОКЕИ kodu
+      de: OKEI-Code
+      en: OKEI code
       es: Código OKEY
       fr: Code OKEY
       hy: ՉՄԲ կոդ
@@ -70,48 +50,73 @@ fields:
       kk: ОКЕИ коды
       pt: Código OKEY
       ro: Cod OKI
+      sr: ОКЕИ кôд
       tr: OKEY kodu
       uk: Код ОКЕІ
       uz: OKEY kodi
       zh: OKEI代码
+    type: string
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.единицаизмерения
+name: ЕдиницаИзмерения
+notify_changes: true
 predefined:
-  - name: Штука
-    fields:
+  - fields:
+      КодОКЕИ: '796'
       Наименование: шт
       ПолноеНаименование: штука
-      КодОКЕИ: "796"
-  - name: Килограмм
-    fields:
+    name: Штука
+  - fields:
+      КодОКЕИ: '166'
       Наименование: кг
       ПолноеНаименование: килограмм
-      КодОКЕИ: "166"
-  - name: Грамм
-    fields:
+    name: Килограмм
+  - fields:
+      КодОКЕИ: '163'
       Наименование: г
       ПолноеНаименование: грамм
-      КодОКЕИ: "163"
-  - name: Литр
-    fields:
+    name: Грамм
+  - fields:
+      КодОКЕИ: '112'
       Наименование: л
       ПолноеНаименование: литр
-      КодОКЕИ: "112"
-  - name: Метр
-    fields:
+    name: Литр
+  - fields:
+      КодОКЕИ: '006'
       Наименование: м
       ПолноеНаименование: метр
-      КодОКЕИ: "006"
-  - name: КвадратныйМетр
-    fields:
+    name: Метр
+  - fields:
+      КодОКЕИ: '055'
       Наименование: м2
       ПолноеНаименование: квадратный метр
-      КодОКЕИ: "055"
-  - name: Упаковка
-    fields:
+    name: КвадратныйМетр
+  - fields:
+      КодОКЕИ: '778'
       Наименование: упак
       ПолноеНаименование: упаковка
-      КодОКЕИ: "778"
-  - name: Комплект
-    fields:
+    name: Упаковка
+  - fields:
+      КодОКЕИ: '839'
       Наименование: компл
       ПолноеНаименование: комплект
-      КодОКЕИ: "839"
+    name: Комплект
+title: Единица измерения
+titles:
+  az: Ölçü vahidi
+  de: Maßeinheit
+  en: Unit of measure
+  es: Unidad medida
+  fr: Unité mesure
+  hy: Չափման միավոր
+  ka: საზომი ერთეული
+  kk: Өлшем бірлігі
+  pt: Unidade medida
+  ro: Unitate măsură
+  sr: Јединица мере
+  tr: Ölçü birimi
+  uk: Одиниця виміру
+  uz: O'lchov birligi
+  zh: 计量单位

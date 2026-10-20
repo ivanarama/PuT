@@ -26,7 +26,12 @@ fields:
       uz: Nomi
       zh: 名称
     type: string
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.склад
 name: Склад
+notify_changes: true
 title: Склад
 titles:
   az: Anbar

@@ -1,24 +1,29 @@
-name: Зарезервировано
-type: kpi
-title: Зарезервировано под заказы
-titles:
-  en: Reserved for orders
-  de: Für Aufträge reserviert
-  sr: Резервисано за налоге
-  az: Sifarişlər üçün rezerv
-  es: Reservado para pedidos
-  fr: Réservé pour commandes
-  hy: "Պատվերների համար ռեզերվ"
-  ka: "შეკვეთებისთვის რეზერვირებული"
-  kk: "Тапсырыстарға резерв"
-  pt: "Reservado para encomendas"
-  ro: "Rezervat pentru comenzi"
-  tr: "Siparişler için ayrılmış"
-  uk: "Зарезервовано під замовлення"
-  uz: "Buyurtmalar uchun zaxira"
-  zh: "订单预留"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: Зарезервировано
 query: |
   ВЫБРАТЬ СУММА(КоличествоОстаток) КАК Значение
   ИЗ РегистрНакопления.РезервыТоваров.Остатки()
   ГДЕ КоличествоОстаток > 0
+refresh_on:
+  - данные.заказпокупателя
+  - данные.закрытиезаказовпокупателей
+  - данные.реализациятоваров
+title: Зарезервировано под заказы
+titles:
+  az: Sifarişlər üçün rezerv
+  de: Für Aufträge reserviert
+  en: Reserved for orders
+  es: Reservado para pedidos
+  fr: Réservé pour commandes
+  hy: Պատվերների համար ռեզերվ
+  ka: შეკვეთებისთვის რეზერვირებული
+  kk: Тапсырыстарға резерв
+  pt: Reservado para encomendas
+  ro: Rezervat pentru comenzi
+  sr: Резервисано за налоге
+  tr: Siparişler için ayrılmış
+  uk: Зарезервовано під замовлення
+  uz: Buyurtmalar uchun zaxira
+  zh: 订单预留
+type: kpi

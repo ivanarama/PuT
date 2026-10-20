@@ -1,42 +1,50 @@
-name: Настройки
-title: Настройки
-icon: settings
-titles:
-  en: Settings
-  de: Einstellungen
-  sr: Подешавања
-  az: Parametrlər
-  es: Configuración
-  fr: Paramètres
-  hy: Կարգավորումներ
-  ka: პარამეტრები
-  kk: Баптаулар
-  pt: Configurações
-  ro: Setări
-  tr: Ayarlar
-  uk: Налаштування
-  uz: Sozlamalar
-  zh: 设置
-order: 50
-roles: [Демо]
 contents:
-  catalogs:  [Организация, НастройкиПользователя, ЕдиницаИзмерения, СтавкаНДС, ТипЦен, Валюта]
-  processors: [НастройкаТиповЦен, ЗаполнитьТестовуюБазу]
+  catalogs:
+    - Организация
+    - НастройкиПользователя
+    - ЕдиницаИзмерения
+    - СтавкаНДС
+    - ТипЦен
+    - Валюта
+  processors:
+    - НастройкаТиповЦен
+    - ЗаполнитьТестовуюБазу
 home_page:
-  title: Главная
   layout: rows
+  nav_by_role:
+    Кассир:
+      documents: []
+      processors: []
+      reports: []
+    Кладовщик:
+      catalogs: []
+      documents: []
+      processors: []
+      reports: []
+    Менеджер:
+      catalogs: []
+      documents: []
+      processors: []
+      reports: []
+    Снабженец:
+      catalogs: []
+      documents: []
+      processors: []
+      reports: []
+    Управленец:
+      catalogs: []
+      documents: []
+      processors: []
+      reports: []
   rows:
-    # Быстрые действия
     - widgets:
         - БыстрыеДействияНастройки
-    # Объекты конфигурации
     - widgets:
         - НоменклатураВсего
         - КонтрагентовВсего
         - СкладовВсего
         - ОрганизацийВсего
         - ПользователейВсего
-    # Документооборот за месяц
     - widgets:
         - РеализацийЗаМесяц
         - ПоступленийЗаМесяц
@@ -44,11 +52,81 @@ home_page:
         - ЗаказовПокупателейЗаМесяц
         - ВозвратовЗаМесяц
         - КассовыхЗаМесяц
-    # Статистика
     - widgets:
         - СтатистикаДокументов
         - СтатистикаСправочников
-    # Пользователи
     - widgets:
         - ПользователиСписок
         - ПоследняяАктивность
+  title: Главная
+icon: settings
+menu:
+  sections:
+    - groups:
+        - icon: book-open
+          id: settings-reference
+          items:
+            - id: settings-catalog-1eae5fc563
+              target: catalog:ЕдиницаИзмерения
+            - id: settings-catalog-1a5f1ddf1c
+              target: catalog:СтавкаНДС
+            - id: settings-catalog-050a964d9f
+              target: catalog:Валюта
+          title: Единицы, налоги и валюта
+          titles:
+            en: Units, taxes and currency
+        - icon: tags
+          id: settings-prices
+          items:
+            - id: settings-catalog-3d3680a7c5
+              target: catalog:ТипЦен
+            - id: settings-processor-2069eaf086
+              target: processor:НастройкаТиповЦен
+          title: Типы цен
+          titles:
+            en: Price types
+      icon: settings
+      id: settings-trade
+      items:
+        - id: settings-catalog-f468d47562
+          target: catalog:Организация
+        - id: settings-catalog-583367db24
+          target: catalog:НастройкиПользователя
+      title: Параметры торговли
+      titles:
+        en: Trade settings
+    - groups:
+        - icon: flask-conical
+          id: settings-demo
+          items:
+            - id: settings-processor-c74c83d05b
+              target: processor:ЗаполнитьТестовуюБазу
+          title: Демонстрационные данные
+          titles:
+            en: Demo data
+      icon: wrench
+      id: settings-service
+      title: Обслуживание базы
+      titles:
+        en: Database maintenance
+name: Настройки
+order: 50
+roles:
+  - Демо
+title: Настройки
+titles:
+  az: Parametrlər
+  de: Einstellungen
+  en: Settings
+  es: Configuración
+  fr: Paramètres
+  hy: Կարգավորումներ
+  ka: პარამეტრები
+  kk: Баптаулар
+  pt: Configurações
+  ro: Setări
+  sr: Подешавања
+  tr: Ayarlar
+  uk: Налаштування
+  uz: Sozlamalar
+  zh: 设置

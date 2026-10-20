@@ -1,25 +1,7 @@
-name: ПродажиПоДням
-type: chart
 chart_kind: bar
-title: Продажи за квартал
-titles:
-  en: Sales over quarter
-  de: Verkäufe des Quartals
-  sr: Продаја за квартал
-  az: Rüblük satışlar
-  es: Ventas del trimestre
-  fr: Ventes du trimestre
-  hy: "Եռամսյակային վաճառքներ"
-  ka: "კვარტალური გაყიდვები"
-  kk: "Тоқсандық сатылым"
-  pt: "Vendas do trimestre"
-  ro: "Vânzări trimestriale"
-  tr: "Çeyreklik satışlar"
-  uk: "Продажі за квартал"
-  uz: "Choraklik savdo"
-  zh: "季度销售"
+name: ПродажиПоДням
 params:
-  Начало: "{{today|minus_days:90}}"
+  Начало: '{{today|minus_days:90}}'
 query: |
   ВЫБРАТЬ
     strftime('%Y-%m', Дата) КАК Месяц,
@@ -28,5 +10,26 @@ query: |
   ГДЕ Дата >= &Начало И posted = Истина
   СГРУППИРОВАТЬ ПО strftime('%Y-%m', Дата)
   УПОРЯДОЧИТЬ ПО strftime('%Y-%m', Дата)
+refresh_on:
+  - данные.реализациятоваров
+title: Продажи за квартал
+titles:
+  az: Rüblük satışlar
+  de: Verkäufe des Quartals
+  en: Sales over quarter
+  es: Ventas del trimestre
+  fr: Ventes du trimestre
+  hy: Եռամսյակային վաճառքներ
+  ka: კვარტალური გაყიდვები
+  kk: Тоқсандық сатылым
+  pt: Vendas do trimestre
+  ro: Vânzări trimestriale
+  sr: Продаја за квартал
+  tr: Çeyreklik satışlar
+  uk: Продажі за квартал
+  uz: Choraklik savdo
+  zh: 季度销售
+type: chart
 x_field: Месяц
-y_fields: [Сумма]
+y_fields:
+  - Сумма

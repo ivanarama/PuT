@@ -246,11 +246,20 @@ fields:
       uz: To'lovga jami
       zh: 应付总额
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Покупатель
+  - Склад
+list_refresh_on:
+  - данные.реализациятоваров
 name: РеализацияТоваров
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "РЕА-"
+  prefix: РЕА-
 posting: true
 tableparts:
   - fields:

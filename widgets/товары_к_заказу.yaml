@@ -1,91 +1,106 @@
-name: ТоварыКЗаказу
-type: list
-title: Товары к заказу
-titles:
-  en: Items to reorder
-  de: Nachzubestellende Artikel
-  sr: Артикли за наручивање
-  az: Sifariş ediləcək mallar
-  es: Artículos a reabastecer
-  fr: Articles à commander
-  hy: "Պատվիրման ենթակա ապրանքներ"
-  ka: "შესაკვეთი საქონელი"
-  kk: "Тапсырыс беруге тауарлар"
-  pt: "Itens para reabastecer"
-  ro: "Articole de comandat"
-  tr: "Sipariş edilecek ürünler"
-  uk: "Товари до замовлення"
-  uz: "Buyurtma qilinadigan tovarlar"
-  zh: "待补货商品"
-limit: 10
-query: |
-  ВЫБРАТЬ
-    Н.Наименование КАК Номенклатура,
-    CAST(Н.МинимальныйОстаток AS NUMERIC) КАК Минимум,
-    COALESCE(СУММА(Д.КоличествоОстаток), 0) КАК Остаток
-  ИЗ Справочник.Номенклатура КАК Н
-    ЛЕВОЕ СОЕДИНЕНИЕ РегистрНакопления.ОстаткиТоваров.Остатки() КАК Д
-    ПО Д.Номенклатура = Н.Наименование
-  ГДЕ CAST(Н.МинимальныйОстаток AS NUMERIC) > 0
-  СГРУППИРОВАТЬ ПО Н.Наименование, Н.МинимальныйОстаток
-  ИМЕЯ COALESCE(СУММА(Д.КоличествоОстаток), 0) < CAST(Н.МинимальныйОстаток AS NUMERIC)
-  УПОРЯДОЧИТЬ ПО Остаток
 columns:
   - field: Номенклатура
-    label: "Номенклатура"
+    label: Номенклатура
     labels:
-      en: "Item"
-      de: "Artikel"
-      sr: "Артикал"
-      az: "Məhsul"
-      es: "Artículo"
-      fr: "Article"
-      hy: "Ապրանք"
-      ka: "პროდუქტი"
-      kk: "Тауар"
-      pt: "Item"
-      ro: "Articol"
-      tr: "Ürün"
-      uk: "Товар"
-      uz: "Mahsulot"
-      zh: "商品"
-  - field: Остаток
-    label: "Остаток"
-    labels:
-      en: "On hand"
-      de: "Bestand"
-      sr: "Стање"
-      az: "Qalıq"
-      es: "Existencias"
-      fr: "Stock"
-      hy: "Մնացորդ"
-      ka: "ნაშთი"
-      kk: "Қалдық"
-      pt: "Saldo"
-      ro: "Stoc"
-      tr: "Mevcut"
-      uk: "Залишок"
-      uz: "Qoldiq"
-      zh: "现存"
+      az: Məhsul
+      de: Artikel
+      en: Item
+      es: Artículo
+      fr: Article
+      hy: Ապրանք
+      ka: პროდუქტი
+      kk: Тауар
+      pt: Item
+      ro: Articol
+      sr: Артикал
+      tr: Ürün
+      uk: Товар
+      uz: Mahsulot
+      zh: 商品
+  - align: right
+    field: Остаток
     format: number
-    align: right
-  - field: Минимум
-    label: "Минимум"
+    label: Остаток
     labels:
-      en: "Minimum"
-      de: "Minimum"
-      sr: "Минимум"
-      az: "Minimum"
-      es: "Mínimo"
-      fr: "Minimum"
-      hy: "Նվազագույն"
-      ka: "მინიმუმი"
-      kk: "Минимум"
-      pt: "Mínimo"
-      ro: "Minim"
-      tr: "Asgari"
-      uk: "Мінімум"
-      uz: "Minimum"
-      zh: "最低"
+      az: Qalıq
+      de: Bestand
+      en: On hand
+      es: Existencias
+      fr: Stock
+      hy: Մնացորդ
+      ka: ნაშთი
+      kk: Қалдық
+      pt: Saldo
+      ro: Stoc
+      sr: Стање
+      tr: Mevcut
+      uk: Залишок
+      uz: Qoldiq
+      zh: 现存
+  - align: right
+    field: Минимум
     format: number
-    align: right
+    label: Минимум
+    labels:
+      az: Minimum
+      de: Minimum
+      en: Minimum
+      es: Mínimo
+      fr: Minimum
+      hy: Նվազագույն
+      ka: მინიმუმი
+      kk: Минимум
+      pt: Mínimo
+      ro: Minim
+      sr: Минимум
+      tr: Asgari
+      uk: Мінімум
+      uz: Minimum
+      zh: 最低
+limit: 10
+name: ТоварыКЗаказу
+query: |
+  ВЫБРАТЬ
+    Н.Ссылка КАК ИдСтроки,
+    Н.Наименование КАК Номенклатура,
+    CAST(Н.МинимальныйОстаток AS NUMERIC) КАК Минимум,
+    COALESCE(СУММА(ВЫБОР КОГДА Д.вид_движения = "Приход" ТОГДА Д.Количество ИНАЧЕ -Д.Количество КОНЕЦ), 0) КАК Остаток
+  ИЗ Справочник.Номенклатура КАК Н
+    ЛЕВОЕ СОЕДИНЕНИЕ РегистрНакопления.ОстаткиТоваров КАК Д
+    ПО Д.Номенклатура = Н.Ссылка
+  ГДЕ CAST(Н.МинимальныйОстаток AS NUMERIC) > 0
+  СГРУППИРОВАТЬ ПО Н.Ссылка, Н.Наименование, Н.МинимальныйОстаток
+  ИМЕЯ COALESCE(СУММА(ВЫБОР КОГДА Д.вид_движения = "Приход" ТОГДА Д.Количество ИНАЧЕ -Д.Количество КОНЕЦ), 0) < CAST(Н.МинимальныйОстаток AS NUMERIC)
+  УПОРЯДОЧИТЬ ПО Остаток
+refresh_on:
+  - данные.возвратотпокупателя
+  - данные.возвратпоставщику
+  - данные.номенклатура
+  - данные.оприходованиетоваров
+  - данные.перемещениетоваров
+  - данные.поступлениетоваров
+  - данные.разборкатоваров
+  - данные.реализациятоваров
+  - данные.сборкатоваров
+  - данные.списаниетоваров
+source:
+  entity: Номенклатура
+  id_field: ИдСтроки
+title: Товары к заказу
+titles:
+  az: Sifariş ediləcək mallar
+  de: Nachzubestellende Artikel
+  en: Items to reorder
+  es: Artículos a reabastecer
+  fr: Articles à commander
+  hy: Պատվիրման ենթակա ապրանքներ
+  ka: შესაკვეთი საქონელი
+  kk: Тапсырыс беруге тауарлар
+  pt: Itens para reabastecer
+  ro: Articole de comandat
+  sr: Артикли за наручивање
+  tr: Sipariş edilecek ürünler
+  uk: Товари до замовлення
+  uz: Buyurtma qilinadigan tovarlar
+  zh: 待补货商品
+type: list

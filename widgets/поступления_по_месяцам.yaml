@@ -1,25 +1,7 @@
-name: ПоступленияПоМесяцам
-type: chart
 chart_kind: bar
-title: Поступления по месяцам
-titles:
-  en: Receipts by month
-  de: Wareneingänge nach Monat
-  sr: Пријеми по месецима
-  az: Aylar üzrə daxilolmalar
-  es: Entradas por mes
-  fr: Réceptions par mois
-  hy: "Մուտքեր ըստ ամիսների"
-  ka: "მიღებები თვეების მიხედვით"
-  kk: "Айлар бойынша түсімдер"
-  pt: "Entradas por mês"
-  ro: "Recepții pe luni"
-  tr: "Aylara göre girişler"
-  uk: "Надходження за місяцями"
-  uz: "Oylar bo'yicha kirimlar"
-  zh: "按月入库"
+name: ПоступленияПоМесяцам
 params:
-  Начало: "{{today|minus_days:180}}"
+  Начало: '{{today|minus_days:180}}'
 query: |
   ВЫБРАТЬ
     strftime('%Y-%m', Дата) КАК Месяц,
@@ -28,5 +10,26 @@ query: |
   ГДЕ Дата >= &Начало И posted = Истина
   СГРУППИРОВАТЬ ПО strftime('%Y-%m', Дата)
   УПОРЯДОЧИТЬ ПО strftime('%Y-%m', Дата)
+refresh_on:
+  - данные.поступлениетоваров
+title: Поступления по месяцам
+titles:
+  az: Aylar üzrə daxilolmalar
+  de: Wareneingänge nach Monat
+  en: Receipts by month
+  es: Entradas por mes
+  fr: Réceptions par mois
+  hy: Մուտքեր ըստ ամիսների
+  ka: მიღებები თვეების მიხედვით
+  kk: Айлар бойынша түсімдер
+  pt: Entradas por mês
+  ro: Recepții pe luni
+  sr: Пријеми по месецима
+  tr: Aylara göre girişler
+  uk: Надходження за місяцями
+  uz: Oylar bo'yicha kirimlar
+  zh: 按月入库
+type: chart
 x_field: Месяц
-y_fields: [Сумма]
+y_fields:
+  - Сумма

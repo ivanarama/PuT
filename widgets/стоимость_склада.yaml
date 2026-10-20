@@ -1,11 +1,25 @@
+format: number
+link: /ui/report/ОстаткиТоваров
 name: СтоимостьСклада
-type: kpi
+query: |
+  ВЫБРАТЬ CAST(ROUND(СУММА(СуммаОстаток), 0) AS INTEGER) КАК Значение
+  ИЗ РегистрНакопления.ОстаткиТоваров.Остатки()
+  ГДЕ КоличествоОстаток > 0
+refresh_on:
+  - данные.возвратотпокупателя
+  - данные.возвратпоставщику
+  - данные.оприходованиетоваров
+  - данные.перемещениетоваров
+  - данные.поступлениетоваров
+  - данные.разборкатоваров
+  - данные.реализациятоваров
+  - данные.сборкатоваров
+  - данные.списаниетоваров
 title: Стоимость склада
 titles:
-  en: Warehouse value
-  de: Lagerwert
-  sr: Вредност магацина
   az: Anbar dəyəri
+  de: Lagerwert
+  en: Warehouse value
   es: Valor del almacén
   fr: Valeur entrepôt
   hy: Պահեստի արժեք
@@ -13,12 +27,9 @@ titles:
   kk: Қойма құны
   pt: Valor do armazém
   ro: Valoare depozit
+  sr: Вредност магацина
   tr: Depo değeri
   uk: Вартість складу
   uz: Ombor qiymati
   zh: 仓库价值
-format: number
-query: |
-  ВЫБРАТЬ CAST(ROUND(СУММА(СуммаОстаток), 0) AS INTEGER) КАК Значение
-  ИЗ РегистрНакопления.ОстаткиТоваров.Остатки()
-  ГДЕ КоличествоОстаток > 0
+type: kpi

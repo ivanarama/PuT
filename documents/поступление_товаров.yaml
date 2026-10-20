@@ -207,11 +207,20 @@ fields:
       uz: Jami
       zh: 合计
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Поставщик
+  - Склад
+list_refresh_on:
+  - данные.поступлениетоваров
 name: ПоступлениеТоваров
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "ПОС-"
+  prefix: ПОС-
 posting: true
 tableparts:
   - fields:

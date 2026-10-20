@@ -3,146 +3,186 @@ attributes:
     name: Объект
     save: true
     type: DocumentRef.СборкаТоваров
+  - name: ИзделиеПодбора
+    save: false
+    type: CatalogRef.Номенклатура
 elements:
+  - background: '#eef2ff'
+    children:
+      - choice_filter:
+          - field: is_folder
+            op: eq
+            value: false
+        data_path: Форма.ИзделиеПодбора
+        events:
+          ПриИзменении: ИзделиеИзменено
+        id: изделие-сборки
+        kind: ПолеВвода
+        name: ИзделиеПодбора
+        title:
+          ru: Готовое изделие
+      - choice_filter:
+          - field: Номенклатура
+            from: Форма.ИзделиеПодбора
+            op: eq
+        data_path: Объект.Спецификация
+        id: спецификация-сборки
+        kind: ПолеВвода
+        name: Спецификация
+        title:
+          ru: Спецификация изделия
+      - events:
+          Нажатие: ЗаполнитьПоСпецификацииФормы
+        kind: Кнопка
+        name: ЗаполнитьПоСпецификации
+        title:
+          ru: Заполнить по спецификации (заменить состав)
+    kind: ГруппаФормы
+    name: СпецификацияСборки
+    title:
+      ru: Сборка по спецификации
   - children:
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Номер
-                hint: "СБР-NNNNN"
+                hint: СБР-NNNNN
                 kind: ПолеВвода
                 name: ПолеНомер
                 readonly: true
                 title:
-                  de: "Nummer"
-                  en: "Number"
-                  ru: "Номер"
-                  sr: "Број"
+                  de: Nummer
+                  en: Number
+                  ru: Номер
+                  sr: Број
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.Склад
                 kind: ПолеВвода
                 name: ПолеСклад
                 required: true
                 title:
-                  de: "Lager"
-                  en: "Warehouse"
-                  ru: "Склад"
-                  sr: "Магацин"
+                  de: Lager
+                  en: Warehouse
+                  ru: Склад
+                  sr: Магацин
               - data_path: Объект.Комментарий
                 kind: ПолеВвода
                 name: ПолеКомментарий
                 title:
-                  de: "Kommentar"
-                  en: "Comment"
-                  ru: "Комментарий"
-                  sr: "Коментар"
+                  de: Kommentar
+                  en: Comment
+                  ru: Комментарий
+                  sr: Коментар
               - data_path: Объект.Сумма
-                hint: "Рассчитывается при проведении из ФИФО-себестоимости комплектующих"
+                hint: Рассчитывается при проведении из ФИФО-себестоимости комплектующих
                 kind: ПолеВвода
                 name: ПолеСумма
                 readonly: true
                 title:
-                  de: "Montagekosten"
-                  en: "Assembly cost"
-                  ru: "Сумма сборки"
-                  sr: "Трошак састављања"
+                  de: Montagekosten
+                  en: Assembly cost
+                  ru: Сумма сборки
+                  sr: Трошак састављања
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Belegkopf"
-              en: "Document header"
-              ru: "Шапка документа"
-              sr: "Заглавље документа"
+              de: Belegkopf
+              en: Document header
+              ru: Шапка документа
+              sr: Заглавље документа
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Allgemein"
-          en: "General"
-          ru: "Основное"
-          sr: "Опште"
+          de: Allgemein
+          en: General
+          ru: Основное
+          sr: Опште
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Расход
                 kind: ТабличнаяЧасть
                 name: ТабРасход
                 title:
-                  de: "Komponenten"
-                  en: "Components"
-                  ru: "Комплектующие"
-                  sr: "Компоненте"
+                  de: Komponenten
+                  en: Components
+                  ru: Комплектующие
+                  sr: Компоненте
               - events:
                   Нажатие: КнопкаОчиститьРасходНажатие
                 kind: Кнопка
                 name: КнопкаОчиститьРасход
                 title:
-                  de: "Leeren"
-                  en: "Clear"
-                  ru: "Очистить"
-                  sr: "Обриши"
+                  de: Leeren
+                  en: Clear
+                  ru: Очистить
+                  sr: Обриши
             kind: ГруппаФормы
             name: ГруппаРасход
             title:
-              de: "Zu verbrauchende Komponenten"
-              en: "Components to consume"
-              ru: "Списываемые комплектующие"
-              sr: "Компоненте за расход"
+              de: Zu verbrauchende Komponenten
+              en: Components to consume
+              ru: Списываемые комплектующие
+              sr: Компоненте за расход
         kind: Страница
         name: СтраницаРасход
         title:
-          de: "Komponenten"
-          en: "Components"
-          ru: "Комплектующие"
-          sr: "Компоненте"
+          de: Komponenten
+          en: Components
+          ru: Комплектующие
+          sr: Компоненте
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Приход
                 kind: ТабличнаяЧасть
                 name: ТабПриход
                 title:
-                  de: "Fertigprodukte"
-                  en: "Finished goods"
-                  ru: "Продукция"
-                  sr: "Готова роба"
+                  de: Fertigprodukte
+                  en: Finished goods
+                  ru: Продукция
+                  sr: Готова роба
               - events:
                   Нажатие: КнопкаОчиститьПриходНажатие
                 kind: Кнопка
                 name: КнопкаОчиститьПриход
                 title:
-                  de: "Leeren"
-                  en: "Clear"
-                  ru: "Очистить"
-                  sr: "Обриши"
+                  de: Leeren
+                  en: Clear
+                  ru: Очистить
+                  sr: Обриши
             kind: ГруппаФормы
             name: ГруппаПриход
             title:
-              de: "Zu produzierende Fertigprodukte"
-              en: "Finished goods to produce"
-              ru: "Готовая продукция"
-              sr: "Готова роба за пријем"
+              de: Zu produzierende Fertigprodukte
+              en: Finished goods to produce
+              ru: Готовая продукция
+              sr: Готова роба за пријем
         kind: Страница
         name: СтраницаПриход
         title:
-          de: "Fertigprodukte"
-          en: "Finished goods"
-          ru: "Продукция"
-          sr: "Готова роба"
+          de: Fertigprodukte
+          en: Finished goods
+          ru: Продукция
+          sr: Готова роба
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -155,9 +195,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Montage"
-    en: "Assembly"
-    ru: "Сборка товаров"
-    sr: "Састављање робе"
+    de: Montage
+    en: Assembly
+    ru: Сборка товаров
+    sr: Састављање робе
   vertical_scroll: auto
 schema: onebase.form/v1

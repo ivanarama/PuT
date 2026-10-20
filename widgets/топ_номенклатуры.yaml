@@ -1,76 +1,84 @@
 columns:
   - field: Номенклатура
-    label: "Номенклатура"
+    label: Номенклатура
     labels:
-      az: "Məhsul"
-      de: "Artikel"
-      en: "Item"
-      es: "Artículo"
-      fr: "Article"
-      hy: "Ապրանք"
-      ka: "პროდუქტი"
-      kk: "Тауар"
-      pt: "Item"
-      ro: "Articol"
-      sr: "Артикал"
-      tr: "Ürün"
-      uk: "Товар"
-      uz: "Mahsulot"
-      zh: "商品"
+      az: Məhsul
+      de: Artikel
+      en: Item
+      es: Artículo
+      fr: Article
+      hy: Ապրանք
+      ka: პროდუქტი
+      kk: Тауар
+      pt: Item
+      ro: Articol
+      sr: Артикал
+      tr: Ürün
+      uk: Товар
+      uz: Mahsulot
+      zh: 商品
   - align: right
     field: Выручка
     format: number
-    label: "Выручка"
+    label: Выручка
     labels:
-      az: "Gəlir"
-      de: "Umsatz"
-      en: "Revenue"
-      es: "Ingreso"
-      fr: "Chiffre d'affaires"
-      hy: "Եկամուտ"
-      ka: "შემოსავალი"
-      kk: "Табыс"
-      pt: "Receita"
-      ro: "Venit"
-      sr: "Приход"
-      tr: "Gelir"
-      uk: "Виручка"
-      uz: "Daromad"
-      zh: "收入"
+      az: Gəlir
+      de: Umsatz
+      en: Revenue
+      es: Ingreso
+      fr: Chiffre d'affaires
+      hy: Եկամուտ
+      ka: შემოსავალი
+      kk: Табыс
+      pt: Receita
+      ro: Venit
+      sr: Приход
+      tr: Gelir
+      uk: Виручка
+      uz: Daromad
+      zh: 收入
   - align: right
     field: Прибыль
     format: number
-    label: "Прибыль"
+    label: Прибыль
     labels:
-      az: "Mənfəət"
-      de: "Gewinn"
-      en: "Profit"
-      es: "Beneficio"
-      fr: "Bénéfice"
-      hy: "Շահույթ"
-      ka: "მოგება"
-      kk: "Пайда"
-      pt: "Lucro"
-      ro: "Profit"
-      sr: "Добит"
-      tr: "Kâr"
-      uk: "Прибуток"
-      uz: "Foyda"
-      zh: "利润"
+      az: Mənfəət
+      de: Gewinn
+      en: Profit
+      es: Beneficio
+      fr: Bénéfice
+      hy: Շահույթ
+      ka: მოგება
+      kk: Пайда
+      pt: Lucro
+      ro: Profit
+      sr: Добит
+      tr: Kâr
+      uk: Прибуток
+      uz: Foyda
+      zh: 利润
 limit: 10
 name: ТопНоменклатуры
 params:
-  Начало: "{{today|minus_days:30}}"
+  Начало: '{{today|start_of_month}}'
 query: |
   ВЫБРАТЬ
+    Номенклатура.Ссылка КАК ИдСтроки,
     Номенклатура,
     CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)), 0) AS INTEGER)       КАК Выручка,
     CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0 ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ)), 0) AS INTEGER) КАК Себестоимость,
     CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)) - СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СебестоимостьСНДС ЕСТЬ НЕ NULL И СебестоимостьСНДС <> 0 ТОГДА СебестоимостьСНДС ИНАЧЕ Себестоимость КОНЕЦ)), 0) AS INTEGER) КАК Прибыль
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало
-  СГРУППИРОВАТЬ ПО Номенклатура
+  СГРУППИРОВАТЬ ПО Номенклатура.Ссылка, Номенклатура
   УПОРЯДОЧИТЬ ПО Выручка УБЫВ
+refresh_on:
+  - данные.возвратотпокупателя
+  - данные.поступлениетоваров
+  - данные.реализациятоваров
+source:
+  entity: Номенклатура
+  id_field: ИдСтроки
 title: Топ номенклатуры по выручке (месяц)
 titles:
   az: Gəlirə görə top məhsullar (ay)

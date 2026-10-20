@@ -1,64 +1,69 @@
-name: СпецификацииНоменклатуры
-title: Спецификации номенклатуры
-titles:
-  en: Bills of materials
-  de: Stücklisten
-  sr: Саставнице
 fields:
   - name: Наименование
-    type: string
     title: Наименование
     titles:
-      en: Name
       de: Name
+      en: Name
       sr: Назив
+    type: string
   - name: Номенклатура
-    type: reference:Номенклатура
     title: Готовая продукция / Комплект
     titles:
-      en: Finished product / Kit
       de: Fertigprodukt / Set
+      en: Finished product / Kit
       sr: Готов производ / Комплет
+    type: reference:Номенклатура
   - name: Количество
-    type: number
     title: Количество комплекта
     titles:
-      en: Kit quantity
       de: Set-Menge
+      en: Kit quantity
       sr: Количина комплета
+    type: number
   - name: Комментарий
-    type: string
     title: Комментарий
     titles:
-      en: Comment
       de: Kommentar
+      en: Comment
       sr: Коментар
+    type: string
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.спецификацииноменклатуры
+name: СпецификацииНоменклатуры
+notify_changes: true
 tableparts:
-  - name: Состав
-    title: Состав комплекта (материалы)
-    titles:
-      en: Components
-      de: Komponenten
-      sr: Компоненте
-    fields:
+  - fields:
       - name: Номенклатура
-        type: reference:Номенклатура
         title: Комплектующая
         titles:
-          en: Component item
           de: Komponente
+          en: Component item
           sr: Компонента
+        type: reference:Номенклатура
       - name: Количество
-        type: number
         title: Количество
         titles:
-          en: Quantity
           de: Menge
+          en: Quantity
           sr: Количина
+        type: number
       - name: ЕдиницаИзмерения
-        type: reference:ЕдиницаИзмерения
         title: Ед. изм.
         titles:
-          en: Unit
           de: Einheit
+          en: Unit
           sr: Јед. мере
+        type: reference:ЕдиницаИзмерения
+    name: Состав
+    title: Состав комплекта (материалы)
+    titles:
+      de: Komponenten
+      en: Components
+      sr: Компоненте
+title: Спецификации номенклатуры
+titles:
+  de: Stücklisten
+  en: Bills of materials
+  sr: Саставнице

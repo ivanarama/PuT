@@ -128,7 +128,13 @@ fields:
       ru: Услуга
     type: bool
 hierarchical: true
+list_filters:
+  - Наименование
+  - Артикул
+list_refresh_on:
+  - данные.номенклатура
 name: Номенклатура
+notify_changes: true
 title: Номенклатура
 titles:
   az: Məhsullar

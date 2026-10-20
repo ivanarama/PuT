@@ -1,6 +1,11 @@
 замечания_по_платформе.md
 debug.log
-docs/
+docs/*
+!docs/help/
+!docs/LOCAL_PREVIEW.md
+!docs/DEMO_RESET.md
+!docs/HELP_SCREENSHOTS.md
+!docs/RELEASE_1.3.0.md
 
 # Базы данных (не коммитим рабочие/тестовые БД)
 *.db
@@ -33,3 +38,9 @@ scripts/demo_images/
 # базы сценарных тестов (scripts/scenario_tests.sh).
 *.onebase.lock
 .put_ci_*
+
+# Локальный стенд и артефакты проверки интерфейса
+.local/
+.artifacts/
+*.db-wal
+*.db-shm

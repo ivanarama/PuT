@@ -6,94 +6,96 @@ attributes:
 elements:
   - children:
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Номер
-                hint: "ПЕР-NNNNN"
+                hint: ПЕР-NNNNN
                 kind: ПолеВвода
                 name: ПолеНомер
                 readonly: true
                 title:
-                  de: "Nummer"
-                  en: "Number"
-                  ru: "Номер"
-                  sr: "Број"
+                  de: Nummer
+                  en: Number
+                  ru: Номер
+                  sr: Број
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.СкладОтправитель
                 kind: ПолеВвода
                 name: ПолеСкладОтправитель
                 required: true
                 title:
-                  de: "Quelllager"
-                  en: "From warehouse"
-                  ru: "Склад-отправитель"
-                  sr: "Магацин отпремања"
+                  de: Quelllager
+                  en: From warehouse
+                  ru: Склад-отправитель
+                  sr: Магацин отпремања
               - choice: true
                 data_path: Объект.СкладПолучатель
                 kind: ПолеВвода
                 name: ПолеСкладПолучатель
                 required: true
                 title:
-                  de: "Ziellager"
-                  en: "To warehouse"
-                  ru: "Склад-получатель"
-                  sr: "Магацин пријема"
+                  de: Ziellager
+                  en: To warehouse
+                  ru: Склад-получатель
+                  sr: Магацин пријема
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Belegkopf"
-              en: "Document header"
-              ru: "Шапка документа"
-              sr: "Заглавље документа"
-          - children:
+              de: Belegkopf
+              en: Document header
+              ru: Шапка документа
+              sr: Заглавље документа
+          - background: '#f8fafc'
+            children:
               - data_path: Объект.Товары
                 kind: ТабличнаяЧасть
                 name: ТабТовары
                 title:
-                  de: "Artikel"
-                  en: "Items"
-                  ru: "Товары"
-                  sr: "Артикли"
+                  de: Artikel
+                  en: Items
+                  ru: Товары
+                  sr: Артикли
               - events:
                   Нажатие: КнопкаОчиститьНажатие
                 kind: Кнопка
                 name: КнопкаОчистить
                 title:
-                  de: "Leeren"
-                  en: "Clear table"
-                  ru: "Очистить таблицу"
-                  sr: "Обриши табелу"
+                  de: Leeren
+                  en: Clear table
+                  ru: Очистить таблицу
+                  sr: Обриши табелу
             kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              de: "Umbuchungspositionen"
-              en: "Items to transfer"
-              ru: "Перемещаемые товары"
-              sr: "Ставке за пребацивање"
+              de: Umbuchungspositionen
+              en: Items to transfer
+              ru: Перемещаемые товары
+              sr: Ставке за пребацивање
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Allgemein"
-          en: "General"
-          ru: "Основное"
-          sr: "Опште"
+          de: Allgemein
+          en: General
+          ru: Основное
+          sr: Опште
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -106,9 +108,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Lagerumbuchung"
-    en: "Inventory transfer"
-    ru: "Перемещение товаров"
-    sr: "Пребацивање робе"
+    de: Lagerumbuchung
+    en: Inventory transfer
+    ru: Перемещение товаров
+    sr: Пребацивање робе
   vertical_scroll: auto
 schema: onebase.form/v1

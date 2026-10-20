@@ -1,92 +1,101 @@
-name: ЗакрытиеЗаказовПокупателей
-title: Закрытие заказов покупателей
-titles:
-  en: Sales orders closing
-  de: Kundenaufträge abschließen
-  sr: Затварање налога купаца
-posting: true
-numerator:
-  prefix: "ЗЗК-"
-  length: 5
-  period: year
 based_on:
   - ЗаказПокупателя
 fields:
   - name: Номер
-    type: string
     title: Номер
     titles:
-      en: Number
       de: Nummer
+      en: Number
       sr: Број
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
       de: Datum
+      en: Date
       sr: Датум
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
       de: Organisation
+      en: Organization
       sr: Организација
+    type: reference:Организация
   - name: Покупатель
-    type: reference:Контрагент
     title: Покупатель
     titles:
-      en: Customer
       de: Kunde
+      en: Customer
       sr: Купац
+    type: reference:Контрагент
   - name: Склад
-    type: reference:Склад
     title: Склад
     titles:
-      en: Warehouse
       de: Lager
+      en: Warehouse
       sr: Магацин
+    type: reference:Склад
   - name: Комментарий
-    type: string
     title: Комментарий
     titles:
-      en: Comment
       de: Kommentar
+      en: Comment
       sr: Коментар
+    type: string
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Покупатель
+  - Склад
+list_refresh_on:
+  - данные.закрытиезаказовпокупателей
+name: ЗакрытиеЗаказовПокупателей
+notify_changes: true
+numerator:
+  length: 5
+  period: year
+  prefix: ЗЗК-
+posting: true
 tableparts:
-  - name: Заказы
-    title: Заказы к закрытию
-    titles:
-      en: Orders to close
-      de: Aufträge zu schließen
-      sr: Налози за затварање
-    fields:
+  - fields:
       - name: ЗаказПокупателя
-        type: reference:ЗаказПокупателя
         title: Заказ покупателя
         titles:
-          en: Sales order
           de: Kundenauftrag
+          en: Sales order
           sr: Налог купца
+        type: reference:ЗаказПокупателя
       - name: Номенклатура
-        type: reference:Номенклатура
         title: Номенклатура
         titles:
-          en: Item
           de: Artikel
+          en: Item
           sr: Артикал
+        type: reference:Номенклатура
       - name: Количество
-        type: number
         title: Снимаемый остаток
         titles:
-          en: Canceled quantity
           de: Stornierte Menge
+          en: Canceled quantity
           sr: Количина за отказ
+        type: number
       - name: ПричинаЗакрытия
-        type: string
         title: Причина закрытия
         titles:
-          en: Reason
           de: Grund
+          en: Reason
           sr: Разлог
+        type: string
+    name: Заказы
+    title: Заказы к закрытию
+    titles:
+      de: Aufträge zu schließen
+      en: Orders to close
+      sr: Налози за затварање
+title: Закрытие заказов покупателей
+titles:
+  de: Kundenaufträge abschließen
+  en: Sales orders closing
+  sr: Затварање налога купаца

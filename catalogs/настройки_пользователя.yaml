@@ -1,30 +1,10 @@
-name: НастройкиПользователя
-title: Настройки пользователя
-titles:
-  en: User settings
-  de: Benutzereinstellungen
-  sr: Корисничка подешавања
-  az: İstifadəçi ayarları
-  es: Ajustes usuario
-  fr: Paramètres utilisateur
-  hy: Օգտատիրոջ կարգավորումներ
-  ka: მომხმარებლის პარამეტრები
-  kk: Пайдаланушы баптаулары
-  pt: Configurações usuário
-  ro: Setări utilizator
-  tr: Kullanıcı ayarları
-  uk: Налаштування користувача
-  uz: Foydalanuvchi sozlamalari
-  zh: 用户设置
 fields:
   - name: Наименование
-    type: string
     title: Логин пользователя или «Общие»
     titles:
-      en: User login or "General"
-      de: Benutzeranmeldung oder "Allgemein"
-      sr: Корисничко име или "Опште"
       az: İstifadəçi girişi və ya "Ümumi"
+      de: Benutzeranmeldung oder "Allgemein"
+      en: User login or "General"
       es: Login usuario o "General"
       fr: Identifiant utilisateur ou « Général »
       hy: Օգտատիրոջ մուտքանունը կամ «Ընդհանուր»
@@ -32,18 +12,18 @@ fields:
       kk: Пайдаланушы логині немесе "Жалпы"
       pt: Login usuário ou "Geral"
       ro: Login utilizator sau "General"
+      sr: Корисничко име или "Опште"
       tr: Kullanıcı girişi veya "Genel"
       uk: Логін користувача або «Загальні»
       uz: Foydalanuvchi logini yoki "Umumiy"
       zh: 用户登录或"通用"
+    type: string
   - name: Склад
-    type: reference:Склад
     title: Склад по умолчанию
     titles:
-      en: Default warehouse
-      de: Standardlager
-      sr: Подразумевани магацин
       az: Defolt anbar
+      de: Standardlager
+      en: Default warehouse
       es: Almacén predeterminado
       fr: Entrepôt par défaut
       hy: Լռելյայն պահեստ
@@ -51,18 +31,18 @@ fields:
       kk: Әдепкі қойма
       pt: Armazém padrão
       ro: Depozit implicit
+      sr: Подразумевани магацин
       tr: Varsayılan depo
       uk: Склад за замовчуванням
       uz: Standart ombor
       zh: 默认仓库
+    type: reference:Склад
   - name: Организация
-    type: reference:Организация
     title: Организация по умолчанию
     titles:
-      en: Default organization
-      de: Standardunternehmen
-      sr: Подразумевана организација
       az: Defolt təşkilat
+      de: Standardunternehmen
+      en: Default organization
       es: Organización predeterminada
       fr: Organisation par défaut
       hy: Լռելյայն կազմակերպություն
@@ -70,18 +50,18 @@ fields:
       kk: Әдепкі ұйым
       pt: Organização padrão
       ro: Organizație implicită
+      sr: Подразумевана организација
       tr: Varsayılan organizasyon
       uk: Організація за замовчуванням
       uz: Standart tashkilot
       zh: 默认组织
+    type: reference:Организация
   - name: ТипЦенПродажи
-    type: reference:ТипЦен
     title: Тип цен продажи по умолчанию
     titles:
-      en: Default sales price type
-      de: Standard-Verkaufspreistyp
-      sr: Подразумевани тип цене продаје
       az: Satış qiymət növü
+      de: Standard-Verkaufspreistyp
+      en: Default sales price type
       es: Tipo precio venta
       fr: Type prix vente
       hy: Վաճառքի գնի տեսակի
@@ -89,7 +69,32 @@ fields:
       kk: Сату баға түрі
       pt: Tipo preço venda
       ro: Tip preț vânzare
+      sr: Подразумевани тип цене продаје
       tr: Satış fiyat tipi
       uk: Тип ціни продажу
       uz: Sotuv narx turi
       zh: 销售价格类型
+    type: reference:ТипЦен
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.настройкипользователя
+name: НастройкиПользователя
+notify_changes: true
+title: Настройки пользователя
+titles:
+  az: İstifadəçi ayarları
+  de: Benutzereinstellungen
+  en: User settings
+  es: Ajustes usuario
+  fr: Paramètres utilisateur
+  hy: Օգտատիրոջ կարգավորումներ
+  ka: მომხმარებლის პარამეტრები
+  kk: Пайдаланушы баптаулары
+  pt: Configurações usuário
+  ro: Setări utilizator
+  sr: Корисничка подешавања
+  tr: Kullanıcı ayarları
+  uk: Налаштування користувача
+  uz: Foydalanuvchi sozlamalari
+  zh: 用户设置

@@ -1,11 +1,73 @@
+columns:
+  - field: Контрагент
+    label: Поставщик
+    labels:
+      az: Təchizatçı
+      de: Lieferant
+      en: Supplier
+      es: Proveedor
+      fr: Fournisseur
+      hy: Մատակարար
+      ka: მომწოდებელი
+      kk: Жабдықтаушы
+      pt: Fornecedor
+      ro: Furnizor
+      sr: Добављач
+      tr: Tedarikçi
+      uk: Постачальник
+      uz: Yetkazib beruvchi
+      zh: 供应商
+  - align: right
+    field: Сумма
+    format: number
+    label: Сумма закупок
+    labels:
+      az: Satınalma məbləği
+      de: Einkaufsbetrag
+      en: Purchase amount
+      es: Importe compras
+      fr: Montant achats
+      hy: Գնումների գումար
+      ka: შესყიდვის თანხა
+      kk: Сатып алу сомасы
+      pt: Valor compras
+      ro: Sumă achiziții
+      sr: Износ набавке
+      tr: Satın alma tutarı
+      uk: Сума закупівель
+      uz: Xarid miqdori
+      zh: 采购金额
+limit: 5
 name: ТопПоставщики
-type: list
+params:
+  Начало: '{{today|minus_days:120}}'
+query: |
+  ВЫБРАТЬ
+    Контрагент.Ссылка КАК ИдСтроки,
+    Контрагент,
+    CAST(ROUND(СУММА(Сумма), 0) AS INTEGER) КАК Сумма
+  ИЗ РегистрНакопления.Взаиморасчеты
+  ГДЕ ТипКонтрагента = "Поставщик"
+    И вид_движения = "Расход"
+    И period >= &Начало
+  СГРУППИРОВАТЬ ПО Контрагент.Ссылка, Контрагент
+  УПОРЯДОЧИТЬ ПО Сумма УБЫВ
+refresh_on:
+  - данные.корректировкадолга
+  - данные.поступлениенарасчётныйсчёт
+  - данные.поступлениетоваров
+  - данные.приходныйкассовыйордер
+  - данные.расходныйкассовыйордер
+  - данные.реализациятоваров
+  - данные.списаниесрасчётногосчёта
+source:
+  entity: Контрагент
+  id_field: ИдСтроки
 title: Топ поставщики за квартал
 titles:
-  en: Top suppliers (quarter)
-  de: Top-Lieferanten (Quartal)
-  sr: Топ добављачи (квартал)
   az: Ən yaxşı təchizatçılar (rüblük)
+  de: Top-Lieferanten (Quartal)
+  en: Top suppliers (quarter)
   es: Top proveedores (trimestre)
   fr: Top fournisseurs (trimestre)
   hy: Լավագույն մատակարարներ (եռամսակ)
@@ -13,59 +75,9 @@ titles:
   kk: Топ жабдықтаушылар (тоқсан)
   pt: Top fornecedores (trimestre)
   ro: Top furnizori (trimestru)
+  sr: Топ добављачи (квартал)
   tr: En iyi tedarikçiler (çeyrek)
   uk: Топ постачальники (квартал)
   uz: Top yetkazib beruvchilar (chorak)
   zh: 季度热门供应商
-limit: 5
-params:
-  Начало: "{{today|minus_days:120}}"
-query: |
-  ВЫБРАТЬ
-    Контрагент,
-    CAST(ROUND(СУММА(Сумма), 0) AS INTEGER) КАК Сумма
-  ИЗ РегистрНакопления.Взаиморасчеты
-  ГДЕ ТипКонтрагента = "Поставщик"
-    И вид_движения = "Расход"
-    И period >= &Начало
-  СГРУППИРОВАТЬ ПО Контрагент
-  УПОРЯДОЧИТЬ ПО Сумма УБЫВ
-columns:
-  - field: Контрагент
-    label: "Поставщик"
-    labels:
-      en: "Supplier"
-      de: "Lieferant"
-      sr: "Добављач"
-      az: "Təchizatçı"
-      es: "Proveedor"
-      fr: "Fournisseur"
-      hy: "Մատակարար"
-      ka: "მომწოდებელი"
-      kk: "Жабдықтаушы"
-      pt: "Fornecedor"
-      ro: "Furnizor"
-      tr: "Tedarikçi"
-      uk: "Постачальник"
-      uz: "Yetkazib beruvchi"
-      zh: "供应商"
-  - field: Сумма
-    label: "Сумма закупок"
-    labels:
-      en: "Purchase amount"
-      de: "Einkaufsbetrag"
-      sr: "Износ набавке"
-      az: "Satınalma məbləği"
-      es: "Importe compras"
-      fr: "Montant achats"
-      hy: "Գնումների գումար"
-      ka: "შესყიდვის თანხა"
-      kk: "Сатып алу сомасы"
-      pt: "Valor compras"
-      ro: "Sumă achiziții"
-      tr: "Satın alma tutarı"
-      uk: "Сума закупівель"
-      uz: "Xarid miqdori"
-      zh: "采购金额"
-    format: number
-    align: right
+type: list

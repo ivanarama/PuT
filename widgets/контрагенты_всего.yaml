@@ -1,23 +1,26 @@
-name: КонтрагентовВсего
-type: kpi
-title: Контрагенты
-titles:
-  en: Counterparties
-  de: Geschäftspartner
-  sr: Контрагенти
-  az: Əməkdaşlar
-  es: Contrapartes
-  fr: Tiers
-  hy: "Գործընկերներ"
-  ka: "კონტრაგენტები"
-  kk: "Контрагенттер"
-  pt: "Contrapartes"
-  ro: "Parteneri"
-  tr: "Cari hesaplar"
-  uk: "Контрагенти"
-  uz: "Kontragentlar"
-  zh: "往来单位"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: КонтрагентовВсего
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Справочник.Контрагент
+refresh_on:
+  - данные.контрагент
+title: Контрагенты
+titles:
+  az: Əməkdaşlar
+  de: Geschäftspartner
+  en: Counterparties
+  es: Contrapartes
+  fr: Tiers
+  hy: Գործընկերներ
+  ka: კონტრაგენტები
+  kk: Контрагенттер
+  pt: Contrapartes
+  ro: Parteneri
+  sr: Контрагенти
+  tr: Cari hesaplar
+  uk: Контрагенти
+  uz: Kontragentlar
+  zh: 往来单位
+type: kpi

@@ -128,11 +128,19 @@ fields:
       uz: Miqdor
       zh: 金额
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Склад
+list_refresh_on:
+  - данные.оприходованиетоваров
 name: ОприходованиеТоваров
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "ОПР-"
+  prefix: ОПР-
 posting: true
 tableparts:
   - fields:

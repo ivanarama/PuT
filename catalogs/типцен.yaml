@@ -1,30 +1,10 @@
-name: ТипЦен
-title: Тип цен
-titles:
-  en: Price type
-  de: Preisart
-  sr: Тип цене
-  az: Qiymət növü
-  es: Tipo precio
-  fr: Type prix
-  hy: Գնի տեսակ
-  ka: ფასის ტიპი
-  kk: Баға түрі
-  pt: Tipo preço
-  ro: Tip preț
-  tr: Fiyat türü
-  uk: Тип ціни
-  uz: Narx turi
-  zh: 价格类型
 fields:
   - name: Наименование
-    type: string
     title: Наименование
     titles:
-      en: Name
-      de: Name
-      sr: Назив
       az: Adlandırma
+      de: Name
+      en: Name
       es: Nombre
       fr: Nom
       hy: Անվանում
@@ -32,18 +12,18 @@ fields:
       kk: Атауы
       pt: Nome
       ro: Denumire
+      sr: Назив
       tr: Ad
       uk: Найменування
       uz: Nomi
       zh: 名称
+    type: string
   - name: ВидРасчета
-    type: enum:ВидРасчета
     title: Вид расчёта
     titles:
-      en: Calculation type
-      de: Berechnungsart
-      sr: Врста обрачунa
       az: Hesablama növü
+      de: Berechnungsart
+      en: Calculation type
       es: Tipo cálculo
       fr: Type calcul
       hy: Հաշվարկի տեսակ
@@ -51,18 +31,18 @@ fields:
       kk: Есептеу түрі
       pt: Tipo cálculo
       ro: Tip calcul
+      sr: Врста обрачунa
       tr: Hesaplama türü
       uk: Вид розрахунку
       uz: Hisob turi
       zh: 计算类型
+    type: enum:ВидРасчета
   - name: БазовыйТип
-    type: reference:ТипЦен
     title: Базовый тип
     titles:
-      en: Base type
-      de: Basistyp
-      sr: Основни тип
       az: Əsas növ
+      de: Basistyp
+      en: Base type
       es: Tipo base
       fr: Type base
       hy: Բազային տեսակ
@@ -70,18 +50,18 @@ fields:
       kk: Негізгі түрі
       pt: Tipo base
       ro: Tip bază
+      sr: Основни тип
       tr: Temel tür
       uk: Базовий тип
       uz: Asosiy tur
       zh: 基本类型
+    type: reference:ТипЦен
   - name: Процент
-    type: number
     title: Процент
     titles:
-      en: Percentage
-      de: Prozent
-      sr: Проценат
       az: Faiz
+      de: Prozent
+      en: Percentage
       es: Porcentaje
       fr: Pourcentage
       hy: Տոկոս
@@ -89,18 +69,18 @@ fields:
       kk: Пайыз
       pt: Porcentagem
       ro: Procentaj
+      sr: Проценат
       tr: Yüzde
       uk: Відсоток
       uz: Foiz
       zh: 百分比
-  - name: Округление
     type: number
+  - name: Округление
     title: Округление
     titles:
-      en: Rounding
-      de: Rundung
-      sr: Заокруживање
       az: Yuvarlama
+      de: Rundung
+      en: Rounding
       es: Redondeo
       fr: Arrondi
       hy: Կլորացում
@@ -108,25 +88,50 @@ fields:
       kk: Дөңгелектеу
       pt: Arredondamento
       ro: Rotunjire
+      sr: Заокруживање
       tr: Yuvarlama
       uk: Округлення
       uz: Yaxlitlash
       zh: 舍入
+    type: number
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.типцен
+name: ТипЦен
+notify_changes: true
 predefined:
-  - name: Закупочная
-    fields:
+  - fields:
+      ВидРасчета: Хранимый
       Наименование: Закупочная
-      ВидРасчета: Хранимый
       Округление: 2
-  - name: Розничная
-    fields:
-      Наименование: Розничная
-      ВидРасчета: Расчетный
+    name: Закупочная
+  - fields:
       БазовыйТип: Закупочная
+      ВидРасчета: Расчетный
+      Наименование: Розничная
+      Округление: 2
       Процент: 30
-      Округление: 2
-  - name: Оптовая
-    fields:
-      Наименование: Оптовая
+    name: Розничная
+  - fields:
       ВидРасчета: Хранимый
+      Наименование: Оптовая
       Округление: 2
+    name: Оптовая
+title: Тип цен
+titles:
+  az: Qiymət növü
+  de: Preisart
+  en: Price type
+  es: Tipo precio
+  fr: Type prix
+  hy: Գնի տեսակ
+  ka: ფასის ტიპი
+  kk: Баға түрі
+  pt: Tipo preço
+  ro: Tip preț
+  sr: Тип цене
+  tr: Fiyat türü
+  uk: Тип ціни
+  uz: Narx turi
+  zh: 价格类型

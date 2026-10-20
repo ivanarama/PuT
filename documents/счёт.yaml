@@ -1,3 +1,5 @@
+based_on:
+  - Контрагент
 fields:
   - name: Идентификатор1С
     title: Идентификатор 1С
@@ -235,11 +237,20 @@ fields:
       uz: To'lovga jami
       zh: 应付总额
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Покупатель
+  - Склад
+list_refresh_on:
+  - данные.счёт
 name: Счёт
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "СЧ-"
+  prefix: СЧ-
 posting: false
 tableparts:
   - fields:

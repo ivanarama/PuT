@@ -1,23 +1,26 @@
-name: НоменклатураВсего
-type: kpi
-title: Номенклатура
-titles:
-  en: Items
-  de: Artikel
-  sr: Артикли
-  az: Məhsullar
-  es: Artículos
-  fr: Articles
-  hy: "Ապրանքներ"
-  ka: "პროდუქტები"
-  kk: "Тауарлар"
-  pt: "Itens"
-  ro: "Articole"
-  tr: "Ürünler"
-  uk: "Номенклатура"
-  uz: "Mahsulotlar"
-  zh: "商品"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: НоменклатураВсего
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Справочник.Номенклатура
+refresh_on:
+  - данные.номенклатура
+title: Номенклатура
+titles:
+  az: Məhsullar
+  de: Artikel
+  en: Items
+  es: Artículos
+  fr: Articles
+  hy: Ապրանքներ
+  ka: პროდუქტები
+  kk: Тауарлар
+  pt: Itens
+  ro: Articole
+  sr: Артикли
+  tr: Ürünler
+  uk: Номенклатура
+  uz: Mahsulotlar
+  zh: 商品
+type: kpi

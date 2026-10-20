@@ -1,0 +1,37 @@
+auto_update: true
+chapters:
+  - file: introduction.md
+    id: introduction
+    title: Начало работы
+  - file: cards.md
+    id: cards
+    objects:
+      - catalog/Контрагент
+      - catalog/Номенклатура
+    title: Карточки клиента и товара
+  - file: orders.md
+    id: orders
+    objects:
+      - document/ЗаказПокупателя
+      - document/ЗаказПоставщику
+    title: Заказы и обеспечение
+  - file: jobs.md
+    id: jobs
+    objects:
+      - processor/ЗакрытиеМесяца
+      - processor/ИмпортНоменклатуры
+      - processor/ВыгрузкаБП3
+    title: Длительные операции
+  - file: operator.md
+    id: operator
+    objects:
+      - processor/РабочееМестоПродаж
+      - processor/ПриёмкаТовара
+      - processor/ОтгрузкаЗаказов
+      - processor/ИнвентаризацияСклада
+      - processor/ЗагрузкаЭДО
+      - processor/ЗагрузкаВыписки
+      - document/СборкаТоваров
+    title: Ежедневная работа
+enabled: true
+title: Руководство пользователя

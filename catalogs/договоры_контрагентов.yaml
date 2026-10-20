@@ -1,56 +1,61 @@
-name: ДоговорыКонтрагентов
-title: Договоры контрагентов
-titles:
-  en: Counterparty contracts
-  de: Verträge mit Geschäftspartnern
-  sr: Уговори партнера
 fields:
   - name: Наименование
-    type: string
     title: Наименование
     titles:
-      en: Name
       de: Name
+      en: Name
       sr: Назив
+    type: string
   - name: Владелец
-    type: reference:Контрагент
     title: Контрагент
     titles:
-      en: Counterparty
       de: Geschäftspartner
+      en: Counterparty
       sr: Партнер
+    type: reference:Контрагент
   - name: Номер
-    type: string
     title: Номер договора
     titles:
-      en: Contract number
       de: Vertragsnummer
+      en: Contract number
       sr: Број уговора
+    type: string
   - name: Дата
-    type: date
     title: Дата договора
     titles:
-      en: Contract date
       de: Vertragsdatum
+      en: Contract date
       sr: Датум уговора
+    type: date
   - name: ВидДоговора
-    type: enum:ВидДоговора
     title: Вид договора
     titles:
-      en: Contract type
       de: Vertragsart
+      en: Contract type
       sr: Врста уговора
+    type: enum:ВидДоговора
   - name: КредитныйЛимит
-    type: number
     title: Кредитный лимит
     titles:
-      en: Credit limit
       de: Kreditlimit
+      en: Credit limit
       sr: Кредитни лимит
+    type: number
   - name: Комментарий
-    type: string
     title: Комментарий
     titles:
-      en: Comment
       de: Kommentar
+      en: Comment
       sr: Коментар
+    type: string
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.договорыконтрагентов
+name: ДоговорыКонтрагентов
+notify_changes: true
+title: Договоры контрагентов
+titles:
+  de: Verträge mit Geschäftspartnern
+  en: Counterparty contracts
+  sr: Уговори партнера

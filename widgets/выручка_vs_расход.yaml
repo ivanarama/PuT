@@ -1,23 +1,5 @@
-name: ВыручкаПротивРасхода
-type: chart
 chart_kind: line
-title: Приход и расход денег по месяцам
-titles:
-  en: Cash in vs out by month
-  de: Geldzufluss und -abfluss nach Monat
-  sr: Прилив и одлив новца по месецима
-  az: Aylar üzrə pul daxilolması və xərci
-  es: Ingresos y egresos por mes
-  fr: Entrées et sorties de trésorerie par mois
-  hy: "Դրամի մուտքն ու ելքն ըստ ամիսների"
-  ka: "ფულის შემოსვლა და გასვლა თვეების მიხედვით"
-  kk: "Айлар бойынша ақша кірісі мен шығысы"
-  pt: "Entradas e saídas de caixa por mês"
-  ro: "Încasări și plăți pe luni"
-  tr: "Aylara göre nakit giriş ve çıkışı"
-  uk: "Надходження та витрати грошей за місяцями"
-  uz: "Oylar bo'yicha pul kirimi va chiqimi"
-  zh: "按月现金收支"
+name: ВыручкаПротивРасхода
 query: |
   ВЫБРАТЬ
     strftime('%Y-%m', period) КАК Месяц,
@@ -26,5 +8,33 @@ query: |
   ИЗ РегистрНакопления.ДенежныеСредства
   СГРУППИРОВАТЬ ПО strftime('%Y-%m', period)
   УПОРЯДОЧИТЬ ПО strftime('%Y-%m', period)
+refresh_on:
+  - данные.корректировкадолга
+  - данные.поступлениенарасчётныйсчёт
+  - данные.поступлениетоваров
+  - данные.приходныйкассовыйордер
+  - данные.расходныйкассовыйордер
+  - данные.реализациятоваров
+  - данные.списаниесрасчётногосчёта
+title: Приход и расход денег по месяцам
+titles:
+  az: Aylar üzrə pul daxilolması və xərci
+  de: Geldzufluss und -abfluss nach Monat
+  en: Cash in vs out by month
+  es: Ingresos y egresos por mes
+  fr: Entrées et sorties de trésorerie par mois
+  hy: Դրամի մուտքն ու ելքն ըստ ամիսների
+  ka: ფულის შემოსვლა და გასვლა თვეების მიხედვით
+  kk: Айлар бойынша ақша кірісі мен шығысы
+  pt: Entradas e saídas de caixa por mês
+  ro: Încasări și plăți pe luni
+  sr: Прилив и одлив новца по месецима
+  tr: Aylara göre nakit giriş ve çıkışı
+  uk: Надходження та витрати грошей за місяцями
+  uz: Oylar bo'yicha pul kirimi va chiqimi
+  zh: 按月现金收支
+type: chart
 x_field: Месяц
-y_fields: [Приход, Расход]
+y_fields:
+  - Приход
+  - Расход

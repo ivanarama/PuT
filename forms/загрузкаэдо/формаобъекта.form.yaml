@@ -1,169 +1,166 @@
-schema: onebase.form/v1
-
-form:
-  name: ФормаОбъекта
-  kind: object
-  entity: ЗагрузкаЭДО
-  title:
-    ru: "Сопоставление и загрузка ЭДО (УПД)"
-    en: "EDO (UPD) matching and import"
-    de: "EDO-Abgleich und Import"
-  auto_save_settings: true
-  vertical_scroll: auto
-
-events:
-  ПриОткрытии: ПриОткрытииФормы
-
 attributes:
-  - name: Объект
-    main: true
-
+  - main: true
+    name: Объект
 elements:
-  - kind: СтраницыФормы
-    name: ОсновныеЗакладки
-    children:
-      - kind: Страница
-        name: СтраницаПараметры
-        title:
-          ru: "1. Параметры и файл"
-          en: "1. Parameters & File"
-        children:
-          - kind: ГруппаФормы
+  - children:
+      - children:
+          - background: '#eff6ff'
+            children:
+              - data_path: Объект.ФайлЭДО
+                kind: ПолеВвода
+                name: ПолеФайлЭДО
+                required: true
+                title:
+                  en: UPD XML file
+                  ru: Файл УПД (XML) / Текст
+                type: file
+            kind: ГруппаФормы
             name: ГруппаФайл
             title:
-              ru: "Файл электронного документа (УПД XML)"
-              en: "EDO File (UPD XML)"
+              en: EDO File (UPD XML)
+              ru: Файл электронного документа (УПД XML)
+          - background: '#eff6ff'
             children:
-              - kind: ПолеВвода
-                name: ПолеФайлЭДО
-                title:
-                  ru: "Файл УПД (XML) / Текст"
-                  en: "UPD XML file"
-                data_path: Объект.ФайлЭДО
-                type: file
-                required: true
-
-          - kind: ГруппаФормы
-            name: ГруппаРеквизиты
-            title:
-              ru: "Основные реквизиты документа"
-              en: "Main document attributes"
-            children:
-              - kind: ПолеВвода
+              - choice: true
+                data_path: Объект.Организация
+                kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  ru: "Организация (Покупатель)"
-                  en: "Organization"
-                data_path: Объект.Организация
-                choice: true
-              - kind: ПолеВвода
+                  en: Organization
+                  ru: Организация (Покупатель)
+              - choice: true
+                data_path: Объект.Поставщик
+                kind: ПолеВвода
                 name: ПолеПоставщик
                 title:
-                  ru: "Поставщик (Продавец)"
-                  en: "Supplier"
-                data_path: Объект.Поставщик
-                choice: true
-              - kind: ПолеВвода
+                  en: Supplier
+                  ru: Поставщик (Продавец)
+              - choice: true
+                data_path: Объект.Склад
+                kind: ПолеВвода
                 name: ПолеСклад
                 title:
-                  ru: "Склад поступления"
-                  en: "Warehouse"
-                data_path: Объект.Склад
-                choice: true
-              - kind: ПолеВвода
+                  en: Warehouse
+                  ru: Склад поступления
+              - data_path: Объект.Договор
+                id: ПолеДоговор
+                kind: ПолеВвода
                 name: ПолеДоговор
                 title:
-                  ru: "Договор"
-                  en: "Contract"
-                data_path: Объект.Договор
-
-          - kind: ГруппаФормы
-            name: ГруппаНастройкиПоиска
+                  en: Contract
+                  ru: Договор
+            kind: ГруппаФормы
+            name: ГруппаРеквизиты
             title:
-              ru: "Настройки умного поиска и сопоставления"
-              en: "Matching settings"
+              en: Main document attributes
+              ru: Основные реквизиты документа
+          - background: '#eff6ff'
             children:
-              - kind: ПолеВвода
+              - choice: true
+                data_path: Объект.ВариантПоиска
+                kind: ПолеВвода
                 name: ПолеВариантПоиска
                 title:
-                  ru: "Вариант сопоставления"
-                  en: "Matching mode"
-                data_path: Объект.ВариантПоиска
-                choice: true
-              - kind: ПолеВвода
+                  en: Matching mode
+                  ru: Вариант сопоставления
+              - data_path: Объект.ПрефиксАртикула
+                kind: ПолеВвода
                 name: ПолеПрефиксАртикула
                 title:
-                  ru: "Префикс артикула поставщика (отсекать при поиске)"
-                  en: "SKU prefix"
-                data_path: Объект.ПрефиксАртикула
-              - kind: Флажок
+                  en: SKU prefix
+                  ru: Префикс артикула поставщика (отсекать при поиске)
+              - data_path: Объект.ОчищатьСпецсимволы
+                kind: Флажок
                 name: ПолеОчищатьСпецсимволы
                 title:
-                  ru: "Очищать спецсимволы, дефисы и пробелы в артикулах"
-                  en: "Clean special characters"
-                data_path: Объект.ОчищатьСпецсимволы
-              - kind: Флажок
+                  en: Clean special characters
+                  ru: Очищать спецсимволы, дефисы и пробелы в артикулах
+              - data_path: Объект.СоздаватьНедостающую
+                kind: Флажок
                 name: ПолеСоздаватьНедостающую
                 title:
-                  ru: "Автоматически создавать отсутствующую номенклатуру"
-                  en: "Auto-create missing items"
-                data_path: Объект.СоздаватьНедостающую
-              - kind: Флажок
+                  en: Auto-create missing items
+                  ru: Автоматически создавать отсутствующую номенклатуру
+              - data_path: Объект.СохранятьСопоставления
+                kind: Флажок
                 name: ПолеСохранятьСопоставления
                 title:
-                  ru: "Сохранять сопоставления в регистр сведений"
-                  en: "Save mappings to inforeg"
-                data_path: Объект.СохранятьСопоставления
-
-          - kind: ГруппаФормы
-            name: ГруппаКнопкаРазбор
+                  en: Save mappings to inforeg
+                  ru: Сохранять сопоставления в регистр сведений
+            kind: ГруппаФормы
+            name: ГруппаНастройкиПоиска
+            title:
+              en: Matching settings
+              ru: Настройки умного поиска и сопоставления
+          - background: '#eff6ff'
             children:
-              - kind: Кнопка
+              - events:
+                  Нажатие: КнопкаРазобратьНажатие
+                kind: Кнопка
                 name: КнопкаРазобрать
                 title:
-                  ru: "🔍 1. Загрузить и сопоставить позиции"
-                  en: "🔍 1. Parse and match items"
-                events:
-                  Нажатие: КнопкаРазобратьНажатие
-
-      - kind: Страница
-        name: СтраницаСопоставление
+                  en: "\U0001F50D 1. Parse and match items"
+                  ru: "\U0001F50D 1. Загрузить и сопоставить позиции"
+            kind: ГруппаФормы
+            name: ГруппаКнопкаРазбор
+        kind: Страница
+        name: СтраницаПараметры
         title:
-          ru: "2. Таблица сопоставления и создание документа"
-          en: "2. Matching table & Creation"
-        children:
-          - kind: ТабличнаяЧасть
+          en: 1. Parameters & File
+          ru: 1. Параметры и файл
+      - children:
+          - data_path: Товары
+            kind: ТабличнаяЧасть
             name: ТабТовары
             title:
-              ru: "Позиции документа УПД и статус сопоставления"
-              en: "Document items"
-            data_path: Товары
+              en: Document items
+              ru: Позиции документа УПД и статус сопоставления
             use_grid: true
-
-          - kind: ГруппаФормы
-            name: ГруппаДействия
-            title:
-              ru: "Оформление поступления"
-              en: "Create receipt"
+          - background: '#eef2ff'
             children:
-              - kind: Кнопка
+              - events:
+                  Нажатие: КнопкаСоздатьНедостающиеНажатие
+                kind: Кнопка
                 name: КнопкаСоздатьНедостающие
                 title:
-                  ru: "✨ Создать отсутствующую номенклатуру"
-                  en: "Create missing items"
-                events:
-                  Нажатие: КнопкаСоздатьНедостающиеНажатие
-              - kind: Кнопка
+                  en: Create missing items
+                  ru: ✨ Создать отсутствующую номенклатуру
+              - events:
+                  Нажатие: КнопкаСоздатьДокументНажатие
+                kind: Кнопка
                 name: КнопкаСоздатьДокумент
                 title:
-                  ru: "📄 Создать Поступление товаров"
-                  en: "Create Goods Receipt"
-                events:
-                  Нажатие: КнопкаСоздатьДокументНажатие
-              - kind: Кнопка
+                  en: Create Goods Receipt
+                  ru: "\U0001F4C4 Создать Поступление товаров"
+              - events:
+                  Нажатие: КнопкаСоздатьИПровестиНажатие
+                kind: Кнопка
                 name: КнопкаСоздатьИПровести
                 title:
-                  ru: "🚀 Создать и провести Поступление"
-                  en: "Create & Post Receipt"
-                events:
-                  Нажатие: КнопкаСоздатьИПровестиНажатие
+                  en: Create & Post Receipt
+                  ru: "\U0001F680 Создать и провести Поступление"
+            kind: ГруппаФормы
+            name: ГруппаДействия
+            title:
+              en: Create receipt
+              ru: Оформление поступления
+        kind: Страница
+        name: СтраницаСопоставление
+        title:
+          en: 2. Matching table & Creation
+          ru: 2. Таблица сопоставления и создание документа
+    kind: СтраницыФормы
+    name: ОсновныеЗакладки
+events:
+  ПриОткрытии: ПриОткрытииФормы
+form:
+  auto_save_settings: true
+  entity: ЗагрузкаЭДО
+  kind: object
+  name: ФормаОбъекта
+  title:
+    de: EDO-Abgleich und Import
+    en: EDO (UPD) matching and import
+    ru: Сопоставление и загрузка ЭДО (УПД)
+  vertical_scroll: auto
+schema: onebase.form/v1

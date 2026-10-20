@@ -1,25 +1,7 @@
-name: ДенежныйПоток
-type: chart
 chart_kind: bar
-title: Движение денежных средств за 30 дней
-titles:
-  en: Cash flow over 30 days
-  de: Geldverkehr der letzten 30 Tage
-  sr: Новчани токови за 30 дана
-  az: 30 günlük pul axını
-  es: Flujo de caja en 30 días
-  fr: Flux de trésorerie sur 30 jours
-  hy: 30 օրվա դրամական հոսք
-  ka: 30 დღის სალარო ნაკადი
-  kk: 30 күндік ақша ағыны
-  pt: Fluxo de caixa em 30 dias
-  ro: Flux de numerar pe 30 de zile
-  tr: 30 günlük nakit akışı
-  uk: Грошовий потік за 30 днів
-  uz: 30 kunlik pul oqimi
-  zh: 30天现金流
+name: ДенежныйПоток
 params:
-  Начало: "{{today|minus_days:30}}"
+  Начало: '{{today|minus_days:30}}'
 query: |
   ВЫБРАТЬ
     date(period) КАК Дата,
@@ -29,5 +11,33 @@ query: |
   ГДЕ period >= &Начало
   СГРУППИРОВАТЬ ПО date(period)
   УПОРЯДОЧИТЬ ПО date(period)
+refresh_on:
+  - данные.корректировкадолга
+  - данные.поступлениенарасчётныйсчёт
+  - данные.поступлениетоваров
+  - данные.приходныйкассовыйордер
+  - данные.расходныйкассовыйордер
+  - данные.реализациятоваров
+  - данные.списаниесрасчётногосчёта
+title: Движение денежных средств за 30 дней
+titles:
+  az: 30 günlük pul axını
+  de: Geldverkehr der letzten 30 Tage
+  en: Cash flow over 30 days
+  es: Flujo de caja en 30 días
+  fr: Flux de trésorerie sur 30 jours
+  hy: 30 օրվա դրամական հոսք
+  ka: 30 დღის სალარო ნაკადი
+  kk: 30 күндік ақша ағыны
+  pt: Fluxo de caixa em 30 dias
+  ro: Flux de numerar pe 30 de zile
+  sr: Новчани токови за 30 дана
+  tr: 30 günlük nakit akışı
+  uk: Грошовий потік за 30 днів
+  uz: 30 kunlik pul oqimi
+  zh: 30天现金流
+type: chart
 x_field: Дата
-y_fields: [Приход, Расход]
+y_fields:
+  - Приход
+  - Расход

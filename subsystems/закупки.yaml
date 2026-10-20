@@ -1,81 +1,261 @@
-name: Закупки
-title: Закупки
-icon: truck
-titles:
-    az: Satınalmalar
-    de: Einkauf
-    en: Purchasing
-    es: Compras
-    fr: Achats
-    hy: Գնումներ
-    ka: შესყიდვები
-    kk: Сатып алу
-    pt: Compras
-    ro: Achiziții
-    sr: Набавка
-    tr: Satın alma
-    uk: Закупівлі
-    uz: Xaridlar
-    zh: 采购
-order: 20
-roles: [Снабженец, Управленец, Демо]
 contents:
-    catalogs:
-        - Валюта
-        - ДоговорыКонтрагентов
-        - ЕдиницаИзмерения
+  catalogs:
+    - Валюта
+    - ДоговорыКонтрагентов
+    - ЕдиницаИзмерения
+    - Контрагент
+    - Номенклатура
+    - Организация
+    - СтавкаНДС
+    - ТипЦен
+  documents:
+    - ВозвратПоставщику
+    - ЗаказПоставщику
+    - ЗакрытиеЗаказовПоставщикам
+    - КорректировкаДолга
+    - ПоступлениеТоваров
+    - РасходныйКассовыйОрдер
+  inforegs:
+    - НоменклатураКонтрагентов
+  processors:
+    - ПланЗакупок
+    - ПриёмкаТовара
+    - ИмпортНоменклатуры
+    - ВыгрузкаВExcel
+    - ЗагрузкаЭДО
+  registers:
+    - ТоварыВПути
+    - Взаиморасчеты
+    - ПартииТоваров
+    - ОстаткиТоваров
+  reports:
+    - АктСверки
+    - АнализЗаказовПоставщикам
+    - Взаиморасчеты
+    - ДвиженияТоваров
+    - КнигаПокупок
+    - ОплатыПоступлений
+    - ТоварыВПути
+    - ЦеныНоменклатуры
+home_page:
+  layout: rows
+  nav_by_role:
+    Кассир:
+      documents:
+        - РасходныйКассовыйОрдер
+      processors: []
+      reports: []
+    Кладовщик:
+      catalogs:
+        - Номенклатура
+      documents:
+        - ПоступлениеТоваров
+      processors:
+        - ПриёмкаТовара
+      reports: []
+    Менеджер:
+      catalogs:
         - Контрагент
         - Номенклатура
-        - Организация
-        - СтавкаНДС
-        - ТипЦен
-    documents:
-        - ВозвратПоставщику
+      documents: []
+      processors: []
+      reports: []
+    Снабженец:
+      catalogs:
+        - Контрагент
+        - Номенклатура
+      documents:
         - ЗаказПоставщику
-        - ЗакрытиеЗаказовПоставщикам
-        - КорректировкаДолга
         - ПоступлениеТоваров
-        - РасходныйКассовыйОрдер
-    registers:
-        - ТоварыВПути
-        - Взаиморасчеты
-        - ПартииТоваров
-        - ОстаткиТоваров
-    reports:
-        - АктСверки
-        - АнализЗаказовПоставщикам
-        - Взаиморасчеты
-        - ДвиженияТоваров
-        - КнигаПокупок
-        - ОплатыПоступлений
-        - ТоварыВПути
-        - ЦеныНоменклатуры
-    processors:
-        - ПланЗакупок
+        - ВозвратПоставщику
+      processors:
         - ПриёмкаТовара
-        - ИмпортНоменклатуры
-        - ВыгрузкаВExcel
-        - ЗагрузкаЭДО
-    inforegs:
-        - НоменклатураКонтрагентов
-home_page:
-    title: Главная
-    layout: rows
-    rows:
-        # Быстрые действия
-        - widgets:
-            - БыстрыеДействияЗакупки
-        # KPI-полоса
-        - widgets:
-            - ЗадолженностьПоставщикам
-            - ТоварыВПутиСумма
-            - ПоступленийЗаМесяц
-        # Динамика и структура
-        - widgets:
-            - ПоступленияПоМесяцам
-            - ЗакупкиПоПоставщикам
-        # Списки
-        - widgets:
-            - ТоварыКЗаказу
-            - ОжидаемыеПоставки
-            - ТопПоставщики
+      reports:
+        - ТоварыВПути
+        - АнализЗаказовПоставщикам
+    Управленец:
+      catalogs:
+        - Контрагент
+        - Номенклатура
+      documents:
+        - ЗаказПоставщику
+      processors: []
+      reports:
+        - Взаиморасчеты
+  rows:
+    - widgets:
+        - БыстрыеДействияЗакупки
+    - widgets:
+        - ЗадолженностьПоставщикам
+        - ТоварыВПутиСумма
+        - ПоступленийЗаМесяц
+    - widgets:
+        - ПоступленияПоМесяцам
+        - ЗакупкиПоПоставщикам
+    - widgets:
+        - ТоварыКЗаказу
+        - ОжидаемыеПоставки
+        - ТопПоставщики
+  title: Главная
+icon: truck
+menu:
+  sections:
+    - groups:
+        - icon: undo-2
+          id: purchase-returns
+          items:
+            - id: purchase-document-b388e1dc7b
+              target: document:ВозвратПоставщику
+            - id: purchase-document-d04e824ed1
+              target: document:ЗакрытиеЗаказовПоставщикам
+          title: Возвраты и закрытие заказов
+          titles:
+            en: Returns and order closing
+      icon: truck
+      id: purchase-work
+      items:
+        - id: purchase-processor-8a5867d4e8
+          target: processor:ПланЗакупок
+        - id: purchase-processor-a6ab717934
+          target: processor:ПриёмкаТовара
+        - id: purchase-document-89ec8b3fa6
+          target: document:ЗаказПоставщику
+        - id: purchase-document-c29e8cf19a
+          target: document:ПоступлениеТоваров
+      title: Заказ и приёмка
+      titles:
+        en: Ordering and receiving
+    - groups:
+        - icon: wallet
+          id: purchase-payments
+          items:
+            - id: purchase-document-81fc3a67e5
+              target: document:РасходныйКассовыйОрдер
+            - id: purchase-document-9c9e758b25
+              target: document:КорректировкаДолга
+            - id: purchase-report-db2467a336
+              target: report:ОплатыПоступлений
+            - id: purchase-report-d427b5b85a
+              target: report:Взаиморасчеты
+            - id: purchase-report-c91c6a3b3d
+              target: report:АктСверки
+          title: Оплаты и задолженность
+          titles:
+            en: Payments and debt
+      icon: handshake
+      id: purchase-suppliers
+      items:
+        - id: purchase-catalog-103b090669
+          target: catalog:Контрагент
+        - id: purchase-catalog-c8a1bd78bc
+          target: catalog:ДоговорыКонтрагентов
+      title: Поставщики и расчёты
+      titles:
+        en: Suppliers and settlements
+    - groups:
+        - icon: file-down
+          id: purchase-import
+          items:
+            - id: purchase-processor-ba0566e5c6
+              target: processor:ИмпортНоменклатуры
+            - id: purchase-processor-a6af7a7afe
+              target: processor:ЗагрузкаЭДО
+            - id: purchase-processor-ab859dc12c
+              target: processor:ВыгрузкаВExcel
+            - id: purchase-inforeg-f660ecc791
+              target: inforeg:НоменклатураКонтрагентов
+            - id: purchase-report-e7aa50dc40
+              target: report:ЦеныНоменклатуры
+          title: Номенклатура и документы поставщика
+          titles:
+            en: Supplier products and documents
+        - icon: book-open
+          id: purchase-reference
+          items:
+            - id: purchase-catalog-f468d47562
+              target: catalog:Организация
+            - id: purchase-catalog-050a964d9f
+              target: catalog:Валюта
+            - id: purchase-catalog-1eae5fc563
+              target: catalog:ЕдиницаИзмерения
+            - id: purchase-catalog-1a5f1ddf1c
+              target: catalog:СтавкаНДС
+          title: Реквизиты и нормативы
+          titles:
+            en: Business reference data
+      icon: package
+      id: purchase-products
+      items:
+        - id: purchase-catalog-7624619d53
+          target: catalog:Номенклатура
+        - id: purchase-catalog-3d3680a7c5
+          target: catalog:ТипЦен
+      title: Товары и обмен
+      titles:
+        en: Products and exchange
+    - groups:
+        - icon: chart-column
+          id: purchase-reports
+          items:
+            - id: purchase-report-057cc9a2b5
+              target: report:ДвиженияТоваров
+            - id: purchase-report-f33a170aa5
+              target: report:КнигаПокупок
+          title: Движение и книга покупок
+          titles:
+            en: Movements and purchase ledger
+        - icon: database
+          id: purchase-accounting
+          items:
+            - id: purchase-register-e3a06519a7
+              target: register:ТоварыВПути:balances
+            - id: purchase-register-8569d79d65
+              target: register:ТоварыВПути:movements
+            - id: purchase-register-75eaef5c7d
+              target: register:Взаиморасчеты:balances
+            - id: purchase-register-3839a81b53
+              target: register:Взаиморасчеты:movements
+            - id: purchase-register-30da39fef2
+              target: register:ПартииТоваров:balances
+            - id: purchase-register-350a2355be
+              target: register:ПартииТоваров:movements
+            - id: purchase-register-13ae720e30
+              target: register:ОстаткиТоваров:balances
+            - id: purchase-register-c5cb600e6a
+              target: register:ОстаткиТоваров:movements
+          title: Данные учёта
+          titles:
+            en: Accounting data
+      icon: clipboard-check
+      id: purchase-analysis
+      items:
+        - id: purchase-report-a88a44c8f1
+          target: report:АнализЗаказовПоставщикам
+        - id: purchase-report-190533934e
+          target: report:ТоварыВПути
+      title: Контроль закупок
+      titles:
+        en: Purchasing control
+name: Закупки
+order: 20
+roles:
+  - Снабженец
+  - Управленец
+  - Демо
+title: Закупки
+titles:
+  az: Satınalmalar
+  de: Einkauf
+  en: Purchasing
+  es: Compras
+  fr: Achats
+  hy: Գնումներ
+  ka: შესყიდვები
+  kk: Сатып алу
+  pt: Compras
+  ro: Achiziții
+  sr: Набавка
+  tr: Satın alma
+  uk: Закупівлі
+  uz: Xaridlar
+  zh: 采购

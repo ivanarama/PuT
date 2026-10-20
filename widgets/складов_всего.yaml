@@ -1,23 +1,26 @@
-name: СкладовВсего
-type: kpi
-title: Складов
-titles:
-  en: Warehouses
-  de: Lager
-  sr: Магацини
-  az: Anbarlar
-  es: Almacenes
-  fr: Entrepôts
-  hy: "Պահեստներ"
-  ka: "საწყობები"
-  kk: "Қоймалар"
-  pt: "Armazéns"
-  ro: "Depozite"
-  tr: "Depolar"
-  uk: "Складів"
-  uz: "Omborlar"
-  zh: "仓库"
 format: number
+link: /ui/report/ОстаткиТоваров
+name: СкладовВсего
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Справочник.Склад
+refresh_on:
+  - данные.склад
+title: Складов
+titles:
+  az: Anbarlar
+  de: Lager
+  en: Warehouses
+  es: Almacenes
+  fr: Entrepôts
+  hy: Պահեստներ
+  ka: საწყობები
+  kk: Қоймалар
+  pt: Armazéns
+  ro: Depozite
+  sr: Магацини
+  tr: Depolar
+  uk: Складів
+  uz: Omborlar
+  zh: 仓库
+type: kpi

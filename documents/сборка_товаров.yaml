@@ -26,11 +26,19 @@ fields:
     type: reference:СпецификацииНоменклатуры
   - name: Сумма
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Склад
+list_refresh_on:
+  - данные.сборкатоваров
 name: СборкаТоваров
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "СБР-"
+  prefix: СБР-
 posting: true
 tableparts:
   - fields:

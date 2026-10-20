@@ -1,0 +1,504 @@
+diff --git a/internal/configcheck/lint.go b/internal/configcheck/lint.go
+index 4725c29a..0143b688 100644
+--- a/internal/configcheck/lint.go
++++ b/internal/configcheck/lint.go
+@@ -417,7 +417,7 @@ func entityYAMLSchema() *yamlLintSchema {
+ 		// owner — справочник-владелец (подчинённый справочник, 1С «Владелец»).
+ 		"owner",
+ 		"presentation", "order_by", "choice_preview", "choice_preview_proc",
+-		"list_form", "item_form", "based_on", "list_mode", "notify_changes", "list_refresh_on",
++		"list_form", "item_form", "based_on", "list_mode", "notify_changes", "list_refresh_on", "list_filters",
+ 		"fulltext", "search_fields", "detail_panel",
+ 	), map[string]*yamlLintSchema{
+ 		"titles": freeMap(),
+diff --git a/internal/configcheck/lint_test.go b/internal/configcheck/lint_test.go
+index 5964dcba..4eff8c5c 100644
+--- a/internal/configcheck/lint_test.go
++++ b/internal/configcheck/lint_test.go
+@@ -141,6 +141,7 @@ func TestLintYAML_LiveListKeysKnown(t *testing.T) {
+ notify_changes: true
+ list_refresh_on:
+   - данные.задача
++list_filters: [Номер]
+ fields:
+   - name: Номер
+     type: string
+diff --git a/internal/i18n/locales/en.json b/internal/i18n/locales/en.json
+index eb943d9e..a47bdb8f 100644
+--- a/internal/i18n/locales/en.json
++++ b/internal/i18n/locales/en.json
+@@ -1,4 +1,5 @@
+ {
++  "Отборы": "Filters",
+   "у локального источника %s нет ссылочного реквизита %s; внешняя ссылка затенена": "Local source %s has no reference field %s; the outer reference is shadowed",
+   "временный каталог загрузок": "temporary upload directory",
+   "временный файл параметра %s": "temporary file for parameter %s",
+diff --git a/internal/ui/handlers_home.go b/internal/ui/handlers_home.go
+index d045998b..5dd1d857 100644
+--- a/internal/ui/handlers_home.go
++++ b/internal/ui/handlers_home.go
+@@ -277,6 +277,7 @@ func (s *Server) decorateRefreshResult(r *http.Request, wMeta *metadata.Widget,
+ 	res.RefreshLabel = s.tr(lang, "Обновить")
+ 	res.RefreshError = s.tr(lang, "Не удалось обновить виджет")
+ 	res.ResetLabel = s.tr(lang, "Сбросить")
++	res.FiltersLabel = s.tr(lang, "Отборы")
+ 	if wMeta != nil && len(wMeta.RefreshOn) > 0 {
+ 		res.RefreshOn = strings.Join(wMeta.RefreshOn, " ")
+ 	}
+diff --git a/internal/ui/handlers_processors.go b/internal/ui/handlers_processors.go
+index 4a208b9b..ece01ce0 100644
+--- a/internal/ui/handlers_processors.go
++++ b/internal/ui/handlers_processors.go
+@@ -640,6 +640,7 @@ func processorAllocatedAuxiliaryParamName(params []processorpkg.Param, prefix, n
+ // себе ничего не доказывают: такие имена разрешены у обычных параметров.
+ type processorRequestControls struct {
+ 	paramFields      map[string][]string
++	formAttrs        map[string]*metadata.FormAttribute
+ 	fileInputs       map[string][]string
+ 	boolPresence     map[string][]string
+ 	fileContent      map[string][]string
+@@ -661,6 +662,7 @@ func processorRequestControlsForForm(proc *processorpkg.Processor, form *metadat
+ 	}
+ 	controls := processorRequestControls{
+ 		paramFields:      make(map[string][]string),
++		formAttrs:        make(map[string]*metadata.FormAttribute),
+ 		fileInputs:       make(map[string][]string),
+ 		boolPresence:     make(map[string][]string),
+ 		fileContent:      make(map[string][]string),
+@@ -699,6 +701,14 @@ func processorRequestControlsForForm(proc *processorpkg.Processor, form *metadat
+ 		fieldName := dpFieldName(el.DataPath)
+ 		p, ok := paramsByName[strings.ToLower(fieldName)]
+ 		if !ok {
++			// Form-local scalar state is client-carried, like ValueTable rows.
++			// Accept only declared, rendered, editable controls from the body.
++			for _, attr := range form.Attributes {
++				if formAttrIsScalar(attr) && !attr.MainAttribute && !entityServiceFieldName(attr.Name) && strings.EqualFold(attr.Name, fieldName) {
++					controls.formAttrs[fieldName] = attr
++					break
++				}
++			}
+ 			return
+ 		}
+ 		paramKey := strings.ToLower(p.Name)
+@@ -908,6 +918,11 @@ func processorFormObjectFromRequest(
+ 	for name, value := range paramValues {
+ 		fields[name] = value
+ 	}
++	for name, attr := range controls.formAttrs {
++		if raw, present := processorPostFormText(r, name); present {
++			fields[attr.Name] = typeFormAttrValue(attr.TypeRef, raw)
++		}
++	}
+ 	rows, err := processorFormTableRowsFromRequest(r, entity, form, controls.formTables)
+ 	if err != nil {
+ 		return nil, err
+diff --git a/internal/ui/static/managed.js b/internal/ui/static/managed.js
+index aab0b16b..d990f477 100644
+--- a/internal/ui/static/managed.js
++++ b/internal/ui/static/managed.js
+@@ -929,13 +929,14 @@ window.obManagedApplyTablePartRefOptions = obManagedApplyTablePartRefOptions;
+           td.appendChild(inp);
+           tr.appendChild(td);
+         });
+-        var tdDel = document.createElement('td');
+-        var btn = document.createElement('button');
+-        btn.type = 'button'; btn.className = 'del-btn'; btn.textContent = '×';
+-        btn.disabled = readOnly;
+-        if (!readOnly) btn.setAttribute('data-ob-remove-row', '');
+-        tdDel.appendChild(btn);
+-        tr.appendChild(tdDel);
++        if (!readOnly) {
++          var tdDel = document.createElement('td');
++          var btn = document.createElement('button');
++          btn.type = 'button'; btn.className = 'del-btn'; btn.textContent = '×';
++          btn.setAttribute('data-ob-remove-row', '');
++          tdDel.appendChild(btn);
++          tr.appendChild(tdDel);
++        }
+         tbody.appendChild(tr);
+       });
+       });
+diff --git a/internal/ui/static/managed_file_reader_behavior_test.js b/internal/ui/static/managed_file_reader_behavior_test.js
+index 95b81bcf..fa4964f2 100644
+--- a/internal/ui/static/managed_file_reader_behavior_test.js
++++ b/internal/ui/static/managed_file_reader_behavior_test.js
+@@ -560,7 +560,7 @@ test('table round-trip keeps readonly controls display-only and guarded', () =>
+   assert.equal(vtRow.children[0].children[0].disabled, true, 'bool remained enabled');
+   assert.equal(vtRow.children[0].children.length, 1, 'readonly bool regained a successful hidden mirror');
+   assert.equal(vtRow.children[1].children[0].disabled, true, 'text remained successful');
+-  assert.equal(vtRow.children[2].children[0].disabled, true, 'VT delete remained enabled');
++  assert.equal(vtRow.children.length, 2, 'readonly VT must omit the delete cell');
+ 
+   const editableBody = installTableBody('tp-body-Редактируемые', {
+     'data-tp-fields': 'Номенклатура|reference:Товар,Количество|number'
+diff --git a/internal/ui/static/ui.js b/internal/ui/static/ui.js
+index f34306ee..15a8b272 100644
+--- a/internal/ui/static/ui.js
++++ b/internal/ui/static/ui.js
+@@ -730,6 +730,23 @@ window.obRefreshWidgetCard = function (card) {
+     return card.querySelectorAll('[data-ob-filter]');
+   }
+ 
++  function updateFilterCount(card) {
++    var nodes = filterNodes(card);
++    var count = 0;
++    for (var i = 0; i < nodes.length; i++) {
++      if (nodes[i].value !== '') count++;
++    }
++    var badges = card.querySelectorAll('[data-ob-filter-count]');
++    for (var j = 0; j < badges.length; j++) {
++      badges[j].textContent = String(count);
++      badges[j].hidden = count === 0;
++    }
++  }
++  obReady(function () {
++    var initialCards = document.querySelectorAll('[data-ob-widget-card]');
++    for (var i = 0; i < initialCards.length; i++) updateFilterCount(initialCards[i]);
++  });
++
+   // Пар ключ→значение контролов карточки.
+   function collectFilters(card) {
+     var out = [];
+@@ -767,6 +784,7 @@ window.obRefreshWidgetCard = function (card) {
+   }
+ 
+   function applyEndpoint(card, endpoint, search) {
++    updateFilterCount(card);
+     var previous = card.getAttribute('data-widget-url') || '';
+     if (previous !== endpoint) {
+       card.setAttribute('data-widget-url', endpoint);
+@@ -822,6 +840,7 @@ window.obRefreshWidgetCard = function (card) {
+       for (var j = 0; j < nodes.length; j++) {
+         nodes[j].value = params.get(nodes[j].getAttribute('data-ob-filter')) || '';
+       }
++      updateFilterCount(card);
+       var endpoint = rebuildEndpoint(card, collectFilters(card));
+       if ((card.getAttribute('data-widget-url') || '') !== endpoint) {
+         card.setAttribute('data-widget-url', endpoint);
+diff --git a/internal/ui/static/widget_filters_behavior_test.js b/internal/ui/static/widget_filters_behavior_test.js
+index 8a44abb0..3b4b9cca 100644
+--- a/internal/ui/static/widget_filters_behavior_test.js
++++ b/internal/ui/static/widget_filters_behavior_test.js
+@@ -46,15 +46,19 @@ const KEY_A = 'w.QQ.0Vj';   // ключ фильтра карточки A (пр
+ const KEY_B = 'w.88.0Vj';
+ 
+ function setup(initialSearch) {
++  const readyCallbacks = [];
++  let documentReady = false;
+   const docHandlers = new Map();
+   const winHandlers = new Map();
+   const refreshed = [];
+   const cardA = element('div', { 'data-ob-widget-card': '', 'data-widget-url': '/ui/_widget/A' });
+   const selectA = element('select', { 'data-ob-filter': KEY_A }, cardA);
++  selectA.value = new URLSearchParams(initialSearch).get(KEY_A) || '';
++  const countA = element('span', { 'data-ob-filter-count': '' }, cardA);
+   const cardB = element('div', { 'data-ob-widget-card': '', 'data-widget-url': '/ui/_widget/B?' + KEY_B + '=100' });
+   element('select', { 'data-ob-filter': KEY_B }, cardB);
+ 
+-  const all = [cardA, selectA, cardB];
++  const all = [cardA, selectA, countA, cardB];
+   function isDescendant(node, ancestor) {
+     let cur = node;
+     while (cur) {
+@@ -63,13 +67,15 @@ function setup(initialSearch) {
+     }
+     return false;
+   }
+-  cardA.querySelectorAll = (sel) => (sel === '[data-ob-filter]' ? all.filter((n) => n.hasAttribute('data-ob-filter') && isDescendant(n, cardA)) : []);
++  cardA.querySelectorAll = (sel) => all.filter((n) => n.hasAttribute(sel.slice(1, -1)) && isDescendant(n, cardA));
+   cardB.querySelectorAll = (sel) => (sel === '[data-ob-filter]' ? all.filter((n) => n.hasAttribute('data-ob-filter') && isDescendant(n, cardB)) : []);
+   const sandbox = {
+     URLSearchParams,
++    obReady: (fn) => readyCallbacks.push(fn),
+     document: {
+       addEventListener: (n, f) => docHandlers.set(n, f),
+       querySelectorAll(sel) {
++        if (!documentReady) return [];
+         if (sel === '[data-ob-widget-card]') return [cardA, cardB];
+         return [];
+       },
+@@ -87,12 +93,34 @@ function setup(initialSearch) {
+   sandbox.__cardA = cardA;
+   sandbox.__cardB = cardB;
+   sandbox.__selectA = selectA;
++  sandbox.__countA = countA;
+   sandbox.__refreshed = refreshed;
+   vm.createContext(sandbox);
+   vm.runInContext(filtersSource, sandbox, { filename: 'widget-filters.js' });
++  documentReady = true;
++  readyCallbacks.forEach(fn => fn());
+   return sandbox;
+ }
+ 
++test('active filter count survives load, change, reset and browser history', () => {
++  const app = setup('?' + KEY_A + '=saved');
++  assert.equal(app.__countA.textContent, '1');
++  assert.equal(app.__countA.hidden, false);
++  app.__selectA.value = '';
++  app.__fire('change', {target: app.__selectA});
++  assert.equal(app.__countA.hidden, true);
++  app.__selectA.value = 'new';
++  app.__fire('change', {target: app.__selectA});
++  assert.equal(app.__countA.textContent, '1');
++  const reset = element('button', {'data-ob-filter-reset': ''}, app.__cardA);
++  app.__fire('click', {target: reset});
++  assert.equal(app.__countA.hidden, true);
++  app.location.search = '?' + KEY_A + '=previous';
++  app.__fireWindow('popstate');
++  assert.equal(app.__countA.textContent, '1');
++  assert.equal(app.__countA.hidden, false);
++});
++
+ test('изменение фильтра обновляет адрес карточки и перечитывает её', () => {
+   const app = setup('');
+   app.__selectA.value = 'Гвозди';
+diff --git a/internal/ui/templates.go b/internal/ui/templates.go
+index 90eacbb2..38619514 100644
+--- a/internal/ui/templates.go
++++ b/internal/ui/templates.go
+@@ -1852,6 +1852,14 @@ const tplIndex = `
+ .w-refresh:hover{background:#f1f5f9;color:#1d4ed8}.w-refresh:focus-visible{outline:2px solid #60a5fa;outline-offset:2px}
+ .w-refresh[disabled]{cursor:wait;opacity:.55}.w-card.ob-widget-loading .w-refresh{animation:ob-widget-spin .8s linear infinite}
+ @keyframes ob-widget-spin{to{transform:rotate(360deg)}}
++.w-filter-panel{margin:0 0 8px;font-size:13px}
++.w-filter-panel summary{cursor:pointer;color:#2563eb;width:fit-content;padding:4px 0}
++.w-filter-panel summary:focus-visible{outline:2px solid #60a5fa;outline-offset:2px}
++.w-filter-panel [data-ob-filter-count]{background:#dbeafe;border-radius:10px;padding:1px 6px;margin-left:4px}
++.w-filters{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap;padding:8px 0}
++.w-filter{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
++.w-filter select,.w-filter input{width:100%;min-width:100px;max-width:100%;padding:5px;border:1px solid #cbd5e1;border-radius:5px;font-size:13px}
++.w-filter-reset{border:0;background:#f1f5f9;border-radius:5px;padding:6px 8px;cursor:pointer;color:#475569}
+ .w-refresh-status{font-size:12px;color:#b91c1c;margin-top:7px;min-height:0}
+ .w-kpi-value{font-size:32px;font-weight:700;color:#0f172a;line-height:1.1;white-space:nowrap}
+ .w-kpi-sub{font-size:12px;color:#94a3b8;margin-top:6px}
+@@ -1922,6 +1930,8 @@ a.w-kpi-link:hover{color:#1a4a80;text-decoration:underline}
+   </div>
+   {{end}}
+   {{if .Filters}}
++  <details class="w-filter-panel">
++  <summary>{{.FiltersLabel}} <span data-ob-filter-count hidden></span></summary>
+   <div class="w-filters">
+     {{range .Filters}}{{$f := .}}
+     <label class="w-filter"><span>{{$f.Label}}</span>
+@@ -1932,6 +1942,7 @@ a.w-kpi-link:hover{color:#1a4a80;text-decoration:underline}
+     {{end}}
+     <button type="button" class="w-filter-reset" data-ob-filter-reset>{{.ResetLabel}}</button>
+   </div>
++  </details>
+   {{end}}
+   <div data-ob-widget-body>
+   {{template "widget-body" .}}
+diff --git a/internal/ui/templates_managed.go b/internal/ui/templates_managed.go
+index d19bbafb..a2861f22 100644
+--- a/internal/ui/templates_managed.go
++++ b/internal/ui/templates_managed.go
+@@ -211,7 +211,11 @@ const tplManagedForm = `
+              подсветка ниже адресована ОПЕЧАТКЕ в data_path; штатный реквизит
+              формы работает полноценно (обработчик читает его голым именем и как
+              Объект.<Реквизит>), и предупреждать о нём не о чем. */}}
++        {{if $el.Multiline}}
++        <textarea name="{{$fn}}" autocomplete="off" rows="5" style="width:100%"{{if and $req (not $ro)}} required{{end}}{{if $el.AccessKey}} accesskey="{{$el.AccessKey}}"{{end}}{{if $ro}} readonly{{end}}{{if and $roUnlockable $hChg}} data-ob-fire-change="{{$el.Name}}"{{end}}>{{index $ctx.Values $fn}}</textarea>
++        {{else}}
+         <input type="text" autocomplete="off" name="{{$fn}}" value="{{index $ctx.Values $fn}}"{{if and $req (not $ro)}} required{{end}}{{if $el.AccessKey}} accesskey="{{$el.AccessKey}}"{{end}}{{if $ro}} readonly{{end}}{{if $el.Mask}} pattern="{{$el.Mask}}"{{end}}{{if $el.InputMask}} data-ob-input-mask="{{$el.InputMask}}"{{if inputMaskDigitsOnly $el.InputMask}} inputmode="numeric"{{end}}{{end}}{{if $el.Hint}} title="{{$el.Hint}}"{{end}}{{if and $roUnlockable $hChg}} data-ob-fire-change="{{$el.Name}}"{{end}}>
++        {{end}}
+       {{else}}
+         {{/* Ни поля сущности, ни реквизита формы с таким именем — почти всегда
+              опечатка в data_path: подсвечиваем, чтобы это не осталось незамеченным. */}}
+@@ -442,7 +446,6 @@ const tplManagedForm = `
+   {{$vtLayout := elLayout $el}}
+   {{/* Заданная высота ограничивает весь блок ValueTable, включая строки и команды. */}}
+   {{if $vtLayout}}<div class="managed-vt-layout{{if elFill $el}} managed-vt-scroll{{end}}" data-ob-el="{{$el.Name}}"{{with elPath $ctx $el}} data-ob-el-path="{{.}}"{{end}} style="{{$vtLayout}}">{{end}}
+-  <h3 style="margin:18px 0 8px;font-size:14px">{{fieldTitleRU $el.TitleMap (or (tablePartTitle $tpMeta) $tpName)}}</h3>
+   {{if $vtCmds}}
+   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
+     {{range $vtCmds}}
+@@ -460,7 +463,7 @@ const tplManagedForm = `
+     <thead>
+       <tr>
+         {{range $vtCols}}<th>{{if .Title}}{{index .Title "ru"}}{{else}}{{.Name}}{{end}}</th>{{end}}
+-        <th style="width:40px"></th>
++        {{if not $tpReadOnly}}<th style="width:40px"></th>{{end}}
+       </tr>
+     </thead>
+     <tbody id="vt-body-{{$tpName}}" {{if $tpReadOnly}}data-ob-table-readonly="1" {{end}}data-vt-fields="{{range $i, $c := $vtCols}}{{if $i}},{{end}}{{$c.Name}}|{{$c.TypeRef}}{{end}}">
+@@ -478,15 +481,15 @@ const tplManagedForm = `
+           {{end}}
+         </td>
+         {{end}}
+-        <td><button type="button" class="del-btn"{{if $tpReadOnly}} disabled{{else}} data-ob-remove-row{{end}}>×</button></td>
++        {{if not $tpReadOnly}}<td><button type="button" class="del-btn" data-ob-remove-row>×</button></td>{{end}}
+       </tr>
+     {{end}}
+     </tbody>
+   </table>
+-  <button type="button" class="btn btn-sm" style="background:#e2e8f0;color:#475569;margin:0 0 12px"{{if $tpReadOnly}} disabled{{else}}
+-    data-ob-add-vt="{{$tpName}}"{{end}}>
++  {{if not $tpReadOnly}}<button type="button" class="btn btn-sm" style="background:#e2e8f0;color:#475569;margin:0 0 12px"
++    data-ob-add-vt="{{$tpName}}">
+     + Добавить строку
+-  </button>
++  </button>{{end}}
+   {{if $vtLayout}}</div>{{end}}
+   {{else}}
+   <div style="background:#fef9c3;padding:8px;border-radius:6px;font-size:12px;color:#92400e">
+diff --git a/internal/ui/widget_filters_test.go b/internal/ui/widget_filters_test.go
+index dd42617b..d49cbe50 100644
+--- a/internal/ui/widget_filters_test.go
++++ b/internal/ui/widget_filters_test.go
+@@ -171,6 +171,10 @@ func TestWidgetFiltersDashboard_F5AppliesFilter(t *testing.T) {
+ 		t.Fatalf("F5 page renders unfiltered rows: %s", rec.Body.String())
+ 	}
+ 	// Контрол предзаполнен тем же значением.
++	if !strings.Contains(rec.Body.String(), `<details class="w-filter-panel">`) ||
++		!strings.Contains(rec.Body.String(), `data-ob-filter-count`) {
++		t.Fatal("filters must be inside a collapsed disclosure with an active count")
++	}
+ 	if !strings.Contains(rec.Body.String(), `value="Гвозди"`) {
+ 		t.Fatalf("control not prefilled: %s", rec.Body.String())
+ 	}
+diff --git a/internal/widget/runner.go b/internal/widget/runner.go
+index 81dd3b2e..1e5fb46c 100644
+--- a/internal/widget/runner.go
++++ b/internal/widget/runner.go
+@@ -43,7 +43,8 @@ type Result struct {
+ 	// (план 182D), заполняются HTTP-слоем после Run вместе с PartialURL.
+ 	Filters []FilterControl
+ 	// ResetLabel — подпись кнопки сброса фильтров карточки (i18n HTTP-слоя).
+-	ResetLabel string
++	ResetLabel   string
++	FiltersLabel string
+ 	// AccessDenied — у пользователя нет прав на источник данных виджета (или на
+ 	// все его кнопки-действия). Дашборд такие карточки не рендерит вовсе, в
+ 	// отличие от настоящих ошибок (compile/SQL), которые остаются видимыми.
+diff --git a/internal/ui/value_table_readonly_test.go b/internal/ui/value_table_readonly_test.go
+new file mode 100644
+index 00000000..7fcaabd0
+--- /dev/null
++++ b/internal/ui/value_table_readonly_test.go
+@@ -0,0 +1,66 @@
++package ui
++
++import (
++	"net/http"
++	"net/http/httptest"
++	"strings"
++	"testing"
++
++	"github.com/go-chi/chi/v5"
++
++	"github.com/ivantit66/onebase/internal/metadata"
++)
++
++func TestValueTableReadonlyPresentationHTTP(t *testing.T) {
++	for _, readonly := range []bool{false, true} {
++		name := "editable"
++		if readonly {
++			name = "readonly"
++		}
++		t.Run(name, func(t *testing.T) {
++			form := managedObjectForm(&metadata.FormElement{
++				Kind: metadata.FormElementTablePart, Name: "History",
++				DataPath: "Форма.History", ReadOnly: readonly,
++				TitleMap: map[string]string{"ru": "Subscription history"},
++			})
++			form.EntityName = "Client"
++			form.Attributes = []*metadata.FormAttribute{{
++				Name: "History", TypeRef: "ValueTable",
++				Columns: []*metadata.FormAttributeColumn{{Name: "Product", TypeRef: "string"}},
++			}}
++			form.Attributes = append(form.Attributes, &metadata.FormAttribute{Name: "Result", TypeRef: "string"})
++			form.Elements = append(form.Elements, &metadata.FormElement{
++				Kind: metadata.FormElementField, Name: "Result", DataPath: "Форма.Result", Multiline: true, ReadOnly: readonly,
++			})
++			entity := &metadata.Entity{Name: "Client", Kind: metadata.KindCatalog,
++				Fields: []metadata.Field{{Name: "Наименование", Type: metadata.FieldTypeString}},
++				Forms:  []*metadata.FormModule{form},
++			}
++			server, _ := newSubmitTestServer(t, []*metadata.Entity{entity})
++			request := reqWithChi(http.MethodGet, "/ui/catalog/Client/new", nil,
++				map[string]string{"kind": "catalog", "entity": "Client"})
++			response := httptest.NewRecorder()
++			router := chi.NewRouter()
++			server.Mount(router)
++			router.ServeHTTP(response, request)
++			if response.Code != http.StatusOK {
++				t.Fatalf("status=%d: %s", response.Code, response.Body.String())
++			}
++			body := response.Body.String()
++			if !strings.Contains(body, `<textarea name="Result"`) {
++				t.Fatal("multiline form-local result must use a textarea")
++			}
++			if got := strings.Count(body, ">Subscription history</h3>"); got != 1 {
++				t.Fatalf("expected one table title, got %d", got)
++			}
++			hasAdd := strings.Contains(body, `data-ob-add-vt="History"`)
++			if hasAdd == readonly {
++				t.Fatalf("add row visible=%v, readonly=%v", hasAdd, readonly)
++			}
++			hasActionColumn := strings.Contains(body, `<th style="width:40px"></th>`)
++			if hasActionColumn == readonly {
++				t.Fatalf("action column visible=%v, readonly=%v", hasActionColumn, readonly)
++			}
++		})
++	}
++}
+diff --git a/internal/ui/processor_form_attrs_test.go b/internal/ui/processor_form_attrs_test.go
+new file mode 100644
+index 00000000..09d0b014
+--- /dev/null
++++ b/internal/ui/processor_form_attrs_test.go
+@@ -0,0 +1,54 @@
++package ui
++
++import (
++	"net/http/httptest"
++	"net/url"
++	"strings"
++	"testing"
++
++	"github.com/ivantit66/onebase/internal/metadata"
++	processorpkg "github.com/ivantit66/onebase/internal/processor"
++)
++
++func TestProcessorFormScalarState(t *testing.T) {
++	proc := &processorpkg.Processor{Name: "Импорт"}
++	form := &metadata.FormModule{
++		Attributes: []*metadata.FormAttribute{
++			{Name: "Задача", TypeRef: "string"},
++			{Name: "Скрытое", TypeRef: "string"},
++			{Name: "Результат", TypeRef: "string"},
++		},
++		Elements: []*metadata.FormElement{
++			{Kind: metadata.FormElementField, Name: "Номер", DataPath: "Объект.Задача"},
++			{Kind: metadata.FormElementField, Name: "Вывод", DataPath: "Объект.Результат", ReadOnly: true},
++		},
++	}
++	controls := processorRequestControlsForForm(proc, form)
++	body := url.Values{"Задача": {"from-body"}, "Скрытое": {"forged"}, "Результат": {"forged"}, "posted": {"true"}}
++	req := httptest.NewRequest("POST", "/event?Задача=from-query", strings.NewReader(body.Encode()))
++	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
++	if err := req.ParseForm(); err != nil {
++		t.Fatal(err)
++	}
++	obj, err := processorFormObjectFromRequest(req, processorVirtualEntity(proc), form, nil, controls)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if obj.Fields["Задача"] != "from-body" {
++		t.Fatalf("state was lost: %#v", obj.Fields)
++	}
++	for _, name := range []string{"Скрытое", "Результат", "posted"} {
++		if _, ok := obj.Fields[name]; ok {
++			t.Fatalf("accepted forged %s", name)
++		}
++	}
++	req = httptest.NewRequest("POST", "/event?Задача=query-only", nil)
++	req.PostForm = url.Values{}
++	obj, err = processorFormObjectFromRequest(req, processorVirtualEntity(proc), form, nil, controls)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if _, ok := obj.Fields["Задача"]; ok {
++		t.Fatal("accepted query-only state")
++	}
++}

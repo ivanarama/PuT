@@ -382,7 +382,14 @@ fields:
       en: Credit limit
       sr: Кредитни лимит
     type: number
+list_filters:
+  - Наименование
+  - Вид
+  - ИНН
+list_refresh_on:
+  - данные.контрагент
 name: Контрагент
+notify_changes: true
 title: Контрагент
 titles:
   az: Əks-tərəf

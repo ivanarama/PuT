@@ -18,15 +18,24 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.25'
+          go-version: '1.27.0'
 
       - name: Run Go tests
         run: go test ./...
 
       - name: Build OneBase CLI
         run: |
-          git clone --depth 1 https://github.com/ivanarama/onebase.git /tmp/onebase
-          cd /tmp/onebase && go build -o /usr/local/bin/onebase ./cmd/onebase
+          revision=$(python3 -c 'import json; print(json.load(open("platform-patches/runtime.json"))["commit"])')
+          build=$(python3 -c 'import json; print(json.load(open("platform-patches/runtime.json"))["build"])')
+          git clone --filter=blob:none --no-checkout https://github.com/ivanarama/onebase.git /tmp/onebase
+          git -C /tmp/onebase fetch --depth 1 origin "$revision"
+          git -C /tmp/onebase checkout --detach FETCH_HEAD
+          git -C /tmp/onebase apply "$GITHUB_WORKSPACE/platform-patches/put-ui.patch"
+          cd /tmp/onebase
+          go build -ldflags "-X github.com/ivantit66/onebase/internal/version.Build=$build" -o /usr/local/bin/onebase ./cmd/onebase
+
+      - name: Check supported platform build
+        run: python3 scripts/check_runtime.py --onebase /usr/local/bin/onebase
 
       - name: Run onebase check
         run: onebase check --project .
@@ -47,3 +56,6 @@ jobs:
 
       - name: Run scenario tests (суммы ЭДО/проведения/идемпотентность)
         run: bash scripts/scenario_tests.sh
+
+      - name: Check rolling demo reset
+        run: python3 scripts/test_demo_reset.py --onebase /usr/local/bin/onebase

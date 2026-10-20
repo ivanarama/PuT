@@ -1,0 +1,317 @@
+attributes:
+  - main: true
+    name: Объект
+    save: true
+    type: CatalogRef.Контрагент
+  - name: ДолгПокупателя
+    save: false
+    type: decimal(15,2)
+  - name: ДолгПоставщику
+    save: false
+    type: decimal(15,2)
+  - name: Просрочено
+    save: false
+    type: decimal(15,2)
+  - name: ДоступныйКредит
+    save: false
+    type: string
+  - columns:
+      - name: Номер
+        title:
+          ru: Документ
+        type: string
+      - name: Дата
+        title:
+          ru: Дата
+        type: string
+      - name: СрокОплаты
+        title:
+          ru: Оплатить до
+        type: string
+      - name: Долг
+        title:
+          ru: Осталось оплатить
+        type: number
+    name: Неоплаченные
+    save: false
+    type: ValueTable
+  - columns:
+      - name: Номер
+        title:
+          ru: Заказ
+        type: string
+      - name: Дата
+        title:
+          ru: Дата
+        type: string
+      - name: Этап
+        title:
+          ru: Этап
+        type: string
+      - name: Сумма
+        title:
+          ru: Сумма
+        type: number
+      - name: Проведен
+        title:
+          ru: Проведён
+        type: bool
+    name: Заказы
+    save: false
+    type: ValueTable
+  - columns:
+      - name: Вид
+        title:
+          ru: Вид документа
+        type: string
+      - name: Номер
+        title:
+          ru: Номер
+        type: string
+      - name: Дата
+        title:
+          ru: Дата
+        type: string
+      - name: Сумма
+        title:
+          ru: Сумма
+        type: number
+    name: История
+    save: false
+    type: ValueTable
+  - name: НераспределённыеОплаты
+    save: false
+    type: decimal(15,2)
+elements:
+  - background: '#f0fdf4'
+    children:
+      - data_path: Объект.ДолгПокупателя
+        kind: ПолеВвода
+        name: ПолеДолгПокупателя
+        readonly: true
+        title:
+          ru: Долг покупателя
+      - data_path: Объект.ДолгПоставщику
+        kind: ПолеВвода
+        name: ПолеДолгПоставщику
+        readonly: true
+        title:
+          ru: Наш долг поставщику
+      - data_path: Объект.Просрочено
+        kind: ПолеВвода
+        name: ПолеПросрочено
+        readonly: true
+        title:
+          ru: Просрочено
+      - data_path: Объект.ДоступныйКредит
+        kind: ПолеВвода
+        name: ПолеДоступныйКредит
+        readonly: true
+        title:
+          ru: Остаток кредитного лимита
+      - data_path: Объект.НераспределённыеОплаты
+        kind: ПолеВвода
+        name: НераспределённыеОплаты
+        readonly: true
+        title:
+          ru: Оплаты без распределения
+    kind: ГруппаФормы
+    name: ГруппаОбзор
+    orientation: horizontal
+    title:
+      ru: Обзор
+  - background: '#eef2ff'
+    children:
+      - events:
+          Нажатие: ОбновитьСведения
+        kind: Кнопка
+        name: ОбновитьСведения
+        title:
+          ru: Обновить сведения
+    kind: ГруппаФормы
+    name: ГруппаДействия
+    title:
+      ru: Действия
+  - background: '#fffbeb'
+    children:
+      - kind: Надпись
+        name: ПояснениеОплаты
+        title:
+          ru: Оплаты без указания реализации уменьшают общий долг. Для закрытия конкретного документа укажите его в оплате.
+      - data_path: Объект.Неоплаченные
+        kind: ТабличнаяЧасть
+        name: ТаблицаНеоплаченные
+        readonly: true
+        title:
+          ru: Неоплаченные реализации
+    kind: ГруппаФормы
+    name: ГруппаНеоплаченные
+  - background: '#f8fafc'
+    children:
+      - data_path: Объект.Заказы
+        kind: ТабличнаяЧасть
+        name: ТаблицаЗаказы
+        readonly: true
+        title:
+          ru: Заказы покупателя
+    kind: ГруппаФормы
+    name: ГруппаЗаказы
+  - background: '#f8fafc'
+    children:
+      - data_path: Объект.История
+        kind: ТабличнаяЧасть
+        name: ТаблицаИстория
+        readonly: true
+        title:
+          ru: Последние документы
+    kind: ГруппаФормы
+    name: ГруппаИстория
+  - background: '#eff6ff'
+    children:
+      - data_path: Объект.Наименование
+        kind: ПолеВвода
+        name: ПолеНаименование
+        title:
+          ru: Наименование
+      - data_path: Объект.ПолноеНаименование
+        kind: ПолеВвода
+        name: ПолеПолноеНаименование
+        title:
+          ru: Полное наименование
+      - data_path: Объект.Вид
+        kind: ПолеВвода
+        name: ПолеВид
+        title:
+          ru: Вид
+      - data_path: Объект.ИНН
+        kind: ПолеВвода
+        name: ПолеИНН
+        title:
+          ru: ИНН
+      - data_path: Объект.КПП
+        kind: ПолеВвода
+        name: ПолеКПП
+        title:
+          ru: КПП
+    kind: ГруппаФормы
+    name: ГруппаОсновное
+    title:
+      ru: Основные сведения
+  - background: '#eff6ff'
+    children:
+      - data_path: Объект.ТипЦенПродажи
+        kind: ПолеВвода
+        name: ПолеТипЦенПродажи
+        title:
+          ru: Тип цен продажи
+      - data_path: Объект.ПроцентСкидки
+        kind: ПолеВвода
+        name: ПолеПроцентСкидки
+        title:
+          ru: Скидка, %
+      - data_path: Объект.КредитныйЛимит
+        kind: ПолеВвода
+        name: ПолеКредитныйЛимит
+        title:
+          ru: Кредитный лимит
+    kind: ГруппаФормы
+    name: ГруппаУсловия
+    title:
+      ru: Условия работы
+  - background: '#eff6ff'
+    children:
+      - data_path: Объект.Телефон
+        kind: ПолеВвода
+        name: ПолеТелефон
+        title:
+          ru: Телефон
+      - data_path: Объект.Email
+        kind: ПолеВвода
+        name: ПолеEmail
+        title:
+          ru: Email
+      - data_path: Объект.КонтактноеЛицо
+        kind: ПолеВвода
+        name: ПолеКонтактноеЛицо
+        title:
+          ru: Контактное лицо
+      - data_path: Объект.Сайт
+        kind: ПолеВвода
+        name: ПолеСайт
+        title:
+          ru: Сайт
+      - data_path: Объект.ЮридическийАдрес
+        kind: ПолеВвода
+        name: ПолеЮридическийАдрес
+        title:
+          ru: ЮридическийАдрес
+      - data_path: Объект.ФактическийАдрес
+        kind: ПолеВвода
+        name: ПолеФактическийАдрес
+        title:
+          ru: ФактическийАдрес
+    kind: ГруппаФормы
+    name: ГруппаКонтакты
+    title:
+      ru: Контакты
+  - background: '#eff6ff'
+    children:
+      - data_path: Объект.РасчётныйСчёт
+        kind: ПолеВвода
+        name: ПолеРасчётныйСчёт
+        title:
+          ru: РасчётныйСчёт
+      - data_path: Объект.НаименованиеБанка
+        kind: ПолеВвода
+        name: ПолеНаименованиеБанка
+        title:
+          ru: НаименованиеБанка
+      - data_path: Объект.БИК
+        kind: ПолеВвода
+        name: ПолеБИК
+        title:
+          ru: БИК
+      - data_path: Объект.КорреспондентскийСчёт
+        kind: ПолеВвода
+        name: ПолеКорреспондентскийСчёт
+        title:
+          ru: КорреспондентскийСчёт
+    kind: ГруппаФормы
+    name: ГруппаБанк
+    title:
+      ru: Банковские реквизиты
+  - background: '#f8fafc'
+    children:
+      - data_path: Объект.Идентификатор1С
+        kind: ПолеВвода
+        name: ПолеИдентификатор1С
+        title:
+          ru: Идентификатор1С
+      - data_path: Объект.ОГРН
+        kind: ПолеВвода
+        name: ПолеОГРН
+        title:
+          ru: ОГРН
+      - data_path: Объект.ОГРНИП
+        kind: ПолеВвода
+        name: ПолеОГРНИП
+        title:
+          ru: ОГРНИП
+      - data_path: Объект.ОКПО
+        kind: ПолеВвода
+        name: ПолеОКПО
+        title:
+          ru: ОКПО
+    kind: ГруппаФормы
+    name: ГруппаДополнительно
+    title:
+      ru: Дополнительные реквизиты
+events:
+  ПриОткрытии: ОбновитьСведения
+form:
+  entity: Контрагент
+  kind: object
+  name: ФормаОбъекта
+  title:
+    ru: Карточка контрагента
+schema: onebase.form/v1

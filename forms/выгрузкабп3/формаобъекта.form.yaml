@@ -1,0 +1,80 @@
+attributes:
+  - main: true
+    name: Объект
+    save: false
+  - name: ИдЗадачи
+    save: false
+    type: string
+  - name: СостояниеЗадачи
+    save: false
+    type: string
+  - name: РезультатЗадачи
+    save: false
+    type: string
+elements:
+  - background: '#eff6ff'
+    children:
+      - data_path: Объект.Путь
+        kind: ПолеВвода
+        name: ПолеПуть
+        title:
+          ru: Путь к файлу выгрузки (.json)
+      - data_path: Объект.ДатаНачала
+        kind: ПолеВвода
+        name: ПолеДатаНачала
+        title:
+          ru: Дата начала периода ГГГГ-ММ-ДД (необязательно)
+      - data_path: Объект.ДатаОкончания
+        kind: ПолеВвода
+        name: ПолеДатаОкончания
+        title:
+          ru: Дата окончания периода ГГГГ-ММ-ДД (необязательно)
+    kind: ГруппаФормы
+    name: Параметры
+    title:
+      ru: Параметры операции
+  - background: '#f0fdf4'
+    children:
+      - events:
+          Нажатие: ЗапуститьВФоне
+        kind: Кнопка
+        name: ЗапуститьВФоне
+        title:
+          ru: Поставить в очередь
+      - events:
+          Нажатие: ОбновитьСтатус
+        kind: Кнопка
+        name: ОбновитьСтатус
+        title:
+          ru: Обновить результат
+      - data_path: Объект.СостояниеЗадачи
+        kind: ПолеВвода
+        name: Статус
+        readonly: true
+        title:
+          ru: Состояние
+      - data_path: Объект.РезультатЗадачи
+        kind: ПолеВвода
+        multiline: true
+        name: Результат
+        readonly: true
+        title:
+          ru: Результат и сообщения
+      - data_path: Объект.ИдЗадачи
+        hint: Номер текущего задания. Можно вставить сохранённый номер для просмотра результата.
+        kind: ПолеВвода
+        name: ИдЗадачи
+        readonly: false
+        title:
+          ru: Номер задания
+    kind: ГруппаФормы
+    name: Очередь
+    title:
+      ru: Фоновое выполнение
+form:
+  entity: ВыгрузкаБП3
+  kind: processor
+  name: ФормаОбъекта
+  title:
+    ru: Выгрузка в 1С:Бухгалтерию (БП3)
+schema: onebase.form/v1

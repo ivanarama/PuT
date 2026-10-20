@@ -1,28 +1,32 @@
-name: Штрихкоды
-title: Штрихкоды номенклатуры
-titles:
-  en: Item barcodes
-  de: Artikelebarcode
-  sr: Баркодови артикала
 fields:
   - name: Штрихкод
     title: Штрихкод
     titles:
-      en: Barcode
       de: Barcode
+      en: Barcode
       sr: Баркод
     type: string
   - name: Номенклатура
     title: Номенклатура
     titles:
-      en: Item
       de: Artikel
+      en: Item
       sr: Артикал
     type: reference:Номенклатура
   - name: ЕдиницаИзмерения
     title: Единица измерения
     titles:
-      en: Unit
       de: Einheit
+      en: Unit
       sr: Јединица
     type: reference:ЕдиницаИзмерения
+list_filters: []
+list_refresh_on:
+  - данные.штрихкоды
+name: Штрихкоды
+notify_changes: true
+title: Штрихкоды номенклатуры
+titles:
+  de: Artikelebarcode
+  en: Item barcodes
+  sr: Баркодови артикала

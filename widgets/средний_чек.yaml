@@ -1,7 +1,8 @@
 format: number
+link: /ui/report/ПродажиПоМесяцам
 name: СреднийЧек
 params:
-  Начало: "{{today|minus_days:30}}"
+  Начало: '{{today|start_of_month}}'
 query: |
   ВЫБРАТЬ
     ВЫБОР КОГДА т.Чеков > 0
@@ -12,6 +13,10 @@ query: |
         КОЛИЧЕСТВО(РАЗЛИЧНЫЕ ВЫБОР КОГДА вид_движения = "Приход" ТОГДА Регистратор КОНЕЦ) КАК Чеков
       ИЗ РегистрНакопления.ВаловаяПрибыль
       ГДЕ period >= &Начало) КАК т
+refresh_on:
+  - данные.возвратотпокупателя
+  - данные.поступлениетоваров
+  - данные.реализациятоваров
 title: Средний чек за месяц
 titles:
   az: Orta çek (ay)
@@ -19,14 +24,14 @@ titles:
   en: Average check (month)
   es: Ticket medio (mes)
   fr: Panier moyen (mois)
-  hy: "Միջին չեկ (ամիս)"
-  ka: "საშუალო ჩეკი (თვე)"
-  kk: "Орташа чек (ай)"
-  pt: "Ticket médio (mês)"
-  ro: "Bon mediu (lună)"
+  hy: Միջին չեկ (ամիս)
+  ka: საშუალო ჩეკი (თვე)
+  kk: Орташа чек (ай)
+  pt: Ticket médio (mês)
+  ro: Bon mediu (lună)
   sr: Просечна сметка (месец)
-  tr: "Ortalama fiş (ay)"
-  uk: "Середній чек (місяць)"
-  uz: "O'rtacha chek (oy)"
-  zh: "月度客单价"
+  tr: Ortalama fiş (ay)
+  uk: Середній чек (місяць)
+  uz: O'rtacha chek (oy)
+  zh: 月度客单价
 type: kpi

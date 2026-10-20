@@ -6,143 +6,146 @@ attributes:
 elements:
   - children:
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Номер
-                hint: "РЗБ-NNNNN"
+                hint: РЗБ-NNNNN
                 kind: ПолеВвода
                 name: ПолеНомер
                 readonly: true
                 title:
-                  de: "Nummer"
-                  en: "Number"
-                  ru: "Номер"
-                  sr: "Број"
+                  de: Nummer
+                  en: Number
+                  ru: Номер
+                  sr: Број
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.Склад
                 kind: ПолеВвода
                 name: ПолеСклад
                 required: true
                 title:
-                  de: "Lager"
-                  en: "Warehouse"
-                  ru: "Склад"
-                  sr: "Магацин"
+                  de: Lager
+                  en: Warehouse
+                  ru: Склад
+                  sr: Магацин
               - data_path: Объект.Комментарий
                 kind: ПолеВвода
                 name: ПолеКомментарий
                 title:
-                  de: "Kommentar"
-                  en: "Comment"
-                  ru: "Комментарий"
-                  sr: "Коментар"
+                  de: Kommentar
+                  en: Comment
+                  ru: Комментарий
+                  sr: Коментар
               - data_path: Объект.Сумма
-                hint: "ФИФО-себестоимость разбираемой продукции"
+                hint: ФИФО-себестоимость разбираемой продукции
                 kind: ПолеВвода
                 name: ПолеСумма
                 readonly: true
                 title:
-                  de: "Demontagekosten"
-                  en: "Disassembly cost"
-                  ru: "Сумма разборки"
-                  sr: "Трошак растављања"
+                  de: Demontagekosten
+                  en: Disassembly cost
+                  ru: Сумма разборки
+                  sr: Трошак растављања
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Belegkopf"
-              en: "Document header"
-              ru: "Шапка документа"
-              sr: "Заглавље документа"
+              de: Belegkopf
+              en: Document header
+              ru: Шапка документа
+              sr: Заглавље документа
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Allgemein"
-          en: "General"
-          ru: "Основное"
-          sr: "Опште"
+          de: Allgemein
+          en: General
+          ru: Основное
+          sr: Опште
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Расход
                 kind: ТабличнаяЧасть
                 name: ТабРасход
                 title:
-                  de: "Produkt"
-                  en: "Product"
-                  ru: "Продукция"
-                  sr: "Продукција"
+                  de: Produkt
+                  en: Product
+                  ru: Продукция
+                  sr: Продукција
               - events:
                   Нажатие: КнопкаОчиститьРасходНажатие
                 kind: Кнопка
                 name: КнопкаОчиститьРасход
                 title:
-                  de: "Leeren"
-                  en: "Clear"
-                  ru: "Очистить"
-                  sr: "Обриши"
+                  de: Leeren
+                  en: Clear
+                  ru: Очистить
+                  sr: Обриши
             kind: ГруппаФормы
             name: ГруппаРасход
             title:
-              de: "Zu demontierendes Produkt"
-              en: "Product to disassemble"
-              ru: "Разбираемая продукция"
-              sr: "Роба за растављање"
+              de: Zu demontierendes Produkt
+              en: Product to disassemble
+              ru: Разбираемая продукция
+              sr: Роба за растављање
         kind: Страница
         name: СтраницаРасход
         title:
-          de: "Produkt"
-          en: "Product"
-          ru: "Продукция"
-          sr: "Продукција"
+          de: Produkt
+          en: Product
+          ru: Продукция
+          sr: Продукција
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Приход
                 kind: ТабличнаяЧасть
                 name: ТабПриход
                 title:
-                  de: "Komponenten"
-                  en: "Components"
-                  ru: "Комплектующие"
-                  sr: "Компоненте"
+                  de: Komponenten
+                  en: Components
+                  ru: Комплектующие
+                  sr: Компоненте
               - events:
                   Нажатие: КнопкаОчиститьПриходНажатие
                 kind: Кнопка
                 name: КнопкаОчиститьПриход
                 title:
-                  de: "Leeren"
-                  en: "Clear"
-                  ru: "Очистить"
-                  sr: "Обриши"
+                  de: Leeren
+                  en: Clear
+                  ru: Очистить
+                  sr: Обриши
             kind: ГруппаФормы
             name: ГруппаПриход
             title:
-              de: "Gewonnene Komponenten"
-              en: "Recovered components"
-              ru: "Полученные комплектующие"
-              sr: "Добијене компоненте"
+              de: Gewonnene Komponenten
+              en: Recovered components
+              ru: Полученные комплектующие
+              sr: Добијене компоненте
         kind: Страница
         name: СтраницаПриход
         title:
-          de: "Komponenten"
-          en: "Components"
-          ru: "Комплектующие"
-          sr: "Компоненте"
+          de: Komponenten
+          en: Components
+          ru: Комплектующие
+          sr: Компоненте
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -155,9 +158,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Demontage"
-    en: "Disassembly"
-    ru: "Разборка товаров"
-    sr: "Растављање робе"
+    de: Demontage
+    en: Disassembly
+    ru: Разборка товаров
+    sr: Растављање робе
   vertical_scroll: auto
 schema: onebase.form/v1

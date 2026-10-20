@@ -1,24 +1,27 @@
-name: ЗаказовПокупателейЗаМесяц
-type: kpi
-title: Заказов
-titles:
-  en: Orders
-  de: Aufträge
-  sr: Поруџбине
-  az: Sifarişlər
-  es: Pedidos
-  fr: Commandes
-  hy: "Պատվերներ"
-  ka: "შეკვეთები"
-  kk: "Тапсырыстар"
-  pt: "Encomendas"
-  ro: "Comenzi"
-  tr: "Siparişler"
-  uk: "Замовлень"
-  uz: "Buyurtmalar"
-  zh: "订单"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: ЗаказовПокупателейЗаМесяц
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Документ.ЗаказПокупателя
   ГДЕ posted = Истина
+refresh_on:
+  - данные.заказпокупателя
+title: Заказов
+titles:
+  az: Sifarişlər
+  de: Aufträge
+  en: Orders
+  es: Pedidos
+  fr: Commandes
+  hy: Պատվերներ
+  ka: შეკვეთები
+  kk: Тапсырыстар
+  pt: Encomendas
+  ro: Comenzi
+  sr: Поруџбине
+  tr: Siparişler
+  uk: Замовлень
+  uz: Buyurtmalar
+  zh: 订单
+type: kpi

@@ -1,23 +1,24 @@
-name: ПользователейВсего
-type: kpi
-title: Пользователи
-titles:
-  en: Users
-  de: Benutzer
-  sr: Корисници
-  az: İstifadəçilər
-  es: Usuarios
-  fr: Utilisateurs
-  hy: "Օգտատերեր"
-  ka: "მომხმარებლები"
-  kk: "Пайдаланушылар"
-  pt: "Utilizadores"
-  ro: "Utilizatori"
-  tr: "Kullanıcılar"
-  uk: "Користувачі"
-  uz: "Foydalanuvchilar"
-  zh: "用户"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: ПользователейВсего
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Справочник.НастройкиПользователя
+title: Пользователи
+titles:
+  az: İstifadəçilər
+  de: Benutzer
+  en: Users
+  es: Usuarios
+  fr: Utilisateurs
+  hy: Օգտատերեր
+  ka: მომხმარებლები
+  kk: Пайдаланушылар
+  pt: Utilizadores
+  ro: Utilizatori
+  sr: Корисници
+  tr: Kullanıcılar
+  uk: Користувачі
+  uz: Foydalanuvchilar
+  zh: 用户
+type: kpi

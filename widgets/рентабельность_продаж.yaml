@@ -1,7 +1,8 @@
 format: percent
+link: /ui/report/ВаловаяПрибыль
 name: РентабельностьПродаж
 params:
-  Начало: "{{today|minus_days:30}}"
+  Начало: '{{today|start_of_month}}'
 query: |
   ВЫБРАТЬ
     ВЫБОР КОГДА СУММА(ВЫБОР КОГДА вид_движения = "Приход" ТОГДА 1 ИНАЧЕ -1 КОНЕЦ * (ВЫБОР КОГДА СуммаСНДС ЕСТЬ НЕ NULL И СуммаСНДС <> 0 ТОГДА СуммаСНДС ИНАЧЕ Выручка КОНЕЦ)) > 0
@@ -9,21 +10,25 @@ query: |
       ИНАЧЕ 0 КОНЕЦ КАК Значение
   ИЗ РегистрНакопления.ВаловаяПрибыль
   ГДЕ period >= &Начало
-title: Рентабельность продаж, %
+refresh_on:
+  - данные.возвратотпокупателя
+  - данные.поступлениетоваров
+  - данные.реализациятоваров
+title: Рентабельность продаж за месяц, %
 titles:
   az: Satış marjası, %
   de: Verkaufsmarge, %
   en: Sales margin, %
   es: Margen de ventas, %
   fr: Marge de vente, %
-  hy: "Վաճառքի մարժա, %"
-  ka: "გაყიდვების მარჟა, %"
-  kk: "Сату маржасы, %"
-  pt: "Margem de vendas, %"
-  ro: "Marja vânzărilor, %"
+  hy: Վաճառքի մարժա, %
+  ka: გაყიდვების მარჟა, %
+  kk: Сату маржасы, %
+  pt: Margem de vendas, %
+  ro: Marja vânzărilor, %
   sr: Маржа продаје, %
-  tr: "Satış marjı, %"
-  uk: "Рентабельність продаж, %"
-  uz: "Sotuv marjasi, %"
-  zh: "销售利润率%"
+  tr: Satış marjı, %
+  uk: Рентабельність продаж, %
+  uz: Sotuv marjasi, %
+  zh: 销售利润率%
 type: kpi

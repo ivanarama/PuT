@@ -1,0 +1,12 @@
+[Unit]
+Description=Refresh PuT demonstration data with current dates
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/onebase-put/current/project
+EnvironmentFile=/etc/onebase/put-demo.env
+ExecStartPre=+/usr/bin/systemctl stop onebase.service
+ExecStart=/usr/bin/python3 /opt/onebase-put/current/project/scripts/reset_demo_postgres.py --onebase /opt/onebase-put/current/onebase --project /opt/onebase-put/current/project --baseline /opt/onebase-put/demo.dump --baseline-files /opt/onebase-put/baseline-files --backups /opt/onebase-put/backups --demo-only
+ExecStopPost=+/usr/bin/systemctl start onebase.service
+TimeoutStartSec=2400

@@ -1,104 +1,98 @@
-schema: onebase.form/v1
-
-# Без объявления события обработчики модуля формы не вызываются: умолчания
-# организации и склада не подставлялись, проверки перед записью не работали.
+attributes:
+  - main: true
+    name: Объект
+    save: true
+    type: DocumentRef.ПересчетТоваров
+elements:
+  - background: '#eef2ff'
+    children:
+      - events:
+          Нажатие: КнопкаЗаполнитьНажатие
+        kind: Кнопка
+        name: КнопкаЗаполнить
+        title:
+          en: Fill from book stock
+          ru: Заполнить по учётным остаткам
+      - events:
+          Нажатие: КнопкаОформитьНажатие
+        kind: Кнопка
+        name: КнопкаОформить
+        title:
+          en: Create surplus/shortage docs
+          ru: Оформить излишки и недостачи
+    kind: ГруппаФормы
+    name: ГруппаДействия
+    title:
+      en: Actions
+      ru: Действия
+  - children:
+      - children:
+          - background: '#eff6ff'
+            children:
+              - data_path: Объект.Номер
+                kind: ПолеВвода
+                name: ПолеНомер
+                readonly: true
+                title:
+                  en: Number
+                  ru: Номер
+              - data_path: Объект.Дата
+                kind: ПолеВвода
+                name: ПолеДата
+                required: true
+                title:
+                  en: Date
+                  ru: Дата
+              - choice: true
+                data_path: Объект.Организация
+                kind: ПолеВвода
+                name: ПолеОрганизация
+                title:
+                  en: Organization
+                  ru: Организация
+              - choice: true
+                data_path: Объект.Склад
+                kind: ПолеВвода
+                name: ПолеСклад
+                required: true
+                title:
+                  en: Warehouse
+                  ru: Склад
+              - data_path: Объект.Комментарий
+                kind: ПолеВвода
+                name: ПолеКомментарий
+                title:
+                  en: Comment
+                  ru: Комментарий
+            kind: ГруппаФормы
+            name: ГруппаШапка
+            title:
+              en: Header
+              ru: Шапка документа
+          - data_path: Объект.Товары
+            kind: ТабличнаяЧасть
+            name: ТабТовары
+            title:
+              en: Recount results
+              ru: Результаты пересчёта
+            use_grid: true
+        kind: Страница
+        name: СтраницаОсновное
+        title:
+          en: General
+          ru: Основное
+    kind: СтраницыФормы
+    name: ОсновныеЗакладки
 events:
   ПередЗаписью: ПередЗаписьюФормы
   ПриОткрытии: ПриОткрытииФормы
 form:
-  name: ФормаОбъекта
-  kind: object
-  entity: ПересчетТоваров
-  title:
-    ru: "Пересчёт товаров"
-    en: "Stock recount"
   auto_save_settings: true
+  entity: ПересчетТоваров
+  kind: object
+  name: ФормаОбъекта
+  title:
+    en: Stock recount
+    ru: Пересчёт товаров
   vertical_scroll: auto
-
-attributes:
-  - name: Объект
-    type: DocumentRef.ПересчетТоваров
-    save: true
-    main: true
-
-elements:
-  - kind: ГруппаФормы
-    name: ГруппаДействия
-    title:
-      ru: "Действия"
-      en: "Actions"
-    children:
-      - kind: Кнопка
-        name: КнопкаЗаполнить
-        title:
-          ru: "Заполнить по учётным остаткам"
-          en: "Fill from book stock"
-        events:
-          Нажатие: КнопкаЗаполнитьНажатие
-      - kind: Кнопка
-        name: КнопкаОформить
-        title:
-          ru: "Оформить излишки и недостачи"
-          en: "Create surplus/shortage docs"
-        events:
-          Нажатие: КнопкаОформитьНажатие
-
-  - kind: СтраницыФормы
-    name: ОсновныеЗакладки
-    children:
-
-      - kind: Страница
-        name: СтраницаОсновное
-        title:
-          ru: "Основное"
-          en: "General"
-        children:
-          - kind: ГруппаФормы
-            name: ГруппаШапка
-            title:
-              ru: "Шапка документа"
-              en: "Header"
-            children:
-              - kind: ПолеВвода
-                name: ПолеНомер
-                title:
-                  ru: "Номер"
-                  en: "Number"
-                data_path: Объект.Номер
-                readonly: true
-              - kind: ПолеВвода
-                name: ПолеДата
-                title:
-                  ru: "Дата"
-                  en: "Date"
-                data_path: Объект.Дата
-                required: true
-              - kind: ПолеВвода
-                name: ПолеОрганизация
-                title:
-                  ru: "Организация"
-                  en: "Organization"
-                data_path: Объект.Организация
-                choice: true
-              - kind: ПолеВвода
-                name: ПолеСклад
-                title:
-                  ru: "Склад"
-                  en: "Warehouse"
-                data_path: Объект.Склад
-                required: true
-                choice: true
-              - kind: ПолеВвода
-                name: ПолеКомментарий
-                title:
-                  ru: "Комментарий"
-                  en: "Comment"
-                data_path: Объект.Комментарий
-
-          - kind: ТабличнаяЧасть
-            name: ТабТовары
-            title:
-              ru: "Результаты пересчёта"
-              en: "Recount results"
-            data_path: Объект.Товары
-            use_grid: true
+schema: onebase.form/v1

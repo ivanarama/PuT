@@ -199,11 +199,20 @@ fields:
       uz: Qaytarishga jami
       zh: 退货总额
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Поставщик
+  - Склад
+list_refresh_on:
+  - данные.возвратпоставщику
 name: ВозвратПоставщику
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "ВПС-"
+  prefix: ВПС-
 posting: true
 tableparts:
   - fields:

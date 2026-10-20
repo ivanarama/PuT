@@ -1,25 +1,7 @@
-name: ЗакупкиПоПоставщикам
-type: chart
 chart_kind: pie
-title: Структура закупок по поставщикам
-titles:
-  en: Purchases breakdown by supplier
-  de: Einkaufsstruktur nach Lieferant
-  sr: Структура набавке по добављачу
-  az: Satınalmaların təchizatçı üzrə strukturu
-  es: Compras por proveedor
-  fr: Répartition des achats par fournisseur
-  hy: "Գնումների կառուցվածքն ըստ մատակարարների"
-  ka: "შესყიდვების სტრუქტურა მომწოდებლის მიხედვით"
-  kk: "Сатып алулардың жабдықтаушы бойынша құрылымы"
-  pt: "Compras por fornecedor"
-  ro: "Structura achizițiilor pe furnizori"
-  tr: "Tedarikçiye göre satın alma yapısı"
-  uk: "Структура закупівель за постачальниками"
-  uz: "Xaridlarning yetkazib beruvchi bo'yicha tuzilishi"
-  zh: "按供应商的采购构成"
+name: ЗакупкиПоПоставщикам
 params:
-  Начало: "{{today|minus_days:120}}"
+  Начало: '{{today|minus_days:120}}'
 query: |
   ВЫБРАТЬ
     Контрагент,
@@ -30,5 +12,32 @@ query: |
     И period >= &Начало
   СГРУППИРОВАТЬ ПО Контрагент
   УПОРЯДОЧИТЬ ПО Сумма УБЫВ
+refresh_on:
+  - данные.корректировкадолга
+  - данные.поступлениенарасчётныйсчёт
+  - данные.поступлениетоваров
+  - данные.приходныйкассовыйордер
+  - данные.расходныйкассовыйордер
+  - данные.реализациятоваров
+  - данные.списаниесрасчётногосчёта
+title: Структура закупок по поставщикам
+titles:
+  az: Satınalmaların təchizatçı üzrə strukturu
+  de: Einkaufsstruktur nach Lieferant
+  en: Purchases breakdown by supplier
+  es: Compras por proveedor
+  fr: Répartition des achats par fournisseur
+  hy: Գնումների կառուցվածքն ըստ մատակարարների
+  ka: შესყიდვების სტრუქტურა მომწოდებლის მიხედვით
+  kk: Сатып алулардың жабдықтаушы бойынша құрылымы
+  pt: Compras por fornecedor
+  ro: Structura achizițiilor pe furnizori
+  sr: Структура набавке по добављачу
+  tr: Tedarikçiye göre satın alma yapısı
+  uk: Структура закупівель за постачальниками
+  uz: Xaridlarning yetkazib beruvchi bo'yicha tuzilishi
+  zh: 按供应商的采购构成
+type: chart
 x_field: Контрагент
-y_fields: [Сумма]
+y_fields:
+  - Сумма

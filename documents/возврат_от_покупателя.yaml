@@ -29,7 +29,16 @@ fields:
     type: number
   - name: Сумма
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Покупатель
+  - Склад
+list_refresh_on:
+  - данные.возвратотпокупателя
 name: ВозвратОтПокупателя
+notify_changes: true
 numerator:
   length: 5
   period: year

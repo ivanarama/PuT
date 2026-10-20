@@ -4,115 +4,118 @@ attributes:
 elements:
   - children:
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.Склад
-                hint: "Склад, который пересчитываем"
+                hint: Склад, который пересчитываем
                 kind: ПолеВвода
                 name: ПолеСклад
                 required: true
                 title:
-                  de: "Lager"
-                  en: "Warehouse"
-                  ru: "Склад"
-                  sr: "Магацин"
+                  de: Lager
+                  en: Warehouse
+                  ru: Склад
+                  sr: Магацин
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Parameter"
-              en: "Parameters"
-              ru: "Параметры"
-              sr: "Параметри"
+              de: Parameter
+              en: Parameters
+              ru: Параметры
+              sr: Параметри
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Inventur"
-          en: "Stocktaking"
-          ru: "Инвентаризация"
-          sr: "Инвентура"
+          de: Inventur
+          en: Stocktaking
+          ru: Инвентаризация
+          sr: Инвентура
       - children:
-          - children:
+          - background: '#f8fafc'
+            children:
               - children:
                   - events:
                       Нажатие: КнопкаЗаполнитьНажатие
-                    hint: "Текущие остатки склада; факт заполняется = учёту, измените вручную"
+                    hint: Текущие остатки склада; факт заполняется = учёту, измените вручную
                     kind: Кнопка
                     name: КнопкаЗаполнить
                     title:
-                      de: "Buchbestand füllen"
-                      en: "Fill recorded stock"
-                      ru: "1️⃣ Заполнить учётные остатки"
-                      sr: "Попуни књиговодствено"
+                      de: Buchbestand füllen
+                      en: Fill recorded stock
+                      ru: 1️⃣ Заполнить учётные остатки
+                      sr: Попуни књиговодствено
                   - events:
                       Нажатие: КнопкаОчиститьНажатие
                     kind: Кнопка
                     name: КнопкаОчистить
                     title:
-                      de: "Leeren"
-                      en: "Clear"
-                      ru: "Очистить"
-                      sr: "Обриши"
+                      de: Leeren
+                      en: Clear
+                      ru: Очистить
+                      sr: Обриши
                 data_path: Ведомость
                 events:
                   ПриИзменении: ТабВедомостьПриИзменении
                 kind: ТабличнаяЧасть
                 name: ТабВедомость
                 title:
-                  de: "Liste"
-                  en: "Sheet"
-                  ru: "Ведомость"
-                  sr: "Листа"
+                  de: Liste
+                  en: Sheet
+                  ru: Ведомость
+                  sr: Листа
                 use_grid: true
             kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              de: "Abweichung = Ist − Buch"
-              en: "Deviation = actual − recorded"
-              ru: "Отклонение = факт − учёт (− недостача, + излишек)"
-              sr: "Одступање = стварно − књиговодствено"
-          - children:
+              de: Abweichung = Ist − Buch
+              en: Deviation = actual − recorded
+              ru: Отклонение = факт − учёт (− недостача, + излишек)
+              sr: Одступање = стварно − књиговодствено
+          - background: '#eef2ff'
+            children:
               - events:
                   Нажатие: КнопкаОформитьНажатие
-                hint: "Излишки → Оприходование (средняя цена), недостачи → Списание (FIFO)"
+                hint: Излишки → Оприходование (средняя цена), недостачи → Списание (FIFO)
                 kind: Кнопка
                 name: КнопкаОформить
                 title:
-                  de: "Überschuss & Fehlmenge buchen"
-                  en: "Post surplus & shortage"
-                  ru: "2️⃣ Оформить излишки и недостачи"
-                  sr: "Књижи вишак и мањак"
+                  de: Überschuss & Fehlmenge buchen
+                  en: Post surplus & shortage
+                  ru: 2️⃣ Оформить излишки и недостачи
+                  sr: Књижи вишак и мањак
             kind: ГруппаФормы
             name: ГруппаДействия
             title:
-              de: "Buchung"
-              en: "Posting"
-              ru: "Оформление"
-              sr: "Књижење"
+              de: Buchung
+              en: Posting
+              ru: Оформление
+              sr: Књижење
         kind: Страница
         name: СтраницаВедомость
         title:
-          de: "Liste"
-          en: "Sheet"
-          ru: "Ведомость"
-          sr: "Листа"
+          de: Liste
+          en: Sheet
+          ru: Ведомость
+          sr: Листа
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -123,9 +126,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Inventur-Arbeitsplatz"
-    en: "Stocktaking workplace"
-    ru: "АРМ Инвентаризации"
-    sr: "Радно место инвентуре"
+    de: Inventur-Arbeitsplatz
+    en: Stocktaking workplace
+    ru: АРМ Инвентаризации
+    sr: Радно место инвентуре
   vertical_scroll: auto
 schema: onebase.form/v1

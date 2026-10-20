@@ -216,11 +216,19 @@ fields:
       uz: Miqdor
       zh: 金额
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Контрагент
+list_refresh_on:
+  - данные.поступлениенарасчётныйсчёт
 name: ПоступлениеНаРасчётныйСчёт
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "БНК-П-"
+  prefix: БНК-П-
 posting: true
 title: Поступление на расчётный счёт
 titles:

@@ -1,11 +1,118 @@
+items:
+  - label: АРМ Продажи
+    labels:
+      az: Satış iş yeri
+      de: Verkaufsarbeitsplatz
+      en: Sales Workplace
+      es: Puesto de ventas
+      fr: Poste de vente
+      hy: Վաճառքի աշխատատեղ
+      ka: გაყიდვების სამუშაო ადგილი
+      kk: Сату жұмыс орны
+      pt: Posto de vendas
+      ro: Post de vânzări
+      sr: Радно место продаје
+      tr: Satış iş yeri
+      uk: АРМ Продажі
+      uz: Savdo ish joyi
+      zh: 销售工作台
+    url: /ui/processor/рабочееместопродаж
+  - entity: Счёт
+    label: Счёт
+    labels:
+      az: Hesab
+      de: Rechnung
+      en: Invoice
+      es: Factura
+      fr: Facture
+      hy: Հաշիվ-ապացույց
+      ka: ინვოისი
+      kk: Шот
+      pt: Fatura
+      ro: Factură
+      sr: Рачун
+      tr: Fatura
+      uk: Рахунок
+      uz: Hisob
+      zh: 发票
+  - entity: РеализацияТоваров
+    label: Реализация
+    labels:
+      az: Satış
+      de: Verkauf
+      en: Sale
+      es: Venta
+      fr: Vente
+      hy: Վաճառք
+      ka: გაყიდვა
+      kk: Сату
+      pt: Venda
+      ro: Vânzare
+      sr: Продажа
+      tr: Satış
+      uk: Продаж
+      uz: Savdo
+      zh: 销售
+  - entity: ЗаказПокупателя
+    label: Заказ покупателя
+    labels:
+      az: Müştəri sifarişi
+      de: Kundenbestellung
+      en: Customer order
+      es: Pedido de cliente
+      fr: Commande client
+      hy: Հաճախորդի պատվեր
+      ka: კლიენტის შეკვეთა
+      kk: Тұтынушы тапсырысы
+      pt: Pedido do cliente
+      ro: Comandă client
+      sr: Наручба купца
+      tr: Müşteri siparişi
+      uk: Замовлення покупця
+      uz: Mijoz buyurtmasi
+      zh: 客户订单
+  - entity: ВозвратОтПокупателя
+    label: Возврат от покупателя
+    labels:
+      az: Müştəri qaytarılması
+      de: Kundenrückgabe
+      en: Customer return
+      es: Devolución de cliente
+      fr: Retour client
+      hy: Հաճախորդի վերադարձ
+      ka: კლიენტის დაბრუნება
+      kk: Сатып алушыдан қайтару
+      pt: Devolução de cliente
+      ro: Returnare client
+      sr: Поврат од купца
+      tr: Müşteri iadesi
+      uk: Повернення від покупця
+      uz: Mijoz qaytarishi
+      zh: 客户退货
+  - entity: УстановкаЦен
+    label: Установка цен
+    labels:
+      az: Qiymət təyinetmə
+      de: Preisfestlegung
+      en: Price setting
+      es: Configuración de precios
+      fr: Définition des prix
+      hy: Գների սահմանում
+      ka: ფასების დაყენება
+      kk: Баға белгілеу
+      pt: Configuração de preços
+      ro: Setare prețuri
+      sr: Постављање цена
+      tr: Fiyat ayarı
+      uk: Встановлення цін
+      uz: Narx sozlash
+      zh: 价格设置
 name: БыстрыеДействияПродажи
-type: actions
 title: Создать
 titles:
-  en: Create
-  de: Erstellen
-  sr: Креирај
   az: Yarat
+  de: Erstellen
+  en: Create
   es: Crear
   fr: Créer
   hy: Ստեղծել
@@ -13,116 +120,9 @@ titles:
   kk: Құру
   pt: Criar
   ro: Creare
+  sr: Креирај
   tr: Oluştur
   uk: Створити
   uz: Yaratish
   zh: 新建
-items:
-  - label: "АРМ Продажи"
-    labels:
-      en: "Sales Workplace"
-      de: "Verkaufsarbeitsplatz"
-      sr: "Радно место продаје"
-      az: "Satış iş yeri"
-      es: "Puesto de ventas"
-      fr: "Poste de vente"
-      hy: "Վաճառքի աշխատատեղ"
-      ka: "გაყიდვების სამუშაო ადგილი"
-      kk: "Сату жұмыс орны"
-      pt: "Posto de vendas"
-      ro: "Post de vânzări"
-      tr: "Satış iş yeri"
-      uk: "АРМ Продажі"
-      uz: "Savdo ish joyi"
-      zh: "销售工作台"
-    url: /ui/processor/рабочееместопродаж
-  - label: "Счёт"
-    labels:
-      en: "Invoice"
-      de: "Rechnung"
-      sr: "Рачун"
-      az: "Hesab"
-      es: "Factura"
-      fr: "Facture"
-      hy: "Հաշիվ-ապացույց"
-      ka: "ინვოისი"
-      kk: "Шот"
-      pt: "Fatura"
-      ro: "Factură"
-      tr: "Fatura"
-      uk: "Рахунок"
-      uz: "Hisob"
-      zh: "发票"
-    entity: Счёт
-  - label: "Реализация"
-    labels:
-      en: "Sale"
-      de: "Verkauf"
-      sr: "Продажа"
-      az: "Satış"
-      es: "Venta"
-      fr: "Vente"
-      hy: "Վաճառք"
-      ka: "გაყიდვა"
-      kk: "Сату"
-      pt: "Venda"
-      ro: "Vânzare"
-      tr: "Satış"
-      uk: "Продаж"
-      uz: "Savdo"
-      zh: "销售"
-    entity: РеализацияТоваров
-  - label: "Заказ покупателя"
-    labels:
-      en: "Customer order"
-      de: "Kundenbestellung"
-      sr: "Наручба купца"
-      az: "Müştəri sifarişi"
-      es: "Pedido de cliente"
-      fr: "Commande client"
-      hy: "Հաճախորդի պատվեր"
-      ka: "კლიენტის შეკვეთა"
-      kk: "Тұтынушы тапсырысы"
-      pt: "Pedido do cliente"
-      ro: "Comandă client"
-      tr: "Müşteri siparişi"
-      uk: "Замовлення покупця"
-      uz: "Mijoz buyurtmasi"
-      zh: "客户订单"
-    entity: ЗаказПокупателя
-  - label: "Возврат от покупателя"
-    labels:
-      en: "Customer return"
-      de: "Kundenrückgabe"
-      sr: "Поврат од купца"
-      az: "Müştəri qaytarılması"
-      es: "Devolución de cliente"
-      fr: "Retour client"
-      hy: "Հաճախորդի վերադարձ"
-      ka: "კლიენტის დაბრუნება"
-      kk: "Сатып алушыдан қайтару"
-      pt: "Devolução de cliente"
-      ro: "Returnare client"
-      tr: "Müşteri iadesi"
-      uk: "Повернення від покупця"
-      uz: "Mijoz qaytarishi"
-      zh: "客户退货"
-    entity: ВозвратОтПокупателя
-  - label: "Установка цен"
-    labels:
-      en: "Price setting"
-      de: "Preisfestlegung"
-      sr: "Постављање цена"
-      az: "Qiymət təyinetmə"
-      es: "Configuración de precios"
-      fr: "Définition des prix"
-      hy: "Գների սահմանում"
-      ka: "ფასების დაყენება"
-      kk: "Баға белгілеу"
-      pt: "Configuração de preços"
-      ro: "Setare prețuri"
-      tr: "Fiyat ayarı"
-      uk: "Встановлення цін"
-      uz: "Narx sozlash"
-      zh: "价格设置"
-    entity: УстановкаЦен
+type: actions

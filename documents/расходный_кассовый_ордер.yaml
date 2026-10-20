@@ -178,11 +178,19 @@ fields:
       uz: Miqdor
       zh: 金额
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Контрагент
+list_refresh_on:
+  - данные.расходныйкассовыйордер
 name: РасходныйКассовыйОрдер
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "РКО-"
+  prefix: РКО-
 posting: true
 title: Расходный кассовый ордер
 titles:

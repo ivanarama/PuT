@@ -102,11 +102,18 @@ fields:
       uz: Qabul qiluvchi ombor
       zh: 接收仓库
     type: reference:Склад
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+list_refresh_on:
+  - данные.перемещениетоваров
 name: ПеремещениеТоваров
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "ПЕР-"
+  prefix: ПЕР-
 posting: true
 tableparts:
   - fields:

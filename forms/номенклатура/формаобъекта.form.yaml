@@ -1,0 +1,208 @@
+attributes:
+  - main: true
+    name: Объект
+    save: true
+    type: CatalogRef.Номенклатура
+  - name: ВсегоНаСкладах
+    save: false
+    type: decimal(15,3)
+  - name: Зарезервировано
+    save: false
+    type: decimal(15,3)
+  - name: СвободноВсего
+    save: false
+    type: decimal(15,3)
+  - name: ОжидаетсяВсего
+    save: false
+    type: decimal(15,3)
+  - columns:
+      - name: Склад
+        title:
+          ru: Склад
+        type: string
+      - name: Остаток
+        title:
+          ru: На складе
+        type: number
+      - name: Резерв
+        title:
+          ru: В резерве
+        type: number
+      - name: Свободно
+        title:
+          ru: Свободно
+        type: number
+      - name: Ожидается
+        title:
+          ru: В пути
+        type: number
+    name: Остатки
+    save: false
+    type: ValueTable
+  - columns:
+      - name: ТипЦен
+        title:
+          ru: Тип цены
+        type: string
+      - name: Цена
+        title:
+          ru: Цена
+        type: number
+    name: Цены
+    save: false
+    type: ValueTable
+  - columns:
+      - name: Дата
+        title:
+          ru: Дата
+        type: string
+      - name: Склад
+        title:
+          ru: Склад
+        type: string
+      - name: Вид
+        title:
+          ru: Движение
+        type: string
+      - name: Количество
+        title:
+          ru: Количество
+        type: number
+    name: Движения
+    save: false
+    type: ValueTable
+elements:
+  - background: '#f0fdf4'
+    children:
+      - data_path: Объект.ВсегоНаСкладах
+        kind: ПолеВвода
+        name: ПолеВсегоНаСкладах
+        readonly: true
+        title:
+          ru: На складах
+      - data_path: Объект.Зарезервировано
+        kind: ПолеВвода
+        name: ПолеЗарезервировано
+        readonly: true
+        title:
+          ru: В резерве
+      - data_path: Объект.СвободноВсего
+        kind: ПолеВвода
+        name: ПолеСвободноВсего
+        readonly: true
+        title:
+          ru: Свободно
+      - data_path: Объект.ОжидаетсяВсего
+        kind: ПолеВвода
+        name: ПолеОжидаетсяВсего
+        readonly: true
+        title:
+          ru: В пути
+    kind: ГруппаФормы
+    name: ГруппаОбзор
+    orientation: horizontal
+    title:
+      ru: Обзор
+  - background: '#eef2ff'
+    children:
+      - events:
+          Нажатие: ОбновитьСведения
+        kind: Кнопка
+        name: ОбновитьСведения
+        title:
+          ru: Обновить сведения
+    kind: ГруппаФормы
+    name: ГруппаДействия
+    title:
+      ru: Действия
+  - background: '#fffbeb'
+    children:
+      - data_path: Объект.Остатки
+        kind: ТабличнаяЧасть
+        name: ТаблицаОстатки
+        readonly: true
+        title:
+          ru: Остатки и обеспечение
+    kind: ГруппаФормы
+    name: ГруппаОстатки
+  - background: '#f8fafc'
+    children:
+      - data_path: Объект.Цены
+        kind: ТабличнаяЧасть
+        name: ТаблицаЦены
+        readonly: true
+        title:
+          ru: Текущие цены
+    kind: ГруппаФормы
+    name: ГруппаЦены
+  - background: '#f8fafc'
+    children:
+      - data_path: Объект.Движения
+        kind: ТабличнаяЧасть
+        name: ТаблицаДвижения
+        readonly: true
+        title:
+          ru: Последние движения товара
+    kind: ГруппаФормы
+    name: ГруппаДвижения
+  - background: '#eff6ff'
+    children:
+      - data_path: Объект.Наименование
+        kind: ПолеВвода
+        name: ПолеНаименование
+        title:
+          ru: Наименование
+      - data_path: Объект.Артикул
+        kind: ПолеВвода
+        name: ПолеАртикул
+        title:
+          ru: Артикул
+      - data_path: Объект.Услуга
+        kind: ПолеВвода
+        name: ПолеУслуга
+        title:
+          ru: Услуга
+      - data_path: Объект.ЕдиницаИзмерения
+        kind: ПолеВвода
+        name: ПолеЕдиницаИзмерения
+        title:
+          ru: Единица измерения
+      - data_path: Объект.СтавкаНДС
+        kind: ПолеВвода
+        name: ПолеСтавкаНДС
+        title:
+          ru: Ставка НДС
+      - data_path: Объект.МинимальныйОстаток
+        kind: ПолеВвода
+        name: ПолеМинимальныйОстаток
+        title:
+          ru: Минимальный остаток
+      - data_path: Объект.ОсновноеИзображение
+        kind: ПолеВвода
+        name: ПолеОсновноеИзображение
+        title:
+          ru: Изображение товара
+    kind: ГруппаФормы
+    name: ГруппаОсновное
+    title:
+      ru: Карточка товара
+  - background: '#f8fafc'
+    children:
+      - data_path: Объект.Идентификатор1С
+        kind: ПолеВвода
+        name: ПолеИдентификатор1С
+        title:
+          ru: Идентификатор1С
+    kind: ГруппаФормы
+    name: ГруппаДополнительно
+    title:
+      ru: Дополнительные реквизиты
+events:
+  ПриОткрытии: ОбновитьСведения
+form:
+  entity: Номенклатура
+  kind: object
+  name: ФормаОбъекта
+  title:
+    ru: Карточка товара
+schema: onebase.form/v1

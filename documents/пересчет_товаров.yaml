@@ -1,73 +1,81 @@
-name: ПересчетТоваров
-title: Пересчёт товаров
-titles:
-  en: Stock recount
-  de: Inventurauszählung
-  sr: Пребројавање робе
-posting: false
-numerator:
-  prefix: "ПЕРС-"
-  length: 5
-  period: year
 fields:
   - name: Идентификатор1С
-    type: string
     title: Идентификатор 1С
     titles:
-      en: 1C identifier
       de: 1C-Kennung
-  - name: Номер
+      en: 1C identifier
     type: string
+  - name: Номер
     title: Номер
     titles:
-      en: Number
       de: Nummer
+      en: Number
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
       de: Datum
+      en: Date
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
       de: Organisation
+      en: Organization
+    type: reference:Организация
   - name: Склад
-    type: reference:Склад
     title: Склад
     titles:
-      en: Warehouse
       de: Lager
+      en: Warehouse
+    type: reference:Склад
   - name: Комментарий
-    type: string
     title: Комментарий
     titles:
-      en: Comment
       de: Kommentar
+      en: Comment
+    type: string
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Склад
+list_refresh_on:
+  - данные.пересчеттоваров
+name: ПересчетТоваров
+notify_changes: true
+numerator:
+  length: 5
+  period: year
+  prefix: ПЕРС-
+posting: false
 tableparts:
-  - name: Товары
-    title: Товары
-    titles:
-      en: Items
-      de: Artikel
-    fields:
+  - fields:
       - name: Номенклатура
-        type: reference:Номенклатура
         title: Номенклатура
         titles:
-          en: Item
           de: Artikel
+          en: Item
+        type: reference:Номенклатура
       - name: КоличествоУчёт
-        type: number
         title: Учтено
         titles:
-          en: Book qty
           de: Buchbestand
-      - name: КоличествоФакт
+          en: Book qty
         type: number
+      - name: КоличествоФакт
         title: Фактически
         titles:
-          en: Counted qty
           de: Gezählt
+          en: Counted qty
+        type: number
+    name: Товары
+    title: Товары
+    titles:
+      de: Artikel
+      en: Items
+title: Пересчёт товаров
+titles:
+  de: Inventurauszählung
+  en: Stock recount
+  sr: Пребројавање робе

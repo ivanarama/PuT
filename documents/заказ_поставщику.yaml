@@ -199,12 +199,64 @@ fields:
       uz: Jami
       zh: 合计
     type: number
+  - default: Новый
+    name: Состояние
+    title: Этап обработки
+    type: enum:СостояниеЗаказа
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Поставщик
+  - Склад
+  - Состояние
+list_refresh_on:
+  - данные.заказпоставщику
 name: ЗаказПоставщику
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "ЗПС-"
+  prefix: ЗПС-
 posting: true
+stages:
+  deadline_days:
+    ВРаботе: 2
+    НаОбеспечении: 3
+    Принят: 2
+  enforce: strict
+  field: Состояние
+  order:
+    - Новый
+    - Принят
+    - НаОбеспечении
+    - ВРаботе
+    - Готов
+    - Завершён
+    - Отменён
+  transitions:
+    - from: Новый
+      to:
+        - Принят
+        - Отменён
+    - from: Принят
+      to:
+        - НаОбеспечении
+        - ВРаботе
+        - Отменён
+    - from: НаОбеспечении
+      to:
+        - ВРаботе
+        - Отменён
+    - from: ВРаботе
+      to:
+        - Готов
+        - Отменён
+    - from: Готов
+      to:
+        - ВРаботе
+        - Завершён
+        - Отменён
 tableparts:
   - fields:
       - name: Номенклатура

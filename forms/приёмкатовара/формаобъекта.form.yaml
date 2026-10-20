@@ -1,140 +1,157 @@
 attributes:
   - main: true
     name: Объект
+conditional_formatting:
+  - target: Товары
+    then:
+      background: '#fee2e2'
+      color: '#991b1b'
+    when: Расхождение < 0
+  - target: Товары
+    then:
+      background: '#fef3c7'
+    when: Расхождение > 0
+  - target: Товары
+    then:
+      background: '#dcfce7'
+    when: Принято > 0 И Расхождение = 0
 elements:
   - children:
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.ЗаказПоставщику
                 events:
                   ПриИзменении: ЗаказПриИзменении
-                hint: "Заказ, по которому принимается товар"
+                hint: Заказ, по которому принимается товар
                 kind: ПолеВвода
                 name: ПолеЗаказПоставщику
                 required: true
                 title:
-                  de: "Bestellung"
-                  en: "Purchase order"
-                  ru: "Заказ поставщику"
-                  sr: "Налог добављачу"
+                  de: Bestellung
+                  en: Purchase order
+                  ru: Заказ поставщику
+                  sr: Налог добављачу
               - choice: true
                 data_path: Объект.Поставщик
-                hint: "Заполняется из заказа"
+                hint: Заполняется из заказа
                 kind: ПолеВвода
                 name: ПолеПоставщик
                 title:
-                  de: "Lieferant"
-                  en: "Supplier"
-                  ru: "Поставщик"
-                  sr: "Добављач"
+                  de: Lieferant
+                  en: Supplier
+                  ru: Поставщик
+                  sr: Добављач
               - choice: true
                 data_path: Объект.Склад
-                hint: "Заполняется из заказа"
+                hint: Заполняется из заказа
                 kind: ПолеВвода
                 name: ПолеСклад
                 title:
-                  de: "Lager"
-                  en: "Warehouse"
-                  ru: "Склад"
-                  sr: "Магацин"
+                  de: Lager
+                  en: Warehouse
+                  ru: Склад
+                  sr: Магацин
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Eingangsparameter"
-              en: "Receipt parameters"
-              ru: "Параметры приёмки"
-              sr: "Параметри пријема"
+              de: Eingangsparameter
+              en: Receipt parameters
+              ru: Параметры приёмки
+              sr: Параметри пријема
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Eingang"
-          en: "Receipt"
-          ru: "Приёмка"
-          sr: "Пријем"
+          de: Eingang
+          en: Receipt
+          ru: Приёмка
+          sr: Пријем
       - children:
-          - children:
+          - background: '#f8fafc'
+            children:
               - children:
                   - events:
                       Нажатие: КнопкаЗаполнитьНажатие
-                    hint: "Подтянуть ожидаемые позиции (остаток в пути) и цены заказа"
+                    hint: Подтянуть ожидаемые позиции (остаток в пути) и цены заказа
                     kind: Кнопка
                     name: КнопкаЗаполнить
                     title:
-                      de: "Aus Bestellung füllen"
-                      en: "Fill from order"
-                      ru: "1️⃣ Заполнить по заказу"
-                      sr: "Попуни из налога"
+                      de: Aus Bestellung füllen
+                      en: Fill from order
+                      ru: 1️⃣ Заполнить по заказу
+                      sr: Попуни из налога
                   - events:
                       Нажатие: КнопкаОчиститьНажатие
                     kind: Кнопка
                     name: КнопкаОчистить
                     title:
-                      de: "Leeren"
-                      en: "Clear"
-                      ru: "Очистить"
-                      sr: "Обриши"
+                      de: Leeren
+                      en: Clear
+                      ru: Очистить
+                      sr: Обриши
                 data_path: Товары
                 events:
                   ПриИзменении: ТабТоварыПриИзменении
                 kind: ТабличнаяЧасть
                 name: ТабТовары
                 title:
-                  de: "Artikel"
-                  en: "Items"
-                  ru: "Товары"
-                  sr: "Артикли"
+                  de: Artikel
+                  en: Items
+                  ru: Товары
+                  sr: Артикли
                 use_grid: true
             kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              de: "Eingangsabgleich"
-              en: "Receipt reconciliation"
-              ru: "Сверка приёмки (расхождение < 0 — недопоставка)"
-              sr: "Усклађивање пријема"
-          - children:
+              de: Eingangsabgleich
+              en: Receipt reconciliation
+              ru: Сверка приёмки (расхождение < 0 — недопоставка)
+              sr: Усклађивање пријема
+          - background: '#eef2ff'
+            children:
               - events:
                   Нажатие: КнопкаСоздатьПоступлениеНажатие
-                hint: "Провести ПоступлениеТоваров: закроет товары в пути, создаст партии FIFO и долг поставщику"
+                hint: 'Провести ПоступлениеТоваров: закроет товары в пути, создаст партии FIFO и долг поставщику'
                 kind: Кнопка
                 name: КнопкаСоздатьПоступление
                 title:
-                  de: "Zugang erstellen"
-                  en: "Create receipt"
-                  ru: "2️⃣ Создать поступление"
-                  sr: "Креирај пријем"
+                  de: Zugang erstellen
+                  en: Create receipt
+                  ru: 2️⃣ Создать поступление
+                  sr: Креирај пријем
             kind: ГруппаФормы
             name: ГруппаДействия
             title:
-              de: "Zugang buchen"
-              en: "Receipt posting"
-              ru: "Оформление прихода"
-              sr: "Књижење пријема"
+              de: Zugang buchen
+              en: Receipt posting
+              ru: Оформление прихода
+              sr: Књижење пријема
         kind: Страница
         name: СтраницаТовары
         title:
-          de: "Artikel"
-          en: "Items"
-          ru: "Товары"
-          sr: "Артикли"
+          de: Artikel
+          en: Items
+          ru: Товары
+          sr: Артикли
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -145,9 +162,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Wareneingang-Arbeitsplatz"
-    en: "Goods receipt workplace"
-    ru: "АРМ Приёмки"
-    sr: "Радно место пријема"
+    de: Wareneingang-Arbeitsplatz
+    en: Goods receipt workplace
+    ru: АРМ Приёмки
+    sr: Радно место пријема
   vertical_scroll: auto
 schema: onebase.form/v1

@@ -1,65 +1,204 @@
-name: Касса
-title: Касса и банк
-icon: banknote
-titles:
-    az: Kassa
-    de: Kasse & Bank
-    en: Cash & Bank
-    es: Caja
-    fr: Caisse
-    hy: Դրամարկղի
-    ka: სალარო
-    kk: Касса
-    pt: Caixa
-    ro: Casier
-    sr: Каса и банка
-    tr: Kasa
-    uk: Каса
-    uz: Kassa
-    zh: 现金
-order: 30
-roles: [Кассир, Менеджер, Управленец, Демо]
 contents:
-    catalogs:
-        - Касса
-        - Контрагент
-        - ПодключаемоеОборудование
-    documents:
-        - ПоступлениеНаРасчётныйСчёт
+  catalogs:
+    - Касса
+    - Контрагент
+    - ПодключаемоеОборудование
+  documents:
+    - ПоступлениеНаРасчётныйСчёт
+    - ПриходныйКассовыйОрдер
+    - РасходныйКассовыйОрдер
+    - СписаниеСРасчётногоСчёта
+  processors:
+    - РабочееМестоКассира
+    - ЗагрузкаВыписки
+    - ПробитьЧек
+    - ПечатьЧека
+    - ВзвеситьТовар
+    - ВыгрузкаВExcel
+    - ВыгрузкаБП3
+  registers:
+    - ДенежныеСредства
+    - Взаиморасчеты
+  reports:
+    - АктСверки
+    - ВыпискаБанка
+    - ДвижениеДенежныхСредств
+    - ОстаткиДенежныхСредств
+    - ПлатежныйКалендарь
+    - УправленческийБаланс
+home_page:
+  layout: rows
+  nav_by_role:
+    Кассир:
+      documents:
         - ПриходныйКассовыйОрдер
         - РасходныйКассовыйОрдер
-        - СписаниеСРасчётногоСчёта
-    registers:
-        - ДенежныеСредства
-        - Взаиморасчеты
-    reports:
-        - АктСверки
-        - ВыпискаБанка
-        - ДвижениеДенежныхСредств
-        - ОстаткиДенежныхСредств
+      processors: []
+      reports: []
+    Кладовщик:
+      catalogs: []
+      documents: []
+      processors: []
+      reports: []
+    Менеджер:
+      catalogs:
+        - Контрагент
+      documents: []
+      processors: []
+      reports: []
+    Снабженец:
+      catalogs:
+        - Контрагент
+      documents: []
+      processors: []
+      reports: []
+    Управленец:
+      catalogs:
+        - Контрагент
+      documents: []
+      processors: []
+      reports:
         - ПлатежныйКалендарь
-        - УправленческийБаланс
-    processors:
-        - РабочееМестоКассира
-        - ЗагрузкаВыписки
-        - ПробитьЧек
-        - ПечатьЧека
-        - ВзвеситьТовар
-        - ВыгрузкаВExcel
-        - ВыгрузкаБП3
-home_page:
-    title: Главная
-    layout: rows
-    rows:
-        # Быстрые действия
-        - widgets:
-            - БыстрыеДействияКасса
-        # KPI-полоса
-        - widgets:
-            - КассаОстаток
-            - ДебиторскаяЗадолженность
-            - ЗадолженностьПоставщикам
-        # Динамика
-        - widgets:
-            - ДенежныйПоток
-            - ВыручкаПротивРасхода
+  rows:
+    - widgets:
+        - БыстрыеДействияКасса
+    - widgets:
+        - КассаОстаток
+        - ДебиторскаяЗадолженность
+        - ЗадолженностьПоставщикам
+    - widgets:
+        - ДенежныйПоток
+        - ВыручкаПротивРасхода
+  title: Главная
+icon: banknote
+menu:
+  sections:
+    - groups:
+        - icon: arrow-down-left
+          id: cash-receipts
+          items:
+            - id: cash-document-1e41208271
+              target: document:ПриходныйКассовыйОрдер
+            - id: cash-document-c1e100106f
+              target: document:ПоступлениеНаРасчётныйСчёт
+          title: Приём оплат
+          titles:
+            en: Receive payments
+        - icon: arrow-up-right
+          id: cash-payments
+          items:
+            - id: cash-document-81fc3a67e5
+              target: document:РасходныйКассовыйОрдер
+            - id: cash-document-ef813b396e
+              target: document:СписаниеСРасчётногоСчёта
+            - id: cash-processor-e2eeb1cc85
+              target: processor:ЗагрузкаВыписки
+          title: Выплаты и банковская выписка
+          titles:
+            en: Payments and bank statement
+      icon: banknote
+      id: cash-work
+      items:
+        - id: cash-processor-9cf49bbe96
+          target: processor:РабочееМестоКассира
+        - id: cash-catalog-2b63083158
+          target: catalog:Касса
+      title: Касса и банк
+      titles:
+        en: Cash and bank
+    - groups:
+        - icon: chart-column
+          id: cash-reports
+          items:
+            - id: cash-report-a5905e88aa
+              target: report:ОстаткиДенежныхСредств
+            - id: cash-report-9ecf0c521f
+              target: report:ДвижениеДенежныхСредств
+            - id: cash-report-1f3c652a9d
+              target: report:ВыпискаБанка
+            - id: cash-report-a4dfd633cd
+              target: report:УправленческийБаланс
+          title: Отчёты о деньгах
+          titles:
+            en: Money reports
+        - icon: database
+          id: cash-accounting
+          items:
+            - id: cash-register-21ec2d3c3f
+              target: register:ДенежныеСредства:balances
+            - id: cash-register-63517c206b
+              target: register:ДенежныеСредства:movements
+            - id: cash-register-75eaef5c7d
+              target: register:Взаиморасчеты:balances
+            - id: cash-register-3839a81b53
+              target: register:Взаиморасчеты:movements
+          title: Данные учёта
+          titles:
+            en: Accounting data
+      icon: calendar-days
+      id: cash-settlements
+      items:
+        - id: cash-catalog-103b090669
+          target: catalog:Контрагент
+        - id: cash-report-8daeefc0e4
+          target: report:ПлатежныйКалендарь
+        - id: cash-report-c91c6a3b3d
+          target: report:АктСверки
+      title: Расчёты и планирование
+      titles:
+        en: Settlements and planning
+    - groups:
+        - icon: receipt
+          id: cash-checks
+          items:
+            - id: cash-processor-6f0fc5277a
+              target: processor:ПробитьЧек
+            - id: cash-processor-20ea531676
+              target: processor:ПечатьЧека
+            - id: cash-processor-bb7a11b90e
+              target: processor:ВзвеситьТовар
+          title: Чеки и весы
+          titles:
+            en: Receipts and scales
+        - icon: file-up
+          id: cash-export
+          items:
+            - id: cash-processor-c6955660f2
+              target: processor:ВыгрузкаБП3
+            - id: cash-processor-ab859dc12c
+              target: processor:ВыгрузкаВExcel
+          title: Выгрузка данных
+          titles:
+            en: Data export
+      icon: printer
+      id: cash-equipment
+      items:
+        - id: cash-catalog-ba4ded0938
+          target: catalog:ПодключаемоеОборудование
+      title: Оборудование и обмен
+      titles:
+        en: Equipment and exchange
+name: Касса
+order: 30
+roles:
+  - Кассир
+  - Менеджер
+  - Управленец
+  - Демо
+title: Касса и банк
+titles:
+  az: Kassa
+  de: Kasse & Bank
+  en: Cash & Bank
+  es: Caja
+  fr: Caisse
+  hy: Դրամարկղի
+  ka: სალარო
+  kk: Касса
+  pt: Caixa
+  ro: Casier
+  sr: Каса и банка
+  tr: Kasa
+  uk: Каса
+  uz: Kassa
+  zh: 现金

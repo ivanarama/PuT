@@ -1,24 +1,27 @@
-name: ПоступленийЗаМесяц
-type: kpi
-title: Поступлений
-titles:
-  en: Receipts
-  de: Eingänge
-  sr: Пријеми
-  az: Daxilolmalar
-  es: Recepciones
-  fr: Réceptions
-  hy: "Մուտքեր"
-  ka: "მიღებები"
-  kk: "Түсімдер"
-  pt: "Receções"
-  ro: "Recepții"
-  tr: "Girişler"
-  uk: "Надходжень"
-  uz: "Qabullar"
-  zh: "入库"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: ПоступленийЗаМесяц
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Документ.ПоступлениеТоваров
   ГДЕ posted = Истина
+refresh_on:
+  - данные.поступлениетоваров
+title: Поступлений
+titles:
+  az: Daxilolmalar
+  de: Eingänge
+  en: Receipts
+  es: Recepciones
+  fr: Réceptions
+  hy: Մուտքեր
+  ka: მიღებები
+  kk: Түсімдер
+  pt: Receções
+  ro: Recepții
+  sr: Пријеми
+  tr: Girişler
+  uk: Надходжень
+  uz: Qabullar
+  zh: 入库
+type: kpi

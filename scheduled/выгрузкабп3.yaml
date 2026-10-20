@@ -1,0 +1,5 @@
+enabled: false
+name: ФонВыгрузкаБП3
+processor: ВыгрузкаБП3
+timeout: 1200
+title: Выгрузка в 1С:Бухгалтерию (БП3)

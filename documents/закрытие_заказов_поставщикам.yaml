@@ -1,99 +1,108 @@
-name: ЗакрытиеЗаказовПоставщикам
-title: Закрытие заказов поставщикам
-titles:
-  en: Purchase orders closing
-  de: Bestellungen abschließen
-  sr: Затварање налога добављача
-posting: true
-numerator:
-  prefix: "ЗЗП-"
-  length: 5
-  period: year
 based_on:
   - ЗаказПоставщику
 fields:
   - name: Номер
-    type: string
     title: Номер
     titles:
-      en: Number
       de: Nummer
+      en: Number
       sr: Број
+    type: string
   - name: Дата
-    type: date
     title: Дата
     titles:
-      en: Date
       de: Datum
+      en: Date
       sr: Датум
+    type: date
   - name: Организация
-    type: reference:Организация
     title: Организация
     titles:
-      en: Organization
       de: Organisation
+      en: Organization
       sr: Организација
+    type: reference:Организация
   - name: Поставщик
-    type: reference:Контрагент
     title: Поставщик
     titles:
-      en: Supplier
       de: Lieferant
+      en: Supplier
       sr: Добављач
+    type: reference:Контрагент
   - name: Склад
-    type: reference:Склад
     title: Склад
     titles:
-      en: Warehouse
       de: Lager
+      en: Warehouse
       sr: Магацин
+    type: reference:Склад
   - name: Комментарий
-    type: string
     title: Комментарий
     titles:
-      en: Comment
       de: Kommentar
+      en: Comment
       sr: Коментар
+    type: string
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Поставщик
+  - Склад
+list_refresh_on:
+  - данные.закрытиезаказовпоставщикам
+name: ЗакрытиеЗаказовПоставщикам
+notify_changes: true
+numerator:
+  length: 5
+  period: year
+  prefix: ЗЗП-
+posting: true
 tableparts:
-  - name: Заказы
-    title: Заказы к закрытию
-    titles:
-      en: Orders to close
-      de: Bestellungen zu schließen
-      sr: Налози за затварање
-    fields:
+  - fields:
       - name: ЗаказПоставщику
-        type: reference:ЗаказПоставщику
         title: Заказ поставщику
         titles:
-          en: Purchase order
           de: Bestellung
+          en: Purchase order
           sr: Налог добављачу
+        type: reference:ЗаказПоставщику
       - name: ЗаказПокупателя
-        type: reference:ЗаказПокупателя
         title: Заказ покупателя
         titles:
-          en: Sales order
           de: Kundenauftrag
+          en: Sales order
           sr: Налог купца
+        type: reference:ЗаказПокупателя
       - name: Номенклатура
-        type: reference:Номенклатура
         title: Номенклатура
         titles:
-          en: Item
           de: Artikel
+          en: Item
           sr: Артикал
+        type: reference:Номенклатура
       - name: Количество
-        type: number
         title: Снимаемый остаток
         titles:
-          en: Canceled quantity
           de: Stornierte Menge
+          en: Canceled quantity
           sr: Количина за отказ
+        type: number
       - name: ПричинаЗакрытия
-        type: string
         title: Причина закрытия
         titles:
-          en: Reason
           de: Grund
+          en: Reason
           sr: Разлог
+        type: string
+    name: Заказы
+    title: Заказы к закрытию
+    titles:
+      de: Bestellungen zu schließen
+      en: Orders to close
+      sr: Налози за затварање
+title: Закрытие заказов поставщикам
+titles:
+  de: Bestellungen abschließen
+  en: Purchase orders closing
+  sr: Затварање налога добављача

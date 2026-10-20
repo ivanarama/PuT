@@ -1,11 +1,24 @@
+format: number
+link: /ui/report/Взаиморасчеты
 name: ЗадолженностьПоставщикам
-type: kpi
+query: |
+  ВЫБРАТЬ
+    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ), 0) AS INTEGER) КАК Значение
+  ИЗ РегистрНакопления.Взаиморасчеты
+  ГДЕ ТипКонтрагента = "Поставщик"
+refresh_on:
+  - данные.корректировкадолга
+  - данные.поступлениенарасчётныйсчёт
+  - данные.поступлениетоваров
+  - данные.приходныйкассовыйордер
+  - данные.расходныйкассовыйордер
+  - данные.реализациятоваров
+  - данные.списаниесрасчётногосчёта
 title: Задолженность поставщикам
 titles:
-  en: Accounts payable
-  de: Verbindlichkeiten
-  sr: Дуг добављачима
   az: Təchizatçılara borc
+  de: Verbindlichkeiten
+  en: Accounts payable
   es: Deuda con proveedores
   fr: Dettes fournisseurs
   hy: Պարտք մատակարարներին
@@ -13,13 +26,9 @@ titles:
   kk: Жабдықтаушыларға берешек
   pt: Dívida a fornecedores
   ro: Datorii furnizori
+  sr: Дуг добављачима
   tr: Tedarikçi borcu
   uk: Заборгованість постачальникам
   uz: Yetkazib beruvchilarga qarz
   zh: 应付账款
-format: number
-query: |
-  ВЫБРАТЬ
-    CAST(ROUND(СУММА(ВЫБОР КОГДА вид_движения = "Расход" ТОГДА Сумма ИНАЧЕ -Сумма КОНЕЦ), 0) AS INTEGER) КАК Значение
-  ИЗ РегистрНакопления.Взаиморасчеты
-  ГДЕ ТипКонтрагента = "Поставщик"
+type: kpi

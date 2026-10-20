@@ -1,23 +1,26 @@
-name: ОрганизацийВсего
-type: kpi
-title: Организаций
-titles:
-  en: Organizations
-  de: Organisationen
-  sr: Организације
-  az: Təşkilatlar
-  es: Organizaciones
-  fr: Organisations
-  hy: "Կազմակերպություններ"
-  ka: "ორგანიზაციები"
-  kk: "Ұйымдар"
-  pt: "Organizações"
-  ro: "Organizații"
-  tr: "Kuruluşlar"
-  uk: "Організацій"
-  uz: "Tashkilotlar"
-  zh: "组织"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: ОрганизацийВсего
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Справочник.Организация
+refresh_on:
+  - данные.организация
+title: Организаций
+titles:
+  az: Təşkilatlar
+  de: Organisationen
+  en: Organizations
+  es: Organizaciones
+  fr: Organisations
+  hy: Կազմակերպություններ
+  ka: ორგანიზაციები
+  kk: Ұйымдар
+  pt: Organizações
+  ro: Organizații
+  sr: Организације
+  tr: Kuruluşlar
+  uk: Організацій
+  uz: Tashkilotlar
+  zh: 组织
+type: kpi

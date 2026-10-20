@@ -1,30 +1,10 @@
-name: СтавкаНДС
-title: Ставка НДС
-titles:
-  en: VAT rate
-  de: MwSt.-Satz
-  sr: ПДВ стопа
-  az: ƏDV dərəcəsi
-  es: Tasa IVA
-  fr: Taux TVA
-  hy: ԱԱՀ տոկոս
-  ka: დღგ განაკვეთი
-  kk: ҚҚС мөлшері
-  pt: Taxa IVA
-  ro: Cotă TVA
-  tr: KDV oranı
-  uk: Ставка ПДВ
-  uz: QQS stavkasi
-  zh: 增值税率
 fields:
   - name: Наименование
-    type: string
     title: Наименование
     titles:
-      en: Name
-      de: Name
-      sr: Назив
       az: Adlandırma
+      de: Name
+      en: Name
       es: Nombre
       fr: Nom
       hy: Անվանում
@@ -32,18 +12,18 @@ fields:
       kk: Атауы
       pt: Nome
       ro: Denumire
+      sr: Назив
       tr: Ad
       uk: Найменування
       uz: Nomi
       zh: 名称
+    type: string
   - name: Процент
-    type: number
     title: Процент
     titles:
-      en: Percentage
-      de: Prozent
-      sr: Проценат
       az: Faiz
+      de: Prozent
+      en: Percentage
       es: Porcentaje
       fr: Pourcentage
       hy: Տոկոս
@@ -51,24 +31,49 @@ fields:
       kk: Пайыз
       pt: Porcentagem
       ro: Procentaj
+      sr: Проценат
       tr: Yüzde
       uk: Відсоток
       uz: Foiz
       zh: 百分比
+    type: number
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.ставкандс
+name: СтавкаНДС
+notify_changes: true
 predefined:
-  - name: НДС20
-    fields:
-      Наименование: "20%"
+  - fields:
+      Наименование: 20%
       Процент: 20
-  - name: НДС10
-    fields:
-      Наименование: "10%"
+    name: НДС20
+  - fields:
+      Наименование: 10%
       Процент: 10
-  - name: НДС0
-    fields:
-      Наименование: "0%"
+    name: НДС10
+  - fields:
+      Наименование: 0%
       Процент: 0
-  - name: БезНДС
-    fields:
-      Наименование: "Без НДС"
+    name: НДС0
+  - fields:
+      Наименование: Без НДС
       Процент: 0
+    name: БезНДС
+title: Ставка НДС
+titles:
+  az: ƏDV dərəcəsi
+  de: MwSt.-Satz
+  en: VAT rate
+  es: Tasa IVA
+  fr: Taux TVA
+  hy: ԱԱՀ տոկոս
+  ka: დღგ განაკვეთი
+  kk: ҚҚС мөлшері
+  pt: Taxa IVA
+  ro: Cotă TVA
+  sr: ПДВ стопа
+  tr: KDV oranı
+  uk: Ставка ПДВ
+  uz: QQS stavkasi
+  zh: 增值税率

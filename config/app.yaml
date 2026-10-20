@@ -1,16 +1,32 @@
-name: ПУТ — Программа управления торговлей
-version: "1.2.0"
 author: Иван Титов
 copyright: © 2026 Иван Титов
 license: MIT
 llm:
+  default_profile: анализ
   enabled: true
   endpoints:
-    - {name: z_ai, kind: anthropic, base_url: https://api.z.ai/api/anthropic, api_key: "${env:ZAI_KEY}"}
+    - api_key: ${env:ZAI_KEY}
+      base_url: https://api.z.ai/api/anthropic
+      kind: anthropic
+      name: z_ai
   models:
-    - {name: glm-5.1, endpoint: z_ai}
+    - endpoint: z_ai
+      name: glm-5.1
   profiles:
-    - {task: анализ, models: [glm-5.1]}
-    - {task: чат, models: [glm-5.1]}
-    - {task: конфигуратор, models: [glm-5.1]}
-  default_profile: анализ
+    - models:
+        - glm-5.1
+      task: анализ
+    - models:
+        - glm-5.1
+      task: чат
+    - models:
+        - glm-5.1
+      task: конфигуратор
+min_engine_version: 0.13.0
+name: ПУТ — Программа управления торговлей
+queue:
+  lease_sec: 1800
+  max_attempts: 1
+  retention_days: 14
+  workers: 1
+version: 1.3.0

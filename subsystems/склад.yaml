@@ -1,81 +1,268 @@
-name: Склад
-title: Склад
-icon: warehouse
-titles:
-    az: Anbar
-    de: Lager
-    en: Warehouse
-    es: Almacén
-    fr: Entrepôt
-    hy: Պահեստ
-    ka: საწყობ
-    kk: Қойма
-    pt: Armazém
-    ro: Depozit
-    sr: Магацин
-    tr: Depo
-    uk: Склад
-    uz: Ombor
-    zh: 仓库
-order: 40
-roles: [Кладовщик, Управленец, Демо]
 contents:
-    catalogs:
-        - ЕдиницаИзмерения
+  catalogs:
+    - ЕдиницаИзмерения
+    - Номенклатура
+    - Склад
+    - СпецификацииНоменклатуры
+    - ПодключаемоеОборудование
+    - Штрихкоды
+  documents:
+    - ВозвратОтПокупателя
+    - ВозвратПоставщику
+    - ОприходованиеТоваров
+    - ПеремещениеТоваров
+    - ПересчетТоваров
+    - ПоступлениеТоваров
+    - РазборкаТоваров
+    - РеализацияТоваров
+    - СборкаТоваров
+    - СписаниеТоваров
+  inforegs:
+    - ЦеныНоменклатуры
+  processors:
+    - ПриёмкаТовара
+    - ОтгрузкаЗаказов
+    - ИнвентаризацияСклада
+    - ВзвеситьТовар
+    - ИмпортНоменклатуры
+    - ВыгрузкаВExcel
+    - ЗакрытиеМесяца
+  registers:
+    - ОстаткиТоваров
+    - ПартииТоваров
+    - РезервыТоваров
+    - ТоварыВПути
+  reports:
+    - ВедомостьПартий
+    - ДвиженияТоваров
+    - Неликвиды
+    - ОборотПоСкладам
+    - ОстаткиТоваров
+    - РезервыТоваров
+    - СвободныеОстатки
+    - ТоварыВПути
+home_page:
+  layout: rows
+  nav_by_role:
+    Кассир:
+      documents:
+        - РеализацияТоваров
+      processors: []
+      reports: []
+    Кладовщик:
+      catalogs:
         - Номенклатура
         - Склад
-        - СпецификацииНоменклатуры
-        - ПодключаемоеОборудование
-        - Штрихкоды
-    documents:
-        - ВозвратОтПокупателя
-        - ВозвратПоставщику
-        - ОприходованиеТоваров
-        - ПеремещениеТоваров
-        - ПересчетТоваров
+      documents:
         - ПоступлениеТоваров
-        - РазборкаТоваров
-        - РеализацияТоваров
-        - СборкаТоваров
-        - СписаниеТоваров
-    registers:
-        - ОстаткиТоваров
-        - ПартииТоваров
-        - РезервыТоваров
-        - ТоварыВПути
-    inforegs:
-        - ЦеныНоменклатуры
-    reports:
-        - ВедомостьПартий
-        - ДвиженияТоваров
-        - Неликвиды
-        - ОборотПоСкладам
-        - ОстаткиТоваров
-        - РезервыТоваров
-        - СвободныеОстатки
-        - ТоварыВПути
-    processors:
+        - ПеремещениеТоваров
+      processors:
         - ПриёмкаТовара
         - ОтгрузкаЗаказов
-        - ИнвентаризацияСклада
-        - ВзвеситьТовар
-        - ИмпортНоменклатуры
-        - ВыгрузкаВExcel
-        - ЗакрытиеМесяца
-home_page:
-    title: Главная
-    layout: rows
-    rows:
-        - widgets:
-            - БыстрыеДействияСклад
-        - widgets:
-            - СтоимостьСклада
-            - Зарезервировано
-            - ТоварыВПутиСумма
-        - widgets:
-            - ОстаткиНаСкладах
-        - widgets:
-            - ТоварыКЗаказу
-            - НеликвидыСписок
-        - widgets:
-            - ОжидаемыеПоставки
+      reports:
+        - ОстаткиТоваров
+        - РезервыТоваров
+    Менеджер:
+      catalogs:
+        - Номенклатура
+      documents:
+        - РеализацияТоваров
+        - ВозвратОтПокупателя
+      processors:
+        - ОтгрузкаЗаказов
+      reports:
+        - СвободныеОстатки
+    Снабженец:
+      catalogs:
+        - Номенклатура
+      documents:
+        - ПоступлениеТоваров
+        - ВозвратПоставщику
+      processors:
+        - ПриёмкаТовара
+      reports:
+        - ТоварыВПути
+    Управленец:
+      catalogs:
+        - Номенклатура
+      documents: []
+      processors: []
+      reports: []
+  rows:
+    - widgets:
+        - БыстрыеДействияСклад
+    - widgets:
+        - СтоимостьСклада
+        - Зарезервировано
+        - ТоварыВПутиСумма
+    - widgets:
+        - ОстаткиНаСкладах
+    - widgets:
+        - ТоварыКЗаказу
+        - НеликвидыСписок
+    - widgets:
+        - ОжидаемыеПоставки
+  title: Главная
+icon: warehouse
+menu:
+  sections:
+    - groups:
+        - icon: arrow-right-left
+          id: warehouse-movement
+          items:
+            - id: warehouse-document-c29e8cf19a
+              target: document:ПоступлениеТоваров
+            - id: warehouse-document-57fe772677
+              target: document:РеализацияТоваров
+            - id: warehouse-document-13dd25d0de
+              target: document:ПеремещениеТоваров
+          title: Поступление, отгрузка и перемещение
+          titles:
+            en: Receiving, shipping and transfers
+        - icon: clipboard-list
+          id: warehouse-adjustments
+          items:
+            - id: warehouse-document-c724646b12
+              target: document:ПересчетТоваров
+            - id: warehouse-document-86a0072f07
+              target: document:ОприходованиеТоваров
+            - id: warehouse-document-c5bc2f5000
+              target: document:СписаниеТоваров
+            - id: warehouse-document-e1d0e67842
+              target: document:ВозвратОтПокупателя
+            - id: warehouse-document-b388e1dc7b
+              target: document:ВозвратПоставщику
+          title: Инвентаризация и корректировки
+          titles:
+            en: Inventory and adjustments
+      icon: warehouse
+      id: warehouse-work
+      items:
+        - id: warehouse-processor-a6ab717934
+          target: processor:ПриёмкаТовара
+        - id: warehouse-processor-d3ac662e0c
+          target: processor:ОтгрузкаЗаказов
+        - id: warehouse-processor-18afc3b92a
+          target: processor:ИнвентаризацияСклада
+      title: Складские операции
+      titles:
+        en: Warehouse operations
+    - groups:
+        - icon: boxes
+          id: warehouse-kits
+          items:
+            - id: warehouse-catalog-18ca7200d9
+              target: catalog:СпецификацииНоменклатуры
+            - id: warehouse-document-2152be03f3
+              target: document:СборкаТоваров
+            - id: warehouse-document-942fefb7b0
+              target: document:РазборкаТоваров
+          title: Сборка и разборка
+          titles:
+            en: Assembly and disassembly
+        - icon: barcode
+          id: warehouse-reference
+          items:
+            - id: warehouse-catalog-0340959eef
+              target: catalog:Штрихкоды
+            - id: warehouse-catalog-1eae5fc563
+              target: catalog:ЕдиницаИзмерения
+            - id: warehouse-catalog-ba4ded0938
+              target: catalog:ПодключаемоеОборудование
+            - id: warehouse-inforeg-713cdae8b1
+              target: inforeg:ЦеныНоменклатуры
+            - id: warehouse-processor-bb7a11b90e
+              target: processor:ВзвеситьТовар
+            - id: warehouse-processor-ba0566e5c6
+              target: processor:ИмпортНоменклатуры
+            - id: warehouse-processor-ab859dc12c
+              target: processor:ВыгрузкаВExcel
+          title: Штрихкоды, цены и оборудование
+          titles:
+            en: Barcodes, prices and equipment
+      icon: package
+      id: warehouse-products
+      items:
+        - id: warehouse-catalog-7624619d53
+          target: catalog:Номенклатура
+        - id: warehouse-catalog-958f1133ae
+          target: catalog:Склад
+      title: Товары и комплекты
+      titles:
+        en: Products and kits
+    - groups:
+        - icon: clipboard-check
+          id: warehouse-reports
+          items:
+            - id: warehouse-report-9d4558879d
+              target: report:ВедомостьПартий
+            - id: warehouse-report-057cc9a2b5
+              target: report:ДвиженияТоваров
+            - id: warehouse-report-34e160a7aa
+              target: report:Неликвиды
+            - id: warehouse-report-bc7f415528
+              target: report:ОборотПоСкладам
+            - id: warehouse-report-190533934e
+              target: report:ТоварыВПути
+          title: Партии, движение и неликвиды
+          titles:
+            en: Batches, movements and slow stock
+        - icon: database
+          id: warehouse-accounting
+          items:
+            - id: warehouse-register-13ae720e30
+              target: register:ОстаткиТоваров:balances
+            - id: warehouse-register-c5cb600e6a
+              target: register:ОстаткиТоваров:movements
+            - id: warehouse-register-30da39fef2
+              target: register:ПартииТоваров:balances
+            - id: warehouse-register-350a2355be
+              target: register:ПартииТоваров:movements
+            - id: warehouse-register-c82aa355b4
+              target: register:РезервыТоваров:balances
+            - id: warehouse-register-314fd20cd8
+              target: register:РезервыТоваров:movements
+            - id: warehouse-register-e3a06519a7
+              target: register:ТоварыВПути:balances
+            - id: warehouse-register-8569d79d65
+              target: register:ТоварыВПути:movements
+            - id: warehouse-processor-f3df3ffe1a
+              target: processor:ЗакрытиеМесяца
+          title: Данные учёта и закрытие
+          titles:
+            en: Accounting data and closing
+      icon: chart-column
+      id: warehouse-control
+      items:
+        - id: warehouse-report-07184e5473
+          target: report:СвободныеОстатки
+        - id: warehouse-report-d670fe8748
+          target: report:ОстаткиТоваров
+        - id: warehouse-report-cfa9047091
+          target: report:РезервыТоваров
+      title: Контроль запасов
+      titles:
+        en: Inventory control
+name: Склад
+order: 40
+roles:
+  - Кладовщик
+  - Управленец
+  - Демо
+title: Склад
+titles:
+  az: Anbar
+  de: Lager
+  en: Warehouse
+  es: Almacén
+  fr: Entrepôt
+  hy: Պահեստ
+  ka: საწყობ
+  kk: Қойма
+  pt: Armazém
+  ro: Depozit
+  sr: Магацин
+  tr: Depo
+  uk: Склад
+  uz: Ombor
+  zh: 仓库

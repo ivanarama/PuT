@@ -1,0 +1,5 @@
+enabled: false
+name: ФонИмпортНоменклатуры
+processor: ИмпортНоменклатуры
+timeout: 1200
+title: Импорт номенклатуры из JSON

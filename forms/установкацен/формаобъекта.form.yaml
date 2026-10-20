@@ -6,85 +6,87 @@ attributes:
 elements:
   - children:
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Номер
-                hint: "УЦ-NNNNN"
+                hint: УЦ-NNNNN
                 kind: ПолеВвода
                 name: ПолеНомер
                 readonly: true
                 title:
-                  de: "Nummer"
-                  en: "Number"
-                  ru: "Номер"
-                  sr: "Број"
+                  de: Nummer
+                  en: Number
+                  ru: Номер
+                  sr: Број
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.ТипЦен
-                hint: "Цены какого типа устанавливаются этим документом"
+                hint: Цены какого типа устанавливаются этим документом
                 kind: ПолеВвода
                 name: ПолеТипЦен
                 required: true
                 title:
-                  de: "Preistyp"
-                  en: "Price type"
-                  ru: "Тип цен"
-                  sr: "Тип цене"
+                  de: Preistyp
+                  en: Price type
+                  ru: Тип цен
+                  sr: Тип цене
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Belegkopf"
-              en: "Document header"
-              ru: "Шапка документа"
-              sr: "Заглавље документа"
-          - children:
+              de: Belegkopf
+              en: Document header
+              ru: Шапка документа
+              sr: Заглавље документа
+          - background: '#f8fafc'
+            children:
               - data_path: Объект.Цены
                 kind: ТабличнаяЧасть
                 name: ТабЦены
                 title:
-                  de: "Preise"
-                  en: "Prices"
-                  ru: "Цены"
-                  sr: "Цене"
+                  de: Preise
+                  en: Prices
+                  ru: Цены
+                  sr: Цене
               - events:
                   Нажатие: КнопкаОчиститьНажатие
                 kind: Кнопка
                 name: КнопкаОчистить
                 title:
-                  de: "Leeren"
-                  en: "Clear table"
-                  ru: "Очистить таблицу"
-                  sr: "Обриши табелу"
+                  de: Leeren
+                  en: Clear table
+                  ru: Очистить таблицу
+                  sr: Обриши табелу
             kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              de: "Artikelpreise"
-              en: "Item prices"
-              ru: "Цены номенклатуры"
-              sr: "Цене артикала"
+              de: Artikelpreise
+              en: Item prices
+              ru: Цены номенклатуры
+              sr: Цене артикала
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Allgemein"
-          en: "General"
-          ru: "Основное"
-          sr: "Опште"
+          de: Allgemein
+          en: General
+          ru: Основное
+          sr: Опште
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -97,9 +99,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Preisaktualisierung"
-    en: "Price update"
-    ru: "Установка цен"
-    sr: "Утврђивање цена"
+    de: Preisaktualisierung
+    en: Price update
+    ru: Установка цен
+    sr: Утврђивање цена
   vertical_scroll: auto
 schema: onebase.form/v1

@@ -1,11 +1,154 @@
+items:
+  - label: Приёмка товара
+    labels:
+      az: Malların qəbulu
+      de: Warenannahme
+      en: Goods Receipt
+      es: Recepción de mercancías
+      fr: Réception de marchandises
+      hy: Ապրանքների ընդունում
+      ka: საქონლის მიღება
+      kk: Тауар қабылдау
+      pt: Recebimento de mercadorias
+      ro: Recepție mărfuri
+      sr: Пријем робе
+      tr: Mal kabulü
+      uk: Приймання товару
+      uz: Tovarlarni qabul qilish
+      zh: 货物验收
+    url: /ui/processor/приёмкатовара
+  - label: Отгрузка заказов
+    labels:
+      az: Sifarişlərin göndərilməsi
+      de: Auftragsversand
+      en: Order Shipment
+      es: Envío de pedidos
+      fr: Expédition des commandes
+      hy: Պատվերների առաքում
+      ka: შეკვეთების გაგზავნა
+      kk: Тапсырыстарды жөнелту
+      pt: Envio de pedidos
+      ro: Expediere comenzi
+      sr: Отпрема наруџби
+      tr: Sipariş sevkiyatı
+      uk: Відвантаження замовлень
+      uz: Buyurtmalarni jo'natish
+      zh: 订单发货
+    url: /ui/processor/отгрузказаказов
+  - label: Инвентаризация
+    labels:
+      az: İnventarizasiya
+      de: Inventur
+      en: Stocktaking
+      es: Inventario
+      fr: Inventaire
+      hy: Գույքագրում
+      ka: ინვენტარიზაცია
+      kk: Түгендеу
+      pt: Inventário
+      ro: Inventariere
+      sr: Инвентура
+      tr: Sayım
+      uk: Інвентаризація
+      uz: Inventarizatsiya
+      zh: 库存盘点
+    url: /ui/processor/инвентаризациясклада
+  - entity: ПеремещениеТоваров
+    label: Перемещение
+    labels:
+      az: Köçürmə
+      de: Umlagerung
+      en: Transfer
+      es: Transferencia
+      fr: Transfert
+      hy: Տեղափոխում
+      ka: გადატანა
+      kk: Ауыстыру
+      pt: Transferência
+      ro: Transfer
+      sr: Пренос
+      tr: Transfer
+      uk: Переміщення
+      uz: Ko'chirish
+      zh: 调拨
+  - entity: СписаниеТоваров
+    label: Списание
+    labels:
+      az: Silinmə
+      de: Abschreibung
+      en: Write-off
+      es: Baja
+      fr: Radiation
+      hy: Գրում
+      ka: ჩამოწერა
+      kk: Жазу
+      pt: Baixa
+      ro: Casare
+      sr: Отпис
+      tr: Silme
+      uk: Списання
+      uz: Yozish
+      zh: 核销
+  - entity: ОприходованиеТоваров
+    label: Оприходование
+    labels:
+      az: Qəbul
+      de: Zugang
+      en: Receipt
+      es: Recepción
+      fr: Réception
+      hy: Ընդունում
+      ka: მიღება
+      kk: Қабылдау
+      pt: Recebimento
+      ro: Recepție
+      sr: Пријем
+      tr: Kabul
+      uk: Оприходування
+      uz: Qabul qilish
+      zh: 入库
+  - entity: СборкаТоваров
+    label: Сборка
+    labels:
+      az: Yığma
+      de: Montage
+      en: Assembly
+      es: Montaje
+      fr: Assemblage
+      hy: Հավաքում
+      ka: აწყობა
+      kk: Жинақтау
+      pt: Montagem
+      ro: Asamblare
+      sr: Монтажа
+      tr: Montaj
+      uk: Збірка
+      uz: Yig'ish
+      zh: 组装
+  - entity: РазборкаТоваров
+    label: Разборка
+    labels:
+      az: Sökmə
+      de: Demontage
+      en: Disassembly
+      es: Desmontaje
+      fr: Désassemblage
+      hy: Ապամոնտաժ
+      ka: დაშლა
+      kk: Бұзу
+      pt: Desmontagem
+      ro: Dezasamblare
+      sr: Демонтажа
+      tr: Sökme
+      uk: Розбірка
+      uz: Sökish
+      zh: 拆卸
 name: БыстрыеДействияСклад
-type: actions
 title: Создать
 titles:
-  en: Create
-  de: Erstellen
-  sr: Креирај
   az: Yarat
+  de: Erstellen
+  en: Create
   es: Crear
   fr: Créer
   hy: Ստեղծել
@@ -13,152 +156,9 @@ titles:
   kk: Құру
   pt: Criar
   ro: Creare
+  sr: Креирај
   tr: Oluştur
   uk: Створити
   uz: Yaratish
   zh: 新建
-items:
-  - label: "Приёмка товара"
-    labels:
-      en: "Goods Receipt"
-      de: "Warenannahme"
-      sr: "Пријем робе"
-      az: "Malların qəbulu"
-      es: "Recepción de mercancías"
-      fr: "Réception de marchandises"
-      hy: "Ապրանքների ընդունում"
-      ka: "საქონლის მიღება"
-      kk: "Тауар қабылдау"
-      pt: "Recebimento de mercadorias"
-      ro: "Recepție mărfuri"
-      tr: "Mal kabulü"
-      uk: "Приймання товару"
-      uz: "Tovarlarni qabul qilish"
-      zh: "货物验收"
-    url: /ui/processor/приёмкатовара
-  - label: "Отгрузка заказов"
-    labels:
-      en: "Order Shipment"
-      de: "Auftragsversand"
-      sr: "Отпрема наруџби"
-      az: "Sifarişlərin göndərilməsi"
-      es: "Envío de pedidos"
-      fr: "Expédition des commandes"
-      hy: "Պատվերների առաքում"
-      ka: "შეკვეთების გაგზავნა"
-      kk: "Тапсырыстарды жөнелту"
-      pt: "Envio de pedidos"
-      ro: "Expediere comenzi"
-      tr: "Sipariş sevkiyatı"
-      uk: "Відвантаження замовлень"
-      uz: "Buyurtmalarni jo'natish"
-      zh: "订单发货"
-    url: /ui/processor/отгрузказаказов
-  - label: "Инвентаризация"
-    labels:
-      en: "Stocktaking"
-      de: "Inventur"
-      sr: "Инвентура"
-      az: "İnventarizasiya"
-      es: "Inventario"
-      fr: "Inventaire"
-      hy: "Գույքագրում"
-      ka: "ინვენტარიზაცია"
-      kk: "Түгендеу"
-      pt: "Inventário"
-      ro: "Inventariere"
-      tr: "Sayım"
-      uk: "Інвентаризація"
-      uz: "Inventarizatsiya"
-      zh: "库存盘点"
-    url: /ui/processor/инвентаризациясклада
-  - label: "Перемещение"
-    labels:
-      en: "Transfer"
-      de: "Umlagerung"
-      sr: "Пренос"
-      az: "Köçürmə"
-      es: "Transferencia"
-      fr: "Transfert"
-      hy: "Տեղափոխում"
-      ka: "გადატანა"
-      kk: "Ауыстыру"
-      pt: "Transferência"
-      ro: "Transfer"
-      tr: "Transfer"
-      uk: "Переміщення"
-      uz: "Ko'chirish"
-      zh: "调拨"
-    entity: ПеремещениеТоваров
-  - label: "Списание"
-    labels:
-      en: "Write-off"
-      de: "Abschreibung"
-      sr: "Отпис"
-      az: "Silinmə"
-      es: "Baja"
-      fr: "Radiation"
-      hy: "Գրում"
-      ka: "ჩამოწერა"
-      kk: "Жазу"
-      pt: "Baixa"
-      ro: "Casare"
-      tr: "Silme"
-      uk: "Списання"
-      uz: "Yozish"
-      zh: "核销"
-    entity: СписаниеТоваров
-  - label: "Оприходование"
-    labels:
-      en: "Receipt"
-      de: "Zugang"
-      sr: "Пријем"
-      az: "Qəbul"
-      es: "Recepción"
-      fr: "Réception"
-      hy: "Ընդունում"
-      ka: "მიღება"
-      kk: "Қабылдау"
-      pt: "Recebimento"
-      ro: "Recepție"
-      tr: "Kabul"
-      uk: "Оприходування"
-      uz: "Qabul qilish"
-      zh: "入库"
-    entity: ОприходованиеТоваров
-  - label: "Сборка"
-    labels:
-      en: "Assembly"
-      de: "Montage"
-      sr: "Монтажа"
-      az: "Yığma"
-      es: "Montaje"
-      fr: "Assemblage"
-      hy: "Հավաքում"
-      ka: "აწყობა"
-      kk: "Жинақтау"
-      pt: "Montagem"
-      ro: "Asamblare"
-      tr: "Montaj"
-      uk: "Збірка"
-      uz: "Yig'ish"
-      zh: "组装"
-    entity: СборкаТоваров
-  - label: "Разборка"
-    labels:
-      en: "Disassembly"
-      de: "Demontage"
-      sr: "Демонтажа"
-      az: "Sökmə"
-      es: "Desmontaje"
-      fr: "Désassemblage"
-      hy: "Ապամոնտաժ"
-      ka: "დაშლა"
-      kk: "Бұзу"
-      pt: "Desmontagem"
-      ro: "Dezasamblare"
-      tr: "Sökme"
-      uk: "Розбірка"
-      uz: "Sökish"
-      zh: "拆卸"
-    entity: РазборкаТоваров
+type: actions

@@ -109,11 +109,19 @@ fields:
       en: Stock recount
       uk: Перерахунок товарів
     type: reference:ПересчетТоваров
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Склад
+list_refresh_on:
+  - данные.списаниетоваров
 name: СписаниеТоваров
+notify_changes: true
 numerator:
   length: 5
   period: year
-  prefix: "СПС-"
+  prefix: СПС-
 posting: true
 tableparts:
   - fields:

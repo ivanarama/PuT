@@ -25,7 +25,15 @@ fields:
     type: string
   - name: Сумма
     type: number
+list_filters:
+  - Номер
+  - Дата
+  - Организация
+  - Контрагент
+list_refresh_on:
+  - данные.приходныйкассовыйордер
 name: ПриходныйКассовыйОрдер
+notify_changes: true
 numerator:
   length: 5
   period: year

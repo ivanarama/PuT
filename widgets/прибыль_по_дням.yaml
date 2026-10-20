@@ -1,7 +1,7 @@
 chart_kind: bar
 name: ПрибыльПоДням
 params:
-  Начало: "{{today|minus_days:90}}"
+  Начало: '{{today|minus_days:90}}'
 query: |
   ВЫБРАТЬ
     strftime('%Y-%m', period) КАК Месяц,
@@ -12,6 +12,10 @@ query: |
   ГДЕ period >= &Начало
   СГРУППИРОВАТЬ ПО strftime('%Y-%m', period)
   УПОРЯДОЧИТЬ ПО strftime('%Y-%m', period)
+refresh_on:
+  - данные.возвратотпокупателя
+  - данные.поступлениетоваров
+  - данные.реализациятоваров
 title: Прибыль за квартал
 titles:
   az: Rüblük mənfəət
@@ -19,16 +23,18 @@ titles:
   en: Profit over quarter
   es: Beneficio trimestral
   fr: Bénéfice trimestriel
-  hy: "Եռամսյակային շահույթ"
-  ka: "კვარტალური მოგება"
-  kk: "Тоқсандық пайда"
-  pt: "Lucro trimestrial"
-  ro: "Profit trimestrial"
+  hy: Եռամսյակային շահույթ
+  ka: კვარტალური მოგება
+  kk: Тоқсандық пайда
+  pt: Lucro trimestrial
+  ro: Profit trimestrial
   sr: Добит за квартал
-  tr: "Çeyreklik kâr"
-  uk: "Прибуток за квартал"
-  uz: "Choraklik foyda"
-  zh: "季度利润"
+  tr: Çeyreklik kâr
+  uk: Прибуток за квартал
+  uz: Choraklik foyda
+  zh: 季度利润
 type: chart
 x_field: Месяц
-y_fields: [Выручка, Прибыль]
+y_fields:
+  - Выручка
+  - Прибыль

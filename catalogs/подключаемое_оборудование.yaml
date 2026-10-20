@@ -1,30 +1,10 @@
-name: ПодключаемоеОборудование
-title: Подключаемое оборудование
-titles:
-  en: Connected equipment
-  de: Anschließbare Geräte
-  sr: Прикључива опрема
-  az: Qoşula bilən avadanlıq
-  es: Equipo conectable
-  fr: Équipement connectable
-  hy: Միացվող սարքավորում
-  ka: დასაკავშირებელი აღჭურვილობა
-  kk: Қосылатын жабдық
-  pt: Equipamento conectável
-  ro: Echipament conectabil
-  tr: Bağlanabilir ekipman
-  uk: Підключуване обладнання
-  uz: Ulanadigan uskuna
-  zh: 可连接设备
 fields:
   - name: Наименование
-    type: string
     title: Наименование
     titles:
-      en: Name
-      de: Name
-      sr: Назив
       az: Adlandırma
+      de: Name
+      en: Name
       es: Nombre
       fr: Nom
       hy: Անվանում
@@ -32,18 +12,18 @@ fields:
       kk: Атауы
       pt: Nome
       ro: Denumire
+      sr: Назив
       tr: Ad
       uk: Найменування
       uz: Nomi
       zh: 名称
+    type: string
   - name: ТипОборудования
-    type: enum:ТипОборудования
     title: Тип оборудования
     titles:
-      en: Equipment type
-      de: Gerätetyp
-      sr: Тип опреме
       az: Avadanlıq növü
+      de: Gerätetyp
+      en: Equipment type
       es: Tipo de equipo
       fr: Type d'équipement
       hy: Սարքավորման տեսակ
@@ -51,18 +31,18 @@ fields:
       kk: Жабдық түрі
       pt: Tipo de equipamento
       ro: Tip de echipament
+      sr: Тип опреме
       tr: Ekipman türü
       uk: Тип обладнання
       uz: Uskuna turi
       zh: 设备类型
+    type: enum:ТипОборудования
   - name: Драйвер
-    type: string
     title: Драйвер
     titles:
-      en: Driver
-      de: Treiber
-      sr: Драјвер
       az: Drayver
+      de: Treiber
+      en: Driver
       es: Controlador
       fr: Pilote
       hy: Դրայվեր
@@ -70,18 +50,18 @@ fields:
       kk: Драйвер
       pt: Driver
       ro: Driver
+      sr: Драјвер
       tr: Sürücü
       uk: Драйвер
       uz: Drayver
       zh: 驱动程序
-  - name: Порт
     type: string
+  - name: Порт
     title: Порт / адрес
     titles:
-      en: Port / address
-      de: Port / Adresse
-      sr: Порт / адреса
       az: Port / ünvan
+      de: Port / Adresse
+      en: Port / address
       es: Puerto / dirección
       fr: Port / adresse
       hy: Պորտ / հասցե
@@ -89,18 +69,18 @@ fields:
       kk: Порт / мекенжай
       pt: Porta / endereço
       ro: Port / adresă
+      sr: Порт / адреса
       tr: Port / adres
       uk: Порт / адреса
       uz: Port / manzil
       zh: 端口 / 地址
+    type: string
   - name: Ширина
-    type: number
     title: Ширина (символов)
     titles:
-      en: Width (chars)
-      de: Breite (Zeichen)
-      sr: Ширина (знакова)
       az: En (simvol)
+      de: Breite (Zeichen)
+      en: Width (chars)
       es: Ancho (caracteres)
       fr: Largeur (caractères)
       hy: Լայնություն (նիշ)
@@ -108,20 +88,18 @@ fields:
       kk: Ені (таңба)
       pt: Largura (caracteres)
       ro: Lățime (caractere)
+      sr: Ширина (знакова)
       tr: Genişlik (karakter)
       uk: Ширина (символів)
       uz: Kenglik (belgi)
       zh: 宽度（字符）
-  # Поля декларативного протокола (драйвер «scripted»): описывают модель
-  # устройства данными, без программирования драйвера в платформе.
+    type: number
   - name: КомандаЗапроса
-    type: string
     title: Команда запроса (hex)
     titles:
-      en: Request command (hex)
-      de: Abfragebefehl (hex)
-      sr: Команда упита (hex)
       az: Sorğu əmri (hex)
+      de: Abfragebefehl (hex)
+      en: Request command (hex)
       es: Comando de solicitud (hex)
       fr: Commande de requête (hex)
       hy: Հարցման հրաման (hex)
@@ -129,18 +107,18 @@ fields:
       kk: Сұраныс командасы (hex)
       pt: Comando de solicitação (hex)
       ro: Comandă de interogare (hex)
+      sr: Команда упита (hex)
       tr: Sorgu komutu (hex)
       uk: Команда запиту (hex)
       uz: So‘rov buyrug‘i (hex)
       zh: 请求命令（hex）
-  - name: Шаблон
     type: string
+  - name: Шаблон
     title: Шаблон разбора ответа
     titles:
-      en: Response parse template
-      de: Antwort-Parsing-Vorlage
-      sr: Шаблон рашчлањивања одговора
       az: Cavabın təhlil şablonu
+      de: Antwort-Parsing-Vorlage
+      en: Response parse template
       es: Plantilla de análisis de respuesta
       fr: Modèle d'analyse de la réponse
       hy: Պատասխանի վերլուծման ձևանմուշ
@@ -148,18 +126,18 @@ fields:
       kk: Жауапты талдау үлгісі
       pt: Modelo de análise da resposta
       ro: Șablon de analiză a răspunsului
+      sr: Шаблон рашчлањивања одговора
       tr: Yanıt ayrıştırma şablonu
       uk: Шаблон розбору відповіді
       uz: Javobni tahlil qilish shabloni
       zh: 响应解析模板
+    type: string
   - name: Множитель
-    type: number
     title: Множитель
     titles:
-      en: Multiplier
-      de: Multiplikator
-      sr: Множилац
       az: Vuruq
+      de: Multiplikator
+      en: Multiplier
       es: Multiplicador
       fr: Multiplicateur
       hy: Բազմապատկիչ
@@ -167,29 +145,54 @@ fields:
       kk: Көбейткіш
       pt: Multiplicador
       ro: Multiplicator
+      sr: Множилац
       tr: Çarpan
       uk: Множник
       uz: Koʻpaytuvchi
       zh: 乘数
+    type: number
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.подключаемоеоборудование
+name: ПодключаемоеОборудование
+notify_changes: true
 predefined:
-  - name: ККТ_АТОЛ
-    fields:
-      Наименование: "ККТ АТОЛ (демо)"
-      ТипОборудования: ФискальныйРегистратор
+  - fields:
       Драйвер: atol_kkt
-      Порт: "127.0.0.1:16732"
-  - name: ПринтерЧеков
-    fields:
-      Наименование: "Чековый принтер (демо)"
-      ТипОборудования: ПринтерЧеков
+      Наименование: ККТ АТОЛ (демо)
+      Порт: 127.0.0.1:16732
+      ТипОборудования: ФискальныйРегистратор
+    name: ККТ_АТОЛ
+  - fields:
       Драйвер: escpos_tcp
-      Порт: "127.0.0.1:9100"
-  - name: Весы
-    fields:
-      Наименование: "Весы (демо, scripted)"
-      ТипОборудования: Весы
+      Наименование: Чековый принтер (демо)
+      Порт: 127.0.0.1:9100
+      ТипОборудования: ПринтерЧеков
+    name: ПринтерЧеков
+  - fields:
       Драйвер: scripted
-      Порт: "127.0.0.1:5001"
-      КомандаЗапроса: "05"
-      Шаблон: "{вес} кг"
+      КомандаЗапроса: '05'
       Множитель: 1
+      Наименование: Весы (демо, scripted)
+      Порт: 127.0.0.1:5001
+      ТипОборудования: Весы
+      Шаблон: '{вес} кг'
+    name: Весы
+title: Подключаемое оборудование
+titles:
+  az: Qoşula bilən avadanlıq
+  de: Anschließbare Geräte
+  en: Connected equipment
+  es: Equipo conectable
+  fr: Équipement connectable
+  hy: Միացվող սարքավորում
+  ka: დასაკავშირებელი აღჭურვილობა
+  kk: Қосылатын жабдық
+  pt: Equipamento conectável
+  ro: Echipament conectabil
+  sr: Прикључива опрема
+  tr: Bağlanabilir ekipman
+  uk: Підключуване обладнання
+  uz: Ulanadigan uskuna
+  zh: 可连接设备

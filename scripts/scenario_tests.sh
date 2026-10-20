@@ -50,10 +50,10 @@ echo "── B. ЭДО: чистая база + сид → загрузка УП
 onebase migrate --project . --sqlite "$DB_EDO" > /dev/null
 if command -v sqlite3 > /dev/null 2>&1; then
   sqlite3 "$DB_EDO" < tests/fixtures/seed.sql
-elif command -v python3 > /dev/null 2>&1; then
+elif [ "$(python3 -c "import sqlite3; print('sqlite-ok')" 2>/dev/null)" = "sqlite-ok" ]; then
   python3 -c "import sqlite3; c = sqlite3.connect('$DB_EDO'); c.executescript(open('tests/fixtures/seed.sql', encoding='utf-8').read()); c.commit(); c.close()"
 else
-  python -c "import sqlite3; c = sqlite3.connect(r'$DB_EDO'); c.executescript(open('tests/fixtures/seed.sql', encoding='utf-8').read()); c.commit(); c.close()"
+  python -c "import sqlite3; c = sqlite3.connect(r'$DB_EDO'); c.executescript(open('tests/fixtures/seed.sql', encoding='utf-8').read()); c.commit(); c.close()" || exit 1
 fi
 
 onebase procrun --project . --sqlite "$DB_EDO" --proc ЗагрузкаЭДО \

@@ -292,7 +292,7 @@ fields:
       uz: Direktorning to'liq nomi
       zh: 负责人姓名
     type: string
-  - default: "Директор"
+  - default: Директор
     name: ДолжностьРуководителя
     title: Должность руководителя
     titles:
@@ -331,7 +331,13 @@ fields:
       uz: Bosh buxgalterning to'liq nomi
       zh: 总会计师姓名
     type: string
+list_filters:
+  - Наименование
+  - ИНН
+list_refresh_on:
+  - данные.организация
 name: Организация
+notify_changes: true
 title: Организация
 titles:
   az: Təşkilat

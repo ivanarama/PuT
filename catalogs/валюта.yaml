@@ -1,30 +1,10 @@
-name: Валюта
-title: Валюта
-titles:
-  en: Currency
-  de: Währung
-  sr: Валута
-  az: Valyuta
-  es: Moneda
-  fr: Devise
-  hy: Արժույթ
-  ka: ვალუტა
-  kk: Валюта
-  pt: Moeda
-  ro: Monedă
-  tr: Para birimi
-  uk: Валюта
-  uz: Valyuta
-  zh: 货币
 fields:
   - name: Наименование
-    type: string
     title: Наименование
     titles:
-      en: Name
-      de: Name
-      sr: Назив
       az: Adlandırma
+      de: Name
+      en: Name
       es: Nombre
       fr: Nom
       hy: Անվանում
@@ -32,18 +12,18 @@ fields:
       kk: Атауы
       pt: Nome
       ro: Denumire
+      sr: Назив
       tr: Ad
       uk: Найменування
       uz: Nomi
       zh: 名称
-  - name: Код
     type: string
+  - name: Код
     title: Код
     titles:
-      en: Code
-      de: Code
-      sr: Кôд
       az: Kod
+      de: Code
+      en: Code
       es: Código
       fr: Code
       hy: Կոդ
@@ -51,20 +31,45 @@ fields:
       kk: Код
       pt: Código
       ro: Cod
+      sr: Кôд
       tr: Kod
       uk: Код
       uz: Kod
       zh: 代码
+    type: string
+list_filters:
+  - Наименование
+list_refresh_on:
+  - данные.валюта
+name: Валюта
+notify_changes: true
 predefined:
-  - name: Рубль
-    fields:
-      Наименование: Российский рубль
+  - fields:
       Код: RUB
-  - name: Доллар
-    fields:
-      Наименование: Доллар США
+      Наименование: Российский рубль
+    name: Рубль
+  - fields:
       Код: USD
-  - name: Евро
-    fields:
-      Наименование: Евро
+      Наименование: Доллар США
+    name: Доллар
+  - fields:
       Код: EUR
+      Наименование: Евро
+    name: Евро
+title: Валюта
+titles:
+  az: Valyuta
+  de: Währung
+  en: Currency
+  es: Moneda
+  fr: Devise
+  hy: Արժույթ
+  ka: ვალუტა
+  kk: Валюта
+  pt: Moeda
+  ro: Monedă
+  sr: Валута
+  tr: Para birimi
+  uk: Валюта
+  uz: Valyuta
+  zh: 货币

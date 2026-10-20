@@ -1,24 +1,3 @@
-name: ПоследниеДокументы
-type: recent
-title: Мои последние документы
-titles:
-  en: My recent documents
-  de: Meine letzten Dokumente
-  sr: Моји недавни документи
-  az: Son sənədlərim
-  es: Mis documentos recientes
-  fr: Mes documents récents
-  hy: Իմ վերջին փաստաթղթերը
-  ka: ჩემი ბოლო დოკუმენტები
-  kk: Соңғы құжаттарым
-  pt: Meus documentos recentes
-  ro: Documentele mele recente
-  tr: Son belgelerim
-  uk: Мої останні документи
-  uz: So'nggi hujjatlarim
-  zh: 我的最近文档
-limit: 10
-scope: current_user
 entities:
   - Счёт
   - РеализацияТоваров
@@ -31,3 +10,36 @@ entities:
   - ПоступлениеНаРасчётныйСчёт
   - СписаниеСРасчётногоСчёта
   - УстановкаЦен
+limit: 10
+name: ПоследниеДокументы
+refresh_on:
+  - данные.оприходованиетоваров
+  - данные.перемещениетоваров
+  - данные.поступлениенарасчётныйсчёт
+  - данные.поступлениетоваров
+  - данные.приходныйкассовыйордер
+  - данные.расходныйкассовыйордер
+  - данные.реализациятоваров
+  - данные.списаниесрасчётногосчёта
+  - данные.списаниетоваров
+  - данные.счёт
+  - данные.установкацен
+scope: current_user
+title: Мои последние документы
+titles:
+  az: Son sənədlərim
+  de: Meine letzten Dokumente
+  en: My recent documents
+  es: Mis documentos recientes
+  fr: Mes documents récents
+  hy: Իմ վերջին փաստաթղթերը
+  ka: ჩემი ბოლო დოკუმენტები
+  kk: Соңғы құжаттарым
+  pt: Meus documentos recentes
+  ro: Documentele mele recente
+  sr: Моји недавни документи
+  tr: Son belgelerim
+  uk: Мої останні документи
+  uz: So'nggi hujjatlarim
+  zh: 我的最近文档
+type: recent

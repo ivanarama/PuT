@@ -1,30 +1,41 @@
 attributes:
   - main: true
     name: Объект
+conditional_formatting:
+  - field: Количество
+    target: Товары
+    then:
+      background: '#fee2e2'
+    when: Количество > Свободно И Свободно > 0
+  - field: Цена
+    target: Товары
+    then:
+      background: '#fef3c7'
+    when: Количество > 0 И Цена <= 0
 elements:
   - children:
-      # ── Вкладка 1: Параметры продажи ────────────────────────────────────
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
-                hint: "Заполняется автоматически, если не указана"
+                hint: Заполняется автоматически, если не указана
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.Покупатель
                 events:
@@ -33,143 +44,144 @@ elements:
                 name: ПолеПокупатель
                 required: true
                 title:
-                  de: "Kunde"
-                  en: "Customer"
-                  ru: "Покупатель"
-                  sr: "Купац"
+                  de: Kunde
+                  en: Customer
+                  ru: Покупатель
+                  sr: Купац
               - choice: true
                 data_path: Объект.Склад
-                hint: "Подбор показывает свободный остаток этого склада"
+                hint: Подбор показывает свободный остаток этого склада
                 kind: ПолеВвода
                 name: ПолеСклад
                 required: true
                 title:
-                  de: "Lager"
-                  en: "Warehouse"
-                  ru: "Склад"
-                  sr: "Магацин"
+                  de: Lager
+                  en: Warehouse
+                  ru: Склад
+                  sr: Магацин
               - choice: true
                 data_path: Объект.ТипЦенПродажи
                 events:
                   ПриИзменении: ТипЦенПродажиПриИзменении
-                hint: "Заполняется из карточки покупателя"
+                hint: Заполняется из карточки покупателя
                 kind: ПолеВвода
                 name: ПолеТипЦенПродажи
                 title:
-                  de: "Verkaufspreistyp"
-                  en: "Sales price type"
-                  ru: "Тип цен продажи"
-                  sr: "Тип цене продаје"
+                  de: Verkaufspreistyp
+                  en: Sales price type
+                  ru: Тип цен продажи
+                  sr: Тип цене продаје
               - data_path: Объект.Штрихкод
                 events:
                   ПриИзменении: ПолеШтрихкодаПриИзменении
-                hint: "Сканер: товар добавится в таблицу автоматически"
+                hint: 'Сканер: товар добавится в таблицу автоматически'
                 kind: ПолеВвода
                 name: ПолеШтрихкод
                 title:
-                  de: "Barcode"
-                  en: "Barcode"
-                  ru: "Штрихкод"
-                  sr: "Баркод"
+                  de: Barcode
+                  en: Barcode
+                  ru: Штрихкод
+                  sr: Баркод
               - choice: true
                 data_path: Объект.Касса
-                hint: "Наличная касса для оплаты сразу (ПКО)"
+                hint: Наличная касса для оплаты сразу (ПКО)
                 kind: ПолеВвода
                 name: ПолеКасса
                 title:
-                  de: "Kasse"
-                  en: "Cash desk"
-                  ru: "Касса"
-                  sr: "Каса"
+                  de: Kasse
+                  en: Cash desk
+                  ru: Касса
+                  sr: Каса
               - data_path: Объект.ОплатитьСразу
                 kind: Флажок
                 name: ПолеОплатитьСразу
                 title:
-                  de: "Sofort bezahlen"
-                  en: "Pay immediately (cash receipt)"
-                  ru: "Оплатить сразу (ПКО)"
-                  sr: "Плати одмах"
+                  de: Sofort bezahlen
+                  en: Pay immediately (cash receipt)
+                  ru: Оплатить сразу (ПКО)
+                  sr: Плати одмах
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Verkaufsparameter"
-              en: "Sale parameters"
-              ru: "Параметры продажи"
-              sr: "Параметри продаје"
+              de: Verkaufsparameter
+              en: Sale parameters
+              ru: Параметры продажи
+              sr: Параметри продаје
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Verkauf"
-          en: "Sale"
-          ru: "Продажа"
-          sr: "Продаја"
-      # ── Вкладка 2: Подбор товара ────────────────────────────────────────
+          de: Verkauf
+          en: Sale
+          ru: Продажа
+          sr: Продаја
       - children:
-          - children:
+          - background: '#f8fafc'
+            children:
               - children:
                   - events:
                       Выбор: КнопкаПодборВыбор
                       Нажатие: КнопкаПодборНажатие
-                    hint: "Подобрать товары со свободным остатком на складе"
+                    hint: Подобрать товары со свободным остатком на складе
                     kind: Кнопка
                     name: КнопкаПодбор
                     title:
-                      de: "Auswahl"
-                      en: "Pick items"
+                      de: Auswahl
+                      en: Pick items
                       ru: "\U0001F50D Подбор товара"
-                      sr: "Избор"
+                      sr: Избор
                   - events:
                       Нажатие: КнопкаОчиститьНажатие
                     kind: Кнопка
                     name: КнопкаОчистить
                     title:
-                      de: "Leeren"
-                      en: "Clear"
-                      ru: "Очистить"
-                      sr: "Обриши"
+                      de: Leeren
+                      en: Clear
+                      ru: Очистить
+                      sr: Обриши
                 data_path: Товары
                 events:
                   ПриИзменении: ТабТоварыПриИзменении
                 kind: ТабличнаяЧасть
                 name: ТабТовары
                 title:
-                  de: "Artikel"
-                  en: "Items"
-                  ru: "Товары"
-                  sr: "Артикли"
+                  de: Artikel
+                  en: Items
+                  ru: Товары
+                  sr: Артикли
                 use_grid: true
             kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              de: "Verkaufsinhalt"
-              en: "Sale contents"
-              ru: "Состав продажи"
-              sr: "Садржај продаје"
-          - children:
+              de: Verkaufsinhalt
+              en: Sale contents
+              ru: Состав продажи
+              sr: Садржај продаје
+          - background: '#eef2ff'
+            children:
               - events:
                   Нажатие: КнопкаОформитьНажатие
-                hint: "Создать и провести реализацию (и ПКО, если включена оплата)"
+                hint: Создать и провести реализацию (и ПКО, если включена оплата)
                 kind: Кнопка
                 name: КнопкаОформить
                 title:
-                  de: "Verkauf abschließen"
-                  en: "Process sale"
+                  de: Verkauf abschließen
+                  en: Process sale
                   ru: "\U0001F4B0 Оформить продажу"
-                  sr: "Изврши продају"
+                  sr: Изврши продају
             kind: ГруппаФормы
             name: ГруппаДействия
             title:
-              de: "Abschluss"
-              en: "Checkout"
-              ru: "Оформление"
-              sr: "Издавање"
+              de: Abschluss
+              en: Checkout
+              ru: Оформление
+              sr: Издавање
         kind: Страница
         name: СтраницаТовары
         title:
-          de: "Artikel"
-          en: "Items"
-          ru: "Товары"
-          sr: "Артикли"
+          de: Artikel
+          en: Items
+          ru: Товары
+          sr: Артикли
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -180,9 +192,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Verkaufsarbeitsplatz"
-    en: "Sales workplace"
-    ru: "АРМ Продавца"
-    sr: "Радно место продаје"
+    de: Verkaufsarbeitsplatz
+    en: Sales workplace
+    ru: АРМ Продавца
+    sr: Радно место продаје
   vertical_scroll: auto
 schema: onebase.form/v1

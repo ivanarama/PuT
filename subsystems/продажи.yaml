@@ -1,96 +1,308 @@
-name: Продажи
-title: Продажи
-icon: shopping-cart
-titles:
-    az: Satış
-    de: Verkauf
-    en: Sales
-    es: Ventas
-    fr: Ventes
-    hy: Վաճառք
-    ka: გაყიდვები
-    kk: Сату
-    pt: Vendas
-    ro: Vânzări
-    sr: Продаја
-    tr: Satış
-    uk: Продажі
-    uz: Savdo
-    zh: 销售
-order: 10
-roles: [Менеджер, Управленец, Демо]
 contents:
-    catalogs:
-        - Валюта
-        - ДоговорыКонтрагентов
-        - ЕдиницаИзмерения
-        - Контрагент
-        - Номенклатура
-        - Организация
-        - СтавкаНДС
-        - ТипЦен
-    documents:
-        - ВозвратОтПокупателя
-        - ЗаказПокупателя
-        - ЗакрытиеЗаказовПокупателей
-        - КорректировкаДолга
-        - ПоступлениеНаРасчётныйСчёт
+  catalogs:
+    - Валюта
+    - ДоговорыКонтрагентов
+    - ЕдиницаИзмерения
+    - Контрагент
+    - Номенклатура
+    - Организация
+    - СтавкаНДС
+    - ТипЦен
+  documents:
+    - ВозвратОтПокупателя
+    - ЗаказПокупателя
+    - ЗакрытиеЗаказовПокупателей
+    - КорректировкаДолга
+    - ПоступлениеНаРасчётныйСчёт
+    - ПриходныйКассовыйОрдер
+    - РеализацияТоваров
+    - Счёт
+    - УстановкаЦен
+  pages:
+    - Панель
+  processors:
+    - РабочееМестоПродаж
+    - ОтгрузкаЗаказов
+    - РеализацияИзСчёта
+    - ПересчётЦен
+    - НастройкаТиповЦен
+    - ВыгрузкаВExcel
+    - УведомленияПродажи
+    - ЗакрытиеМесяца
+  registers:
+    - ВаловаяПрибыль
+    - Взаиморасчеты
+    - РезервыТоваров
+  reports:
+    - ABCАнализПродаж
+    - АктСверки
+    - АнализЗаказовПокупателей
+    - ВаловаяПрибыль
+    - ВаловаяПрибыльСКД
+    - Взаиморасчеты
+    - КнигаПродаж
+    - ОплатыРеализаций
+    - ОстаткиТоваров
+    - ПродажиПоКонтрагентам
+    - ПродажиПоМесяцам
+    - РезервыТоваров
+    - ЦеныНоменклатуры
+home_page:
+  layout: rows
+  nav_by_role:
+    Кассир:
+      documents:
         - ПриходныйКассовыйОрдер
         - РеализацияТоваров
-        - Счёт
-        - УстановкаЦен
-    registers:
-        - ВаловаяПрибыль
-        - Взаиморасчеты
-        - РезервыТоваров
-    reports:
-        - ABCАнализПродаж
-        - АктСверки
-        - АнализЗаказовПокупателей
-        - ВаловаяПрибыль
-        - ВаловаяПрибыльСКД
-        - Взаиморасчеты
-        - КнигаПродаж
-        - ОплатыРеализаций
+      processors:
+        - РабочееМестоПродаж
+      reports: []
+    Кладовщик:
+      catalogs:
+        - Номенклатура
+      documents: []
+      processors:
+        - ОтгрузкаЗаказов
+      reports:
         - ОстаткиТоваров
-        - ПродажиПоКонтрагентам
-        - ПродажиПоМесяцам
         - РезервыТоваров
-        - ЦеныНоменклатуры
-    processors:
+    Менеджер:
+      catalogs:
+        - Контрагент
+        - Номенклатура
+      documents:
+        - ЗаказПокупателя
+        - Счёт
+        - РеализацияТоваров
+        - ВозвратОтПокупателя
+      processors:
         - РабочееМестоПродаж
         - ОтгрузкаЗаказов
-        - РеализацияИзСчёта
-        - ПересчётЦен
-        - НастройкаТиповЦен
-        - ВыгрузкаВExcel
-        - УведомленияПродажи
-        - ЗакрытиеМесяца
-    pages:
+      reports:
+        - АнализЗаказовПокупателей
+        - ОплатыРеализаций
+    Снабженец:
+      catalogs:
+        - Контрагент
+        - Номенклатура
+      documents: []
+      processors: []
+      reports: []
+    Управленец:
+      catalogs:
+        - Контрагент
+        - Номенклатура
+      documents:
+        - ЗаказПокупателя
+      pages:
         - Панель
-home_page:
-    title: Главная
-    layout: rows
-    rows:
-        # Быстрые действия
-        - widgets:
-            - БыстрыеДействияПродажи
-        # KPI-полоса
-        - widgets:
-            - ВыручкаМесяца
-            - ВаловаяПрибыльМесяца
-            - РентабельностьПродаж
-            - СреднийЧек
-            - ПродажиМесяца
-        # Динамика
-        - widgets:
-            - ПродажиПоДням
-            - ПрибыльПоДням
-        # Структура
-        - widgets:
-            - СтруктураВыручки
-            - ПрибыльПоНоменклатуре
-        # Рейтинги
-        - widgets:
-            - ТопНоменклатуры
-            - ТопПокупатели
+      processors: []
+      reports:
+        - ВаловаяПрибыль
+        - Взаиморасчеты
+        - ABCАнализПродаж
+  rows:
+    - widgets:
+        - БыстрыеДействияПродажи
+    - widgets:
+        - ВыручкаМесяца
+        - ВаловаяПрибыльМесяца
+        - РентабельностьПродаж
+        - СреднийЧек
+        - ПродажиМесяца
+    - widgets:
+        - ПродажиПоДням
+        - ПрибыльПоДням
+    - widgets:
+        - СтруктураВыручки
+        - ПрибыльПоНоменклатуре
+    - widgets:
+        - ТопНоменклатуры
+        - ТопПокупатели
+  title: Главная
+icon: shopping-cart
+menu:
+  sections:
+    - groups:
+        - icon: package-check
+          id: sales-fulfilment
+          items:
+            - id: sales-processor-d3ac662e0c
+              target: processor:ОтгрузкаЗаказов
+            - id: sales-processor-dd313da2d3
+              target: processor:РеализацияИзСчёта
+            - id: sales-document-e1d0e67842
+              target: document:ВозвратОтПокупателя
+            - id: sales-document-1ab08f15ef
+              target: document:ЗакрытиеЗаказовПокупателей
+          title: Отгрузка и возвраты
+          titles:
+            en: Shipping and returns
+      icon: shopping-cart
+      id: sales-work
+      items:
+        - id: sales-processor-ef592cc658
+          target: processor:РабочееМестоПродаж
+        - id: sales-document-4aaa16b771
+          target: document:ЗаказПокупателя
+        - id: sales-document-e1da46b833
+          target: document:Счёт
+        - id: sales-document-57fe772677
+          target: document:РеализацияТоваров
+      title: Заказы и отгрузка
+      titles:
+        en: Orders and fulfilment
+    - groups:
+        - icon: wallet
+          id: sales-payments
+          items:
+            - id: sales-document-1e41208271
+              target: document:ПриходныйКассовыйОрдер
+            - id: sales-document-c1e100106f
+              target: document:ПоступлениеНаРасчётныйСчёт
+            - id: sales-document-9c9e758b25
+              target: document:КорректировкаДолга
+            - id: sales-report-2835e9207c
+              target: report:ОплатыРеализаций
+            - id: sales-report-d427b5b85a
+              target: report:Взаиморасчеты
+            - id: sales-report-c91c6a3b3d
+              target: report:АктСверки
+          title: Оплаты и задолженность
+          titles:
+            en: Payments and debt
+      icon: users
+      id: sales-customers
+      items:
+        - id: sales-catalog-103b090669
+          target: catalog:Контрагент
+        - id: sales-catalog-c8a1bd78bc
+          target: catalog:ДоговорыКонтрагентов
+      title: Клиенты и расчёты
+      titles:
+        en: Customers and settlements
+    - groups:
+        - icon: badge-dollar-sign
+          id: sales-price-tools
+          items:
+            - id: sales-document-da3f3dc311
+              target: document:УстановкаЦен
+            - id: sales-processor-ae1ddec939
+              target: processor:ПересчётЦен
+            - id: sales-processor-2069eaf086
+              target: processor:НастройкаТиповЦен
+            - id: sales-report-e7aa50dc40
+              target: report:ЦеныНоменклатуры
+          title: Управление ценами
+          titles:
+            en: Price management
+        - icon: book-open
+          id: sales-reference
+          items:
+            - id: sales-catalog-f468d47562
+              target: catalog:Организация
+            - id: sales-catalog-050a964d9f
+              target: catalog:Валюта
+            - id: sales-catalog-1eae5fc563
+              target: catalog:ЕдиницаИзмерения
+            - id: sales-catalog-1a5f1ddf1c
+              target: catalog:СтавкаНДС
+          title: Реквизиты и нормативы
+          titles:
+            en: Business reference data
+      icon: tags
+      id: sales-prices
+      items:
+        - id: sales-catalog-7624619d53
+          target: catalog:Номенклатура
+        - id: sales-catalog-3d3680a7c5
+          target: catalog:ТипЦен
+      title: Товары и цены
+      titles:
+        en: Products and pricing
+    - groups:
+        - icon: chart-column
+          id: sales-reports
+          items:
+            - id: sales-report-b071fc7fa9
+              target: report:ВаловаяПрибыльСКД
+            - id: sales-report-d169e475b6
+              target: report:КнигаПродаж
+            - id: sales-report-ca04b83a41
+              target: report:ПродажиПоКонтрагентам
+            - id: sales-report-b2510847f9
+              target: report:ПродажиПоМесяцам
+            - id: sales-report-d670fe8748
+              target: report:ОстаткиТоваров
+            - id: sales-report-cfa9047091
+              target: report:РезервыТоваров
+            - id: sales-page-3114237f04
+              target: page:Панель
+          title: Отчёты и сводки
+          titles:
+            en: Reports and summaries
+        - icon: database
+          id: sales-accounting
+          items:
+            - id: sales-register-ca82e7d91f
+              target: register:ВаловаяПрибыль:balances
+            - id: sales-register-50b1668b46
+              target: register:ВаловаяПрибыль:movements
+            - id: sales-register-75eaef5c7d
+              target: register:Взаиморасчеты:balances
+            - id: sales-register-3839a81b53
+              target: register:Взаиморасчеты:movements
+            - id: sales-register-c82aa355b4
+              target: register:РезервыТоваров:balances
+            - id: sales-register-314fd20cd8
+              target: register:РезервыТоваров:movements
+          title: Данные учёта
+          titles:
+            en: Accounting data
+        - icon: wrench
+          id: sales-service
+          items:
+            - id: sales-processor-ab859dc12c
+              target: processor:ВыгрузкаВExcel
+            - id: sales-processor-003a575973
+              target: processor:УведомленияПродажи
+            - id: sales-processor-f3df3ffe1a
+              target: processor:ЗакрытиеМесяца
+          title: Обмен и обслуживание
+          titles:
+            en: Exchange and maintenance
+      icon: chart-no-axes-combined
+      id: sales-analysis
+      items:
+        - id: sales-report-f94cdca46f
+          target: report:АнализЗаказовПокупателей
+        - id: sales-report-c2a1f3d390
+          target: report:ВаловаяПрибыль
+        - id: sales-report-538aa5c6c2
+          target: report:ABCАнализПродаж
+      title: Результаты продаж
+      titles:
+        en: Sales performance
+name: Продажи
+order: 10
+roles:
+  - Менеджер
+  - Управленец
+  - Демо
+title: Продажи
+titles:
+  az: Satış
+  de: Verkauf
+  en: Sales
+  es: Ventas
+  fr: Ventes
+  hy: Վաճառք
+  ka: გაყიდვები
+  kk: Сату
+  pt: Vendas
+  ro: Vânzări
+  sr: Продаја
+  tr: Satış
+  uk: Продажі
+  uz: Savdo
+  zh: 销售

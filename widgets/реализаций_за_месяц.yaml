@@ -1,24 +1,27 @@
-name: РеализацийЗаМесяц
-type: kpi
-title: Реализаций
-titles:
-  en: Sales
-  de: Verkäufe
-  sr: Продаја
-  az: Satışlar
-  es: Ventas
-  fr: Ventes
-  hy: "Վաճառքներ"
-  ka: "გაყიდვები"
-  kk: "Сатылымдар"
-  pt: "Vendas"
-  ro: "Vânzări"
-  tr: "Satışlar"
-  uk: "Реалізацій"
-  uz: "Sotuvlar"
-  zh: "销售"
 format: number
+link: /ui/report/ПродажиПоМесяцам
+name: РеализацийЗаМесяц
 query: |
   ВЫБРАТЬ КОЛИЧЕСТВО(*) КАК Значение
   ИЗ Документ.РеализацияТоваров
   ГДЕ posted = Истина
+refresh_on:
+  - данные.реализациятоваров
+title: Реализаций
+titles:
+  az: Satışlar
+  de: Verkäufe
+  en: Sales
+  es: Ventas
+  fr: Ventes
+  hy: Վաճառքներ
+  ka: გაყიდვები
+  kk: Сатылымдар
+  pt: Vendas
+  ro: Vânzări
+  sr: Продаја
+  tr: Satışlar
+  uk: Реалізацій
+  uz: Sotuvlar
+  zh: 销售
+type: kpi

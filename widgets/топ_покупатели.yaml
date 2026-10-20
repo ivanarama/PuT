@@ -1,90 +1,101 @@
-name: ТопПокупатели
-type: list
-title: Топ покупатели за месяц
-titles:
-  en: Top customers (month)
-  de: Top-Kunden (Monat)
-  sr: Топ купци (месец)
-  az: Ən yaxşı alıcılar (ay)
-  es: Top clientes (mes)
-  fr: Top clients (mois)
-  hy: "Լավագույն գնորդներ (ամիս)"
-  ka: "საუკეთესო მყიდველები (თვე)"
-  kk: "Топ сатып алушылар (ай)"
-  pt: "Top clientes (mês)"
-  ro: "Top clienți (lună)"
-  tr: "En iyi müşteriler (ay)"
-  uk: "Топ покупці (місяць)"
-  uz: "Top xaridorlar (oy)"
-  zh: "月度热门客户"
+columns:
+  - field: Покупатель
+    label: Покупатель
+    labels:
+      az: Alıcı
+      de: Kunde
+      en: Customer
+      es: Cliente
+      fr: Client
+      hy: Գնորդ
+      ka: მყიდველი
+      kk: Сатып алушы
+      pt: Cliente
+      ro: Client
+      sr: Купац
+      tr: Müşteri
+      uk: Покупець
+      uz: Xaridor
+      zh: 客户
+  - align: right
+    field: Реализаций
+    format: number
+    label: Реализаций
+    labels:
+      az: Satışlar
+      de: Verkäufe
+      en: Sales
+      es: Ventas
+      fr: Ventes
+      hy: Վաճառք
+      ka: გაყიდვები
+      kk: Сатылымдар
+      pt: Vendas
+      ro: Vânzări
+      sr: Продаја
+      tr: Satışlar
+      uk: Реалізацій
+      uz: Sotuvlar
+      zh: 销售笔数
+  - align: right
+    field: Сумма
+    format: number
+    label: Сумма
+    labels:
+      az: Məbləğ
+      de: Betrag
+      en: Amount
+      es: Importe
+      fr: Montant
+      hy: Գումაր
+      ka: თანხა
+      kk: Сома
+      pt: Valor
+      ro: Sumă
+      sr: Износ
+      tr: Tutar
+      uk: Сума
+      uz: Miqdor
+      zh: 金额
+filters:
+  - label: Покупатель
+    name: Покупатель
+    param: Покупатель
+    type: reference:Контрагент
 limit: 5
+name: ТопПокупатели
 params:
-  Начало: "{{today|minus_days:30}}"
+  Начало: '{{today|start_of_month}}'
 query: |
   ВЫБРАТЬ
+    Покупатель.Ссылка КАК ИдСтроки,
     Покупатель,
     КОЛИЧЕСТВО(*) КАК Реализаций,
     CAST(ROUND(СУММА(Сумма), 0) AS INTEGER) КАК Сумма
   ИЗ Документ.РеализацияТоваров
-  ГДЕ Дата >= &Начало И posted = Истина
-  СГРУППИРОВАТЬ ПО Покупатель
+  ГДЕ Дата >= &Начало И posted = Истина И (&Покупатель ЕСТЬ NULL ИЛИ Покупатель = &Покупатель)
+  СГРУППИРОВАТЬ ПО Покупатель.Ссылка, Покупатель
   УПОРЯДОЧИТЬ ПО Сумма УБЫВ
-columns:
-  - field: Покупатель
-    label: "Покупатель"
-    labels:
-      en: "Customer"
-      de: "Kunde"
-      sr: "Купац"
-      az: "Alıcı"
-      es: "Cliente"
-      fr: "Client"
-      hy: "Գնորդ"
-      ka: "მყიდველი"
-      kk: "Сатып алушы"
-      pt: "Cliente"
-      ro: "Client"
-      tr: "Müşteri"
-      uk: "Покупець"
-      uz: "Xaridor"
-      zh: "客户"
-  - field: Реализаций
-    label: "Реализаций"
-    labels:
-      en: "Sales"
-      de: "Verkäufe"
-      sr: "Продаја"
-      az: "Satışlar"
-      es: "Ventas"
-      fr: "Ventes"
-      hy: "Վաճառք"
-      ka: "გაყიდვები"
-      kk: "Сатылымдар"
-      pt: "Vendas"
-      ro: "Vânzări"
-      tr: "Satışlar"
-      uk: "Реалізацій"
-      uz: "Sotuvlar"
-      zh: "销售笔数"
-    format: number
-    align: right
-  - field: Сумма
-    label: "Сумма"
-    labels:
-      en: "Amount"
-      de: "Betrag"
-      sr: "Износ"
-      az: "Məbləğ"
-      es: "Importe"
-      fr: "Montant"
-      hy: "Գումაր"
-      ka: "თანხა"
-      kk: "Сома"
-      pt: "Valor"
-      ro: "Sumă"
-      tr: "Tutar"
-      uk: "Сума"
-      uz: "Miqdor"
-      zh: "金额"
-    format: number
-    align: right
+refresh_on:
+  - данные.реализациятоваров
+source:
+  entity: Контрагент
+  id_field: ИдСтроки
+title: Топ покупатели за месяц
+titles:
+  az: Ən yaxşı alıcılar (ay)
+  de: Top-Kunden (Monat)
+  en: Top customers (month)
+  es: Top clientes (mes)
+  fr: Top clients (mois)
+  hy: Լավագույն գնորդներ (ամիս)
+  ka: საუკეთესო მყიდველები (თვე)
+  kk: Топ сатып алушылар (ай)
+  pt: Top clientes (mês)
+  ro: Top clienți (lună)
+  sr: Топ купци (месец)
+  tr: En iyi müşteriler (ay)
+  uk: Топ покупці (місяць)
+  uz: Top xaridorlar (oy)
+  zh: 月度热门客户
+type: list

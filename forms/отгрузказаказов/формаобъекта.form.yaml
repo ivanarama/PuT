@@ -1,126 +1,138 @@
 attributes:
   - main: true
     name: Объект
+conditional_formatting:
+  - target: Строки
+    then:
+      background: '#fef3c7'
+    when: КОтгрузке < Резерв
+  - target: Строки
+    then:
+      background: '#dcfce7'
+    when: КОтгрузке > 0 И КОтгрузке = Резерв
 elements:
   - children:
       - children:
-          - children:
+          - background: '#eff6ff'
+            children:
               - data_path: Объект.Дата
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
                 title:
-                  de: "Datum"
-                  en: "Date"
-                  ru: "Дата"
-                  sr: "Датум"
+                  de: Datum
+                  en: Date
+                  ru: Дата
+                  sr: Датум
               - choice: true
                 data_path: Объект.Организация
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
-                  de: "Organisation"
-                  en: "Organization"
-                  ru: "Организация"
-                  sr: "Организација"
+                  de: Organisation
+                  en: Organization
+                  ru: Организация
+                  sr: Организација
               - choice: true
                 data_path: Объект.Покупатель
-                hint: "Чьи заказы отгружаем"
+                hint: Чьи заказы отгружаем
                 kind: ПолеВвода
                 name: ПолеПокупатель
                 required: true
                 title:
-                  de: "Kunde"
-                  en: "Customer"
-                  ru: "Покупатель"
-                  sr: "Купац"
+                  de: Kunde
+                  en: Customer
+                  ru: Покупатель
+                  sr: Купац
               - choice: true
                 data_path: Объект.Склад
                 kind: ПолеВвода
                 name: ПолеСклад
                 required: true
                 title:
-                  de: "Lager"
-                  en: "Warehouse"
-                  ru: "Склад"
-                  sr: "Магацин"
+                  de: Lager
+                  en: Warehouse
+                  ru: Склад
+                  sr: Магацин
             kind: ГруппаФормы
             name: ГруппаШапка
             title:
-              de: "Versandparameter"
-              en: "Shipment parameters"
-              ru: "Параметры отгрузки"
-              sr: "Параметри отпреме"
+              de: Versandparameter
+              en: Shipment parameters
+              ru: Параметры отгрузки
+              sr: Параметри отпреме
         kind: Страница
         name: СтраницаОсновное
         title:
-          de: "Versand"
-          en: "Shipment"
-          ru: "Отгрузка"
-          sr: "Отпрема"
+          de: Versand
+          en: Shipment
+          ru: Отгрузка
+          sr: Отпрема
       - children:
-          - children:
+          - background: '#f8fafc'
+            children:
               - children:
                   - events:
                       Нажатие: КнопкаЗаполнитьНажатие
-                    hint: "Резервы по заказам покупателя с учётом остатка склада"
+                    hint: Резервы по заказам покупателя с учётом остатка склада
                     kind: Кнопка
                     name: КнопкаЗаполнить
                     title:
-                      de: "Zu liefern füllen"
-                      en: "Fill to ship"
-                      ru: "1️⃣ Заполнить к отгрузке"
-                      sr: "Попуни за отпрему"
+                      de: Zu liefern füllen
+                      en: Fill to ship
+                      ru: 1️⃣ Заполнить к отгрузке
+                      sr: Попуни за отпрему
                   - events:
                       Нажатие: КнопкаОчиститьНажатие
                     kind: Кнопка
                     name: КнопкаОчистить
                     title:
-                      de: "Leeren"
-                      en: "Clear"
-                      ru: "Очистить"
-                      sr: "Обриши"
+                      de: Leeren
+                      en: Clear
+                      ru: Очистить
+                      sr: Обриши
                 data_path: Строки
                 kind: ТабличнаяЧасть
                 name: ТабСтроки
                 title:
-                  de: "Zeilen"
-                  en: "Lines"
-                  ru: "Строки"
-                  sr: "Ставке"
+                  de: Zeilen
+                  en: Lines
+                  ru: Строки
+                  sr: Ставке
                 use_grid: true
             kind: ГруппаФормы
             name: ГруппаТабЧасть
             title:
-              de: "Zu liefern = min(Reserve, Bestand)"
-              en: "To ship = min(reserved, stock)"
-              ru: "К отгрузке = мин(резерв, остаток)"
-              sr: "За отпрему = мин(резерва, стање)"
-          - children:
+              de: Zu liefern = min(Reserve, Bestand)
+              en: To ship = min(reserved, stock)
+              ru: К отгрузке = мин(резерв, остаток)
+              sr: За отпрему = мин(резерва, стање)
+          - background: '#eef2ff'
+            children:
               - events:
                   Нажатие: КнопкаСоздатьРеализацииНажатие
-                hint: "Одна реализация на заказ; проведение снимает резерв и списывает FIFO"
+                hint: Одна реализация на заказ; проведение снимает резерв и списывает FIFO
                 kind: Кнопка
                 name: КнопкаСоздатьРеализации
                 title:
-                  de: "Verkäufe erstellen"
-                  en: "Create sales"
-                  ru: "2️⃣ Создать реализации"
-                  sr: "Креирај продаје"
+                  de: Verkäufe erstellen
+                  en: Create sales
+                  ru: 2️⃣ Создать реализации
+                  sr: Креирај продаје
             kind: ГруппаФормы
             name: ГруппаДействия
             title:
-              de: "Versand"
-              en: "Shipment"
-              ru: "Отгрузка"
-              sr: "Отпрема"
+              de: Versand
+              en: Shipment
+              ru: Отгрузка
+              sr: Отпрема
         kind: Страница
         name: СтраницаСтроки
         title:
-          de: "Zu liefern"
-          en: "To ship"
-          ru: "К отгрузке"
-          sr: "За отпрему"
+          de: Zu liefern
+          en: To ship
+          ru: К отгрузке
+          sr: За отпрему
     kind: СтраницыФормы
     name: ОсновныеЗакладки
 events:
@@ -131,9 +143,9 @@ form:
   kind: object
   name: ФормаОбъекта
   title:
-    de: "Versand-Arbeitsplatz"
-    en: "Shipment workplace"
-    ru: "АРМ Отгрузки"
-    sr: "Радно место отпреме"
+    de: Versand-Arbeitsplatz
+    en: Shipment workplace
+    ru: АРМ Отгрузки
+    sr: Радно место отпреме
   vertical_scroll: auto
 schema: onebase.form/v1

@@ -1,89 +1,86 @@
-schema: onebase.form/v1
-
-form:
-  name: ФормаОбъекта
-  kind: object
-  entity: ЗагрузкаВыписки
-  title:
-    ru: "Загрузка банковской выписки"
-    en: "Load bank statement"
-  auto_save_settings: true
-  vertical_scroll: auto
-
-events:
-  ПриОткрытии: ПриОткрытииФормы
-
 attributes:
-  - name: Объект
-    main: true
-
+  - main: true
+    name: Объект
 elements:
-  - kind: ГруппаФормы
-    name: ГруппаПараметры
-    title:
-      ru: "Параметры загрузки"
-      en: "Load parameters"
+  - background: '#eff6ff'
     children:
-      - kind: ПолеВвода
-        name: ПолеБанковскийСчёт
-        title:
-          ru: "Банковский счёт"
-          en: "Bank account"
+      - choice: true
         data_path: Объект.БанковскийСчёт
+        kind: ПолеВвода
+        name: ПолеБанковскийСчёт
         required: true
-        choice: true
-      - kind: ПолеВвода
+        title:
+          en: Bank account
+          ru: Банковский счёт
+      - choice: true
+        data_path: Объект.Формат
+        kind: ПолеВвода
         name: ПолеФормат
         title:
-          ru: "Формат выгрузки"
-          en: "Export format"
-        data_path: Объект.Формат
-        choice: true
-      - kind: ПолеВвода
+          en: Export format
+          ru: Формат выгрузки
+      - data_path: Объект.ТекстВыгрузки
+        kind: ПолеВвода
         name: ПолеТекстВыгрузки
         title:
-          ru: "Выгрузка клиент-банка"
-          en: "Client-bank export"
-        data_path: Объект.ТекстВыгрузки
+          en: Client-bank export
+          ru: Выгрузка клиент-банка
         type: file
-
-  - kind: ГруппаФормы
-    name: ГруппаПредпросмотр
+    kind: ГруппаФормы
+    name: ГруппаПараметры
     title:
-      ru: "Предпросмотр"
-      en: "Preview"
+      en: Load parameters
+      ru: Параметры загрузки
+  - background: '#eff6ff'
     children:
-      - kind: ТабличнаяЧасть
+      - data_path: Платежи
+        kind: ТабличнаяЧасть
         name: ТаблицаПлатежей
         title:
-          ru: "Платежи"
-          en: "Payments"
-        data_path: Платежи
-
-  - kind: ГруппаФормы
-    name: ГруппаДействия
+          en: Payments
+          ru: Платежи
+    kind: ГруппаФормы
+    name: ГруппаПредпросмотр
     title:
-      ru: "Действия"
-      en: "Actions"
+      en: Preview
+      ru: Предпросмотр
+  - background: '#eef2ff'
     children:
-      - kind: Кнопка
+      - events:
+          Нажатие: ЗагрузитьНажатие
+        kind: Кнопка
         name: КнопкаЗагрузить
         title:
-          ru: "Загрузить предпросмотр"
-          en: "Load preview"
-        events:
-          Нажатие: ЗагрузитьНажатие
-      - kind: Кнопка
+          en: Load preview
+          ru: Загрузить предпросмотр
+      - events:
+          Нажатие: ЗаписатьНажатие
+        kind: Кнопка
         name: КнопкаЗаписать
         title:
-          ru: "Записать"
-          en: "Save"
-        events:
-          Нажатие: ЗаписатьНажатие
-      - kind: Кнопка
+          en: Save
+          ru: Записать
+      - events:
+          Нажатие: ЗаписатьИПровестиНажатие
+        kind: Кнопка
         name: КнопкаЗаписатьИПровести
         title:
-          ru: "Записать и провести"
-          en: "Save and post"
-        events:
-          Нажатие: ЗаписатьИПровестиНажатие
+          en: Save and post
+          ru: Записать и провести
+    kind: ГруппаФормы
+    name: ГруппаДействия
+    title:
+      en: Actions
+      ru: Действия
+events:
+  ПриОткрытии: ПриОткрытииФормы
+form:
+  auto_save_settings: true
+  entity: ЗагрузкаВыписки
+  kind: object
+  name: ФормаОбъекта
+  title:
+    en: Load bank statement
+    ru: Загрузка банковской выписки
+  vertical_scroll: auto
+schema: onebase.form/v1
