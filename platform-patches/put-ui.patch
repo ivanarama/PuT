@@ -92,6 +92,178 @@ index 4a208b9b..ece01ce0 100644
  	rows, err := processorFormTableRowsFromRequest(r, entity, form, controls.formTables)
  	if err != nil {
  		return nil, err
+diff --git a/internal/ui/settings_navigation_tmpl.go b/internal/ui/settings_navigation_tmpl.go
+index 6de27fc0..15421ba6 100644
+--- a/internal/ui/settings_navigation_tmpl.go
++++ b/internal/ui/settings_navigation_tmpl.go
+@@ -53,6 +53,6 @@ const tplNavigationSettings = `
+ @media(max-width:850px){.navigation-editor-layout{grid-template-columns:1fr}}
+ </style>
+ <script type="application/json" id="navigation-editor-data">{{jsJSON .NavigationEditor}}</script>
+-<script src="/static/settings-navigation.js"></script>
++<script src="{{appJSURL "/static/settings-navigation.js"}}"></script>
+ </body></html>
+ {{end}}`
+diff --git a/internal/ui/static.go b/internal/ui/static.go
+index 51195769..7c733284 100644
+--- a/internal/ui/static.go
++++ b/internal/ui/static.go
+@@ -1,12 +1,17 @@
+ package ui
+ 
+ import (
++	"compress/gzip"
+ 	"crypto/sha256"
+ 	_ "embed"
+ 	"encoding/hex"
++	"mime"
+ 	"net/http"
++	"strconv"
++	"strings"
+ 
+ 	"github.com/go-chi/chi/v5"
++	"github.com/go-chi/chi/v5/middleware"
+ 	"github.com/ivantit66/onebase/internal/webassets"
+ )
+ 
+@@ -35,16 +40,73 @@ func assetETag(b []byte) string {
+ 	return `"` + hex.EncodeToString(sum[:8]) + `"`
+ }
+ 
+-// serveAppJS отдаёт встроенный JS приложения с ревалидацией по ETag. Путь
+-// фиксирован (/static/ui.js) и не содержит хэша, а сам код меняется с каждым
+-// билдом, поэтому immutable-кэш на год отдавал бы устаревший скрипт после
+-// обновления (старый JS против нового HTML-bootstrap → тихо сломанные формы).
+-// no-cache заставляет клиента ревалидировать: при совпадении ETag ответ — 304
+-// без повторной передачи тела, поэтому свежесть не стоит лишнего трафика.
++// appJSURL связывает долгий кэш с содержимым скрипта. Старый HTML и прямые
++// ссылки без версии по-прежнему используют обязательную ревалидацию.
++func appJSURL(path string) string {
++	var etag string
++	switch path {
++	case "/static/ui.js":
++		etag = uiJSETag
++	case "/static/managed.js":
++		etag = managedJSETag
++	case "/static/query-builder.js":
++		etag = queryBuilderJSETag
++	case "/static/settings-navigation.js":
++		etag = settingsNavigationJSETag
++	default:
++		return path
++	}
++	return path + "?v=" + strings.Trim(etag, `"`)
++}
++
++func staticAcceptsGzip(header string) bool {
++	wildcard := false
++	for _, part := range strings.Split(header, ",") {
++		coding, params, err := mime.ParseMediaType(strings.TrimSpace(part))
++		if err != nil {
++			continue
++		}
++		quality := 1.0
++		if value, ok := params["q"]; ok {
++			quality, err = strconv.ParseFloat(value, 64)
++			if err != nil || quality < 0 || quality > 1 {
++				quality = 0
++			}
++		}
++		if coding == "gzip" {
++			return quality > 0
++		}
++		if coding == "*" {
++			wildcard = quality > 0
++		}
++	}
++	return wildcard
++}
++
++func compressStaticAssets(next http.Handler) http.Handler {
++	compressed := middleware.Compress(gzip.BestSpeed)(next)
++	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		w.Header().Add("Vary", "Accept-Encoding")
++		// Do not put a gzip trailer in a bodyless 304 or change byte ranges.
++		if r.Method != http.MethodGet || r.Header.Get("If-None-Match") != "" || r.Header.Get("Range") != "" || !staticAcceptsGzip(r.Header.Get("Accept-Encoding")) {
++			next.ServeHTTP(w, r)
++			return
++		}
++		request := r.Clone(r.Context())
++		request.Header.Set("Accept-Encoding", "gzip")
++		compressed.ServeHTTP(w, request)
++	})
++}
++
++// serveAppJS разрешает immutable-кэш только для хэша текущих байтов.
++// Неизвестная/устаревшая версия не закрепляет новый скрипт под старым ключом.
+ func serveAppJS(w http.ResponseWriter, r *http.Request, body []byte, etag string) {
+ 	w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
+ 	w.Header().Set("ETag", etag)
+ 	w.Header().Set("Cache-Control", "no-cache")
++	if r.URL.Query().Get("v") == strings.Trim(etag, `"`) {
++		w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
++	}
+ 	if match := r.Header.Get("If-None-Match"); match != "" && match == etag {
+ 		w.WriteHeader(http.StatusNotModified)
+ 		return
+@@ -58,29 +120,33 @@ func serveAppJS(w http.ResponseWriter, r *http.Request, body []byte, etag string
+ // тем же путём, что и в конфигураторе лаунчера, чтобы рабочий стол и
+ // предпросмотр виджетов рисовались идентично.
+ func mountStatic(r chi.Router) {
+-	r.Get("/static/settings-navigation.js", func(w http.ResponseWriter, req *http.Request) {
+-		serveAppJS(w, req, settingsNavigationJS, settingsNavigationJSETag)
+-	})
+-	r.Get("/static/ui.js", func(w http.ResponseWriter, req *http.Request) {
+-		serveAppJS(w, req, uiJS, uiJSETag)
+-	})
+-	r.Get("/static/managed.js", func(w http.ResponseWriter, req *http.Request) {
+-		serveAppJS(w, req, managedJS, managedJSETag)
+-	})
+-	r.Get("/static/query-builder.js", func(w http.ResponseWriter, req *http.Request) {
+-		serveAppJS(w, req, queryBuilderJS, queryBuilderJSETag)
++	r.Group(func(r chi.Router) {
++		// Только публичные статические ресурсы: формы, API и SSE не затронуты.
++		r.Use(compressStaticAssets)
++		r.Get("/static/settings-navigation.js", func(w http.ResponseWriter, req *http.Request) {
++			serveAppJS(w, req, settingsNavigationJS, settingsNavigationJSETag)
++		})
++		r.Get("/static/ui.js", func(w http.ResponseWriter, req *http.Request) {
++			serveAppJS(w, req, uiJS, uiJSETag)
++		})
++		r.Get("/static/managed.js", func(w http.ResponseWriter, req *http.Request) {
++			serveAppJS(w, req, managedJS, managedJSETag)
++		})
++		r.Get("/static/query-builder.js", func(w http.ResponseWriter, req *http.Request) {
++			serveAppJS(w, req, queryBuilderJS, queryBuilderJSETag)
++		})
++		r.Handle("/vendor/echarts/*", http.StripPrefix("/vendor/echarts/", webassets.EChartsHandler()))
++		// Monaco editor — инструменты разработчика (консоль кода/запросов, отладчик)
++		// грузят его офлайн вместо CDN.
++		r.Handle("/vendor/monaco/*", http.StripPrefix("/vendor/monaco/", webassets.MonacoHandler()))
++		// SlickGrid — грид для редактируемых табличных частей managed-форм.
++		r.Handle("/vendor/slickgrid/*", http.StripPrefix("/vendor/slickgrid/", webassets.SlickGridHandler()))
++		// Quill — WYSIWYG-редактор для richtext-полей (план 65). Раздаётся только в
++		// пользовательском режиме: формы сущностей с richtext-реквизитами здесь.
++		// Конфигуратор лаунчера правит метаданные, а не данные — Quill ему не нужен.
++		r.Handle("/vendor/quill/*", http.StripPrefix("/vendor/quill/", webassets.QuillHandler()))
++		// Lucide — спрайт иконок навигации (план 73): <use> ссылается на символ по
++		// этому пути, поэтому он нужен на каждой странице с панелью разделов.
++		r.Handle("/vendor/lucide/*", http.StripPrefix("/vendor/lucide/", webassets.LucideHandler()))
+ 	})
+-	r.Handle("/vendor/echarts/*", http.StripPrefix("/vendor/echarts/", webassets.EChartsHandler()))
+-	// Monaco editor — инструменты разработчика (консоль кода/запросов, отладчик)
+-	// грузят его офлайн вместо CDN.
+-	r.Handle("/vendor/monaco/*", http.StripPrefix("/vendor/monaco/", webassets.MonacoHandler()))
+-	// SlickGrid — грид для редактируемых табличных частей managed-форм.
+-	r.Handle("/vendor/slickgrid/*", http.StripPrefix("/vendor/slickgrid/", webassets.SlickGridHandler()))
+-	// Quill — WYSIWYG-редактор для richtext-полей (план 65). Раздаётся только в
+-	// пользовательском режиме: формы сущностей с richtext-реквизитами здесь.
+-	// Конфигуратор лаунчера правит метаданные, а не данные — Quill ему не нужен.
+-	r.Handle("/vendor/quill/*", http.StripPrefix("/vendor/quill/", webassets.QuillHandler()))
+-	// Lucide — спрайт иконок навигации (план 73): <use> ссылается на символ по
+-	// этому пути, поэтому он нужен на каждой странице с панелью разделов.
+-	r.Handle("/vendor/lucide/*", http.StripPrefix("/vendor/lucide/", webassets.LucideHandler()))
+ }
 diff --git a/internal/ui/static/managed.js b/internal/ui/static/managed.js
 index aab0b16b..d990f477 100644
 --- a/internal/ui/static/managed.js
@@ -253,10 +425,27 @@ index 8a44abb0..3b4b9cca 100644
    const app = setup('');
    app.__selectA.value = 'Гвозди';
 diff --git a/internal/ui/templates.go b/internal/ui/templates.go
-index 90eacbb2..38619514 100644
+index 90eacbb2..ce292650 100644
 --- a/internal/ui/templates.go
 +++ b/internal/ui/templates.go
-@@ -1852,6 +1852,14 @@ const tplIndex = `
+@@ -227,6 +227,7 @@ func templateFuncs(bundle *i18n.Bundle) template.FuncMap {
+ 		return key
+ 	}
+ 	return template.FuncMap{
++		"appJSURL":              appJSURL,
+ 		"refWriteAllowed":       refWriteAllowed,
+ 		"listFilterPanelFields": listFilterPanelFields,
+ 		"listFilterChoices":     listFilterChoices,
+@@ -1455,7 +1456,7 @@ const tplHead = `
+   "closeNotConfirmed" (t (or $.Lang "ru") "Форма не закрыта: сервер не подтвердил закрытие.")
+   "unsavedClose" (t (or $.Lang "ru") "Данные были изменены и не записаны. Закрыть форму?")
+ )}}</script>
+-<script src="/static/ui.js"></script>
++<script src="{{appJSURL "/static/ui.js"}}"></script>
+ <style>
+ .ob-embedded .topbar,.ob-embedded .subsys-bar,.ob-embedded #ob-nav{display:none!important}
+ *{box-sizing:border-box;margin:0;padding:0}
+@@ -1852,6 +1853,14 @@ const tplIndex = `
  .w-refresh:hover{background:#f1f5f9;color:#1d4ed8}.w-refresh:focus-visible{outline:2px solid #60a5fa;outline-offset:2px}
  .w-refresh[disabled]{cursor:wait;opacity:.55}.w-card.ob-widget-loading .w-refresh{animation:ob-widget-spin .8s linear infinite}
  @keyframes ob-widget-spin{to{transform:rotate(360deg)}}
@@ -271,7 +460,7 @@ index 90eacbb2..38619514 100644
  .w-refresh-status{font-size:12px;color:#b91c1c;margin-top:7px;min-height:0}
  .w-kpi-value{font-size:32px;font-weight:700;color:#0f172a;line-height:1.1;white-space:nowrap}
  .w-kpi-sub{font-size:12px;color:#94a3b8;margin-top:6px}
-@@ -1922,6 +1930,8 @@ a.w-kpi-link:hover{color:#1a4a80;text-decoration:underline}
+@@ -1922,6 +1931,8 @@ a.w-kpi-link:hover{color:#1a4a80;text-decoration:underline}
    </div>
    {{end}}
    {{if .Filters}}
@@ -280,7 +469,7 @@ index 90eacbb2..38619514 100644
    <div class="w-filters">
      {{range .Filters}}{{$f := .}}
      <label class="w-filter"><span>{{$f.Label}}</span>
-@@ -1932,6 +1942,7 @@ a.w-kpi-link:hover{color:#1a4a80;text-decoration:underline}
+@@ -1932,6 +1943,7 @@ a.w-kpi-link:hover{color:#1a4a80;text-decoration:underline}
      {{end}}
      <button type="button" class="w-filter-reset" data-ob-filter-reset>{{.ResetLabel}}</button>
    </div>
@@ -289,7 +478,7 @@ index 90eacbb2..38619514 100644
    <div data-ob-widget-body>
    {{template "widget-body" .}}
 diff --git a/internal/ui/templates_managed.go b/internal/ui/templates_managed.go
-index d19bbafb..a2861f22 100644
+index d19bbafb..77eef56d 100644
 --- a/internal/ui/templates_managed.go
 +++ b/internal/ui/templates_managed.go
 @@ -211,7 +211,11 @@ const tplManagedForm = `
@@ -341,6 +530,31 @@ index d19bbafb..a2861f22 100644
    {{if $vtLayout}}</div>{{end}}
    {{else}}
    <div style="background:#fef9c3;padding:8px;border-radius:6px;font-size:12px;color:#92400e">
+@@ -911,9 +914,9 @@ select[data-ref-choice-context][data-ob-choice-error="1"]{border-color:#dc2626;b
+ <script src="/vendor/slickgrid/slick.dataview.js"></script>
+ <script src="/vendor/slickgrid/slick.editors.js"></script>
+ <script src="/vendor/slickgrid/slick.formatters.js"></script>
+-<script src="/static/managed.js"></script>
++<script src="{{appJSURL "/static/managed.js"}}"></script>
+ {{else}}
+-<script src="/static/managed.js"></script>
++<script src="{{appJSURL "/static/managed.js"}}"></script>
+ {{end}}
+ 
+ {{if hasCodeField .Form}}
+diff --git a/internal/ui/tpl_query_builder.go b/internal/ui/tpl_query_builder.go
+index 3061e85d..26d11f36 100644
+--- a/internal/ui/tpl_query_builder.go
++++ b/internal/ui/tpl_query_builder.go
+@@ -107,7 +107,7 @@ const tplQueryBuilder = `
+ </main>
+ 
+ <script type="application/json" id="ob-query-builder-schema">{{.Schema}}</script>
+-<script src="/static/query-builder.js"></script>
++<script src="{{appJSURL "/static/query-builder.js"}}"></script>
+ </div></body></html>
+ {{end}}
+ `
 diff --git a/internal/ui/widget_filters_test.go b/internal/ui/widget_filters_test.go
 index dd42617b..d49cbe50 100644
 --- a/internal/ui/widget_filters_test.go
@@ -500,5 +714,121 @@ index 00000000..09d0b014
 +	}
 +	if _, ok := obj.Fields["Задача"]; ok {
 +		t.Fatal("accepted query-only state")
++	}
++}
+diff --git a/internal/ui/static_performance_test.go b/internal/ui/static_performance_test.go
+new file mode 100644
+index 00000000..953092b0
+--- /dev/null
++++ b/internal/ui/static_performance_test.go
+@@ -0,0 +1,110 @@
++package ui
++
++import (
++	"bytes"
++	"compress/gzip"
++	"io"
++	"net/http"
++	"net/http/httptest"
++	"strings"
++	"testing"
++
++	"github.com/go-chi/chi/v5"
++)
++
++func TestStaticAssetsCompressedOnPublicRoutes(t *testing.T) {
++	r := chi.NewRouter()
++	mountStatic(r)
++	r.Get("/ui/events", func(w http.ResponseWriter, r *http.Request) {
++		w.Header().Set("Content-Type", "text/event-stream")
++		_, _ = io.WriteString(w, "data: ready\n\n")
++	})
++	for _, path := range []string{
++		"/static/ui.js", "/static/managed.js", "/static/settings-navigation.js", "/static/query-builder.js",
++		"/vendor/echarts/echarts.min.js", "/vendor/lucide/sprite.svg",
++		"/vendor/slickgrid/slick.grid.js", "/vendor/slickgrid/slick.grid.css",
++	} {
++		t.Run(path, func(t *testing.T) {
++			plain := httptest.NewRecorder()
++			r.ServeHTTP(plain, httptest.NewRequest(http.MethodGet, path, nil))
++			req := httptest.NewRequest(http.MethodGet, path, nil)
++			req.Header.Set("Accept-Encoding", "gzip")
++			compressed := httptest.NewRecorder()
++			r.ServeHTTP(compressed, req)
++			if plain.Code != http.StatusOK || compressed.Code != http.StatusOK {
++				t.Fatalf("plain/gzip status = %d/%d", plain.Code, compressed.Code)
++			}
++			if compressed.Header().Get("Content-Encoding") != "gzip" || !strings.Contains(compressed.Header().Get("Vary"), "Accept-Encoding") {
++				t.Fatalf("missing compression negotiation: %v", compressed.Header())
++			}
++			reader, err := gzip.NewReader(compressed.Body)
++			if err != nil {
++				t.Fatal(err)
++			}
++			defer reader.Close()
++			body, err := io.ReadAll(reader)
++			if err != nil || !bytes.Equal(body, plain.Body.Bytes()) {
++				t.Fatalf("decoded resource differs: %v", err)
++			}
++			if compressed.Body.Len()*2 >= plain.Body.Len() {
++				t.Fatalf("gzip did not halve the transfer: %d vs %d", compressed.Body.Len(), plain.Body.Len())
++			}
++			if plain.Header().Get("Content-Encoding") != "" {
++				t.Fatal("client without Accept-Encoding received compressed bytes")
++			}
++		})
++	}
++	req := httptest.NewRequest(http.MethodGet, "/ui/events", nil)
++	req.Header.Set("Accept-Encoding", "gzip")
++	response := httptest.NewRecorder()
++	r.ServeHTTP(response, req)
++	if response.Header().Get("Content-Encoding") != "" || response.Body.String() != "data: ready\n\n" {
++		t.Fatal("static compression leaked into SSE")
++	}
++	for _, encoding := range []string{"identity", "gzip;q=0", "gzip;q=0, *;q=1", "br"} {
++		req := httptest.NewRequest(http.MethodGet, "/static/ui.js", nil)
++		req.Header.Set("Accept-Encoding", encoding)
++		response := httptest.NewRecorder()
++		r.ServeHTTP(response, req)
++		if response.Header().Get("Content-Encoding") != "" || !bytes.Equal(response.Body.Bytes(), uiJS) {
++			t.Fatalf("client declining gzip received encoded bytes: %q", encoding)
++		}
++	}
++	req = httptest.NewRequest(http.MethodGet, "/vendor/slickgrid/slick.grid.js", nil)
++	req.Header.Set("Accept-Encoding", "gzip")
++	req.Header.Set("Range", "bytes=0-15")
++	response = httptest.NewRecorder()
++	r.ServeHTTP(response, req)
++	if response.Code != http.StatusPartialContent || response.Body.Len() != 16 || response.Header().Get("Content-Encoding") != "" {
++		t.Fatal("static compression changed a byte range")
++	}
++}
++
++func TestVersionedAppScriptsCacheAndRevalidate(t *testing.T) {
++	r := chi.NewRouter()
++	mountStatic(r)
++	for _, path := range []string{"/static/ui.js", "/static/managed.js", "/static/query-builder.js", "/static/settings-navigation.js"} {
++		plain := httptest.NewRecorder()
++		r.ServeHTTP(plain, httptest.NewRequest(http.MethodGet, path, nil))
++		version := strings.Trim(plain.Header().Get("ETag"), `"`)
++		if version == "" {
++			t.Fatalf("%s: missing content-derived version", path)
++		}
++		for _, suffix := range []string{"?v=" + version, "?v=previous-build", ""} {
++			req := httptest.NewRequest(http.MethodGet, path+suffix, nil)
++			rr := httptest.NewRecorder()
++			r.ServeHTTP(rr, req)
++			immutable := strings.Contains(rr.Header().Get("Cache-Control"), "immutable")
++			if immutable != (suffix == "?v="+version) || !bytes.Equal(rr.Body.Bytes(), plain.Body.Bytes()) {
++				t.Fatalf("%s%s: invalid cache/content contract", path, suffix)
++			}
++			req.Header.Set("If-None-Match", plain.Header().Get("ETag"))
++			req.Header.Set("Accept-Encoding", "gzip")
++			notModified := httptest.NewRecorder()
++			r.ServeHTTP(notModified, req)
++			if notModified.Code != http.StatusNotModified || notModified.Body.Len() != 0 {
++				t.Fatalf("%s%s: revalidation = %d, %d bytes", path, suffix, notModified.Code, notModified.Body.Len())
++			}
++		}
 +	}
 +}
