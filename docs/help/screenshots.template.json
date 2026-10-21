@@ -4,6 +4,10 @@
   "viewport": {"width": 1440, "height": 1050},
   "screenshots": [
     {
+      "file": "cash-receipt.png", "path": "/ui/document/ПриходныйКассовыйОрдер/${CASH_RECEIPT}", "selector": "main",
+      "wait_for": "[name='Сумма']"
+    },
+    {
       "file": "navigation-sales.png", "path": "/ui/?subsystem=Продажи", "selector": ".app-body",
       "wait_for": "#ob-nav [data-nav-id='cfg:sales-work']"
     },

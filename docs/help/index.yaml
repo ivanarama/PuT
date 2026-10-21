@@ -8,13 +8,57 @@ chapters:
     objects:
       - catalog/Контрагент
       - catalog/Номенклатура
+      - document/УстановкаЦен
     title: Карточки клиента и товара
   - file: orders.md
     id: orders
     objects:
       - document/ЗаказПокупателя
       - document/ЗаказПоставщику
+      - document/ЗакрытиеЗаказовПокупателей
+      - document/ЗакрытиеЗаказовПоставщикам
     title: Заказы и обеспечение
+  - file: trade.md
+    id: trade
+    objects:
+      - document/Счёт
+      - document/РеализацияТоваров
+      - document/ПоступлениеТоваров
+      - document/ВозвратОтПокупателя
+      - document/ВозвратПоставщику
+    title: Продажи, закупки и возвраты
+  - file: money.md
+    id: money
+    objects:
+      - document/ПриходныйКассовыйОрдер
+      - document/РасходныйКассовыйОрдер
+      - document/ПоступлениеНаРасчётныйСчёт
+      - document/СписаниеСРасчётногоСчёта
+      - document/КорректировкаДолга
+      - catalog/Касса
+      - processor/РабочееМестоКассира
+      - processor/ЗагрузкаВыписки
+      - report/ОстаткиДенежныхСредств
+      - report/ДвижениеДенежныхСредств
+      - report/ВыпискаБанка
+      - report/АктСверки
+      - report/ОплатыРеализаций
+      - report/ОплатыПоступлений
+      - report/ПлатежныйКалендарь
+    title: Касса, банк и расчёты
+  - file: warehouse.md
+    id: warehouse
+    objects:
+      - document/ПеремещениеТоваров
+      - document/ОприходованиеТоваров
+      - document/СписаниеТоваров
+      - document/ПересчетТоваров
+      - document/РазборкаТоваров
+      - report/ОстаткиТоваров
+      - report/СвободныеОстатки
+      - report/РезервыТоваров
+      - report/ТоварыВПути
+    title: Складские документы
   - file: jobs.md
     id: jobs
     objects:
@@ -30,7 +74,6 @@ chapters:
       - processor/ОтгрузкаЗаказов
       - processor/ИнвентаризацияСклада
       - processor/ЗагрузкаЭДО
-      - processor/ЗагрузкаВыписки
       - document/СборкаТоваров
     title: Ежедневная работа
 enabled: true
