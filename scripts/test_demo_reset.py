@@ -56,8 +56,16 @@ def main():
             assert result.returncode == 0, result.stdout+result.stderr
             metrics = json.loads(result.stdout.strip().splitlines()[-1])
             assert metrics['sales'] > 0 and metrics['revenue'] > 0, metrics
-            assert sales()[0] == 6, 'repeat reset must not duplicate sales'
+            assert sales()[0] == 7, 'repeat reset must not duplicate sales'
+            verify_stage_examples(database)
             print('rolling reset', repeat+1, metrics)
+        before = sales()
+        run('procrun', *target, '--proc', 'ЗаполнитьТестовуюБазу')
+        assert sales() == before, 'additive refill must not duplicate fulfillment documents'
+        verify_stage_examples(database)
+        run('procrun', *target, '--proc', 'ДополнитьДемоЗаказы', '--set', 'ДемоБаза=true')
+        assert sales() == before, 'dedicated additive refill must not duplicate fulfillment documents'
+        verify_stage_examples(database)
         # The first day of a month and leap day still contain an anchor-day sale.
         for anchor in ['2026-01-01', '2024-02-29']:
             run('procrun', *target, '--proc', 'ЗаполнитьТестовуюБазу', '--set', 'Очистить=true',
@@ -88,6 +96,28 @@ def main():
                               ('PUT-ROLLBACK',)).fetchone()[0] == 0
         print('IMPORT IDEMPOTENCY AND ROLLBACK OK')
         print('DEMO RESET REGRESSION OK')
+
+
+def verify_stage_examples(database):
+    expected = {'Новый', 'Принят', 'НаОбеспечении', 'ВРаботе', 'Готов', 'Завершён', 'Отменён'}
+    with closing(sqlite3.connect(database)) as db:
+        for table,register,dimension in [
+            ('заказпокупателя', 'рег_резервытоваров', 'заказпокупателя_id'),
+            ('заказпоставщику', 'рег_товарывпути', 'заказпоставщику_id'),
+        ]:
+            orders = db.execute(f'SELECT id,состояние,posted FROM {table} WHERE комментарий LIKE ?',
+                                ('Демо этапов: %',)).fetchall()
+            assert len(orders) == 7 and {row[1] for row in orders} == expected, (table, orders)
+            for identity,stage,posted in orders:
+                assert bool(posted) == (stage != 'Новый'), (table, stage, posted)
+                balance = db.execute(f'''SELECT coalesce(sum(CASE WHEN вид_движения='Приход'
+                    THEN CAST(количество AS NUMERIC) ELSE -CAST(количество AS NUMERIC) END),0)
+                    FROM {register} WHERE {dimension}=?''', (identity,)).fetchone()[0]
+                assert balance == (1 if stage in {'Принят','НаОбеспечении','ВРаботе','Готов'} else 0), (table, stage, balance)
+                if stage == 'Завершён':
+                    fulfillment = 'реализациятоваров' if table == 'заказпокупателя' else 'поступлениетоваров'
+                    assert db.execute(f'SELECT count(*) FROM {fulfillment} WHERE {dimension}=? AND posted=1',
+                                      (identity,)).fetchone()[0] == 1, (table, stage)
 
 
 if __name__ == '__main__':

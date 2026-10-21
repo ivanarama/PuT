@@ -17,6 +17,7 @@ chapters:
       - document/ЗаказПоставщику
       - document/ЗакрытиеЗаказовПокупателей
       - document/ЗакрытиеЗаказовПоставщикам
+      - processor/ДополнитьДемоЗаказы
     title: Заказы и обеспечение
   - file: trade.md
     id: trade

@@ -24,7 +24,7 @@ index 5964dcba..4eff8c5c 100644
    - name: Номер
      type: string
 diff --git a/internal/i18n/locales/en.json b/internal/i18n/locales/en.json
-index eb943d9e..a47bdb8f 100644
+index eb943d9e..a79ce9d5 100644
 --- a/internal/i18n/locales/en.json
 +++ b/internal/i18n/locales/en.json
 @@ -1,4 +1,5 @@
@@ -33,6 +33,14 @@ index eb943d9e..a47bdb8f 100644
    "у локального источника %s нет ссылочного реквизита %s; внешняя ссылка затенена": "Local source %s has no reference field %s; the outer reference is shadowed",
    "временный каталог загрузок": "temporary upload directory",
    "временный файл параметра %s": "temporary file for parameter %s",
+@@ -429,6 +430,7 @@
+   "Наверх": "Up",
+   "Нажмите «Добавить» для создания первой базы": "Click \"Add\" to create the first database",
+   "Нажмите «Заполнить из запроса» или введите вручную": "Click \"Fill from query\" or enter manually",
++  "Нет доступных объектов с этапами.": "No objects with stages are available.",
+   "Назад": "Back",
+   "Назад к списку баз": "Back to database list",
+   "Название": "Name",
 diff --git a/internal/ui/dev_query_delegates_test.go b/internal/ui/dev_query_delegates_test.go
 index 49db22f4..7e3cd4e9 100644
 --- a/internal/ui/dev_query_delegates_test.go
@@ -171,6 +179,51 @@ index 6de27fc0..15421ba6 100644
 +<script src="{{appJSURL "/static/settings-navigation.js"}}"></script>
  </body></html>
  {{end}}`
+diff --git a/internal/ui/stages.go b/internal/ui/stages.go
+index e5c158de..30e1ec8f 100644
+--- a/internal/ui/stages.go
++++ b/internal/ui/stages.go
+@@ -11,6 +11,7 @@ import (
+ 	"fmt"
+ 	"html/template"
+ 	"net/http"
++	"net/url"
+ 	"sort"
+ 	"strings"
+ 	"time"
+@@ -240,6 +241,12 @@ func (s *Server) stagesReport(w http.ResponseWriter, r *http.Request) {
+ 	ctx := r.Context()
+ 	lang := s.resolveLang(r)
+ 	wanted := strings.TrimSpace(chi.URLParam(r, "entity"))
++	if decoded, err := url.PathUnescape(wanted); err == nil {
++		wanted = decoded
++	} else {
++		http.NotFound(w, r)
++		return
++	}
+ 
+ 	var reports []*stageEntityReport
+ 	for _, e := range s.reg.Entities() {
+@@ -309,9 +316,17 @@ func (s *Server) stagesReport(w http.ResponseWriter, r *http.Request) {
+ 	}
+ 	sort.Slice(reports, func(i, j int) bool { return reports[i].Entity.Name < reports[j].Entity.Name })
+ 
++	returnURL := ""
++	if wanted != "" && len(reports) == 1 {
++		if id, err := uuid.Parse(r.URL.Query().Get("object")); err == nil && id != uuid.Nil {
++			e := reports[0].Entity
++			returnURL = "/ui/" + string(e.Kind) + "/" + url.PathEscape(e.Name) + "/" + id.String()
++		}
++	}
+ 	s.render(w, r, "page-stages", map[string]any{
+-		"Reports": reports,
+-		"Wanted":  wanted,
++		"Reports":   reports,
++		"Wanted":    wanted,
++		"ReturnURL": returnURL,
+ 	})
+ }
+ 
 diff --git a/internal/ui/static.go b/internal/ui/static.go
 index 51195769..7c733284 100644
 --- a/internal/ui/static.go
@@ -520,7 +573,7 @@ index 63db5ea7..e48e58c3 100644
  	}
  	js := string(uiJS)
 diff --git a/internal/ui/templates.go b/internal/ui/templates.go
-index 90eacbb2..ce292650 100644
+index 90eacbb2..ad54d865 100644
 --- a/internal/ui/templates.go
 +++ b/internal/ui/templates.go
 @@ -227,6 +227,7 @@ func templateFuncs(bundle *i18n.Bundle) template.FuncMap {
@@ -572,6 +625,27 @@ index 90eacbb2..ce292650 100644
    {{end}}
    <div data-ob-widget-body>
    {{template "widget-body" .}}
+@@ -3929,7 +3941,7 @@ const tplStages = `
+     {{else}}
+       <span style="font-size:13px;color:#94a3b8">{{t $.Lang "не задан"}}</span>
+     {{end}}
+-    <a href="/ui/stages/{{lower .Entity.Name}}" style="font-size:12px;color:#64748b;margin-left:auto">{{t $.Lang "Где застряло"}} →</a>
++    <a href="/ui/stages/{{lower .Entity.Name}}{{if .ID}}?object={{.ID}}{{end}}" style="font-size:12px;color:#64748b;margin-left:auto">{{t $.Lang "Где застряло"}} →</a>
+   </div>
+   <div class="ob-stage-route" data-ob-stage-option="{{stageChartJSON .StageRoute}}" style="height:90px"></div>
+ </div>
+@@ -3963,9 +3975,10 @@ const tplStages = `
+ <main>
+ <div class="row-top">
+   <h2>{{t $.Lang "Этапы — где застряло"}}</h2>
++  {{if .ReturnURL}}<a class="btn btn-secondary" data-ob-stage-return href="{{.ReturnURL}}">{{t $.Lang "← Назад"}}</a>{{end}}
+ </div>
+ {{if not .Reports}}
+-<p class="empty">{{t $.Lang "Ни у одной сущности не объявлен блок stages."}}</p>
++<p class="empty">{{t $.Lang "Нет доступных объектов с этапами."}}</p>
+ {{end}}
+ {{range $ri, $rep := .Reports}}
+ <div class="card" style="margin-bottom:20px">
 diff --git a/internal/ui/templates_managed.go b/internal/ui/templates_managed.go
 index d19bbafb..77eef56d 100644
 --- a/internal/ui/templates_managed.go
@@ -925,5 +999,61 @@ index 00000000..953092b0
 +				t.Fatalf("%s%s: revalidation = %d, %d bytes", path, suffix, notModified.Code, notModified.Body.Len())
 +			}
 +		}
++	}
++}
+diff --git a/internal/ui/stages_navigation_test.go b/internal/ui/stages_navigation_test.go
+new file mode 100644
+index 00000000..7b9d8bb1
+--- /dev/null
++++ b/internal/ui/stages_navigation_test.go
+@@ -0,0 +1,50 @@
++package ui
++
++import (
++	"net/http"
++	"net/http/httptest"
++	"net/url"
++	"strings"
++	"testing"
++
++	"github.com/go-chi/chi/v5"
++	"github.com/google/uuid"
++)
++
++func TestStagesReportEncodedEntityAndReturnLink(t *testing.T) {
++	s, e, ctx := stagesUIServer(t)
++	id := uuid.New()
++	if err := s.store.Upsert(ctx, e.Name, id, map[string]any{"Наименование": "Проверка возврата", "Состояние": "Черновик"}, e); err != nil {
++		t.Fatal(err)
++	}
++	router := chi.NewRouter()
++	router.Get("/ui/stages/{entity}", s.stagesReport)
++	path := "/ui/stages/" + url.PathEscape(strings.ToLower(e.Name))
++	for _, object := range []string{id.String(), "https://outside.invalid/", "bad-id", ""} {
++		recorder := httptest.NewRecorder()
++		request := httptest.NewRequest(http.MethodGet, path+"?object="+url.QueryEscape(object), nil)
++		router.ServeHTTP(recorder, request)
++		body := recorder.Body.String()
++		if recorder.Code != http.StatusOK || !strings.Contains(body, "Черновик") || strings.Contains(body, `class="empty"`) {
++			t.Fatalf("encoded entity lost its stages: status=%d", recorder.Code)
++		}
++		if object == id.String() {
++			want := `href="/ui/catalog/` + url.PathEscape(e.Name) + "/" + id.String() + `"`
++			if !strings.Contains(body, want) || !strings.Contains(body, "data-ob-stage-return") {
++				t.Fatalf("report does not return to its source object: want %s", want)
++			}
++		} else if strings.Contains(body, "data-ob-stage-return") {
++			t.Fatalf("invalid source became a return URL: %q", object)
++		}
++	}
++	var route strings.Builder
++	if err := tmpl.ExecuteTemplate(&route, "stage-route", map[string]any{
++		"Entity": e, "ID": id.String(), "IsNew": false, "Cfg": s.cfg, "Lang": "ru",
++		"StageRoute": s.buildStageRoute(httptest.NewRequest(http.MethodGet, "/", nil), e, "Черновик"),
++	}); err != nil {
++		t.Fatal(err)
++	}
++	if !strings.Contains(route.String(), "?object="+id.String()) {
++		t.Fatal("object form did not pass its identity to the stages report")
 +	}
 +}

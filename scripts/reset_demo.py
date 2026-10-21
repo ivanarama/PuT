@@ -67,7 +67,18 @@ def main():
         summary[name] = float(data['rows'][0]['значение'] or 0)
         if summary[name] <= 0:
             raise RuntimeError(f'Demo check failed: current-month {name} is zero')
-    print(json.dumps({'period': beginning.date().isoformat(), **summary}, ensure_ascii=False), flush=True)
+    expected_stages = {'Новый','Принят','НаОбеспечении','ВРаботе','Готов','Завершён','Отменён'}
+    stage_examples = {}
+    for entity in ['ЗаказПокупателя', 'ЗаказПоставщику']:
+        query = ('ВЫБРАТЬ Д.Состояние КАК Этап, КОЛИЧЕСТВО(*) КАК Количество ИЗ Документ.' + entity +
+                 ' КАК Д ГДЕ Д.Комментарий ПОДОБНО &Метка СГРУППИРОВАТЬ ПО Д.Состояние')
+        data = run(['query','--project',str(project),*target,'--json','--params',
+                    json.dumps({'Метка':'Демо этапов: %'},ensure_ascii=False),query],query=True)
+        stages = {row['этап']:int(row['количество']) for row in data['rows']}
+        if set(stages) != expected_stages or any(count != 1 for count in stages.values()):
+            raise RuntimeError(f'Demo check failed: {entity} stage examples are incomplete or duplicated')
+        stage_examples[entity] = len(stages)
+    print(json.dumps({'period': beginning.date().isoformat(), **summary, 'order_stages':stage_examples}, ensure_ascii=False), flush=True)
 
 
 if __name__ == '__main__':

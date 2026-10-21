@@ -4,6 +4,10 @@
   "viewport": {"width": 1440, "height": 1050},
   "screenshots": [
     {
+      "file": "order-stages.png", "path": "/ui/stages/ЗаказПоставщику?object=${SUPPLIER_ORDER}", "selector": "main",
+      "wait_for": "#ob-stage-report-0 canvas"
+    },
+    {
       "file": "cash-receipt.png", "path": "/ui/document/ПриходныйКассовыйОрдер/${CASH_RECEIPT}", "selector": "main",
       "wait_for": "[name='Сумма']"
     },

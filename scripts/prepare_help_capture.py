@@ -28,6 +28,7 @@ def main():
             'CUSTOMER': scalar('select id from контрагент where наименование like ?', ('%Маленький стульчик%',)),
             'PRODUCT': scalar('select id from номенклатура where наименование like ?', ('%Внезапно Зашатался%',)),
             'ORDER': scalar('select id from заказпокупателя order by номер limit 1'),
+            'SUPPLIER_ORDER': scalar('select id from заказпоставщику order by номер limit 1'),
             'CASH_RECEIPT': scalar('select id from приходныйкассовыйордер order by дата desc, номер limit 1'),
             'SPEC': scalar("select с.id from спецификацииноменклатуры с join номенклатура н on н.id=с.номенклатура_id where с.deletion_mark=0 order by case when н.наименование like '%Столовый%' then 0 else 1 end, с.наименование limit 1"),
             'JOB': scalar("select id from _job_queue where job_name='ФонЗакрытиеМесяца' and status='done' order by finished_at desc limit 1"),
