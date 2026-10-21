@@ -5,5 +5,5 @@
   "commit": "ac6231b8dd7a88e1ca19d532e0ac15e60c73bbca",
   "build": "0.13.0+put.2.ac6231b8",
   "patch": "platform-patches/put-ui.patch",
-  "patch_sha256": "bb0aab204b388411024fa3b482f9bfc68800c338fb7ec60d60a1b3a996736474"
+  "patch_sha256": "ea2291c15def6c245bc17e22502a317848fc0dd5678bc3cde13182d773045998"
 }

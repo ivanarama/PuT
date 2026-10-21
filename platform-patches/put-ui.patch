@@ -33,6 +33,45 @@ index eb943d9e..a47bdb8f 100644
    "у локального источника %s нет ссылочного реквизита %s; внешняя ссылка затенена": "Local source %s has no reference field %s; the outer reference is shadowed",
    "временный каталог загрузок": "temporary upload directory",
    "временный файл параметра %s": "temporary file for parameter %s",
+diff --git a/internal/ui/dev_query_delegates_test.go b/internal/ui/dev_query_delegates_test.go
+index 49db22f4..7e3cd4e9 100644
+--- a/internal/ui/dev_query_delegates_test.go
++++ b/internal/ui/dev_query_delegates_test.go
+@@ -18,7 +18,7 @@ func TestDevQueryPagesUseDelegatedHandlers(t *testing.T) {
+ 			data: map[string]any{"Schema": template.JS(`[]`)},
+ 			want: []string{
+ 				`id="ob-query-builder-schema"`,
+-				`src="/static/query-builder.js"`,
++				`src="/static/query-builder.js?v=`,
+ 				`data-ob-qb-source`,
+ 				`data-ob-qb-main-alias`,
+ 				`data-ob-qb-vt-param`,
+diff --git a/internal/ui/equipment_ui_test.go b/internal/ui/equipment_ui_test.go
+index 3f14d5d1..1e321069 100644
+--- a/internal/ui/equipment_ui_test.go
++++ b/internal/ui/equipment_ui_test.go
+@@ -34,7 +34,7 @@ func renderPage(t *testing.T, name string, extra ...map[string]any) string {
+ // Мост onebaseDevice подключён общим layout и доступен на каждой странице.
+ func TestUI_DeviceBridge_InHead(t *testing.T) {
+ 	html := renderPage(t, "page-index")
+-	if !strings.Contains(html, `src="/static/ui.js"`) {
++	if !strings.Contains(html, `src="/static/ui.js?v=`) {
+ 		t.Fatalf("layout не подключает /static/ui.js")
+ 	}
+ 	js := string(uiJS)
+diff --git a/internal/ui/form_conditional_test.go b/internal/ui/form_conditional_test.go
+index a302445b..b447c4e4 100644
+--- a/internal/ui/form_conditional_test.go
++++ b/internal/ui/form_conditional_test.go
+@@ -72,7 +72,7 @@ func TestManagedFormConditionalRenderSlickGrid(t *testing.T) {
+ 	applyManagedFormConditionalStyles(form, rows, nil, newInterpEvaluator(interpreter.New()))
+ 
+ 	html := renderConditionalManagedForm(t, ent, form, rows)
+-	for _, want := range []string{"_form_row_class", "_form_cell_classes", `src="/static/managed.js"`} {
++	for _, want := range []string{"_form_row_class", "_form_cell_classes", `src="/static/managed.js?v=`} {
+ 		if !strings.Contains(html, want) {
+ 			t.Fatalf("rendered grid form missing %q:\n%s", want, html)
+ 		}
 diff --git a/internal/ui/handlers_home.go b/internal/ui/handlers_home.go
 index d045998b..5dd1d857 100644
 --- a/internal/ui/handlers_home.go
@@ -92,6 +131,34 @@ index 4a208b9b..ece01ce0 100644
  	rows, err := processorFormTableRowsFromRequest(r, entity, form, controls.formTables)
  	if err != nil {
  		return nil, err
+diff --git a/internal/ui/managed_form_test.go b/internal/ui/managed_form_test.go
+index 8c07aa53..e6cd7b67 100644
+--- a/internal/ui/managed_form_test.go
++++ b/internal/ui/managed_form_test.go
+@@ -149,8 +149,8 @@ func TestPageManagedForm_Renders(t *testing.T) {
+ 		`"closeUrl":"/ui/catalog/Контрагент/form-close-intent"`,
+ 		`"closeTimeoutMs":31500`,
+ 		`id="ob-managed-tp-ref-opts"`,
+-		`src="/static/managed.js"`,
+-		`src="/static/ui.js"`, // managed-форма грузит и ui.js (из "head"): делегат data-ob-toggle-next живёт только там (issue #309)
++		`src="/static/managed.js?v=`,
++		`src="/static/ui.js?v=`, // managed-форма грузит и ui.js (из "head"): делегат data-ob-toggle-next живёт только там (issue #309)
+ 	}
+ 	for _, e := range expects {
+ 		if !strings.Contains(html, e) {
+diff --git a/internal/ui/pwa_test.go b/internal/ui/pwa_test.go
+index b6ae878e..16f303ec 100644
+--- a/internal/ui/pwa_test.go
++++ b/internal/ui/pwa_test.go
+@@ -83,7 +83,7 @@ func TestHeadHasPWATags(t *testing.T) {
+ 		t.Fatalf("рендер head: %v", err)
+ 	}
+ 	out := buf.String()
+-	for _, want := range []string{`name="viewport"`, `rel="manifest"`, `src="/static/ui.js"`} {
++	for _, want := range []string{`name="viewport"`, `rel="manifest"`, `src="/static/ui.js?v=`} {
+ 		if !strings.Contains(out, want) {
+ 			t.Errorf("head не содержит %q", want)
+ 		}
 diff --git a/internal/ui/settings_navigation_tmpl.go b/internal/ui/settings_navigation_tmpl.go
 index 6de27fc0..15421ba6 100644
 --- a/internal/ui/settings_navigation_tmpl.go
@@ -424,6 +491,34 @@ index 8a44abb0..3b4b9cca 100644
  test('изменение фильтра обновляет адрес карточки и перечитывает её', () => {
    const app = setup('');
    app.__selectA.value = 'Гвозди';
+diff --git a/internal/ui/tabs_test.go b/internal/ui/tabs_test.go
+index 942985bf..bc5c3f1d 100644
+--- a/internal/ui/tabs_test.go
++++ b/internal/ui/tabs_test.go
+@@ -106,7 +106,7 @@ func TestHead_EmbeddedChromeHidden(t *testing.T) {
+ 	}
+ 	html := buf.String()
+ 	for _, want := range []string{
+-		`src="/static/ui.js"`,
++		`src="/static/ui.js?v=`,
+ 		`ob-embedded`,
+ 		`.ob-embedded .topbar,.ob-embedded .subsys-bar,.ob-embedded #ob-nav{display:none`,
+ 	} {
+diff --git a/internal/ui/telephony_service_test.go b/internal/ui/telephony_service_test.go
+index 63db5ea7..e48e58c3 100644
+--- a/internal/ui/telephony_service_test.go
++++ b/internal/ui/telephony_service_test.go
+@@ -297,8 +297,8 @@ func TestTelephony_PanelRenders(t *testing.T) {
+ // Общий layout содержит слушатель шины для входящего звонка (план 75): без него
+ // скрин-поп не виден ни на одной странице (страницы JS не инжектят).
+ func TestTelephony_LayoutHasCallToast(t *testing.T) {
+-	src := templateSource()
+-	if !strings.Contains(src, `src="/static/ui.js"`) {
++	src := renderPage(t, "page-index")
++	if !strings.Contains(src, `src="/static/ui.js?v=`) {
+ 		t.Fatalf("layout не подключает общий ui.js")
+ 	}
+ 	js := string(uiJS)
 diff --git a/internal/ui/templates.go b/internal/ui/templates.go
 index 90eacbb2..ce292650 100644
 --- a/internal/ui/templates.go

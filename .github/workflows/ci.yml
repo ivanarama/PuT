@@ -34,10 +34,10 @@ jobs:
           cd /tmp/onebase
           go build -ldflags "-X github.com/ivantit66/onebase/internal/version.Build=$build" -o /usr/local/bin/onebase ./cmd/onebase
 
-      - name: Check platform static asset compression and cache
+      - name: Check platform UI and static assets
         run: |
           cd /tmp/onebase
-          go test ./internal/ui -run 'Test(StaticAssetsCompressedOnPublicRoutes|VersionedAppScriptsCacheAndRevalidate|StaticJSRevalidates)$' -count=1 -timeout 180s
+          go test ./internal/ui ./internal/webassets ./internal/widget ./internal/configcheck -count=1 -timeout 600s
 
       - name: Check supported platform build
         run: python3 scripts/check_runtime.py --onebase /usr/local/bin/onebase
