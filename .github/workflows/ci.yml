@@ -45,6 +45,12 @@ jobs:
       - name: Run onebase check
         run: onebase check --project .
 
+      - name: Check BP3 exporter contract
+        run: |
+          python3 -m pip install pyyaml
+          python3 scripts/generate_bp3_exporter.py --check
+          python3 scripts/test_bp3_export.py --onebase /usr/local/bin/onebase
+
       - name: Run onebase lint
         run: onebase lint --project .
 

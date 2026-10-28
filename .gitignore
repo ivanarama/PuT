@@ -1,6 +1,8 @@
 замечания_по_платформе.md
 debug.log
 docs/*
+!docs/BP3_EXCHANGE.md
+!docs/bp3-schema.json
 !docs/help/
 !docs/LOCAL_PREVIEW.md
 !docs/DEMO_RESET.md
@@ -45,5 +47,6 @@ scripts/demo_images/
 # Локальный стенд и артефакты проверки интерфейса
 .local/
 .artifacts/
+build/
 *.db-wal
 *.db-shm
