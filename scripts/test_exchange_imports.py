@@ -172,6 +172,10 @@ def verify_parallel_postgres(executable, dsn_path, tmp):
     org = str(uuid.uuid4())
     partner = "Плательщик " + suffix
     with psycopg.connect(env["DATABASE_URL"]) as connection:
+        writer_tables = connection.execute(
+            "SELECT to_regclass('_audit') IS NOT NULL, to_regclass('_stage_history') IS NOT NULL"
+        ).fetchone()
+        assert writer_tables == (True, True), f"migrate must prepare the processor schemas: {writer_tables}"
         connection.execute("INSERT INTO касса(id,наименование,вид) VALUES (%s,%s,%s)",
                            (account, "Банк " + suffix, "БанковскийСчёт"))
         connection.execute("INSERT INTO организация(id,наименование) VALUES (%s,%s)",

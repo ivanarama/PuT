@@ -1165,3 +1165,23 @@ index 143d4210..af1ddec2 100644
 +		}
 +	}
 +}
+diff --git a/internal/cli/migrate.go b/internal/cli/migrate.go
+index 5bca0ea8..20c2509b 100644
+--- a/internal/cli/migrate.go
++++ b/internal/cli/migrate.go
+@@ -101,6 +101,15 @@ func runMigrate(cmd *cobra.Command, _ []string) error {
+ 	if err := applyAllMigrations(ctx, db, proj); err != nil {
+ 		return err
+ 	}
++	// Create the schemas used by document writers before the first processors
++	// start concurrently. PostgreSQL can race on concurrent CREATE TABLE even
++	// with IF NOT EXISTS when the relation does not exist yet.
++	if err := db.EnsureAuditSchema(ctx); err != nil {
++		return fmt.Errorf("audit schema: %w", err)
++	}
++	if err := db.EnsureStageHistorySchema(ctx); err != nil {
++		return fmt.Errorf("stage history schema: %w", err)
++	}
+ 	if skipped > 0 {
+ 		outf("\nНе применено изменений: %d — они удаляют данные.\n", skipped)
+ 		outln("Колонки остались в базе нетронутыми. Чтобы удалить их вместе с данными,")
