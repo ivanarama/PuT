@@ -1057,3 +1057,111 @@ index 00000000..7b9d8bb1
 +		t.Fatal("object form did not pass its identity to the stages report")
 +	}
 +}
+diff --git a/internal/query/query.go b/internal/query/query.go
+index 0e3b287e..e17dc39a 100644
+--- a/internal/query/query.go
++++ b/internal/query/query.go
+@@ -2464,7 +2464,7 @@ func (tr *translator) genBalances(reg *metadata.Register, args [][]tok) (string,
+ 	// атрибуты — не часть ключа измерения, но должны быть
+ 	// доступны в outer SELECT/WHERE. Берём MIN(col) — детерминированно
+ 	// и работает в обоих диалектах (TEXT/UUID сравнимы лексикографически).
+-	cols = append(cols, attributeAggCols(reg.Attributes)...)
++	cols = append(cols, tr.attributeAggCols(reg.Attributes)...)
+ 
+ 	var sb strings.Builder
+ 	sb.WriteString("SELECT ")
+@@ -2720,7 +2720,7 @@ func (tr *translator) genTurnovers(reg *metadata.Register, args [][]tok) (string
+ 			"SUM(CASE WHEN вид_движения = 'Приход' THEN "+col+" ELSE -"+col+" END) AS "+col+"оборот",
+ 		)
+ 	}
+-	cols = append(cols, attributeAggCols(reg.Attributes)...)
++	cols = append(cols, tr.attributeAggCols(reg.Attributes)...)
+ 
+ 	var sb strings.Builder
+ 	sb.WriteString("SELECT ")
+@@ -2878,7 +2878,7 @@ func (tr *translator) genBalancesAndTurnovers(reg *metadata.Register, args [][]t
+ 					" THEN -"+col+" ELSE 0 END) AS "+col+"конечный")
+ 		}
+ 	}
+-	cols = append(cols, attributeAggCols(reg.Attributes)...)
++	cols = append(cols, tr.attributeAggCols(reg.Attributes)...)
+ 
+ 	var sb strings.Builder
+ 	sb.WriteString("SELECT ")
+@@ -2910,17 +2910,24 @@ func (tr *translator) genBalancesAndTurnovers(reg *metadata.Register, args [][]t
+ 	return sb.String(), alias, nil
+ }
+ 
+-// attributeAggCols returns "MIN(col) AS col" expressions for each attribute.
+-// Атрибуты не часть ключа измерения, поэтому в SELECT их нельзя оставлять
+-// без агрегата (SQL ошибся бы). MIN — детерминированный выбор. Если атрибут
+-// варьируется в пределах одного значения измерения, MIN отдаст
+-// лексикографически минимальное; в стабильных учётных моделях такое
+-// нехарактерно.
+-func attributeAggCols(attrs []metadata.Field) []string {
++// attributeAggCols selects one deterministic minimum per non-grouped attribute.
++func (tr *translator) attributeAggCols(attrs []metadata.Field) []string {
++	postgres := dialectOrDefault(tr.opts.Dialect).Name() == "postgres"
+ 	out := make([]string, 0, len(attrs))
+ 	for _, a := range attrs {
+ 		col := metadata.ColumnName(a)
+-		out = append(out, "MIN("+col+") AS "+col)
++		aggregate := "MIN(" + col + ")"
++		if postgres {
++			switch {
++			case a.RefEntity != "":
++				// PostgreSQL 16 has no MIN(uuid). Canonical UUID text in C order
++				// preserves byte order. Return a UUID for outer joins and filters.
++				aggregate = "MIN(" + col + `::text COLLATE "C")::uuid`
++			case a.Type == metadata.FieldTypeBool:
++				aggregate = "BOOL_AND(" + col + ")"
++			}
++		}
++		out = append(out, aggregate+" AS "+col)
+ 	}
+ 	return out
+ }
+diff --git a/internal/query/query_test.go b/internal/query/query_test.go
+index 143d4210..af1ddec2 100644
+--- a/internal/query/query_test.go
++++ b/internal/query/query_test.go
+@@ -967,3 +967,39 @@ func TestCompile_VT_WithUserAlias(t *testing.T) {
+ 		t.Errorf("JOIN ON must use user alias, got: %s", sql)
+ 	}
+ }
++
++func TestCompile_RegisterAttributeAggregatesByDialect(t *testing.T) {
++	reg := &metadata.Register{
++		Name:       "Деньги",
++		Dimensions: []metadata.Field{{Name: "Валюта", Type: metadata.FieldTypeString}},
++		Resources:  []metadata.Field{{Name: "Сумма", Type: metadata.FieldTypeNumber}},
++		Attributes: []metadata.Field{
++			{Name: "Партнер", Type: "reference:Партнеры", RefEntity: "Партнеры"},
++			{Name: "Активен", Type: metadata.FieldTypeBool},
++			{Name: "Объект", Type: "anyref"},
++		},
++	}
++	for _, table := range []string{"Остатки", "Обороты", "ОстаткиИОбороты"} {
++		for _, dialect := range []storage.Dialect{storage.PgDialect{}, storage.SQLiteDialect{}} {
++			t.Run(table+"/"+dialect.Name(), func(t *testing.T) {
++				result, err := query.Compile("ВЫБРАТЬ Валюта ИЗ РегистрНакопления.Деньги."+table+"()", query.CompileOpts{
++					Dialect: dialect, Registers: []*metadata.Register{reg},
++				})
++				if err != nil {
++					t.Fatal(err)
++				}
++				want := []string{"MIN(объект) AS объект"}
++				if dialect.Name() == "postgres" {
++					want = append(want, `MIN(партнер_id::text COLLATE "C")::uuid AS партнер_id`, "BOOL_AND(активен) AS активен")
++				} else {
++					want = append(want, "MIN(партнер_id) AS партнер_id", "MIN(активен) AS активен")
++				}
++				for _, expression := range want {
++					if !strings.Contains(result.SQL, expression) {
++						t.Errorf("missing %q in %s", expression, result.SQL)
++					}
++				}
++			})
++		}
++	}
++}
