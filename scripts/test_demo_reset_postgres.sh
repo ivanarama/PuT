@@ -38,6 +38,8 @@ install -d -o onebase -g onebase "$ONEBASE_FILES_DIR" "$work/baseline-files"
 cd /tmp
 binary=/usr/local/bin/onebase
 runuser -u onebase -- "$binary" migrate --project /project
+runuser -u onebase -- "$binary" procrun --project /project --proc ЗаполнитьТестовуюБазу >/dev/null
+cp -a "$ONEBASE_FILES_DIR/." "$work/baseline-files/"
 sql -c "SET ROLE onebase; CREATE TABLE reset_test_marker (value text); INSERT INTO reset_test_marker VALUES ('baseline')"
 runuser -u postgres -- pg_dump -Fc -d "$dbname" >"$work/baseline.dump"
 printf 'baseline\0bytes' >"$work/baseline-files/shared.bin"
@@ -45,7 +47,7 @@ printf 'baseline only' >"$work/baseline-files/baseline-only.bin"
 printf 'live\0bytes' >"$ONEBASE_FILES_DIR/shared.bin"
 printf 'user upload' >"$ONEBASE_FILES_DIR/upload.bin"
 sql -c "UPDATE reset_test_marker SET value='live'"
-printf 'native-reset-test-passphrase\n' | runuser -u onebase -- "$binary" user add smoke-operator --project /project --password-stdin
+printf 'native-reset-test-passphrase\n' | runuser -u onebase -- "$binary" user add smoke-operator --project /project --admin --password-stdin
 
 reset_args=(--project /project --baseline "$work/baseline.dump" --baseline-files "$work/baseline-files" --backups "$work/backups" --demo-only)
 reset=/project/scripts/reset_demo_postgres.py
