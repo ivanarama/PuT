@@ -74,6 +74,13 @@ tableparts:
           en: Item
           sr: Артикал
         type: reference:Номенклатура
+      - name: Склад
+        title: Склад
+        titles:
+          de: Lager
+          en: Warehouse
+          sr: Магацин
+        type: reference:Склад
       - name: Количество
         title: Снимаемый остаток
         titles:

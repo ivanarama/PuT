@@ -1,0 +1,42 @@
+elements:
+  - choice: true
+    data_path: Объект.Загрузка
+    events: {ПриИзменении: ОбновитьИсторию}
+    kind: ПолеВвода
+    name: ПолеЗагрузка
+    title: {en: Import batch, ru: Загрузка}
+  - choice: true
+    data_path: Объект.СтатусОтбора
+    events: {ПриИзменении: ОбновитьИсторию}
+    kind: ПолеВвода
+    name: ПолеСтатус
+    title: {en: Status, ru: Статус}
+  - data_path: История
+    kind: ТабличнаяЧасть
+    name: ИсторияОбменов
+    readonly: true
+    title: {en: Exchange history, ru: История обменов}
+  - events: {Нажатие: ОбновитьИсторию}
+    kind: Кнопка
+    name: ОбновитьСписок
+    title: {en: Refresh, ru: Обновить историю}
+  - choice: true
+    choice_filter:
+      - {field: ДоступенПовтор, op: eq, value: true}
+    data_path: Объект.ЗаписьЖурнала
+    id: выбор-ошибки-обмена
+    kind: ПолеВвода
+    name: ВыборОшибки
+    title: {en: History entry, ru: Запись журнала}
+  - events: {Нажатие: ПовторитьСтроку}
+    kind: Кнопка
+    name: ПовторБанка
+    title: {en: Retry failed bank payment, ru: Повторить ошибочную строку банка}
+events:
+  ПриОткрытии: ОбновитьИсторию
+form:
+  entity: СверкаОбменов
+  kind: object
+  name: ФормаОбъекта
+  title: {en: Exchange reconciliation, ru: Сверка обменов}
+schema: onebase.form/v1

@@ -338,6 +338,9 @@ tableparts:
           uz: Miqdor
           zh: 金额
         type: number
+      - name: СтрокаЗаказа
+        title: Строка заказа поставщику
+        type: number
       - name: ЗаказПокупателя
         title: Заказ покупателя
         titles:

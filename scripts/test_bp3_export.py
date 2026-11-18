@@ -26,6 +26,9 @@ def main():
         full=export('full')
         assert full['format']=='OneBase-PuT-BP3' and full['version']=='1.0'
         assert full['sourceId']=='PuT'
+        assert not {'ЖурналОбменов', 'ЗагрузкиОбменов'}.intersection(full['catalogs'])
+        for kind in ('ПоступлениеНаРасчётныйСчёт', 'СписаниеСРасчётногоСчёта'):
+            assert all('КлючИмпортаБанка' not in row for row in full['documents'][kind])
         assert all(not full['documents'][k] for k in EXCLUDED)
         assert len([k for k,v in full['documents'].items() if v])==17
         entities=[yaml.safe_load(f.read_text(encoding='utf-8-sig')) for f in (ROOT/'documents').glob('*.yaml')]

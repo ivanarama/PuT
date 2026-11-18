@@ -4,6 +4,15 @@ attributes:
 elements:
   - background: '#eff6ff'
     children:
+      - data_path: Объект.ИсточникОбмена
+        kind: ПолеВвода
+        name: ПолеИсточникОбмена
+        title: {en: File or source name for history, ru: Файл или источник для журнала}
+      - choice: true
+        data_path: Объект.Организация
+        kind: ПолеВвода
+        name: ПолеОрганизация
+        title: {en: Organization, ru: Организация}
       - choice: true
         data_path: Объект.БанковскийСчёт
         kind: ПолеВвода

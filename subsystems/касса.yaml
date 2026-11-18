@@ -8,6 +8,8 @@ contents:
     - ПриходныйКассовыйОрдер
     - РасходныйКассовыйОрдер
     - СписаниеСРасчётногоСчёта
+  pages:
+    - СверкаУчета
   processors:
     - РабочееМестоКассира
     - ЗагрузкаВыписки
@@ -110,6 +112,8 @@ menu:
         - icon: chart-column
           id: cash-reports
           items:
+            - id: cash-review-balances
+              target: page:СверкаУчета
             - id: cash-report-a5905e88aa
               target: report:ОстаткиДенежныхСредств
             - id: cash-report-9ecf0c521f

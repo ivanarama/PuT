@@ -10,6 +10,15 @@ jobs:
   validate:
     name: Validation & Smoke Tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: put-ci
+          POSTGRES_DB: put_ci
+        ports:
+          - 127.0.0.1:5432:5432
+        options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 12
 
     steps:
       - name: Checkout repository
@@ -70,3 +79,33 @@ jobs:
 
       - name: Check rolling demo reset
         run: python3 scripts/test_demo_reset.py --onebase /usr/local/bin/onebase
+
+      - name: Check native PostgreSQL demo reset and rollback
+        run: bash scripts/test_demo_reset_postgres.sh /usr/local/bin/onebase
+
+      - name: Verify accounting on PostgreSQL
+        env:
+          DATABASE_URL: postgres://postgres:put-ci@127.0.0.1:5432/put_ci?sslmode=disable
+        run: |
+          onebase migrate --project .
+          onebase procrun --project . --proc ЗаполнитьТестовуюБазу
+          onebase test --project .
+          onebase procrun --project . --proc ЗакрытиеМесяца --set ТолькоСверка=true --set "ДатаОкончания=$(date +%F)"
+          python3 -m pip install 'psycopg[binary]'
+          python3 scripts/test_postgres_reports.py --onebase /usr/local/bin/onebase
+
+      - name: Check managed workstations and exchange replay
+        env:
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          PGPASSWORD: put-ci
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+          python3 scripts/test_workplaces_ui.py --onebase /usr/local/bin/onebase
+          createdb put_exchange
+          umask 077
+          echo 'postgres://postgres:put-ci@127.0.0.1:5432/put_exchange?sslmode=disable' > "$RUNNER_TEMP/put-exchange.dsn"
+          browser=$(python3 -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')
+          python3 scripts/test_exchange_imports.py --onebase /usr/local/bin/onebase \
+            --browser "$browser" --postgres-dsn-file "$RUNNER_TEMP/put-exchange.dsn"

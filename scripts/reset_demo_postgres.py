@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Offline native PostgreSQL reset for the isolated PuT demo (run as root)."""
 import argparse
+from contextlib import contextmanager
 import datetime as dt
 import json
 import os
@@ -9,7 +10,39 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from urllib.parse import urlparse
+
+
+@contextmanager
+def switch_demo_files(live, baseline, backup, owner):
+    """Keep the original directory available for rollback until validation finishes."""
+    # Both renames must stay on the filesystem containing the live directory.
+    stage = Path(tempfile.mkdtemp(prefix='.put-reset-', dir=live.parent))
+    previous = stage / 'original'
+    incoming = stage / 'incoming'
+    try:
+        shutil.copytree(live, backup, symlinks=True)
+        shutil.copytree(baseline, incoming)
+        if owner:
+            for directory, _, files in os.walk(incoming):
+                shutil.chown(directory, user=owner, group=owner)
+                for name in files:
+                    shutil.chown(Path(directory)/name, user=owner, group=owner)
+        live.rename(previous)
+        try:
+            incoming.rename(live)
+            yield
+        except BaseException:
+            if live.exists():
+                live.rename(stage / 'failed')
+            previous.rename(live)
+            raise
+        shutil.rmtree(previous)
+    finally:
+        # Leave the original in place for recovery if a rollback rename failed.
+        if not previous.exists():
+            shutil.rmtree(stage)
 
 
 def main():
@@ -33,10 +66,13 @@ def main():
     os.umask(0o077)
     live_files = Path(os.environ.get('ONEBASE_FILES_DIR', '')).resolve()
     expected_root = Path('/var/lib/onebase-put').resolve()
-    if live_files == expected_root or expected_root not in live_files.parents:
+    if live_files == expected_root or expected_root not in live_files.parents or not live_files.is_dir():
         p.error('ONEBASE_FILES_DIR must be inside /var/lib/onebase-put')
     if not args.baseline.is_file() or not args.baseline_files.is_dir():
         p.error('Both native baseline and its binary files snapshot are required')
+    for other in (args.baseline_files.resolve(), args.backups.resolve()):
+        if other == live_files or live_files in other.parents or other in live_files.parents:
+            p.error('Live files, baseline files and backups must be separate directories')
     project = args.project.resolve()
     env = dict(os.environ)
     args.backups.mkdir(parents=True, exist_ok=True)
@@ -89,29 +125,23 @@ def main():
         with Path(dump).open('rb') as source:
             pg('pg_restore', '--no-owner', '--no-acl', '--role=onebase', '-d', dbname, stdin=source)
 
-    try:
-        replace_database(args.baseline)
-        sql('TRUNCATE '+','.join(auth)+' CASCADE')
-        with (backup/'auth.dump').open('rb') as source:
-            pg('pg_restore', '--no-owner', '--no-acl', '--role=onebase', '-d', dbname, stdin=source)
-        shutil.copytree(args.baseline_files, live_files, dirs_exist_ok=True)
-        for directory, _, files in os.walk(live_files):
-            shutil.chown(directory, user='onebase', group='onebase')
-            for name in files:
-                shutil.chown(Path(directory)/name, user='onebase', group='onebase')
-        output = run(['runuser', '-u', 'onebase', '--', args.onebase, '--no-gui', 'deploy',
-                      '--project', str(project), '--db', dsn, '--message', 'PuT native rolling demo reset'])
-        output = run(['runuser', '-u', 'onebase', '--', 'python3', str(project/'scripts/reset_demo.py'),
-                      '--onebase', args.onebase, '--project', str(project), '--demo-only'])
-        summary = json.loads(output.strip().splitlines()[-1])
-        if sql('SELECT count(*) FROM _users') != auth_before:
-            raise RuntimeError('User count changed during demo reset')
-        print(json.dumps(dict(summary, backup=str(backup), users_preserved=True), ensure_ascii=False), flush=True)
-    except Exception:
-        # Original database and its auth state return together on any reset failure.
-        replace_database(backup/'before.dump')
-        print('Reset failed; restored the complete pre-reset database', file=sys.stderr, flush=True)
-        raise
+    with switch_demo_files(live_files, args.baseline_files, backup/'before-files', 'onebase'):
+        try:
+            replace_database(args.baseline)
+            sql('TRUNCATE '+','.join(auth)+' CASCADE')
+            with (backup/'auth.dump').open('rb') as source:
+                pg('pg_restore', '--no-owner', '--no-acl', '--role=onebase', '-d', dbname, stdin=source)
+            run(['runuser', '-u', 'onebase', '--', args.onebase, '--no-gui', 'deploy',
+                          '--project', str(project), '--db', dsn, '--message', 'PuT native rolling demo reset'])
+            output = run(['runuser', '-u', 'onebase', '--', 'python3', str(project/'scripts/reset_demo.py'),
+                          '--onebase', args.onebase, '--project', str(project), '--demo-only'])
+            summary = json.loads(output.strip().splitlines()[-1])
+            if sql('SELECT count(*) FROM _users') != auth_before:
+                raise RuntimeError('User count changed during demo reset')
+        except BaseException:
+            replace_database(backup/'before.dump')
+            raise
+    print(json.dumps(dict(summary, backup=str(backup), users_preserved=True), ensure_ascii=False), flush=True)
 
 
 if __name__ == '__main__':

@@ -2,6 +2,8 @@ name: Демо
 description: Роль для демо-доступа — чтение и создание без удаления
 permissions:
   catalogs:
+    ЖурналОбменов: [write]
+    ЗагрузкиОбменов: [write]
     Валюта: [read]
     Контрагент: [read, write]
     Номенклатура: [read, write]

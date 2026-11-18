@@ -6,6 +6,10 @@ elements:
       - children:
           - background: '#eff6ff'
             children:
+              - data_path: Объект.ИсточникОбмена
+                kind: ПолеВвода
+                name: ПолеИсточникОбмена
+                title: {en: File or source name for history, ru: Файл или источник для журнала}
               - data_path: Объект.ФайлЭДО
                 kind: ПолеВвода
                 name: ПолеФайлЭДО

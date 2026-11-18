@@ -1,30 +1,18 @@
 name: ЗагрузкаВыписки
-title: Загрузка банковской выписки
-titles:
-  en: Load bank statement
-  de: Bankauszug laden
-  sr: Увоз банковског извода
-  az: Bank çıxarışını yüklə
-  es: Cargar extracto bancario
-  fr: Charger relevé bancaire
-  hy: Բանկային քաղվածքի բեռնում
-  ka: საბანკო ამონაწერის ჩატვირთვა
-  kk: Банк шығарылымын жүктеу
-  pt: Carregar extrato bancário
-  ro: Încărcare extras bancar
-  tr: Banka ekstresi yükle
-  uk: Завантаження банківської виписки
-  uz: Bank bayonnomasini yuklash
-  zh: 加载银行对账单
 params:
-  - name: БанковскийСчёт
-    type: reference:Касса
-    label: Банковский счёт
+  - label: Файл или источник для журнала
+    labels: {en: File or source name for history}
+    name: ИсточникОбмена
+    type: string
+  - label: Организация
+    labels: {en: Organization}
+    name: Организация
+    type: reference:Организация
+  - label: Банковский счёт
     labels:
-      en: Bank account
-      de: Bankkonto
-      sr: Банковни рачун
       az: Bank hesabı
+      de: Bankkonto
+      en: Bank account
       es: Cuenta bancaria
       fr: Compte bancaire
       hy: Բանկային հաշիվ
@@ -32,19 +20,20 @@ params:
       kk: Банк шоты
       pt: Conta bancária
       ro: Cont bancar
+      sr: Банковни рачун
       tr: Banka hesabı
       uk: Банківський рахунок
       uz: Bank hisobvarag'i
       zh: 银行账户
+    name: БанковскийСчёт
     required: true
-  - name: Действие
-    type: choice
+    type: reference:Касса
+  - default: Предпросмотр
     label: Действие
     labels:
-      en: Action
-      de: Aktion
-      sr: Радња
       az: Əməliyyat
+      de: Aktion
+      en: Action
       es: Acción
       fr: Action
       hy: Գործողություն
@@ -52,23 +41,23 @@ params:
       kk: Әрекет
       pt: Ação
       ro: Acțiune
+      sr: Радња
       tr: İşlem
       uk: Дія
       uz: Harakat
       zh: 操作
-    default: Предпросмотр
+    name: Действие
     options:
       - Предпросмотр
       - Записать
       - ЗаписатьИПровести
-  - name: Формат
     type: choice
+  - default: Авто
     label: Формат выгрузки
     labels:
-      en: Export format
-      de: Exportformat
-      sr: Формат извоза
       az: İxrac formatı
+      de: Exportformat
+      en: Export format
       es: Formato de exportación
       fr: Format d'export
       hy: Արտահանման ձևաչափ
@@ -76,23 +65,22 @@ params:
       kk: Экспорт пішімі
       pt: Formato de exportação
       ro: Format export
+      sr: Формат извоза
       tr: Dışa aktarma formatı
       uk: Формат експорту
       uz: Eksport formati
       zh: 导出格式
-    default: Авто
+    name: Формат
     options:
       - Авто
       - 1CClientBankExchange
       - JSON
-  - name: ТекстВыгрузки
-    type: file
-    label: "Выгрузка клиент-банка"
+    type: choice
+  - label: "Выгрузка клиент-банка"
     labels:
-      en: "Client-bank export"
-      de: "Client-Bank-Export"
-      sr: "Извоз клијент-банке"
       az: "Müştəri-bank ixracı"
+      de: "Client-Bank-Export"
+      en: "Client-bank export"
       es: "Exportación cliente-banco"
       fr: "Export client-banque"
       hy: "Հաճախորդ-բանկ արտահանում"
@@ -100,19 +88,57 @@ params:
       kk: "Клиент-банк экспорты"
       pt: "Exportação cliente-banco"
       ro: "Export client-bancă"
+      sr: "Извоз клијент-банке"
       tr: "Müşteri-bankası dışa aktarma"
       uk: "Експорт клієнт-банк"
       uz: "Mijoz-bank eksporti"
       zh: "客户端-银行导出"
-
+    name: ТекстВыгрузки
+    type: file
 table_parts:
-  - name: Платежи
+  - fields:
+      - name: Дата
+        title: Дата
+        titles:
+          de: Datum
+          en: Date
+        type: date
+      - name: Тип
+        title: Тип
+        titles:
+          de: Typ
+          en: Type
+        type: string
+      - name: Контрагент
+        title: Контрагент
+        titles:
+          de: Geschäftspartner
+          en: Counterparty
+        type: string
+      - name: Сумма
+        title: Сумма
+        titles:
+          de: Betrag
+          en: Amount
+        type: number
+      - name: НазначениеПлатежа
+        title: Назначение платежа
+        titles:
+          de: Verwendungszweck
+          en: Payment purpose
+        type: string
+      - name: НомерПлатёжки
+        title: Номер платёжки
+        titles:
+          de: Zahlungsnummer
+          en: Payment number
+        type: string
+    name: Платежи
     title: Платежи
     titles:
-      en: Payments
-      de: Zahlungen
-      sr: Плаћања
       az: Ödənişlər
+      de: Zahlungen
+      en: Payments
       es: Pagos
       fr: Paiements
       hy: Վճարումներ
@@ -120,44 +146,25 @@ table_parts:
       kk: Төлемдер
       pt: Pagamentos
       ro: Plăți
+      sr: Плаћања
       tr: Ödemeler
       uk: Платежі
       uz: To'lovlar
       zh: 付款
-    fields:
-      - name: Дата
-        type: date
-        title: Дата
-        titles:
-          en: Date
-          de: Datum
-      - name: Тип
-        type: string
-        title: Тип
-        titles:
-          en: Type
-          de: Typ
-      - name: Контрагент
-        type: string
-        title: Контрагент
-        titles:
-          en: Counterparty
-          de: Geschäftspartner
-      - name: Сумма
-        type: number
-        title: Сумма
-        titles:
-          en: Amount
-          de: Betrag
-      - name: НазначениеПлатежа
-        type: string
-        title: Назначение платежа
-        titles:
-          en: Payment purpose
-          de: Verwendungszweck
-      - name: НомерПлатёжки
-        type: string
-        title: Номер платёжки
-        titles:
-          en: Payment number
-          de: Zahlungsnummer
+title: Загрузка банковской выписки
+titles:
+  az: Bank çıxarışını yüklə
+  de: Bankauszug laden
+  en: Load bank statement
+  es: Cargar extracto bancario
+  fr: Charger relevé bancaire
+  hy: Բանկային քաղվածքի բեռնում
+  ka: საბანკო ამონაწერის ჩატვირთვა
+  kk: Банк шығарылымын жүктеу
+  pt: Carregar extrato bancário
+  ro: Încărcare extras bancar
+  sr: Увоз банковског извода
+  tr: Banka ekstresi yükle
+  uk: Завантаження банківської виписки
+  uz: Bank bayonnomasini yuklash
+  zh: 加载银行对账单

@@ -1,4 +1,7 @@
 fields:
+  - name: КлючИмпортаБанка
+    title: Ключ импорта банка
+    type: string
   - name: Идентификатор1С
     title: Идентификатор 1С
     titles:
@@ -216,6 +219,9 @@ fields:
       uz: Miqdor
       zh: 金额
     type: number
+indexes:
+  - fields: [КлючИмпортаБанка]
+    unique: true
 list_filters:
   - Номер
   - Дата

@@ -3,6 +3,9 @@ title: Закрытие месяца и расчёт себестоимости
 titles:
   en: Month-End Closing and Cost Recalculation
 params:
+  - name: ТолькоСверка
+    type: bool
+    label: Только показать расхождения на дату окончания
   - name: Организация
     type: reference:Организация
     label: "Организация"

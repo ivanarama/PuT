@@ -1,0 +1,36 @@
+name: СверкаОбменов
+params:
+  - label: Загрузка
+    name: Загрузка
+    type: reference:ЗагрузкиОбменов
+  - label: Статус
+    name: СтатусОтбора
+    options: [Все, Ошибка, Выполнено, Пропущено, Исправлено]
+    type: choice
+  - label: Ошибочная запись для повтора
+    name: ЗаписьЖурнала
+    type: reference:ЖурналОбменов
+table_parts:
+  - fields:
+      - name: Источник
+        title: Загрузка
+        type: string
+      - name: Момент
+        title: Момент
+        type: date
+      - name: Обмен
+        title: Обмен
+        type: string
+      - name: Документ
+        title: Документ
+        type: string
+      - name: Статус
+        title: Статус
+        type: string
+      - name: Описание
+        title: Описание
+        type: string
+    name: История
+    title: История обменов
+title: Сверка обменов
+titles: {en: Exchange reconciliation}

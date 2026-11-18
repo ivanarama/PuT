@@ -1,0 +1,16 @@
+fields:
+  - name: Наименование
+    title: Загрузка
+    type: string
+  - name: Момент
+    title: Начало загрузки
+    type: date
+  - name: ВидОбмена
+    title: Вид обмена
+    type: string
+  - name: Источник
+    title: Файл или источник
+    type: string
+name: ЗагрузкиОбменов
+title: Загрузки файлов обмена
+titles: {en: Exchange imports}

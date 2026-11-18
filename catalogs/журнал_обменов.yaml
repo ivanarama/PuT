@@ -1,0 +1,36 @@
+fields:
+  - name: ДоступенПовтор
+    title: Доступен повтор строки
+    type: bool
+  - name: Загрузка
+    title: Загрузка
+    type: reference:ЗагрузкиОбменов
+  - name: Наименование
+    title: Документ или операция
+    type: string
+  - name: Момент
+    title: Момент
+    type: date
+  - name: Обмен
+    title: Обмен
+    type: string
+  - name: Статус
+    title: Статус
+    type: string
+  - name: Описание
+    title: Описание
+    type: string
+  - name: СчётБанка
+    title: СчётБанка
+    type: string
+  - name: Действие
+    title: Действие
+    type: string
+  - name: СтрокаВыписки
+    title: СтрокаВыписки
+    type: string
+indexes:
+  - fields: [Загрузка, Статус]
+name: ЖурналОбменов
+title: Журнал обменов
+titles: {en: Exchange history}

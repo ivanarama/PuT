@@ -2,6 +2,8 @@ name: Кассир
 description: Кассовые и банковские операции
 permissions:
   catalogs:
+    ЖурналОбменов: [write]
+    ЗагрузкиОбменов: [write]
     Касса: [read]
     Контрагент: [read]
     Организация: [read]

@@ -37,6 +37,18 @@ table_parts:
         type: reference:Номенклатура
         title: Номенклатура
         titles: {en: Item, de: Artikel, sr: Артикал}
+      - name: СтрокаЗаказа
+        type: number
+        title: Строка заказа
+      - name: ЗаказПокупателя
+        type: reference:ЗаказПокупателя
+        title: Заказ покупателя
+      - name: Склад
+        type: reference:Склад
+        title: Склад приёмки
+      - name: СтавкаНДС
+        type: reference:СтавкаНДС
+        title: Ставка НДС
       - name: Заказано
         type: number
         title: Заказано (ожидается)

@@ -7,6 +7,7 @@ contents:
     - ТипЦен
     - Валюта
   processors:
+    - СверкаОбменов
     - НастройкаТиповЦен
     - ЗаполнитьТестовуюБазу
 home_page:
@@ -96,6 +97,13 @@ menu:
       titles:
         en: Trade settings
     - groups:
+        - icon: list
+          id: settings-exchange
+          items:
+            - id: settings-exchange-review
+              target: processor:СверкаОбменов
+          title: Обмен данными
+          titles: {en: Data exchange}
         - icon: flask-conical
           id: settings-demo
           items:

@@ -34,6 +34,10 @@ permissions:
       - write
       - post
       - unpost
+    ЗаказПокупателя:
+      - read
+    ЗаказПоставщику:
+      - read
     ОприходованиеТоваров:
       - read
       - write

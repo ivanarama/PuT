@@ -7,6 +7,8 @@ elements:
           - background: '#eff6ff'
             children:
               - data_path: Объект.Дата
+                events:
+                  ПриИзменении: ПараметрыПересчётаИзменены
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
@@ -17,6 +19,8 @@ elements:
                   sr: Датум
               - choice: true
                 data_path: Объект.Организация
+                events:
+                  ПриИзменении: ПараметрыПересчётаИзменены
                 kind: ПолеВвода
                 name: ПолеОрганизация
                 title:
@@ -26,6 +30,8 @@ elements:
                   sr: Организација
               - choice: true
                 data_path: Объект.Склад
+                events:
+                  ПриИзменении: ПараметрыПересчётаИзменены
                 hint: Склад, который пересчитываем
                 kind: ПолеВвода
                 name: ПолеСклад

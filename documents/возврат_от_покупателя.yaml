@@ -48,6 +48,14 @@ tableparts:
   - fields:
       - name: Номенклатура
         type: reference:Номенклатура
+      - name: СтрокаРеализации
+        title: Строка реализации
+        titles:
+          de: Verkaufsposition
+          en: Sales line
+          sr: Ставка продаје
+          uk: Рядок реалізації
+        type: number
       - name: Количество
         type: number(5,2)
       - name: Цена

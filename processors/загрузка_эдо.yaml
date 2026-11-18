@@ -1,143 +1,145 @@
 name: ЗагрузкаЭДО
-title: Сопоставление и загрузка документов ЭДО (УПД)
-titles:
-  en: EDO XML Invoice matching and import
-  de: EDO XML Rechnungsmatching und Import
-  sr: Увоз и упаривање ЕДО докумената
 params:
-  - name: ФайлЭДО
-    type: file
-    label: Файл УПД (XML) / ЭДО
-    labels:
-      en: EDO / UPD XML file
-      de: EDO / UPD XML Datei
-      sr: ЕДО / УПД XML датотека
-    required: true
-  - name: Организация
-    type: reference:Организация
-    label: Организация (Покупатель)
-    labels:
-      en: Organization (Buyer)
-      de: Organisation (Käufer)
-      sr: Организација (Купац)
-  - name: Поставщик
-    type: reference:Контрагент
-    label: Поставщик (Продавец)
-    labels:
-      en: Supplier (Seller)
-      de: Lieferant (Verkäufer)
-      sr: Добављач (Продавац)
-  - name: Склад
-    type: reference:Склад
-    label: Склад поступления
-    labels:
-      en: Warehouse
-      de: Lager
-      sr: Складиште
-  - name: Договор
+  - label: Файл или источник для журнала
+    labels: {en: File or source name for history}
+    name: ИсточникОбмена
     type: string
-    label: Договор
+  - label: Файл УПД (XML) / ЭДО
     labels:
-      en: Contract
+      de: EDO / UPD XML Datei
+      en: EDO / UPD XML file
+      sr: ЕДО / УПД XML датотека
+    name: ФайлЭДО
+    required: true
+    type: file
+  - label: Организация (Покупатель)
+    labels:
+      de: Organisation (Käufer)
+      en: Organization (Buyer)
+      sr: Организација (Купац)
+    name: Организация
+    type: reference:Организация
+  - label: Поставщик (Продавец)
+    labels:
+      de: Lieferant (Verkäufer)
+      en: Supplier (Seller)
+      sr: Добављач (Продавац)
+    name: Поставщик
+    type: reference:Контрагент
+  - label: Склад поступления
+    labels:
+      de: Lager
+      en: Warehouse
+      sr: Складиште
+    name: Склад
+    type: reference:Склад
+  - label: Договор
+    labels:
       de: Vertrag
+      en: Contract
       sr: Уговор
-  - name: ВариантПоиска
-    type: choice
+    name: Договор
+    type: string
+  - default: "Умный поиск (все варианты)"
     label: Вариант сопоставления
     labels:
-      en: Matching strategy
       de: Suchstrategie
+      en: Matching strategy
       sr: Стратегија упаривања
-    default: "Умный поиск (все варианты)"
+    name: ВариантПоиска
     options:
       - "Умный поиск (все варианты)"
       - "По артикулу"
       - "По наименованию"
       - "По коду"
       - "Артикул + Наименование"
-  - name: ПрефиксАртикула
-    type: string
-    label: Префикс артикула поставщика
+    type: choice
+  - label: Префикс артикула поставщика
     labels:
-      en: Supplier SKU prefix to strip
       de: SKU-Präfix des Lieferanten
+      en: Supplier SKU prefix to strip
       sr: Префикс шифре добављача
-  - name: ОчищатьСпецсимволы
-    type: bool
+    name: ПрефиксАртикула
+    type: string
+  - default: true
     label: Очищать спецсимволы и пробелы в артикулах
     labels:
-      en: Clean special characters and spaces in SKU
       de: Sonderzeichen und Leerzeichen in SKU bereinigen
+      en: Clean special characters and spaces in SKU
       sr: Очисти специјалне знаке и размаке
-    default: true
-  - name: СоздаватьНедостающую
+    name: ОчищатьСпецсимволы
     type: bool
+  - default: false
     label: Автоматически создавать отсутствующую номенклатуру
     labels:
-      en: Auto-create missing nomenclature items
       de: Fehlende Artikel automatisch anlegen
+      en: Auto-create missing nomenclature items
       sr: Аутоматски креирај нову номенклатуру
-    default: false
-  - name: СохранятьСопоставления
+    name: СоздаватьНедостающую
     type: bool
+  - default: true
     label: Сохранять сопоставления поставщика в базу
     labels:
-      en: Save supplier mappings to database
       de: Lieferantenzuordnungen speichern
+      en: Save supplier mappings to database
       sr: Сачувај упаривања добављача
-    default: true
-  - name: Действие
-    type: choice
+    name: СохранятьСопоставления
+    type: bool
+  - default: Предпросмотр
     label: Действие
     labels:
-      en: Action
       de: Aktion
+      en: Action
       sr: Радња
-    default: Предпросмотр
+    name: Действие
     options:
       - Предпросмотр
       - "Создать документ"
       - "Создать и провести"
-
+    type: choice
 table_parts:
-  - name: Товары
+  - fields:
+      - name: НомерСтроки
+        title: №
+        type: number
+      - name: Статус
+        title: Статус
+        type: string
+      - name: НаимТов
+        title: Наименование поставщика
+        type: string
+      - name: Артикул
+        title: Артикул поставщика
+        type: string
+      - name: Номенклатура
+        title: Номенклатура базы
+        type: reference:Номенклатура
+      - name: Количество
+        title: Количество
+        type: number
+      - name: Цена
+        title: Цена
+        type: number
+      - name: Сумма
+        title: Сумма
+        type: number
+      - name: СтавкаНДС
+        title: НДС
+        type: string
+      - name: СуммаНДС
+        title: Сумма НДС
+        type: number
+      - name: Всего
+        title: Всего
+        type: number
+    name: Товары
     title: Товары документа
     titles:
-      en: Document items
       de: Dokumentpositionen
+      en: Document items
       sr: Позиције документа
-    fields:
-      - name: НомерСтроки
-        type: number
-        title: №
-      - name: Статус
-        type: string
-        title: Статус
-      - name: НаимТов
-        type: string
-        title: Наименование поставщика
-      - name: Артикул
-        type: string
-        title: Артикул поставщика
-      - name: Номенклатура
-        type: reference:Номенклатура
-        title: Номенклатура базы
-      - name: Количество
-        type: number
-        title: Количество
-      - name: Цена
-        type: number
-        title: Цена
-      - name: Сумма
-        type: number
-        title: Сумма
-      - name: СтавкаНДС
-        type: string
-        title: НДС
-      - name: СуммаНДС
-        type: number
-        title: Сумма НДС
-      - name: Всего
-        type: number
-        title: Всего
-
+title: Сопоставление и загрузка документов ЭДО (УПД)
+titles:
+  de: EDO XML Rechnungsmatching und Import
+  en: EDO XML Invoice matching and import
+  sr: Увоз и упаривање ЕДО докумената
