@@ -1,4 +1,4 @@
-"""Check the six operational reports against a populated PostgreSQL demo."""
+"""Check the operational reports against a populated PostgreSQL demo."""
 import argparse
 from datetime import date
 from decimal import Decimal
@@ -30,6 +30,16 @@ def main():
         return report['rows']
 
     with psycopg.connect(os.environ['DATABASE_URL']) as database:
+        # Exercise the update for installations that already have reserve movements.
+        with database.transaction(force_rollback=True):
+            missing = database.execute("UPDATE рег_резервытоваров SET ключорганизации=NULL").rowcount
+            assert missing > 0
+            backfill = (project / 'scripts/backfill_reservation_owners.sql').read_text(encoding='utf8')
+            assert database.execute(backfill).rowcount == missing
+            assert database.execute(backfill).rowcount == 0
+            assert database.execute("""SELECT count(*) FROM рег_резервытоваров р
+                                      JOIN заказпокупателя з ON р.заказпокупателя_id=з.id
+                                      WHERE р.ключорганизации IS DISTINCT FROM CAST(з.организация_id AS TEXT)""").fetchone()[0] == 0
         for report, field, table, accrual in (
             ('ОплатыРеализаций', 'документреализации', 'реализациятоваров', 'Приход'),
             ('ОплатыПоступлений', 'документпоступления', 'поступлениетоваров', 'Расход'),
@@ -48,6 +58,23 @@ def main():
             opening = sum(amount for moment, amount in items if moment < cutoff)
             assert Decimal(str(line['начальныйостаток'])) == opening and opening > 0, (report, number, line)
             assert Decimal(str(line['остаток'])) == sum(amount for _, amount in items), (report, number, line)
+
+    abc = rows('ABCАнализПродаж', ПорогА=75, ПорогБ=90)
+    profits = [Decimal(str(r['валоваяприбыль'])) for r in abc]
+    assert profits == sorted(profits, reverse=True)
+    total = sum(max(profit, 0) for profit in profits)
+    cumulative = 0
+    for row, profit in zip(abc, profits):
+        grade = 'C'
+        if profit > 0:
+            if cumulative * 100 < 75 * total:
+                grade = 'A'
+            elif cumulative * 100 < 90 * total:
+                grade = 'B'
+        assert row['классabc'] == grade, row
+        cumulative += max(profit, 0)
+        share = Decimal(str(row['накопленнаядоляпроцент']))
+        assert abs(share - (100 * cumulative / total if total else 0)) <= Decimal('0.005'), row
 
     stock = rows('СвободныеОстатки', НаДату=today)
     assert all(Decimal(str(r['наскладе'])) - Decimal(str(r['резерв'])) == Decimal(str(r['количество'])) for r in stock)

@@ -33,10 +33,86 @@ def form_event(page, action):
     response = event.value
     assert response.ok
     response.body()
+    return response
 
 
 def open_workplace(page, base, workplace):
     form_event(page, lambda: page.goto(base + '/ui/processor/' + workplace))
+
+
+def purchase_plan(context, db, base):
+    owner, vendor = db.execute("select организация_id, поставщик_id from заказпоставщику where комментарий='workplace-test'").fetchone()
+    other = sql_one(db, "select id from организация where наименование='Владелец инвентаризации АРМ'")
+    store = sql_one(db, "select id from склад where наименование='Общий склад для плана закупок'")
+    products = dict(db.execute("select артикул,id from номенклатура where наименование='Одноимённый товар для закупок'"))
+    expected = {products['PLAN-1']: (10, 0, 0, 10), products['PLAN-2']: (5, 0, 2, 3)}
+
+    def calculate(page):
+        form_event(page, page.get_by_role('button', name='Рассчитать потребность', exact=False).click)
+        rows = json.loads(page.locator('[name="tp_json.Потребность"]').input_value())
+        return {r['Номенклатура']: tuple(float(r[k]) for k in ('Заказано', 'Остаток', 'ВПути', 'КЗаказу')) for r in rows}
+
+    def select_owner(page, org):
+        field = page.locator('[name="Организация"]')
+        if field.input_value() != org:
+            form_event(page, lambda: field.select_option(org))
+
+    def open_plan(org):
+        page = context.new_page()
+        open_workplace(page, base, 'ПланЗакупок')
+        select_owner(page, org)
+        form_event(page, lambda: page.locator('[name="Склад"]').select_option(store))
+        page.locator('[name="Поставщик"]').select_option(vendor)
+        page.get_by_role('button', name='Потребность', exact=True).click()
+        return page
+
+    page = open_plan(other)
+    # Simulate balances recorded before the owner attribute existed.
+    backfill = (ROOT / 'scripts/backfill_reservation_owners.sql').read_text(encoding='utf8')
+    for old_key in (None, ''):
+        missing = db.execute("update рег_резервытоваров set ключорганизации=? where склад_id=?", (old_key, store)).rowcount
+        db.commit()
+        response = form_event(page, page.get_by_role('button', name='Рассчитать потребность', exact=False).click).json()
+        assert not response['ok'] and 'выполнить перенос владельцев резервов' in response['error'], response
+        assert missing == 3 and db.execute(backfill).rowcount == missing
+        assert db.execute(backfill).rowcount == 0
+        db.commit()
+    current = calculate(page)
+    assert current == {products['PLAN-1']: (12, 7, 4, 1)}, (current, page.locator('body').inner_text()[-1000:])
+    page.get_by_role('button', name='Параметры', exact=True).click()
+    select_owner(page, owner)
+    page.get_by_role('button', name='Потребность', exact=True).click()
+    assert json.loads(page.locator('[name="tp_json.Потребность"]').input_value()) == []
+    assert calculate(page) == expected
+    stale = open_plan(owner)
+    assert calculate(stale) == expected
+
+    def orders():
+        return db.execute("""select id, posted from заказпоставщику where организация_id=? and склад_id=?
+                             and комментарий='Создан из АРМ Закупок по дефициту'""", (owner, store)).fetchall()
+
+    create = page.get_by_role('button', name='Создать заказ поставщику', exact=False)
+    db.execute("""create trigger reject_purchase_movement before insert on рег_товарывпути
+                  begin select raise(abort, 'purchase test failure'); end""")
+    db.commit()
+    form_event(page, create.click)
+    page.get_by_text('purchase test failure', exact=False).first.wait_for()
+    assert orders() == []
+    db.execute('drop trigger reject_purchase_movement')
+    db.commit()
+    form_event(page, create.click)
+    [(order, posted)] = orders()
+    assert posted == 1
+    amount = float(sql_one(db, "select сумма from заказпоставщику where id=?", order))
+    assert amount == 653, amount
+    requested = {product: row[3] for product, row in expected.items()}
+    for table, field in [('заказпоставщику_товары', 'parent_id'), ('рег_товарывпути', 'recorder')]:
+        lines = db.execute(f'select номенклатура_id, cast(количество as numeric) from {table} where {field}=?', (order,)).fetchall()
+        assert len(lines) == len(requested) and dict(lines) == requested, lines
+    form_event(stale, stale.get_by_role('button', name='Создать заказ поставщику', exact=False).click)
+    stale.get_by_text('Потребность изменилась', exact=False).first.wait_for()
+    assert orders() == [(order, 1)]
+    assert calculate(page) == {products['PLAN-1']: (10, 0, 10, 0), products['PLAN-2']: (5, 0, 5, 0)}
 
 
 def receipt(page, db, base):
@@ -276,7 +352,7 @@ def main():
         cli('procrun', '--proc', 'СценарийАРМ')
         password = secrets.token_hex(18)
         cli('user', 'add', 'test', '--admin', '--password-stdin', input=password)
-        for login, role in [('warehouse', 'Кладовщик'), ('seller', 'Менеджер'), ('director', 'Управленец')]:
+        for login, role in [('warehouse', 'Кладовщик'), ('seller', 'Менеджер'), ('director', 'Управленец'), ('buyer', 'Снабженец')]:
             cli('user', 'add', login, '--password-stdin', input=password)
             cli('user', 'role', 'assign', login, role)
         with socket.socket() as sock:
@@ -311,6 +387,9 @@ def main():
                     shipment(page, db, base)
                     inventory(page, db, base)
                     warehouse.close()
+                    buyer = login_context('buyer')
+                    purchase_plan(buyer, db, base)
+                    buyer.close()
                     seller = login_context('seller')
                     checkout(seller.new_page(), db, base)
                     seller.close()
@@ -320,11 +399,15 @@ def main():
                     context = login_context('test')
                     from verify_queue_ui import check_queue_and_diagnostics
                     check_queue_and_diagnostics(context, base, project, db)
+                    from verify_payment_ui import check_payment_allocation
+                    check_payment_allocation(context, db, base)
                     browser.close()
             finally:
                 server.terminate()
                 server.wait(timeout=20)
         with closing(sqlite3.connect(dbfile)) as db:
+            from verify_payment_ui import check_allocated_exchange
+            check_allocated_exchange(cli, db, project)
             reports(cli, db)
     print('OK: receiving, settlements, availability, payment calendar and transactional checkout')
 

@@ -81,6 +81,13 @@ dimensions:
       en: Sales order
       de: Kundenauftrag
       sr: Налог купца
+attributes:
+  - name: СтрокаЗаказа
+    type: number
+    title: Строка заказа поставщику
+  - name: ПодтвержденнаяДатаПоставки
+    type: date
+    title: Подтверждённая дата поставки
 resources:
   - name: Количество
     type: number

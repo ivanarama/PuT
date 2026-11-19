@@ -13,6 +13,7 @@ docs/*
 !docs/RELEASE_1.3.2.md
 !docs/RELEASE_1.3.3.md
 !docs/RELEASE_1.3.4.md
+!docs/RELEASE_1.4.0.md
 __pycache__/
 
 # Базы данных (не коммитим рабочие/тестовые БД)

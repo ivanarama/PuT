@@ -20,6 +20,8 @@ permissions:
       - read
     СтавкаНДС:
       - read
+    ТипЦен:
+      - read
   documents:
     ВозвратПоставщику:
       - read

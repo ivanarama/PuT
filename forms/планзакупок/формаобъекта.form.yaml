@@ -1,12 +1,11 @@
-attributes:
-  - main: true
-    name: Объект
 elements:
   - children:
       - children:
           - background: '#eff6ff'
             children:
               - data_path: Объект.Дата
+                events:
+                  ПриИзменении: ПараметрыРасчетаИзменены
                 kind: ПолеВвода
                 name: ПолеДата
                 required: true
@@ -17,8 +16,11 @@ elements:
                   sr: Датум
               - choice: true
                 data_path: Объект.Организация
+                events:
+                  ПриИзменении: ПараметрыРасчетаИзменены
                 kind: ПолеВвода
                 name: ПолеОрганизация
+                required: true
                 title:
                   de: Organisation
                   en: Organization
@@ -26,6 +28,8 @@ elements:
                   sr: Организација
               - choice: true
                 data_path: Объект.Склад
+                events:
+                  ПриИзменении: ПараметрыРасчетаИзменены
                 hint: Дефицит считается по остаткам этого склада
                 kind: ПолеВвода
                 name: ПолеСклад

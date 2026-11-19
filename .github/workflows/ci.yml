@@ -61,6 +61,11 @@ jobs:
           python3 scripts/generate_bp3_exporter.py --check
           python3 scripts/test_bp3_export.py --onebase /usr/local/bin/onebase
 
+      - name: Verify order promises and ABC cutoffs
+        run: |
+          python3 scripts/test_order_promises.py --onebase /usr/local/bin/onebase
+          python3 scripts/test_abc_report.py --onebase /usr/local/bin/onebase
+
       - name: Run onebase lint
         run: onebase lint --project .
 

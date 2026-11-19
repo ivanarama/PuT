@@ -1,6 +1,8 @@
 # Локальный стенд PuT
 
-Для первого запуска на Windows соберите исполняемый файл по [инструкции для поддерживаемой версии OneBase](../platform-patches/README.md#сборка-для-windows). Затем откройте PowerShell в любой папке внутри клона PuT.
+В готовом [ZIP для Windows](https://github.com/ivanarama/PuT/releases/latest) откройте PowerShell в распакованном каталоге и выполните `.\scripts\start_preview.ps1`.
+
+Для запуска из Git соберите исполняемый файл по [инструкции для поддерживаемой версии OneBase](../platform-patches/README.md#сборка-для-windows). Затем откройте PowerShell в любой папке внутри клона PuT.
 
 ```powershell
 $projectDir = (git rev-parse --show-toplevel)

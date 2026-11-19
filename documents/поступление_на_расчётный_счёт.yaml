@@ -236,6 +236,16 @@ numerator:
   period: year
   prefix: БНК-П-
 posting: true
+tableparts:
+  - fields:
+      - name: ДокументРеализации
+        title: Реализация
+        type: reference:РеализацияТоваров
+      - name: Сумма
+        title: Сумма оплаты
+        type: number
+    name: РаспределениеПлатежа
+    title: Распределение платежа
 title: Поступление на расчётный счёт
 titles:
   az: Hesablaşma hesabına daxilolma

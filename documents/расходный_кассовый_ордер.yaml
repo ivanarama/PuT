@@ -192,6 +192,16 @@ numerator:
   period: year
   prefix: РКО-
 posting: true
+tableparts:
+  - fields:
+      - name: ДокументПоступления
+        title: Поступление
+        type: reference:ПоступлениеТоваров
+      - name: Сумма
+        title: Сумма оплаты
+        type: number
+    name: РаспределениеПлатежа
+    title: Распределение платежа
 title: Расходный кассовый ордер
 titles:
   az: Xərcləmə kassa orderi

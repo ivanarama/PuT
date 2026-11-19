@@ -373,6 +373,13 @@ tableparts:
           uz: Miqdor
           zh: 金额
         type: number
+      - name: ПодтвержденнаяДатаПоставки
+        title: Подтверждённая дата поставки
+        titles:
+          de: Bestätigter Liefertermin
+          en: Confirmed delivery date
+          sr: Потврђени датум испоруке
+        type: date
       - name: ЗаказПокупателя
         title: Заказ покупателя
         titles:

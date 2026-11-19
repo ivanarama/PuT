@@ -74,6 +74,11 @@ dimensions:
       uk: Замовлення покупця
       uz: Xaridor buyurtmasi
       zh: 客户订单
+attributes:
+  - name: КлючОрганизации
+    type: string
+    title: Идентификатор организации
+    titles: {de: Organisation, en: Organization, sr: Организација}
 resources:
   - name: Количество
     type: number

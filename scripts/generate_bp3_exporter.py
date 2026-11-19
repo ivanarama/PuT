@@ -90,7 +90,11 @@ def generate():
         for t in tables:
             lines += ['    Строки = Новый Массив;',f'    Для Каждого СтрокаТаблицы Из Объект.{t["name"]} Цикл','      СтрокаВыгрузки = Новый Соответствие;']
             for f in t.get('fields',[]):lines += [f'      СтрокаВыгрузки.Вставить({q(f["name"])}, {expression(f,"СтрокаТаблицы")});']
-            lines += ['      Строки.Добавить(СтрокаВыгрузки);','    КонецЦикла;',f'    Запись.Вставить({q(t["name"])}, Строки);']
+            lines += ['      Строки.Добавить(СтрокаВыгрузки);', '    КонецЦикла;']
+            if t['name'] == 'РаспределениеПлатежа':
+                lines.append('    Если Строки.Количество() > 0 Тогда Запись.Вставить("РаспределениеПлатежа", Строки); КонецЕсли;')
+            else:
+                lines.append(f'    Запись.Вставить({q(t["name"])}, Строки);')
         if kind == 'catalog':
             lines += ['    Результат.Добавить(Запись);', '  КонецЦикла;', '  Возврат Результат;']
         else:
@@ -103,9 +107,19 @@ def generate():
         if kind != 'document' or e['name'] in EXCLUDED:
             continue
         refs=[f for f in e.get('fields',[]) if f.get('type','').startswith('reference:') and f['type'].split(':',1)[1] in docs]
-        if not refs:continue
+        row_refs = [(table['name'], field['name'], field['type'].split(':', 1)[1])
+                    for table in e.get('tableparts', []) for field in table.get('fields', [])
+                    if field.get('type', '').startswith('reference:') and field['type'].split(':', 1)[1] in docs - EXCLUDED]
+        if not refs and not row_refs:
+            continue
         lines += [f'  Если Вид = {q(e["name"])} Тогда']
         for f in refs:lines += [f'    БП3ДобавитьОснование({q(f["type"].split(":",1)[1])}, Запись.Получить({q(f["name"])}), Включены, Очередь, Результат);']
+        for table, field, target in row_refs:
+            lines += [f'    Строки = Запись.Получить({q(table)});',
+                      '    Если Строки <> Неопределено Тогда',
+                      '      Для Каждого Стр Из Строки Цикл',
+                      f'        БП3ДобавитьОснование({q(target)}, Стр.Получить({q(field)}), Включены, Очередь, Результат);',
+                      '      КонецЦикла;', '    КонецЕсли;']
         lines += ['  КонецЕсли;']
     lines += ['КонецПроцедуры','']
     return '\n'.join(lines),schema

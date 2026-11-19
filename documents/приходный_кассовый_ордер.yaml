@@ -39,6 +39,16 @@ numerator:
   period: year
   prefix: ПКО-
 posting: true
+tableparts:
+  - fields:
+      - name: ДокументРеализации
+        title: Реализация
+        type: reference:РеализацияТоваров
+      - name: Сумма
+        title: Сумма оплаты
+        type: number
+    name: РаспределениеПлатежа
+    title: Распределение платежа
 title: Приходный кассовый ордер
 titles:
   az: Gəlir kassa orderi
