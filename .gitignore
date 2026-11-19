@@ -4,6 +4,7 @@ docs/*
 !docs/BP3_EXCHANGE.md
 !docs/bp3-schema.json
 !docs/help/
+!docs/readme/
 !docs/LOCAL_PREVIEW.md
 !docs/DEMO_RESET.md
 !docs/HELP_SCREENSHOTS.md
