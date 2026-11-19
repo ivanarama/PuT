@@ -33,6 +33,8 @@ def main():
     settings = {s["Key"]: s["Value"] for s in build["Settings"]}
     if (settings.get("GOOS"), settings.get("GOARCH")) != ("windows", "amd64"):
         raise ValueError("Expected a windows/amd64 executable")
+    if build["Path"] != "github.com/ivantit66/onebase/cmd/onebase" or settings.get("vcs.revision") != runtime["commit"]:
+        raise ValueError("Executable does not report the pinned OneBase source revision")
     module_paths = dict(line.split("|", 1) for line in output(
         "go", "-C", args.engine_source, "list", "-m", "-f", "{{.Path}}|{{.Dir}}", "all"
     ).splitlines())

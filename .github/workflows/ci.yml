@@ -46,7 +46,8 @@ jobs:
       - name: Check platform UI and static assets
         run: |
           cd /tmp/onebase
-          go test ./internal/ui ./internal/webassets ./internal/widget ./internal/configcheck -count=1 -timeout 600s
+          go test ./internal/ui ./internal/webassets ./internal/widget ./internal/configcheck ./internal/entityservice -count=1 -timeout 600s
+          go test ./internal/storage -run '^TestTxResourcesReleasedBeforeObservers$' -count=1
           go test ./internal/query -run '^TestCompile_RegisterAttributeAggregatesByDialect$' -count=1
 
       - name: Check supported platform build

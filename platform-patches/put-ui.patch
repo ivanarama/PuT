@@ -1185,3 +1185,339 @@ index 5bca0ea8..20c2509b 100644
  	if skipped > 0 {
  		outf("\nНе применено изменений: %d — они удаляют данные.\n", skipped)
  		outln("Колонки остались в базе нетронутыми. Чтобы удалить их вместе с данными,")
+diff --git a/internal/entityservice/commit_lock_test.go b/internal/entityservice/commit_lock_test.go
+new file mode 100644
+index 00000000..34eb0e66
+--- /dev/null
++++ b/internal/entityservice/commit_lock_test.go
+@@ -0,0 +1,133 @@
++package entityservice
++
++import (
++	"context"
++	"fmt"
++	"path/filepath"
++	"testing"
++	"time"
++
++	"github.com/google/uuid"
++	"github.com/ivantit66/onebase/internal/dsl/ast"
++	"github.com/ivantit66/onebase/internal/dsl/interpreter"
++	"github.com/ivantit66/onebase/internal/metadata"
++	"github.com/ivantit66/onebase/internal/runtime"
++	"github.com/ivantit66/onebase/internal/storage"
++)
++
++type readOnFirstPublish struct {
++	// Only the first Save is configured with this publisher.
++	entered       chan struct{}
++	competingHook chan struct{}
++	read          func() error
++	result        chan error
++}
++
++func (p *readOnFirstPublish) PublishChange(_ context.Context, _, _ string, _, _ map[string]any) {
++	close(p.entered)
++	select {
++	case <-p.competingHook:
++		p.result <- p.read()
++	case <-time.After(5 * time.Second):
++		p.result <- fmt.Errorf("second posting never reached its hook")
++	}
++}
++
++func TestSaveReleasesPostingLocksBeforeChangeNotification(t *testing.T) {
++	ctx := context.Background()
++	db, err := storage.ConnectSQLite(ctx, filepath.Join(t.TempDir(), "posting.db"))
++	if err != nil {
++		t.Fatal(err)
++	}
++	t.Cleanup(db.Close)
++	doc := &metadata.Entity{Name: "Платеж", Kind: metadata.KindDocument, Posting: true, NotifyChanges: true,
++		Fields: []metadata.Field{{Name: "Номер", Type: metadata.FieldTypeString}}}
++	if err := db.Migrate(ctx, []*metadata.Entity{doc}); err != nil {
++		t.Fatal(err)
++	}
++	registry := runtime.NewRegistry()
++	registry.Load(runtime.LoadOptions{Entities: []*metadata.Entity{doc}, Programs: map[string]*ast.Program{
++		doc.Name: mustParseProgramT(t, "Процедура OnPost()\n  БлокировкаДанных().Заблокировать();\nКонецПроцедуры"),
++	}})
++
++	// The second writer owns SQLite's only connection before the publisher
++	// asks for one. If the publisher still holds the posting mutex they deadlock.
++	pub := &readOnFirstPublish{entered: make(chan struct{}), competingHook: make(chan struct{}),
++		result: make(chan error, 1), read: func() error {
++			probe, cancel := context.WithTimeout(ctx, 3*time.Second)
++			defer cancel()
++			var value int
++			return db.QueryRow(probe, "SELECT 1").Scan(&value)
++		}}
++	manager := runtime.NewLockManager()
++	done := make(chan error, 2)
++	save := func(writeCtx context.Context, publisher ChangePublisher, entering func()) error {
++		svc := &Service{Store: db, Reg: registry, Interp: interpreter.New()}
++		svc.ChangePublisher = publisher
++		svc.BuildVars = func(c context.Context, _ *runtime.MovementsCollector, _ *[]string) (map[string]any, *interpreter.TxState) {
++			return map[string]any{"БлокировкаДанных": interpreter.BuiltinFunc(func(_ []any, _ string, _ int) (any, error) {
++				lock := runtime.NewLockObjectWithCollector(manager, runtime.LockCollectorFromContext(c))
++				lock.CallMethod("Добавить", []any{"ОснованиеОплаты"})
++				if entering != nil {
++					entering()
++				}
++				return lock, nil
++			})}, nil
++		}
++		res, err := svc.Save(writeCtx, SaveRequest{Entity: doc, ID: uuid.New(), IsNew: true, Action: "post", Fields: map[string]any{}})
++		if err == nil && res.DSLError != "" {
++			err = fmt.Errorf("posting hook: %s", res.DSLError)
++		}
++		return err
++	}
++	go func() { done <- save(ctx, pub, nil) }()
++	select {
++	case <-pub.entered:
++	case err := <-done:
++		t.Fatalf("first Save returned before notification: %v", err)
++	case <-time.After(5 * time.Second):
++		t.Fatal("first Save never reached notification")
++	}
++	go func() { done <- save(ctx, nil, func() { close(pub.competingHook) }) }()
++	for i := 0; i < 2; i++ {
++		select {
++		case err := <-done:
++			if err != nil {
++				t.Fatalf("Save: %v", err)
++			}
++		case <-time.After(10 * time.Second):
++			t.Fatal("blocked during concurrent posting and notification")
++		}
++	}
++	if err := <-pub.result; err != nil {
++		t.Fatalf("post-commit read: %v", err)
++	}
++	// A single outer transaction can run two sibling saves which post against
++	// the same keys; neither waits for its own outer commit to take the mutex.
++	for _, abort := range []bool{true, false} {
++		rollback := fmt.Errorf("discard both sibling saves")
++		err := db.WithTx(ctx, func(txCtx context.Context) error {
++			for i := 0; i < 2; i++ {
++				if err := save(txCtx, nil, nil); err != nil {
++					return err
++				}
++			}
++			if abort {
++				return rollback
++			}
++			return nil
++		})
++		if abort && err != rollback || !abort && err != nil {
++			t.Fatalf("sibling saves (rollback=%v): %v", abort, err)
++		}
++		want := 4
++		if abort {
++			want = 2
++		}
++		var count int
++		if err := db.QueryRow(ctx, "SELECT count(*) FROM платеж WHERE posted=1").Scan(&count); err != nil || count != want {
++			t.Fatalf("sibling saves (rollback=%v): posted=%d, want %d, err=%v", abort, count, want, err)
++		}
++	}
++
++}
+diff --git a/internal/entityservice/service.go b/internal/entityservice/service.go
+index d23cd954..a429c699 100644
+--- a/internal/entityservice/service.go
++++ b/internal/entityservice/service.go
+@@ -433,6 +433,10 @@ func (s *Service) Save(ctx context.Context, req SaveRequest) (SaveResult, error)
+ 	}
+ 	mc := runtime.NewMovementsCollector(req.Entity.Name, req.ID).WillPersist()
+ 	lockCollector := runtime.NewLockCollectorIn(ctx)
++	// A nested Save relinquishes its own in-process locks when its savepoint
++	// returns, so a sibling Save can reacquire the same keys. The database
++	// transaction and its PostgreSQL advisory locks still belong to the caller.
++	// At outer commit ReleaseOnTxEnd releases first, before notification reads.
+ 	defer lockCollector.ReleaseAll()
+ 
+ 	obj := &runtime.Object{
+@@ -474,6 +478,7 @@ func (s *Service) Save(ctx context.Context, req SaveRequest) (SaveResult, error)
+ 	// при любой последующей ошибке откатываются вместе с родителем.
+ 	var persistedVersion int64
+ 	err := s.Store.WithTxScope(ctx, func(txCtx context.Context) error {
++		storage.ReleaseOnTxEnd(txCtx, lockCollector.ReleaseAll)
+ 		// Документ раньше итогов/хуков: отмена должна дождаться проведения
+ 		// прежде, чем решать, какие регистры очищать.
+ 		if !req.IsNew && req.Entity.Kind == metadata.KindDocument {
+@@ -957,6 +962,7 @@ func (s *Service) delete(ctx context.Context, entity *metadata.Entity, id uuid.U
+ 	defer lockCollector.ReleaseAll()
+ 
+ 	err := s.Store.WithTxScope(ctx, func(txCtx context.Context) error {
++		storage.ReleaseOnTxEnd(txCtx, lockCollector.ReleaseAll)
+ 		return s.deleteInTx(txCtx, entity, id, expectedVersion, &result.DSLMessages, lockCollector)
+ 	})
+ 	if err != nil {
+@@ -1162,6 +1168,7 @@ func (s *Service) Unpost(ctx context.Context, entity *metadata.Entity, id uuid.U
+ 	defer lockCollector.ReleaseAll()
+ 
+ 	err := s.Store.WithTxScope(ctx, func(txCtx context.Context) error {
++		storage.ReleaseOnTxEnd(txCtx, lockCollector.ReleaseAll)
+ 		if err := s.unpostInTx(txCtx, entity, id, result.Movements, &result.DSLMessages, lockCollector); err != nil {
+ 			return err
+ 		}
+@@ -1419,6 +1426,7 @@ func (s *Service) Repost(ctx context.Context, entityName string, id uuid.UUID) e
+ 	lockCollector := runtime.NewLockCollectorIn(ctx)
+ 	defer lockCollector.ReleaseAll()
+ 	return s.Store.WithTx(ctx, func(txCtx context.Context) error {
++		storage.ReleaseOnTxEnd(txCtx, lockCollector.ReleaseAll)
+ 		if err := s.Store.LockMovementRecorder(txCtx, ent, id); err != nil {
+ 			return err
+ 		}
+diff --git a/internal/storage/tx_hooks.go b/internal/storage/tx_hooks.go
+index fe91baea..3ad9f3bb 100644
+--- a/internal/storage/tx_hooks.go
++++ b/internal/storage/tx_hooks.go
+@@ -14,6 +14,7 @@ import (
+ type txHooksKey struct{}
+ 
+ type txHookScope struct {
++	releases     []func()
+ 	beforeCommit []func() error
+ 	commit       []func()
+ 	rollback     []func()
+@@ -52,6 +53,23 @@ func DeferUntilTxRollback(ctx context.Context, fn func()) bool {
+ 	return addTxHook(ctx, fn, false)
+ }
+ 
++// ReleaseOnTxEnd releases an in-process resource before post-commit observers
++// can request a new database connection. A released savepoint transfers the
++// cleanup to its parent. A rolled-back savepoint runs only its own cleanups.
++func ReleaseOnTxEnd(ctx context.Context, release func()) {
++	hooks := txHooksFromContext(ctx)
++	if hooks == nil || release == nil {
++		return
++	}
++	hooks.mu.Lock()
++	defer hooks.mu.Unlock()
++	if hooks.done || len(hooks.scopes) == 0 {
++		return
++	}
++	scope := &hooks.scopes[len(hooks.scopes)-1]
++	scope.releases = append(scope.releases, release)
++}
++
+ // DeferBeforeTxCommit registers an invariant which must hold immediately
+ // before the outer database transaction commits. Returning an error aborts and
+ // rolls back that transaction. Savepoint scopes follow the same rules as the
+@@ -124,6 +142,7 @@ func CommitTxHookScope(ctx context.Context) {
+ 	child := hooks.scopes[len(hooks.scopes)-1]
+ 	hooks.scopes = hooks.scopes[:len(hooks.scopes)-1]
+ 	parent := &hooks.scopes[len(hooks.scopes)-1]
++	parent.releases = append(parent.releases, child.releases...)
+ 	parent.beforeCommit = append(parent.beforeCommit, child.beforeCommit...)
+ 	parent.commit = append(parent.commit, child.commit...)
+ 	parent.rollback = append(parent.rollback, child.rollback...)
+@@ -144,6 +163,7 @@ func RollbackTxHookScope(ctx context.Context) {
+ 	child := hooks.scopes[len(hooks.scopes)-1]
+ 	hooks.scopes = hooks.scopes[:len(hooks.scopes)-1]
+ 	hooks.mu.Unlock()
++	runTxHooksReverse(child.releases)
+ 	runTxHooksReverse(child.rollback)
+ }
+ 
+@@ -154,12 +174,14 @@ func (h *txHooks) commitAll() {
+ 		return
+ 	}
+ 	h.done = true
+-	var callbacks []func()
++	var callbacks, releases []func()
+ 	for _, scope := range h.scopes {
++		releases = append(releases, scope.releases...)
+ 		callbacks = append(callbacks, scope.commit...)
+ 	}
+ 	h.scopes = nil
+ 	h.mu.Unlock()
++	runTxHooksReverse(releases)
+ 	runTxHooks(callbacks)
+ }
+ 
+@@ -189,12 +211,14 @@ func (h *txHooks) rollbackAll() {
+ 		return
+ 	}
+ 	h.done = true
+-	var callbacks []func()
++	var callbacks, releases []func()
+ 	for _, scope := range h.scopes {
++		releases = append(releases, scope.releases...)
+ 		callbacks = append(callbacks, scope.rollback...)
+ 	}
+ 	h.scopes = nil
+ 	h.mu.Unlock()
++	runTxHooksReverse(releases)
+ 	runTxHooksReverse(callbacks)
+ }
+ 
+diff --git a/internal/storage/tx_hooks_test.go b/internal/storage/tx_hooks_test.go
+index 09549487..1190975c 100644
+--- a/internal/storage/tx_hooks_test.go
++++ b/internal/storage/tx_hooks_test.go
+@@ -190,3 +190,37 @@ func TestTxScope_CanceledDerivedContextKeepsLifecycleSafe(t *testing.T) {
+ 		}
+ 	})
+ }
++
++func TestTxResourcesReleasedBeforeObservers(t *testing.T) {
++	db, ctx := openTxHooksTestDB(t)
++	for _, commit := range []bool{true, false} {
++		var events []string
++		record := func(name string) func() { return func() { events = append(events, name) } }
++		tx, txCtx, err := db.BeginTx(ctx)
++		if err != nil {
++			t.Fatal(err)
++		}
++		DeferUntilTxCommit(txCtx, record("observer"))
++		DeferUntilTxRollback(txCtx, record("observer"))
++		ReleaseOnTxEnd(txCtx, record("outer resource"))
++		PushTxHookScope(txCtx)
++		DeferUntilTxRollback(txCtx, record("discarded observer"))
++		ReleaseOnTxEnd(txCtx, record("discarded resource"))
++		RollbackTxHookScope(txCtx)
++		PushTxHookScope(txCtx)
++		ReleaseOnTxEnd(txCtx, record("nested resource"))
++		CommitTxHookScope(txCtx)
++		if commit {
++			err = tx.Commit(txCtx)
++		} else {
++			err = tx.Rollback(txCtx)
++		}
++		if err != nil {
++			t.Fatal(err)
++		}
++		want := []string{"discarded resource", "discarded observer", "nested resource", "outer resource", "observer"}
++		if !reflect.DeepEqual(events, want) {
++			t.Fatalf("commit=%v: events %v, want %v", commit, events, want)
++		}
++	}
++}
+diff --git a/internal/ui/dsl_documents.go b/internal/ui/dsl_documents.go
+index 44c4aac2..8db8d300 100644
+--- a/internal/ui/dsl_documents.go
++++ b/internal/ui/dsl_documents.go
+@@ -923,6 +923,7 @@ func (w *docWriter) withLockScope(fn func(ctx context.Context) error) error {
+ 	lc := runtime.NewLockCollectorIn(base)
+ 	defer lc.ReleaseAll()
+ 	return w.s.store.WithTxScope(base, func(ctx context.Context) error {
++		storage.ReleaseOnTxEnd(ctx, lc.ReleaseAll)
+ 		return fn(runtime.ContextWithLockCollector(ctx, lc))
+ 	})
+ }
+diff --git a/internal/ui/handlers_entity.go b/internal/ui/handlers_entity.go
+index eea05bc4..7caefd24 100644
+--- a/internal/ui/handlers_entity.go
++++ b/internal/ui/handlers_entity.go
+@@ -1974,6 +1974,7 @@ func (s *Server) postDocument(w http.ResponseWriter, r *http.Request) {
+ 	defer lockCollector.ReleaseAll()
+ 	var hookErrMsg string
+ 	if err := s.store.WithTxScope(r.Context(), func(ctx context.Context) error {
++		storage.ReleaseOnTxEnd(ctx, lockCollector.ReleaseAll)
+ 		if err := s.store.LockMovementRecorder(ctx, entity, id); err != nil {
+ 			return err
+ 		}

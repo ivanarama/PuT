@@ -1,7 +1,7 @@
 # Поддерживаемая сборка платформы
 
 Основа — `ivanarama/onebase`, commit `ac6231b8dd7a88e1ca19d532e0ac15e60c73bbca`.
-ПУТ 1.4.0 требует OneBase не ниже **0.13.0** (`min_engine_version` в `config/app.yaml`). Платформа показывает предупреждение при несоответствии и не запрещает запуск. Для выпуска и развёртывания этой версии используется сборка **0.13.0+put.5.ac6231b8**. Точный commit, номер сборки и SHA256 патча записаны в `runtime.json`.
+ПУТ 1.4.0 требует OneBase не ниже **0.13.0** (`min_engine_version` в `config/app.yaml`). Платформа показывает предупреждение при несоответствии и не запрещает запуск. Для выпуска и развёртывания этой версии используется сборка **0.13.0+put.6.ac6231b8**. Точный commit, номер сборки и SHA256 патча записаны в `runtime.json`.
 
 Перед развёртыванием выполните `python scripts/check_runtime.py --onebase <путь-к-бинарю>`. Проверка отказывает при другой сборке, изменённом патче или рассогласовании версий конфигурации. Будущая версия платформы может оказаться совместимой, но её нужно проверить и обновить lock-файл; номер `0.13.0` сам по себе не доказывает наличие текущих патчей. CI собирает платформу из этого же commit с этим же патчем, вместо плавающего `main`.
 Патч `put-ui.patch` обязателен для этой версии конфигурации. Он включает:
@@ -18,6 +18,7 @@
 - обработку кириллицы в URL отчёта этапов и возврат в исходный объект по проверенному UUID;
 - расчёт остатков и оборотов в PostgreSQL для регистров со ссылочными реквизитами, включая проверку денег при проведении кассового документа;
 - создание таблиц аудита и истории этапов при миграции базы, до запуска параллельных обработок;
+- освобождение прикладных блокировок после завершения транзакции и до запросов для уведомления интерфейса. Это позволяет двум операторам получить ответ при одновременной оплате одного долга в SQLite;
 - регрессионные Go- и JavaScript-тесты.
 
 ## Сборка для Windows
@@ -53,7 +54,8 @@ git -C $sourceDir apply --check $patch
 if ($LASTEXITCODE) { throw 'git apply --check failed' }
 git -C $sourceDir apply $patch
 if ($LASTEXITCODE) { throw 'git apply failed' }
-go -C $sourceDir build -ldflags "-X github.com/ivantit66/onebase/internal/version.Build=$($runtime.build)" -o $binary ./cmd/onebase
+$env:CGO_ENABLED = '0'
+go -C $sourceDir build -trimpath -ldflags "-X github.com/ivantit66/onebase/internal/version.Build=$($runtime.build)" -o $binary ./cmd/onebase
 if ($LASTEXITCODE) { throw 'go build failed' }
 python -X utf8 (Join-Path $projectDir 'scripts/check_runtime.py') --onebase $binary
 if ($LASTEXITCODE) { throw 'check_runtime failed' }
