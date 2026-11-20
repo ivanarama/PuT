@@ -2,7 +2,7 @@
 
 ПУТ помогает оптовой или розничной компании вести заказ покупателя от резерва до оплаты. Менеджер видит, какой товар уже можно отгрузить, закупщик оформляет заказ поставщику, а после продажи бухгалтер может сверить долг и выгрузить документы в 1С.
 
-[Открыть демо](https://demo.ivantitov.tech/login) · [Скачать для Windows](https://github.com/ivanarama/PuT/releases/latest) · [Руководство пользователя](docs/help/introduction.md) · [Что изменилось в 1.4.0](docs/RELEASE_1.4.0.md)
+[Открыть демо](https://demo.ivantitov.tech/login) · [Скачать для Windows](https://github.com/ivanarama/PuT/releases/latest) · [Руководство пользователя](docs/help/introduction.md) · [Что изменилось в 1.4.0](docs/RELEASE_1.4.0.md) · [Лицензия MIT](LICENSE)
 
 ![Главная страница ПУТ с выручкой, валовой прибылью, задолженностью покупателей и графиками за квартал](docs/readme/dashboard.png)
 
